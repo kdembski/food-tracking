@@ -1,14 +1,26 @@
-$primary: #f7bc3b;
-$primary-light-10: lighten($primary, 10);
-$primary-light-20: lighten($primary, 20);
-$primary-dark-10: darken($primary, 10);
-$primary-dark-20: darken($primary, 20);
+$primary: #ff9900;
+$primary-light: #ffcc55;
+$primary-dark: #ff6600;
 
-$secondary: #a1a1a1;
+$secondary: #666666;
 $secondary-light-10: lighten($secondary, 10);
 $secondary-light-20: lighten($secondary, 20);
+$secondary-light-50: lighten($secondary, 50);
 $secondary-dark-10: darken($secondary, 10);
 $secondary-dark-20: darken($secondary, 20);
+
+$white: white;
+$black: black;
+$dark-knight: #161723;
+
+$info: #0096cc;
+$info-light: #bfe5f2;
+$success: #077426;
+$success-light: #c1ffd2;
+$warning: #fec90b;
+$warning-light: #fdff8c;
+$error: #cc0000;
+$error-light: #f9e1e1;
 
 $font-xs: 12px;
 $font-sm: 14px;
@@ -16,3 +28,10 @@ $font-base: 16px;
 $font-lg: 18px;
 $font-xl: 22px;
 $font-2xl: 28px;
+
+$shadow-xs: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+$shadow-sm: 0 4px 8px 0 rgba(0, 0, 0, 0.16);
+$shadow-base: 0 6px 10px 0 rgba(0, 0, 0, 0.16);
+$shadow-lg: 0 8px 10px 0 rgba(0, 0, 0, 0.16);
+$shadow-xl: 0 10px 12px 0 rgba(0, 0, 0, 0.16);
+$shadow-2xl: 0 12px 14px 0 rgba(0, 0, 0, 0.16);

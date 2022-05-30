@@ -1,1 +1,12 @@
-<button :class="getButtonClasses()"></button>
+<button class="button" :class="getButtonClasses()">
+  <CLoader
+    v-if="isLoading"
+    :circleWidth="getLoaderSize()"
+    :circleHeight="getLoaderSize()"
+    class="button_loader"
+  />
+  <div else class="button_content" :class="getButtonContentClasses()">
+    <FontAwesomeIcon v-if="icon" :icon="icon" class="button_icon" />
+    <p class="button_label">{{ label }}</p>
+  </div>
+</button>

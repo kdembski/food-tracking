@@ -5,14 +5,17 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "storybook:build": "vue-cli-service storybook:build -c config/storybook",
-    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
+    "test": "jest",
+    "test:coverage": "jest --collect-coverage",
+    "storybook": "start-storybook -c storybook -p 6006",
+    "storybook:build": "build-storybook -c storybook"
   },
   "dependencies": {
-    "@storybook/builder-webpack5": "^6.4.22",
-    "@storybook/manager-webpack5": "^6.4.22",
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
@@ -20,9 +23,14 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^6.0.26",
-    "@storybook/addon-links": "^6.0.26",
-    "@storybook/vue3": "^6.0.26",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-docs": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/builder-webpack5": "^6.5.5",
+    "@storybook/manager-webpack5": "^6.5.5",
+    "@storybook/vue3": "^6.3.7",
     "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
@@ -37,6 +45,7 @@
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.1",
     "babel-jest": "^27.0.6",
+    "css-loader": "^6.7.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -44,10 +53,11 @@
     "jest": "^27.0.5",
     "prettier": "^2.4.1",
     "sass": "^1.32.7",
-    "sass-loader": "^12.0.0",
+    "sass-loader": "^13.0.0",
+    "sass-resources-loader": "^2.2.5",
+    "style-loader": "^3.3.1",
     "ts-jest": "^27.0.4",
-    "typescript": "~4.5.5",
-    "vue-cli-plugin-storybook": "~2.1.0"
+    "typescript": "~4.5.5"
   },
   "eslintConfig": {
     "root": true,
@@ -63,26 +73,12 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {},
-    "overrides": [
-      {
-        "files": [
-          "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
-        ],
-        "env": {
-          "jest": true
-        }
-      }
-    ]
+    "rules": {}
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ],
-  "jest": {
-    "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
-  }
+  ]
 }

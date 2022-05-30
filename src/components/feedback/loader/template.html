@@ -1,0 +1,26 @@
+<div class="loader">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    :width="circleWidth"
+    :height="circleHeight"
+  >
+    <clipPath id="cut-off">
+      <polygon points="0,-10 13,12 0,34 0,-10"></polygon>
+    </clipPath>
+    <circle
+      cx="12"
+      cy="12"
+      r="10"
+      :stroke-width="calculateStrokeWidth()"
+    ></circle>
+    <circle
+      cx="12"
+      cy="12"
+      r="10"
+      :stroke-width="calculateStrokeWidth()"
+      clip-path="url(#cut-off)"
+    ></circle>
+  </svg>
+</div>

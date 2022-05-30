@@ -7,24 +7,64 @@
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body * {
+  font-family: "Roboto", sans-serif;
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-Light.ttf");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-Medium.ttf");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-Bold.ttf");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-LightItalic.ttf");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-Italic.ttf");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-MediumItalic.ttf");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./assets/fonts/Roboto/Roboto-BoldItalic.ttf");
 }
 </style>

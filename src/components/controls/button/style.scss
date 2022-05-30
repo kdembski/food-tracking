@@ -1,3 +1,88 @@
-.home {
-  color: $primary-color
+.button {
+  border: 3px solid transparent;
+  display: inline-block;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+
+  &-disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &.button-text {
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  &-primary {
+    &.button-text {
+      color: $primary;
+    }
+
+    &.button-contained {
+      color: $white;
+      background-color: $primary;
+    }
+
+    &.button-outlined {
+      color: $primary;
+      background-color: $white;
+      border-color: $primary;
+    }
+  }
+
+  &-secondary {
+    &.button-text {
+      color: $dark-knight;
+    }
+
+    &.button-contained {
+      color: $white;
+      background-color: $secondary;
+    }
+
+    &.button-outlined {
+      color: $secondary;
+      background-color: $white;
+      border-color: $secondary;
+    }
+  }
+
+  &-small {
+    font-size: $font-sm;
+    padding: 5px 10px;
+    box-shadow: $shadow-xs;
+    border-radius: 3px;
+  }
+
+  &-medium {
+    font-size: $font-base;
+    padding: 10px 15px;
+    box-shadow: $shadow-sm;
+    border-radius: 4px;
+  }
+
+  &-large {
+    font-size: $font-lg;
+    padding: 15px 20px;
+    box-shadow: $shadow-base;
+    border-radius: 5px;
+  }
+
+  &_label {
+    display: inline;
+  }
+
+  &_content {
+    &-loading {
+      opacity: 0;
+    }
+  }
+
+  &_icon {
+    margin-right: 6px;
+  }
 }
