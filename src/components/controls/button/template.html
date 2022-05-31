@@ -3,10 +3,10 @@
     v-if="isLoading"
     :circleWidth="getLoaderSize()"
     :circleHeight="getLoaderSize()"
-    class="button_loader"
+    class="button__loader"
   />
-  <div else class="button_content" :class="getButtonContentClasses()">
-    <FontAwesomeIcon v-if="icon" :icon="icon" class="button_icon" />
-    <p class="button_label">{{ label }}</p>
+  <div else class="button__content" :class="getButtonContentClasses()">
+    <FontAwesomeIcon v-if="icon" :icon="icon" class="button__icon" />
+    <p class="button__label">{{ label }}</p>
   </div>
 </button>

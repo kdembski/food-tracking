@@ -7,64 +7,12 @@
 </template>
 
 <style lang="scss">
-body * {
+*,
+*:before,
+*:after {
   font-family: "Roboto", sans-serif;
-}
-
-@font-face {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-Light.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-Regular.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-Medium.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-Bold.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-LightItalic.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-Italic.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-MediumItalic.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url("./assets/fonts/Roboto/Roboto-BoldItalic.ttf");
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 </style>

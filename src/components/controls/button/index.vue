@@ -17,7 +17,7 @@ export default defineComponent({
       default: false,
     },
     isDisabled: {
-      type: [Boolean, Function],
+      type: Boolean,
       default: false,
     },
     variant: {
@@ -46,12 +46,13 @@ export default defineComponent({
       default: "",
     },
   },
+
   methods: {
     getButtonClasses(): Array<string> {
-      const varaintClass = "button-" + this.variant;
-      const colorClass = "button-" + this.color;
-      const sizeClass = "button-" + this.size;
-      const disabledClass = "button-disabled";
+      const varaintClass = "button--" + this.variant;
+      const colorClass = "button--" + this.color;
+      const sizeClass = "button--" + this.size;
+      const disabledClass = "button--disabled";
 
       let classes = [varaintClass, colorClass, sizeClass];
 
@@ -64,21 +65,21 @@ export default defineComponent({
 
     getButtonContentClasses(): string {
       if (this.isLoading) {
-        return "button_content-loading";
+        return "button__content--loading";
       }
       return "";
     },
 
-    getLoaderSize(): string {
+    getLoaderSize(): number {
       switch (this.size) {
         case "small":
-          return "20";
+          return 20;
         case "medium":
-          return "22";
+          return 24;
         case "large":
-          return "24";
+          return 28;
         default:
-          return "22";
+          return 24;
       }
     },
   },

@@ -5,84 +5,84 @@
   cursor: pointer;
   position: relative;
 
-  &-disabled {
+  &--disabled {
     opacity: 0.5;
     cursor: default;
   }
 
-  &.button-text {
+  &.button--text {
     background-color: transparent;
     padding: 0;
     border: 0;
     box-shadow: none;
   }
 
-  &-primary {
-    &.button-text {
+  &--primary {
+    &.button--text {
       color: $primary;
     }
 
-    &.button-contained {
+    &.button--contained {
       color: $white;
       background-color: $primary;
     }
 
-    &.button-outlined {
+    &.button--outlined {
       color: $primary;
       background-color: $white;
       border-color: $primary;
     }
   }
 
-  &-secondary {
-    &.button-text {
+  &--secondary {
+    &.button--text {
       color: $dark-knight;
     }
 
-    &.button-contained {
+    &.button--contained {
       color: $white;
       background-color: $secondary;
     }
 
-    &.button-outlined {
+    &.button--outlined {
       color: $secondary;
       background-color: $white;
       border-color: $secondary;
     }
   }
 
-  &-small {
+  &--small {
     font-size: $font-sm;
     padding: 5px 10px;
     box-shadow: $shadow-xs;
     border-radius: 3px;
   }
 
-  &-medium {
+  &--medium {
     font-size: $font-base;
     padding: 10px 15px;
     box-shadow: $shadow-sm;
     border-radius: 4px;
   }
 
-  &-large {
+  &--large {
     font-size: $font-lg;
     padding: 15px 20px;
     box-shadow: $shadow-base;
     border-radius: 5px;
   }
 
-  &_label {
+  &__label {
     display: inline;
   }
 
-  &_content {
-    &-loading {
+  &__content {
+    &--loading {
       opacity: 0;
     }
   }
 
-  &_icon {
+  &__icon {
     margin-right: 6px;
   }
 }

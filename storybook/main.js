@@ -22,7 +22,10 @@ module.exports = {
           loader: "sass-resources-loader",
           options: {
             sourceMap: true,
-            resources: [path.resolve("src/styles/_variables.scss")],
+            resources: [
+              path.resolve("src/styles/_variables.scss"),
+              path.resolve("src/styles/_fonts.scss"),
+            ],
           },
         },
       ],

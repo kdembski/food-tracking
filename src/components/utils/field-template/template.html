@@ -1,0 +1,7 @@
+<div class="field__wrapper">
+  <slot></slot>
+  <label :for="$attrs.id + '-field'" class="field__label">{{ label }}</label>
+  <CTransition type="slide-up">
+    <p v-if="errorMessage" class="field__error-message">{{ errorMessage }}</p>
+  </CTransition>
+</div>

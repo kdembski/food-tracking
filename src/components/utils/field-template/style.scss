@@ -1,0 +1,57 @@
+.field {
+  &__wrapper {
+    position: relative;
+    margin-top: 6px;
+
+    &:deep(input) {
+      appearance: none;
+      width: 100%;
+      padding: 12px 10px;
+      border: 2px solid $secondary-light-50;
+      border-radius: 4px;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-light;
+
+        & + label {
+          color: $primary-dark;
+        }
+      }
+
+      &:hover:not(:focus) {
+        border-color: $secondary-light-40;
+      }
+    }
+
+    &.field-has-error {
+      &:deep(input) {
+        border-color: $error;
+      }
+
+      &.field_label {
+        color: $error;
+      }
+    }
+  }
+
+  &__label {
+    position: absolute;
+    padding: 0 6px;
+    background-color: $white;
+    top: -7px;
+    left: 10px;
+    font-size: $font-sm;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $secondary;
+  }
+
+  &__error-message {
+    font-size: $font-xs;
+    font-weight: 600;
+    color: $error;
+    margin: 4px 0;
+    padding: 0 2px;
+  }
+}

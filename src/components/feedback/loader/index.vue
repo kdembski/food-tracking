@@ -1,26 +1,20 @@
 <template src="./template.html"></template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineProps, defineComponent } from "vue";
 
-export default defineComponent({
-  name: "CLoader",
-  props: {
-    circleHeight: {
-      type: String,
-      default: "55",
-    },
-    circleWidth: {
-      type: String,
-      default: "55",
-    },
-  },
-  methods: {
-    calculateStrokeWidth() {
-      return (200 / (parseInt(this.circleWidth) + 30)).toFixed(1);
-    },
-  },
-});
+export default defineComponent({ name: "CLoader" });
+</script>
+
+<script setup lang="ts">
+const { circleHeight = 55, circleWidth = 55 } = defineProps<{
+  circleHeight: number;
+  circleWidth: number;
+}>();
+
+const calculateStrokeWidth = () => {
+  return (200 / (circleWidth + 30)).toFixed(1);
+};
 </script>
 
 <style src="./style.scss" lang="scss" scoped></style>

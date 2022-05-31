@@ -2,11 +2,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import CButton from "@/components/controls/button/index.vue";
+import CInput from "@/components/controls/input/index.vue";
 
 export default defineComponent({
   name: "LoginView",
-  components: { CButton },
+  components: { CInput },
 });
 </script>
 
