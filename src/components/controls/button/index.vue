@@ -1,89 +1,90 @@
-<template src="./template.html"></template>
-
 <script lang="ts">
-import { defineComponent } from "vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 
-export default defineComponent({
+export default {
   name: "CButton",
   components: { CLoader },
-  props: {
-    label: {
-      type: String,
-      default: "Button",
-    },
-    isLoading: {
-      type: Boolean,
-      default: false,
-    },
-    isDisabled: {
-      type: Boolean,
-      default: false,
-    },
-    variant: {
-      type: String,
-      default: "contained",
-      validator: (value: string) => {
-        return ["contained", "outlined", "text"].indexOf(value) !== -1;
-      },
-    },
-    color: {
-      type: String,
-      default: "primary",
-      validator: (value: string) => {
-        return ["primary", "secondary"].indexOf(value) !== -1;
-      },
-    },
-    size: {
-      type: String,
-      default: "medium",
-      validator: (value: string) => {
-        return ["small", "medium", "large"].indexOf(value) !== -1;
-      },
-    },
-    icon: {
-      type: String,
-      default: "",
-    },
-  },
-
-  methods: {
-    getButtonClasses(): Array<string> {
-      const varaintClass = "button--" + this.variant;
-      const colorClass = "button--" + this.color;
-      const sizeClass = "button--" + this.size;
-      const disabledClass = "button--disabled";
-
-      let classes = [varaintClass, colorClass, sizeClass];
-
-      if (this.isDisabled || this.isLoading) {
-        classes.push(disabledClass);
-      }
-
-      return classes;
-    },
-
-    getButtonContentClasses(): string {
-      if (this.isLoading) {
-        return "button__content--loading";
-      }
-      return "";
-    },
-
-    getLoaderSize(): number {
-      switch (this.size) {
-        case "small":
-          return 20;
-        case "medium":
-          return 24;
-        case "large":
-          return 28;
-        default:
-          return 24;
-      }
-    },
-  },
-});
+};
 </script>
 
+<script setup lang="ts">
+import { defineProps } from "vue";
+
+const props = defineProps({
+  label: {
+    type: String,
+    default: "Button",
+  },
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+  isDisabled: {
+    type: Boolean,
+    default: false,
+  },
+  variant: {
+    type: String,
+    default: "contained",
+    validator: (value: string) => {
+      return ["contained", "outlined", "text"].indexOf(value) !== -1;
+    },
+  },
+  color: {
+    type: String,
+    default: "primary",
+    validator: (value: string) => {
+      return ["primary", "secondary"].indexOf(value) !== -1;
+    },
+  },
+  size: {
+    type: String,
+    default: "medium",
+    validator: (value: string) => {
+      return ["small", "medium", "large"].indexOf(value) !== -1;
+    },
+  },
+  icon: {
+    type: String,
+    default: "",
+  },
+});
+
+const getButtonClasses = (): Array<string> => {
+  const varaintClass = "button--" + props.variant;
+  const colorClass = "button--" + props.color;
+  const sizeClass = "button--" + props.size;
+  const disabledClass = "button--disabled";
+
+  let classes = [varaintClass, colorClass, sizeClass];
+
+  if (props.isDisabled || props.isLoading) {
+    classes.push(disabledClass);
+  }
+
+  return classes;
+};
+
+const getButtonContentClasses = (): string => {
+  if (props.isLoading) {
+    return "button__content--loading";
+  }
+  return "";
+};
+
+const getLoaderSize = (): number => {
+  switch (props.size) {
+    case "small":
+      return 20;
+    case "medium":
+      return 24;
+    case "large":
+      return 28;
+    default:
+      return 24;
+  }
+};
+</script>
+
+<template src="./template.html"></template>
 <style src="./style.scss" lang="scss" scoped></style>

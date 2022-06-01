@@ -1,21 +1,35 @@
-<template src="./template.html"></template>
-
 <script lang="ts">
-import { defineComponent, defineProps } from "vue";
 import CFieldTemplate from "@/components/utils/field-template/index.vue";
-import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
-const { fieldProps, getFieldTemplateProps } = useFieldProps();
 
-export default defineComponent({
+export default {
   name: "CInput",
   components: { CFieldTemplate },
-});
+};
 </script>
 
 <script setup lang="ts">
+import { defineProps, defineEmits, computed } from "vue";
+import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
+
+const { getFieldTemplateProps } = useFieldProps();
+
 const props = defineProps({
-  ...fieldProps,
+  ...useFieldProps().fieldProps,
+});
+
+const emits = defineEmits<{
+  (event: "update:modelValue", value: string): void;
+}>();
+
+const value = computed({
+  get(): string {
+    return props.modelValue;
+  },
+  set(value: string) {
+    emits("update:modelValue", value);
+  },
 });
 </script>
 
+<template src="./template.html"></template>
 <style src="./style.scss" lang="scss" scoped></style>

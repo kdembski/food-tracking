@@ -9,8 +9,13 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
+  data() {
+    return {
+      value: "",
+    };
+  },
   components: { CInput },
-  template: '<CInput v-bind="args" />',
+  template: '<CInput v-model="value" v-bind="args" />',
 });
 
 export const Default = Template.bind({});

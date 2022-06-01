@@ -7,30 +7,29 @@
       appearance: none;
       width: 100%;
       padding: 12px 10px;
-      border: 2px solid $secondary-light-50;
+      border: 1px solid $secondary-light-50;
       border-radius: 4px;
 
       &:focus {
         outline: none;
-        border-color: $primary-light;
-
-        & + label {
-          color: $primary-dark;
-        }
-      }
-
-      &:hover:not(:focus) {
-        border-color: $secondary-light-40;
       }
     }
 
-    &.field-has-error {
+    &:not(.field__wrapper--invalid) {
+      &:deep(input) {
+        &:focus {
+          border-color: $primary-light;
+        }
+
+        &:hover:not(:focus) {
+          border-color: $secondary-light-40;
+        }
+      }
+    }
+
+    &--invalid {
       &:deep(input) {
         border-color: $error;
-      }
-
-      &.field_label {
-        color: $error;
       }
     }
   }
@@ -42,7 +41,7 @@
     top: -7px;
     left: 10px;
     font-size: $font-sm;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     color: $secondary;
   }

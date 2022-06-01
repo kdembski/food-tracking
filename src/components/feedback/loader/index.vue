@@ -1,12 +1,10 @@
-<template src="./template.html"></template>
-
 <script lang="ts">
-import { defineProps, defineComponent } from "vue";
-
-export default defineComponent({ name: "CLoader" });
+export default { name: "CLoader" };
 </script>
 
 <script setup lang="ts">
+import { defineProps } from "vue";
+
 const { circleHeight = 55, circleWidth = 55 } = defineProps<{
   circleHeight: number;
   circleWidth: number;
@@ -17,4 +15,5 @@ const calculateStrokeWidth = () => {
 };
 </script>
 
+<template src="./template.html"></template>
 <style src="./style.scss" lang="scss" scoped></style>

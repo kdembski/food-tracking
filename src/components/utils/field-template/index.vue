@@ -1,21 +1,31 @@
-<template src="./template.html"></template>
-
 <script lang="ts">
-import { defineComponent, defineProps } from "vue";
-import { useFieldProps } from "./composables/field-props";
 import CTransition from "@/components/utils/transition/index.vue";
-const { fieldProps } = useFieldProps();
 
-export default defineComponent({
+export default {
   name: "CFieldTemplate",
   components: { CTransition },
-});
+};
 </script>
 
 <script setup lang="ts">
+import { defineProps, computed } from "vue";
+import { useFieldProps } from "./composables/field-props";
+
 const props = defineProps({
-  ...fieldProps,
+  ...useFieldProps().fieldProps,
 });
+
+const isInvalid = computed((): boolean => {
+  return !!props.errorMessage;
+});
+
+const getFieldWrapperClasses = (): string => {
+  if (isInvalid.value) {
+    return "field__wrapper--invalid";
+  }
+  return "";
+};
 </script>
 
+<template src="./template.html"></template>
 <style src="./style.scss" lang="scss" scoped></style>
