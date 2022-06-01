@@ -8,8 +8,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 const props = defineProps({
   label: {
     type: String,
@@ -48,6 +46,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  fullWidth: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const getButtonClasses = (): Array<string> => {
@@ -55,11 +57,16 @@ const getButtonClasses = (): Array<string> => {
   const colorClass = "button--" + props.color;
   const sizeClass = "button--" + props.size;
   const disabledClass = "button--disabled";
+  const fullWidthClass = "button--full-width";
 
   let classes = [varaintClass, colorClass, sizeClass];
 
   if (props.isDisabled || props.isLoading) {
     classes.push(disabledClass);
+  }
+
+  if (props.fullWidth) {
+    classes.push(fullWidthClass);
   }
 
   return classes;

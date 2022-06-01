@@ -6,7 +6,7 @@ const ApiService = {
     const accessToken: string | null = store.getters["user/getAccessToken"];
 
     if (accessToken) {
-      axios.defaults.headers.common["Authorization"] = "Bearer" + accessToken;
+      axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
     }
     axios.defaults.headers.common["Content-Type"] = "application/json";
   },

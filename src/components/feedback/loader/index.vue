@@ -3,15 +3,18 @@ export default { name: "CLoader" };
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { withDefaults } from "vue";
 
-const { circleHeight = 55, circleWidth = 55 } = defineProps<{
-  circleHeight: number;
-  circleWidth: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    circleHeight: number;
+    circleWidth: number;
+  }>(),
+  { circleHeight: 55, circleWidth: 55 }
+);
 
 const calculateStrokeWidth = () => {
-  return (200 / (circleWidth + 30)).toFixed(1);
+  return (200 / (props.circleWidth + 30)).toFixed(1);
 };
 </script>
 

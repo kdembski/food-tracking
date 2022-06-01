@@ -10,6 +10,10 @@
     cursor: default;
   }
 
+  &--full-width {
+    width: 100%;
+  }
+
   &.button--text {
     background-color: transparent;
     padding: 0;

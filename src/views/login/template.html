@@ -1,1 +1,14 @@
-<div class="home"><CInput /></div>
+<div class="login">
+  <CCard as="form" class="login__form" @submit.prevent="onLoginFormSubmit">
+    <CInput
+      v-model="password"
+      id="login_password"
+      class="login__password"
+      label="Password"
+      type="password"
+      :errorMessage="passwordErrorMessage"
+      @update:modelValue="clearPasswordErrorMessage"
+    />
+    <CButton type="submit" label="Login" :isLoading="isLoggingIn" fullWidth />
+  </CCard>
+</div>

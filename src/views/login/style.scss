@@ -1,3 +1,18 @@
-.home {
-  color: $primary-light;
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $secondary-light-50;
+
+  &__form {
+    background-color: $white;
+    box-shadow: $shadow-lg;
+    padding: 30px;
+    width: 500px;
+  }
+
+  &__password {
+    margin-bottom: 20px;
+  }
 }

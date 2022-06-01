@@ -1,13 +1,12 @@
 import ApiService from "@/services/api.service";
 import StorageService from "@/services/storage.service";
-import { UserState, LoginResponse } from "@/types/store/user";
+import { UserState, LoginResponse, LoginError } from "@/types/store/user";
 import { GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
-import { AxiosResponse } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 
 const state: UserState = {
   accessToken: StorageService.getItem("accessToken"),
   isLoggingIn: false,
-  loginError: null,
 };
 
 const getters: GetterTree<UserState, any> = {
@@ -21,16 +20,19 @@ const actions: ActionTree<UserState, any> = {
     return new Promise<void>((resolve, reject) => {
       commit("loginRequest");
 
-      ApiService.post(process.env.SERVICE_URL + "/login", {
+      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/login", {
         password,
       })
         .then((response: AxiosResponse<LoginResponse>) => {
-          commit("loginSucces", response.data.accessToken);
+          commit("loginSuccess", response.data.accessToken);
           resolve();
         })
-        .catch((error) => {
-          commit("loginError", error.code);
-          reject(error.code);
+        .catch((error: AxiosError<LoginError>) => {
+          const errorMessage: string | undefined =
+            error.response?.data.message || error.code;
+
+          commit("loginError", errorMessage);
+          reject(errorMessage);
         });
     });
   },
@@ -50,7 +52,6 @@ const mutations: MutationTree<UserState> = {
 
   loginError(state: UserState, error: string) {
     state.isLoggingIn = false;
-    state.loginError = error;
   },
 };
 

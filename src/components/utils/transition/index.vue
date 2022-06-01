@@ -3,7 +3,6 @@ export default { name: "TTransition" };
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { capitalize } from "lodash";
 
 interface TransitionProps {

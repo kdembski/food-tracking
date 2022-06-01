@@ -8,7 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed } from "vue";
+import { computed } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 
 const { getFieldTemplateProps } = useFieldProps();

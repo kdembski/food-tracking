@@ -25,8 +25,8 @@ const routes: Array<RouteRecordRaw> = [
     name: "recipes",
     component: LoginView,
     meta: {
-      layout: "default",
-      isPublic: true,
+      layout: "plain",
+      isPublic: false,
     },
   },
 ];
@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
   const isPublic: boolean = to.matched.some((record) => record.meta.isPublic);
   const isLoggedIn: boolean = store.getters["user/isLoggedIn"];
 
-  if (!(isPublic || isLoggedIn)) {
+  if (!isPublic && !isLoggedIn) {
     return next({
       path: "/login",
       query: { redirect: to.fullPath },

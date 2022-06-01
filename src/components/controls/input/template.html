@@ -1,3 +1,8 @@
 <CFieldTemplate :modelValue="value" v-bind="getFieldTemplateProps(props)">
-  <input v-model="value" :disabled="isDisabled" />
+  <input
+    :id="$attrs.id + '-field'"
+    v-model="value"
+    :disabled="isDisabled"
+    :type="$attrs.type"
+  />
 </CFieldTemplate>
