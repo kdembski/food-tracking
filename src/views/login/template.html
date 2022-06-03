@@ -4,11 +4,11 @@
       v-model="password"
       id="login_password"
       class="login__password"
-      label="Password"
+      label="Hasło"
       type="password"
       :errorMessage="passwordErrorMessage"
       @update:modelValue="clearPasswordErrorMessage"
     />
-    <CButton type="submit" label="Login" :isLoading="isLoggingIn" fullWidth />
+    <CButton type="submit" label="Zaloguj" :isLoading="isLoggingIn" fullWidth />
   </CCard>
 </div>

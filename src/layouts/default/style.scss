@@ -1,0 +1,18 @@
+.layout--default {
+  display: flex;
+  background-color: $secondary-light-55;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.1s ease-in-out;
+
+  &__content {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+}
+
+.dark-mode {
+  &.layout--default {
+    background-color: $secondary-dark-25;
+  }
+}

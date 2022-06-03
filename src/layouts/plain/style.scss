@@ -1,0 +1,9 @@
+.layout--plain {
+  background-color: $secondary-light-55;
+}
+
+.dark-mode {
+  &.layout--plain {
+    background-color: $secondary-dark-20;
+  }
+}

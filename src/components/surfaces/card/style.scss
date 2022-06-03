@@ -2,4 +2,11 @@
   background-color: $white;
   box-shadow: $shadow-lg;
   padding: 30px;
+  margin: 10px;
+}
+
+.dark-mode {
+  .card {
+    background-color: $dark-knight;
+  }
 }

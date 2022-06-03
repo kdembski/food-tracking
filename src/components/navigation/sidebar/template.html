@@ -1,0 +1,23 @@
+<div class="sidebar" :class="getCollapsedClass()">
+  <div class="sidebar__wrapper">
+    <ul class="sidebar__items">
+      <li v-for="item in items" class="item">
+        <RouterLink
+          :to="item.route"
+          class="item__link"
+          activeClass="item__link--active"
+          exactActiveClass="item__link--exact-active"
+        >
+          <div class="item__icon">
+            <FontAwesomeIcon v-if="item.icon" :icon="item.icon" />
+          </div>
+          <p class="item__label">{{ item.label }}</p>
+        </RouterLink>
+      </li>
+    </ul>
+    <CDarkModeToggle />
+  </div>
+  <div class="sidebar__collapse-btn" @click="toggleIsCollapsed">
+    <FontAwesomeIcon v-if="isMobile" :icon="isCollapsed ? 'bars' : 'times'" />
+  </div>
+</div>

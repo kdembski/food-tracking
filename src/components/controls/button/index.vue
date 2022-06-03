@@ -8,6 +8,9 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { useWindowSize } from "@/components/utils/composables/window-size";
+
 const props = defineProps({
   label: {
     type: String,
@@ -52,10 +55,12 @@ const props = defineProps({
   },
 });
 
+const { windowWidth } = useWindowSize();
+
 const getButtonClasses = (): Array<string> => {
   const varaintClass = "button--" + props.variant;
   const colorClass = "button--" + props.color;
-  const sizeClass = "button--" + props.size;
+  const sizeClass = "button--" + handleSizePropOnMobile(props.size);
   const disabledClass = "button--disabled";
   const fullWidthClass = "button--full-width";
 
@@ -70,6 +75,18 @@ const getButtonClasses = (): Array<string> => {
   }
 
   return classes;
+};
+
+const handleSizePropOnMobile = (size: string): string => {
+  if (windowWidth.value > 1024) {
+    return size;
+  }
+
+  if (size === "large") {
+    return "medium";
+  }
+
+  return size;
 };
 
 const getButtonContentClasses = (): string => {

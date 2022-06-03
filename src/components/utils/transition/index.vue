@@ -5,55 +5,42 @@ export default { name: "TTransition" };
 <script setup lang="ts">
 import { capitalize } from "lodash";
 
-interface TransitionProps {
-  enterActiveClass?: string;
-  leaveActiveClass?: string;
-  enterFromClass?: string;
-  leaveToClass?: string;
-}
-
 const props = defineProps({
-  type: {
+  enterActiveClass: {
     type: String,
-    default: "roll-up",
+    default: "",
+  },
+  leaveActiveClass: {
+    type: String,
+    default: "",
+  },
+  enterFromClass: {
+    type: String,
+    default: "",
+  },
+  leaveToClass: {
+    type: String,
+    default: "",
+  },
+  dimensionDecreased: {
+    type: String,
+    default: "height",
     validator: (value: string) => {
-      return ["roll-up", "slide-up", "slide-right"].indexOf(value) !== -1;
+      return ["height", "width"].indexOf(value) !== -1;
     },
   },
 });
 
-const getTransitionProps = (): TransitionProps => {
-  switch (props.type) {
-    case "roll-up":
-      return Object.assign(
-        {
-          enterActiveClass: "overflow-hidden",
-          leaveActiveClass: "overflow-hidden",
-        },
-        getTransitionEvents("height")
-      );
-    case "slide-up":
-      return Object.assign(
-        {
-          enterFromClass: "opacity-0 transform -translate-y-10",
-          leaveToClass: "opacity-0 transform -translate-y-10",
-        },
-        getTransitionEvents("height")
-      );
-    case "slide-right":
-      return Object.assign(
-        {
-          enterFromClass: "opacity-0 transform -translate-x-10",
-          leaveToClass: "opacity-0 transform -translate-x-10",
-        },
-        getTransitionEvents("width")
-      );
-    default:
-      return {
-        enterFromClass: "opacity-0",
-        leaveToClass: "opacity-0",
-      };
-  }
+const getTransitionProps = () => {
+  return Object.assign(
+    {
+      enterActiveClass: props.enterActiveClass,
+      leaveActiveClass: props.leaveActiveClass,
+      enterFromClass: props.enterFromClass,
+      leaveToClass: props.leaveToClass,
+    },
+    getTransitionEvents(props.dimensionDecreased)
+  );
 };
 
 const getTransitionEvents = (prop: string) => {
@@ -103,3 +90,4 @@ const leave = (el: HTMLElement, prop: string) => {
 </script>
 
 <template src="./template.html"></template>
+<style src="./style.scss" lang="scss" scoped></style>

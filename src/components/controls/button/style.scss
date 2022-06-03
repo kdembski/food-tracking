@@ -78,6 +78,7 @@
 
   &__label {
     display: inline;
+    letter-spacing: 1px;
   }
 
   &__content {
@@ -88,5 +89,18 @@
 
   &__icon {
     margin-right: 6px;
+  }
+}
+
+.dark-mode {
+  .button {
+    &--outlined {
+      background-color: $secondary-light-55;
+    }
+    &--secondary {
+      &.button--text {
+        color: $secondary-light-55;
+      }
+    }
   }
 }

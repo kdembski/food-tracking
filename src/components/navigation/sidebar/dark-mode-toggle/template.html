@@ -1,0 +1,13 @@
+<div class="dark-mode-toggle">
+  <input
+    id="dark_mode_toggle"
+    type="checkbox"
+    class="dark-mode-toggle__input"
+    @change="toggleDarkMode"
+  />
+  <label for="dark_mode_toggle" class="dark-mode-toggle__label">
+    <div class="dark-mode-toggle__icon">
+      <FontAwesomeIcon :icon="isDarkModeEnabled ? 'moon' : 'sun'" />
+    </div>
+  </label>
+</div>

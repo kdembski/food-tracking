@@ -1,26 +1,52 @@
 <template>
-  <component :is="layoutComponentName">
+  <component
+    :is="layoutComponentName"
+    :class="{ 'dark-mode': isDarkModeEnabled }"
+  >
     <router-view />
   </component>
 </template>
 
 <script lang="ts">
 import PlainLayout from "@/layouts/plain/index.vue";
-export default { components: { PlainLayout } };
+import DefaultLayout from "@/layouts/default/index.vue";
+
+export default {
+  components: {
+    PlainLayout,
+    DefaultLayout,
+  },
+};
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeMount } from "vue";
+import { computed, onBeforeMount, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import ApiService from "./services/api.service";
+import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useStore } from "vuex";
+
+const store = useStore();
+
+const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
 
 const layoutComponentName = computed(() => {
   const layoutType = useRoute().meta.layout;
   return (layoutType || "default") + "-layout";
 });
 
+const { addResizeListener, removeResizeListener } = useWindowSize();
+
 onBeforeMount(() => {
   ApiService.setHeader();
+});
+
+onMounted(() => {
+  addResizeListener();
+});
+
+onUnmounted(() => {
+  removeResizeListener();
 });
 </script>
 
@@ -32,5 +58,9 @@ onBeforeMount(() => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  all: unset;
 }
 </style>

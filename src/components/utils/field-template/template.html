@@ -1,7 +1,10 @@
 <div class="field__wrapper" :class="getFieldWrapperClasses()">
   <slot></slot>
   <label :for="$attrs.id + '-field'" class="field__label">{{ label }}</label>
-  <CTransition type="slide-up">
+  <CTransition
+    enterFromClass="field__error-message--transition-class"
+    leaveToClass="field__error-message--transition-class"
+  >
     <p v-if="isInvalid" class="field__error-message">{{ errorMessage }}</p>
   </CTransition>
 </div>

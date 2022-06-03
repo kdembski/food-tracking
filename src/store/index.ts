@@ -1,10 +1,27 @@
 import { createStore } from "vuex";
+import StorageService from "@/services/storage.service";
 import user from "./user/index";
 
 export default createStore({
-  state: {},
+  state: {
+    isDarkModeEnabled: !!parseInt(
+      StorageService.getItem("isDarkModeEnabled") || "0"
+    ),
+  },
+
   getters: {},
-  mutations: {},
+
+  mutations: {
+    toggleDarkMode(state) {
+      state.isDarkModeEnabled = !state.isDarkModeEnabled;
+      StorageService.setItem(
+        "isDarkModeEnabled",
+        state.isDarkModeEnabled ? "1" : "0"
+      );
+    },
+  },
+
   actions: {},
+
   modules: { user },
 });

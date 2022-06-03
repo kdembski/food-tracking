@@ -25,7 +25,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "recipes",
     component: LoginView,
     meta: {
-      layout: "plain",
       isPublic: false,
     },
   },

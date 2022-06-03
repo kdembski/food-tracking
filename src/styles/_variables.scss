@@ -1,6 +1,5 @@
-$primary: #ff9900;
+$primary: #ff9100;
 $primary-light: #ffcc55;
-$primary-dark: #ff6600;
 
 $secondary: #666666;
 $secondary-light-10: lighten($secondary, 10);
@@ -8,8 +7,10 @@ $secondary-light-20: lighten($secondary, 20);
 $secondary-light-30: lighten($secondary, 30);
 $secondary-light-40: lighten($secondary, 40);
 $secondary-light-50: lighten($secondary, 50);
+$secondary-light-55: lighten($secondary, 55);
 $secondary-dark-10: darken($secondary, 10);
 $secondary-dark-20: darken($secondary, 20);
+$secondary-dark-25: darken($secondary, 25);
 
 $white: white;
 $black: black;
@@ -37,3 +38,10 @@ $shadow-base: 0 4px 8px 0 rgba(0, 0, 0, 0.16);
 $shadow-lg: 0 6px 10px 0 rgba(0, 0, 0, 0.16);
 $shadow-xl: 0 8px 12px 0 rgba(0, 0, 0, 0.16);
 $shadow-2xl: 0 10px 14px 0 rgba(0, 0, 0, 0.16);
+
+$screen-xs: 320px;
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 1024px;
+$screen-xl: 1200px;
+$screen-2xl: 1500px;

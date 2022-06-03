@@ -1,6 +1,10 @@
 const StorageService = {
-  getItem(key: string): string | null {
-    return localStorage.getItem(key);
+  getItem(key: string): string {
+    const item = localStorage.getItem(key);
+    if (!item) {
+      return "";
+    }
+    return item;
   },
 
   setItem(key: string, value: string) {

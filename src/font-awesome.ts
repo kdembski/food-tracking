@@ -12,6 +12,14 @@ import {
   faPlus,
   faInfo,
   faCheck,
+  faUtensils,
+  faCheese,
+  faCalendarDays,
+  faList,
+  faTruck,
+  faBars,
+  faMoon,
+  faSun,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -25,7 +33,15 @@ library.add(
   faArrowLeft,
   faPlus,
   faInfo,
-  faCheck
+  faCheck,
+  faUtensils,
+  faCheese,
+  faCalendarDays,
+  faList,
+  faTruck,
+  faBars,
+  faMoon,
+  faSun
 );
 
 export default FontAwesomeIcon;
