@@ -1,8 +1,12 @@
 .dark-mode-toggle {
+  display: flex;
+  align-items: center;
   position: absolute;
-  bottom: 20px;
-  left: 85px;
+  overflow: hidden;
+  bottom: 5px;
+  left: 0;
   transition: all 0.2s ease-in-out;
+  padding: 20px;
 
   &__input {
     display: none;
@@ -18,6 +22,7 @@
     box-shadow: $shadow-sm;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    margin-right: 26px;
   }
 
   &__icon {
@@ -36,11 +41,13 @@
     color: $dark-knight;
     transition: all 0.2s ease-in-out;
   }
-}
 
-@media screen and (max-width: $screen-md) {
-  .dark-mode-toggle {
-    left: 20px;
+  &__text {
+    color: $white;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    transition: opacity 0.15s ease-in-out;
+    user-select: none;
   }
 }
 
@@ -61,8 +68,6 @@
 
 .sidebar--collapsed {
   .dark-mode-toggle {
-    left: 20px;
-
     &__label {
       width: 30px;
     }
@@ -82,6 +87,10 @@
       font-size: 22px;
       color: $dark-knight;
       transition: all 0.1s ease-in-out;
+    }
+
+    &__text {
+      opacity: 0;
     }
   }
 }

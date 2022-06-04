@@ -1,0 +1,51 @@
+<script lang="ts">
+export default { name: "CLogo" };
+</script>
+
+<script setup lang="ts">
+import { computed } from "vue";
+
+const props = defineProps({
+  isCollapsed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const sharedTextProps = {
+  "alignment-baseline": "before-edge",
+  "dominant-baseline": "text-before-edge",
+  "font-style": "normal",
+  "letter-spacing": "0",
+  style: "line-height: 100%",
+  "xml:space": "preserve",
+  "font-weight": "500",
+  "font-size": "130",
+  fill: "#ff9100",
+  class: "logo__item",
+};
+
+const getLogoWidth = () => {
+  if (props.isCollapsed) {
+    return 80;
+  }
+  return 675;
+};
+
+const getLogoCollapsedClass = () => {
+  if (props.isCollapsed) {
+    return "logo--collapsed";
+  }
+  return "";
+};
+
+const collapsedLogoConfig = computed(() => {
+  if (props.isCollapsed) {
+    return { collapsedClass: "logo--collapsed" };
+  }
+  return "";
+});
+</script>
+
+<template src="./template.html"></template>
+<style src="./style.scss" lang="scss" scoped></style>

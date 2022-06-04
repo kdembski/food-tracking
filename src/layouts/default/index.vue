@@ -10,7 +10,7 @@ export default {
 import { ref } from "vue";
 
 const sidebarItems = ref([
-  { route: "/recipes", label: "Przepisy", icon: "utensils" },
+  { route: "/", label: "Przepisy", icon: "utensils" },
   { route: "/", label: "Składniki", icon: "cheese" },
   { route: "/", label: "Kalendarz", icon: "calendar-days" },
   { route: "/", label: "Lista zakupów", icon: "list" },

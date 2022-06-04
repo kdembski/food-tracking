@@ -7,7 +7,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
 
-const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
+const isDarkModeEnabled = computed(() => store?.state?.isDarkModeEnabled);
 
 const toggleDarkMode = () => {
   store.commit("toggleDarkMode");

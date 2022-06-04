@@ -1,5 +1,5 @@
 .sidebar {
-  width: 250px;
+  width: 280px;
   height: 100vh;
   display: flex;
   position: relative;
@@ -19,7 +19,8 @@
       transform: translateX(-100%);
 
       .sidebar__collapse-btn {
-        right: -32px;
+        right: -40px;
+        top: 15px;
         color: $secondary;
       }
 
@@ -34,7 +35,6 @@
     width: 100%;
     background-color: $secondary-dark-10;
     box-shadow: $shadow-2xl;
-    padding: 60px 0;
     overflow: hidden;
   }
 
@@ -54,15 +54,15 @@
 
   @media screen and (max-width: $screen-md) {
     &__collapse-btn {
-      top: 10px;
-      right: 20px;
+      top: 28px;
+      right: 30px;
       left: unset;
       width: 20px;
       height: 20px;
       position: absolute;
       color: $white;
       font-size: 30px;
-      transition: right 0.25s ease-in-out;
+      transition: right 0.2s ease-in-out;
 
       &:hover {
         background-color: transparent;
@@ -117,7 +117,7 @@
     top: 0;
     width: 100%;
     z-index: 10;
-    transition: transform 0.25s ease-in-out;
+    transition: transform 0.2s ease-in-out;
   }
 }
 

@@ -1,5 +1,6 @@
 <div class="sidebar" :class="getCollapsedClass()">
   <div class="sidebar__wrapper">
+    <CLogo :isCollapsed="isCollapsed && !isMobile" />
     <ul class="sidebar__items">
       <li v-for="item in items" class="item">
         <RouterLink

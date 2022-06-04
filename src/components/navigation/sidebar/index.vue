@@ -1,8 +1,10 @@
 <script lang="ts">
 import CDarkModeToggle from "./dark-mode-toggle/index.vue";
+import CLogo from "./logo/index.vue";
+
 export default {
   name: "CSidebar",
-  components: { CDarkModeToggle },
+  components: { CDarkModeToggle, CLogo },
 };
 </script>
 
