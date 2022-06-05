@@ -6,27 +6,14 @@
   transition: width 0.15s ease-in-out, background-color 0.1s ease-in-out;
 
   &.sidebar--collapsed {
-    width: 77px;
+    width: 71px;
 
     .item__label {
       opacity: 0;
     }
-  }
 
-  @media screen and (max-width: $screen-md) {
-    &.sidebar--collapsed {
-      width: 100%;
-      transform: translateX(-100%);
-
-      .sidebar__collapse-btn {
-        right: -40px;
-        top: 15px;
-        color: $secondary;
-      }
-
-      .item__label {
-        opacity: 1;
-      }
+    .sidebar__collapse-btn {
+      font-size: 26px;
     }
   }
 
@@ -35,10 +22,9 @@
     width: 100%;
     background-color: $secondary-dark-10;
     box-shadow: $shadow-2xl;
-    overflow: hidden;
   }
 
-  &__collapse-btn {
+  &__collapse-bar {
     position: relative;
     left: -6px;
     height: 100%;
@@ -52,27 +38,30 @@
     }
   }
 
-  @media screen and (max-width: $screen-md) {
-    &__collapse-btn {
-      top: 28px;
-      right: 30px;
-      left: unset;
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      color: $white;
-      font-size: 30px;
-      transition: right 0.2s ease-in-out;
+  &__header {
+    background-color: $secondary-dark-10;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-      &:hover {
-        background-color: transparent;
-        box-shadow: none;
-      }
+  &__collapse-btn {
+    color: $white;
+    font-size: 31px;
+    margin-right: 22px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: transparent;
+      box-shadow: none;
     }
   }
 
   &__items {
     list-style: none;
+    overflow: hidden;
   }
 
   .item {
@@ -83,11 +72,7 @@
       display: flex;
       align-items: center;
 
-      &:hover {
-        color: $secondary-dark-10;
-        background-color: $primary-light;
-      }
-
+      &:hover,
       &--active {
         color: $secondary-dark-10;
         background-color: $primary-light;
@@ -118,31 +103,35 @@
     width: 100%;
     z-index: 10;
     transition: transform 0.2s ease-in-out;
+
+    &.sidebar--collapsed {
+      width: 100%;
+      transform: translateX(-100%);
+
+      .item__label {
+        opacity: 1;
+      }
+
+      .sidebar__header {
+        transform: translateX(100%);
+      }
+    }
   }
 }
 
 .dark-mode {
-  .sidebar__wrapper {
-    background-color: $dark-knight;
+  .sidebar {
+    &__header,
+    &__wrapper {
+      background-color: $dark-knight;
+    }
   }
 
   .item__link {
+    &--active,
     &:hover {
       color: $dark-knight;
       background-color: $primary-light;
-    }
-
-    &--active {
-      color: $dark-knight;
-      background-color: $primary-light;
-    }
-  }
-
-  @media screen and (max-width: $screen-md) {
-    .sidebar.sidebar--collapsed {
-      .sidebar__collapse-btn {
-        color: $white;
-      }
     }
   }
 }

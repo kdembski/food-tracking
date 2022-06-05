@@ -2,33 +2,20 @@
   display: flex;
   align-items: center;
   position: absolute;
-  overflow: hidden;
-  bottom: 5px;
-  left: 0;
-  transition: all 0.2s ease-in-out;
-  padding: 20px;
+  bottom: 15.5px;
+  left: 15.5px;
 
   &__input {
     display: none;
   }
 
   &__label {
-    position: relative;
-    display: block;
-    height: 30px;
-    width: 65px;
-    border-radius: 20px;
-    background-color: $white;
-    box-shadow: $shadow-sm;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    margin-right: 26px;
   }
 
   &__icon {
-    position: absolute;
-    left: -5px;
-    top: -5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,73 +27,15 @@
     font-size: 22px;
     color: $dark-knight;
     transition: all 0.2s ease-in-out;
-  }
-
-  &__text {
-    color: $white;
-    letter-spacing: 1px;
-    white-space: nowrap;
-    transition: opacity 0.15s ease-in-out;
-    user-select: none;
+    margin-right: 26px;
   }
 }
 
 .dark-mode {
   .dark-mode-toggle {
-    &__label {
-      background-color: $secondary-dark-10;
-    }
-
     &__icon {
-      left: 30px;
-      top: -5px;
       background-color: $secondary-dark-20;
       color: $primary-light;
-    }
-  }
-}
-
-.sidebar--collapsed {
-  .dark-mode-toggle {
-    &__label {
-      width: 30px;
-    }
-
-    &__icon {
-      position: absolute;
-      left: -5px;
-      top: -5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 40px;
-      width: 40px;
-      border-radius: 100%;
-      background-color: $primary-light;
-      box-shadow: $shadow-lg;
-      font-size: 22px;
-      color: $dark-knight;
-      transition: all 0.1s ease-in-out;
-    }
-
-    &__text {
-      opacity: 0;
-    }
-  }
-}
-
-.dark-mode {
-  .sidebar--collapsed {
-    .dark-mode-toggle {
-      &__label {
-        background-color: $secondary-dark-10;
-      }
-
-      &__icon {
-        left: -5px;
-        background-color: $secondary-dark-20;
-        color: $primary-light;
-      }
     }
   }
 }

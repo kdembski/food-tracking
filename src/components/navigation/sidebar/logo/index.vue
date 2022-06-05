@@ -3,8 +3,6 @@ export default { name: "CLogo" };
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
-
 const props = defineProps({
   isCollapsed: {
     type: Boolean,
@@ -25,26 +23,12 @@ const sharedTextProps = {
   class: "logo__item",
 };
 
-const getLogoWidth = () => {
-  if (props.isCollapsed) {
-    return 80;
-  }
-  return 675;
-};
-
 const getLogoCollapsedClass = () => {
   if (props.isCollapsed) {
     return "logo--collapsed";
   }
   return "";
 };
-
-const collapsedLogoConfig = computed(() => {
-  if (props.isCollapsed) {
-    return { collapsedClass: "logo--collapsed" };
-  }
-  return "";
-});
 </script>
 
 <template src="./template.html"></template>

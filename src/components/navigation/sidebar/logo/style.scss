@@ -1,36 +1,54 @@
 .logo {
-  margin: 25px 25px 20px;
-  transition: all 0.2s ease-in-out;
-  height: 60px;
+  margin: 25px;
+  height: 30px;
+  user-select: none;
 
   &__svg {
-    width: 100%;
-    height: 60px;
+    transition: transform 0.2s ease-in-out;
+    height: 30px;
   }
 
-  &__item {
+  &__line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
     transition: all 0.2s ease-in-out;
+  }
 
-    &--rotated {
-      transform: rotateX(180deg);
-      transform-origin: 0% 103px;
-      opacity: 0;
-    }
+  .logo__text1,
+  .logo__text2,
+  .logo__text3,
+  .logo__text4 {
+    will-change: transform;
+    backface-visibility: hidden;
+    transition: all 0.2s ease-in-out;
   }
 
   &.logo--collapsed {
-    padding-right: 0;
+    .logo__text1 {
+      transform: translateX(-12px);
+    }
+
+    .logo__text3 {
+      transform: translateX(-276px);
+    }
+
+    .logo__text2,
+    .logo__text4 {
+      opacity: 0;
+    }
+
+    .logo__line {
+      stroke-dashoffset: 903;
+    }
+
+    .logo__svg {
+      transform: translateX(-4px);
+    }
   }
 }
 
-.dark-mode {
+@media screen and (max-width: $screen-md) {
   .logo {
-    &__item {
-      opacity: 0;
-
-      &--rotated {
-        opacity: 1;
-      }
-    }
+    margin: 15px 25px;
   }
 }
