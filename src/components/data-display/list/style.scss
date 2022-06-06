@@ -1,0 +1,46 @@
+.list {
+  width: 100%;
+
+  &__content {
+    border-collapse: collapse;
+    width: 100%;
+
+    tr {
+      border-bottom: 1px solid $secondary-light-50;
+    }
+
+    th {
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: 25px;
+
+      &:first-child {
+        padding-left: 5px;
+      }
+
+      &:last-child {
+        padding-right: 5px;
+      }
+    }
+
+    th {
+      color: $secondary-light-20;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: $font-sm;
+    }
+  }
+}
+
+.dark-mode {
+  .list {
+    color: $white;
+  }
+
+  tr {
+    border-color: $secondary-dark-20;
+  }
+}

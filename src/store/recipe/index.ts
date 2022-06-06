@@ -1,11 +1,11 @@
 import ApiService from "@/services/api.service";
 import StorageService from "@/services/storage.service";
-import { RecipeState, Recipe } from "@/types/recipe";
+import { RecipeState, RecipeList } from "@/types/recipe";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery } from "../helpers/list-query";
-import { ListFilters } from "@/composables/list";
+import { ListFilters } from "@/types/list";
 
 const state: RecipeState = {
   recipesList: null,
@@ -27,7 +27,7 @@ const actions: ActionTree<RecipeState, any> = {
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL + "/recipes" + getListQuery(filters)
       )
-        .then((response: AxiosResponse<Array<Recipe>>) => {
+        .then((response: AxiosResponse<RecipeList>) => {
           commit("loadRecipesListSuccess", response.data);
           resolve();
         })
@@ -47,8 +47,8 @@ const mutations: MutationTree<RecipeState> = {
     state.isLoadingRecipesList = true;
   },
 
-  loadRecipesListSuccess(state: RecipeState, listData: Array<Recipe>) {
-    state.recipesList = listData;
+  loadRecipesListSuccess(state: RecipeState, list: RecipeList) {
+    state.recipesList = list;
     state.isLoadingRecipesList = false;
   },
 

@@ -1,24 +1,26 @@
 <script lang="ts">
-import CTable from "@/components/data-display/table/index.vue";
+import CList from "@/components/data-display/list/index.vue";
 import CTags from "@/components/data-display/tags/index.vue";
 
 export default {
   name: "RecipesListView",
-  components: { CTable, CTags },
+  components: { CList, CTags },
 };
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, Ref } from "vue";
 import { useList } from "@/composables/list";
 import { isEmpty } from "lodash";
+import { ListFilters } from "@/types/list";
 
-const filters = ref({
+const filters: Ref<ListFilters> = ref({
   currentPage: 1,
   pageSize: 10,
   searchPhrase: "",
   sortAttribute: "",
   sortDirection: "",
+  tags: "",
 });
 
 const {
@@ -44,8 +46,8 @@ const recipesListColumns = [
   },
 ];
 
-const onTagClick = (tag: string) => {
-  filters.value.searchPhrase = tag;
+const filterBySearchPhrase = (phrase: string) => {
+  filters.value.searchPhrase = phrase;
   loadListAndSaveFiltersToStorage(filters.value);
 };
 

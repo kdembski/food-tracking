@@ -1,4 +1,4 @@
-import { ListFilters } from "@/composables/list";
+import { ListFilters } from "@/types/list";
 
 export const getListQuery = (filters: ListFilters) => {
   const page = filters.currentPage || 1;
@@ -13,6 +13,9 @@ export const getListQuery = (filters: ListFilters) => {
   }
   if (filters.sortDirection) {
     query += "&dir=" + filters.sortDirection;
+  }
+  if (filters.tags) {
+    query += "&tags=" + filters.tags;
   }
 
   return query;

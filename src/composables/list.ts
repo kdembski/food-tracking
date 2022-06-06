@@ -1,14 +1,7 @@
 import StorageService from "@/services/storage.service";
 import { useStore } from "vuex";
 import { computed } from "vue";
-
-export interface ListFilters {
-  currentPage: number;
-  pageSize: number;
-  searchPhrase: string;
-  sortAttribute: string;
-  sortDirection: string;
-}
+import { ListFilters } from "@/types/list";
 
 export function useList(
   listName: string,

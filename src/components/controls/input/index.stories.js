@@ -19,6 +19,10 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
+Default.args = {
+  label: "Label",
+};
+
 export const Invalid = Template.bind({});
 Invalid.args = Object.assign(
   { errorMessage: "Field is required" },

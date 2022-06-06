@@ -12,7 +12,7 @@ export function useFieldProps() {
     },
     label: {
       type: String,
-      default: "Label",
+      default: "",
     },
     isDisabled: {
       type: Boolean,

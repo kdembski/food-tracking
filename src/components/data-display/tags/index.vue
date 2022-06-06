@@ -13,7 +13,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits<{
-  (e: "click", value: string): void;
+  (e: "click", name: string): void;
 }>();
 
 const tagsArray = computed(() => {

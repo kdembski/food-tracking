@@ -1,0 +1,17 @@
+<div class="list">
+  <div class="list__search">
+    <CInput v-model="_searchPhrase" />
+  </div>
+  <table class="list__content">
+    <tr>
+      <th v-for="col in columns"><p>{{ col.label }}</p></th>
+    </tr>
+    <tr v-for="item in items">
+      <td v-for="col in columns">
+        <slot :name="col.value" :value="item[col.value]">
+          {{ getItemColumnValue(item[col.value]) }}
+        </slot>
+      </td>
+    </tr>
+  </table>
+</div>

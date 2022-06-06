@@ -2,9 +2,14 @@
   <header class="recipes-list__header">
     <h1>Lista przepisów</h1>
   </header>
-  <CTable :items="list?.data" :columns="recipesListColumns">
+  <CList
+    :items="list?.data"
+    :columns="recipesListColumns"
+    :searchPhrase="filters.searchPhrase"
+    @update:searchPhrase="filterBySearchPhrase"
+  >
     <template #tags="{ value }">
-      <CTags :tags="value" @click="onTagClick" />
+      <CTags :tags="value" @click="filterBySearchPhrase" />
     </template>
-  </CTable>
+  </CList>
 </div>
