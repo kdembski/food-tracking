@@ -14,7 +14,7 @@ const sharedTextProps = {
   "alignment-baseline": "before-edge",
   "dominant-baseline": "text-before-edge",
   "font-style": "normal",
-  "letter-spacing": "0",
+  "letter-spacing": "3",
   style: "line-height: 100%",
   "xml:space": "preserve",
   "font-weight": "500",

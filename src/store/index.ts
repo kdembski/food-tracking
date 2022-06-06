@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import StorageService from "@/services/storage.service";
 import user from "./user/index";
+import recipe from "./recipe/index";
 
 export default createStore({
   state: {
@@ -23,5 +24,5 @@ export default createStore({
 
   actions: {},
 
-  modules: { user },
+  modules: { user, recipe },
 });

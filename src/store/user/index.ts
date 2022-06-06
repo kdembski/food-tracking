@@ -1,6 +1,7 @@
 import ApiService from "@/services/api.service";
 import StorageService from "@/services/storage.service";
-import { UserState, LoginResponse, LoginError } from "@/types/store/user";
+import { UserState, LoginResponse } from "@/types/user";
+import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 
@@ -27,7 +28,7 @@ const actions: ActionTree<UserState, any> = {
           commit("loginSuccess", response.data.accessToken);
           resolve();
         })
-        .catch((error: AxiosError<LoginError>) => {
+        .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data.message || error.code;
 

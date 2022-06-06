@@ -1,11 +1,11 @@
 .logo {
-  margin: 25px;
-  height: 30px;
+  margin: 25px 20px;
+  height: 32px;
   user-select: none;
 
   &__svg {
     transition: transform 0.2s ease-in-out;
-    height: 30px;
+    height: 32px;
   }
 
   &__line {
@@ -14,41 +14,42 @@
     transition: all 0.2s ease-in-out;
   }
 
-  .logo__text1,
   .logo__text2,
   .logo__text3,
   .logo__text4 {
     will-change: transform;
     backface-visibility: hidden;
-    transition: all 0.2s ease-in-out;
+  }
+
+  .logo__text3 {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .logo__text2,
+  .logo__text4 {
+    transition: 0.2s 0.1s ease-in-out;
   }
 
   &.logo--collapsed {
-    .logo__text1 {
-      transform: translateX(-12px);
-    }
-
     .logo__text3 {
-      transform: translateX(-276px);
+      transform: translateX(-270px);
     }
 
     .logo__text2,
     .logo__text4 {
       opacity: 0;
+      transform: translateY(90px);
+      transition: 0.2s ease-in-out;
     }
 
     .logo__line {
       stroke-dashoffset: 903;
-    }
-
-    .logo__svg {
-      transform: translateX(-4px);
     }
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .logo {
-    margin: 15px 25px;
+    margin: 10px 20px;
   }
 }

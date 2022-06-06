@@ -6,8 +6,3 @@ export interface UserState {
 export interface LoginResponse {
   accessToken: string;
 }
-
-export interface LoginError {
-  code: string;
-  message: string;
-}

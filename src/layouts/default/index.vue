@@ -1,8 +1,10 @@
 <script lang="ts">
 import CSidebar from "@/components/navigation/sidebar/index.vue";
+import CCard from "@/components/surfaces/card/index.vue";
+
 export default {
   name: "DefaultLayout",
-  components: { CSidebar },
+  components: { CSidebar, CCard },
 };
 </script>
 
@@ -10,7 +12,7 @@ export default {
 import { ref } from "vue";
 
 const sidebarItems = ref([
-  { route: "/", label: "Przepisy", icon: "utensils" },
+  { route: "/recipes", label: "Przepisy", icon: "utensils" },
   { route: "/", label: "Składniki", icon: "cheese" },
   { route: "/", label: "Kalendarz", icon: "calendar-days" },
   { route: "/", label: "Lista zakupów", icon: "list" },

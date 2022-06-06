@@ -4,15 +4,39 @@
   position: relative;
   overflow: hidden;
   transition: background-color 0.1s ease-in-out;
+  height: 100vh;
 
   &__content {
+    padding: 10px;
     flex-grow: 1;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__card {
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  &:deep(header) {
+    margin-bottom: 20px;
+    color: $dark-knight;
+
+    & > h1 {
+      font-size: $font-2xl;
+      line-height: 100%;
+      letter-spacing: 1px;
+    }
   }
 }
 
 .dark-mode {
   &.layout--default {
     background-color: $secondary-dark-25;
+
+    &:deep(header) {
+      color: $white;
+    }
   }
 }

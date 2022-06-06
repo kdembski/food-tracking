@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import store from "@/store";
 
 import LoginView from "../views/login/index.vue";
+import RecipesListView from "../views/recipes/list/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/recipes",
     name: "recipes",
-    component: LoginView,
+    component: RecipesListView,
     meta: {
       isPublic: false,
     },
