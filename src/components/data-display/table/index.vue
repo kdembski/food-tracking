@@ -6,7 +6,7 @@ export default { name: "CTable" };
 const props = defineProps({
   items: {
     type: Array,
-    required: true,
+    default: () => [],
   },
   columns: {
     type: Array,

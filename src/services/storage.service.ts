@@ -11,8 +11,12 @@ const StorageService = {
     localStorage.setItem(key, value);
   },
 
-  getObject(key: string): object {
-    return JSON.parse(localStorage.getItem(key) || "");
+  getObject(key: string) {
+    const item = localStorage.getItem(key);
+    if (!item) {
+      return {};
+    }
+    return JSON.parse(item);
   },
 
   setObject(key: string, value: object) {

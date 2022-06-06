@@ -1,10 +1,4 @@
-export interface ListFilters {
-  currentPage: number;
-  pageSize: number;
-  searchPhrase: string;
-  sortAttribute: string;
-  sortDirection: string;
-}
+import { ListFilters } from "@/composables/list";
 
 export const getListQuery = (filters: ListFilters) => {
   const page = filters.currentPage || 1;

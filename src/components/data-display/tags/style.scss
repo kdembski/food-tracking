@@ -1,0 +1,71 @@
+.recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    margin-right: 8px;
+    background-color: $secondary-light-50;
+    box-shadow: $shadow-xs;
+    font-weight: 500;
+    font-size: $font-sm;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      filter: brightness(90%);
+    }
+
+    svg {
+      margin-right: 6px;
+    }
+
+    &--leaf {
+      color: $success;
+      background-color: $success-light;
+    }
+
+    &--fire {
+      color: #ff1100;
+      background-color: #ffdda9;
+    }
+
+    &--clock {
+      color: $info;
+      background-color: $info-light;
+    }
+  }
+}
+
+.dark-mode {
+  .recipe-tags {
+    &__item {
+      color: $white;
+      background-color: $secondary-dark-20;
+      box-shadow: $shadow-sm-dark;
+
+      &:hover {
+        filter: brightness(75%);
+      }
+
+      &--leaf {
+        color: $success-light;
+        background-color: $success;
+      }
+
+      &--fire {
+        color: #ffdda9;
+        background-color: #ff1100;
+      }
+
+      &--clock {
+        color: $info-light;
+        background-color: $info;
+      }
+    }
+  }
+}

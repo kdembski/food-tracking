@@ -4,7 +4,8 @@ import { RecipeState, Recipe } from "@/types/recipe";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { ListFilters, getListQuery } from "../helpers/list-query";
+import { getListQuery } from "../helpers/list-query";
+import { ListFilters } from "@/composables/list";
 
 const state: RecipeState = {
   recipesList: null,
@@ -16,25 +17,25 @@ const getters: GetterTree<RecipeState, any> = {
 };
 
 const actions: ActionTree<RecipeState, any> = {
-  getRecipesList(
+  loadRecipesList(
     { commit }: ActionContext<RecipeState, any>,
     filters: ListFilters
   ) {
     return new Promise<void>((resolve, reject) => {
-      commit("getRecipesListRequest");
+      commit("loadRecipesListRequest");
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL + "/recipes" + getListQuery(filters)
       )
         .then((response: AxiosResponse<Array<Recipe>>) => {
-          commit("getRecipesListSuccess", response.data);
+          commit("loadRecipesListSuccess", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
 
-          commit("getRecipesListError", errorMessage);
+          commit("loadRecipesListError", errorMessage);
           reject(errorMessage);
         });
     });
@@ -42,16 +43,16 @@ const actions: ActionTree<RecipeState, any> = {
 };
 
 const mutations: MutationTree<RecipeState> = {
-  getRecipesListRequest(state: RecipeState) {
+  loadRecipesListRequest(state: RecipeState) {
     state.isLoadingRecipesList = true;
   },
 
-  getRecipesListSuccess(state: RecipeState, listData: Array<Recipe>) {
+  loadRecipesListSuccess(state: RecipeState, listData: Array<Recipe>) {
     state.recipesList = listData;
     state.isLoadingRecipesList = false;
   },
 
-  getRecipesListError(state: RecipeState) {
+  loadRecipesListError(state: RecipeState) {
     state.isLoadingRecipesList = false;
   },
 };

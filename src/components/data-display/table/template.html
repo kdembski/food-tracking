@@ -4,7 +4,9 @@
   </tr>
   <tr v-for="item in items">
     <td v-for="col in columns">
-      <slot :name="col.value"> {{ getItemColumnValue(item[col.value]) }} </slot>
+      <slot :name="col.value" :value="item[col.value]">
+        {{ getItemColumnValue(item[col.value]) }}
+      </slot>
     </td>
   </tr>
 </table>

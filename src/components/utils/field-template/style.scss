@@ -70,7 +70,7 @@
     &__wrapper {
       &:deep(input) {
         color: $white;
-        background-color: $dark-knight;
+        background-color: $secondary-dark-30;
         border-color: $secondary-light-30;
       }
 
@@ -82,7 +82,7 @@
     }
     &__label {
       color: $white;
-      background-color: $dark-knight;
+      background-color: $secondary-dark-30;
     }
   }
 }

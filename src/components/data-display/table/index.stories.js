@@ -9,7 +9,7 @@ const Template = (args) => ({
     return { args };
   },
   components: { CTable },
-  template: '<CTable v-bind="args" > Content </CTable>',
+  template: '<CTable v-bind="args"></CTable>',
 });
 
 export const Default = Template.bind({});

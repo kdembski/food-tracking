@@ -20,6 +20,9 @@ import {
   faBars,
   faMoon,
   faSun,
+  faLeaf,
+  faFire,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -41,7 +44,10 @@ library.add(
   faTruck,
   faBars,
   faMoon,
-  faSun
+  faSun,
+  faLeaf,
+  faFire,
+  faClock
 );
 
 export default FontAwesomeIcon;

@@ -1,16 +1,17 @@
 <script lang="ts">
 import CTable from "@/components/data-display/table/index.vue";
+import CTags from "@/components/data-display/tags/index.vue";
 
 export default {
   name: "RecipesListView",
-  components: { CTable },
+  components: { CTable, CTags },
 };
 </script>
 
 <script setup lang="ts">
-import { useStore } from "vuex";
-import { onMounted, ref, computed } from "vue";
-const store = useStore();
+import { onMounted, ref } from "vue";
+import { useList } from "@/composables/list";
+import { isEmpty } from "lodash";
 
 const filters = ref({
   currentPage: 1,
@@ -20,10 +21,18 @@ const filters = ref({
   sortDirection: "",
 });
 
-const recipesList = computed(() => store.getters["recipe/getRecipesList"]);
-const isLoadingRecipesList = computed(
-  () => store.state.recipe.isLoadingRecipesList
+const {
+  list,
+  isLoadingList,
+  loadListAndSaveFiltersToStorage,
+  getFiltersFromStorage,
+} = useList(
+  "recipesList",
+  "recipe/getRecipesList",
+  "recipe/loadRecipesList",
+  "recipe/isLoadingRecipesList"
 );
+
 const recipesListColumns = [
   {
     label: "Nazwa przepisu",
@@ -35,8 +44,19 @@ const recipesListColumns = [
   },
 ];
 
+const onTagClick = (tag: string) => {
+  filters.value.searchPhrase = tag;
+  loadListAndSaveFiltersToStorage(filters.value);
+};
+
 onMounted(() => {
-  store.dispatch("recipe/getRecipesList", filters);
+  const storedFilters = getFiltersFromStorage();
+
+  if (!isEmpty(storedFilters)) {
+    filters.value = storedFilters;
+  }
+
+  loadListAndSaveFiltersToStorage(filters.value);
 });
 </script>
 

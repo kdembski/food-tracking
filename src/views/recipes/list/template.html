@@ -2,5 +2,9 @@
   <header class="recipes-list__header">
     <h1>Lista przepisów</h1>
   </header>
-  <CTable :items="recipesList?.data" :columns="recipesListColumns"></CTable>
+  <CTable :items="list?.data" :columns="recipesListColumns">
+    <template #tags="{ value }">
+      <CTags :tags="value" @click="onTagClick" />
+    </template>
+  </CTable>
 </div>

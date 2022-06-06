@@ -21,7 +21,7 @@
     height: 100%;
     width: 100%;
     background-color: $secondary-dark-10;
-    box-shadow: $shadow-2xl;
+    box-shadow: $shadow-md-dark;
   }
 
   &__collapse-bar {
@@ -34,7 +34,6 @@
 
     &:hover {
       background-color: $primary;
-      box-shadow: $shadow-2xl;
     }
   }
 
@@ -123,14 +122,15 @@
   .sidebar {
     &__header,
     &__wrapper {
-      background-color: $dark-knight;
+      background-color: $secondary-dark-30;
+      box-shadow: $shadow-md;
     }
   }
 
   .item__link {
     &--active,
     &:hover {
-      color: $dark-knight;
+      color: $secondary-dark-30;
       background-color: $primary-light;
     }
   }

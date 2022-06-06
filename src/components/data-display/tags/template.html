@@ -1,0 +1,11 @@
+<div class="recipe-tags">
+  <div
+    v-for="tag in tagsArray"
+    class="recipe-tags__item"
+    :class="'recipe-tags__item--' + tag.icon"
+    @click="onClick(tag.name)"
+  >
+    <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
+    {{ tag.name }}
+  </div>
+</div>
