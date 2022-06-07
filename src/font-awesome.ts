@@ -23,6 +23,7 @@ import {
   faLeaf,
   faFire,
   faClock,
+  faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -47,7 +48,8 @@ library.add(
   faSun,
   faLeaf,
   faFire,
-  faClock
+  faClock,
+  faMagnifyingGlass
 );
 
 export default FontAwesomeIcon;

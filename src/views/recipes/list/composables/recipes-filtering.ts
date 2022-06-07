@@ -27,7 +27,7 @@ export function useRecipesFiltering(
     };
 
     store
-      .dispatch("recipe/getAvailableRecipesTags", filters)
+      .dispatch("recipe/getAvailableRecipesTags", filtersForAvailableTags)
       .then((response) => {
         availableTags.value = response;
         isLoadingAvailableTags.value = false;

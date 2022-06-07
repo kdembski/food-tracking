@@ -9,3 +9,9 @@
     }
   }
 }
+
+.dark-mode {
+  .tag__checkbox:checked + .tag {
+    filter: brightness(40%);
+  }
+}

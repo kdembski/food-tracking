@@ -28,3 +28,14 @@ Invalid.args = Object.assign(
   { errorMessage: "Field is required" },
   Default.args
 );
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  icon: "magnifying-glass",
+};
+
+export const InvalidWithIcon = Template.bind({});
+InvalidWithIcon.args = Object.assign(
+  { errorMessage: "Field is required" },
+  WithIcon.args
+);

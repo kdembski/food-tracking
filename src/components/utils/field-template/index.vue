@@ -19,11 +19,17 @@ const isInvalid = computed((): boolean => {
   return !!props.errorMessage;
 });
 
-const getFieldWrapperClasses = (): string => {
+const getFieldClasses = (): Array<string> => {
+  let classes = [];
+
   if (isInvalid.value) {
-    return "field__wrapper--invalid";
+    classes.push("field--invalid");
   }
-  return "";
+  if (props.icon) {
+    classes.push("field--with-icon");
+  }
+
+  return classes;
 };
 </script>
 

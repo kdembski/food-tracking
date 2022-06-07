@@ -2,6 +2,7 @@ interface FieldTemplateProps {
   label: string;
   isDisabled: boolean;
   errorMessage: string;
+  icon: string;
 }
 
 export function useFieldProps() {
@@ -22,6 +23,10 @@ export function useFieldProps() {
       type: String,
       default: "",
     },
+    icon: {
+      type: String,
+      default: "",
+    },
   };
 
   const getFieldTemplateProps = (
@@ -31,6 +36,7 @@ export function useFieldProps() {
       label: props.label,
       isDisabled: props.isDisabled,
       errorMessage: props.errorMessage,
+      icon: props.icon,
     };
   };
 

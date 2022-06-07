@@ -1,5 +1,6 @@
-<div class="field__wrapper" :class="getFieldWrapperClasses()">
+<div class="field" :class="getFieldClasses()">
   <slot></slot>
+  <div v-if="icon" class="field__icon"><FontAwesomeIcon :icon="icon" /></div>
   <label :for="$attrs.id + '-field'" class="field__label">{{ label }}</label>
   <CTransition
     enterFromClass="field__error-message--transition-class"

@@ -1,39 +1,51 @@
 .field {
-  &__wrapper {
-    position: relative;
-    margin-top: 6px;
+  position: relative;
+  margin-top: 6px;
 
+  &:deep(input) {
+    appearance: none;
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid $secondary-light-50;
+    border-radius: 4px;
+    font-size: $font-base;
+    background-color: $white;
+    z-index: 10;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:not(.field--invalid) {
     &:deep(input) {
-      appearance: none;
-      width: 100%;
-      padding: 12px 10px;
-      border: 1px solid $secondary-light-50;
-      border-radius: 4px;
-      font-size: $font-base;
-      background-color: $white;
-      z-index: 10;
-
       &:focus {
-        outline: none;
-      }
-    }
+        border-color: $primary-light;
 
-    &:not(.field__wrapper--invalid) {
-      &:deep(input) {
-        &:focus {
-          border-color: $primary-light;
-        }
-
-        &:hover:not(:focus) {
-          border-color: $secondary-light-40;
+        & + .field__icon {
+          color: $primary-light;
         }
       }
+
+      &:hover:not(:focus) {
+        border-color: $secondary-light-40;
+      }
+    }
+  }
+
+  &--invalid {
+    &:deep(input) {
+      border-color: $error;
     }
 
-    &--invalid {
-      &:deep(input) {
-        border-color: $error;
-      }
+    .field__icon {
+      color: $error;
+    }
+  }
+
+  &.field--with-icon {
+    &:deep(input) {
+      padding-left: 38px;
     }
   }
 
@@ -63,26 +75,45 @@
       transform: translateY(-20px);
     }
   }
+
+  &__icon {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: $secondary;
+    font-size: 18px;
+  }
 }
 
 .dark-mode {
   .field {
-    &__wrapper {
-      &:deep(input) {
-        color: $white;
-        background-color: $secondary-dark-30;
-        border-color: $secondary-light-30;
-      }
+    &:deep(input) {
+      color: $white;
+      background-color: $secondary-dark-30;
+      border-color: $secondary;
+    }
 
-      &--invalid {
-        &:deep(input) {
-          border-color: $error;
+    &--invalid {
+      &:deep(input) {
+        border-color: $error;
+      }
+    }
+
+    &:not(.field--invalid) {
+      &:deep(input) {
+        &:hover:not(:focus) {
+          border-color: $secondary-light-10;
         }
       }
     }
+
     &__label {
       color: $white;
       background-color: $secondary-dark-30;
+    }
+
+    &__icon {
+      color: $white;
     }
   }
 }

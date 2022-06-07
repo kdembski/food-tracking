@@ -1,4 +1,4 @@
-<CTags :tags="tags">
+<CTags v-if="tags" :tags="tags">
   <template #default="{ tagsArray }">
     <div v-for="tag in tagsArray">
       <input
