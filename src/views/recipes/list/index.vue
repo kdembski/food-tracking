@@ -9,13 +9,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref, Ref } from "vue";
+import { onMounted } from "vue";
 import { useListWithFilters } from "@/composables/list-with-filters";
 import { isEmpty } from "lodash";
-import { ListFilters } from "@/types/list";
-import { useStore } from "vuex";
-import { useRecipesFiltering } from "./composables/recipes-filtering";
-const store = useStore();
 
 const recipesListColumns = [
   {
@@ -28,26 +24,34 @@ const recipesListColumns = [
   },
 ];
 
+const recipesListDefaultFilters = {
+  currentPage: 1,
+  pageSize: 10,
+  searchPhrase: "",
+  sortAttribute: "",
+  sortDirection: "",
+  tags: "",
+};
+
 const {
   list,
   isLoadingList,
   loadListAndSaveFiltersToStorage,
   getFiltersFromStorage,
-} = useListWithFilters(
-  "recipesList",
-  "recipe/getRecipesList",
-  "recipe/loadRecipesList",
-  "recipe/isLoadingRecipesList"
-);
-
-const {
   availableTags,
   isLoadingAvailableTags,
   filters,
   filterBySearchPhrase,
   filterByTags,
-  handleRecipesListLoading,
-} = useRecipesFiltering(loadListAndSaveFiltersToStorage);
+  handleListLoadingProccess,
+} = useListWithFilters(
+  "recipesList",
+  "recipe/getRecipesList",
+  "recipe/loadRecipesList",
+  "recipe/isLoadingRecipesList",
+  "recipe/getAvailableRecipesTags",
+  recipesListDefaultFilters
+);
 
 onMounted(() => {
   const storedFilters = getFiltersFromStorage();
@@ -56,7 +60,7 @@ onMounted(() => {
     filters.value = storedFilters;
   }
 
-  handleRecipesListLoading();
+  handleListLoadingProccess();
 });
 </script>
 

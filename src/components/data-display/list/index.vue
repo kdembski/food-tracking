@@ -15,6 +15,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
   columns: {
     type: Array,
     required: true,

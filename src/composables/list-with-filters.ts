@@ -2,14 +2,24 @@ import StorageService from "@/services/storage.service";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import { ListFilters } from "@/types/list";
+import { ref, Ref } from "vue";
+
+const availableTags = ref("");
+const isLoadingAvailableTags = ref(false);
+
+let filterBySearchPhraseTimeout = 0;
 
 export function useListWithFilters(
   listName: string,
   listGetter: string,
   listLoadAction: string,
-  listIsLoading: string
+  listIsLoading: string,
+  listGetTagsAction: string,
+  defaultFilters: ListFilters
 ) {
   const store = useStore();
+
+  const filters: Ref<ListFilters> = ref(defaultFilters);
   const list = computed(() => store.getters[listGetter]);
   const isLoadingList = computed(() => store.state[listIsLoading]);
 
@@ -30,10 +40,51 @@ export function useListWithFilters(
     loadList(listFilters);
   };
 
+  const setAvailableTags = () => {
+    isLoadingAvailableTags.value = true;
+
+    const filtersForAvailableTags = {
+      searchPhrase: filters.value.searchPhrase,
+      tags: filters.value.tags,
+    };
+
+    store
+      .dispatch(listGetTagsAction, filtersForAvailableTags)
+      .then((response) => {
+        availableTags.value = response;
+        isLoadingAvailableTags.value = false;
+      });
+  };
+
+  const filterBySearchPhrase = (phrase: string) => {
+    clearTimeout(filterBySearchPhraseTimeout);
+
+    filterBySearchPhraseTimeout = setTimeout(() => {
+      filters.value.searchPhrase = phrase;
+      handleListLoadingProccess();
+    }, 200);
+  };
+
+  const filterByTags = (tags: string) => {
+    filters.value.tags = tags;
+    handleListLoadingProccess();
+  };
+
+  const handleListLoadingProccess = () => {
+    setAvailableTags();
+    loadListAndSaveFiltersToStorage(filters.value);
+  };
+
   return {
     list,
     isLoadingList,
     loadListAndSaveFiltersToStorage,
     getFiltersFromStorage,
+    availableTags,
+    isLoadingAvailableTags,
+    filters,
+    filterBySearchPhrase,
+    filterByTags,
+    handleListLoadingProccess,
   };
 }
