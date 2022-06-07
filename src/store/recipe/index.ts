@@ -6,6 +6,7 @@ import { GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery } from "../helpers/list-query";
 import { ListFilters } from "@/types/list";
+import { getAvailableTagsQuery, TagsFilters } from "../helpers/tags-query";
 
 const state: RecipeState = {
   recipesList: null,
@@ -17,10 +18,7 @@ const getters: GetterTree<RecipeState, any> = {
 };
 
 const actions: ActionTree<RecipeState, any> = {
-  loadRecipesList(
-    { commit }: ActionContext<RecipeState, any>,
-    filters: ListFilters
-  ) {
+  loadRecipesList({ commit }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("loadRecipesListRequest");
 
@@ -40,19 +38,38 @@ const actions: ActionTree<RecipeState, any> = {
         });
     });
   },
+
+  getAvailableRecipesTags(_, filters: TagsFilters) {
+    return new Promise<string>((resolve, reject) => {
+      ApiService.get(
+        process.env.VUE_APP_SERVICE_URL +
+          "/recipes/tags" +
+          getAvailableTagsQuery(filters)
+      )
+        .then((response: AxiosResponse<{ recipesTags: string }>) => {
+          resolve(response.data.recipesTags);
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          const errorMessage: string | undefined =
+            error.response?.data?.message || error.code;
+
+          reject(errorMessage);
+        });
+    });
+  },
 };
 
 const mutations: MutationTree<RecipeState> = {
-  loadRecipesListRequest(state: RecipeState) {
+  loadRecipesListRequest(state) {
     state.isLoadingRecipesList = true;
   },
 
-  loadRecipesListSuccess(state: RecipeState, list: RecipeList) {
+  loadRecipesListSuccess(state, list: RecipeList) {
     state.recipesList = list;
     state.isLoadingRecipesList = false;
   },
 
-  loadRecipesListError(state: RecipeState) {
+  loadRecipesListError(state) {
     state.isLoadingRecipesList = false;
   },
 };

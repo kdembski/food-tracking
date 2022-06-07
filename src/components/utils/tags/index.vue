@@ -12,10 +12,6 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits<{
-  (e: "click", name: string): void;
-}>();
-
 const tagsArray = computed(() => {
   const namesArray: Array<string> = props.tags.split(",");
 
@@ -40,10 +36,6 @@ const tagsArray = computed(() => {
     };
   });
 });
-
-const onClick = (name: string) => {
-  emit("click", name);
-};
 </script>
 
 <template src="./template.html"></template>

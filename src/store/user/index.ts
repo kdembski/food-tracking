@@ -17,7 +17,7 @@ const getters: GetterTree<UserState, any> = {
 };
 
 const actions: ActionTree<UserState, any> = {
-  login({ commit }: ActionContext<UserState, any>, password: string) {
+  login({ commit }, password: string) {
     return new Promise<void>((resolve, reject) => {
       commit("loginRequest");
 
@@ -40,18 +40,18 @@ const actions: ActionTree<UserState, any> = {
 };
 
 const mutations: MutationTree<UserState> = {
-  loginRequest(state: UserState) {
+  loginRequest(state) {
     state.isLoggingIn = true;
   },
 
-  loginSuccess(state: UserState, accessToken: string) {
+  loginSuccess(state, accessToken: string) {
     state.isLoggingIn = false;
     state.accessToken = accessToken;
     StorageService.setItem("accessToken", accessToken);
     ApiService.setHeader();
   },
 
-  loginError(state: UserState, error: string) {
+  loginError(state, error: string) {
     state.isLoggingIn = false;
   },
 };

@@ -1,9 +1,9 @@
-.recipe-tags {
+.tags {
   display: flex;
   flex-wrap: wrap;
   row-gap: 8px;
 
-  &__item {
+  &:deep(.tag) {
     display: inline-flex;
     align-items: center;
     padding: 6px 12px;
@@ -13,8 +13,8 @@
     font-weight: 500;
     font-size: $font-sm;
     border-radius: 12px;
+    transition: 0.05s ease-in-out;
     cursor: pointer;
-    transition: 0.1s ease-in-out;
 
     &:hover {
       filter: brightness(90%);
@@ -24,17 +24,17 @@
       margin-right: 6px;
     }
 
-    &--leaf {
+    &.tag--leaf {
       color: $success;
       background-color: $success-light;
     }
 
-    &--fire {
+    &.tag--fire {
       color: #ff1100;
       background-color: #ffdda9;
     }
 
-    &--clock {
+    &.tag--clock {
       color: $info;
       background-color: $info-light;
     }
@@ -42,27 +42,23 @@
 }
 
 .dark-mode {
-  .recipe-tags {
-    &__item {
+  .tags {
+    &:deep(.tag) {
       color: $white;
       background-color: $secondary-dark-20;
       box-shadow: $shadow-sm-dark;
 
-      &:hover {
-        filter: brightness(75%);
-      }
-
-      &--leaf {
+      &.tag--leaf {
         color: $success-light;
         background-color: $success;
       }
 
-      &--fire {
+      &.tag--fire {
         color: #ffdda9;
         background-color: #ff1100;
       }
 
-      &--clock {
+      &.tag--clock {
         color: $info-light;
         background-color: $info;
       }

@@ -9,10 +9,6 @@
       border-bottom: 1px solid $secondary-light-50;
     }
 
-    th {
-      text-align: left;
-    }
-
     th,
     td {
       padding: 25px;
@@ -27,11 +23,17 @@
     }
 
     th {
+      text-align: left;
       color: $secondary-light-20;
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: $font-sm;
+      padding-bottom: 5px;
     }
+  }
+
+  &__select-tags {
+    margin: 10px 0 20px;
   }
 }
 

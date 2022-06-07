@@ -3,7 +3,7 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import { ListFilters } from "@/types/list";
 
-export function useList(
+export function useListWithFilters(
   listName: string,
   listGetter: string,
   listLoadAction: string,

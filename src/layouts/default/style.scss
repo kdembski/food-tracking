@@ -15,12 +15,12 @@
   }
 
   &__card {
-    max-width: 1200px;
+    max-width: 1300px;
     width: 100%;
   }
 
   &:deep(header) {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: $secondary-dark-30;
 
     & > h1 {

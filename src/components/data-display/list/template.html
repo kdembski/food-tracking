@@ -2,6 +2,11 @@
   <div class="list__search">
     <CInput v-model="_searchPhrase" />
   </div>
+  <CSelectTags
+    v-model:selectedTags="_selectedTags"
+    :tags="availableTags"
+    class="list__select-tags"
+  />
   <table class="list__content">
     <tr>
       <th v-for="col in columns"><p>{{ col.label }}</p></th>

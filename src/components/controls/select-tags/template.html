@@ -1,0 +1,21 @@
+<CTags :tags="tags">
+  <template #default="{ tagsArray }">
+    <div v-for="tag in tagsArray">
+      <input
+        v-model="_selectedTags"
+        :id="'tag_' + tag.name"
+        :value="tag.name"
+        class="tag__checkbox"
+        type="checkbox"
+      />
+      <label
+        class="tag"
+        :class="tag.icon && 'tag--' + tag.icon"
+        :for="'tag_' + tag.name"
+      >
+        <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
+        {{ tag.name }}
+      </label>
+    </div>
+  </template>
+</CTags>

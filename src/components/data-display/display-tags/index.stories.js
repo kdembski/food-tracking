@@ -1,15 +1,15 @@
-import CTags from "./index.vue";
+import CDisplayTags from "./index.vue";
 
 export default {
-  title: "Data Display/Tags",
+  title: "Data Display/Display Tags",
 };
 
 const Template = (args) => ({
   setup() {
     return { args };
   },
-  components: { CTags },
-  template: '<CTags v-bind="args"></CTags>',
+  components: { CDisplayTags },
+  template: '<CDisplayTags v-bind="args"></CDisplayTags>',
 });
 
 export const Default = Template.bind({});

@@ -1,8 +1,10 @@
 <script lang="ts">
 import CInput from "@/components/controls/input/index.vue";
+import CSelectTags from "@/components/controls/select-tags/index.vue";
+
 export default {
   name: "CList",
-  components: { CInput },
+  components: { CInput, CSelectTags },
 };
 </script>
 
@@ -25,10 +27,19 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  availableTags: {
+    type: String,
+    default: "",
+  },
+  selectedTags: {
+    type: String,
+    default: "",
+  },
 });
 
 const emit = defineEmits<{
   (e: "update:searchPhrase", value: string): void;
+  (e: "update:selectedTags", tags: string): void;
 }>();
 
 const _searchPhrase = computed({
@@ -37,6 +48,15 @@ const _searchPhrase = computed({
   },
   set(value: string) {
     emit("update:searchPhrase", value);
+  },
+});
+
+const _selectedTags = computed({
+  get(): string {
+    return props.selectedTags;
+  },
+  set(tags: string) {
+    emit("update:selectedTags", tags);
   },
 });
 </script>

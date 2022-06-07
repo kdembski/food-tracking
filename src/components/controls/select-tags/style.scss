@@ -1,0 +1,11 @@
+.tag {
+  user-select: none;
+
+  &__checkbox {
+    display: none;
+
+    &:checked + .tag {
+      filter: brightness(60%);
+    }
+  }
+}

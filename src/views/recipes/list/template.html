@@ -7,9 +7,12 @@
     :columns="recipesListColumns"
     :searchPhrase="filters.searchPhrase"
     @update:searchPhrase="filterBySearchPhrase"
+    :availableTags="availableTags"
+    :selectedTags="filters.tags"
+    @update:selectedTags="filterByTags"
   >
     <template #tags="{ value }">
-      <CTags :tags="value" @click="filterBySearchPhrase" />
+      <CDisplayTags :tags="value" />
     </template>
   </CList>
 </div>

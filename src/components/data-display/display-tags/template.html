@@ -1,0 +1,12 @@
+<CTags :tags="tags">
+  <template #default="{ tagsArray }">
+    <div
+      v-for="tag in tagsArray"
+      class="tag"
+      :class="tag.icon && 'tag--' + tag.icon"
+    >
+      <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
+      {{ tag.name }}
+    </div>
+  </template>
+</CTags>
