@@ -1,6 +1,6 @@
 <CFieldTemplate :modelValue="value" v-bind="getFieldTemplateProps(props)">
   <input
-    :id="$attrs.id + '-field'"
+    :id="$attrs.id && $attrs.id + '-field'"
     v-model="value"
     :disabled="isDisabled"
     :type="$attrs.type"

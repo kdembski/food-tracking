@@ -1,0 +1,35 @@
+<div class="list-with-filters">
+  <div class="list-with-filters__clear-filters-btn">
+    <CButton
+      variant="text"
+      color="secondary"
+      label="Wyszyść filtry"
+      size="small"
+      icon="times"
+      :isLoading="isLoadingAvailableTags || isLoading"
+      @click="clearFilters"
+    />
+  </div>
+  <div class="list-with-filters__search">
+    <CInput v-model="_searchPhrase" icon="magnifying-glass" />
+  </div>
+  <CSelectTags
+    v-model:selectedTags="_selectedTags"
+    :tags="availableTags"
+    :isLoading="isLoadingAvailableTags || isLoading"
+    class="list-with-filters__select-tags"
+  />
+  <CList
+    :items="items"
+    :isLoading="isLoadingAvailableTags || isLoading"
+    :columns="columns"
+    :getItemColumnValue="getItemColumnValue"
+  >
+    <template
+      v-for="field in Object.keys($slots)"
+      v-slot:[field]="{ itemValue }"
+    >
+      <slot :name="field" :itemValue="itemValue"></slot>
+    </template>
+  </CList>
+</div>

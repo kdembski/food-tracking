@@ -1,30 +1,10 @@
 <div class="list">
-  <div class="list__clear-filters-btn">
-    <CButton
-      variant="text"
-      color="secondary"
-      label="Clear filters"
-      size="small"
-      icon="times"
-      :isLoading="isLoadingAvailableTags || isLoading"
-      @click="clearFilters"
-    />
-  </div>
-  <div class="list__search">
-    <CInput v-model="_searchPhrase" icon="magnifying-glass" />
-  </div>
-  <CSelectTags
-    v-model:selectedTags="_selectedTags"
-    :tags="availableTags"
-    :isLoading="isLoadingAvailableTags || isLoading"
-    class="list__select-tags"
-  />
-  <div v-if="isLoadingAvailableTags || isLoading" class="loader">
-    <CSkeletonLoader class="loader__header" :itemsCount="columnsCount" />
-    <div class="loader__content">
+  <div v-if="isLoading" class="list-loader">
+    <CSkeletonLoader class="list-loader__header" :itemsCount="columnsCount" />
+    <div class="list-loader__content">
       <CSkeletonLoader
         v-for="index in 6"
-        class="loader__item"
+        class="list-loader__item"
         :itemsCount="columnsCount"
       />
     </div>
@@ -43,7 +23,7 @@
     <tbody v-else>
       <tr v-for="item in items">
         <td v-for="col in columns">
-          <slot :name="col.value" :value="item[col.value]">
+          <slot :name="col.value" :itemValue="item[col.value]">
             {{ getItemColumnValue(item[col.value]) }}
           </slot>
         </td>

@@ -2,7 +2,7 @@
   <header class="recipes-list__header">
     <h1>Lista przepisów</h1>
   </header>
-  <CList
+  <CListWithFilters
     :items="list?.data"
     :isLoading="isLoadingList"
     :columns="recipesListColumns"
@@ -14,8 +14,8 @@
     :isLoadingAvailableTags="isLoadingAvailableTags"
     @clearFilters="clearListFilters"
   >
-    <template #tags="{ value }">
-      <CDisplayTags :tags="value" />
+    <template v-slot:tags="{ itemValue }">
+      <CDisplayTags :tags="itemValue" />
     </template>
-  </CList>
+  </CListWithFilters>
 </div>

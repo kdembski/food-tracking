@@ -1,15 +1,16 @@
-import CList from "./index.vue";
+import CListWithFilters from "./index.vue";
 
 export default {
-  title: "Data Display/List",
+  title: "Data Display/List With Filters",
 };
 
 const Template = (args) => ({
   setup() {
     return { args };
   },
-  components: { CList },
-  template: '<CList v-bind="args" style="height: 90vh"></CList>',
+  components: { CListWithFilters },
+  template:
+    '<CListWithFilters v-bind="args" style="height: 90vh"></CListWithFilters>',
 });
 
 export const Default = Template.bind({});

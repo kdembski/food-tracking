@@ -49,15 +49,7 @@
     }
   }
 
-  &__select-tags {
-    margin: 10px 0 20px;
-  }
-
-  &__clear-filters-btn {
-    padding-left: 2px;
-  }
-
-  .loader {
+  .list-loader {
     display: flex;
     flex-direction: column;
     height: 100%;

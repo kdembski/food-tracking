@@ -1,7 +1,7 @@
 <div class="tags" ref="container">
-  <div v-if="isLoading" class="tags__loader">
+  <div v-if="isLoading" class="tags-loader">
     <CSkeletonLoader
-      class="loader__item"
+      class="tags-loader__item"
       v-for="index in getLoaderItemsCount()"
     />
   </div>
