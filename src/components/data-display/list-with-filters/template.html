@@ -3,10 +3,10 @@
     <CButton
       variant="text"
       color="secondary"
-      label="Wyszyść filtry"
+      label="Usuń filtry"
       size="small"
       icon="times"
-      :isLoading="isLoadingAvailableTags || isLoading"
+      :isLoading="isLoading"
       @click="clearFilters"
     />
   </div>
@@ -16,12 +16,12 @@
   <CSelectTags
     v-model:selectedTags="_selectedTags"
     :tags="availableTags"
-    :isLoading="isLoadingAvailableTags || isLoading"
+    :isLoading="isLoading"
     class="list-with-filters__select-tags"
   />
   <CList
     :items="items"
-    :isLoading="isLoadingAvailableTags || isLoading"
+    :isLoading="isLoading"
     :columns="columns"
     :getItemColumnValue="getItemColumnValue"
   >
@@ -32,4 +32,10 @@
       <slot :name="field" :itemValue="itemValue"></slot>
     </template>
   </CList>
+  <CPagination
+    v-if="paginationData"
+    v-model:currentPage="_currentPage"
+    :paginationData="paginationData"
+    :isLoading="isLoading"
+  />
 </div>

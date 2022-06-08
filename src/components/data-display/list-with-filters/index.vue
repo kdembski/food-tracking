@@ -3,10 +3,11 @@ import CInput from "@/components/controls/input/index.vue";
 import CSelectTags from "@/components/controls/select-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import CList from "@/components/data-display/list/index.vue";
+import CPagination from "./pagination/index.vue";
 
 export default {
   name: "CListWithFilters",
-  components: { CInput, CSelectTags, CList, CButton },
+  components: { CInput, CSelectTags, CList, CButton, CPagination },
 };
 </script>
 
@@ -42,15 +43,20 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  isLoadingAvailableTags: {
-    type: Boolean,
-    default: false,
+  currentPage: {
+    type: Number,
+    default: 1,
+  },
+  paginationData: {
+    type: Object,
+    default: null,
   },
 });
 
 const emit = defineEmits<{
   (e: "update:searchPhrase", value: string): void;
   (e: "update:selectedTags", tags: string): void;
+  (e: "update:currentPage", page: number): void;
   (e: "clearFilters"): void;
 }>();
 
@@ -69,6 +75,15 @@ const _selectedTags = computed({
   },
   set(tags: string) {
     emit("update:selectedTags", tags);
+  },
+});
+
+const _currentPage = computed({
+  get(): number {
+    return props.currentPage;
+  },
+  set(page: number) {
+    emit("update:currentPage", page);
   },
 });
 

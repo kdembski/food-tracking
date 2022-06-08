@@ -1,0 +1,19 @@
+<div v-if="isLoading" class="list-pagination-loader">
+  <CSkeletonLoader class="list-pagination-loader__item" />
+  <CSkeletonLoader class="list-pagination-loader__item" :itemsCount="6" />
+</div>
+<div v-else-if="paginationData.totalRecords > 0" class="list-pagination">
+  <div class="list-pagination__summary">
+    <p>{{ getPaginationSummaryText() }}</p>
+  </div>
+  <div class="list-pagination-pages">
+    <div
+      v-for="pageNumber in paginationData.totalPages"
+      class="list-pagination-pages__item"
+      :class="getPaginationActiveItemClass(pageNumber)"
+      @click="changePage(pageNumber)"
+    >
+      {{ pageNumber }}
+    </div>
+  </div>
+</div>

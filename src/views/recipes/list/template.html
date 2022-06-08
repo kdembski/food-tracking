@@ -4,14 +4,16 @@
   </header>
   <CListWithFilters
     :items="list?.data"
-    :isLoading="isLoadingList"
     :columns="recipesListColumns"
+    :isLoading="isLoadingList || isLoadingAvailableTags"
     :searchPhrase="filters.searchPhrase"
     @update:searchPhrase="filterBySearchPhrase"
     :availableTags="availableTags"
     :selectedTags="filters.tags"
     @update:selectedTags="filterByTags"
-    :isLoadingAvailableTags="isLoadingAvailableTags"
+    :paginationData="list?.pagination"
+    :currentPage="filters.currentPage"
+    @update:currentPage="changeCurrentPage"
     @clearFilters="clearListFilters"
   >
     <template v-slot:tags="{ itemValue }">

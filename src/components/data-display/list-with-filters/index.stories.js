@@ -53,6 +53,13 @@ Default.args = {
       value: "4",
     },
   ],
+  paginationData: {
+    currentPage: 1,
+    totalPages: 10,
+    firstRecord: 1,
+    lastRecord: 0,
+    totalRecords: 69,
+  },
 };
 
 export const isLoading = Template.bind({});

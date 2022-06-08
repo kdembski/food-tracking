@@ -71,6 +71,11 @@ export function useListWithFilters(
     handleListLoadingProccess();
   };
 
+  const changeCurrentPage = (page: number) => {
+    filters.value.currentPage = page;
+    handleListLoadingProccess();
+  };
+
   const handleListLoadingProccess = () => {
     setAvailableTags();
     loadListAndSaveFiltersToStorage(filters.value);
@@ -106,5 +111,6 @@ export function useListWithFilters(
     filterByTags,
     loadListOnMounted,
     clearListFilters,
+    changeCurrentPage,
   };
 }

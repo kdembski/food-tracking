@@ -42,6 +42,7 @@ const {
   filterByTags,
   loadListOnMounted,
   clearListFilters,
+  changeCurrentPage,
 } = useListWithFilters(
   "recipesList",
   "recipe/getRecipesList",
