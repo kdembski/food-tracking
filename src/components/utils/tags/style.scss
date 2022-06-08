@@ -1,13 +1,12 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 8px;
+  gap: 8px;
 
   &:deep(.tag) {
     display: inline-flex;
     align-items: center;
     padding: 6px 12px;
-    margin-right: 8px;
     background-color: $secondary-light-50;
     box-shadow: $shadow-xs;
     font-weight: 500;
@@ -37,6 +36,22 @@
     &.tag--clock {
       color: $info;
       background-color: $info-light;
+    }
+  }
+
+  &__empty {
+    padding: 5px 2px;
+  }
+
+  &__loader {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+
+    .loader__item {
+      padding: 0;
+      height: 29px;
+      border-radius: 12px;
     }
   }
 }

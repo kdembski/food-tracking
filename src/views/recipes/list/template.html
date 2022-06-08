@@ -4,12 +4,14 @@
   </header>
   <CList
     :items="list?.data"
+    :isLoading="isLoadingList"
     :columns="recipesListColumns"
     :searchPhrase="filters.searchPhrase"
     @update:searchPhrase="filterBySearchPhrase"
     :availableTags="availableTags"
     :selectedTags="filters.tags"
     @update:selectedTags="filterByTags"
+    :isLoadingAvailableTags="isLoadingAvailableTags"
   >
     <template #tags="{ value }">
       <CDisplayTags :tags="value" />

@@ -13,7 +13,6 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
-
 Default.args = {
   items: [
     {
@@ -54,3 +53,6 @@ Default.args = {
     },
   ],
 };
+
+export const isLoading = Template.bind({});
+isLoading.args = Object.assign({ isLoading: true }, Default.args);

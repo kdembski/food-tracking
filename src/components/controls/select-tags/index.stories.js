@@ -22,3 +22,11 @@ export const Default = Template.bind({});
 Default.args = {
   tags: "default,vege,hot,szybki",
 };
+
+export const isLoading = Template.bind({});
+isLoading.args = Object.assign({ isLoading: true }, Default.args);
+
+export const Empty = Template.bind({});
+Empty.args = {
+  tags: "",
+};

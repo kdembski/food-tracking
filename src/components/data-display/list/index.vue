@@ -1,10 +1,11 @@
 <script lang="ts">
 import CInput from "@/components/controls/input/index.vue";
 import CSelectTags from "@/components/controls/select-tags/index.vue";
+import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 
 export default {
   name: "CList",
-  components: { CInput, CSelectTags },
+  components: { CInput, CSelectTags, CSkeletonLoader },
 };
 </script>
 
@@ -39,6 +40,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  isLoadingAvailableTags: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits<{
@@ -63,6 +68,9 @@ const _selectedTags = computed({
     emit("update:selectedTags", tags);
   },
 });
+
+const columnsCount = computed(() => props.columns.length);
+const itemsCount = computed(() => props.items.length);
 </script>
 
 <template src="./template.html"></template>

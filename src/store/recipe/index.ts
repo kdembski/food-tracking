@@ -14,7 +14,8 @@ const state: RecipeState = {
 };
 
 const getters: GetterTree<RecipeState, any> = {
-  getRecipesList: (state: RecipeState) => state.recipesList,
+  getRecipesList: (state): RecipeList | null => state.recipesList,
+  isLoadingRecipesList: (state) => state.isLoadingRecipesList,
 };
 
 const actions: ActionTree<RecipeState, any> = {

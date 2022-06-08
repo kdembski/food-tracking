@@ -11,7 +11,6 @@ export default {
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useListWithFilters } from "@/composables/list-with-filters";
-import { isEmpty } from "lodash";
 
 const recipesListColumns = [
   {
@@ -36,14 +35,12 @@ const recipesListDefaultFilters = {
 const {
   list,
   isLoadingList,
-  loadListAndSaveFiltersToStorage,
-  getFiltersFromStorage,
   availableTags,
   isLoadingAvailableTags,
   filters,
   filterBySearchPhrase,
   filterByTags,
-  handleListLoadingProccess,
+  loadListOnMounted,
 } = useListWithFilters(
   "recipesList",
   "recipe/getRecipesList",
@@ -54,13 +51,7 @@ const {
 );
 
 onMounted(() => {
-  const storedFilters = getFiltersFromStorage();
-
-  if (!isEmpty(storedFilters)) {
-    filters.value = storedFilters;
-  }
-
-  handleListLoadingProccess();
+  loadListOnMounted();
 });
 </script>
 

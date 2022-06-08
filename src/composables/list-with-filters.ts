@@ -3,6 +3,7 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import { ListFilters } from "@/types/list";
 import { ref, Ref } from "vue";
+import { isEmpty } from "lodash";
 
 const availableTags = ref("");
 const isLoadingAvailableTags = ref(false);
@@ -13,7 +14,7 @@ export function useListWithFilters(
   listName: string,
   listGetter: string,
   listLoadAction: string,
-  listIsLoading: string,
+  listIsLoadingGetter: string,
   listGetTagsAction: string,
   defaultFilters: ListFilters
 ) {
@@ -21,7 +22,7 @@ export function useListWithFilters(
 
   const filters: Ref<ListFilters> = ref(defaultFilters);
   const list = computed(() => store.getters[listGetter]);
-  const isLoadingList = computed(() => store.state[listIsLoading]);
+  const isLoadingList = computed(() => store.getters[listIsLoadingGetter]);
 
   const loadList = (filters: ListFilters) => {
     store.dispatch(listLoadAction, filters);
@@ -75,16 +76,24 @@ export function useListWithFilters(
     loadListAndSaveFiltersToStorage(filters.value);
   };
 
+  const loadListOnMounted = () => {
+    const storedFilters = getFiltersFromStorage();
+
+    if (!isEmpty(storedFilters)) {
+      filters.value = storedFilters;
+    }
+
+    handleListLoadingProccess();
+  };
+
   return {
     list,
     isLoadingList,
-    loadListAndSaveFiltersToStorage,
-    getFiltersFromStorage,
     availableTags,
     isLoadingAvailableTags,
     filters,
     filterBySearchPhrase,
     filterByTags,
-    handleListLoadingProccess,
+    loadListOnMounted,
   };
 }

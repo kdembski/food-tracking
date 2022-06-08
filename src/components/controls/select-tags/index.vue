@@ -14,6 +14,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  isLoading: {
+    type: Boolean,
+    deafult: false,
+  },
   selectedTags: {
     type: String,
     default: "",

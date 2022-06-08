@@ -1,3 +1,10 @@
-<div class="tags">
-  <slot :tagsArray="tagsArray"></slot>
+<div class="tags" ref="container">
+  <div v-if="isLoading" class="tags__loader">
+    <CSkeletonLoader
+      class="loader__item"
+      v-for="index in getLoaderItemsCount()"
+    />
+  </div>
+  <slot v-else-if="tagsCount > 0" :tagsArray="tagsArray"></slot>
+  <div v-else class="tags__empty">Brak tagów</div>
 </div>

@@ -11,9 +11,9 @@ const state: UserState = {
 };
 
 const getters: GetterTree<UserState, any> = {
-  isLoggedIn: (state: UserState): boolean => !!state.accessToken,
+  isLoggedIn: (state): boolean => !!state.accessToken,
 
-  getAccessToken: (state: UserState): string | null => state.accessToken,
+  getAccessToken: (state): string | null => state.accessToken,
 };
 
 const actions: ActionTree<UserState, any> = {
