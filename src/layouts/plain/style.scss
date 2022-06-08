@@ -1,10 +1,10 @@
-.layout--plain {
+.layout-plain {
   background-color: $secondary-light-55;
   height: 100vh;
 }
 
 .dark-mode {
-  &.layout--plain {
+  &.layout-plain {
     background-color: $secondary-dark-20;
   }
 }

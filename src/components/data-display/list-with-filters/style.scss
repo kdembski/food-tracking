@@ -1,7 +1,6 @@
 .list-with-filters {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100%;
 
   &__search {
@@ -10,6 +9,7 @@
 
   &__select-tags {
     margin-bottom: 15px;
+    padding: 0 2px;
   }
 
   &__clear-filters-btn {

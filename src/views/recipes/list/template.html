@@ -17,7 +17,7 @@
     @clearFilters="clearListFilters"
   >
     <template v-slot:tags="{ itemValue }">
-      <CDisplayTags :tags="itemValue" />
+      <CDisplayTags :tags="itemValue" @click="addTagAndFilter" />
     </template>
   </CListWithFilters>
 </div>

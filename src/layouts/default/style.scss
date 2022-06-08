@@ -1,4 +1,4 @@
-.layout--default {
+.layout-default {
   display: flex;
   background-color: $secondary-light-55;
   position: relative;
@@ -6,17 +6,24 @@
   transition: background-color 0.2s ease-in-out;
   height: 100vh;
 
-  &__content {
-    padding: 10px;
-    flex-grow: 1;
-    overflow-y: auto;
+  &-content {
     display: flex;
-    justify-content: center;
-  }
+    flex-grow: 1;
 
-  &__card {
-    max-width: 1300px;
-    width: 100%;
+    &__card {
+      display: flex;
+      max-width: 1400px;
+      width: 100%;
+      min-height: 100%;
+      margin: auto;
+    }
+
+    &__wrapper {
+      padding: 15px;
+      padding-left: 30px;
+      overflow-y: scroll;
+      flex-grow: 1;
+    }
   }
 
   &:deep(header) {
@@ -32,13 +39,13 @@
 }
 
 @media screen and (max-width: $screen-md) {
-  .layout--default__content {
+  .layout-default-content {
     padding: 52px 0 0 0;
   }
 }
 
 .dark-mode {
-  &.layout--default {
+  &.layout-default {
     background-color: $secondary-dark-25;
 
     &:deep(header) {

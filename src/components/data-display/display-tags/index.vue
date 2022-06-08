@@ -13,6 +13,14 @@ const props = defineProps({
     default: "",
   },
 });
+
+const emit = defineEmits<{
+  (e: "click", name: string): void;
+}>();
+
+const onClick = (name: string) => {
+  emit("click", name);
+};
 </script>
 
 <template src="./template.html"></template>

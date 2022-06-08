@@ -20,7 +20,7 @@
   &__wrapper {
     height: 100%;
     width: 100%;
-    background-color: $secondary-dark-10;
+    background-color: $secondary-dark-20;
     box-shadow: $shadow-md-dark;
   }
 
@@ -38,7 +38,7 @@
   }
 
   &__header {
-    background-color: $secondary-dark-10;
+    background-color: $secondary-dark-20;
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
     display: flex;

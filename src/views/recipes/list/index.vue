@@ -40,6 +40,7 @@ const {
   filters,
   filterBySearchPhrase,
   filterByTags,
+  addTagAndFilter,
   loadListOnMounted,
   clearListFilters,
   changeCurrentPage,

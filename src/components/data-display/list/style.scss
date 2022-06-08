@@ -1,12 +1,10 @@
 .list {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100%;
 
   &__content {
     border-collapse: collapse;
-    width: 100%;
 
     tr {
       border-bottom: 1px solid $secondary-light-50;

@@ -62,12 +62,25 @@ export function useListWithFilters(
 
     filterBySearchPhraseTimeout = setTimeout(() => {
       filters.value.searchPhrase = phrase;
+      filters.value.currentPage = 1;
       handleListLoadingProccess();
     }, 200);
   };
 
   const filterByTags = (tags: string) => {
     filters.value.tags = tags;
+    filters.value.currentPage = 1;
+    handleListLoadingProccess();
+  };
+
+  const addTagAndFilter = (name: string) => {
+    if (filters.value.tags) {
+      filters.value.tags += "," + name;
+    } else {
+      filters.value.tags = name;
+    }
+
+    filters.value.currentPage = 1;
     handleListLoadingProccess();
   };
 
@@ -109,6 +122,7 @@ export function useListWithFilters(
     filters,
     filterBySearchPhrase,
     filterByTags,
+    addTagAndFilter,
     loadListOnMounted,
     clearListFilters,
     changeCurrentPage,

@@ -1,8 +1,10 @@
-<div class="layout--default">
+<div class="layout-default">
   <CSidebar :items="sidebarItems" />
-  <div class="layout--default__content">
-    <CCard class="layout--default__card">
-      <slot></slot>
-    </CCard>
+  <div class="layout-default-content">
+    <div class="layout-default-content__wrapper">
+      <CCard class="layout-default-content__card">
+        <slot></slot>
+      </CCard>
+    </div>
   </div>
 </div>

@@ -63,4 +63,33 @@ onUnmounted(() => {
 a {
   all: unset;
 }
+
+* {
+  &::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $secondary-light-30;
+    border-radius: 100px;
+    border: 4px transparent solid;
+    background-clip: padding-box;
+  }
+}
+
+.dark-mode {
+  * {
+    &::-webkit-scrollbar-thumb {
+      background: $secondary-dark-30;
+      border-radius: 100px;
+      border: 4px transparent solid;
+      background-clip: padding-box;
+    }
+  }
+}
 </style>
