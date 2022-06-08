@@ -1,14 +1,25 @@
 <div class="list">
+  <div class="list__clear-filters-btn">
+    <CButton
+      variant="text"
+      color="secondary"
+      label="Clear filters"
+      size="small"
+      icon="times"
+      :isLoading="isLoadingAvailableTags || isLoading"
+      @click="clearFilters"
+    />
+  </div>
   <div class="list__search">
     <CInput v-model="_searchPhrase" icon="magnifying-glass" />
   </div>
   <CSelectTags
     v-model:selectedTags="_selectedTags"
     :tags="availableTags"
-    :isLoading="isLoadingAvailableTags"
+    :isLoading="isLoadingAvailableTags || isLoading"
     class="list__select-tags"
   />
-  <div v-if="isLoading" class="loader">
+  <div v-if="isLoadingAvailableTags || isLoading" class="loader">
     <CSkeletonLoader class="loader__header" :itemsCount="columnsCount" />
     <div class="loader__content">
       <CSkeletonLoader

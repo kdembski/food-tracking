@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   tags: {

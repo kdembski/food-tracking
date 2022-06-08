@@ -2,10 +2,11 @@
 import CInput from "@/components/controls/input/index.vue";
 import CSelectTags from "@/components/controls/select-tags/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
+import CButton from "@/components/controls/button/index.vue";
 
 export default {
   name: "CList",
-  components: { CInput, CSelectTags, CSkeletonLoader },
+  components: { CInput, CSelectTags, CSkeletonLoader, CButton },
 };
 </script>
 
@@ -49,6 +50,7 @@ const props = defineProps({
 const emit = defineEmits<{
   (e: "update:searchPhrase", value: string): void;
   (e: "update:selectedTags", tags: string): void;
+  (e: "clearFilters"): void;
 }>();
 
 const _searchPhrase = computed({
@@ -71,6 +73,10 @@ const _selectedTags = computed({
 
 const columnsCount = computed(() => props.columns.length);
 const itemsCount = computed(() => props.items.length);
+
+const clearFilters = () => {
+  emit("clearFilters");
+};
 </script>
 
 <template src="./template.html"></template>

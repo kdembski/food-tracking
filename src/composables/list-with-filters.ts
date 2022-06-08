@@ -3,7 +3,7 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import { ListFilters } from "@/types/list";
 import { ref, Ref } from "vue";
-import { isEmpty } from "lodash";
+import { isEmpty, isEqual, clone } from "lodash";
 
 const availableTags = ref("");
 const isLoadingAvailableTags = ref(false);
@@ -86,6 +86,16 @@ export function useListWithFilters(
     handleListLoadingProccess();
   };
 
+  const clearListFilters = () => {
+    if (isEqual(defaultFilters, filters.value)) {
+      return false;
+    }
+
+    filters.value = clone(defaultFilters);
+    handleListLoadingProccess();
+    return true;
+  };
+
   return {
     list,
     isLoadingList,
@@ -95,5 +105,6 @@ export function useListWithFilters(
     filterBySearchPhrase,
     filterByTags,
     loadListOnMounted,
+    clearListFilters,
   };
 }

@@ -12,6 +12,7 @@
     :selectedTags="filters.tags"
     @update:selectedTags="filterByTags"
     :isLoadingAvailableTags="isLoadingAvailableTags"
+    @clearFilters="clearListFilters"
   >
     <template #tags="{ value }">
       <CDisplayTags :tags="value" />

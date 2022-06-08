@@ -41,6 +41,7 @@ const {
   filterBySearchPhrase,
   filterByTags,
   loadListOnMounted,
+  clearListFilters,
 } = useListWithFilters(
   "recipesList",
   "recipe/getRecipesList",
