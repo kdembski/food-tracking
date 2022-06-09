@@ -37,6 +37,21 @@
       color: $info;
       background-color: $info-light;
     }
+
+    &.tag--utensils {
+      color: #990000;
+      background-color: #ffd0d0;
+    }
+
+    &.tag--bell-concierge {
+      color: #6b3400;
+      background-color: #ffd9b5;
+    }
+
+    &.tag--mug-saucer {
+      color: #887400;
+      background-color: #fff8bb;
+    }
   }
 
   &__empty {
@@ -77,6 +92,21 @@
       &.tag--clock {
         color: $info-light;
         background-color: $info;
+      }
+
+      &.tag--utensils {
+        color: #ffd0d0;
+        background-color: #990000;
+      }
+
+      &.tag--bell-concierge {
+        color: #ffd9b5;
+        background-color: #6b3400;
+      }
+
+      &.tag--mug-saucer {
+        color: #fff8bb;
+        background-color: #887400;
       }
     }
   }

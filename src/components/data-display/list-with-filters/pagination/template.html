@@ -1,6 +1,6 @@
 <div v-if="isLoading" class="list-pagination-loader">
   <CSkeletonLoader class="list-pagination-loader__item" />
-  <CSkeletonLoader class="list-pagination-loader__item" :itemsCount="6" />
+  <CSkeletonLoader class="list-pagination-loader__item" />
 </div>
 <div v-else-if="paginationData.totalRecords > 0" class="list-pagination">
   <div class="list-pagination__summary">

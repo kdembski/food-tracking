@@ -1,5 +1,5 @@
 .skeleton-loader {
-  background-color: transparentize($secondary-light-55, 0.5);
+  background-color: $secondary-light-55;
   width: 100%;
   height: 50px;
   position: relative;
@@ -19,19 +19,12 @@
     background-image: linear-gradient(
       90deg,
       rgba($secondary-light-40, 0) 0,
-      rgba($secondary-light-40, 0.2) 20%,
-      rgba($secondary-light-40, 0.4) 60%,
+      rgba($secondary-light-40, 0.4) 20%,
+      rgba($secondary-light-40, 0.6) 60%,
       rgba($secondary-light-40, 0)
     );
     animation: shimmer 2s infinite;
     content: "";
-  }
-
-  &__item {
-    width: 100%;
-    height: 40%;
-    background-color: $secondary-light-55;
-    border-radius: 100px;
   }
 }
 
@@ -47,10 +40,6 @@
         rgba($secondary-dark-10, 0.4) 60%,
         rgba($secondary-dark-10, 0)
       );
-    }
-
-    &__item {
-      background-color: $secondary-dark-30;
     }
   }
 }

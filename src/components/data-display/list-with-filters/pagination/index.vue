@@ -25,13 +25,13 @@ const emit = defineEmits<{
 
 const getPaginationSummaryText = () => {
   return (
-    "Wyświetlono \xa0" +
+    "Wyświetlono \xa0\xa0" +
     props.paginationData.firstRecord +
     " - " +
     props.paginationData.lastRecord +
-    "\xa0 z \xa0" +
+    "\xa0\xa0 z \xa0\xa0" +
     props.paginationData.totalRecords +
-    "\xa0 wyników"
+    " wyników"
   );
 };
 

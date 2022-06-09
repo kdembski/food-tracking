@@ -9,6 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useWindowSize } from "@/components/utils/composables/window-size";
 
 const props = defineProps({
   items: {
@@ -31,6 +32,11 @@ const props = defineProps({
 
 const columnsCount = computed(() => props.columns.length);
 const itemsCount = computed(() => props.items.length);
+const { windowHeight } = useWindowSize();
+
+const getLoaderRowsCount = () => {
+  return Math.floor((windowHeight.value - 300) / 100);
+};
 </script>
 
 <template src="./template.html"></template>

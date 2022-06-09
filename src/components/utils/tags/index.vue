@@ -29,16 +29,28 @@ const tagsArray = computed(() => {
   return namesArray.map((name) => {
     let icon = "";
 
-    if (name.includes("veg")) {
+    if (name === "vege") {
       icon = "leaf";
     }
 
-    if (["hot", "spicy", "ostr"].some((item) => name.includes(item))) {
+    if (name === "ostre") {
       icon = "fire";
     }
 
-    if (name.includes("szybk")) {
+    if (name === "szybkie") {
       icon = "clock";
+    }
+
+    if (name === "śniadanie") {
+      icon = "mug-saucer";
+    }
+
+    if (name === "obiad") {
+      icon = "utensils";
+    }
+
+    if (name === "kolacja") {
+      icon = "bell-concierge";
     }
 
     return {

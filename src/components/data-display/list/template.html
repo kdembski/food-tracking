@@ -1,12 +1,15 @@
-<div class="list">
+<div class="list" ref="container">
   <div v-if="isLoading" class="list-loader">
-    <CSkeletonLoader class="list-loader__header" :itemsCount="columnsCount" />
+    <div class="list-loader__header">
+      <CSkeletonLoader v-for="item in columnsCount" class="list-loader__item" />
+    </div>
     <div class="list-loader__content">
-      <CSkeletonLoader
-        v-for="index in 6"
-        class="list-loader__item"
-        :itemsCount="columnsCount"
-      />
+      <div v-for="row in getLoaderRowsCount()" class="list-loader__row">
+        <CSkeletonLoader
+          v-for="item in columnsCount"
+          class="list-loader__item"
+        />
+      </div>
     </div>
   </div>
   <table v-else class="list__content">

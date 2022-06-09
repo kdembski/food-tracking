@@ -1,9 +1,9 @@
 .sidebar {
-  width: 280px;
+  width: 250px;
   height: 100vh;
   display: flex;
   position: relative;
-  transition: width 0.15s ease-in-out, background-color 0.2s ease-in-out;
+  transition: width 0.15s ease-in-out;
 
   &.sidebar--collapsed {
     width: 71px;
@@ -18,10 +18,24 @@
   }
 
   &__wrapper {
-    height: 100%;
     width: 100%;
-    background-color: $secondary-dark-20;
     box-shadow: $shadow-md-dark;
+  }
+
+  &__header {
+    background-color: $secondary-dark-20;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__content {
+    height: 100%;
+    background-color: $secondary-dark-20;
+    transition: background-color 0.2s ease-in-out;
+    overflow: hidden;
   }
 
   &__collapse-bar {
@@ -35,15 +49,6 @@
     &:hover {
       background-color: $primary;
     }
-  }
-
-  &__header {
-    background-color: $secondary-dark-20;
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
 
   &__collapse-btn {
@@ -60,7 +65,6 @@
 
   &__items {
     list-style: none;
-    overflow: hidden;
   }
 
   .item {
@@ -115,14 +119,26 @@
         transform: translateX(100%);
       }
     }
+
+    &__header {
+      box-shadow: $shadow-xs-dark;
+    }
+
+    &__content {
+      position: relative;
+      z-index: 1;
+    }
   }
 }
 
 .dark-mode {
   .sidebar {
     &__header,
-    &__wrapper {
+    &__content {
       background-color: $secondary-dark-30;
+    }
+
+    &__wrapper {
       box-shadow: $shadow-md;
     }
   }
