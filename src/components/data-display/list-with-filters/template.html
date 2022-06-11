@@ -7,40 +7,48 @@
       size="small"
       icon="times"
       class="list-with-filters__clear-filters-btn"
-      :isLoading="isLoading"
+      :isLoading="_isLoading"
+      :isDisabled="areFiltersEqualToDefault()"
       @click="clearFilters"
     />
   </div>
   <CInput
-    v-model="_searchPhrase"
+    :modelValue="filters.searchPhrasee"
+    @update:modelValue="filterBySearchPhrase"
     class="list-with-filters__search-input"
     icon="magnifying-glass"
     placeholder="Szukaj po nazwie"
   />
   <CSelectTags
-    v-model:selectedTags="_selectedTags"
+    :selectedTags="filters.tags"
+    @update:selectedTags="filterByTags"
     :tags="availableTags"
-    :isLoading="isLoading"
+    :isLoading="_isLoading"
     class="list-with-filters__select-tags"
   />
   <CList
-    :items="items"
-    :isLoading="isLoading"
+    :items="list?.data"
+    :isLoading="_isLoading"
     :columns="columns"
     :getItemColumnValue="getItemColumnValue"
-    @sortChange="$attrs.onSortChange"
+    @sortChange="filterBySort"
   >
     <template
       v-for="field in Object.keys($slots)"
       v-slot:[field]="{ itemValue }"
     >
-      <slot :name="field" :itemValue="itemValue"></slot>
+      <slot
+        :name="field"
+        :itemValue="itemValue"
+        :addTagAndFilter="addTagAndFilter"
+      ></slot>
     </template>
   </CList>
   <CPagination
-    v-if="paginationData"
-    v-model:currentPage="_currentPage"
-    :paginationData="paginationData"
-    :isLoading="isLoading"
+    v-if="list?.pagination"
+    :currentPage="filters.currentPage"
+    @update:currentPage="changeCurrentPage"
+    :paginationData="list?.pagination"
+    :isLoading="_isLoading"
   />
 </div>

@@ -3,22 +3,17 @@
     <h1>Lista przepisów</h1>
   </header>
   <CListWithFilters
-    :items="list?.data"
     :columns="recipesListColumns"
-    :isLoading="isLoadingList || isLoadingAvailableTags"
-    :searchPhrase="filters.searchPhrase"
-    @update:searchPhrase="filterBySearchPhrase"
-    :availableTags="availableTags"
-    :selectedTags="filters.tags"
-    @update:selectedTags="filterByTags"
-    :paginationData="list?.pagination"
-    :currentPage="filters.currentPage"
-    @update:currentPage="changeCurrentPage"
-    @clearFilters="clearListFilters"
-    :currentSort="currentSort"
-    @sortChange="filterBySort"
+    :defaultFilters="recipesListDefaultFilters"
+    listName="recipesList"
+    listGetterName="recipe/getRecipesList"
+    listLoadActionName="recipe/loadRecipesList"
+    listIsLoadingGetterName="recipe/isLoadingRecipesList"
+    tagsGetterName="recipe/getRecipesTags"
+    tagsLoadActionName="recipe/loadRecipesTags"
+    tagsIsLoadingGetterName="recipe/isLoadingRecipesTags"
   >
-    <template v-slot:tags="{ itemValue }">
+    <template v-slot:tags="{ itemValue, addTagAndFilter }">
       <CDisplayTags :tags="itemValue" @click="addTagAndFilter" />
     </template>
   </CListWithFilters>

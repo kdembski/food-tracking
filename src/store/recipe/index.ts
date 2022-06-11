@@ -1,8 +1,7 @@
 import ApiService from "@/services/api.service";
-import StorageService from "@/services/storage.service";
 import { RecipeState, RecipeList } from "@/types/recipe";
 import { ApiError } from "@/types/api";
-import { GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
+import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery } from "../helpers/list-query";
 import { ListFilters } from "@/types/list";
@@ -11,11 +10,16 @@ import { getAvailableTagsQuery, TagsFilters } from "../helpers/tags-query";
 const state: RecipeState = {
   recipesList: null,
   isLoadingRecipesList: false,
+  recipesTags: null,
+  isLoadingRecipesTags: false,
 };
 
 const getters: GetterTree<RecipeState, any> = {
   getRecipesList: (state): RecipeList | null => state.recipesList,
   isLoadingRecipesList: (state) => state.isLoadingRecipesList,
+
+  getRecipesTags: (state): RecipeList | null => state.recipesTags,
+  isLoadingRecipesTags: (state) => state.isLoadingRecipesTags,
 };
 
 const actions: ActionTree<RecipeState, any> = {
@@ -42,20 +46,24 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  getAvailableRecipesTags(_, filters: TagsFilters) {
-    return new Promise<string>((resolve, reject) => {
+  loadRecipesTags({ commit }, filters: TagsFilters) {
+    return new Promise<void>((resolve, reject) => {
+      commit("loadRecipesTagsRequest");
+
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/recipes/tags" +
           getAvailableTagsQuery(filters)
       )
         .then((response: AxiosResponse<{ recipesTags: string }>) => {
-          resolve(response.data.recipesTags);
+          commit("loadRecipesTagsSuccess", response.data.recipesTags);
+          resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
 
+          commit("loadRecipesTagsError", errorMessage);
           reject(errorMessage);
         });
     });
@@ -74,6 +82,19 @@ const mutations: MutationTree<RecipeState> = {
 
   loadRecipesListError(state) {
     state.isLoadingRecipesList = false;
+  },
+
+  loadRecipesTagsRequest(state) {
+    state.isLoadingRecipesTags = true;
+  },
+
+  loadRecipesTagsSuccess(state, list: RecipeList) {
+    state.recipesTags = list;
+    state.isLoadingRecipesTags = false;
+  },
+
+  loadRecipesTagsError(state) {
+    state.isLoadingRecipesTags = false;
   },
 };
 

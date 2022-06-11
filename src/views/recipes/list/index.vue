@@ -9,9 +9,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { useListWithFilters } from "@/composables/list-with-filters";
-
 const recipesListColumns = [
   {
     label: "Nazwa przepisu",
@@ -32,33 +29,6 @@ const recipesListDefaultFilters = {
   sortDirection: "asc",
   tags: "",
 };
-
-const {
-  list,
-  isLoadingList,
-  availableTags,
-  isLoadingAvailableTags,
-  filters,
-  currentSort,
-  filterBySearchPhrase,
-  filterByTags,
-  addTagAndFilter,
-  filterBySort,
-  loadListOnMounted,
-  clearListFilters,
-  changeCurrentPage,
-} = useListWithFilters(
-  "recipesList",
-  "recipe/getRecipesList",
-  "recipe/loadRecipesList",
-  "recipe/isLoadingRecipesList",
-  "recipe/getAvailableRecipesTags",
-  recipesListDefaultFilters
-);
-
-onMounted(() => {
-  loadListOnMounted();
-});
 </script>
 
 <template src="./template.html"></template>

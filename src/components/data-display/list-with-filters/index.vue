@@ -12,96 +12,107 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, provide, reactive, watch, ref } from "vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
+import { ListFilters } from "@/types/list";
+import { useAvailableTags } from "./composables/available-tags";
+import { useStoredFilters } from "./composables/stored-filters";
+import { useFilters } from "./composables/filters";
+import { onMounted, provide } from "vue";
+import { isEmpty, isEqual, clone } from "lodash";
+const store = useStore();
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => [],
-  },
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
-  columns: {
-    type: Array,
-    required: true,
-  },
-  getItemColumnValue: {
-    type: Function,
-    default: (value: string | number) => value,
-  },
-  searchPhrase: {
-    type: String,
-    default: "",
-  },
-  availableTags: {
-    type: String,
-    default: "",
-  },
-  selectedTags: {
-    type: String,
-    default: "",
-  },
-  currentPage: {
-    type: Number,
-    default: 1,
-  },
-  paginationData: {
-    type: Object,
-    default: null,
-  },
-  currentSort: {
-    type: Object,
-    default() {
-      return {
-        sortAttribute: "",
-        sortDirection: "asc",
-      };
-    },
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    columns: Array<any>;
+    getItemColumnValue?: (value: string | number) => string | number;
+    listName: string;
+    listGetterName: string;
+    listLoadActionName: string;
+    listIsLoadingGetterName: string;
+    tagsGetterName?: string;
+    tagsLoadActionName?: string;
+    tagsIsLoadingGetterName?: string;
+    defaultFilters: ListFilters;
+    isLoading?: boolean;
+  }>(),
+  {
+    getItemColumnValue: (value: string | number) => value,
+    tagsGetterName: "",
+    tagsLoadActionName: "",
+    tagsIsLoadingGetterName: "",
+    isLoading: false,
+  }
+);
 
-const emit = defineEmits<{
-  (e: "update:searchPhrase", value: string): void;
-  (e: "update:selectedTags", tags: string): void;
-  (e: "update:currentPage", page: number): void;
-  (e: "clearFilters"): void;
-}>();
+const list = computed(() => store.getters[props.listGetterName]);
+const isLoadingList = computed(
+  () => store.getters[props.listIsLoadingGetterName]
+);
+const _isLoading = computed(
+  () => isLoadingList.value || isLoadingAvailableTags.value || props.isLoading
+);
 
-const _currentSort = computed(() => props.currentSort);
-provide("currentSort", _currentSort);
+const loadList = (filters: ListFilters) => {
+  store.dispatch(props.listLoadActionName, filters);
+};
 
-const _searchPhrase = computed({
-  get(): string {
-    return props.searchPhrase;
-  },
-  set(value: string) {
-    emit("update:searchPhrase", value);
-  },
-});
+const handleListLoadingProccess = () => {
+  saveFiltersToStorage(filters.value);
+  loadAvailableTags(filters.value);
+  loadList(filters.value);
+};
 
-const _selectedTags = computed({
-  get(): string {
-    return props.selectedTags;
-  },
-  set(tags: string) {
-    emit("update:selectedTags", tags);
-  },
-});
+const {
+  filters,
+  currentSort,
+  filterBySearchPhrase,
+  filterBySort,
+  filterByTags,
+  addTagAndFilter,
+  changeCurrentPage,
+} = useFilters(props.defaultFilters, handleListLoadingProccess);
 
-const _currentPage = computed({
-  get(): number {
-    return props.currentPage;
-  },
-  set(page: number) {
-    emit("update:currentPage", page);
-  },
-});
+provide("currentSort", currentSort);
+
+const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
+  useAvailableTags(
+    props.tagsLoadActionName,
+    props.tagsGetterName,
+    props.tagsIsLoadingGetterName
+  );
+
+const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
+  props.listName
+);
+
+const loadListOnMounted = () => {
+  const storedFilters = getFiltersFromStorage();
+
+  if (!isEmpty(storedFilters)) {
+    filters.value = storedFilters;
+  }
+
+  handleListLoadingProccess();
+};
+
+const areFiltersEqualToDefault = () => {
+  return isEqual(props.defaultFilters, filters.value);
+};
 
 const clearFilters = () => {
-  emit("clearFilters");
+  if (areFiltersEqualToDefault()) {
+    return false;
+  }
+
+  filters.value = clone(props.defaultFilters);
+  handleListLoadingProccess();
+  return true;
 };
+
+onMounted(() => {
+  loadListOnMounted();
+});
 </script>
 
 <template src="./template.html"></template>

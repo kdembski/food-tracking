@@ -17,3 +17,8 @@ export interface ListPagination {
   lastRecord: number;
   totalRecords: number;
 }
+
+export type ListWithFilters<T> = {
+  data: Array<T>;
+  pagination: ListPagination;
+};

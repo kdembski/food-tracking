@@ -1,8 +1,10 @@
-import { ListPagination } from "./list";
+import { ListWithFilters } from "./list";
 
 export interface RecipeState {
   recipesList: RecipeList | null;
   isLoadingRecipesList: boolean;
+  recipesTags: RecipeList | null;
+  isLoadingRecipesTags: boolean;
 }
 
 export interface Recipe {
@@ -11,7 +13,4 @@ export interface Recipe {
   tags: string;
 }
 
-export interface RecipeList {
-  data: Array<Recipe>;
-  pagination: ListPagination;
-}
+export type RecipeList = ListWithFilters<Recipe>;

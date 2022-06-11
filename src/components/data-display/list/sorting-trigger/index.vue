@@ -3,7 +3,7 @@ export default { name: "CSortingTrigger" };
 </script>
 
 <script setup lang="ts">
-import { inject, Ref } from "vue";
+import { inject, ComputedRef } from "vue";
 import { ListSortFilters } from "@/types/list";
 
 const props = defineProps({
@@ -23,7 +23,9 @@ const emit = defineEmits<{
 }>();
 
 const currentSort =
-  inject<Ref<{ sortAttribute: string; sortDirection: string }>>("currentSort");
+  inject<ComputedRef<{ sortAttribute: string; sortDirection: string }>>(
+    "currentSort"
+  );
 
 const getActiveIconClass = (direction: string) => {
   if (isThisSortActive(direction)) {

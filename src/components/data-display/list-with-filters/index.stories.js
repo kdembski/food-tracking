@@ -15,30 +15,11 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  items: [
-    {
-      1: "1-1",
-      2: "1-2",
-      3: "1-3",
-      4: "1-4",
-    },
-    {
-      1: "2-1",
-      2: "2-2",
-      3: "2-3",
-      4: "2-4",
-    },
-    {
-      1: "3-1",
-      2: "3-2",
-      3: "3-3",
-      4: "3-4",
-    },
-  ],
   columns: [
     {
       label: "label-1",
       value: "1",
+      sortable: true,
     },
     {
       label: "label-2",
@@ -53,13 +34,21 @@ Default.args = {
       value: "4",
     },
   ],
-  paginationData: {
+  defaultFilters: {
     currentPage: 1,
-    totalPages: 10,
-    firstRecord: 1,
-    lastRecord: 0,
-    totalRecords: 69,
+    pageSize: 10,
+    searchPhrase: "",
+    sortAttribute: "1",
+    sortDirection: "asc",
+    tags: "",
   },
+  listName: "list",
+  listGetterName: "list/getList",
+  listIsLoadingGetterName: "list/isLoadingList",
+  listLoadActionName: "list/loadList",
+  tagsGetterName: "list/getTags",
+  tagsIsLoadingGetterName: "list/isLoadingTags",
+  tagsLoadActionName: "list/loadTags",
 };
 
 export const isLoading = Template.bind({});
