@@ -27,6 +27,10 @@ export function useFieldProps() {
       type: String,
       default: "",
     },
+    placeholder: {
+      type: String,
+      default: "",
+    },
   };
 
   const getFieldTemplateProps = (

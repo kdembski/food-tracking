@@ -1,9 +1,10 @@
 <script lang="ts">
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
+import CSortingTrigger from "./sorting-trigger/index.vue";
 
 export default {
   name: "CList",
-  components: { CSkeletonLoader },
+  components: { CSkeletonLoader, CSortingTrigger },
 };
 </script>
 

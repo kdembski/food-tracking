@@ -3,16 +3,25 @@
   flex-direction: column;
   height: 100%;
 
-  &__search {
-    margin: 2px 0 12px;
+  &__search-input {
+    margin: 0 1px 18px;
+    border-radius: 4px;
+    box-shadow: $shadow-xs;
   }
 
   &__select-tags {
-    margin-bottom: 15px;
-    padding: 0 2px;
+    margin: 0 2px 15px;
   }
 
   &__clear-filters-btn {
-    padding-left: 3px;
+    margin: 5px 2px 18px;
+  }
+}
+
+.dark-mode {
+  .list-with-filters {
+    &__search-input {
+      box-shadow: $shadow-sm-dark;
+    }
   }
 }

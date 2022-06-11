@@ -1,18 +1,22 @@
 <div class="list-with-filters">
-  <div class="list-with-filters__clear-filters-btn">
+  <div>
     <CButton
-      variant="text"
+      variant="contained"
       color="secondary"
       label="Usuń filtry"
       size="small"
       icon="times"
+      class="list-with-filters__clear-filters-btn"
       :isLoading="isLoading"
       @click="clearFilters"
     />
   </div>
-  <div class="list-with-filters__search">
-    <CInput v-model="_searchPhrase" icon="magnifying-glass" />
-  </div>
+  <CInput
+    v-model="_searchPhrase"
+    class="list-with-filters__search-input"
+    icon="magnifying-glass"
+    placeholder="Szukaj po nazwie"
+  />
   <CSelectTags
     v-model:selectedTags="_selectedTags"
     :tags="availableTags"
@@ -24,6 +28,7 @@
     :isLoading="isLoading"
     :columns="columns"
     :getItemColumnValue="getItemColumnValue"
+    @sortChange="$attrs.onSortChange"
   >
     <template
       v-for="field in Object.keys($slots)"

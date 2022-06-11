@@ -1,9 +1,12 @@
-export interface ListFilters {
+export interface ListSortFilters {
+  sortAttribute: string;
+  sortDirection: string;
+}
+
+export interface ListFilters extends ListSortFilters {
   currentPage: number;
   pageSize: number;
   searchPhrase: string;
-  sortAttribute: string;
-  sortDirection: string;
   tags?: string;
 }
 

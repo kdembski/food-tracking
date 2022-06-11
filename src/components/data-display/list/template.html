@@ -1,7 +1,9 @@
 <div class="list" ref="container">
   <div v-if="isLoading" class="list-loader">
-    <div class="list-loader__header">
-      <CSkeletonLoader v-for="item in columnsCount" class="list-loader__item" />
+    <div class="list-loader__header loader-header">
+      <div v-for="item in columnsCount" class="loader-header__item-wrapper">
+        <CSkeletonLoader class="loader-header__item" />
+      </div>
     </div>
     <div class="list-loader__content">
       <div v-for="row in getLoaderRowsCount()" class="list-loader__row">
@@ -15,7 +17,14 @@
   <table v-else class="list__content">
     <thead>
       <tr>
-        <th v-for="col in columns"><p>{{ col.label }}</p></th>
+        <th v-for="col in columns">
+          <CSortingTrigger
+            v-if="col.sortable"
+            :column="col"
+            @sortChange="$attrs.onSortChange"
+          />
+          <p v-else>{{ col.label }}</p>
+        </th>
       </tr>
     </thead>
     <tbody v-if="itemsCount < 1" class="list__empty-content">

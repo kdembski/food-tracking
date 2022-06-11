@@ -1,0 +1,15 @@
+<div class="sorting-trigger" @click="changeSort">
+  <p>{{ column.label}}</p>
+  <div class="sorting-trigger__icons-wrapper">
+    <FontAwesomeIcon
+      class="sorting-trigger__icon"
+      :class="getActiveIconClass('desc')"
+      icon="caret-up"
+    />
+    <FontAwesomeIcon
+      class="sorting-trigger__icon"
+      :class="getActiveIconClass('asc')"
+      icon="caret-down"
+    />
+  </div>
+</div>

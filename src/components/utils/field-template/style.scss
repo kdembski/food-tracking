@@ -15,6 +15,10 @@
     &:focus {
       outline: none;
     }
+
+    &::placeholder {
+      color: $secondary-light-40;
+    }
   }
 
   &:not(.field--invalid) {

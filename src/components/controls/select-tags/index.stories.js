@@ -20,7 +20,7 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  tags: "default,vege,hot,szybki",
+  tags: "default,vege,ostre,szybkie,śniadanie,obiad,kolacja",
 };
 
 export const isLoading = Template.bind({});

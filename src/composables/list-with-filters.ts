@@ -1,7 +1,7 @@
 import StorageService from "@/services/storage.service";
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { ListFilters } from "@/types/list";
+import { ListFilters, ListSortFilters } from "@/types/list";
 import { ref, Ref } from "vue";
 import { isEmpty, isEqual, clone } from "lodash";
 
@@ -21,19 +21,26 @@ export function useListWithFilters(
   const store = useStore();
 
   const filters: Ref<ListFilters> = ref(defaultFilters);
+  const currentSort = computed(() => {
+    return {
+      sortAttribute: filters.value.sortAttribute,
+      sortDirection: filters.value.sortDirection,
+    };
+  });
   const list = computed(() => store.getters[listGetter]);
   const isLoadingList = computed(() => store.getters[listIsLoadingGetter]);
+  const storageFiltersName = listName + "Filters";
 
   const loadList = (filters: ListFilters) => {
     store.dispatch(listLoadAction, filters);
   };
 
   const saveFiltersToStorage = (listFilters: ListFilters) => {
-    StorageService.setObject(listName, listFilters);
+    StorageService.setObject(storageFiltersName, listFilters);
   };
 
   const getFiltersFromStorage = (): ListFilters => {
-    return StorageService.getObject(listName);
+    return StorageService.getObject(storageFiltersName);
   };
 
   const loadListAndSaveFiltersToStorage = (listFilters: ListFilters) => {
@@ -84,6 +91,14 @@ export function useListWithFilters(
     handleListLoadingProccess();
   };
 
+  const filterBySort = (sort: ListSortFilters) => {
+    filters.value.sortAttribute = sort.sortAttribute;
+    filters.value.sortDirection = sort.sortDirection;
+
+    filters.value.currentPage = 1;
+    handleListLoadingProccess();
+  };
+
   const changeCurrentPage = (page: number) => {
     filters.value.currentPage = page;
     handleListLoadingProccess();
@@ -120,9 +135,11 @@ export function useListWithFilters(
     availableTags,
     isLoadingAvailableTags,
     filters,
+    currentSort,
     filterBySearchPhrase,
     filterByTags,
     addTagAndFilter,
+    filterBySort,
     loadListOnMounted,
     clearListFilters,
     changeCurrentPage,

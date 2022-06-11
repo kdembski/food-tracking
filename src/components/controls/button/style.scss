@@ -1,9 +1,10 @@
 .button {
   border: 3px solid transparent;
-  display: inline-block;
+  display: inline;
   font-weight: 700;
   cursor: pointer;
   position: relative;
+  white-space: nowrap;
 
   &--disabled {
     opacity: 0.5;
@@ -44,14 +45,14 @@
     }
 
     &.button--contained {
-      color: $white;
-      background-color: $secondary;
+      color: $secondary-dark-30;
+      background-color: $secondary-light-50;
     }
 
     &.button--outlined {
-      color: $secondary;
+      color: $secondary-dark-30;
       background-color: $white;
-      border-color: $secondary;
+      border-color: $secondary-light-50;
     }
   }
 
@@ -94,13 +95,59 @@
 
 .dark-mode {
   .button {
-    &--outlined {
-      background-color: $secondary-light-55;
+    &--primary {
+      &.button--text {
+        color: $primary;
+      }
+
+      &.button--contained {
+        color: $white;
+        background-color: $primary;
+      }
+
+      &.button--outlined {
+        color: $primary;
+        background-color: $white;
+        border-color: $primary;
+      }
     }
+
     &--secondary {
       &.button--text {
-        color: $secondary-light-55;
+        color: $secondary-light-30;
       }
+
+      &.button--contained {
+        color: $white;
+        background-color: $secondary-dark-20;
+      }
+
+      &.button--outlined {
+        color: $secondary-dark-20;
+        background-color: $white;
+        border-color: $secondary-light-50;
+      }
+    }
+
+    &--small {
+      font-size: $font-sm;
+      padding: 5px 10px;
+      box-shadow: $shadow-xs-dark;
+      border-radius: 3px;
+    }
+
+    &--medium {
+      font-size: $font-base;
+      padding: 10px 15px;
+      box-shadow: $shadow-sm-dark;
+      border-radius: 4px;
+    }
+
+    &--large {
+      font-size: $font-lg;
+      padding: 15px 20px;
+      box-shadow: $shadow-md-dark;
+      border-radius: 5px;
     }
   }
 }

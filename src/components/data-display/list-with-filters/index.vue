@@ -12,7 +12,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, provide, reactive, watch, ref } from "vue";
 
 const props = defineProps({
   items: {
@@ -51,6 +51,15 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  currentSort: {
+    type: Object,
+    default() {
+      return {
+        sortAttribute: "",
+        sortDirection: "asc",
+      };
+    },
+  },
 });
 
 const emit = defineEmits<{
@@ -59,6 +68,9 @@ const emit = defineEmits<{
   (e: "update:currentPage", page: number): void;
   (e: "clearFilters"): void;
 }>();
+
+const _currentSort = computed(() => props.currentSort);
+provide("currentSort", _currentSort);
 
 const _searchPhrase = computed({
   get(): string {

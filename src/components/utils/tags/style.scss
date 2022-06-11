@@ -29,11 +29,11 @@
     }
 
     &.tag--fire {
-      color: #ff1100;
+      color: #e70f00;
       background-color: #ffdda9;
     }
 
-    &.tag--clock {
+    &.tag--bell-concierge {
       color: $info;
       background-color: $info-light;
     }
@@ -43,13 +43,13 @@
       background-color: #ffd0d0;
     }
 
-    &.tag--bell-concierge {
+    &.tag--mug-saucer {
       color: #6b3400;
       background-color: #ffd9b5;
     }
 
-    &.tag--mug-saucer {
-      color: #887400;
+    &.tag--clock {
+      color: #aa8200;
       background-color: #fff8bb;
     }
   }
@@ -86,10 +86,10 @@
 
       &.tag--fire {
         color: #ffdda9;
-        background-color: #ff1100;
+        background-color: #e70f00;
       }
 
-      &.tag--clock {
+      &.tag--bell-concierge {
         color: $info-light;
         background-color: $info;
       }
@@ -99,14 +99,14 @@
         background-color: #990000;
       }
 
-      &.tag--bell-concierge {
+      &.tag--mug-saucer {
         color: #ffd9b5;
         background-color: #6b3400;
       }
 
-      &.tag--mug-saucer {
+      &.tag--clock {
         color: #fff8bb;
-        background-color: #887400;
+        background-color: #aa8200;
       }
     }
   }

@@ -16,6 +16,7 @@ const recipesListColumns = [
   {
     label: "Nazwa przepisu",
     value: "recipeName",
+    sortable: true,
   },
   {
     label: "Tagi",
@@ -27,8 +28,8 @@ const recipesListDefaultFilters = {
   currentPage: 1,
   pageSize: 10,
   searchPhrase: "",
-  sortAttribute: "",
-  sortDirection: "",
+  sortAttribute: "recipeName",
+  sortDirection: "asc",
   tags: "",
 };
 
@@ -38,9 +39,11 @@ const {
   availableTags,
   isLoadingAvailableTags,
   filters,
+  currentSort,
   filterBySearchPhrase,
   filterByTags,
   addTagAndFilter,
+  filterBySort,
   loadListOnMounted,
   clearListFilters,
   changeCurrentPage,
