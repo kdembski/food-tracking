@@ -3,7 +3,7 @@ import { ListWithFilters } from "./list";
 export interface RecipeState {
   recipesList: RecipeList | null;
   isLoadingRecipesList: boolean;
-  recipesTags: RecipeList | null;
+  recipesTags: string | null;
   isLoadingRecipesTags: boolean;
 }
 

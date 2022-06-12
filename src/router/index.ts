@@ -3,13 +3,14 @@ import store from "@/store";
 
 import LoginView from "../views/login/index.vue";
 import RecipesListView from "../views/recipes/list/index.vue";
+import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
     redirect: {
-      name: "recipes",
+      name: "recipesList",
     },
   },
   {
@@ -23,8 +24,16 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/recipes",
-    name: "recipes",
+    name: "recipesList",
     component: RecipesListView,
+    meta: {
+      isPublic: false,
+    },
+  },
+  {
+    path: "/ordered",
+    name: "orderedFoodList",
+    component: OrderedFoodListView,
     meta: {
       isPublic: false,
     },

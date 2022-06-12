@@ -18,7 +18,7 @@ const getters: GetterTree<RecipeState, any> = {
   getRecipesList: (state): RecipeList | null => state.recipesList,
   isLoadingRecipesList: (state) => state.isLoadingRecipesList,
 
-  getRecipesTags: (state): RecipeList | null => state.recipesTags,
+  getRecipesTags: (state): string | null => state.recipesTags,
   isLoadingRecipesTags: (state) => state.isLoadingRecipesTags,
 };
 
@@ -86,8 +86,8 @@ const mutations: MutationTree<RecipeState> = {
     state.isLoadingRecipesTags = true;
   },
 
-  loadRecipesTagsSuccess(state, list: RecipeList) {
-    state.recipesTags = list;
+  loadRecipesTagsSuccess(state, tags: string) {
+    state.recipesTags = tags;
     state.isLoadingRecipesTags = false;
   },
 
