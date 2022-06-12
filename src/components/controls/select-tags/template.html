@@ -1,5 +1,5 @@
 <CTags :tags="tags" :isLoading="isLoading">
-  <template #default="{ tagsArray }">
+  <template #default="{ tagsArray, getTagColorStyles }">
     <div v-for="tag in tagsArray">
       <input
         v-model="_selectedTags"
@@ -10,8 +10,8 @@
       />
       <label
         class="tag"
-        :class="tag.icon && 'tag--' + tag.icon"
         :for="'tag_' + tag.name"
+        :style="getTagColorStyles(tag)"
       >
         <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
         {{ tag.name }}

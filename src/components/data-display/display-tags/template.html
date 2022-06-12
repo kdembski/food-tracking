@@ -1,9 +1,9 @@
 <CTags v-if="tags" :tags="tags">
-  <template #default="{ tagsArray }">
+  <template #default="{ tagsArray, getTagColorStyles }">
     <div
       v-for="tag in tagsArray"
       class="tag"
-      :class="tag.icon && 'tag--' + tag.icon"
+      :style="getTagColorStyles(tag)"
       @click="onClick(tag.name)"
     >
       <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />

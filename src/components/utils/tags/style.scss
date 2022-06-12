@@ -12,7 +12,7 @@
     font-weight: 500;
     font-size: $font-sm;
     border-radius: 12px;
-    transition: 0.05s ease-in-out;
+    transition: filter 0.05s ease-in-out;
     cursor: pointer;
 
     &:hover {
@@ -78,36 +78,6 @@
       color: $white;
       background-color: $secondary-dark-20;
       box-shadow: $shadow-sm-dark;
-
-      &.tag--leaf {
-        color: $success-light;
-        background-color: $success;
-      }
-
-      &.tag--fire {
-        color: #ffdda9;
-        background-color: #e70f00;
-      }
-
-      &.tag--bell-concierge {
-        color: $info-light;
-        background-color: $info;
-      }
-
-      &.tag--utensils {
-        color: #ffd0d0;
-        background-color: #990000;
-      }
-
-      &.tag--mug-saucer {
-        color: #ffd9b5;
-        background-color: #6b3400;
-      }
-
-      &.tag--clock {
-        color: #fff8bb;
-        background-color: #aa8200;
-      }
     }
   }
 }

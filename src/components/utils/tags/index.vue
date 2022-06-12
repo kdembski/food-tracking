@@ -8,6 +8,16 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { useStore } from "vuex";
+
+interface tagSettings {
+  name: string;
+  icon?: string;
+  lightColor?: string;
+  darkColor?: string;
+}
+
+const store = useStore();
 
 const props = defineProps({
   tags: {
@@ -20,6 +30,35 @@ const props = defineProps({
   },
 });
 
+const tagsSettings = [
+  { name: "vege", icon: "leaf", lightColor: "#c1ffd2", darkColor: "#077426" },
+  { name: "ostre", icon: "fire", lightColor: "#ffdda9", darkColor: "#e70f00" },
+  {
+    name: "szybkie",
+    icon: "clock",
+    lightColor: "#fff8bb",
+    darkColor: "#aa8200",
+  },
+  {
+    name: "śniadanie",
+    icon: "mug-saucer",
+    lightColor: "#ffd9b5",
+    darkColor: "#6b3400",
+  },
+  {
+    name: "obiad",
+    icon: "utensils",
+    lightColor: "#ffd0d0",
+    darkColor: "#990000",
+  },
+  {
+    name: "kolacja",
+    icon: "bell-concierge",
+    lightColor: "#bfe5f2",
+    darkColor: "#003780",
+  },
+];
+
 const tagsArray = computed(() => {
   if (!props.tags) {
     return [];
@@ -27,42 +66,39 @@ const tagsArray = computed(() => {
   const namesArray: Array<string> = props.tags.split(",");
 
   return namesArray.map((name) => {
-    let icon = "";
+    const tagSettings = tagsSettings.find((tag) => tag.name === name);
 
-    if (name === "vege") {
-      icon = "leaf";
+    if (!tagSettings) {
+      return {
+        name,
+      };
     }
 
-    if (name === "ostre") {
-      icon = "fire";
-    }
-
-    if (name === "szybkie") {
-      icon = "clock";
-    }
-
-    if (name === "śniadanie") {
-      icon = "mug-saucer";
-    }
-
-    if (name === "obiad") {
-      icon = "utensils";
-    }
-
-    if (name === "kolacja") {
-      icon = "bell-concierge";
-    }
-
-    return {
-      name,
-      icon,
-    };
+    return tagSettings;
   });
 });
 const tagsCount = computed(() => tagsArray.value.length);
 
-const container = ref<HTMLElement | null>(null);
+const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
+const getTagColorStyles = (tagSettings: tagSettings) => {
+  if (!tagSettings.darkColor || !tagSettings.lightColor) {
+    return false;
+  }
 
+  if (isDarkModeEnabled.value) {
+    return {
+      color: tagSettings.lightColor,
+      backgroundColor: tagSettings.darkColor,
+    };
+  }
+
+  return {
+    color: tagSettings.darkColor,
+    backgroundColor: tagSettings.lightColor,
+  };
+};
+
+const container = ref<HTMLElement | null>(null);
 const getLoaderItemsCount = () => {
   if (!(container.value && container.value.clientWidth)) {
     return 0;

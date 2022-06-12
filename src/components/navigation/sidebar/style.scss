@@ -25,7 +25,7 @@
   &__header {
     background-color: $secondary-dark-20;
     overflow: hidden;
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,7 +34,6 @@
   &__content {
     height: 100%;
     background-color: $secondary-dark-20;
-    transition: background-color 0.2s ease-in-out;
     overflow: hidden;
   }
 

@@ -5,12 +5,16 @@
   width: 100%;
 
   .filters {
-    padding: 10px 0 20px;
+    padding: 5px 0 12px;
 
     &__search-input {
       border-radius: 4px;
       box-shadow: $shadow-xs;
       margin: 20px 1px;
+
+      &:deep(input) {
+        border: 0;
+      }
     }
 
     &__select-tags {

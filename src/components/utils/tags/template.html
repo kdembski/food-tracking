@@ -5,6 +5,10 @@
       v-for="index in getLoaderItemsCount()"
     />
   </div>
-  <slot v-else-if="tagsCount > 0" :tagsArray="tagsArray"></slot>
+  <slot
+    v-else-if="tagsCount > 0"
+    :tagsArray="tagsArray"
+    :getTagColorStyles="getTagColorStyles"
+  ></slot>
   <div v-else class="tags__empty">Brak tagów</div>
 </div>
