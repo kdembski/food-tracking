@@ -2,12 +2,13 @@
   display: flex;
   background-color: $secondary-light-55;
   position: relative;
-  overflow: hidden;
   transition: background-color 0.2s ease-in-out;
   height: 100vh;
+  overflow: hidden;
 
-  &-content {
+  .layout-content {
     display: flex;
+    overflow: hidden;
     flex-grow: 1;
 
     &__card {
@@ -23,6 +24,7 @@
       padding-left: 30px;
       overflow-y: scroll;
       flex-grow: 1;
+      width: 100%;
     }
   }
 
@@ -39,8 +41,22 @@
 }
 
 @media screen and (max-width: $screen-md) {
-  .layout-default-content {
-    padding: 48px 0 0 0;
+  .layout-default {
+    .layout-content {
+      padding: 48px 0 0 0;
+
+      &__wrapper {
+        padding: 0;
+      }
+    }
+
+    &:deep(header) {
+      margin-bottom: 10px;
+
+      & > h1 {
+        font-size: $font-xl;
+      }
+    }
   }
 }
 

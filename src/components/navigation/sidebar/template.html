@@ -2,13 +2,13 @@
   <div class="sidebar__wrapper">
     <div class="sidebar__header">
       <CLogo :isCollapsed="isCollapsed || isMobile" />
-      <div
+      <button
         v-if="isMobile"
         class="sidebar__collapse-btn"
         @click="toggleCollapsedState"
       >
         <FontAwesomeIcon :icon="isCollapsed ? 'bars' : 'times'" />
-      </div>
+      </button>
     </div>
     <div class="sidebar__content">
       <ul class="sidebar__items">

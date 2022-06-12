@@ -7,6 +7,12 @@
   border-radius: 8px;
 }
 
+@media screen and (max-width: $screen-md) {
+  .card {
+    padding: 20px;
+  }
+}
+
 .dark-mode {
   .card {
     background-color: $secondary-dark-30;

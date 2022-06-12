@@ -19,7 +19,9 @@ import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
 import { useFilters } from "./composables/filters";
 import { onMounted, provide } from "vue";
-import { isEmpty, isEqual, clone } from "lodash";
+import { isEmpty } from "lodash";
+import { useWindowSize } from "@/components/utils/composables/window-size";
+
 const store = useStore();
 
 const props = withDefaults(
@@ -71,6 +73,10 @@ const {
   filterByTags,
   addTagAndFilter,
   changeCurrentPage,
+  areFiltersEqualToDefault,
+  clearFilters,
+  areFiltersOpenOnMobile,
+  toggleFiltersOnMobile,
 } = useFilters(props.defaultFilters, handleListLoadingProccess);
 
 provide("currentSort", currentSort);
@@ -86,6 +92,8 @@ const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
 
+const { isMobile } = useWindowSize();
+
 const loadListOnMounted = () => {
   const storedFilters = getFiltersFromStorage();
 
@@ -94,20 +102,6 @@ const loadListOnMounted = () => {
   }
 
   handleListLoadingProccess();
-};
-
-const areFiltersEqualToDefault = () => {
-  return isEqual(props.defaultFilters, filters.value);
-};
-
-const clearFilters = () => {
-  if (areFiltersEqualToDefault()) {
-    return false;
-  }
-
-  filters.value = clone(props.defaultFilters);
-  handleListLoadingProccess();
-  return true;
 };
 
 onMounted(() => {

@@ -28,6 +28,7 @@ import {
   faMagnifyingGlass,
   faBellConcierge,
   faMugSaucer,
+  faFilter,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -57,7 +58,8 @@ library.add(
   faClock,
   faMagnifyingGlass,
   faBellConcierge,
-  faMugSaucer
+  faMugSaucer,
+  faFilter
 );
 
 export default FontAwesomeIcon;

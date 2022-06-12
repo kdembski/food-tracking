@@ -64,21 +64,23 @@ a {
   all: unset;
 }
 
-* {
-  &::-webkit-scrollbar {
-    width: 16px;
-    height: 16px;
-  }
+@media screen and (min-width: $screen-md) {
+  * {
+    &::-webkit-scrollbar {
+      width: 16px;
+      height: 16px;
+    }
 
-  &::-webkit-scrollbar-track {
-    border-radius: 100px;
-  }
+    &::-webkit-scrollbar-track {
+      border-radius: 100px;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background: $secondary-light-30;
-    border-radius: 100px;
-    border: 4px transparent solid;
-    background-clip: padding-box;
+    &::-webkit-scrollbar-thumb {
+      background: $secondary-light-30;
+      border-radius: 100px;
+      border: 4px transparent solid;
+      background-clip: padding-box;
+    }
   }
 }
 

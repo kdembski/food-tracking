@@ -33,10 +33,14 @@ const props = defineProps({
 
 const columnsCount = computed(() => props.columns.length);
 const itemsCount = computed(() => props.items.length);
-const { windowHeight } = useWindowSize();
+const { windowHeight, isMobile } = useWindowSize();
 
 const getLoaderRowsCount = () => {
-  return Math.floor((windowHeight.value - 300) / 100);
+  const containerHeight = isMobile.value
+    ? windowHeight.value
+    : windowHeight.value - 350;
+
+  return Math.floor(containerHeight / 100);
 };
 </script>
 

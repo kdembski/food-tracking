@@ -1,6 +1,7 @@
 import { computed } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/list";
 import { ref, Ref } from "vue";
+import { isEqual, clone } from "lodash";
 
 let filterBySearchPhraseTimeout = 0;
 
@@ -56,6 +57,24 @@ export function useFilters(
     handleListLoadingProccess();
   };
 
+  const areFiltersEqualToDefault = () => {
+    return isEqual(defaultFilters, filters.value);
+  };
+  const clearFilters = () => {
+    if (areFiltersEqualToDefault()) {
+      return false;
+    }
+
+    filters.value = clone(defaultFilters);
+    handleListLoadingProccess();
+    return true;
+  };
+
+  const areFiltersOpenOnMobile = ref(false);
+  const toggleFiltersOnMobile = () => {
+    areFiltersOpenOnMobile.value = !areFiltersOpenOnMobile.value;
+  };
+
   return {
     filters,
     currentSort,
@@ -64,5 +83,9 @@ export function useFilters(
     filterByTags,
     addTagAndFilter,
     changeCurrentPage,
+    areFiltersEqualToDefault,
+    clearFilters,
+    areFiltersOpenOnMobile,
+    toggleFiltersOnMobile,
   };
 }

@@ -9,6 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { ListPagination } from "@/types/list";
+import { useWindowSize } from "@/components/utils/composables/window-size";
 
 const props = withDefaults(
   defineProps<{
@@ -23,15 +24,27 @@ const emit = defineEmits<{
   (e: "update:currentPage", page: number): void;
 }>();
 
+const { isMobile } = useWindowSize();
+
 const getPaginationSummaryText = () => {
+  if (isMobile.value) {
+    return (
+      props.paginationData.firstRecord +
+      " - " +
+      props.paginationData.lastRecord +
+      "\xa0\xa0z\xa0\xa0" +
+      props.paginationData.totalRecords
+    );
+  }
+
   return (
-    "<p>Wyświetlono\xa0\xa0<b>" +
+    "Wyświetlono " +
     props.paginationData.firstRecord +
-    "</b> - <b>" +
+    " - " +
     props.paginationData.lastRecord +
-    "</b>\xa0\xa0z\xa0\xa0<b>" +
+    "\xa0\xa0z\xa0\xa0" +
     props.paginationData.totalRecords +
-    "</b>\xa0\xa0wyników</p>"
+    " wyników"
   );
 };
 

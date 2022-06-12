@@ -3,10 +3,9 @@
   <CSkeletonLoader class="list-pagination-loader__item" />
 </div>
 <div v-else-if="paginationData.totalRecords > 0" class="list-pagination">
-  <div
-    class="list-pagination__summary"
-    v-html="getPaginationSummaryText()"
-  ></div>
+  <div class="list-pagination__summary">
+    <p>{{ getPaginationSummaryText() }}</p>
+  </div>
   <div class="list-pagination-pages">
     <div
       v-for="pageNumber in paginationData.totalPages"
