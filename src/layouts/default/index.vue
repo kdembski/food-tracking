@@ -1,10 +1,9 @@
 <script lang="ts">
 import CSidebar from "@/components/navigation/sidebar/index.vue";
-import CCard from "@/components/surfaces/card/index.vue";
 
 export default {
   name: "DefaultLayout",
-  components: { CSidebar, CCard },
+  components: { CSidebar },
 };
 </script>
 

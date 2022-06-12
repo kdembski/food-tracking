@@ -38,7 +38,7 @@ const getPaginationSummaryText = () => {
   }
 
   return (
-    "Wyświetlono " +
+    "Wyświetlono\xa0\xa0" +
     props.paginationData.firstRecord +
     " - " +
     props.paginationData.lastRecord +

@@ -2,23 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 25px;
-  padding: 0 4px;
+  padding: 30px 30px 0;
   color: $secondary-light-20;
 
   &-pages {
     display: flex;
     cursor: pointer;
+    gap: 15px;
 
     &__item {
-      padding: 2px 5px;
-      margin: 0 5px;
-
       &--active {
         cursor: default;
         color: $secondary;
         font-weight: 600;
-        border-bottom: 2px solid $secondary;
       }
     }
   }
@@ -26,13 +22,23 @@
   &-loader {
     display: flex;
     justify-content: space-between;
-    margin: 20px 5px 0;
+    margin: 20px 25px 0;
     gap: 40%;
 
     &__item {
       height: 30px;
       padding: 0 2%;
       gap: 6%;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .list-pagination {
+    padding: 15px 25px 0;
+
+    &-loader {
+      margin: 10px 20px 0;
     }
   }
 }

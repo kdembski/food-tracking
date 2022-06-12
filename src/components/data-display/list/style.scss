@@ -32,7 +32,7 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: $font-sm;
-      padding-bottom: 5px;
+      padding: 0 25px 5px;
 
       & > p {
         display: inline;
@@ -56,7 +56,6 @@
 
   .list-loader {
     height: 100%;
-    margin: 22px 0 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -101,18 +100,28 @@
 @media screen and (max-width: $screen-md) {
   .list {
     &__content {
-      th,
       td {
         padding: 15px;
       }
 
       th {
-        padding-bottom: 5px;
+        padding: 0 15px 5px;
       }
     }
 
     .list-loader {
-      margin: 12px 0 0;
+      &__content {
+        gap: 10px;
+      }
+
+      &__row {
+        gap: 10px;
+      }
+    }
+
+    .loader-header {
+      gap: 10px;
+      margin: 0 0 10px;
     }
   }
 }

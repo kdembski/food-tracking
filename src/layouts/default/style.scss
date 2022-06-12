@@ -10,7 +10,7 @@
     overflow: hidden;
     flex-grow: 1;
 
-    &__card {
+    &__container {
       display: flex;
       max-width: 1400px;
       width: 100%;
@@ -19,8 +19,8 @@
     }
 
     &__wrapper {
-      padding: 15px;
-      padding-left: 30px;
+      padding: 30px;
+      padding-right: 15px;
       overflow-y: scroll;
       flex-grow: 1;
       width: 100%;
@@ -28,7 +28,7 @@
   }
 
   &:deep(header) {
-    margin-bottom: 25px;
+    margin: 0 0 22px;
     color: $secondary-dark-30;
 
     & > h1 {
@@ -42,15 +42,15 @@
 @media screen and (max-width: $screen-md) {
   .layout-default {
     .layout-content {
-      padding: 48px 0 0 0;
+      padding: 48px 0 0;
 
       &__wrapper {
-        padding: 0;
+        padding: 20px 0;
       }
     }
 
     &:deep(header) {
-      margin-bottom: 10px;
+      margin: 0 20px 10px;
 
       & > h1 {
         font-size: $font-xl;

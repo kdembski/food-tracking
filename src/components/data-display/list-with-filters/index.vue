@@ -4,10 +4,11 @@ import CSelectTags from "@/components/controls/select-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import CList from "@/components/data-display/list/index.vue";
 import CPagination from "./pagination/index.vue";
+import CCard from "@/components/surfaces/card/index.vue";
 
 export default {
   name: "CListWithFilters",
-  components: { CInput, CSelectTags, CList, CButton, CPagination },
+  components: { CInput, CSelectTags, CList, CButton, CPagination, CCard },
 };
 </script>
 

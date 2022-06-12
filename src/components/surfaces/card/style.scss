@@ -1,14 +1,14 @@
 .card {
   background-color: $white;
-  box-shadow: $shadow-md;
-  padding: 30px;
-  margin: 10px;
+  box-shadow: $shadow-xs;
+  padding: 30px 25px;
   border-radius: 8px;
 }
 
 @media screen and (max-width: $screen-md) {
   .card {
-    padding: 20px;
+    padding: 15px 20px;
+    border-radius: 0;
   }
 }
 

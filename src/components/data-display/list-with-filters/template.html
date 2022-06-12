@@ -1,78 +1,82 @@
 <div class="list-with-filters">
-  <div>
-    <CButton
-      v-if="isMobile"
-      variant="contained"
-      color="secondary"
-      label="Szukaj"
-      size="small"
-      icon="magnifying-glass"
-      class="list-with-filters__open-filters-btn"
-      @click="toggleFiltersOnMobile"
-    />
-  </div>
-  <div
-    class="list-with-filters__filters filters"
-    :class="{ 'filters--open': areFiltersOpenOnMobile}"
-  >
-    <div class="filters__btn-container">
+  <CCard class="list-with-filters__header">
+    <div>
       <CButton
+        v-if="isMobile"
         variant="contained"
         color="secondary"
-        label="Wyczyść filtry"
+        label="Szukaj"
         size="small"
-        icon="times"
-        class="filters__clear-btn"
-        :isLoading="_isLoading"
-        :isDisabled="areFiltersEqualToDefault()"
-        @click="clearFilters"
-      />
-      <button
-        v-if="isMobile"
-        class="filters__close-btn"
+        icon="magnifying-glass"
+        class="list-with-filters__open-filters-btn"
         @click="toggleFiltersOnMobile"
-      >
-        <FontAwesomeIcon icon="times" />
-      </button>
+      />
     </div>
-    <CInput
-      :modelValue="filters.searchPhrasee"
-      @update:modelValue="filterBySearchPhrase"
-      class="filters__search-input"
-      icon="magnifying-glass"
-      placeholder="Szukaj po nazwie"
-    />
-    <CSelectTags
-      :selectedTags="filters.tags"
-      @update:selectedTags="filterByTags"
-      :tags="availableTags"
-      :isLoading="_isLoading"
-      class="filters__select-tags"
-    />
-  </div>
-  <CList
-    :items="list?.data"
-    :isLoading="_isLoading"
-    :columns="columns"
-    :getItemColumnValue="getItemColumnValue"
-    @sortChange="filterBySort"
-  >
-    <template
-      v-for="field in Object.keys($slots)"
-      v-slot:[field]="{ itemValue }"
+    <div
+      class="list-with-filters__filters filters"
+      :class="{ 'filters--open': areFiltersOpenOnMobile}"
     >
-      <slot
-        :name="field"
-        :itemValue="itemValue"
-        :addTagAndFilter="addTagAndFilter"
-      ></slot>
-    </template>
-  </CList>
-  <CPagination
-    v-if="list?.pagination"
-    :currentPage="filters.currentPage"
-    @update:currentPage="changeCurrentPage"
-    :paginationData="list?.pagination"
-    :isLoading="_isLoading"
-  />
+      <div class="filters__btn-container">
+        <CButton
+          variant="contained"
+          color="secondary"
+          label="Wyczyść filtry"
+          size="small"
+          icon="times"
+          class="filters__clear-btn"
+          :isLoading="_isLoading"
+          :isDisabled="areFiltersEqualToDefault()"
+          @click="clearFilters"
+        />
+        <button
+          v-if="isMobile"
+          class="filters__close-btn"
+          @click="toggleFiltersOnMobile"
+        >
+          <FontAwesomeIcon icon="times" />
+        </button>
+      </div>
+      <CInput
+        :modelValue="filters.searchPhrasee"
+        @update:modelValue="filterBySearchPhrase"
+        class="filters__search-input"
+        icon="magnifying-glass"
+        placeholder="Szukaj po nazwie"
+      />
+      <CSelectTags
+        :selectedTags="filters.tags"
+        @update:selectedTags="filterByTags"
+        :tags="availableTags"
+        :isLoading="_isLoading"
+        class="filters__select-tags"
+      />
+    </div>
+  </CCard>
+  <CCard class="list-with-filters__content">
+    <CList
+      :items="list?.data"
+      :isLoading="_isLoading"
+      :columns="columns"
+      :getItemColumnValue="getItemColumnValue"
+      @sortChange="filterBySort"
+    >
+      <template
+        v-for="field in Object.keys($slots)"
+        v-slot:[field]="{ itemValue }"
+      >
+        <slot
+          :name="field"
+          :itemValue="itemValue"
+          :addTagAndFilter="addTagAndFilter"
+        ></slot>
+      </template>
+    </CList>
+    <CPagination
+      v-if="list?.pagination"
+      :currentPage="filters.currentPage"
+      @update:currentPage="changeCurrentPage"
+      :paginationData="list?.pagination"
+      :isLoading="_isLoading"
+    />
+  </CCard>
 </div>

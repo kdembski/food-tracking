@@ -11,7 +11,7 @@
     box-shadow: $shadow-xs;
     font-weight: 500;
     font-size: $font-sm;
-    border-radius: 12px;
+    border-radius: 15px;
     transition: filter 0.05s ease-in-out;
     cursor: pointer;
 
@@ -21,36 +21,6 @@
 
     svg {
       margin-right: 6px;
-    }
-
-    &.tag--leaf {
-      color: $success;
-      background-color: $success-light;
-    }
-
-    &.tag--fire {
-      color: #e70f00;
-      background-color: #ffdda9;
-    }
-
-    &.tag--bell-concierge {
-      color: $info;
-      background-color: $info-light;
-    }
-
-    &.tag--utensils {
-      color: #990000;
-      background-color: #ffd0d0;
-    }
-
-    &.tag--mug-saucer {
-      color: #6b3400;
-      background-color: #ffd9b5;
-    }
-
-    &.tag--clock {
-      color: #aa8200;
-      background-color: #fff8bb;
     }
   }
 
@@ -67,7 +37,7 @@
     &__item {
       padding: 0;
       height: 29px;
-      border-radius: 12px;
+      border-radius: 15px;
     }
   }
 }
