@@ -31,10 +31,8 @@ const actions: ActionTree<RecipeState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/recipes" + getListQuery(filters)
       )
         .then((response: AxiosResponse<RecipeList>) => {
-          setTimeout(() => {
-            commit("loadRecipesListSuccess", response.data);
-            resolve();
-          }, 100);
+          commit("loadRecipesListSuccess", response.data);
+          resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
