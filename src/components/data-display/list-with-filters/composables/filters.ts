@@ -34,12 +34,19 @@ export function useFilters(
   };
 
   const addTagAndFilter = (name: string) => {
-    if (filters.value.tags) {
-      filters.value.tags += "," + name;
-    } else {
-      filters.value.tags = name;
+    let tags = filters.value.tags;
+
+    if (tags?.includes(name)) {
+      return;
     }
 
+    if (tags) {
+      tags += "," + name;
+    } else {
+      tags = name;
+    }
+
+    filters.value.tags = tags;
     filters.value.currentPage = 1;
     handleListLoadingProccess();
   };
