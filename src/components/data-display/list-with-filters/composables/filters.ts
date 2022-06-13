@@ -9,7 +9,7 @@ export function useFilters(
   defaultFilters: ListFilters,
   handleListLoadingProccess: () => void
 ) {
-  const filters: Ref<ListFilters> = ref(defaultFilters);
+  const filters: Ref<ListFilters> = ref(clone(defaultFilters));
   const currentSort = computed(() => {
     return {
       sortAttribute: filters.value.sortAttribute,
