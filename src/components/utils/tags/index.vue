@@ -9,6 +9,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { useWindowSize } from "@/components/utils/composables/window-size";
 
 interface tagSettings {
   name: string;
@@ -99,12 +100,23 @@ const getTagColorStyles = (tagSettings: tagSettings) => {
 };
 
 const container = ref<HTMLElement | null>(null);
-const getLoaderItemsCount = () => {
+
+const getLoaderRowItemsCount = () => {
   if (!(container.value && container.value.clientWidth)) {
-    return 0;
+    return 5;
   }
 
-  return Math.floor(container.value.clientWidth / 90);
+  const itemsCount = Math.floor(container.value.clientWidth / 80);
+  if (itemsCount < 5) {
+    return 5;
+  }
+  return itemsCount;
+};
+
+const { isMobile } = useWindowSize();
+const getLoaderRowsCount = () => {
+  if (isMobile.value) return 3;
+  return 1;
 };
 </script>
 

@@ -19,6 +19,10 @@
     &::placeholder {
       color: $secondary-light-40;
     }
+
+    &::selection {
+      background: $primary-light;
+    }
   }
 
   &:not(.field--invalid) {
@@ -95,6 +99,10 @@
       color: $white;
       background-color: $secondary-dark-30;
       border-color: $secondary;
+
+      &::selection {
+        background: $primary;
+      }
     }
 
     &--invalid {

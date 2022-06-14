@@ -33,7 +33,17 @@ const isCollapsed = ref(getIsCollapsedValue());
 
 const toggleCollapsedState = () => {
   isCollapsed.value = !isCollapsed.value;
-  StorageService.setItem("isSidebarCollapsed", isCollapsed.value ? "1" : "0");
+
+  if (!isMobile.value) {
+    StorageService.setItem("isSidebarCollapsed", isCollapsed.value ? "1" : "0");
+  }
+};
+
+const collapseSidebarOnMobile = (isActive: boolean) => {
+  if (isActive) {
+    return;
+  }
+  toggleCollapsedState();
 };
 
 const getCollapsedClass = () => {

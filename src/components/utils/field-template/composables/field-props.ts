@@ -7,10 +7,6 @@ interface FieldTemplateProps {
 
 export function useFieldProps() {
   const fieldProps = {
-    modelValue: {
-      type: String,
-      default: "",
-    },
     label: {
       type: String,
       default: "",

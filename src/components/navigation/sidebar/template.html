@@ -18,11 +18,17 @@
             class="item__link"
             activeClass="item__link--active"
             exactActiveClass="item__link--exact-active"
+            v-slot="{ isActive }"
           >
-            <div class="item__icon">
-              <FontAwesomeIcon v-if="item.icon" :icon="item.icon" />
+            <div
+              class="item__wrapper"
+              @click="collapseSidebarOnMobile(isActive)"
+            >
+              <div class="item__icon">
+                <FontAwesomeIcon v-if="item.icon" :icon="item.icon" />
+              </div>
+              <p class="item__label">{{ item.label }}</p>
             </div>
-            <p class="item__label">{{ item.label }}</p>
           </RouterLink>
         </li>
       </ul>

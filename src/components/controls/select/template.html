@@ -1,0 +1,39 @@
+<CFieldTemplate
+  :modelValue="selectedValue"
+  v-bind="getFieldTemplateProps(props)"
+  class="select"
+>
+  <input
+    :id="$attrs.id && $attrs.id + '-field'"
+    v-model="inputValue"
+    :disabled="isDisabled"
+    :type="$attrs.type"
+    autocomplete="off"
+    :placeholder="placeholder"
+    class="select_input"
+    @focus="hasFocus = true"
+    @blur="onBlur"
+    @keydown.arrow-up="onArrowUp"
+    @keydown.arrow-down="onArrowDown"
+    @keydown.enter="onEnter"
+    @click="onInputClick"
+    ref="input"
+  />
+  <transition name="dropdown__transition">
+    <ul
+      v-if="hasFocus"
+      class="select_dropdown dropdown"
+      @mouseout="setHoveredOptionIndex(null)"
+    >
+      <li
+        v-for="(option, index) in filteredOptions"
+        class="dropdown__option"
+        @mouseover="setHoveredOptionIndex(index)"
+        @click="selectOption(option)"
+        :class="getHoveredOptionClass(index)"
+      >
+        {{ option.label }}
+      </li>
+    </ul>
+  </transition>
+</CFieldTemplate>

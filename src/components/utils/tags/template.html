@@ -1,9 +1,11 @@
 <div class="tags" ref="container">
   <div v-if="isLoading" class="tags-loader">
-    <CSkeletonLoader
-      class="tags-loader__item"
-      v-for="index in getLoaderItemsCount()"
-    />
+    <div v-for="index in getLoaderRowsCount()" class="tags-loader__row">
+      <CSkeletonLoader
+        v-for="index in getLoaderRowItemsCount()"
+        class="tags-loader__item"
+      />
+    </div>
   </div>
   <slot
     v-else-if="tagsCount > 0"

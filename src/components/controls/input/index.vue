@@ -15,6 +15,10 @@ const { getFieldTemplateProps } = useFieldProps();
 
 const props = defineProps({
   ...useFieldProps().fieldProps,
+  modelValue: {
+    type: String,
+    default: "",
+  },
 });
 
 const emits = defineEmits<{

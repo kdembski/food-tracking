@@ -55,7 +55,7 @@
     border: 0;
     color: $white;
     font-size: 31px;
-    margin-right: 20px;
+    margin-right: 10px;
     cursor: pointer;
     background-color: transparent;
   }
@@ -70,13 +70,17 @@
       cursor: pointer;
       color: $white;
       display: flex;
-      align-items: center;
 
       &:hover,
       &--active {
         color: $secondary-dark-10;
         background-color: $primary-light;
       }
+    }
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
     }
 
     &__icon {
@@ -124,6 +128,12 @@
     &__content {
       position: relative;
       z-index: 1;
+    }
+
+    .item {
+      &__link {
+        padding: 15px 13px;
+      }
     }
   }
 }
