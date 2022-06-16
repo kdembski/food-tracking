@@ -67,8 +67,8 @@ a {
 @media screen and (min-width: $screen-md) {
   * {
     &::-webkit-scrollbar {
-      width: 16px;
-      height: 16px;
+      width: 15px;
+      height: 15px;
     }
 
     &::-webkit-scrollbar-track {
@@ -76,7 +76,7 @@ a {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $secondary-light-30;
+      background: $secondary-light-40;
       border-radius: 100px;
       border: 4px transparent solid;
       background-clip: padding-box;
@@ -87,7 +87,7 @@ a {
 .dark-mode {
   * {
     &::-webkit-scrollbar-thumb {
-      background: $secondary-dark-30;
+      background: darken($secondary-dark-25, 2);
       border-radius: 100px;
       border: 4px transparent solid;
       background-clip: padding-box;

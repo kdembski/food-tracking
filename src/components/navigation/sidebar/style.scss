@@ -1,5 +1,5 @@
 .sidebar {
-  width: 250px;
+  width: 253px;
   height: 100vh;
   display: flex;
   position: relative;
@@ -12,18 +12,20 @@
       opacity: 0;
     }
 
-    .sidebar__collapse-btn {
-      font-size: 26px;
+    .sidebar__mobile-collapse-btn {
+      font-size: 24px;
     }
   }
 
   &__wrapper {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     box-shadow: $shadow-sm-dark;
   }
 
   &__header {
-    background-color: $secondary-dark-20;
+    background-color: $secondary-dark-25;
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
     display: flex;
@@ -33,28 +35,47 @@
 
   &__content {
     height: 100%;
-    background-color: $secondary-dark-20;
+    background-color: $secondary-dark-25;
     overflow: hidden;
   }
 
-  &__collapse-bar {
+  &__collapse-btn {
     position: relative;
-    left: -6px;
     height: 100%;
-    min-width: 6px;
-    cursor: pointer;
-    transition: all 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.15s ease-in-out;
+    opacity: 0;
 
-    &:hover {
-      background-color: $primary;
+    & > button {
+      position: absolute;
+      left: -20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 20px;
+      background-color: $secondary;
+      color: $white;
+      box-shadow: $shadow-xs-dark;
+      border: 0;
+      cursor: pointer;
+      font-size: 16px;
     }
   }
 
-  &__collapse-btn {
+  &:hover {
+    .sidebar__collapse-btn {
+      opacity: 1;
+    }
+  }
+
+  &__mobile-collapse-btn {
     appearance: none;
     border: 0;
     color: $white;
-    font-size: 31px;
+    font-size: 28px;
     margin-right: 10px;
     cursor: pointer;
     background-color: transparent;
@@ -66,15 +87,22 @@
 
   .item {
     &__link {
-      padding: 15px 24px;
+      padding: 13px 24px;
       cursor: pointer;
       color: $white;
       display: flex;
+      transition: background-color 0.15s ease-in-out;
 
-      &:hover,
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:hover:not(.item__link--active) {
+        background-color: $secondary-dark-20;
+      }
+
       &--active {
-        color: $secondary-dark-10;
-        background-color: $primary-light;
+        background-color: $secondary-dark-10;
       }
     }
 
@@ -92,7 +120,7 @@
     }
 
     &__label {
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       white-space: nowrap;
       transition: opacity 0.15s ease-in-out;
     }
@@ -122,7 +150,7 @@
     }
 
     &__header {
-      box-shadow: $shadow-xs-dark;
+      box-shadow: $shadow-xs;
     }
 
     &__content {
@@ -134,27 +162,22 @@
       &__link {
         padding: 15px 13px;
       }
+
+      &__icon {
+        margin-right: 20px;
+      }
     }
   }
 }
 
 .dark-mode {
   .sidebar {
-    &__header,
-    &__content {
-      background-color: $secondary-dark-30;
-    }
-
     &__wrapper {
-      box-shadow: $shadow-sm;
+      box-shadow: $shadow-xs-dark;
     }
-  }
 
-  .item__link {
-    &--active,
-    &:hover {
-      color: $secondary-dark-30;
-      background-color: $primary-light;
+    &__collapse-btn > button {
+      background-color: $secondary-dark-10;
     }
   }
 }

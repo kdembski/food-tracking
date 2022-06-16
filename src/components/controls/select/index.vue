@@ -8,14 +8,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref, nextTick } from "vue";
+import { SelectOption } from "./types/select";
+import { computed, ref } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 import { useOptionHover } from "./composables/option-hover";
-
-interface SelectOption {
-  value: string | number;
-  label: string;
-}
+import { useSelectEvents } from "./composables/select-events";
 
 const { getFieldTemplateProps } = useFieldProps();
 
@@ -33,24 +30,24 @@ const props = defineProps({
     type: [String, Number],
     default: "",
   },
-  closeOnEnter: {
+  shootingMode: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 });
 
 const emits = defineEmits<{
-  (event: "update:modelValue", value: string | number): void;
+  (event: "update:modelValue", value: string | number | null): void;
 }>();
 
 const hasFocus = ref(false);
 const input = ref<HTMLInputElement>();
 
 const selectedValue = computed({
-  get(): string | number {
+  get(): string | number | null {
     return props.modelValue;
   },
-  set(value: string | number) {
+  set(value: string | number | null) {
     emits("update:modelValue", value);
   },
 });
@@ -65,51 +62,32 @@ const filteredOptions = computed(() => {
 const selectOption = (option: SelectOption) => {
   selectedValue.value = option.value;
   inputValue.value = option.label;
-};
 
-const onEnter = () => {
-  const hoveredOptionIndex = getHoveredOptionIndex();
-  if (hoveredOptionIndex === null) {
-    return;
+  if (props.shootingMode) {
+    afterOptionSelectWithShootingMode();
   }
-  selectOption(filteredOptions.value[hoveredOptionIndex]);
-  setHoveredOptionIndex(null);
-  afterOptionSelectOnEnter();
 };
 
-const afterOptionSelectOnEnter = () => {
-  if (!props.closeOnEnter) {
-    inputValue.value = "";
-    selectedValue.value = "";
-    return;
+const clearSelectedAndInputValue = () => {
+  selectedValue.value = null;
+  inputValue.value = "";
+};
+
+const getSelectedClass = () => {
+  if (selectedValue.value) {
+    return "select__input--selected";
   }
-
-  if (!input.value) {
-    return;
-  }
-  console.log(input.value.tabIndex);
-  input.value.blur();
+  return "";
 };
 
-const onArrowUp = (e: KeyboardEvent) => {
-  e.preventDefault();
-  decrementHoveredOptionIndex();
-};
+const isAfterSuccessfulShot = ref(false);
+const afterOptionSelectWithShootingMode = () => {
+  isAfterSuccessfulShot.value = true;
+  clearSelectedAndInputValue();
 
-const onArrowDown = (e: KeyboardEvent) => {
-  e.preventDefault();
-  incrementHoveredOptionIndex();
-};
-
-const onBlur = () => {
-  hasFocus.value = false;
-};
-
-const onInputClick = () => {
-  if (!input.value) {
-    return;
-  }
-  input.value.select();
+  setTimeout(() => {
+    isAfterSuccessfulShot.value = false;
+  }, 500);
 };
 
 const {
@@ -119,6 +97,22 @@ const {
   incrementHoveredOptionIndex,
   decrementHoveredOptionIndex,
 } = useOptionHover(filteredOptions.value.length);
+
+const { onEnter, onArrowUp, onArrowDown, onInput, onInputClick, onBlur } =
+  useSelectEvents(
+    getHoveredOptionIndex,
+    setHoveredOptionIndex,
+    decrementHoveredOptionIndex,
+    incrementHoveredOptionIndex,
+    filteredOptions,
+    selectOption,
+    afterOptionSelectWithShootingMode,
+    input,
+    inputValue,
+    selectedValue,
+    props.shootingMode,
+    hasFocus
+  );
 </script>
 
 <template src="./template.html"></template>

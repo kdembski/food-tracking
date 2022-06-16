@@ -8,7 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed } from "vue";
 import { useFieldProps } from "./composables/field-props";
 
 const props = defineProps({
@@ -24,6 +24,9 @@ const getFieldClasses = (): Array<string> => {
 
   if (isInvalid.value) {
     classes.push("field--invalid");
+  }
+  if (props.isSuccessful) {
+    classes.push("field--successful");
   }
   if (props.icon) {
     classes.push("field--with-icon");

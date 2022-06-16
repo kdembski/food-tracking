@@ -1,12 +1,22 @@
 .select {
   position: relative;
 
+  &__input {
+    color: $secondary-light-10;
+    font-style: italic;
+
+    &--selected {
+      color: $secondary-dark-30;
+      font-style: normal;
+    }
+  }
+
   .dropdown {
     position: absolute;
     left: 2px;
     right: -2px;
     top: calc(100% + 10px);
-    box-shadow: $shadow-md;
+    box-shadow: 0 1px 6px 0 $shadow-color;
     border-radius: 6px;
     list-style: none;
     overflow: hidden;

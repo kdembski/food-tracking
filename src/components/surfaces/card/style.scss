@@ -2,7 +2,6 @@
   background-color: $white;
   box-shadow: $shadow-xs;
   padding: 30px 25px;
-  border-radius: 8px;
 }
 
 @media screen and (max-width: $screen-md) {
@@ -14,6 +13,7 @@
 
 .dark-mode {
   .card {
-    background-color: $secondary-dark-30;
+    background-color: $secondary-dark-25;
+    box-shadow: $shadow-xs-dark;
   }
 }

@@ -42,15 +42,15 @@
 @media screen and (max-width: $screen-md) {
   .layout-default {
     .layout-content {
-      padding: 48px 0 0;
+      padding: 45px 0 0;
 
       &__wrapper {
-        padding: 20px 0;
+        padding: 15px 0;
       }
     }
 
     &:deep(header) {
-      margin: 0 10px 10px;
+      margin: 0 10px 15px;
 
       & > h1 {
         font-size: $font-xl;
@@ -61,7 +61,7 @@
 
 .dark-mode {
   &.layout-default {
-    background-color: $secondary-dark-25;
+    background-color: $secondary-dark-30;
 
     &:deep(header) {
       color: $white;

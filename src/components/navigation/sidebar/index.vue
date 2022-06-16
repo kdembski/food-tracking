@@ -40,7 +40,7 @@ const toggleCollapsedState = () => {
 };
 
 const collapseSidebarOnMobile = (isActive: boolean) => {
-  if (isActive) {
+  if (isActive || !isMobile.value) {
     return;
   }
   toggleCollapsedState();

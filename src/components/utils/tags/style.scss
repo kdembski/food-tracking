@@ -7,7 +7,7 @@
     display: inline-flex;
     align-items: center;
     padding: 6px 12px;
-    background-color: $secondary-light-50;
+    background-color: $secondary-light-55;
     box-shadow: $shadow-xs;
     font-weight: 500;
     font-size: $font-sm;
@@ -55,7 +55,7 @@
   .tags {
     &:deep(.tag) {
       color: $white;
-      background-color: $secondary-dark-20;
+      background-color: $secondary-dark-15;
       box-shadow: $shadow-xs-dark;
     }
 

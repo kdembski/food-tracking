@@ -25,7 +25,7 @@
     }
   }
 
-  &:not(.field--invalid) {
+  &:not(.field--invalid):not(.field--successful) {
     &:deep(input) {
       &:focus {
         border-color: $primary-light;
@@ -48,6 +48,16 @@
 
     .field__icon {
       color: $error;
+    }
+  }
+
+  &--successful {
+    &:deep(input) {
+      border-color: $success;
+    }
+
+    .field__icon {
+      color: $success;
     }
   }
 
@@ -97,7 +107,7 @@
   .field {
     &:deep(input) {
       color: $white;
-      background-color: $secondary-dark-30;
+      background-color: $secondary-dark-25;
       border-color: $secondary;
 
       &::selection {
@@ -105,13 +115,7 @@
       }
     }
 
-    &--invalid {
-      &:deep(input) {
-        border-color: $error;
-      }
-    }
-
-    &:not(.field--invalid) {
+    &:not(.field--invalid):not(.field--successful) {
       &:deep(input) {
         &:hover:not(:focus) {
           border-color: $secondary-light-10;
@@ -121,7 +125,7 @@
 
     &__label {
       color: $white;
-      background-color: $secondary-dark-30;
+      background-color: $secondary-dark-25;
     }
 
     &__icon {

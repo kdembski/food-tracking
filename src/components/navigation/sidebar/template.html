@@ -4,7 +4,7 @@
       <CLogo :isCollapsed="isCollapsed || isMobile" />
       <button
         v-if="isMobile"
-        class="sidebar__collapse-btn"
+        class="sidebar__mobile-collapse-btn"
         @click="toggleCollapsedState"
       >
         <FontAwesomeIcon :icon="isCollapsed ? 'bars' : 'times'" />
@@ -35,9 +35,9 @@
     </div>
     <CDarkModeToggle />
   </div>
-  <span
-    v-if="!isMobile"
-    class="sidebar__collapse-bar"
-    @click="toggleCollapsedState"
-  ></span>
+  <div v-if="!isMobile" class="sidebar__collapse-btn">
+    <button @click="toggleCollapsedState">
+      <FontAwesomeIcon :icon="isCollapsed ? 'chevron-right' : 'chevron-left'" />
+    </button>
+  </div>
 </div>

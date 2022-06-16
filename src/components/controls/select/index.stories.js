@@ -40,6 +40,7 @@ Invalid.args = Object.assign(
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   icon: "magnifying-glass",
+  options: Default.args.options,
 };
 
 export const InvalidWithIcon = Template.bind({});
@@ -48,5 +49,5 @@ InvalidWithIcon.args = Object.assign(
   WithIcon.args
 );
 
-export const NotCloseOnEnter = Template.bind({});
-NotCloseOnEnter.args = Object.assign({ closeOnEnter: false }, Default.args);
+export const ShootingMode = Template.bind({});
+ShootingMode.args = Object.assign({ shootingMode: true }, Default.args);

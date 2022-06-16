@@ -17,9 +17,9 @@ const sharedTextProps = {
   "letter-spacing": "3",
   style: "line-height: 100%",
   "xml:space": "preserve",
-  "font-weight": "500",
+  "font-weight": "400",
   "font-size": "130",
-  fill: "#ff9100",
+  fill: "#ffcc55",
   class: "logo__item",
 };
 

@@ -27,6 +27,10 @@ export function useFieldProps() {
       type: String,
       default: "",
     },
+    isSuccessful: {
+      type: Boolean,
+      default: false,
+    },
   };
 
   const getFieldTemplateProps = (

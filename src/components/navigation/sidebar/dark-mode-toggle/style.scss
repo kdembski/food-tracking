@@ -5,6 +5,7 @@
   bottom: 15.5px;
   left: 15.5px;
   z-index: 2;
+  user-select: none;
 
   &__input {
     display: none;
@@ -24,7 +25,7 @@
     width: 40px;
     border-radius: 100%;
     background-color: $primary-light;
-    box-shadow: $shadow-lg;
+    box-shadow: $shadow-xs;
     font-size: 22px;
     color: $secondary-dark-30;
     transition: all 0.2s ease-in-out;
@@ -41,9 +42,9 @@
 .dark-mode {
   .dark-mode-toggle {
     &__icon {
-      background-color: $secondary-dark-20;
+      background-color: $secondary-dark-15;
       color: $primary-light;
-      box-shadow: $shadow-lg-dark;
+      box-shadow: $shadow-xs-dark;
     }
   }
 }
