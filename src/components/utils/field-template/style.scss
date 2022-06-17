@@ -31,7 +31,7 @@
       &:focus {
         border-color: $primary-light;
 
-        & + .field__icon-left {
+        & ~ .field__icon-left {
           color: $primary-light;
         }
       }
@@ -128,7 +128,6 @@
     &:deep(input) {
       color: $white;
       background-color: $secondary-dark-25;
-      border-color: $secondary;
 
       &::selection {
         background: $primary;
@@ -137,19 +136,21 @@
 
     &:not(.field--invalid):not(.field--successful) {
       &:deep(input) {
+        border-color: $secondary;
+
         &:hover:not(:focus) {
           border-color: $secondary-light-10;
         }
+      }
+
+      .field__icon-left {
+        color: $white;
       }
     }
 
     &__label {
       color: $white;
       background-color: $secondary-dark-25;
-    }
-
-    &__icon-left {
-      color: $white;
     }
   }
 }

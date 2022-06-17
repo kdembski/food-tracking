@@ -16,7 +16,8 @@
       class="list-with-filters__filters filters"
       :class="{ 'filters--open': areFiltersOpenOnMobile}"
     >
-      <div class="filters__btn-container">
+      <div class="filters__btns-container">
+        <CSlider v-model="inputFilterBy" :options="inputFilterByOptions" />
         <CButton
           variant="contained"
           color="secondary"
@@ -27,21 +28,37 @@
           :isLoading="_isLoading"
           :isDisabled="areFiltersEqualToDefault()"
           @click="clearFilters"
+          :fullWidth="isMobile"
         />
-        <button
+        <CButton
           v-if="isMobile"
+          variant="contained"
+          color="secondary"
+          label="Zamknij"
+          size="small"
+          icon="times"
           class="filters__close-btn"
           @click="toggleFiltersOnMobile"
-        >
-          <FontAwesomeIcon icon="times" />
-        </button>
+          fullWidth
+        />
       </div>
       <CInput
+        v-if="inputFilterBy === 'byName'"
         :modelValue="filters.searchPhrase"
         @update:modelValue="filterBySearchPhrase"
         class="filters__search-input"
         icon="magnifying-glass"
         placeholder="Szukaj po nazwie"
+      />
+      <CAutocomplete
+        v-else
+        v-model="inputSelectedTag"
+        :options="availableTagsOptions"
+        @update:modelValue="addTagAndFilter"
+        shootingMode
+        class="filters__search-input"
+        icon="magnifying-glass"
+        placeholder="Szukaj po tagach"
       />
       <CSelectTags
         :selectedTags="filters.tags"

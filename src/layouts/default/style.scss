@@ -28,7 +28,7 @@
   }
 
   &:deep(header) {
-    margin: 0 0 22px;
+    margin: -3px 0 15px;
     color: $secondary-dark-30;
 
     & > h1 {
@@ -50,7 +50,7 @@
     }
 
     &:deep(header) {
-      margin: 0 10px 15px;
+      margin: 0 10px 10px;
 
       & > h1 {
         font-size: $font-xl;

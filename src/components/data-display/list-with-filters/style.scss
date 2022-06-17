@@ -5,12 +5,12 @@
   width: 100%;
 
   &__header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .filters {
     &__search-input {
-      margin: 20px 1px;
+      margin: 15px 1px;
     }
 
     &__select-tags {
@@ -19,6 +19,13 @@
 
     &__clear-btn {
       margin: 0 1px;
+    }
+
+    &__btns-container {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
   }
 
@@ -60,24 +67,6 @@
 
       &--open {
         transform: translateX(0);
-      }
-
-      &__search-input {
-        margin: 15px 1px;
-      }
-
-      &__btn-container {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      &__close-btn {
-        background-color: transparent;
-        border: 0;
-        font-size: 25px;
-        margin-right: 2px;
-        cursor: pointer;
-        color: $secondary-dark-30;
       }
     }
 

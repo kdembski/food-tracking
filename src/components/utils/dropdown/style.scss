@@ -1,12 +1,16 @@
 .dropdown {
   position: absolute;
-  left: 2px;
-  right: -2px;
+  left: 0;
+  right: 0;
   top: calc(100% + 10px);
   box-shadow: 0 1px 6px 0 $shadow-color;
   border-radius: 6px;
   list-style: none;
   overflow: hidden;
+  z-index: 10;
+  max-height: 392px;
+  overflow-y: auto;
+  background-color: $white;
 
   &__option {
     padding: 15px 15px;

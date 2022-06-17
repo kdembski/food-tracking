@@ -16,6 +16,11 @@ export function useFilters(
       sortDirection: filters.value.sortDirection,
     };
   });
+  const inputFilterBy = ref("byName");
+  const inputFilterByOptions = [
+    { value: "byName", label: "Nazwa" },
+    { value: "byTags", label: "Tagi" },
+  ];
 
   const filterBySearchPhrase = (phrase: string) => {
     clearTimeout(filterBySearchPhraseTimeout);
@@ -34,6 +39,9 @@ export function useFilters(
   };
 
   const addTagAndFilter = (name: string) => {
+    if (!name) {
+      return;
+    }
     let tags = filters.value.tags;
 
     if (tags?.includes(name)) {
@@ -94,5 +102,7 @@ export function useFilters(
     clearFilters,
     areFiltersOpenOnMobile,
     toggleFiltersOnMobile,
+    inputFilterBy,
+    inputFilterByOptions,
   };
 }

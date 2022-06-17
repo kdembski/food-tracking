@@ -83,22 +83,18 @@ const getSelectedClass = () => {
 
 const isAfterSuccessfulShot = ref(false);
 const afterOptionSelectWithShootingMode = () => {
-  isAfterSuccessfulShot.value = true;
-
   setTimeout(() => {
+    isAfterSuccessfulShot.value = true;
     clearSelectedAndInputValue();
   }, 200);
 
   setTimeout(() => {
     isAfterSuccessfulShot.value = false;
-  }, 800);
+  }, 1000);
 };
 
 const isDropdownOpen = computed(() => {
-  if (props.shootingMode) {
-    return hasFocus.value;
-  }
-  return hasFocus.value && filteredOptions.value.length > 1;
+  return hasFocus.value;
 });
 
 const {

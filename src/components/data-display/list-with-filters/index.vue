@@ -5,16 +5,27 @@ import CButton from "@/components/controls/button/index.vue";
 import CList from "@/components/data-display/list/index.vue";
 import CPagination from "./pagination/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
+import CSlider from "@/components/controls/slider/index.vue";
+import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 
 export default {
   name: "CListWithFilters",
-  components: { CInput, CSelectTags, CList, CButton, CPagination, CCard },
+  components: {
+    CInput,
+    CSelectTags,
+    CList,
+    CButton,
+    CPagination,
+    CCard,
+    CSlider,
+    CAutocomplete,
+  },
 };
 </script>
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { ListFilters } from "@/types/list";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
@@ -78,6 +89,8 @@ const {
   clearFilters,
   areFiltersOpenOnMobile,
   toggleFiltersOnMobile,
+  inputFilterBy,
+  inputFilterByOptions,
 } = useFilters(props.defaultFilters, handleListLoadingProccess);
 
 provide("currentSort", currentSort);
@@ -88,6 +101,16 @@ const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
     props.tagsGetterName,
     props.tagsIsLoadingGetterName
   );
+
+const availableTagsOptions = computed(() => {
+  return availableTags.value?.split(",").map((tag: string) => {
+    return {
+      value: tag,
+      label: tag,
+    };
+  });
+});
+const inputSelectedTag = ref("");
 
 const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
