@@ -1,9 +1,10 @@
 <script lang="ts">
 import CTransition from "@/components/utils/transition/index.vue";
+import CIcon from "@/components/utils/icon/index.vue";
 
 export default {
   name: "CFieldTemplate",
-  components: { CTransition },
+  components: { CTransition, CIcon },
 };
 </script>
 
@@ -19,6 +20,10 @@ const isInvalid = computed((): boolean => {
   return !!props.errorMessage;
 });
 
+const hasIconRight = computed((): boolean => {
+  return isInvalid.value || props.isSuccessful;
+});
+
 const getFieldClasses = (): Array<string> => {
   let classes = [];
 
@@ -29,7 +34,10 @@ const getFieldClasses = (): Array<string> => {
     classes.push("field--successful");
   }
   if (props.icon) {
-    classes.push("field--with-icon");
+    classes.push("field--with-icon-left");
+  }
+  if (hasIconRight.value) {
+    classes.push("field--with-icon-right");
   }
 
   return classes;

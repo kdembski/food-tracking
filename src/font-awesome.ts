@@ -29,6 +29,7 @@ import {
   faBellConcierge,
   faMugSaucer,
   faFilter,
+  faExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -59,7 +60,8 @@ library.add(
   faMagnifyingGlass,
   faBellConcierge,
   faMugSaucer,
-  faFilter
+  faFilter,
+  faExclamation
 );
 
 export default FontAwesomeIcon;

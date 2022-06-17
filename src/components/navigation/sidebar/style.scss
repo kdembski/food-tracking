@@ -87,8 +87,6 @@
 
   .item {
     &__link {
-      padding: 13px 24px;
-      cursor: pointer;
       color: $white;
       display: flex;
       transition: background-color 0.15s ease-in-out;
@@ -109,6 +107,9 @@
     &__wrapper {
       display: flex;
       align-items: center;
+      width: 100%;
+      padding: 13px 24px;
+      cursor: pointer;
     }
 
     &__icon {
@@ -120,7 +121,8 @@
     }
 
     &__label {
-      letter-spacing: 2px;
+      font-size: $font-base;
+      letter-spacing: 1px;
       white-space: nowrap;
       transition: opacity 0.15s ease-in-out;
     }
@@ -159,7 +161,7 @@
     }
 
     .item {
-      &__link {
+      &__wrapper {
         padding: 15px 13px;
       }
 

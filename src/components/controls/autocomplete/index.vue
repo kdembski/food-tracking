@@ -1,18 +1,19 @@
 <script lang="ts">
 import CFieldTemplate from "@/components/utils/field-template/index.vue";
+import CDropdown from "@/components/utils/dropdown/index.vue";
 
 export default {
-  name: "CSelect",
-  components: { CFieldTemplate },
+  name: "CAutocomplete",
+  components: { CFieldTemplate, CDropdown },
 };
 </script>
 
 <script setup lang="ts">
-import { SelectOption } from "./types/select";
+import { SelectOption } from "../select/types/select";
 import { computed, ref } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 import { useOptionHover } from "./composables/option-hover";
-import { useSelectEvents } from "./composables/select-events";
+import { useAutocompleteEvents } from "./composables/autocomplete-events";
 
 const { getFieldTemplateProps } = useFieldProps();
 
@@ -75,7 +76,7 @@ const clearSelectedAndInputValue = () => {
 
 const getSelectedClass = () => {
   if (selectedValue.value) {
-    return "select__input--selected";
+    return "autocomplete__input--option-selected";
   }
   return "";
 };
@@ -83,12 +84,22 @@ const getSelectedClass = () => {
 const isAfterSuccessfulShot = ref(false);
 const afterOptionSelectWithShootingMode = () => {
   isAfterSuccessfulShot.value = true;
-  clearSelectedAndInputValue();
+
+  setTimeout(() => {
+    clearSelectedAndInputValue();
+  }, 200);
 
   setTimeout(() => {
     isAfterSuccessfulShot.value = false;
-  }, 500);
+  }, 800);
 };
+
+const isDropdownOpen = computed(() => {
+  if (props.shootingMode) {
+    return hasFocus.value;
+  }
+  return hasFocus.value && filteredOptions.value.length > 1;
+});
 
 const {
   getHoveredOptionClass,
@@ -99,7 +110,7 @@ const {
 } = useOptionHover(filteredOptions.value.length);
 
 const { onEnter, onArrowUp, onArrowDown, onInput, onInputClick, onBlur } =
-  useSelectEvents(
+  useAutocompleteEvents(
     getHoveredOptionIndex,
     setHoveredOptionIndex,
     decrementHoveredOptionIndex,

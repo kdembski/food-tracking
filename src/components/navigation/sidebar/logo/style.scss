@@ -1,17 +1,11 @@
 .logo {
-  margin: 25px 22px;
-  height: 28px;
+  margin: 24px 24px;
+  height: 22px;
   user-select: none;
 
   &__svg {
     transition: transform 0.2s ease-in-out;
-    height: 28px;
-  }
-
-  &__line {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
-    transition: all 0.2s ease-in-out;
+    height: 22px;
   }
 
   .logo__text2,
@@ -32,7 +26,7 @@
 
   &.logo--collapsed {
     .logo__text3 {
-      transform: translateX(-265px);
+      transform: translateX(-280px);
     }
 
     .logo__text2,
@@ -40,15 +34,11 @@
       opacity: 0;
       transition: opacity 0.2s ease-in-out;
     }
-
-    .logo__line {
-      stroke-dashoffset: 903;
-    }
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .logo {
-    margin: 10px;
+    margin: 13px 10px;
   }
 }

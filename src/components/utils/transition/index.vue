@@ -1,5 +1,5 @@
 <script lang="ts">
-export default { name: "TTransition" };
+export default { name: "CTransition" };
 </script>
 
 <script setup lang="ts">

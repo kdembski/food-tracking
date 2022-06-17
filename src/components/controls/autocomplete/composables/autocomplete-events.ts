@@ -1,7 +1,7 @@
-import { SelectOption } from "../types/select";
+import { SelectOption } from "@/components/controls/select/types/select";
 import { ComputedRef, Ref, WritableComputedRef } from "vue";
 
-export function useSelectEvents(
+export function useAutocompleteEvents(
   getHoveredOptionIndex: () => number | null,
   setHoveredOptionIndex: (index: number | null) => void,
   decrementHoveredOptionIndex: () => void,

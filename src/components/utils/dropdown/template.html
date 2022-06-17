@@ -1,0 +1,13 @@
+<transition name="dropdown__transition">
+  <ul v-if="isOpen" class="dropdown" @mouseout="emitListMouseout(index)">
+    <li
+      v-for="(option, index) in options"
+      class="dropdown__option"
+      @mouseover="emitOptionMouseover(index)"
+      @click="emitOptionClick(option)"
+      :class="getOptionClass(index)"
+    >
+      {{ option.label }}
+    </li>
+  </ul>
+</transition>

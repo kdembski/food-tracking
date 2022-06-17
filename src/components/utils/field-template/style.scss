@@ -11,6 +11,7 @@
     font-size: $font-base;
     background-color: $white;
     z-index: 10;
+    transition: border-color 0.1s ease-in-out;
 
     &:focus {
       outline: none;
@@ -30,7 +31,7 @@
       &:focus {
         border-color: $primary-light;
 
-        & + .field__icon {
+        & + .field__icon-left {
           color: $primary-light;
         }
       }
@@ -46,7 +47,7 @@
       border-color: $error;
     }
 
-    .field__icon {
+    .field__icon-left {
       color: $error;
     }
   }
@@ -56,14 +57,24 @@
       border-color: $success;
     }
 
-    .field__icon {
+    .field__icon-left {
       color: $success;
     }
   }
 
-  &.field--with-icon {
+  &.field--with-icon-left {
     &:deep(input) {
       padding-left: 38px;
+    }
+  }
+
+  &.field--with-icon-right {
+    &:deep(input) {
+      padding-right: 38px;
+    }
+
+    .field__icon-right {
+      opacity: 1;
     }
   }
 
@@ -94,12 +105,21 @@
     }
   }
 
-  &__icon {
+  &__icon-left {
     position: absolute;
     top: 12px;
     left: 12px;
     color: $secondary;
+    transition: color 0.1s ease-in-out;
     font-size: 18px;
+  }
+
+  &__icon-right {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    transition: opacity 0.1s ease-in-out;
+    opacity: 0;
   }
 }
 
@@ -128,7 +148,7 @@
       background-color: $secondary-dark-25;
     }
 
-    &__icon {
+    &__icon-left {
       color: $white;
     }
   }

@@ -1,8 +1,8 @@
-import CSelect from "./index.vue";
+import CAutocomplete from "./index.vue";
 
 export default {
-  title: "Controls/Select",
-  component: CSelect,
+  title: "Controls/Autocomplete",
+  component: CAutocomplete,
 };
 
 const Template = (args) => ({
@@ -14,8 +14,8 @@ const Template = (args) => ({
       value: "",
     };
   },
-  components: { CSelect },
-  template: '<CSelect v-model="value" v-bind="args" />',
+  components: { CAutocomplete },
+  template: '<CAutocomplete v-model="value" v-bind="args" />',
 });
 
 export const Default = Template.bind({});
