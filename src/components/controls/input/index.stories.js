@@ -39,3 +39,9 @@ InvalidWithIcon.args = Object.assign(
   { errorMessage: "Field is required" },
   WithIcon.args
 );
+
+export const isLoading = Template.bind({});
+isLoading.args = Object.assign({ isLoading: true }, Default.args);
+
+export const isSuccessful = Template.bind({});
+isSuccessful.args = Object.assign({ isSuccessful: true }, Default.args);

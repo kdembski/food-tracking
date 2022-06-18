@@ -1,10 +1,11 @@
 <script lang="ts">
 import CListWithFilters from "@/components/data-display/list-with-filters/index.vue";
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
+import CButton from "@/components/controls/button/index.vue";
 
 export default {
   name: "RecipesListView",
-  components: { CListWithFilters, CDisplayTags },
+  components: { CListWithFilters, CDisplayTags, CButton },
 };
 </script>
 

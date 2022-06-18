@@ -86,6 +86,10 @@ const handleSizePropOnMobile = (size: string): string => {
     return "medium";
   }
 
+  if (size === "medium") {
+    return "small";
+  }
+
   return size;
 };
 

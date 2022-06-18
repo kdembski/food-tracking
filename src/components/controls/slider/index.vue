@@ -17,6 +17,10 @@ const props = defineProps({
     type: Array as () => Array<SelectOption>,
     default: () => [],
   },
+  fullWidth: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const items: Ref<Array<HTMLElement>> = ref([]);
@@ -33,6 +37,13 @@ const selected = computed({
     emits("update:modelValue", value);
   },
 });
+
+const getFullWidthClass = () => {
+  if (props.fullWidth) {
+    return "slider--full-width";
+  }
+  return "";
+};
 
 const getActiveOptionIndex = () => {
   const activeOption = props.options.find(

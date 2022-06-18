@@ -7,7 +7,7 @@
   &__item {
     position: relative;
     z-index: 1;
-    padding: 7px 10px;
+    padding: 6px 10px;
 
     & > input {
       display: none;
@@ -27,8 +27,19 @@
       cursor: pointer;
 
       &:hover {
-        color: $secondary-dark-30;
+        color: $secondary;
       }
+    }
+  }
+
+  &--full-width {
+    display: flex;
+    width: 100%;
+
+    .slider__item {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 

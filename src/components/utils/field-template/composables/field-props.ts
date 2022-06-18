@@ -3,6 +3,8 @@ interface FieldTemplateProps {
   isDisabled: boolean;
   errorMessage: string;
   icon: string;
+  isLoading: boolean;
+  isSuccessful: boolean;
 }
 
 export function useFieldProps() {
@@ -31,6 +33,10 @@ export function useFieldProps() {
       type: Boolean,
       default: false,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   };
 
   const getFieldTemplateProps = (
@@ -41,6 +47,8 @@ export function useFieldProps() {
       isDisabled: props.isDisabled,
       errorMessage: props.errorMessage,
       icon: props.icon,
+      isLoading: props.isLoading,
+      isSuccessful: props.isSuccessful,
     };
   };
 

@@ -1,4 +1,4 @@
-<div class="slider">
+<div class="slider" :class="getFullWidthClass()">
   <div v-for="(option, index) in options" class="slider__item" ref="items">
     <input
       v-model="selected"

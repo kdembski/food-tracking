@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 30px 0;
+  padding: 10px 30px 0;
   color: $secondary-light-20;
 
   &-pages {
@@ -17,6 +17,10 @@
         font-weight: 600;
       }
     }
+  }
+
+  &__summary {
+    font-style: italic;
   }
 
   &-loader {
@@ -35,7 +39,7 @@
 
 @media screen and (max-width: $screen-md) {
   .list-pagination {
-    padding: 15px 15px 0;
+    padding: 10px 15px 0;
 
     &-loader {
       margin: 10px 10px 0;

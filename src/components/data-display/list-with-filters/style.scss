@@ -10,7 +10,7 @@
 
   .filters {
     &__search-input {
-      margin: 15px 1px;
+      margin: 20px 1px;
     }
 
     &__select-tags {
@@ -24,8 +24,7 @@
     &__btns-container {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
     }
   }
 
@@ -38,7 +37,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    padding: 30px 0;
+    padding: 25px 0;
 
     &:deep(.list) {
       padding: 0 25px;
@@ -67,6 +66,17 @@
 
       &--open {
         transform: translateX(0);
+      }
+
+      &__btns-container {
+        gap: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      &__filter-by,
+      &__close-btn {
+        grid-column: span 2;
       }
     }
 

@@ -10,6 +10,7 @@
         icon="magnifying-glass"
         class="list-with-filters__open-filters-btn"
         @click="toggleFiltersOnMobile"
+        fullWidth
       />
     </div>
     <div
@@ -17,19 +18,6 @@
       :class="{ 'filters--open': areFiltersOpenOnMobile}"
     >
       <div class="filters__btns-container">
-        <CSlider v-model="inputFilterBy" :options="inputFilterByOptions" />
-        <CButton
-          variant="contained"
-          color="secondary"
-          label="Wyczyść filtry"
-          size="small"
-          icon="times"
-          class="filters__clear-btn"
-          :isLoading="_isLoading"
-          :isDisabled="areFiltersEqualToDefault()"
-          @click="clearFilters"
-          :fullWidth="isMobile"
-        />
         <CButton
           v-if="isMobile"
           variant="contained"
@@ -40,6 +28,29 @@
           class="filters__close-btn"
           @click="toggleFiltersOnMobile"
           fullWidth
+        />
+        <CSlider
+          v-model="inputFilterBy"
+          :options="inputFilterByOptions"
+          :fullWidth="isMobile"
+          class="filters__filter-by"
+        />
+        <CButton
+          variant="contained"
+          color="secondary"
+          label="Wyczyść filtry"
+          size="small"
+          icon="times"
+          class="filters__clear-btn"
+          :isLoading="_isLoading"
+          :isDisabled="areFiltersEqualToDefault()"
+          @click="clearFilters"
+        />
+        <CButton
+          variant="outlined"
+          label="Wylosuj"
+          size="small"
+          icon="question"
         />
       </div>
       <CInput

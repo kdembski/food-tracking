@@ -81,16 +81,10 @@ const getSelectedClass = () => {
   return "";
 };
 
-const isAfterSuccessfulShot = ref(false);
 const afterOptionSelectWithShootingMode = () => {
   setTimeout(() => {
-    isAfterSuccessfulShot.value = true;
     clearSelectedAndInputValue();
   }, 200);
-
-  setTimeout(() => {
-    isAfterSuccessfulShot.value = false;
-  }, 1000);
 };
 
 const isDropdownOpen = computed(() => {
