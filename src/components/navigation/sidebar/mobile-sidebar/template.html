@@ -1,0 +1,33 @@
+<div class="mobile-sidebar">
+  <div
+    class="mobile-sidebar__wrapper"
+    @touchstart="onTouchStart"
+    @touchend="onTouchEnd"
+    :class="'mobile-sidebar--active-' + (activeListIndex + 1)"
+  >
+    <ul v-for="limit in mobileListLimits" class="mobile-sidebar__items">
+      <li v-for="item in items.slice(limit.start, limit.end)" class="item">
+        <RouterLink
+          :to="item.route"
+          class="item__link"
+          activeClass="item__link--active"
+          exactActiveClass="item__link--exact-active"
+          v-slot="{ isActive }"
+        >
+          <div class="item__wrapper">
+            <div class="item__icon">
+              <FontAwesomeIcon v-if="item.icon" :icon="item.icon" />
+            </div>
+            <p class="item__label">{{ item.label }}</p>
+          </div>
+        </RouterLink>
+      </li>
+    </ul>
+  </div>
+  <div class="mobile-sidebar__active-indicator">
+    <span
+      v-for="index in mobileListLimits.length"
+      :class="getActiveIndicatorClass(index)"
+    ></span>
+  </div>
+</div>

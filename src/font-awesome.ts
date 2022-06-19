@@ -31,6 +31,7 @@ import {
   faFilter,
   faExclamation,
   faQuestion,
+  faGear,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -63,7 +64,8 @@ library.add(
   faMugSaucer,
   faFilter,
   faExclamation,
-  faQuestion
+  faQuestion,
+  faGear
 );
 
 export default FontAwesomeIcon;

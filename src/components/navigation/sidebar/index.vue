@@ -1,17 +1,14 @@
 <script lang="ts">
-import CDarkModeToggle from "./dark-mode-toggle/index.vue";
-import CLogo from "./logo/index.vue";
+import CDesktopSidebar from "./desktop-sidebar/index.vue";
+import CMobileSidebar from "./mobile-sidebar/index.vue";
 
 export default {
   name: "CSidebar",
-  components: { CDarkModeToggle, CLogo },
+  components: { CDesktopSidebar, CMobileSidebar },
 };
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { RouterLink } from "vue-router";
-import StorageService from "@/services/storage.service";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
 const props = defineProps({
@@ -22,36 +19,6 @@ const props = defineProps({
 });
 
 const { isMobile } = useWindowSize();
-
-const getIsCollapsedValue = () => {
-  if (isMobile.value) {
-    return true;
-  }
-  return !!parseInt(StorageService.getItem("isSidebarCollapsed") || "0");
-};
-const isCollapsed = ref(getIsCollapsedValue());
-
-const toggleCollapsedState = () => {
-  isCollapsed.value = !isCollapsed.value;
-
-  if (!isMobile.value) {
-    StorageService.setItem("isSidebarCollapsed", isCollapsed.value ? "1" : "0");
-  }
-};
-
-const collapseSidebarOnMobile = (isActive: boolean) => {
-  if (isActive || !isMobile.value) {
-    return;
-  }
-  toggleCollapsedState();
-};
-
-const getCollapsedClass = () => {
-  if (isCollapsed.value) {
-    return "sidebar--collapsed";
-  }
-  return "";
-};
 </script>
 
 <template src="./template.html"></template>

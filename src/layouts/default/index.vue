@@ -14,8 +14,9 @@ const sidebarItems = ref([
   { route: "/recipes", label: "Przepisy", icon: "utensils" },
   { route: "/", label: "Składniki", icon: "cheese" },
   { route: "/", label: "Kalendarz", icon: "calendar-days" },
-  { route: "/", label: "Lista zakupów", icon: "list" },
-  { route: "/ordered", label: "Co zamawiamy?", icon: "truck" },
+  { route: "/", label: "Zakupy", icon: "list" },
+  { route: "/ordered", label: "Zamawiamy?", icon: "truck" },
+  { route: "/settings", label: "Ustawienia", icon: "gear" },
 ]);
 </script>
 

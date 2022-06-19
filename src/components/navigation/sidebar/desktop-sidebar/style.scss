@@ -1,0 +1,116 @@
+.sidebar {
+  width: 253px;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  transition: width 0.15s ease-in-out;
+
+  &.sidebar--collapsed {
+    width: 71px;
+
+    .item__label {
+      opacity: 0;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-shadow: $shadow-sm-dark;
+    background-color: $secondary-dark-25;
+    overflow: hidden;
+  }
+
+  &__collapse-btn {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.15s ease-in-out;
+    opacity: 0;
+
+    & > button {
+      position: absolute;
+      left: -20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 20px;
+      background-color: $secondary;
+      color: $white;
+      box-shadow: $shadow-xs-dark;
+      border: 0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+
+  &:hover {
+    .sidebar__collapse-btn {
+      opacity: 1;
+    }
+  }
+
+  &__items {
+    list-style: none;
+  }
+
+  .item {
+    &__link {
+      color: $white;
+      display: flex;
+      transition: background-color 0.15s ease-in-out;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:hover:not(.item__link--active) {
+        background-color: $secondary-dark-20;
+      }
+
+      &--active {
+        background-color: $secondary-dark-10;
+      }
+    }
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 13px 24px;
+      cursor: pointer;
+    }
+
+    &__icon {
+      display: flex;
+      justify-content: center;
+      min-width: 23px;
+      font-size: $font-lg;
+      margin-right: 26px;
+    }
+
+    &__label {
+      font-size: $font-base;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      transition: opacity 0.15s ease-in-out;
+    }
+  }
+}
+
+.dark-mode {
+  .sidebar {
+    &__wrapper {
+      box-shadow: $shadow-xs-dark;
+    }
+
+    &__collapse-btn > button {
+      background-color: $secondary-dark-10;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import store from "@/store";
 import LoginView from "../views/login/index.vue";
 import RecipesListView from "../views/recipes/list/index.vue";
 import OrderedFoodListView from "../views/ordered-food/list/index.vue";
+import SettingsView from "../views/settings/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -34,6 +35,14 @@ const routes: Array<RouteRecordRaw> = [
     path: "/ordered",
     name: "orderedFoodList",
     component: OrderedFoodListView,
+    meta: {
+      isPublic: false,
+    },
+  },
+  {
+    path: "/settings",
+    name: "settings",
+    component: SettingsView,
     meta: {
       isPublic: false,
     },

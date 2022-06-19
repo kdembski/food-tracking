@@ -19,7 +19,7 @@
     }
 
     &__wrapper {
-      padding: 30px;
+      padding: 20px 30px;
       padding-right: 15px;
       overflow-y: scroll;
       flex-grow: 1;
@@ -42,7 +42,7 @@
 @media screen and (max-width: $screen-md) {
   .layout-default {
     .layout-content {
-      padding: 45px 0 0;
+      padding: 0 0 55px;
 
       &__wrapper {
         padding: 15px 0;
