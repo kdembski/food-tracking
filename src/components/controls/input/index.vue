@@ -33,6 +33,12 @@ const value = computed({
     emits("update:modelValue", value);
   },
 });
+
+const onInput = (e: KeyboardEvent) => {
+  if (props.isLoading) {
+    e.preventDefault();
+  }
+};
 </script>
 
 <template src="./template.html"></template>

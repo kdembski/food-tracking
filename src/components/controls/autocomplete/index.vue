@@ -10,7 +10,7 @@ export default {
 
 <script setup lang="ts">
 import { SelectOption } from "../select/types/select";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 import { useOptionHover } from "./composables/option-hover";
 import { useAutocompleteEvents } from "./composables/autocomplete-events";
@@ -56,17 +56,16 @@ const inputValue = ref("");
 
 const filteredOptions = computed(() => {
   return props.options.filter((option: SelectOption) => {
-    return option.label.toLowerCase().includes(inputValue.value.toLowerCase());
+    return option.label
+      .toLowerCase()
+      .removeDiacritics()
+      .includes(inputValue.value.toLowerCase().removeDiacritics());
   });
 });
 
 const selectOption = (option: SelectOption) => {
   selectedValue.value = option.value;
   inputValue.value = option.label;
-
-  if (props.shootingMode) {
-    afterOptionSelectWithShootingMode();
-  }
 };
 
 const clearSelectedAndInputValue = () => {
@@ -81,15 +80,19 @@ const getSelectedClass = () => {
   return "";
 };
 
-const afterOptionSelectWithShootingMode = () => {
-  setTimeout(() => {
-    clearSelectedAndInputValue();
-  }, 200);
-};
-
 const isDropdownOpen = computed(() => {
   return hasFocus.value;
 });
+
+watch(
+  () => props.isLoading,
+  (value) => {
+    if (value || !props.shootingMode) {
+      return;
+    }
+    clearSelectedAndInputValue();
+  }
+);
 
 const {
   getHoveredOptionClass,
@@ -107,11 +110,11 @@ const { onEnter, onArrowUp, onArrowDown, onInput, onInputClick, onBlur } =
     incrementHoveredOptionIndex,
     filteredOptions,
     selectOption,
-    afterOptionSelectWithShootingMode,
     input,
     inputValue,
     selectedValue,
     props.shootingMode,
+    props.isLoading,
     hasFocus
   );
 </script>

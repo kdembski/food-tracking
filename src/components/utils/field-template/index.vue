@@ -40,6 +40,12 @@ const getFieldClasses = (): Array<string> => {
   if (hasIconRight.value) {
     classes.push("field--with-icon-right");
   }
+  if (props.isDisabled || props.isLoading) {
+    classes.push("field--disabled");
+  }
+  if (props.label) {
+    classes.push("field--with-label");
+  }
 
   return classes;
 };

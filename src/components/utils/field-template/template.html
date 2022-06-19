@@ -3,14 +3,10 @@
   <div v-if="icon" class="field__icon-left">
     <FontAwesomeIcon :icon="icon" />
   </div>
-  <transition name="icon-right__transition">
-    <div v-if="hasIconRight" class="field__icon-right">
-      <transition name="icon-right__transition">
-        <CLoader v-if="isLoading" />
-        <CIcon v-else :type="isInvalid ? 'error': 'success'" />
-      </transition>
-    </div>
-  </transition>
+  <div v-if="hasIconRight" class="field__icon-right">
+    <CLoader v-if="isLoading" :circleWidth="25" :circleHeight="25" />
+    <CIcon v-else :type="isInvalid ? 'error': 'success'" />
+  </div>
   <label :for="$attrs.id + '-field'" class="field__label">{{ label }}</label>
   <CTransition
     enterFromClass="field__error-message--transition-class"

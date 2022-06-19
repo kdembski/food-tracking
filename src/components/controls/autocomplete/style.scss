@@ -3,13 +3,27 @@
 
   &__input {
     font-style: italic;
+    color: $secondary-light-20;
 
     &--option-selected {
       font-style: normal;
+      color: $secondary-dark-30;
     }
 
     &::placeholder {
       font-style: normal;
+    }
+  }
+}
+
+.dark-mode {
+  .autocomplete {
+    .autocomplete__input {
+      color: $secondary-light-30;
+
+      &--option-selected {
+        color: $white;
+      }
     }
   }
 }

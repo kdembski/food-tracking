@@ -45,3 +45,6 @@ isLoading.args = Object.assign({ isLoading: true }, Default.args);
 
 export const isSuccessful = Template.bind({});
 isSuccessful.args = Object.assign({ isSuccessful: true }, Default.args);
+
+export const isDisabled = Template.bind({});
+isDisabled.args = Object.assign({ isDisabled: true }, Default.args);

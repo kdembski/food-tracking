@@ -7,8 +7,8 @@ import { withDefaults } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    circleHeight?: number;
-    circleWidth?: number;
+    circleHeight: number;
+    circleWidth: number;
   }>(),
   { circleHeight: 55, circleWidth: 55 }
 );

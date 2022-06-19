@@ -8,11 +8,11 @@ export function useAutocompleteEvents(
   incrementHoveredOptionIndex: () => void,
   filteredOptions: ComputedRef<Array<SelectOption>>,
   selectOption: (option: SelectOption) => void,
-  afterOptionSelectWithShootingMode: () => void,
   input: Ref<HTMLInputElement | undefined>,
   inputValue: Ref<string>,
   selectedValue: WritableComputedRef<string | number | null>,
   shootingMode: boolean,
+  isLoading: boolean,
   hasFocus: Ref<boolean>
 ) {
   const onEnter = () => {
@@ -33,13 +33,13 @@ export function useAutocompleteEvents(
 
   const afterOptionSelectOnEnter = () => {
     if (shootingMode) {
-      afterOptionSelectWithShootingMode();
       return;
     }
 
     if (!input.value) {
       return;
     }
+
     input.value.blur();
   };
 
@@ -55,7 +55,9 @@ export function useAutocompleteEvents(
 
   const getOptionMatchingInputValue = () => {
     const matchingOptions = filteredOptions.value.filter(
-      (option) => option.label.toLowerCase() === inputValue.value.toLowerCase()
+      (option) =>
+        option.label.toLowerCase().removeDiacritics() ===
+        inputValue.value.toLowerCase().removeDiacritics()
     );
     return matchingOptions[0];
   };
@@ -64,13 +66,13 @@ export function useAutocompleteEvents(
     return !!getOptionMatchingInputValue();
   };
 
-  const onInput = () => {
+  const onInput = (e: KeyboardEvent) => {
+    if (isLoading) {
+      e.preventDefault();
+    }
+
     if (isInputValueMatchingAnyOption()) {
       selectOption(getOptionMatchingInputValue());
-
-      if (shootingMode) {
-        afterOptionSelectWithShootingMode();
-      }
       return;
     }
 

@@ -36,3 +36,20 @@
     }
   }
 }
+
+.dark-mode {
+  .dropdown {
+    box-shadow: 0 2px 6px 0 $shadow-color-dark;
+    background-color: $secondary-dark-20;
+
+    &__option {
+      background-color: $secondary-dark-20;
+      color: $white;
+
+      &:hover,
+      &--hovered {
+        filter: brightness(90%);
+      }
+    }
+  }
+}

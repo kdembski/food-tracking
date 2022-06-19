@@ -60,6 +60,7 @@
         class="filters__search-input"
         icon="magnifying-glass"
         placeholder="Szukaj po nazwie"
+        :isLoading="_isLoading"
       />
       <CAutocomplete
         v-else
@@ -70,6 +71,7 @@
         class="filters__search-input"
         icon="magnifying-glass"
         placeholder="Szukaj po tagach"
+        :isLoading="_isLoading"
       />
       <CSelectTags
         :selectedTags="filters.tags"
