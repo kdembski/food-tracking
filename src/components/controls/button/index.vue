@@ -101,7 +101,7 @@ const getButtonContentClasses = (): string => {
 };
 
 const getLoaderSize = (): number => {
-  switch (props.size) {
+  switch (handleSizePropOnMobile(props.size)) {
     case "small":
       return 20;
     case "medium":

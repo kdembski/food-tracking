@@ -3,6 +3,7 @@
   align-items: center;
   cursor: pointer;
   user-select: none;
+  max-height: 17px;
 
   &__icons-wrapper {
     display: flex;
@@ -14,13 +15,28 @@
 
   &__icon {
     color: $secondary-light-30;
+    font-size: $font-base;
 
     &:last-child {
-      margin-top: -9px;
+      margin-top: -10px;
     }
 
     &--active {
-      color: $secondary;
+      color: $secondary-dark-10;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .sorting-trigger {
+    max-height: 14px;
+
+    &__icon {
+      font-size: $font-sm;
+
+      &:last-child {
+        margin-top: -9px;
+      }
     }
   }
 }

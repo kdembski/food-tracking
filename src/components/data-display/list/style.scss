@@ -7,7 +7,7 @@
 
   &__content {
     border-collapse: collapse;
-    min-width: 700px;
+    min-width: 750px;
 
     tr {
       border-bottom: 1px solid $secondary-light-50;
@@ -101,11 +101,12 @@
   .list {
     &__content {
       td {
-        padding: 15px;
+        padding: 12px 15px;
       }
 
       th {
         padding: 0 15px 5px;
+        font-size: $font-xs;
       }
     }
 
