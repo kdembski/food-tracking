@@ -22,7 +22,6 @@ export function useSwipeScreen(
     if (translateValue < minTranslateX) {
       translateValue = minTranslateX;
     }
-    console.log(translateValue);
 
     wrapperTranslateX.value = translateValue + "px";
   };

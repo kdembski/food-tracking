@@ -5,7 +5,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 10;
+    z-index: 20;
     display: flex;
     transition: transform 0.2s ease-in-out;
   }
@@ -64,7 +64,7 @@
     gap: 5px;
     bottom: 4px;
     left: calc(50vw - 7.5px);
-    z-index: 11;
+    z-index: 21;
 
     & > span {
       display: block;

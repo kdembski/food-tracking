@@ -43,7 +43,8 @@
 @media screen and (max-width: $screen-md) {
   .layout-default {
     .layout-content {
-      padding: 0 0 62px;
+      padding: 0;
+      margin-bottom: 62px;
 
       &__wrapper {
         padding: 15px 0;
