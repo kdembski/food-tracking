@@ -44,7 +44,7 @@ const tagsSettings = [
     name: "śniadanie",
     icon: "mug-saucer",
     lightColor: "#ffd9b5",
-    darkColor: "#6b3400",
+    darkColor: "#594430",
   },
   {
     name: "obiad",
@@ -90,13 +90,29 @@ const getTagColorStyles = (tagSettings: tagSettings) => {
     return {
       color: tagSettings.lightColor,
       backgroundColor: tagSettings.darkColor,
+      borderColor: tagSettings.lightColor + "33",
     };
   }
 
   return {
     color: tagSettings.darkColor,
     backgroundColor: tagSettings.lightColor,
+    borderColor: tagSettings.darkColor + "20",
   };
+};
+
+const shadeColor = (color: string, amount: number) => {
+  return (
+    "#" +
+    color
+      .replace(/^#/, "")
+      .replace(/../g, (color) =>
+        (
+          "0" +
+          Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)
+        ).substr(-2)
+      )
+  );
 };
 
 const container = ref<HTMLElement | null>(null);
@@ -106,7 +122,7 @@ const getLoaderRowItemsCount = () => {
     return 5;
   }
 
-  const itemsCount = Math.floor(container.value.clientWidth / 80);
+  const itemsCount = Math.floor(container.value.clientWidth / 85);
   if (itemsCount < 5) {
     return 5;
   }

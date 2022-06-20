@@ -101,7 +101,7 @@
       }
 
       &.button--contained {
-        color: $secondary-dark-20;
+        color: $white;
         background-color: $primary;
       }
 
@@ -123,9 +123,9 @@
       }
 
       &.button--outlined {
-        color: $secondary-dark-20;
-        background-color: $white;
-        border-color: $secondary-light-50;
+        color: $white;
+        background-color: transparent;
+        border-color: $secondary-dark-15;
       }
     }
 

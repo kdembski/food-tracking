@@ -18,7 +18,6 @@ import {
   faCheese,
   faCalendarDays,
   faList,
-  faTruck,
   faBars,
   faMoon,
   faSun,
@@ -32,6 +31,7 @@ import {
   faExclamation,
   faQuestion,
   faGear,
+  faBoxOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -52,7 +52,6 @@ library.add(
   faCheese,
   faCalendarDays,
   faList,
-  faTruck,
   faBars,
   faMoon,
   faSun,
@@ -65,7 +64,8 @@ library.add(
   faFilter,
   faExclamation,
   faQuestion,
-  faGear
+  faGear,
+  faBoxOpen
 );
 
 export default FontAwesomeIcon;

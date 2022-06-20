@@ -103,7 +103,16 @@ const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
   );
 
 const availableTagsOptions = computed(() => {
-  return availableTags.value?.split(",").map((tag: string) => {
+  const selectedTags = filters.value.tags?.split(",");
+
+  const availableTagsWithoutSelected = availableTags.value
+    ?.split(",")
+    .filter(
+      (availableTag: string) =>
+        !selectedTags?.some((selectedTag) => selectedTag == availableTag)
+    );
+
+  return availableTagsWithoutSelected.map((tag: string) => {
     return {
       value: tag,
       label: tag,

@@ -1,40 +1,15 @@
 <div class="list-with-filters">
   <CCard class="list-with-filters__header">
-    <div>
-      <CButton
-        v-if="isMobile"
-        variant="contained"
-        color="secondary"
-        label="Szukaj"
-        size="small"
-        icon="magnifying-glass"
-        class="list-with-filters__open-filters-btn"
-        @click="toggleFiltersOnMobile"
-        fullWidth
-      />
-    </div>
-    <div
-      class="list-with-filters__filters filters"
-      :class="{ 'filters--open': areFiltersOpenOnMobile}"
-    >
+    <div class="list-with-filters__filters filters">
       <div class="filters__btns-container">
-        <CButton
-          v-if="isMobile"
-          variant="contained"
-          color="secondary"
-          label="Zamknij"
-          size="small"
-          icon="times"
-          class="filters__close-btn"
-          @click="toggleFiltersOnMobile"
-          fullWidth
-        />
-        <CSlider
-          v-model="inputFilterBy"
-          :options="inputFilterByOptions"
-          :fullWidth="isMobile"
-          class="filters__filter-by"
-        />
+        <div class="filters__filter-by filter-by__wrapper">
+          <p class="filter-by__label">Szukaj po:</p>
+          <CSlider
+            v-model="inputFilterBy"
+            :options="inputFilterByOptions"
+            class="filter-by__slider"
+          />
+        </div>
         <CButton
           variant="contained"
           color="secondary"

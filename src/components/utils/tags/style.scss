@@ -6,9 +6,9 @@
   &:deep(.tag) {
     display: inline-flex;
     align-items: center;
-    padding: 6px 12px;
+    padding: 5px 12px;
     background-color: $secondary-light-55;
-    box-shadow: $shadow-xs;
+    border: 1.5px solid $secondary-light-50;
     font-weight: 500;
     font-size: $font-sm;
     border-radius: 15px;
@@ -16,7 +16,7 @@
     cursor: pointer;
 
     &:hover {
-      filter: brightness(90%);
+      filter: brightness(95%);
     }
 
     svg {
@@ -55,8 +55,12 @@
   .tags {
     &:deep(.tag) {
       color: $white;
-      background-color: $secondary-dark-15;
-      box-shadow: $shadow-xs-dark;
+      background-color: $secondary-dark-20;
+      border-color: $secondary-dark-15;
+
+      &:hover {
+        filter: brightness(120%);
+      }
     }
 
     &__empty {

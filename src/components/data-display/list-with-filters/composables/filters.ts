@@ -18,8 +18,8 @@ export function useFilters(
   });
   const inputFilterBy = ref("byName");
   const inputFilterByOptions = [
-    { value: "byName", label: "Szukaj po nazwie" },
-    { value: "byTags", label: "Szukaj po tagach" },
+    { value: "byName", label: "Nazwie" },
+    { value: "byTags", label: "Tagach" },
   ];
 
   const filterBySearchPhrase = (phrase: string) => {
