@@ -11,6 +11,7 @@ import {
   faCaretDown,
   faTimes,
   faArrowLeft,
+  faArrowRight,
   faPlus,
   faInfo,
   faCheck,
@@ -32,6 +33,7 @@ import {
   faQuestion,
   faGear,
   faBoxOpen,
+  faTag,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -45,6 +47,7 @@ library.add(
   faCaretDown,
   faTimes,
   faArrowLeft,
+  faArrowRight,
   faPlus,
   faInfo,
   faCheck,
@@ -65,7 +68,8 @@ library.add(
   faExclamation,
   faQuestion,
   faGear,
-  faBoxOpen
+  faBoxOpen,
+  faTag
 );
 
 export default FontAwesomeIcon;

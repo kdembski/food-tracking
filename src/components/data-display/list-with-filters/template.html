@@ -1,63 +1,78 @@
-<div class="list-with-filters">
-  <CCard class="list-with-filters__header">
-    <div class="list-with-filters__filters filters">
-      <div class="filters__btns-container">
-        <div class="filters__filter-by filter-by__wrapper">
-          <p class="filter-by__label">Szukaj po:</p>
-          <CSlider
-            v-model="inputFilterBy"
-            :options="inputFilterByOptions"
-            class="filter-by__slider"
-          />
-        </div>
-        <CButton
-          variant="contained"
-          color="secondary"
-          label="Wyczyść filtry"
-          size="small"
-          icon="times"
-          class="filters__clear-btn"
-          :isLoading="_isLoading"
-          :isDisabled="areFiltersEqualToDefault()"
-          @click="clearFilters"
-        />
-        <CButton
-          variant="outlined"
-          label="Wylosuj"
-          size="small"
-          icon="question"
+<div class="list-with-filters" :class="getMobileContainerClasses()">
+  <CCard class="list-with-filters__filters filters">
+    <div class="filters__btns-container">
+      <CButton
+        v-if="isMobile"
+        color="secondary"
+        label="Lista"
+        size="small"
+        icon="arrow-right"
+        @click="toggleFiltersOnMobile"
+      />
+      <div class="filters__filter-by filter-by__wrapper">
+        <p class="filter-by__label">Szukaj po:</p>
+        <CSlider
+          v-model="inputFilterBy"
+          :options="inputFilterByOptions"
+          class="filter-by__slider"
         />
       </div>
-      <CInput
-        v-if="inputFilterBy === 'byName'"
-        :modelValue="filters.searchPhrase"
-        @update:modelValue="filterBySearchPhrase"
-        class="filters__search-input"
-        icon="magnifying-glass"
-        placeholder="Szukaj po nazwie"
+      <CButton
+        variant="contained"
+        color="secondary"
+        label="Wyczyść filtry"
+        size="small"
+        icon="times"
+        class="filters__clear-btn"
         :isLoading="_isLoading"
+        :isDisabled="areFiltersEqualToDefault()"
+        @click="clearFilters"
       />
-      <CAutocomplete
-        v-else
-        v-model="inputSelectedTag"
-        :options="availableTagsOptions"
-        @update:modelValue="addTagAndFilter"
-        shootingMode
-        class="filters__search-input"
-        icon="magnifying-glass"
-        placeholder="Szukaj po tagach"
-        :isLoading="_isLoading"
-      />
-      <CSelectTags
-        :selectedTags="filters.tags"
-        @update:selectedTags="filterByTags"
-        :tags="availableTags"
-        :isLoading="_isLoading"
-        class="filters__select-tags"
+      <CButton
+        variant="outlined"
+        label="Wylosuj"
+        size="small"
+        icon="question"
       />
     </div>
+    <CInput
+      v-if="inputFilterBy === 'byName'"
+      :modelValue="filters.searchPhrase"
+      @update:modelValue="filterBySearchPhrase"
+      class="filters__search-input"
+      icon="magnifying-glass"
+      placeholder="Szukaj po nazwie"
+      :isLoading="_isLoading"
+    />
+    <CAutocomplete
+      v-else
+      v-model="inputSelectedTag"
+      :options="availableTagsOptions"
+      @update:modelValue="addTagAndFilter"
+      shootingMode
+      class="filters__search-input"
+      icon="magnifying-glass"
+      placeholder="Szukaj po tagach"
+      :isLoading="_isLoading"
+    />
+    <CSelectTags
+      :selectedTags="filters.tags"
+      @update:selectedTags="filterByTags"
+      :tags="availableTags"
+      :isLoading="_isLoading"
+    />
   </CCard>
   <CCard class="list-with-filters__content">
+    <div class="list-with-filters__open-mobile-filters-btn">
+      <CButton
+        v-if="isMobile"
+        color="secondary"
+        label="Filtry"
+        size="small"
+        icon="arrow-left"
+        @click="toggleFiltersOnMobile"
+      />
+    </div>
     <CList
       :items="list?.data"
       :isLoading="_isLoading"

@@ -32,9 +32,10 @@
     color: $secondary-dark-30;
 
     & > h1 {
-      font-size: $font-2xl;
+      font-size: $font-3xl;
       line-height: 100%;
       letter-spacing: 1px;
+      padding: 6px 0;
     }
   }
 }
@@ -54,6 +55,7 @@
 
       & > h1 {
         font-size: $font-xl;
+        padding: 3px 0;
       }
     }
   }

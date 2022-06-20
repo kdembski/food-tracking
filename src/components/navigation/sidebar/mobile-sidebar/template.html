@@ -1,9 +1,8 @@
 <div class="mobile-sidebar">
   <div
     class="mobile-sidebar__wrapper"
-    @touchstart="onTouchStart"
-    @touchend="onTouchEnd"
     :class="'mobile-sidebar--active-' + (activeListIndex + 1)"
+    v-bind="swipeConfig"
   >
     <ul v-for="limit in mobileListLimits" class="mobile-sidebar__items">
       <li v-for="item in items.slice(limit.start, limit.end)" class="item">

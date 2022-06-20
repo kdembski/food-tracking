@@ -29,7 +29,7 @@ export function useFilters(
       filters.value.searchPhrase = phrase;
       filters.value.currentPage = 1;
       handleListLoadingProccess();
-    }, 200);
+    }, 800);
   };
 
   const filterByTags = (tags: string) => {
@@ -85,11 +85,6 @@ export function useFilters(
     return true;
   };
 
-  const areFiltersOpenOnMobile = ref(false);
-  const toggleFiltersOnMobile = () => {
-    areFiltersOpenOnMobile.value = !areFiltersOpenOnMobile.value;
-  };
-
   return {
     filters,
     currentSort,
@@ -100,8 +95,6 @@ export function useFilters(
     changeCurrentPage,
     areFiltersEqualToDefault,
     clearFilters,
-    areFiltersOpenOnMobile,
-    toggleFiltersOnMobile,
     inputFilterBy,
     inputFilterByOptions,
   };

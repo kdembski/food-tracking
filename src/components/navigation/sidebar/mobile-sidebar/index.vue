@@ -5,8 +5,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useSwipeScreen } from "@/components/utils/composables/swipe-screen";
+import { ref, computed, reactive } from "vue";
 import { RouterLink } from "vue-router";
+const { windowWidth } = useWindowSize();
 
 const props = defineProps({
   items: {
@@ -15,8 +18,6 @@ const props = defineProps({
   },
 });
 
-let touchStartX = 0;
-let touchEndX = 0;
 const activeListIndex = ref(0);
 const mobileListLimits = [
   {
@@ -28,27 +29,12 @@ const mobileListLimits = [
     end: 8,
   },
 ];
-
-const onTouchStart = (e: TouchEvent) => {
-  touchStartX = e.changedTouches[0].screenX;
-};
-const onTouchEnd = (e: TouchEvent) => {
-  touchEndX = e.changedTouches[0].screenX;
-  slideMobileSidebar();
-};
-
-const slideMobileSidebar = () => {
-  const touchDifferenceX = touchStartX - touchEndX;
-  if (Math.abs(touchDifferenceX) < 50) {
-    return;
-  }
-  if (touchDifferenceX > 0) {
-    slideLeft();
-  }
-  if (touchDifferenceX < 0) {
-    slideRight();
-  }
-};
+const wrapperCurrentTranslateX = computed(
+  () => windowWidth.value * activeListIndex.value
+);
+const wrapperWidth = computed(
+  () => windowWidth.value * (mobileListLimits.length - 1)
+);
 
 const slideLeft = () => {
   if (activeListIndex.value >= mobileListLimits.length - 1) {
@@ -62,6 +48,16 @@ const slideRight = () => {
   }
   activeListIndex.value--;
 };
+
+const swipeConfig = reactive(
+  useSwipeScreen(
+    slideLeft,
+    slideRight,
+    wrapperCurrentTranslateX,
+    -wrapperWidth.value,
+    0
+  )
+);
 
 const getActiveIndicatorClass = (index: number) => {
   if (index - 1 === activeListIndex.value) {

@@ -33,6 +33,7 @@ import { useFilters } from "./composables/filters";
 import { onMounted, provide } from "vue";
 import { isEmpty } from "lodash";
 import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useMobileFilters } from "./composables/mobile-filters";
 
 const store = useStore();
 
@@ -59,10 +60,13 @@ const props = withDefaults(
   }
 );
 
+// List loading
 const list = computed(() => store.getters[props.listGetterName]);
+
 const isLoadingList = computed(
   () => store.getters[props.listIsLoadingGetterName]
 );
+
 const _isLoading = computed(
   () => isLoadingList.value || isLoadingAvailableTags.value || props.isLoading
 );
@@ -77,6 +81,7 @@ const handleListLoadingProccess = () => {
   loadList(filters.value);
 };
 
+// List filters
 const {
   filters,
   currentSort,
@@ -87,14 +92,16 @@ const {
   changeCurrentPage,
   areFiltersEqualToDefault,
   clearFilters,
-  areFiltersOpenOnMobile,
-  toggleFiltersOnMobile,
   inputFilterBy,
   inputFilterByOptions,
 } = useFilters(props.defaultFilters, handleListLoadingProccess);
+const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
+  props.listName
+);
 
 provide("currentSort", currentSort);
 
+// List tags
 const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
   useAvailableTags(
     props.tagsLoadActionName,
@@ -119,14 +126,15 @@ const availableTagsOptions = computed(() => {
     };
   });
 });
-const inputSelectedTag = ref("");
+const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
-const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
-  props.listName
-);
-
+// Mobile filters
 const { isMobile } = useWindowSize();
 
+const { toggleFiltersOnMobile, getMobileContainerClasses } =
+  useMobileFilters(isMobile);
+
+// On mounted
 const loadListOnMounted = () => {
   const storedFilters = getFiltersFromStorage();
 
