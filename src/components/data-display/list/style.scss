@@ -9,6 +9,13 @@
     border-collapse: collapse;
     min-width: 750px;
 
+    thead {
+      tr {
+        position: sticky;
+        top: 0;
+      }
+    }
+
     tr {
       border-bottom: 1px solid $secondary-light-50;
     }

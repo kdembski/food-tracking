@@ -3,6 +3,7 @@ export default { name: "CCard" };
 </script>
 
 <script setup lang="ts">
+import { ref, Ref, defineExpose } from "vue";
 const props = defineProps({
   as: {
     type: String,
@@ -12,6 +13,9 @@ const props = defineProps({
     },
   },
 });
+
+const wrapper: Ref<HTMLElement | undefined> = ref();
+defineExpose({ wrapper });
 </script>
 
 <template src="./template.html"></template>

@@ -10,6 +10,12 @@
     overflow: hidden;
     flex-grow: 1;
 
+    &--scrollable {
+      .layout-content__wrapper {
+        overflow-y: scroll;
+      }
+    }
+
     &__container {
       display: flex;
       max-width: 1400px;
@@ -21,7 +27,6 @@
     &__wrapper {
       padding: 20px 30px;
       padding-right: 15px;
-      overflow-y: scroll;
       flex-grow: 1;
       width: 100%;
     }

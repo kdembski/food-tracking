@@ -9,6 +9,7 @@ export default createStore({
     isDarkModeEnabled: !!parseInt(
       StorageService.getItem("isDarkModeEnabled") || "0"
     ),
+    isDefaultLayoutContentScrollable: true,
   },
 
   getters: {},
@@ -20,6 +21,9 @@ export default createStore({
         "isDarkModeEnabled",
         state.isDarkModeEnabled ? "1" : "0"
       );
+    },
+    setDefaultLayoutContentScrollable(state, value) {
+      state.isDefaultLayoutContentScrollable = value;
     },
   },
 

@@ -1,5 +1,8 @@
 <div class="list-with-filters" :class="getMobileContainerClasses()">
-  <CCard class="list-with-filters__filters filters">
+  <CCard
+    class="list-with-filters__filters filters"
+    :style="getMobileFiltersPositionTop()"
+  >
     <div class="filters__btns-container">
       <CButton
         v-if="isMobile"
@@ -62,7 +65,7 @@
       :isLoading="_isLoading"
     />
   </CCard>
-  <CCard class="list-with-filters__content">
+  <CCard class="list-with-filters__content" ref="content">
     <div class="list-with-filters__open-mobile-filters-btn">
       <CButton
         v-if="isMobile"

@@ -24,7 +24,7 @@ const recipesListColumns = [
 
 const recipesListDefaultFilters = {
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 20,
   searchPhrase: "",
   sortAttribute: "recipeName",
   sortDirection: "asc",

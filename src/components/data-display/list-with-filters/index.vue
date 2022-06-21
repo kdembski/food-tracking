@@ -25,7 +25,7 @@ export default {
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed, ref } from "vue";
+import { computed, ref, Ref } from "vue";
 import { ListFilters } from "@/types/list";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
@@ -130,9 +130,12 @@ const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
 // Mobile filters
 const { isMobile } = useWindowSize();
-
-const { toggleFiltersOnMobile, getMobileContainerClasses } =
-  useMobileFilters(isMobile);
+const content: Ref<{ wrapper: HTMLElement } | undefined> = ref();
+const {
+  toggleFiltersOnMobile,
+  getMobileContainerClasses,
+  getMobileFiltersPositionTop,
+} = useMobileFilters(isMobile, content);
 
 // On mounted
 const loadListOnMounted = () => {

@@ -8,7 +8,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
 
 const sidebarItems = ref([
   { route: "/recipes", label: "Przepisy", icon: "utensils" },
@@ -18,6 +20,10 @@ const sidebarItems = ref([
   { route: "/ordered", label: "Zamawiamy?", icon: "box-open" },
   { route: "/settings", label: "Ustawienia", icon: "gear" },
 ]);
+
+const isDefaultLayoutContentScrollable = computed(
+  () => store.state.isDefaultLayoutContentScrollable
+);
 </script>
 
 <template src="./template.html"></template>
