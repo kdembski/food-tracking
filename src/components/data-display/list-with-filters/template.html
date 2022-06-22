@@ -1,105 +1,113 @@
 <div class="list-with-filters" :class="getMobileContainerClasses()">
-  <CCard
-    class="list-with-filters__filters filters"
-    :style="getMobileFiltersPositionTop()"
-  >
-    <div class="filters__btns-container">
-      <CButton
-        v-if="isMobile"
-        color="secondary"
-        label="Lista"
-        size="small"
-        icon="arrow-right"
-        @click="toggleFiltersOnMobile"
-      />
-      <div class="filters__filter-by filter-by__wrapper">
-        <p class="filter-by__label">Szukaj po:</p>
-        <CSlider
-          v-model="inputFilterBy"
-          :options="inputFilterByOptions"
-          class="filter-by__slider"
+  <transition name="list-with-filters__filters-transition">
+    <CCard
+      v-if="!isMobile || areMobileFiltersOpen"
+      class="list-with-filters__filters filters"
+    >
+      <div class="filters__btns-container">
+        <CButton
+          v-if="isMobile"
+          color="secondary"
+          label="Lista"
+          size="small"
+          icon="arrow-right"
+          @click="toggleFiltersOnMobile"
+        />
+        <div class="filters__filter-by filter-by__wrapper">
+          <p class="filter-by__label">Szukaj po:</p>
+          <CSlider
+            v-model="inputFilterBy"
+            :options="inputFilterByOptions"
+            class="filter-by__slider"
+          />
+        </div>
+        <CButton
+          variant="contained"
+          color="secondary"
+          label="Wyczyść filtry"
+          size="small"
+          icon="times"
+          class="filters__clear-btn"
+          :isLoading="_isLoading"
+          :isDisabled="areFiltersEqualToDefault()"
+          @click="clearFilters"
+        />
+        <CButton
+          variant="outlined"
+          label="Wylosuj"
+          size="small"
+          icon="question"
         />
       </div>
-      <CButton
-        variant="contained"
-        color="secondary"
-        label="Wyczyść filtry"
-        size="small"
-        icon="times"
-        class="filters__clear-btn"
+      <CInput
+        v-if="inputFilterBy === 'byName'"
+        :modelValue="filters.searchPhrase"
+        @update:modelValue="filterBySearchPhrase"
+        class="filters__search-input"
+        icon="magnifying-glass"
+        placeholder="Szukaj po nazwie"
         :isLoading="_isLoading"
-        :isDisabled="areFiltersEqualToDefault()"
-        @click="clearFilters"
       />
-      <CButton
-        variant="outlined"
-        label="Wylosuj"
-        size="small"
-        icon="question"
+      <CAutocomplete
+        v-else
+        v-model="inputSelectedTag"
+        :options="availableTagsOptions"
+        @update:modelValue="addTagAndFilter"
+        shootingMode
+        class="filters__search-input"
+        icon="magnifying-glass"
+        placeholder="Szukaj po tagach"
+        :isLoading="_isLoading"
       />
-    </div>
-    <CInput
-      v-if="inputFilterBy === 'byName'"
-      :modelValue="filters.searchPhrase"
-      @update:modelValue="filterBySearchPhrase"
-      class="filters__search-input"
-      icon="magnifying-glass"
-      placeholder="Szukaj po nazwie"
-      :isLoading="_isLoading"
-    />
-    <CAutocomplete
-      v-else
-      v-model="inputSelectedTag"
-      :options="availableTagsOptions"
-      @update:modelValue="addTagAndFilter"
-      shootingMode
-      class="filters__search-input"
-      icon="magnifying-glass"
-      placeholder="Szukaj po tagach"
-      :isLoading="_isLoading"
-    />
-    <CSelectTags
-      :selectedTags="filters.tags"
-      @update:selectedTags="filterByTags"
-      :tags="availableTags"
-      :isLoading="_isLoading"
-    />
-  </CCard>
-  <CCard class="list-with-filters__content" ref="content">
-    <div class="list-with-filters__open-mobile-filters-btn">
-      <CButton
-        v-if="isMobile"
-        color="secondary"
-        label="Filtry"
-        size="small"
-        icon="arrow-left"
-        @click="toggleFiltersOnMobile"
+      <CSelectTags
+        :selectedTags="filters.tags"
+        @update:selectedTags="filterByTags"
+        :tags="availableTags"
+        :isLoading="_isLoading"
       />
-    </div>
-    <CList
-      :items="list?.data"
-      :isLoading="_isLoading"
-      :columns="columns"
-      :getItemColumnValue="getItemColumnValue"
-      @sortChange="filterBySort"
+    </CCard>
+  </transition>
+  <transition name="list-with-filters__content-transition">
+    <CCard
+      v-if="!isMobile || !areMobileFiltersOpen"
+      class="list-with-filters__content"
+      ref="content"
     >
-      <template
-        v-for="field in Object.keys($slots)"
-        v-slot:[field]="{ itemValue }"
+      <div class="list-with-filters__open-mobile-filters-btn">
+        <CButton
+          v-if="isMobile"
+          color="secondary"
+          label="Filtry"
+          size="small"
+          icon="arrow-left"
+          @click="toggleFiltersOnMobile"
+        />
+      </div>
+      <CList
+        :items="list?.data"
+        :isLoading="_isLoading"
+        :columns="columns"
+        :getItemColumnValue="getItemColumnValue"
+        @sortChange="filterBySort"
       >
-        <slot
-          :name="field"
-          :itemValue="itemValue"
-          :addTagAndFilter="addTagAndFilter"
-        ></slot>
-      </template>
-    </CList>
-    <CPagination
-      v-if="list?.pagination"
-      :currentPage="filters.currentPage"
-      @update:currentPage="changeCurrentPage"
-      :paginationData="list?.pagination"
-      :isLoading="_isLoading"
-    />
-  </CCard>
+        <template
+          v-for="field in Object.keys($slots)"
+          v-slot:[field]="{ itemValue }"
+        >
+          <slot
+            :name="field"
+            :itemValue="itemValue"
+            :addTagAndFilter="addTagAndFilter"
+          ></slot>
+        </template>
+      </CList>
+      <CPagination
+        v-if="list?.pagination"
+        :currentPage="filters.currentPage"
+        @update:currentPage="changeCurrentPage"
+        :paginationData="list?.pagination"
+        :isLoading="_isLoading"
+      />
+    </CCard>
+  </transition>
 </div>

@@ -130,12 +130,11 @@ const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
 // Mobile filters
 const { isMobile } = useWindowSize();
-const content: Ref<{ wrapper: HTMLElement } | undefined> = ref();
 const {
+  areMobileFiltersOpen,
   toggleFiltersOnMobile,
   getMobileContainerClasses,
-  getMobileFiltersPositionTop,
-} = useMobileFilters(isMobile, content);
+} = useMobileFilters(isMobile);
 
 // On mounted
 const loadListOnMounted = () => {

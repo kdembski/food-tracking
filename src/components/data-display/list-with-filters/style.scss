@@ -10,15 +10,7 @@
 
   .filters {
     &__search-input {
-      margin: 10px 1px 20px;
-    }
-
-    &__select-tags {
-      margin: 0 2px;
-    }
-
-    &__clear-btn {
-      margin: 0 1px;
+      margin: 10px 0 20px;
     }
 
     &__btns-container {
@@ -43,17 +35,12 @@
     }
   }
 
-  &__open-filters-btn {
-    margin: 0 1px;
-  }
-
   &__content {
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
     padding: 25px 0;
-    transition: transform 0.25s ease-in-out;
 
     &:deep(.list) {
       padding: 0 25px;
@@ -65,30 +52,45 @@
   .list-with-filters {
     &--mobile {
       flex-direction: row;
-      overflow: hidden;
-    }
-
-    &--mobile-tags-open {
-      .list-with-filters__content {
-        transform: translateX(100%);
-      }
-
-      .list-with-filters__filters {
-        transform: translateX(0);
-      }
     }
 
     &__filters {
-      margin-bottom: 0;
       width: 100vw;
-      position: fixed;
-      top: 61px;
-      left: 0;
-      right: 0;
-      bottom: 62px;
-      transform: translateX(-100%);
-      transition: all 0.25s ease-in-out;
-      z-index: 10;
+      margin-bottom: 0;
+    }
+
+    &__filters-transition {
+      &-enter-active,
+      &-leave-active {
+        transition: transform 0.25s ease-in-out;
+      }
+
+      &-enter-from,
+      &-leave-to {
+        transform: translateX(-100%);
+      }
+
+      &-enter-to,
+      &-leave-from {
+        transform: translateX(0%);
+      }
+    }
+
+    &__content-transition {
+      &-enter-active,
+      &-leave-active {
+        transition: transform 0.25s ease-in-out;
+      }
+
+      &-enter-from,
+      &-leave-to {
+        transform: translateX(0%);
+      }
+
+      &-enter-to,
+      &-leave-from {
+        transform: translateX(-100%);
+      }
     }
 
     &__open-mobile-filters-btn {
@@ -99,11 +101,11 @@
       &__btns-container {
         gap: 12px;
         margin: 0 -10px;
-        padding: 0 10px 7px;
+        padding: 0 10px 8px;
       }
 
       &__search-input {
-        margin: 8px 1px 15px;
+        margin: 7px 0 15px;
       }
 
       .filter-by {

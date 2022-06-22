@@ -1,9 +1,6 @@
 <div class="layout-default">
   <CSidebar :items="sidebarItems" />
-  <div
-    class="layout-default__content layout-content"
-    :class="{'layout-content--scrollable': isDefaultLayoutContentScrollable}"
-  >
+  <div class="layout-default__content layout-content">
     <div class="layout-content__wrapper">
       <div class="layout-content__container">
         <slot></slot>
