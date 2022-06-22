@@ -1,5 +1,11 @@
 <transition name="dropdown__transition">
-  <ul v-if="isOpen" class="dropdown" @mouseout="emitListMouseout(index)">
+  <ul
+    v-if="isOpen"
+    class="dropdown"
+    @mouseout="emitListMouseout(index)"
+    :style="'max-height: ' + dropdownMaxHeight + 'px'"
+    ref="dropdown"
+  >
     <li
       v-for="(option, index) in options"
       class="dropdown__option"

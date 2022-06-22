@@ -40,7 +40,7 @@ const getLoaderRowsCount = () => {
     ? windowHeight.value
     : windowHeight.value - 350;
 
-  return Math.floor(containerHeight / 100);
+  return Math.floor(containerHeight / (isMobile.value ? 85 : 100));
 };
 </script>
 

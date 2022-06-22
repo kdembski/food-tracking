@@ -7,6 +7,10 @@ const isMobile = computed(() => {
   return windowWidth.value <= 768;
 });
 
+const isMobileKeyboardOpen = computed(() => {
+  return windowHeight.value <= 600;
+});
+
 const onResize = () => {
   windowHeight.value = window.innerHeight;
   windowWidth.value = window.innerWidth;
@@ -25,6 +29,7 @@ export function useWindowSize() {
     windowHeight,
     windowWidth,
     isMobile,
+    isMobileKeyboardOpen,
     addResizeListener,
     removeResizeListener,
   };

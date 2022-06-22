@@ -80,6 +80,18 @@
   }
 }
 
+@media screen and (max-height: 600px) {
+  .mobile-sidebar {
+    &__wrapper {
+      bottom: -62px;
+    }
+
+    &__active-indicator {
+      bottom: -20px;
+    }
+  }
+}
+
 .dark-mode {
   .mobile-sidebar {
     &__wrapper {

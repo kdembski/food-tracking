@@ -8,7 +8,7 @@
     <div class="list-loader__content">
       <div v-for="row in getLoaderRowsCount()" class="list-loader__row">
         <CSkeletonLoader
-          v-for="item in columnsCount"
+          v-for="item in isMobile ? 1 : columnsCount"
           class="list-loader__item"
         />
       </div>

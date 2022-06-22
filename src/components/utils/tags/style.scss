@@ -51,6 +51,16 @@
   }
 }
 
+@media screen and (max-width: $screen-md) {
+  .tags-loader__row {
+    &:last-child {
+      .tags-loader__item {
+        width: 88px;
+      }
+    }
+  }
+}
+
 .dark-mode {
   .tags {
     &:deep(.tag) {

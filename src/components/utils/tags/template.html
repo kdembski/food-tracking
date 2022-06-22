@@ -2,7 +2,7 @@
   <div v-if="isLoading" class="tags-loader">
     <div v-for="index in getLoaderRowsCount()" class="tags-loader__row">
       <CSkeletonLoader
-        v-for="index in getLoaderRowItemsCount()"
+        v-for="index in getLoaderRowItemsCount(index)"
         class="tags-loader__item"
       />
     </div>

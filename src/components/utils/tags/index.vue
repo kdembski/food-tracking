@@ -101,35 +101,23 @@ const getTagColorStyles = (tagSettings: tagSettings) => {
   };
 };
 
-const shadeColor = (color: string, amount: number) => {
-  return (
-    "#" +
-    color
-      .replace(/^#/, "")
-      .replace(/../g, (color) =>
-        (
-          "0" +
-          Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)
-        ).substr(-2)
-      )
-  );
-};
-
 const container = ref<HTMLElement | null>(null);
+const { isMobile } = useWindowSize();
 
-const getLoaderRowItemsCount = () => {
+const getLoaderRowItemsCount = (index: number) => {
   if (!(container.value && container.value.clientWidth)) {
     return 5;
   }
 
   const itemsCount = Math.floor(container.value.clientWidth / 85);
-  if (itemsCount < 5) {
-    return 5;
+
+  if (isMobile.value && index === 3) {
+    return Math.ceil(itemsCount / 2);
   }
+
   return itemsCount;
 };
 
-const { isMobile } = useWindowSize();
 const getLoaderRowsCount = () => {
   if (isMobile.value) return 3;
   return 1;

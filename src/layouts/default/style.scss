@@ -46,17 +46,25 @@
       margin-bottom: 62px;
 
       &__wrapper {
-        padding: 12px 0 0;
+        padding: 15px 0 0;
       }
     }
 
     &:deep(header) {
-      margin: 0 10px 12px;
+      margin: 0 10px 15px;
 
       & > h1 {
         font-size: $font-xl;
         padding: 3px 0;
       }
+    }
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .layout-default {
+    .layout-content {
+      margin-bottom: 0;
     }
   }
 }
