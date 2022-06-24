@@ -2,6 +2,7 @@
   <ul
     v-if="isOpen"
     class="dropdown"
+    :class="'dropdown--' + dropdownPosition"
     @mouseout="emitListMouseout(index)"
     :style="'max-height: ' + dropdownMaxHeight + 'px'"
     ref="dropdown"

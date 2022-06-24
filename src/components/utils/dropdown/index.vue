@@ -4,8 +4,8 @@ export default { name: "TDropdown" };
 
 <script setup lang="ts">
 import { SelectOption } from "@/components/controls/select/types/select";
-import { computed, ref, Ref } from "vue";
-import { useWindowSize } from "../composables/window-size";
+import { ref, Ref, computed } from "vue";
+import { useMaxHeight } from "./composables/max-height";
 
 const props = defineProps({
   isOpen: {
@@ -44,27 +44,12 @@ const emitOptionClick = (option: SelectOption) => {
   emit("optionClick", option);
 };
 
-const dropdown: Ref<HTMLElement | undefined> = ref();
-const { windowHeight, isMobileKeyboardOpen } = useWindowSize();
+const dropdown: Ref<HTMLElement | null> = ref(null);
 
-const dropdownMaxHeight = computed(() => {
-  if (!dropdown.value) {
-    return 392;
-  }
-
-  const offsetBottom = isMobileKeyboardOpen.value ? 10 : 72;
-  const distanceToPageBottom =
-    windowHeight.value -
-    dropdown.value.getBoundingClientRect().top -
-    offsetBottom;
-
-  console.log(distanceToPageBottom);
-  if (distanceToPageBottom < 392) {
-    return distanceToPageBottom;
-  }
-
-  return 392;
-});
+const { dropdownMaxHeight, dropdownPosition } = useMaxHeight(
+  dropdown,
+  computed(() => props.isOpen)
+);
 </script>
 
 <template src="./template.html"></template>

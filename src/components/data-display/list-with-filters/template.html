@@ -22,7 +22,7 @@
           />
         </div>
         <CButton
-          variant="contained"
+          variant="text"
           color="secondary"
           label="Wyczyść filtry"
           size="small"
@@ -32,12 +32,7 @@
           :isDisabled="areFiltersEqualToDefault()"
           @click="clearFilters"
         />
-        <CButton
-          variant="outlined"
-          label="Wylosuj"
-          size="small"
-          icon="question"
-        />
+        <CButton variant="text" label="Wylosuj" size="small" icon="question" />
       </div>
       <CInput
         v-if="inputFilterBy === 'byName'"

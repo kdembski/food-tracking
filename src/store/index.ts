@@ -10,9 +10,7 @@ export default createStore({
       StorageService.getItem("isDarkModeEnabled") || "0"
     ),
   },
-
   getters: {},
-
   mutations: {
     toggleDarkMode(state) {
       state.isDarkModeEnabled = !state.isDarkModeEnabled;
@@ -22,8 +20,6 @@ export default createStore({
       );
     },
   },
-
   actions: {},
-
   modules: { user, recipe, orderedFood },
 });

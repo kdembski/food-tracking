@@ -24,10 +24,6 @@
       }
     }
 
-    &:hover:not(:focus) {
-      border-color: $secondary-light-40;
-    }
-
     &::placeholder {
       color: $secondary-light-40;
     }
@@ -39,7 +35,7 @@
 
   &--disabled {
     &:deep(input) {
-      background-color: lighten($secondary-light-55, 2) !important;
+      background-color: lighten($secondary-light-55, 3) !important;
       border-color: $secondary-light-50 !important;
       pointer-events: none;
 
@@ -52,7 +48,6 @@
   &--invalid {
     &:deep(input) {
       border-color: $error !important;
-      background-color: lighten($error-light, 8) !important;
     }
 
     .field__icon-left {
@@ -63,7 +58,6 @@
   &--successful {
     &:deep(input) {
       border-color: $success !important;
-      background-color: lighten($success-light, 10) !important;
     }
 
     .field__icon-left {
@@ -144,10 +138,6 @@
         }
       }
 
-      &:hover:not(:focus) {
-        border-color: $secondary;
-      }
-
       &::selection {
         background: $primary;
       }
@@ -168,24 +158,16 @@
       }
     }
 
-    &--invalid {
-      &:deep(input) {
-        background-color: $error-dark !important;
-      }
-    }
-
-    &--successful {
-      &:deep(input) {
-        background-color: $success-dark !important;
-      }
-    }
-
     &__error-message {
       color: lighten($error, 15);
     }
 
     &__icon-left {
       color: $white;
+    }
+
+    &__icon-right {
+      color: $secondary-light-30;
     }
 
     &__label {
