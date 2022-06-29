@@ -4,7 +4,6 @@
     <CButton label="Dodaj przepis" icon="plus" />
   </header>
   <CListWithFilters
-    :columns="recipesListColumns"
     :defaultFilters="recipesListDefaultFilters"
     listName="recipesList"
     listGetterName="recipe/getRecipesList"
@@ -14,8 +13,31 @@
     tagsLoadActionName="recipe/loadRecipesTags"
     tagsIsLoadingGetterName="recipe/isLoadingRecipesTags"
   >
-    <template v-slot:tags="{ itemValue, addTagAndFilter }">
-      <CDisplayTags :tags="itemValue" @click="addTagAndFilter" />
+    <template v-slot:default="{ item, addTagAndFilter }">
+      <div class="recipes-list__item item">
+        <p class="item__recipe-name">{{ item.recipeName }}</p>
+        <div class="item__icons">
+          <div class="item__preparation-time">
+            <FontAwesomeIcon :icon="['far', 'clock']" />
+            <p>{{ item.preparationTime }} min</p>
+          </div>
+          <InlineSvg
+            v-if="item.thermomix"
+            :src="require('../../../assets/icons/thermomix.svg')"
+            height="14"
+            width="100"
+            class="item__thermomix"
+          />
+        </div>
+        <CDisplayTags :tags="item.tags" @click.stop="addTagAndFilter" />
+        <CButton
+          color="secondary"
+          label=""
+          variant="text"
+          icon="ellipsis-vertical"
+          class="item__menu"
+        />
+      </div>
     </template>
   </CListWithFilters>
 </div>

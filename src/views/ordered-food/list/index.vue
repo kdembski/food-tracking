@@ -10,23 +10,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-const orderedFoodListColumns = [
-  {
-    label: "Danie",
-    value: "foodName",
-    sortable: true,
-  },
-  {
-    label: "Miejsce",
-    value: "placeName",
-    sortable: true,
-  },
-  {
-    label: "Tagi",
-    value: "tags",
-  },
-];
-
 const orderedFoodListDefaultFilters = {
   currentPage: 1,
   pageSize: 10,

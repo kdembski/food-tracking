@@ -1,6 +1,9 @@
-import { ref, Ref } from "vue";
+import { ref, Ref, computed } from "vue";
 
-export function useMobileFilters(isMobile: Ref<boolean>) {
+export function useMobileFilters(
+  isMobile: Ref<boolean>,
+  windowHeight: Ref<number>
+) {
   const areMobileFiltersOpen = ref(false);
   const toggleFiltersOnMobile = () => {
     if (!isMobile.value) {
@@ -9,19 +12,36 @@ export function useMobileFilters(isMobile: Ref<boolean>) {
     areMobileFiltersOpen.value = !areMobileFiltersOpen.value;
   };
 
-  const getMobileContainerClasses = () => {
-    const classes = [];
+  const maxPositionY = windowHeight.value - 117;
+  const mobileBtnPositionY = ref(maxPositionY - 60);
+  const previousPageY = ref(mobileBtnPositionY.value);
 
-    if (isMobile.value) {
-      classes.push("list-with-filters--mobile");
+  const onMobileBtnTouchMove = (e: TouchEvent) => {
+    const pageY = e.changedTouches[0].pageY;
+    const touchMoveDifference = previousPageY.value - pageY;
+    previousPageY.value = pageY;
+
+    const newPositionY = mobileBtnPositionY.value - touchMoveDifference;
+    if (newPositionY > maxPositionY || newPositionY < 5) {
+      return;
     }
 
-    return classes;
+    mobileBtnPositionY.value = newPositionY;
   };
+
+  const onMobileBtnTouchStart = (e: TouchEvent) => {
+    previousPageY.value = e.changedTouches[0].pageY;
+  };
+
+  const mobileBtnStyle = computed(() => {
+    return "transform: translateY(" + mobileBtnPositionY.value + "px)";
+  });
 
   return {
     areMobileFiltersOpen,
     toggleFiltersOnMobile,
-    getMobileContainerClasses,
+    onMobileBtnTouchMove,
+    onMobileBtnTouchStart,
+    mobileBtnStyle,
   };
 }

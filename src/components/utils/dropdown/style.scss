@@ -11,12 +11,12 @@
 
   &--top {
     bottom: calc(100% + 10px);
-    box-shadow: 0 -2px 6px 0 $shadow-color;
+    box-shadow: 0 -2px 10px 0 rgba(0, 0, 0, 0.12);
   }
 
   &--bottom {
     top: calc(100% + 10px);
-    box-shadow: 0 2px 6px 0 $shadow-color;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   }
 
   &__option {
@@ -45,7 +45,6 @@
 
 .dark-mode {
   .dropdown {
-    box-shadow: 0 2px 6px 0 $shadow-color-dark;
     background-color: $secondary-dark-20;
 
     &__option {

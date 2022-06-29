@@ -32,6 +32,7 @@ const Template = (args) => ({
         { size: "large" },
         { isDisabled: true },
         { icon: "plus" },
+        { icon: "plus", label: "" },
         { isLoading: true },
       ],
     };
@@ -41,9 +42,6 @@ const Template = (args) => ({
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-  label: "Button",
-};
 
 export const PrimaryOutlined = Template.bind({});
 PrimaryOutlined.args = Object.assign({ variant: "outlined" }, Primary.args);
@@ -53,7 +51,6 @@ PrimaryText.args = Object.assign({ variant: "text" }, Primary.args);
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  label: "Button",
   color: "secondary",
 };
 

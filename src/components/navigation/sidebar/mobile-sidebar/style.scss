@@ -95,7 +95,7 @@
 .dark-mode {
   .mobile-sidebar {
     &__wrapper {
-      background-color: $secondary-dark-30;
+      background-color: darken($secondary-dark-25, 3);
     }
   }
 }

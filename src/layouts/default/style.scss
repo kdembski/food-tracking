@@ -12,15 +12,15 @@
 
     &__container {
       display: flex;
-      max-width: 1400px;
       width: 100%;
+      max-width: 1400px;
       min-height: 100%;
       margin: auto;
     }
 
     &__wrapper {
       padding: 20px 30px;
-      padding-right: 15px;
+      padding-right: 20px;
       flex-grow: 1;
       width: 100%;
       overflow-y: scroll;
@@ -46,7 +46,7 @@
       margin-bottom: 62px;
 
       &__wrapper {
-        padding: 15px 0 0;
+        padding: 15px 0;
       }
     }
 

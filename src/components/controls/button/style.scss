@@ -17,9 +17,12 @@
 
   &.button--text {
     background-color: transparent;
-    padding: 0;
     border: 0;
     box-shadow: none;
+
+    &:hover:not(.button--disabled) {
+      background-color: $secondary-light-55;
+    }
   }
 
   &--primary {
@@ -30,6 +33,10 @@
     &.button--contained {
       color: $white;
       background-color: $primary;
+
+      &:hover:not(.button--disabled) {
+        background-color: $primary-dark;
+      }
     }
 
     &.button--outlined {
@@ -47,12 +54,20 @@
     &.button--contained {
       color: $secondary-dark-30;
       background-color: $secondary-light-55;
+
+      &:hover:not(.button--disabled) {
+        background-color: $secondary-light-50;
+      }
     }
 
     &.button--outlined {
       color: $secondary-dark-30;
       background-color: $white;
       border-color: $secondary-light-50;
+
+      &:hover:not(.button--disabled) {
+        background-color: $secondary-light-55;
+      }
     }
   }
 
@@ -83,18 +98,30 @@
   }
 
   &__content {
+    display: flex;
+
+    gap: 6px;
+
     &--loading {
       opacity: 0;
     }
   }
 
   &__icon {
-    margin-right: 6px;
+    margin-top: 1px;
   }
 }
 
 .dark-mode {
   .button {
+    &.button--text {
+      box-shadow: none;
+
+      &:hover:not(.button--disabled) {
+        background-color: $secondary-dark-20;
+      }
+    }
+
     &--primary {
       &.button--text {
         color: $primary;
@@ -120,34 +147,33 @@
       &.button--contained {
         color: $white;
         background-color: $secondary-dark-15;
+
+        &:hover:not(.button--disabled) {
+          background-color: $secondary-dark-10;
+        }
       }
 
       &.button--outlined {
         color: $white;
         background-color: transparent;
         border-color: $secondary-dark-15;
+
+        &:hover:not(.button--disabled) {
+          background-color: $secondary-dark-20;
+        }
       }
     }
 
     &--small {
-      font-size: $font-sm;
-      padding: 5px 10px;
       box-shadow: $shadow-xs-dark;
-      border-radius: 3px;
     }
 
     &--medium {
-      font-size: $font-base;
-      padding: 10px 15px;
       box-shadow: $shadow-sm-dark;
-      border-radius: 4px;
     }
 
     &--large {
-      font-size: $font-lg;
-      padding: 15px 20px;
       box-shadow: $shadow-md-dark;
-      border-radius: 5px;
     }
   }
 }

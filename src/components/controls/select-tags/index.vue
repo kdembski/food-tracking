@@ -8,6 +8,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { TagSettings } from "@/components/utils/tags/types/tags";
 
 const props = defineProps({
   tags: {
@@ -39,6 +40,16 @@ const _selectedTags = computed({
     emit("update:selectedTags", tags.join(","));
   },
 });
+
+const sortTagsBySelected = (tags: Array<TagSettings>) => {
+  return tags.sort((tag) => {
+    if (_selectedTags.value.some((tagName) => tagName === tag.name)) {
+      return -1;
+    }
+
+    return 1;
+  });
+};
 </script>
 
 <template src="./template.html"></template>

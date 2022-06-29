@@ -1,16 +1,23 @@
 <div class="tags" ref="container">
   <div v-if="isLoading" class="tags-loader">
-    <div v-for="index in getLoaderRowsCount()" class="tags-loader__row">
+    <div class="tags-loader__row">
       <CSkeletonLoader
-        v-for="index in getLoaderRowItemsCount(index)"
+        v-for="index in getFirstRowLoaderItemsCount()"
+        class="tags-loader__item"
+      />
+    </div>
+    <div class="tags-loader__row">
+      <CSkeletonLoader
+        v-for="index in getSecondRowLoaderItemsCount()"
         class="tags-loader__item"
       />
     </div>
   </div>
   <slot
-    v-else-if="tagsCount > 0"
+    v-else
     :tagsArray="tagsArray"
     :getTagColorStyles="getTagColorStyles"
+    :customizedTags="customizedTags"
+    :defaultTags="defaultTags"
   ></slot>
-  <div v-else class="tags__empty">Brak tagów</div>
 </div>

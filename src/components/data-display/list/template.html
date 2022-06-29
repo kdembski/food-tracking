@@ -1,45 +1,18 @@
 <div class="list" ref="container">
   <div v-if="isLoading" class="list-loader">
-    <div class="list-loader__header loader-header">
-      <div v-for="item in columnsCount" class="loader-header__item-wrapper">
-        <CSkeletonLoader class="loader-header__item" />
-      </div>
-    </div>
-    <div class="list-loader__content">
-      <div v-for="row in getLoaderRowsCount()" class="list-loader__row">
-        <CSkeletonLoader
-          v-for="item in isMobile ? 1 : columnsCount"
-          class="list-loader__item"
-        />
-      </div>
-    </div>
+    <CSkeletonLoader
+      v-for="row in getLoaderItemsCount()"
+      class="list-loader__item"
+    />
   </div>
-  <table v-else class="list__content">
-    <thead>
-      <tr>
-        <th v-for="col in columns">
-          <CSortingTrigger
-            v-if="col.sortable"
-            :column="col"
-            @sortChange="$attrs.onSortChange"
-          />
-          <p v-else>{{ col.label }}</p>
-        </th>
-      </tr>
-    </thead>
-    <tbody v-if="itemsCount < 1" class="list__empty-content">
-      <tr>
-        <td>Brak wyników</td>
-      </tr>
-    </tbody>
-    <tbody v-else>
-      <tr v-for="item in items">
-        <td v-for="col in columns">
-          <slot :name="col.value" :itemValue="item[col.value]">
-            {{ getItemColumnValue(item[col.value]) }}
-          </slot>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <template v-else>
+    <div v-if="itemsCount < 1" class="list__empty-content">
+      <p>Brak wyników</p>
+    </div>
+    <div class="list__content">
+      <CCard v-for="item in items" class="list__item">
+        <slot :item="item"></slot>
+      </CCard>
+    </div>
+  </template>
 </div>

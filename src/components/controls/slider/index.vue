@@ -38,11 +38,14 @@ const selected = computed({
   },
 });
 
-const getFullWidthClass = () => {
+const getContainerClasses = () => {
+  const classes = [];
+
   if (props.fullWidth) {
-    return "slider--full-width";
+    classes.push("slider--full-width");
   }
-  return "";
+
+  return classes;
 };
 
 const getActiveOptionIndex = () => {

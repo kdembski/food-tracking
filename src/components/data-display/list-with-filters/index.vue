@@ -39,8 +39,6 @@ const store = useStore();
 
 const props = withDefaults(
   defineProps<{
-    columns: Array<any>;
-    getItemColumnValue?: (value: string | number) => string | number;
     listName: string;
     listGetterName: string;
     listLoadActionName: string;
@@ -52,7 +50,6 @@ const props = withDefaults(
     isLoading?: boolean;
   }>(),
   {
-    getItemColumnValue: (value: string | number) => value,
     tagsGetterName: "",
     tagsLoadActionName: "",
     tagsIsLoadingGetterName: "",
@@ -99,8 +96,6 @@ const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
 
-provide("currentSort", currentSort);
-
 // List tags
 const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
   useAvailableTags(
@@ -129,12 +124,14 @@ const availableTagsOptions = computed(() => {
 const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
 // Mobile filters
-const { isMobile } = useWindowSize();
+const { isMobile, windowHeight } = useWindowSize();
 const {
   areMobileFiltersOpen,
   toggleFiltersOnMobile,
-  getMobileContainerClasses,
-} = useMobileFilters(isMobile);
+  onMobileBtnTouchMove,
+  onMobileBtnTouchStart,
+  mobileBtnStyle,
+} = useMobileFilters(isMobile, windowHeight);
 
 // On mounted
 const loadListOnMounted = () => {

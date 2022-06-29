@@ -1,17 +1,33 @@
-.tag {
-  user-select: none;
+.select-tags {
+  .tags:first-child {
+    padding-bottom: 20px;
 
-  &__checkbox {
-    display: none;
+    &:empty {
+      display: none;
+    }
+  }
 
-    &:checked + .tag {
-      filter: brightness(60%);
+  .tag {
+    user-select: none;
+
+    &__checkbox {
+      display: none;
+
+      &:checked + .tag {
+        filter: brightness(60%);
+      }
     }
   }
 }
 
 .dark-mode {
-  .tag__checkbox:checked + .tag {
-    filter: brightness(40%);
+  .select-tags {
+    .tag__checkbox:checked + .tag {
+      filter: brightness(40%);
+    }
+
+    &__empty {
+      color: $white;
+    }
   }
 }

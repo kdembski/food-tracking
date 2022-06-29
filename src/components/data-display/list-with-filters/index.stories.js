@@ -10,30 +10,11 @@ const Template = (args) => ({
   },
   components: { CListWithFilters },
   template:
-    '<CListWithFilters v-bind="args" style="height: 90vh"></CListWithFilters>',
+    '<CListWithFilters v-bind="args" style="height: 90vh"><template v-slot:default="{ item }"><div style="padding: 20px">{{ item[1] }}</div></template></CListWithFilters>',
 });
 
 export const Default = Template.bind({});
 Default.args = {
-  columns: [
-    {
-      label: "label-1",
-      value: "1",
-      sortable: true,
-    },
-    {
-      label: "label-2",
-      value: "2",
-    },
-    {
-      label: "label-3",
-      value: "3",
-    },
-    {
-      label: "label-4",
-      value: "4",
-    },
-  ],
   defaultFilters: {
     currentPage: 1,
     pageSize: 10,

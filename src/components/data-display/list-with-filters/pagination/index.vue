@@ -54,12 +54,29 @@ const isPageActive = (pageNumber: number) => {
 
 const getPaginationActiveItemClass = (pageNumber: number) => {
   if (isPageActive(pageNumber)) {
-    return "list-pagination-pages__item--active";
+    return "pagination-pages__item--active";
+  }
+  return "";
+};
+
+const getLeftArrowClasses = () => {
+  if (props.currentPage <= 1) {
+    return "pagination__arrow--disabled";
+  }
+  return "";
+};
+
+const getRightArrowClasses = () => {
+  if (props.currentPage >= props.paginationData.totalPages) {
+    return "pagination__arrow--disabled";
   }
   return "";
 };
 
 const changePage = (pageNumber: number) => {
+  if (pageNumber <= 0 || pageNumber > props.paginationData.totalPages) {
+    return;
+  }
   emit("update:currentPage", pageNumber);
 };
 </script>

@@ -1,15 +1,15 @@
-import CList from "./index.vue";
+import CTable from "./index.vue";
 
 export default {
-  title: "Data Display/List",
+  title: "Data Display/Table",
 };
 
 const Template = (args) => ({
   setup() {
     return { args };
   },
-  components: { CList },
-  template: '<CList v-bind="args" style="height: 90vh"></CList>',
+  components: { CTable },
+  template: '<CTable v-bind="args" style="height: 90vh"></CTable>',
 });
 
 export const Default = Template.bind({});

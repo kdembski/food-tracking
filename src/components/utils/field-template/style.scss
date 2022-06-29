@@ -1,9 +1,8 @@
 .field {
   position: relative;
-  z-index: 1;
 
   &--with-label {
-    margin-top: 18px;
+    margin-top: 16px;
   }
 
   &:deep(input) {
@@ -80,7 +79,7 @@
   &__label {
     position: absolute;
     top: -16px;
-    left: 4px;
+    left: 0;
     font-size: $font-xs;
     font-weight: 600;
     text-transform: uppercase;
@@ -93,7 +92,6 @@
     font-weight: 600;
     color: $error;
     margin: 4px 0;
-    padding: 0 2px;
     transition: all 0.15s ease-in-out;
 
     &--transition-class {

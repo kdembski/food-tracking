@@ -6,8 +6,8 @@
 
   &__item {
     position: relative;
+
     z-index: 1;
-    padding: 6px 10px;
 
     & > input {
       display: none;
@@ -15,19 +15,22 @@
       &:checked {
         & + label {
           color: $secondary-dark-30;
+          cursor: default;
         }
       }
     }
 
     & > label {
-      font-weight: 700;
+      display: block;
+      font-weight: 600;
       letter-spacing: 1px;
       font-size: $font-sm;
       color: $secondary-light-30;
+      padding: 5px 10px;
       cursor: pointer;
 
       &:hover {
-        color: $secondary;
+        color: $secondary-light-20;
       }
     }
   }
@@ -61,8 +64,10 @@
       }
 
       & > label {
+        color: $secondary;
+
         &:hover {
-          color: $white;
+          color: $secondary-light-10;
         }
       }
     }

@@ -1,17 +1,15 @@
 <script lang="ts">
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
-import CCard from "@/components/surfaces/card/index.vue";
-
+import CSortingTrigger from "./sorting-trigger/index.vue";
 export default {
   name: "CList",
-  components: { CSkeletonLoader, CCard },
+  components: { CSkeletonLoader, CSortingTrigger },
 };
 </script>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useWindowSize } from "@/components/utils/composables/window-size";
-
 const props = defineProps({
   items: {
     type: Array,
@@ -21,18 +19,23 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  columns: {
+    type: Array,
+    required: true,
+  },
   getItemColumnValue: {
     type: Function,
     default: (value: string | number) => value,
   },
 });
-
+const columnsCount = computed(() => props.columns.length);
 const itemsCount = computed(() => props.items.length);
 const { windowHeight, isMobile } = useWindowSize();
-
-const getLoaderItemsCount = () => {
-  const containerHeight = windowHeight.value - 100;
-  return Math.floor(containerHeight / (isMobile.value ? 110 : 140));
+const getLoaderRowsCount = () => {
+  const containerHeight = isMobile.value
+    ? windowHeight.value
+    : windowHeight.value - 350;
+  return Math.floor(containerHeight / (isMobile.value ? 85 : 100));
 };
 </script>
 

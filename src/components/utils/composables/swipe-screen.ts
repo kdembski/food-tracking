@@ -64,5 +64,6 @@ export function useSwipeScreen(
     onTouchstart,
     onTouchend,
     onTouchmove,
+    wrapperTranslateX,
   };
 }

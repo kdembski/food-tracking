@@ -4,3 +4,11 @@
   flex-direction: column;
   width: 100%;
 }
+
+@media screen and (max-width: $screen-md) {
+  .settings {
+    &__wrapper {
+      margin: 0 10px;
+    }
+  }
+}

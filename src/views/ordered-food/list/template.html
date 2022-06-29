@@ -4,7 +4,6 @@
     <CButton label="Dodaj jedzenie" icon="plus" />
   </header>
   <CListWithFilters
-    :columns="orderedFoodListColumns"
     :defaultFilters="orderedFoodListDefaultFilters"
     listName="orderedFoodList"
     listGetterName="orderedFood/getOrderedFoodList"
@@ -14,8 +13,19 @@
     tagsLoadActionName="orderedFood/loadOrderedFoodTags"
     tagsIsLoadingGetterName="orderedFood/isLoadingOrderedFoodTags"
   >
-    <template v-slot:tags="{ itemValue, addTagAndFilter }">
-      <CDisplayTags :tags="itemValue" @click="addTagAndFilter" />
+    <template v-slot:default="{ item, addTagAndFilter }">
+      <div class="ordered-food-list__item item">
+        <p class="item__food-name">{{ item.foodName }}</p>
+        <p class="item__place-name">{{ item.placeName }}</p>
+        <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
+        <CButton
+          color="secondary"
+          label=""
+          variant="text"
+          icon="ellipsis-vertical"
+          class="item__menu"
+        />
+      </div>
     </template>
   </CListWithFilters>
 </div>

@@ -1,21 +1,38 @@
-<CTags :tags="tags" :isLoading="isLoading">
-  <template #default="{ tagsArray, getTagColorStyles }">
-    <div v-for="tag in tagsArray">
-      <input
-        v-model="_selectedTags"
-        :id="'tag_' + tag.name"
-        :value="tag.name"
-        class="tag__checkbox"
-        type="checkbox"
-      />
-      <label
-        class="tag"
-        :for="'tag_' + tag.name"
-        :style="getTagColorStyles(tag)"
-      >
-        <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
-        {{ tag.name }}
-      </label>
-    </div>
-  </template>
-</CTags>
+<div v-if="tags || isLoading" class="select-tags">
+  <CTags :tags="tags" :isLoading="isLoading">
+    <template #default="{ getTagColorStyles, customizedTags }">
+      <div v-for="tag in sortTagsBySelected(customizedTags)">
+        <input
+          v-model="_selectedTags"
+          :id="'tag_' + tag.name"
+          :value="tag.name"
+          class="tag__checkbox"
+          type="checkbox"
+        />
+        <label
+          class="tag"
+          :for="'tag_' + tag.name"
+          :style="getTagColorStyles(tag)"
+        >
+          <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
+          {{ tag.name }}
+        </label>
+      </div>
+    </template>
+  </CTags>
+  <CTags :tags="tags" :isLoading="isLoading">
+    <template #default="{ defaultTags }">
+      <div v-for="tag in sortTagsBySelected(defaultTags)">
+        <input
+          v-model="_selectedTags"
+          :id="'tag_' + tag.name"
+          :value="tag.name"
+          class="tag__checkbox"
+          type="checkbox"
+        />
+        <label class="tag" :for="'tag_' + tag.name"> {{ tag.name }} </label>
+      </div>
+    </template>
+  </CTags>
+</div>
+<div v-else class="select-tags__empty">Brak tagów</div>

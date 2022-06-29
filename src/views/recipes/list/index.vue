@@ -2,26 +2,15 @@
 import CListWithFilters from "@/components/data-display/list-with-filters/index.vue";
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
+import InlineSvg from "vue-inline-svg";
 
 export default {
   name: "RecipesListView",
-  components: { CListWithFilters, CDisplayTags, CButton },
+  components: { CListWithFilters, CDisplayTags, CButton, InlineSvg },
 };
 </script>
 
 <script setup lang="ts">
-const recipesListColumns = [
-  {
-    label: "Nazwa przepisu",
-    value: "recipeName",
-    sortable: true,
-  },
-  {
-    label: "Tagi",
-    value: "tags",
-  },
-];
-
 const recipesListDefaultFilters = {
   currentPage: 1,
   pageSize: 20,

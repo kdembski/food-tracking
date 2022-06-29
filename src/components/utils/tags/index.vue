@@ -10,13 +10,7 @@ export default {
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useWindowSize } from "@/components/utils/composables/window-size";
-
-interface tagSettings {
-  name: string;
-  icon?: string;
-  lightColor?: string;
-  darkColor?: string;
-}
+import { TagSettings } from "./types/tags";
 
 const store = useStore();
 
@@ -72,7 +66,7 @@ const tagsArray = computed(() => {
     if (!tagSettings) {
       return {
         name,
-      };
+      } as TagSettings;
     }
 
     return tagSettings;
@@ -80,8 +74,16 @@ const tagsArray = computed(() => {
 });
 const tagsCount = computed(() => tagsArray.value.length);
 
+const customizedTags = computed(() => {
+  return tagsArray.value.filter((tag) => tag.icon);
+});
+
+const defaultTags = computed(() => {
+  return tagsArray.value.filter((tag) => !tag.icon);
+});
+
 const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
-const getTagColorStyles = (tagSettings: tagSettings) => {
+const getTagColorStyles = (tagSettings: TagSettings) => {
   if (!tagSettings.darkColor || !tagSettings.lightColor) {
     return false;
   }
@@ -104,23 +106,17 @@ const getTagColorStyles = (tagSettings: tagSettings) => {
 const container = ref<HTMLElement | null>(null);
 const { isMobile } = useWindowSize();
 
-const getLoaderRowItemsCount = (index: number) => {
+const getFirstRowLoaderItemsCount = () => {
   if (!(container.value && container.value.clientWidth)) {
     return 5;
   }
 
-  const itemsCount = Math.floor(container.value.clientWidth / 85);
-
-  if (isMobile.value && index === 3) {
-    return Math.ceil(itemsCount / 2);
-  }
-
+  const itemsCount = Math.floor(container.value.clientWidth / 80);
   return itemsCount;
 };
 
-const getLoaderRowsCount = () => {
-  if (isMobile.value) return 3;
-  return 1;
+const getSecondRowLoaderItemsCount = () => {
+  return Math.ceil(getFirstRowLoaderItemsCount() / 2);
 };
 </script>
 

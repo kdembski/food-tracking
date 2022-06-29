@@ -1,3 +1,4 @@
+import { useWindowSize } from "@/components/utils/composables/window-size";
 import { computed } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/list";
 import { ref, Ref } from "vue";
@@ -9,6 +10,8 @@ export function useFilters(
   defaultFilters: ListFilters,
   handleListLoadingProccess: () => void
 ) {
+  const { windowHeight, isMobile } = useWindowSize();
+
   const filters: Ref<ListFilters> = ref(clone(defaultFilters));
   const currentSort = computed(() => {
     return {
@@ -18,8 +21,8 @@ export function useFilters(
   });
   const inputFilterBy = ref("byName");
   const inputFilterByOptions = [
-    { value: "byName", label: "Nazwie" },
-    { value: "byTags", label: "Tagach" },
+    { value: "byName", label: "Nazwa" },
+    { value: "byTags", label: "Tagi" },
   ];
 
   const filterBySearchPhrase = (phrase: string) => {

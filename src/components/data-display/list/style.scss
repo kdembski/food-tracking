@@ -3,96 +3,26 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  overflow-y: auto;
 
   &__content {
-    border-collapse: collapse;
-    min-width: 750px;
-
-    tr {
-      border-bottom: 1px solid $secondary-light-50;
-    }
-
-    th,
-    td {
-      padding: 25px;
-
-      &:first-child {
-        padding-left: 5px;
-      }
-
-      &:last-child {
-        padding-right: 5px;
-      }
-    }
-
-    th {
-      text-align: left;
-      color: $secondary-light-20;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: $font-sm;
-      padding: 0 25px 5px;
-
-      & > p {
-        display: inline;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  &__empty-content {
-    tr {
-      position: relative;
-      border: 0;
-    }
-
-    td {
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
-      padding: 10px;
-    }
+  &__item {
+    padding: 0;
   }
 
   .list-loader {
-    height: 100%;
-    overflow: hidden;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-
-    &__content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    &__row {
-      display: flex;
-      height: 100%;
-      gap: 20px;
-    }
-
-    &__item {
-      height: 100%;
-    }
-  }
-
-  .loader-header {
-    height: 30px;
-    display: flex;
     gap: 20px;
-    margin: 0 0 20px;
 
     &__item {
       height: 100%;
-      margin-right: 45%;
-
-      &-wrapper {
-        display: flex;
-        flex-grow: 1;
-        height: 100%;
-      }
+      background-color: $secondary-light-50;
     }
   }
 }
@@ -100,30 +30,11 @@
 @media screen and (max-width: $screen-md) {
   .list {
     &__content {
-      td {
-        padding: 12px 15px;
-      }
-
-      th {
-        padding: 0 15px 5px;
-        font-size: $font-xs;
-      }
+      gap: 15px;
     }
 
     .list-loader {
-      &__content {
-        gap: 10px;
-      }
-
-      &__row {
-        gap: 10px;
-      }
-    }
-
-    .loader-header {
-      height: 22px;
-      gap: 10px;
-      margin: 0 0 10px;
+      gap: 15px;
     }
   }
 }
@@ -131,9 +42,11 @@
 .dark-mode {
   .list {
     color: $white;
-  }
 
-  tr {
-    border-color: $secondary-dark-20;
+    .list-loader {
+      &__item {
+        background-color: $secondary-dark-25;
+      }
+    }
   }
 }

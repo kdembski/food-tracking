@@ -1,59 +1,104 @@
-.list-pagination {
+.pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px 0;
   color: $secondary-light-20;
 
   &-pages {
     display: flex;
     cursor: pointer;
-    gap: 15px;
+    gap: 5px;
 
     &__item {
+      padding: 5px 10px;
+      border-radius: 3px;
+
       &--active {
         cursor: default;
         color: $secondary;
         font-weight: 600;
+        background-color: $secondary-light-50;
       }
+
+      &:hover {
+        background-color: $secondary-light-50;
+      }
+    }
+  }
+
+  &__arrow {
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: $secondary;
+
+    &--disabled {
+      cursor: default;
+      color: $secondary-light-40;
+    }
+
+    &:hover:not(.pagination__arrow--disabled) {
+      background-color: $secondary-light-50;
     }
   }
 
   &__summary {
     font-style: italic;
+    padding-right: 3px;
   }
 
   &-loader {
     display: flex;
     justify-content: space-between;
-    margin: 20px 25px 0;
     gap: 40%;
 
     &__item {
       height: 30px;
-      padding: 0 2%;
-      gap: 6%;
+      background-color: $secondary-light-50;
     }
   }
 }
 
 @media screen and (max-width: $screen-md) {
-  .list-pagination {
-    padding: 10px 15px 0;
-
+  .pagination {
     &-loader {
-      margin: 10px 10px 0;
-
       &__item {
-        height: 22px;
+        height: 24px;
       }
     }
   }
 }
 
 .dark-mode {
-  .list-pagination-pages__item--active {
-    color: $secondary-light-30;
-    border-color: $secondary-light-30;
+  .pagination {
+    &-pages {
+      &__item {
+        &--active {
+          background-color: $secondary-dark-20;
+          color: $secondary-light-30;
+        }
+
+        &:hover {
+          background-color: $secondary-dark-20;
+        }
+      }
+    }
+
+    &__arrow {
+      color: $secondary-light-30;
+
+      &--disabled {
+        color: $secondary-dark-10;
+      }
+
+      &:hover:not(.pagination__arrow--disabled) {
+        background-color: $secondary-dark-20;
+      }
+    }
+
+    &-loader {
+      &__item {
+        background-color: $secondary-dark-25;
+      }
+    }
   }
 }
