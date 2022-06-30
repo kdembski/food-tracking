@@ -1,23 +1,21 @@
-<div class="tags" ref="container">
-  <div v-if="isLoading" class="tags-loader">
+<div v-if="areTagsVisible()" class="tags" ref="container">
+  <CSkeletonLoader v-if="isLoading" class="tags-loader">
     <div class="tags-loader__row">
-      <CSkeletonLoader
+      <div
         v-for="index in getFirstRowLoaderItemsCount()"
-        class="tags-loader__item"
+        class="tags-loader__item skeleton-loader__item"
       />
     </div>
     <div class="tags-loader__row">
-      <CSkeletonLoader
+      <div
         v-for="index in getSecondRowLoaderItemsCount()"
-        class="tags-loader__item"
+        class="tags-loader__item skeleton-loader__item"
       />
     </div>
-  </div>
+  </CSkeletonLoader>
   <slot
     v-else
-    :tagsArray="tagsArray"
+    :tagsArray="getTagsArrayBasedOnType()"
     :getTagColorStyles="getTagColorStyles"
-    :customizedTags="customizedTags"
-    :defaultTags="defaultTags"
   ></slot>
 </div>

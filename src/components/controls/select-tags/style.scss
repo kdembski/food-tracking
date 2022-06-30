@@ -1,11 +1,6 @@
 .select-tags {
-  .tags:first-child {
-    padding-bottom: 20px;
-
-    &:empty {
-      display: none;
-    }
-  }
+  display: grid;
+  gap: 20px;
 
   .tag {
     user-select: none;

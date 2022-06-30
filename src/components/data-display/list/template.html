@@ -1,9 +1,14 @@
 <div class="list" ref="container">
   <div v-if="isLoading" class="list-loader">
-    <CSkeletonLoader
-      v-for="row in getLoaderItemsCount()"
-      class="list-loader__item"
-    />
+    <CCard v-for="row in getLoaderItemsCount()" class="list-loader__row">
+      <CSkeletonLoader>
+        <div class="list-loader__item skeleton-loader__item" />
+        <div class="list-loader__item skeleton-loader__item" />
+        <div class="list-loader__item">
+          <div v-for="index in 5" class="skeleton-loader__item" />
+        </div>
+      </CSkeletonLoader>
+    </CCard>
   </div>
   <template v-else>
     <div v-if="itemsCount < 1" class="list__empty-content">

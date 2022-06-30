@@ -45,27 +45,6 @@
     font-style: italic;
     padding-right: 3px;
   }
-
-  &-loader {
-    display: flex;
-    justify-content: space-between;
-    gap: 40%;
-
-    &__item {
-      height: 30px;
-      background-color: $secondary-light-50;
-    }
-  }
-}
-
-@media screen and (max-width: $screen-md) {
-  .pagination {
-    &-loader {
-      &__item {
-        height: 24px;
-      }
-    }
-  }
 }
 
 .dark-mode {
@@ -92,12 +71,6 @@
 
       &:hover:not(.pagination__arrow--disabled) {
         background-color: $secondary-dark-20;
-      }
-    }
-
-    &-loader {
-      &__item {
-        background-color: $secondary-dark-25;
       }
     }
   }

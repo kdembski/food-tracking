@@ -23,6 +23,13 @@ const props = defineProps({
     type: Boolean,
     deafult: false,
   },
+  type: {
+    type: String,
+    default: "all",
+    validator: (value: string) => {
+      return ["all", "customized", "default"].indexOf(value) !== -1;
+    },
+  },
 });
 
 const tagsSettings = [
@@ -81,6 +88,23 @@ const customizedTags = computed(() => {
 const defaultTags = computed(() => {
   return tagsArray.value.filter((tag) => !tag.icon);
 });
+
+const getTagsArrayBasedOnType = () => {
+  switch (props.type) {
+    case "all":
+      return tagsArray.value;
+    case "customized":
+      return customizedTags.value;
+    case "default":
+      return defaultTags.value;
+    default:
+      return tagsArray.value;
+  }
+};
+
+const areTagsVisible = () => {
+  return getTagsArrayBasedOnType().length > 0 || props.isLoading;
+};
 
 const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
 const getTagColorStyles = (tagSettings: TagSettings) => {

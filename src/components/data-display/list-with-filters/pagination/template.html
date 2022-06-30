@@ -1,8 +1,4 @@
-<div v-if="isLoading" class="pagination-loader">
-  <CSkeletonLoader class="pagination-loader__item" />
-  <CSkeletonLoader class="pagination-loader__item" />
-</div>
-<div v-else-if="paginationData?.totalRecords > 0" class="pagination">
+<div v-if="paginationData?.totalRecords > 0 && !isLoading" class="pagination">
   <div class="pagination-pages">
     <div
       class="pagination__arrow"

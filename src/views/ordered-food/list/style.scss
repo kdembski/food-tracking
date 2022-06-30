@@ -11,10 +11,6 @@
   }
 
   .item {
-    position: relative;
-    cursor: pointer;
-    padding: 20px 46px 20px 25px;
-
     &__food-name {
       font-size: $font-xl;
       font-weight: 500;
@@ -43,8 +39,6 @@
     overflow: hidden;
 
     .item {
-      padding: 15px 32px 15px 10px;
-
       &__menu {
         top: 10px;
         right: 5px;

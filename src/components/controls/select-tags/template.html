@@ -1,7 +1,7 @@
 <div v-if="tags || isLoading" class="select-tags">
-  <CTags :tags="tags" :isLoading="isLoading">
-    <template #default="{ getTagColorStyles, customizedTags }">
-      <div v-for="tag in sortTagsBySelected(customizedTags)">
+  <CTags :tags="tags" :isLoading="isLoading" type="customized">
+    <template #default="{ getTagColorStyles, tagsArray }">
+      <div v-for="tag in sortTagsBySelected(tagsArray)">
         <input
           v-model="_selectedTags"
           :id="'tag_' + tag.name"
@@ -20,9 +20,9 @@
       </div>
     </template>
   </CTags>
-  <CTags :tags="tags" :isLoading="isLoading">
-    <template #default="{ defaultTags }">
-      <div v-for="tag in sortTagsBySelected(defaultTags)">
+  <CTags :tags="tags" :isLoading="isLoading" type="default">
+    <template #default="{ tagsArray }">
+      <div v-for="tag in sortTagsBySelected(tagsArray)">
         <input
           v-model="_selectedTags"
           :id="'tag_' + tag.name"
