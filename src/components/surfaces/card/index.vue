@@ -9,7 +9,7 @@ const props = defineProps({
     type: String,
     default: "div",
     validator: (value: string) => {
-      return ["div", "form"].indexOf(value) !== -1;
+      return ["div", "form", "li"].indexOf(value) !== -1;
     },
   },
 });

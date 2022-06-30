@@ -11,6 +11,10 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+
 const recipesListDefaultFilters = {
   currentPage: 1,
   pageSize: 20,
@@ -19,6 +23,16 @@ const recipesListDefaultFilters = {
   sortDirection: "asc",
   tags: "",
 };
+
+const totalRecipesAmount = computed(() => {
+  if (store.getters["recipe/isLoadingRecipesList"]) {
+    return;
+  }
+
+  const totalAmount =
+    store.getters["recipe/getRecipesList"]?.pagination?.totalRecords;
+  return "(" + totalAmount + ")";
+});
 </script>
 
 <template src="./template.html"></template>

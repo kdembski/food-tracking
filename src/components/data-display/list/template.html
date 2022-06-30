@@ -14,10 +14,10 @@
     <div v-if="itemsCount < 1" class="list__empty-content">
       <p>Brak wyników</p>
     </div>
-    <div class="list__content">
-      <CCard v-for="item in items" class="list__item">
+    <ul class="list__content">
+      <CCard v-for="item in items" as="li" class="list__item">
         <slot :item="item"></slot>
       </CCard>
-    </div>
+    </ul>
   </template>
 </div>

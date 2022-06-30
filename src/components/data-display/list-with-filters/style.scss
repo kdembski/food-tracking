@@ -142,7 +142,7 @@
       width: 55px;
       height: 55px;
       border-radius: 100%;
-      background-color: $secondary-light-50;
+      background-color: lighten($secondary-light-55, 2);
       color: $secondary-dark-30;
       right: 5px;
       top: 0;
