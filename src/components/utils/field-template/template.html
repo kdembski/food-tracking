@@ -7,7 +7,9 @@
     <CLoader v-if="isLoading" :circleWidth="25" :circleHeight="25" />
     <CIcon v-else :type="isInvalid ? 'error': 'success'" />
   </div>
-  <label :for="$attrs.id + '-field'" class="field__label">{{ label }}</label>
+  <label :for="$attrs.id && $attrs.id + '-field'" class="field__label">
+    {{ label }}
+  </label>
   <CTransition
     enterFromClass="field__error-message--transition-class"
     leaveToClass="field__error-message--transition-class"

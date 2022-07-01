@@ -3,41 +3,43 @@
     <h1>Lista przepisów {{totalRecipesAmount}}</h1>
     <CButton label="Dodaj przepis" icon="plus" />
   </header>
-  <CListWithFilters
-    :defaultFilters="recipesListDefaultFilters"
-    listName="recipesList"
-    listGetterName="recipe/getRecipesList"
-    listLoadActionName="recipe/loadRecipesList"
-    listIsLoadingGetterName="recipe/isLoadingRecipesList"
-    tagsGetterName="recipe/getRecipesTags"
-    tagsLoadActionName="recipe/loadRecipesTags"
-    tagsIsLoadingGetterName="recipe/isLoadingRecipesTags"
-  >
-    <template v-slot:default="{ item, addTagAndFilter }">
-      <div class="recipes-list__item item">
-        <p class="item__recipe-name">{{ item.recipeName }}</p>
-        <div class="item__icons">
-          <div class="item__preparation-time">
-            <FontAwesomeIcon :icon="['far', 'clock']" />
-            <p>{{ item.preparationTime }} min</p>
+  <main class="recipes-list__content">
+    <CListWithFilters
+      :defaultFilters="recipesListDefaultFilters"
+      listName="recipesList"
+      listGetterName="recipe/getRecipesList"
+      listLoadActionName="recipe/loadRecipesList"
+      listIsLoadingGetterName="recipe/isLoadingRecipesList"
+      tagsGetterName="recipe/getRecipesTags"
+      tagsLoadActionName="recipe/loadRecipesTags"
+      tagsIsLoadingGetterName="recipe/isLoadingRecipesTags"
+    >
+      <template v-slot:default="{ item, addTagAndFilter }">
+        <div class="recipes-list__item item">
+          <p class="item__recipe-name">{{ item.recipeName }}</p>
+          <div class="item__icons">
+            <div class="item__preparation-time">
+              <FontAwesomeIcon :icon="['far', 'clock']" />
+              <p>{{ item.preparationTime }} min</p>
+            </div>
+            <InlineSvg
+              v-if="item.thermomix"
+              :src="require('../../../assets/icons/thermomix.svg')"
+              height="14"
+              width="100"
+              class="item__thermomix"
+            />
           </div>
-          <InlineSvg
-            v-if="item.thermomix"
-            :src="require('../../../assets/icons/thermomix.svg')"
-            height="14"
-            width="100"
-            class="item__thermomix"
+          <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
+          <CButton
+            color="secondary"
+            label=""
+            variant="text"
+            icon="ellipsis-vertical"
+            class="item__menu"
           />
         </div>
-        <CDisplayTags :tags="item.tags" @click.stop="addTagAndFilter" />
-        <CButton
-          color="secondary"
-          label=""
-          variant="text"
-          icon="ellipsis-vertical"
-          class="item__menu"
-        />
-      </div>
-    </template>
-  </CListWithFilters>
+      </template>
+    </CListWithFilters>
+  </main>
 </div>

@@ -17,7 +17,7 @@ export function useMobileFilters(
     areMobileFiltersOpen.value = !areMobileFiltersOpen.value;
   };
 
-  const maxPositionY = windowHeight.value - 117;
+  const maxPositionY = windowHeight.value - 122;
   const mobileBtnPositionY = ref(maxPositionY - 60);
   const previousPageY = ref(mobileBtnPositionY.value);
 

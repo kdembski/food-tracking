@@ -13,6 +13,11 @@
 
   &--full-width {
     width: 100%;
+
+    .button__label {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &.button--text {

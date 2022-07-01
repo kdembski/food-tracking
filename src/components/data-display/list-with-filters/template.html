@@ -34,13 +34,14 @@
         <div class="filters__search-by search-by">
           <CSlider
             v-if="!_isLoading"
-            id="filters_search_by"
+            id="filters-search-by"
             v-model="inputFilterBy"
             :options="inputFilterByOptions"
             class="search-by__slider"
           />
           <CInput
             v-if="inputFilterBy === 'byName'"
+            id="search-by-name"
             :modelValue="filters.searchPhrase"
             @update:modelValue="filterBySearchPhrase"
             class="search-by__input"
@@ -51,6 +52,7 @@
           />
           <CAutocomplete
             v-else
+            id="search-by-tags"
             v-model="inputSelectedTag"
             :options="availableTagsOptions"
             @update:modelValue="addTagAndFilter"
