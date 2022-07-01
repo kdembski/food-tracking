@@ -66,10 +66,12 @@ export function useAutocompleteEvents(
     return !!getOptionMatchingInputValue();
   };
 
-  const onInput = (e: KeyboardEvent) => {
+  const onInput = (e: any) => {
     if (isLoading) {
       e.preventDefault();
     }
+
+    inputValue.value = e.target.value;
 
     if (isInputValueMatchingAnyOption()) {
       selectOption(getOptionMatchingInputValue());

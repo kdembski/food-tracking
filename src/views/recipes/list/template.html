@@ -22,12 +22,11 @@
               <FontAwesomeIcon :icon="['far', 'clock']" />
               <p>{{ item.preparationTime }} min</p>
             </div>
-            <InlineSvg
+            <CLink
               v-if="item.thermomix"
-              :src="require('../../../assets/icons/thermomix.svg')"
-              height="14"
-              width="100"
-              class="item__thermomix"
+              class="item__cookidoo-link"
+              label="Cookidoo"
+              external
             />
           </div>
           <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />

@@ -18,16 +18,20 @@
     &__icons {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin: 4px 0 15px 2px;
+      gap: 20px;
+      margin: 4px 0 18px 2px;
+    }
+
+    &__cookidoo-link,
+    &__preparation-time {
+      font-size: $font-sm;
+      font-weight: 500;
     }
 
     &__preparation-time {
       display: flex;
       gap: 5px;
-      color: $primary;
-      font-size: $font-sm;
-      font-weight: 500;
+      color: $secondary-light-20;
 
       & > svg {
         margin-top: 1px;
@@ -38,12 +42,6 @@
       font-size: $font-xl;
       font-weight: 500;
       color: $secondary-dark-30;
-    }
-
-    &__thermomix {
-      color: #00934f;
-      fill: currentColor;
-      margin-top: -5px;
     }
 
     &__menu {

@@ -19,7 +19,7 @@
     width: 100%;
     height: 100%;
     box-shadow: $shadow-sm-dark;
-    background-color: $secondary-dark-25;
+    background-color: $secondary-dark-20;
     overflow: hidden;
   }
 
@@ -70,7 +70,7 @@
       }
 
       &:hover:not(.item__link--active) {
-        background-color: $secondary-dark-20;
+        background-color: $secondary-dark-15;
       }
 
       &--active {
@@ -95,8 +95,8 @@
     }
 
     &__label {
-      font-size: $font-base;
-      letter-spacing: 1px;
+      font-size: $font-sm;
+      letter-spacing: 2px;
       white-space: nowrap;
       transition: opacity 0.15s ease-in-out;
     }
@@ -107,6 +107,7 @@
   .sidebar {
     &__wrapper {
       box-shadow: $shadow-xs-dark;
+      background-color: $secondary-dark-25;
     }
 
     &__collapse-btn > button {

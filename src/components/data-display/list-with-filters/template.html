@@ -111,6 +111,8 @@
     @touchstart="onMobileBtnTouchStart"
     @click="toggleFiltersOnMobile"
   >
-    <FontAwesomeIcon :icon="areMobileFiltersOpen ? 'list' : 'filter'" />
+    <FontAwesomeIcon
+      :icon="areMobileFiltersOpen ? 'list' : 'magnifying-glass'"
+    />
   </button>
 </div>

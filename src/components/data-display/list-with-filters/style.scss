@@ -53,7 +53,7 @@
         position: absolute;
         z-index: 1;
         right: 8px;
-        top: 24px;
+        top: 25px;
       }
     }
   }
@@ -92,7 +92,7 @@
     &__content-transition {
       &-enter-active,
       &-leave-active {
-        transition: 0.2s ease-in-out;
+        transition: 0.25s ease-in-out;
       }
 
       &-enter-active {
@@ -142,13 +142,13 @@
       width: 55px;
       height: 55px;
       border-radius: 100%;
-      background-color: lighten($secondary-light-55, 2);
-      color: $secondary-dark-30;
+      background-color: $primary;
+      color: $white;
       right: 5px;
       top: 0;
-      box-shadow: $shadow-lg;
+      box-shadow: $shadow-xs-dark;
       z-index: 1;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .filters {
@@ -176,12 +176,6 @@
     .list-with-filters {
       &__content {
         background-color: $secondary-dark-30;
-      }
-
-      &__toggle-mobile-filters {
-        background-color: $secondary-dark-20;
-        box-shadow: $shadow-lg-dark;
-        color: $white;
       }
     }
   }

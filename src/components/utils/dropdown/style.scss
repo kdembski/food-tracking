@@ -9,7 +9,7 @@
   overflow-y: auto;
   background-color: $white;
   max-height: 392px;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 10px 0 $shadow-color-light;
 
   &--top {
     bottom: calc(100% + 10px);
@@ -50,18 +50,18 @@
     right: 0;
     bottom: 0;
     top: unset;
-    box-shadow: 0 -2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 -2px 4px 0 $shadow-color-light;
     border-radius: 0;
 
     &__transition {
       &-enter-active,
       &-leave-active {
-        transition: transform 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
       }
 
       &-enter-from,
       &-leave-to {
-        opacity: 1;
+        opacity: 0;
         transform: translateY(100%);
       }
     }
@@ -81,6 +81,8 @@
 
   .dark-mode {
     .dropdown {
+      box-shadow: 0 -2px 4px 0 $shadow-color-dark;
+
       li:last-child {
         background-color: $secondary-dark-20;
         border-color: $secondary-dark-15;
@@ -92,6 +94,7 @@
 .dark-mode {
   .dropdown {
     background-color: $secondary-dark-20;
+    box-shadow: 0 2px 10px 0 $shadow-color;
 
     &__option {
       background-color: $secondary-dark-20;

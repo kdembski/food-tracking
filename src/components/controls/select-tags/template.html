@@ -11,7 +11,7 @@
         />
         <label
           class="tag"
-          :for="'tag_' + tag.name"
+          :for="'tag-' + tag.name"
           :style="getTagColorStyles(tag)"
         >
           <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
@@ -30,7 +30,7 @@
           class="tag__checkbox"
           type="checkbox"
         />
-        <label class="tag" :for="'tag_' + tag.name"> {{ tag.name }} </label>
+        <label class="tag" :for="'tag-' + tag.name"> {{ tag.name }} </label>
       </div>
     </template>
   </CTags>

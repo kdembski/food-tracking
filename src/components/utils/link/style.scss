@@ -1,0 +1,11 @@
+.link {
+  display: flex;
+  gap: 5px;
+  color: $primary;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-dark;
+    text-decoration: underline;
+  }
+}

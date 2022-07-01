@@ -5,7 +5,8 @@
 >
   <input
     :id="$attrs.id && $attrs.id + '-field'"
-    v-model="inputValue"
+    :value="inputValue"
+    @input="onInput"
     :disabled="isDisabled"
     :type="$attrs.type"
     autocomplete="off"
@@ -18,7 +19,6 @@
     @keydown.arrow-down="onArrowDown"
     @keydown.enter="onEnter"
     @click="onInputClick"
-    @input="onInput"
     ref="input"
   />
   <CDropdown
