@@ -5,6 +5,7 @@
       class="list-with-filters__filters filters"
     >
       <CCard class="filters__wrapper">
+        <p class="filters__total-count">{{ getTotalCountText() }}</p>
         <div class="filters__btns-container">
           <CButton
             color="secondary"
@@ -21,14 +22,6 @@
             size="small"
             label="Wylosuj"
             icon="question"
-          />
-          <CButton
-            v-if="isMobile"
-            color="secondary"
-            label=""
-            size="small"
-            icon="times"
-            @click="toggleFiltersOnMobile"
           />
         </div>
         <div class="filters__search-by search-by">

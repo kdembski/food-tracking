@@ -24,6 +24,14 @@
       overflow-y: auto;
     }
 
+    &__total-count {
+      font-weight: 600;
+      font-size: $font-sm;
+      color: $secondary;
+      letter-spacing: 1px;
+      margin-bottom: -3px;
+    }
+
     &__btns-container {
       display: flex;
       align-items: center;
@@ -160,10 +168,6 @@
 
       &__btns-container {
         gap: 15px;
-
-        button:last-child {
-          margin-left: auto;
-        }
       }
     }
 
@@ -188,6 +192,10 @@
         & > p {
           color: $white;
         }
+      }
+
+      &__total-count {
+        color: $white;
       }
     }
   }

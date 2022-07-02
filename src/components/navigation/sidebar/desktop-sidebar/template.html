@@ -1,28 +1,18 @@
-<div class="sidebar" :class="getCollapsedClass()">
-  <div class="sidebar__wrapper">
-    <CLogo :isCollapsed="isCollapsed" />
-    <ul class="sidebar__items">
-      <li v-for="item in items" class="item">
-        <RouterLink
-          :to="item.route"
-          class="item__link"
-          activeClass="item__link--active"
-          exactActiveClass="item__link--exact-active"
-          v-slot="{ isActive }"
-        >
-          <div class="item__wrapper">
-            <div class="item__icon">
-              <FontAwesomeIcon v-if="item.icon" :icon="item.icon" />
-            </div>
-            <p class="item__label">{{ item.label }}</p>
-          </div>
-        </RouterLink>
-      </li>
-    </ul>
-  </div>
-  <div class="sidebar__collapse-btn">
-    <button @click="toggleCollapsedState">
-      <FontAwesomeIcon :icon="isCollapsed ? 'chevron-right' : 'chevron-left'" />
-    </button>
-  </div>
+<div class="sidebar">
+  <CLogo />
+  <ul class="sidebar__items">
+    <li v-for="item in items" class="item">
+      <RouterLink
+        :to="item.route"
+        class="item__link"
+        activeClass="item__link--active"
+        exactActiveClass="item__link--exact-active"
+      >
+        <div class="item__icon">
+          <FontAwesomeIcon v-if="item.icon" :icon="item.icon" />
+        </div>
+        <p class="item__label">{{ item.label }}</p>
+      </RouterLink>
+    </li>
+  </ul>
 </div>

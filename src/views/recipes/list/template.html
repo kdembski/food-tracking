@@ -1,6 +1,6 @@
 <div class="recipes-list">
   <header class="recipes-list__header">
-    <h1>Lista przepisów {{totalRecipesAmount}}</h1>
+    <h1>Lista przepisów</h1>
     <CButton label="Dodaj przepis" icon="plus" />
   </header>
   <main class="recipes-list__content">
@@ -23,7 +23,8 @@
               <p>{{ item.preparationTime }} min</p>
             </div>
             <CLink
-              v-if="item.thermomix"
+              v-if="item.cookidooLink"
+              :href="item.cookidooLink"
               class="item__cookidoo-link"
               label="Cookidoo"
               external

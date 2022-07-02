@@ -12,10 +12,11 @@ import { ref } from "vue";
 
 const sidebarItems = ref([
   { route: "/recipes", label: "Przepisy", icon: "utensils" },
+  { route: "/ordered", label: "Zamawiane", icon: "box-open" },
   { route: "/", label: "Składniki", icon: "cheese" },
   { route: "/", label: "Kalendarz", icon: "calendar-days" },
   { route: "/", label: "Zakupy", icon: "list" },
-  { route: "/ordered", label: "Zamawiamy?", icon: "box-open" },
+  { route: "/", label: "Statystyki", icon: "chart-line" },
   { route: "/settings", label: "Ustawienia", icon: "gear" },
 ]);
 </script>

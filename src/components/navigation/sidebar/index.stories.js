@@ -16,10 +16,12 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   items: [
-    { route: "", label: "Przepisy", icon: "utensils" },
-    { route: "", label: "Składniki", icon: "cheese" },
-    { route: "", label: "Kalendarz", icon: "calendar-days" },
-    { route: "", label: "Lista zakupów", icon: "list" },
-    { route: "", label: "Co zamawiamy?", icon: "truck" },
+    { route: "/recipes", label: "Przepisy", icon: "utensils" },
+    { route: "/ordered", label: "Zamawiane?", icon: "box-open" },
+    { route: "/", label: "Składniki", icon: "cheese" },
+    { route: "/", label: "Kalendarz", icon: "calendar-days" },
+    { route: "/", label: "Zakupy", icon: "list" },
+    { route: "/", label: "Statystyki", icon: "chart-line" },
+    { route: "/settings", label: "Ustawienia", icon: "gear" },
   ],
 };

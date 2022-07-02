@@ -8,9 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { RouterLink } from "vue-router";
-import StorageService from "@/services/storage.service";
 
 const props = defineProps({
   items: {
@@ -18,23 +16,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-const getIsCollapsedValue = () => {
-  return !!parseInt(StorageService.getItem("isSidebarCollapsed") || "0");
-};
-const isCollapsed = ref(getIsCollapsedValue());
-
-const toggleCollapsedState = () => {
-  isCollapsed.value = !isCollapsed.value;
-  StorageService.setItem("isSidebarCollapsed", isCollapsed.value ? "1" : "0");
-};
-
-const getCollapsedClass = () => {
-  if (isCollapsed.value) {
-    return "sidebar--collapsed";
-  }
-  return "";
-};
 </script>
 
 <template src="./template.html"></template>

@@ -1,44 +1,9 @@
 .logo {
-  margin: 24px 24px;
-  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   user-select: none;
-
-  &__svg {
-    transition: transform 0.2s ease-in-out;
-    height: 22px;
-  }
-
-  .logo__text2,
-  .logo__text3,
-  .logo__text4 {
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  .logo__text3 {
-    transition: transform 0.2s ease-in-out;
-  }
-
-  .logo__text2,
-  .logo__text4 {
-    transition: opacity 0.2s 0.1s ease-in-out;
-  }
-
-  &.logo--collapsed {
-    .logo__text3 {
-      transform: translateX(-280px);
-    }
-
-    .logo__text2,
-    .logo__text4 {
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
-    }
-  }
-}
-
-@media screen and (max-width: $screen-md) {
-  .logo {
-    margin: 13px 10px;
-  }
+  color: $primary;
+  padding: 20px 0 25px;
 }

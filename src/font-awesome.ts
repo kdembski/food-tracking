@@ -36,6 +36,8 @@ import {
   faTag,
   faEllipsisVertical,
   faArrowUpRightFromSquare,
+  faChartLine,
+  faCalculator,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faClock as faRegularClock } from "@fortawesome/free-regular-svg-icons";
@@ -76,7 +78,9 @@ library.add(
   faTag,
   faEllipsisVertical,
   faRegularClock,
-  faArrowUpRightFromSquare
+  faArrowUpRightFromSquare,
+  faChartLine,
+  faCalculator
 );
 
 export default FontAwesomeIcon;

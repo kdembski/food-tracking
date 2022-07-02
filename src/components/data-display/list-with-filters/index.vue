@@ -25,12 +25,12 @@ export default {
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed, ref, Ref } from "vue";
+import { computed, ref } from "vue";
 import { ListFilters } from "@/types/list";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
 import { useFilters } from "./composables/filters";
-import { onMounted, provide } from "vue";
+import { onMounted } from "vue";
 import { isEmpty } from "lodash";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 import { useMobileFilters } from "./composables/mobile-filters";
@@ -57,7 +57,6 @@ const props = withDefaults(
   }
 );
 
-// List loading
 const list = computed(() => store.getters[props.listGetterName]);
 
 const isLoadingList = computed(
@@ -78,32 +77,6 @@ const handleListLoadingProccess = () => {
   loadList(filters.value);
 };
 
-// List filters
-const {
-  filters,
-  currentSort,
-  filterBySearchPhrase,
-  filterBySort,
-  filterByTags,
-  addTagAndFilter,
-  changeCurrentPage,
-  areFiltersEqualToDefault,
-  clearFilters,
-  inputFilterBy,
-  inputFilterByOptions,
-} = useFilters(props.defaultFilters, handleListLoadingProccess);
-const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
-  props.listName
-);
-
-// List tags
-const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
-  useAvailableTags(
-    props.tagsLoadActionName,
-    props.tagsGetterName,
-    props.tagsIsLoadingGetterName
-  );
-
 const availableTagsOptions = computed(() => {
   const selectedTags = filters.value.tags?.split(",");
 
@@ -123,17 +96,30 @@ const availableTagsOptions = computed(() => {
 });
 const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
-// Mobile filters
-const { isMobile, windowHeight } = useWindowSize();
-const {
-  areMobileFiltersOpen,
-  toggleFiltersOnMobile,
-  onMobileBtnTouchMove,
-  onMobileBtnTouchStart,
-  mobileBtnStyle,
-} = useMobileFilters(isMobile, windowHeight);
+const getTotalCountText = () => {
+  const totalCount = list.value?.pagination?.totalRecords;
+  if (!totalCount) {
+    return "";
+  }
 
-// On mounted
+  if (totalCount === 1) {
+    return "Znaleziono 1 wynik";
+  }
+
+  if (totalCount >= 12 && totalCount <= 14) {
+    return "Znaleziono " + totalCount + " wyników";
+  }
+
+  const totalCountString = totalCount?.toString();
+  const firstDigit = parseInt(totalCountString[totalCountString?.length - 1]);
+
+  if (firstDigit >= 2 && firstDigit <= 4) {
+    return "Znaleziono " + totalCount + " wyniki";
+  }
+
+  return "Znaleziono " + totalCount + " wyników";
+};
+
 const loadListOnMounted = () => {
   const storedFilters = getFiltersFromStorage();
 
@@ -147,6 +133,40 @@ const loadListOnMounted = () => {
 onMounted(() => {
   loadListOnMounted();
 });
+
+// Composables
+const {
+  filters,
+  currentSort,
+  filterBySearchPhrase,
+  filterBySort,
+  filterByTags,
+  addTagAndFilter,
+  changeCurrentPage,
+  areFiltersEqualToDefault,
+  clearFilters,
+  inputFilterBy,
+  inputFilterByOptions,
+} = useFilters(props.defaultFilters, handleListLoadingProccess);
+const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
+  props.listName
+);
+
+const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
+  useAvailableTags(
+    props.tagsLoadActionName,
+    props.tagsGetterName,
+    props.tagsIsLoadingGetterName
+  );
+
+const { isMobile, windowHeight } = useWindowSize();
+const {
+  areMobileFiltersOpen,
+  toggleFiltersOnMobile,
+  onMobileBtnTouchMove,
+  onMobileBtnTouchStart,
+  mobileBtnStyle,
+} = useMobileFilters(isMobile, windowHeight);
 </script>
 
 <template src="./template.html"></template>

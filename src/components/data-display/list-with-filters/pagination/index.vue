@@ -27,24 +27,24 @@ const emit = defineEmits<{
 const { isMobile } = useWindowSize();
 
 const getPaginationSummaryText = () => {
+  const firstRecord = props.paginationData.firstRecord;
+  const lastRecord = props.paginationData.lastRecord;
+  const totalRecords = props.paginationData.totalRecords;
+
   if (isMobile.value) {
     return (
-      props.paginationData.firstRecord +
-      " - " +
-      props.paginationData.lastRecord +
-      "\xa0\xa0z\xa0\xa0" +
-      props.paginationData.totalRecords
+      firstRecord + " - " + lastRecord + "\xa0\xa0z\xa0\xa0" + totalRecords
     );
   }
 
   return (
     "Wyświetlono\xa0\xa0" +
-    props.paginationData.firstRecord +
+    firstRecord +
     " - " +
-    props.paginationData.lastRecord +
+    lastRecord +
     "\xa0\xa0z\xa0\xa0" +
-    props.paginationData.totalRecords +
-    " wyników"
+    totalRecords +
+    (totalRecords > 1 ? " wyników" : " wyniku")
   );
 };
 
