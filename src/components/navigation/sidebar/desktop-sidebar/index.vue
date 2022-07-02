@@ -1,9 +1,9 @@
 <script lang="ts">
-import CLogo from "./logo/index.vue";
+import InlineSvg from "vue-inline-svg";
 
 export default {
   name: "CDesktopSidebar",
-  components: { CLogo },
+  components: { InlineSvg },
 };
 </script>
 

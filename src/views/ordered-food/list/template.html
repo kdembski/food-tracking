@@ -17,7 +17,12 @@
       <template v-slot:default="{ item, addTagAndFilter }">
         <div class="ordered-food-list__item item">
           <p class="item__food-name">{{ item.foodName }}</p>
-          <p class="item__place-name">{{ item.placeName }}</p>
+          <CLink
+            class="item__place-name"
+            :label="item.placeName"
+            :href="item.placeLink"
+            external
+          />
           <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
           <CButton
             color="secondary"

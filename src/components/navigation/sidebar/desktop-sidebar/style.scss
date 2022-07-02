@@ -63,6 +63,14 @@
       margin-top: 8px;
     }
   }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    padding: 20px 0 25px;
+  }
 }
 
 .dark-mode {
