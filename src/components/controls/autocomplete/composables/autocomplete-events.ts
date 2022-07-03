@@ -1,5 +1,6 @@
 import { SelectOption } from "@/components/controls/select/types/select";
 import { ComputedRef, Ref, WritableComputedRef } from "vue";
+import { useWindowSize } from "@/components/utils/composables/window-size";
 
 export function useAutocompleteEvents(
   getHoveredOptionIndex: () => number | null,
@@ -81,11 +82,21 @@ export function useAutocompleteEvents(
     selectedValue.value = null;
   };
 
+  const { isMobile } = useWindowSize();
   const onInputClick = () => {
     if (!input.value) {
       return;
     }
     input.value.select();
+
+    if (!isMobile.value) {
+      return;
+    }
+
+    input.value.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   const onBlur = () => {

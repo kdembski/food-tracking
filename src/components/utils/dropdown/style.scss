@@ -27,6 +27,15 @@
     &--hovered {
       filter: brightness(95%);
     }
+
+    &:deep(strong) {
+      color: $primary;
+    }
+  }
+
+  &__empty-message {
+    padding: 15px;
+    color: $secondary-light-20;
   }
 
   &__transition {
@@ -56,7 +65,7 @@
     &__transition {
       &-enter-active,
       &-leave-active {
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s 0.1s ease-in-out;
       }
 
       &-enter-from,
@@ -67,7 +76,7 @@
     }
 
     li:last-child {
-      height: 70px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,6 +113,10 @@
       &--hovered {
         filter: brightness(90%);
       }
+    }
+
+    &__empty-message {
+      color: $secondary-light-10;
     }
   }
 }

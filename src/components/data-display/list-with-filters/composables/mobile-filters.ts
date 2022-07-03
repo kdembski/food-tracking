@@ -5,15 +5,13 @@ export function useMobileFilters(
   windowHeight: Ref<number>
 ) {
   const areMobileFiltersOpen = ref(false);
-  const defaultLayoutWrapper = document.querySelector(
-    ".layout-content__wrapper"
-  );
+  const mainScrollContainer = document.querySelector("#main-scroll-container");
 
   const toggleFiltersOnMobile = () => {
     if (!isMobile.value) {
       return;
     }
-    defaultLayoutWrapper?.scrollTo(0, 0);
+    mainScrollContainer?.scrollTo(0, 0);
     areMobileFiltersOpen.value = !areMobileFiltersOpen.value;
   };
 

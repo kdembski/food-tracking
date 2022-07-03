@@ -30,6 +30,10 @@ const props = defineProps({
     type: Function,
     default: null,
   },
+  searchPhrase: {
+    type: String,
+    default: "",
+  },
 });
 
 const emit = defineEmits<{
@@ -81,10 +85,26 @@ const getDropdownDirectionClass = () => {
 };
 
 const getDropdownMaxHeight = () => {
+  if (isMobile.value && windowHeight.value < 600) {
+    return "max-height: " + windowHeight.value / 1.5 + "px";
+  }
+
   if (isMobile.value) {
     return "max-height: " + windowHeight.value / 2 + "px";
   }
+
   return "";
+};
+
+const getOptionContent = (label: string) => {
+  if (props.searchPhrase) {
+    return label.replace(
+      props.searchPhrase,
+      "<strong>" + props.searchPhrase + "</strong>"
+    );
+  }
+
+  return label;
 };
 </script>
 

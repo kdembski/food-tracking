@@ -14,10 +14,12 @@
         @mouseover="emitOptionMouseover(index)"
         @click="emitOptionClick(option)"
         :class="getOptionClass(index)"
-      >
-        {{ option.label }}
+        v-html="getOptionContent(option.label)"
+      ></li>
+      <li v-if="options.length === 0" class="dropdown__empty-message">
+        Brak opcji dla wyszukanej frazy
       </li>
-      <li v-if="isMobile && options.length > 0">
+      <li v-if="isMobile">
         <CButton
           color="secondary"
           variant="outlined"

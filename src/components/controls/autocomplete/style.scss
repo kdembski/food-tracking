@@ -4,6 +4,7 @@
   &__input {
     font-style: italic;
     color: $secondary-light-20;
+    scroll-margin: 25px;
 
     &--option-selected {
       font-style: normal;
