@@ -1,9 +1,11 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
+import CLoader from "@/components/feedback/loader/index.vue";
+import CTransition from "@/components/utils/transition/index.vue";
 
 export default {
   name: "CDropdown",
-  components: { CButton },
+  components: { CButton, CLoader, CTransition },
 };
 </script>
 
@@ -33,6 +35,10 @@ const props = defineProps({
   searchPhrase: {
     type: String,
     default: "",
+  },
+  isLoading: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -86,7 +92,7 @@ const getDropdownDirectionClass = () => {
 
 const getDropdownMaxHeight = () => {
   if (isMobile.value && windowHeight.value < 600) {
-    return "max-height: " + windowHeight.value / 1.5 + "px";
+    return "max-height: " + windowHeight.value / 1.75 + "px";
   }
 
   if (isMobile.value) {
@@ -97,14 +103,22 @@ const getDropdownMaxHeight = () => {
 };
 
 const getOptionContent = (label: string) => {
-  if (props.searchPhrase) {
-    return label.replace(
-      props.searchPhrase,
-      "<strong>" + props.searchPhrase + "</strong>"
-    );
+  const searchPhrase = props.searchPhrase.toLocaleLowerCase();
+
+  if (searchPhrase) {
+    return label.replace(searchPhrase, "<strong>" + searchPhrase + "</strong>");
   }
 
   return label;
+};
+
+const getTransitionProps = () => {
+  return {
+    enterActiveClass: "dropdown__transition-enter-active",
+    leaveActiveClass: "dropdown__transition-leave-active",
+    enterFromClass: "dropdown__transition-enter-from",
+    leaveToClass: "dropdown__transition-leave-to",
+  };
 };
 </script>
 

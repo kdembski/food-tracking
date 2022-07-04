@@ -1,11 +1,13 @@
 <div class="list-with-filters">
   <transition name="list-with-filters__filters-transition">
     <div
-      v-if="!isMobile || areMobileFiltersOpen"
+      v-show="!isMobile || areMobileFiltersOpen"
       class="list-with-filters__filters filters"
     >
       <CCard class="filters__wrapper">
-        <p class="filters__total-count">{{ getTotalCountText() }}</p>
+        <p v-if="getTotalCountText()" class="filters__total-count">
+          {{ getTotalCountText() }}
+        </p>
         <div class="filters__btns-container">
           <CButton
             color="secondary"
@@ -74,7 +76,7 @@
   </transition>
   <transition name="list-with-filters__content-transition">
     <div
-      v-if="!isMobile || !areMobileFiltersOpen"
+      v-show="!isMobile || !areMobileFiltersOpen"
       class="list-with-filters__content"
       ref="content"
     >

@@ -1,25 +1,29 @@
-<Teleport to=".layout-content" :disabled="!isMobile">
-  <transition name="dropdown__transition">
-    <ul
+<Teleport to=".layout-default" :disabled="!isMobile">
+  <CTransition v-bind="getTransitionProps()">
+    <div
       v-if="_isOpen"
       class="dropdown"
       :class="getDropdownDirectionClass()"
       @mouseout="emitListMouseout(index)"
-      :style="getDropdownMaxHeight()"
       ref="dropdown"
     >
-      <li
-        v-for="(option, index) in options"
-        class="dropdown__option"
-        @mouseover="emitOptionMouseover(index)"
-        @click="emitOptionClick(option)"
-        :class="getOptionClass(index)"
-        v-html="getOptionContent(option.label)"
-      ></li>
-      <li v-if="options.length === 0" class="dropdown__empty-message">
-        Brak opcji dla wyszukanej frazy
-      </li>
-      <li v-if="isMobile">
+      <ul class="dropdown__list" :style="getDropdownMaxHeight()">
+        <li
+          v-for="(option, index) in options"
+          class="dropdown__option"
+          @mouseover="emitOptionMouseover(index)"
+          @click="emitOptionClick(option)"
+          :class="getOptionClass(index)"
+          v-html="getOptionContent(option.label)"
+        ></li>
+        <li v-if="isLoading" class="dropdown__loader">
+          <CLoader v-if="isLoading" :circleWidth="25" :circleHeight="25" />
+        </li>
+        <li v-else-if="options.length === 0" class="dropdown__empty-message">
+          Brak opcji dla wyszukanej frazy
+        </li>
+      </ul>
+      <div v-if="isMobile" class="dropdown__close-btn">
         <CButton
           color="secondary"
           variant="outlined"
@@ -27,7 +31,7 @@
           label="Zamknij"
           fullWidth
         />
-      </li>
-    </ul>
-  </transition>
+      </div>
+    </div>
+  </CTransition>
 </Teleport>

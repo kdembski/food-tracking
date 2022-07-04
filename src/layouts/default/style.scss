@@ -3,7 +3,6 @@
   background-color: $secondary-light-55;
   position: relative;
   height: 100vh;
-  overflow: hidden;
 
   .layout-content {
     display: flex;
@@ -42,9 +41,13 @@
 
 @media screen and (max-width: $screen-md) {
   .layout-default {
-    .layout-content {
-      margin-bottom: 62px;
+    flex-direction: column;
 
+    .layout-content:not(:has(.dropdown)) {
+      margin-bottom: 62px;
+    }
+
+    .layout-content {
       &__wrapper {
         padding: 15px 0;
       }

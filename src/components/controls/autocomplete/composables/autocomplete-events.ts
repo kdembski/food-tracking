@@ -67,6 +67,7 @@ export function useAutocompleteEvents(
     return !!getOptionMatchingInputValue();
   };
 
+  const { isMobile } = useWindowSize();
   const onInput = (e: any) => {
     if (isLoading) {
       e.preventDefault();
@@ -76,27 +77,32 @@ export function useAutocompleteEvents(
 
     if (isInputValueMatchingAnyOption()) {
       selectOption(getOptionMatchingInputValue());
+
+      if (isMobile.value) {
+        input.value?.blur();
+      }
       return;
     }
 
     selectedValue.value = null;
   };
 
-  const { isMobile } = useWindowSize();
   const onInputClick = () => {
     if (!input.value) {
       return;
     }
-    input.value.select();
 
-    if (!isMobile.value) {
+    if (isMobile.value) {
+      setTimeout(() => {
+        input?.value?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 400);
       return;
     }
 
-    input.value.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    input.value.select();
   };
 
   const onBlur = () => {

@@ -3,12 +3,9 @@
   left: 0;
   right: 0;
   border-radius: 6px;
-  list-style: none;
-  overflow: hidden;
+
   z-index: 30;
-  overflow-y: auto;
   background-color: $white;
-  max-height: 392px;
   box-shadow: 0 2px 10px 0 $shadow-color-light;
 
   &--top {
@@ -16,6 +13,12 @@
   }
   &--bottom {
     top: calc(100% + 10px);
+  }
+
+  &__list {
+    list-style: none;
+    overflow-y: auto;
+    max-height: 392px;
   }
 
   &__option {
@@ -38,10 +41,15 @@
     color: $secondary-light-20;
   }
 
+  &__loader {
+    height: 49px;
+    color: $secondary-light-10;
+  }
+
   &__transition {
     &-enter-active,
     &-leave-active {
-      transition: all 0.15s ease-in-out;
+      transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
     }
 
     &-enter-from,
@@ -54,35 +62,33 @@
 
 @media screen and (max-width: $screen-md) {
   .dropdown {
-    position: fixed;
-    left: 0;
-    right: 0;
+    position: sticky;
     bottom: 0;
-    top: unset;
     box-shadow: 0 -2px 4px 0 $shadow-color-light;
     border-radius: 0;
 
     &__transition {
-      &-enter-active,
+      &-enter-active {
+        transition: opacity 0.3s 0.2s ease-in-out,
+          transform 0.3s 0.2s ease-in-out, height 0.2s 0.2s ease-in-out;
+      }
+
       &-leave-active {
-        transition: all 0.2s 0.1s ease-in-out;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+          height 0.2s ease-in-out;
       }
 
       &-enter-from,
       &-leave-to {
-        opacity: 0;
-        transform: translateY(100%);
+        transform: translateY(30%);
       }
     }
 
-    li:last-child {
-      height: 60px;
+    &__close-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      position: sticky;
-      bottom: 0;
-      padding: 0 15px;
+      padding: 15px;
       background-color: $white;
       border-top: 1px solid $secondary-light-55;
     }
@@ -92,7 +98,7 @@
     .dropdown {
       box-shadow: 0 -2px 4px 0 $shadow-color-dark;
 
-      li:last-child {
+      &__close-btn {
         background-color: $secondary-dark-20;
         border-color: $secondary-dark-15;
       }
@@ -117,6 +123,10 @@
 
     &__empty-message {
       color: $secondary-light-10;
+    }
+
+    &__loader {
+      color: $secondary-light-30;
     }
   }
 }
