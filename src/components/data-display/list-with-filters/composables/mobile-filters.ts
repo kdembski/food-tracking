@@ -17,12 +17,12 @@ export function useMobileFilters(
 
   const maxPositionY = windowHeight.value - 122;
   const mobileBtnPositionY = ref(maxPositionY - 5);
-  const previousPageY = ref(mobileBtnPositionY.value);
+  const currentPageY = ref(0);
 
   const onMobileBtnTouchMove = (e: TouchEvent) => {
     const pageY = e.changedTouches[0].pageY;
-    const touchMoveDifference = previousPageY.value - pageY;
-    previousPageY.value = pageY;
+    const touchMoveDifference = currentPageY.value - pageY;
+    currentPageY.value = pageY;
 
     const newPositionY = mobileBtnPositionY.value - touchMoveDifference;
     if (newPositionY > maxPositionY || newPositionY < 5) {
@@ -33,7 +33,7 @@ export function useMobileFilters(
   };
 
   const onMobileBtnTouchStart = (e: TouchEvent) => {
-    previousPageY.value = e.changedTouches[0].pageY;
+    currentPageY.value = e.changedTouches[0].pageY;
   };
 
   const mobileBtnStyle = computed(() => {

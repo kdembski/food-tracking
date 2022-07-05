@@ -43,11 +43,9 @@
   .layout-default {
     flex-direction: column;
 
-    .layout-content:not(:has(.dropdown)) {
-      margin-bottom: 62px;
-    }
-
     .layout-content {
+      margin-bottom: 62px;
+
       &__wrapper {
         padding: 15px 0;
       }
@@ -60,14 +58,6 @@
         font-size: $font-xl;
         padding: 3px 0;
       }
-    }
-  }
-}
-
-@media screen and (max-height: 600px) {
-  .layout-default {
-    .layout-content {
-      margin-bottom: 0;
     }
   }
 }

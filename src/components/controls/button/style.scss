@@ -38,10 +38,6 @@
     &.button--contained {
       color: $white;
       background-color: $primary;
-
-      &:hover:not(.button--disabled) {
-        background-color: $primary-dark;
-      }
     }
 
     &.button--outlined {
@@ -59,20 +55,12 @@
     &.button--contained {
       color: $secondary-dark-30;
       background-color: $secondary-light-55;
-
-      &:hover:not(.button--disabled) {
-        background-color: $secondary-light-50;
-      }
     }
 
     &.button--outlined {
       color: $secondary-dark-30;
       background-color: $white;
       border-color: $secondary-light-50;
-
-      &:hover:not(.button--disabled) {
-        background-color: $secondary-light-55;
-      }
     }
   }
 
@@ -152,20 +140,12 @@
       &.button--contained {
         color: $white;
         background-color: $secondary-dark-15;
-
-        &:hover:not(.button--disabled) {
-          background-color: $secondary-dark-10;
-        }
       }
 
       &.button--outlined {
         color: $white;
         background-color: transparent;
         border-color: $secondary-dark-15;
-
-        &:hover:not(.button--disabled) {
-          background-color: $secondary-dark-20;
-        }
       }
     }
 
