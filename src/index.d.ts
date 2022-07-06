@@ -9,3 +9,5 @@ declare module "font-awesome";
 declare interface String {
   removeDiacritics(): string;
 }
+
+declare var global: any;

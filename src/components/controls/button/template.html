@@ -5,7 +5,7 @@
     :circleHeight="getLoaderSize()"
     class="button__loader"
   />
-  <div else class="button__content" :class="getButtonContentClasses()">
+  <div class="button__content">
     <FontAwesomeIcon v-if="icon" :icon="icon" class="button__icon" />
     <p v-if="label" class="button__label">{{ label }}</p>
   </div>

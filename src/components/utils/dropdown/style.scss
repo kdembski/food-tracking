@@ -6,13 +6,13 @@
 
   z-index: 30;
   background-color: $white;
-  box-shadow: 0 2px 10px 0 $shadow-color-light;
+  box-shadow: 0 2px 6px 0 $shadow-color;
 
   &--top {
-    bottom: calc(100% + 10px);
+    bottom: calc(100% + 15px);
   }
   &--bottom {
-    top: calc(100% + 10px);
+    top: calc(100% + 15px);
   }
 
   &__list {

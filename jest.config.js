@@ -10,9 +10,10 @@ module.exports = {
     "!src/main.ts",
     "!src/App.vue",
   ],
-  globals: {},
   moduleFileExtensions: ["js", "json", "vue", "ts"],
-  moduleNameMapper: {},
+  moduleNameMapper: {
+    "^@/(.*)": "<rootDir>/src/$1",
+  },
   preset: "ts-jest",
   setupFiles: ["<rootDir>/jest/setup-jest"],
   testEnvironment: "jsdom",
@@ -21,4 +22,5 @@ module.exports = {
     ".*\\.(vue)$": "@vue/vue3-jest",
     ".*\\.(ts)$": "ts-jest",
   },
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
 };

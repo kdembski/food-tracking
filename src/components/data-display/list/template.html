@@ -1,7 +1,7 @@
 <div class="list" ref="container">
   <div v-if="isLoading" class="list-loader">
     <CCard v-for="row in getLoaderItemsCount()" class="list-loader__row">
-      <CSkeletonLoader>
+      <CSkeletonLoader class="list-loader__wrapper">
         <div class="list-loader__item skeleton-loader__item" />
         <div class="list-loader__item skeleton-loader__item" />
         <div class="list-loader__item">

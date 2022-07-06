@@ -50,6 +50,19 @@
       right: 10px;
       font-size: $font-xl;
     }
+
+    &__cooked-date {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+
+      & > span {
+        width: 8px;
+        height: 8px;
+        background-color: $primary;
+        border-radius: 100%;
+      }
+    }
   }
 }
 

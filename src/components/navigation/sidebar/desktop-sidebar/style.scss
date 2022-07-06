@@ -5,8 +5,8 @@
   flex-shrink: 0;
   position: relative;
   flex-direction: column;
-  box-shadow: $shadow-sm-dark;
   background-color: $secondary-dark-20;
+  box-shadow: $shadow-xs-dark;
 
   &__items {
     flex-grow: 1;
@@ -70,14 +70,16 @@
     align-items: center;
     user-select: none;
     padding: 20px 0 25px;
+    color: $primary-light;
   }
 }
 
 .dark-mode {
   .sidebar {
-    &__wrapper {
-      box-shadow: $shadow-xs-dark;
-      background-color: $secondary-dark-25;
+    background-color: $secondary-dark-25;
+
+    &__logo {
+      color: $primary;
     }
   }
 }

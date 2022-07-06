@@ -22,6 +22,9 @@
               <FontAwesomeIcon :icon="['far', 'clock']" />
               <p>{{ item.preparationTime }} min</p>
             </div>
+            <div v-if="false" class="item__cooked-date">
+              <span v-for="index in 5"></span>
+            </div>
             <CLink
               v-if="item.cookidooLink"
               :href="item.cookidooLink"

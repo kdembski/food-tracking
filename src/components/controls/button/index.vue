@@ -8,7 +8,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
 const props = defineProps({
@@ -60,14 +59,19 @@ const { windowWidth } = useWindowSize();
 const getButtonClasses = (): Array<string> => {
   const varaintClass = "button--" + props.variant;
   const colorClass = "button--" + props.color;
-  const sizeClass = "button--" + handleSizePropOnMobile(props.size);
+  const sizeClass = "button--" + handleSizeOnMobile(props.size);
   const disabledClass = "button--disabled";
+  const loadingClass = "button--loading";
   const fullWidthClass = "button--full-width";
 
   let classes = [varaintClass, colorClass, sizeClass];
 
   if (props.isDisabled || props.isLoading) {
     classes.push(disabledClass);
+  }
+
+  if (props.isLoading) {
+    classes.push(loadingClass);
   }
 
   if (props.fullWidth) {
@@ -77,7 +81,7 @@ const getButtonClasses = (): Array<string> => {
   return classes;
 };
 
-const handleSizePropOnMobile = (size: string): string => {
+const handleSizeOnMobile = (size: string): string => {
   if (windowWidth.value > 1024) {
     return size;
   }
@@ -93,15 +97,8 @@ const handleSizePropOnMobile = (size: string): string => {
   return size;
 };
 
-const getButtonContentClasses = (): string => {
-  if (props.isLoading) {
-    return "button__content--loading";
-  }
-  return "";
-};
-
 const getLoaderSize = (): number => {
-  switch (handleSizePropOnMobile(props.size)) {
+  switch (handleSizeOnMobile(props.size)) {
     case "small":
       return 20;
     case "medium":
