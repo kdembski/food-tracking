@@ -34,7 +34,7 @@ const _selectedTags = computed({
     if (!props.selectedTags) {
       return [];
     }
-    return props.selectedTags?.split(",");
+    return props.selectedTags.split(",");
   },
   set(tags: Array<string>) {
     emit("update:selectedTags", tags.join(","));

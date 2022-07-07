@@ -43,7 +43,6 @@ const emits = defineEmits<{
 
 const hasFocus = ref(false);
 const input = ref<HTMLInputElement>();
-
 const selectedValue = computed({
   get(): string | number | null {
     return props.modelValue;
@@ -53,6 +52,24 @@ const selectedValue = computed({
   },
 });
 const inputValue = ref("");
+
+const getOptionLabelByValue = (value: string | number | null) => {
+  if (!value) {
+    return "";
+  }
+  return props.options.find((option) => option.value === value)?.label;
+};
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (props.shootingMode) {
+      return;
+    }
+    inputValue.value = getOptionLabelByValue(props.modelValue) || "";
+  },
+  { immediate: true }
+);
 
 const filteredOptions = computed(() => {
   return props.options.filter((option: SelectOption) => {

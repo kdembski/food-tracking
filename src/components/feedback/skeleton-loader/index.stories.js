@@ -10,7 +10,7 @@ const Template = (args) => ({
     return { args };
   },
   components: { CSkeletonLoader },
-  template: '<CSkeletonLoader v-bind="args" />',
+  template: '<CSkeletonLoader v-bind="args" style="height: 50px" />',
 });
 
 export const Default = Template.bind({});

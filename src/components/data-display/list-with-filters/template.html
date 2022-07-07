@@ -5,9 +5,13 @@
       class="list-with-filters__filters filters"
     >
       <CCard class="filters__wrapper">
-        <p v-if="getTotalCountText()" class="filters__total-count">
+        <p
+          v-if="getTotalCountText() && !_isLoading"
+          class="filters__total-count"
+        >
           {{ getTotalCountText() }}
         </p>
+        <CSkeletonLoader v-else-if="_isLoading" style="height: 14px" />
         <div class="filters__btns-container">
           <CButton
             color="secondary"

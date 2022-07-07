@@ -7,6 +7,7 @@ import CPagination from "./pagination/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
 import CSlider from "@/components/controls/slider/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 
 export default {
   name: "CListWithFilters",
@@ -19,6 +20,7 @@ export default {
     CCard,
     CSlider,
     CAutocomplete,
+    CSkeletonLoader,
   },
 };
 </script>

@@ -10,7 +10,7 @@ import { SelectOption } from "@/components/controls/select/types/select";
 
 const props = defineProps({
   modelValue: {
-    type: String,
+    type: [String, Number],
     default: "",
   },
   options: {
@@ -26,14 +26,14 @@ const props = defineProps({
 const items: Ref<Array<HTMLElement>> = ref([]);
 
 const emits = defineEmits<{
-  (event: "update:modelValue", value: string): void;
+  (event: "update:modelValue", value: string | number): void;
 }>();
 
 const selected = computed({
-  get(): string {
+  get(): string | number {
     return props.modelValue;
   },
-  set(value: string) {
+  set(value: string | number) {
     emits("update:modelValue", value);
   },
 });
