@@ -1,6 +1,6 @@
 .card {
   background-color: $white;
-  box-shadow: $shadow-xs-light;
+  border: 1px solid $secondary-light-50;
   padding: 25px;
   border-radius: 5px;
 }
@@ -14,6 +14,6 @@
 .dark-mode {
   .card {
     background-color: $secondary-dark-25;
-    box-shadow: $shadow-xs-dark;
+    border-color: $secondary-dark-20;
   }
 }

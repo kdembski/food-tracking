@@ -11,7 +11,10 @@
         >
           {{ getTotalCountText() }}
         </p>
-        <CSkeletonLoader v-else-if="_isLoading" style="height: 14px" />
+        <CSkeletonLoader
+          v-else-if="_isLoading"
+          style="height: 14px; width: 40%"
+        />
         <div class="filters__btns-container">
           <CButton
             color="secondary"

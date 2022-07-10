@@ -114,6 +114,7 @@ const getOptionContent = (label: string) => {
 
 const getTransitionProps = () => {
   return {
+    dimensionDecreased: isMobile.value ? "height" : "none",
     enterActiveClass: "dropdown__transition-enter-active",
     leaveActiveClass: "dropdown__transition-leave-active",
     enterFromClass: "dropdown__transition-enter-from",

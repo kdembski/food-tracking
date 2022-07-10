@@ -26,7 +26,7 @@ const props = defineProps({
     type: String,
     default: "height",
     validator: (value: string) => {
-      return ["height", "width"].indexOf(value) !== -1;
+      return ["height", "width", "none"].indexOf(value) !== -1;
     },
   },
 });
@@ -44,6 +44,10 @@ const getTransitionProps = () => {
 };
 
 const getTransitionEvents = (prop: string) => {
+  if (prop === "none") {
+    return {};
+  }
+
   return {
     onBeforeEnter: (el: HTMLElement) => {
       beforeEnter(el, prop);

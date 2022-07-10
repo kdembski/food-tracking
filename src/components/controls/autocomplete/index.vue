@@ -85,11 +85,6 @@ const selectOption = (option: SelectOption) => {
   inputValue.value = option.label;
 };
 
-const clearSelectedAndInputValue = () => {
-  selectedValue.value = null;
-  inputValue.value = "";
-};
-
 const getSelectedClass = () => {
   if (selectedValue.value) {
     return "autocomplete__input--option-selected";
@@ -101,15 +96,25 @@ const isDropdownOpen = computed(() => {
   return hasFocus.value;
 });
 
-watch(
-  () => props.isLoading,
-  (value) => {
-    if (value || !props.shootingMode) {
-      return;
-    }
-    clearSelectedAndInputValue();
+const clearSelectedAndInputValue = () => {
+  selectedValue.value = null;
+  inputValue.value = "";
+};
+
+const _isLoading = computed(() => {
+  return props.isLoading;
+});
+
+const _shootingMode = computed(() => {
+  return props.shootingMode;
+});
+
+watch(_isLoading, (value) => {
+  if (value || !props.shootingMode) {
+    return;
   }
-);
+  clearSelectedAndInputValue();
+});
 
 const {
   getHoveredOptionClass,
@@ -117,7 +122,7 @@ const {
   getHoveredOptionIndex,
   incrementHoveredOptionIndex,
   decrementHoveredOptionIndex,
-} = useOptionHover(filteredOptions.value.length);
+} = useOptionHover(filteredOptions);
 
 const { onEnter, onArrowUp, onArrowDown, onInput, onInputClick, onBlur } =
   useAutocompleteEvents(
@@ -130,8 +135,8 @@ const { onEnter, onArrowUp, onArrowDown, onInput, onInputClick, onBlur } =
     input,
     inputValue,
     selectedValue,
-    props.shootingMode,
-    props.isLoading,
+    _shootingMode,
+    _isLoading,
     hasFocus
   );
 </script>

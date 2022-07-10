@@ -1,4 +1,6 @@
 <a class="link" :href="href" :target="external ? '_blank' : ''">
-  <slot>{{ label }}</slot>
-  <FontAwesomeIcon v-if="external" icon="arrow-up-right-from-square" />
+  <slot>
+    {{ label }}
+    <FontAwesomeIcon v-if="external" icon="arrow-up-right-from-square" />
+  </slot>
 </a>

@@ -33,29 +33,25 @@ const props = defineProps({
 });
 
 const tagsSettings = [
-  { name: "vege", icon: "leaf", lightColor: "#c1ffd2", darkColor: "#077426" },
-  { name: "ostre", icon: "fire", lightColor: "#ffdda9", darkColor: "#e70f00" },
+  { name: "vege", lightColor: "#c1ffd2", darkColor: "#077426" },
+  { name: "ostre", lightColor: "#ffdda9", darkColor: "#e70f00" },
   {
     name: "szybkie",
-    icon: "clock",
     lightColor: "#fff8bb",
     darkColor: "#aa8200",
   },
   {
     name: "śniadanie",
-    icon: "mug-saucer",
     lightColor: "#ffd9b5",
     darkColor: "#594430",
   },
   {
     name: "obiad",
-    icon: "utensils",
     lightColor: "#ffd0d0",
     darkColor: "#990000",
   },
   {
     name: "kolacja",
-    icon: "bell-concierge",
     lightColor: "#bfe5f2",
     darkColor: "#003780",
   },
@@ -82,11 +78,11 @@ const tagsArray = computed(() => {
 const tagsCount = computed(() => tagsArray.value.length);
 
 const customizedTags = computed(() => {
-  return tagsArray.value.filter((tag) => tag.icon);
+  return tagsArray.value.filter((tag) => tag.lightColor);
 });
 
 const defaultTags = computed(() => {
-  return tagsArray.value.filter((tag) => !tag.icon);
+  return tagsArray.value.filter((tag) => !tag.lightColor);
 });
 
 const getTagsArrayBasedOnType = () => {

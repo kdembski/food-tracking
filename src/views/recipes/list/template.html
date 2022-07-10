@@ -16,8 +16,19 @@
     >
       <template v-slot:default="{ item, addTagAndFilter }">
         <div class="recipes-list__item item">
-          <p class="item__recipe-name">{{ item.recipeName }}</p>
-          <div class="item__icons">
+          <div class="item__row">
+            <p class="item__recipe-name">{{ item.recipeName }}</p>
+            <CLink
+              v-if="item.cookidooLink"
+              :href="item.cookidooLink"
+              class="item__cookidoo-link"
+              label=""
+              external
+            >
+              <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+            </CLink>
+          </div>
+          <div class="item__row">
             <div class="item__preparation-time">
               <FontAwesomeIcon :icon="['far', 'clock']" />
               <p>{{ item.preparationTime }} min</p>
@@ -25,13 +36,6 @@
             <div v-if="false" class="item__cooked-date">
               <span v-for="index in 5"></span>
             </div>
-            <CLink
-              v-if="item.cookidooLink"
-              :href="item.cookidooLink"
-              class="item__cookidoo-link"
-              label="Cookidoo"
-              external
-            />
           </div>
           <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
           <CButton

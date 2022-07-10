@@ -1,6 +1,5 @@
 .mobile-sidebar {
   &__wrapper {
-    box-shadow: 0 -2px 4px 0 $shadow-color-dark;
     background-color: $secondary-dark-20;
     position: fixed;
     bottom: 0;
@@ -84,6 +83,7 @@
   .mobile-sidebar {
     &__wrapper {
       background-color: darken($secondary-dark-25, 3);
+      border-top: 1px solid $secondary-dark-25;
     }
   }
 }

@@ -15,20 +15,24 @@
   }
 
   .item {
-    &__icons {
+    &__row {
       display: flex;
       align-items: center;
-      gap: 20px;
-      margin: 4px 0 18px 2px;
+
+      &:nth-child(2) {
+        gap: 20px;
+        margin: 4px 0 18px 2px;
+      }
     }
 
-    &__cookidoo-link,
+    &__cookidoo-link {
+      min-width: 20px;
+      margin-left: 10px;
+    }
+
     &__preparation-time {
       font-size: $font-sm;
       font-weight: 500;
-    }
-
-    &__preparation-time {
       display: flex;
       gap: 5px;
       color: $secondary-light-20;
@@ -78,6 +82,17 @@
 
       &__recipe-name {
         font-size: $font-lg;
+      }
+
+      &__preparation-time {
+        font-size: $font-xs;
+      }
+
+      &__cookidoo-link {
+        margin-left: 0;
+        position: absolute;
+        bottom: 15px;
+        right: 7px;
       }
     }
   }

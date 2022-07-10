@@ -12,8 +12,8 @@ export function useAutocompleteEvents(
   input: Ref<HTMLInputElement | undefined>,
   inputValue: Ref<string>,
   selectedValue: WritableComputedRef<string | number | null>,
-  shootingMode: boolean,
-  isLoading: boolean,
+  shootingMode: ComputedRef<boolean>,
+  isLoading: ComputedRef<boolean>,
   hasFocus: Ref<boolean>
 ) {
   const onEnter = () => {
@@ -33,15 +33,11 @@ export function useAutocompleteEvents(
   };
 
   const afterOptionSelectOnEnter = () => {
-    if (shootingMode) {
+    if (shootingMode.value) {
       return;
     }
 
-    if (!input.value) {
-      return;
-    }
-
-    input.value.blur();
+    input.value?.blur();
   };
 
   const onArrowUp = (e: KeyboardEvent) => {
@@ -69,8 +65,9 @@ export function useAutocompleteEvents(
 
   const { isMobile } = useWindowSize();
   const onInput = (e: any) => {
-    if (isLoading) {
+    if (isLoading.value) {
       e.preventDefault();
+      return;
     }
 
     inputValue.value = e.target.value;
@@ -88,13 +85,9 @@ export function useAutocompleteEvents(
   };
 
   const onInputClick = () => {
-    if (!input.value) {
-      return;
-    }
-
     if (isMobile.value) {
       setTimeout(() => {
-        input?.value?.scrollIntoView({
+        input.value?.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
@@ -102,7 +95,7 @@ export function useAutocompleteEvents(
       return;
     }
 
-    input.value.select();
+    input.value?.select();
   };
 
   const onBlur = () => {

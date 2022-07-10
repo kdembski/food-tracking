@@ -3,10 +3,11 @@
   left: 0;
   right: 0;
   border-radius: 6px;
-
+  overflow: hidden;
   z-index: 30;
   background-color: $white;
-  box-shadow: 0 2px 6px 0 $shadow-color;
+  border: 1px solid $secondary-light-50;
+  box-shadow: $shadow-md-light;
 
   &--top {
     bottom: calc(100% + 15px);
@@ -55,7 +56,7 @@
     &-enter-from,
     &-leave-to {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-15px);
     }
   }
 }
@@ -63,8 +64,11 @@
 @media screen and (max-width: $screen-md) {
   .dropdown {
     position: sticky;
+    overflow: unset;
     bottom: 0;
-    box-shadow: 0 -2px 4px 0 $shadow-color-light;
+    box-shadow: 0 -2px 6px 0 $shadow-color-light;
+    border: 0;
+    border-top: 1px solid $secondary-light-50;
     border-radius: 0;
     margin-top: -62px;
 
@@ -75,7 +79,7 @@
       }
 
       &-leave-active {
-        transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out,
+        transition: opacity 0.3s 0.1s ease-in-out, height 0.3s ease-in-out,
           margin 0.3s ease-in-out;
       }
 
@@ -97,7 +101,7 @@
 
   .dark-mode {
     .dropdown {
-      box-shadow: 0 -2px 4px 0 $shadow-color-dark;
+      box-shadow: 0 -2px 6px 0 $shadow-color-dark;
 
       &__close-btn {
         background-color: $secondary-dark-20;
@@ -110,7 +114,8 @@
 .dark-mode {
   .dropdown {
     background-color: $secondary-dark-20;
-    box-shadow: 0 2px 10px 0 $shadow-color;
+    box-shadow: $shadow-md;
+    border-color: $secondary-dark-15;
 
     &__option {
       background-color: $secondary-dark-20;
