@@ -57,7 +57,7 @@
     .search-by {
       position: relative;
 
-      &__input:deep(input) {
+      &__input--with-slider:deep(input) {
         padding-right: 132px;
       }
 

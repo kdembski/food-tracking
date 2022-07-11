@@ -21,10 +21,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  getItemColumnValue: {
-    type: Function,
-    default: (value: string | number) => value,
-  },
 });
 
 const itemsCount = computed(() => props.items.length);
@@ -32,7 +28,7 @@ const { windowHeight, isMobile } = useWindowSize();
 
 const getLoaderItemsCount = () => {
   const containerHeight = windowHeight.value - 100;
-  return Math.floor(containerHeight / (isMobile.value ? 110 : 130));
+  return Math.floor(containerHeight / (isMobile.value ? 115 : 125));
 };
 </script>
 

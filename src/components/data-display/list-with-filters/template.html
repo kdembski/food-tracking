@@ -27,6 +27,7 @@
             @click="clearFilters"
           />
           <CButton
+            v-if="enableRandomButton"
             color="secondary"
             size="small"
             label="Wylosuj"
@@ -35,7 +36,7 @@
         </div>
         <div class="filters__search-by search-by">
           <CSlider
-            v-if="!_isLoading"
+            v-if="isSearchBySliderVisible"
             id="filters-search-by"
             v-model="inputFilterBy"
             :options="inputFilterByOptions"
@@ -47,6 +48,7 @@
             :modelValue="filters.searchPhrase"
             @update:modelValue="filterBySearchPhrase"
             class="search-by__input"
+            :class="{ 'search-by__input--with-slider': isSearchBySliderVisible }"
             icon="magnifying-glass"
             placeholder="Szukaj po nazwie"
             :isLoading="_isLoading"
@@ -56,10 +58,11 @@
             v-else
             id="search-by-tags"
             v-model="inputSelectedTag"
-            :options="availableTagsOptions"
+            :options="getAvailableTagsOptions(filters.tags)"
             @update:modelValue="addTagAndFilter"
             shootingMode
             class="search-by__input"
+            :class="{ 'search-by__input--with-slider': isSearchBySliderVisible }"
             icon="magnifying-glass"
             placeholder="Szukaj po tagach"
             :isLoading="_isLoading"
@@ -69,7 +72,7 @@
         <div class="filters__sort-by">
           <CInput label="Sortuj" />
         </div>
-        <div class="filters__select-tags">
+        <div v-if="enableTags" class="filters__select-tags">
           <p>Dostępne tagi</p>
           <CSelectTags
             :selectedTags="filters.tags"
@@ -87,11 +90,7 @@
       class="list-with-filters__content"
       ref="content"
     >
-      <CList
-        :items="list?.data"
-        :isLoading="_isLoading"
-        @sortChange="filterBySort"
-      >
+      <CList :items="list?.data" :isLoading="_isLoading">
         <template v-slot:default="{ item }">
           <slot :item="item" :addTagAndFilter="addTagAndFilter"></slot>
         </template>

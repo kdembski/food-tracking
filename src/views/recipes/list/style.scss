@@ -26,8 +26,15 @@
     }
 
     &__cookidoo-link {
-      min-width: 20px;
-      margin-left: 10px;
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      color: $white;
+      background-color: #009a3e;
+      min-width: 18px;
+      padding: 4px 5px;
+      border-radius: 4px;
+      box-shadow: $shadow-xs;
     }
 
     &__preparation-time {
@@ -51,7 +58,7 @@
     &__menu {
       position: absolute;
       top: 10px;
-      right: 10px;
+      right: 20px;
       font-size: $font-xl;
     }
 
@@ -76,8 +83,8 @@
 
     .item {
       &__menu {
-        top: 10px;
-        right: 5px;
+        top: 8px;
+        right: 10px;
       }
 
       &__recipe-name {
@@ -89,10 +96,8 @@
       }
 
       &__cookidoo-link {
-        margin-left: 0;
-        position: absolute;
-        bottom: 15px;
-        right: 7px;
+        bottom: 12px;
+        right: 10px;
       }
     }
   }
@@ -103,6 +108,10 @@
     .item {
       &__recipe-name {
         color: $white;
+      }
+
+      &__cookidoo-link {
+        box-shadow: $shadow-xs-dark;
       }
     }
   }

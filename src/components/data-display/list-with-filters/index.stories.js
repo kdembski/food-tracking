@@ -34,3 +34,12 @@ Default.args = {
 
 export const isLoading = Template.bind({});
 isLoading.args = Object.assign({ isLoading: true }, Default.args);
+
+export const withoutTags = Template.bind({});
+withoutTags.args = Object.assign({ enableTags: false }, Default.args);
+
+export const isLoadingWithoutTags = Template.bind({});
+isLoadingWithoutTags.args = Object.assign(
+  { enableTags: false },
+  isLoading.args
+);

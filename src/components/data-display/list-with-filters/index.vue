@@ -3,7 +3,7 @@ import CInput from "@/components/controls/input/index.vue";
 import CSelectTags from "@/components/controls/select-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import CList from "@/components/data-display/list/index.vue";
-import CPagination from "./pagination/index.vue";
+import CPagination from "@/components/utils/pagination/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
 import CSlider from "@/components/controls/slider/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
@@ -50,12 +50,16 @@ const props = withDefaults(
     tagsIsLoadingGetterName?: string;
     defaultFilters: ListFilters;
     isLoading?: boolean;
+    enableTags?: boolean;
+    enableRandomButton?: boolean;
   }>(),
   {
     tagsGetterName: "",
     tagsLoadActionName: "",
     tagsIsLoadingGetterName: "",
     isLoading: false,
+    enableTags: true,
+    enableRandomButton: true,
   }
 );
 
@@ -65,9 +69,18 @@ const isLoadingList = computed(
   () => store.getters[props.listIsLoadingGetterName]
 );
 
-const _isLoading = computed(
-  () => isLoadingList.value || isLoadingAvailableTags.value || props.isLoading
-);
+const _isLoading = computed(() => {
+  if (props.enableTags) {
+    return (
+      isLoadingList.value || isLoadingAvailableTags.value || props.isLoading
+    );
+  }
+  return isLoadingList.value || props.isLoading;
+});
+
+const isSearchBySliderVisible = computed(() => {
+  return !_isLoading.value && props.enableTags;
+});
 
 const loadList = (filters: ListFilters) => {
   store.dispatch(props.listLoadActionName, filters);
@@ -75,28 +88,11 @@ const loadList = (filters: ListFilters) => {
 
 const handleListLoadingProccess = () => {
   saveFiltersToStorage(filters.value);
-  loadAvailableTags(filters.value);
+  if (props.enableTags) {
+    loadAvailableTags(filters.value);
+  }
   loadList(filters.value);
 };
-
-const availableTagsOptions = computed(() => {
-  const selectedTags = filters.value.tags?.split(",");
-
-  const availableTagsWithoutSelected = availableTags.value
-    ?.split(",")
-    .filter(
-      (availableTag: string) =>
-        !selectedTags?.some((selectedTag) => selectedTag == availableTag)
-    );
-
-  return availableTagsWithoutSelected.map((tag: string) => {
-    return {
-      value: tag,
-      label: tag,
-    };
-  });
-});
-const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
 const getTotalCountText = () => {
   const totalCount = list.value?.pagination?.totalRecords;
@@ -154,12 +150,17 @@ const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
 
-const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
-  useAvailableTags(
-    props.tagsLoadActionName,
-    props.tagsGetterName,
-    props.tagsIsLoadingGetterName
-  );
+const {
+  loadAvailableTags,
+  availableTags,
+  isLoadingAvailableTags,
+  getAvailableTagsOptions,
+} = useAvailableTags(
+  props.tagsLoadActionName,
+  props.tagsGetterName,
+  props.tagsIsLoadingGetterName
+);
+const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
 const { isMobile, windowHeight } = useWindowSize();
 const {

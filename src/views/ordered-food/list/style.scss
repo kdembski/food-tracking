@@ -31,7 +31,7 @@
     &__menu {
       position: absolute;
       top: 10px;
-      right: 10px;
+      right: 20px;
       font-size: $font-xl;
     }
   }
@@ -43,8 +43,8 @@
 
     .item {
       &__menu {
-        top: 10px;
-        right: 5px;
+        top: 8px;
+        right: 10px;
       }
 
       &__food-name {

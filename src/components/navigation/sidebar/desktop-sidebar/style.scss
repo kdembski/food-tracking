@@ -1,11 +1,12 @@
 .sidebar {
-  width: 90px;
+  width: 92px;
   height: 100vh;
   display: flex;
   flex-shrink: 0;
   position: relative;
   flex-direction: column;
   background-color: $secondary-dark-20;
+  border-right: 1px solid transparent;
 
   &__items {
     flex-grow: 1;
@@ -38,7 +39,7 @@
       cursor: pointer;
       flex-direction: column;
       align-items: center;
-      transition: background-color 0.15s ease-in-out;
+      transition: 0.15s ease-in-out;
 
       &:hover:not(.item__link--active) {
         background-color: $secondary-dark-15;
@@ -76,10 +77,20 @@
 .dark-mode {
   .sidebar {
     background-color: $secondary-dark-25;
-    border-right: 1px solid $secondary-dark-20;
+    border-color: $secondary-dark-20;
 
     &__logo {
       color: $primary;
+    }
+
+    .item__link {
+      &:hover:not(.item__link--active) {
+        background-color: $secondary-dark-20;
+      }
+
+      &--active {
+        background-color: $secondary-dark-15;
+      }
     }
   }
 }

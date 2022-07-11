@@ -23,9 +23,28 @@ export function useAvailableTags(
     () => store.getters[tagsIsLoadingGetterName]
   );
 
+  const getAvailableTagsOptions = (selectedTags: string) => {
+    const selectedTagsArray = selectedTags.split(",");
+
+    const availableTagsWithoutSelected = availableTags.value
+      ?.split(",")
+      .filter(
+        (availableTag: string) =>
+          !selectedTagsArray?.some((selectedTag) => selectedTag == availableTag)
+      );
+
+    return availableTagsWithoutSelected.map((tag: string) => {
+      return {
+        value: tag,
+        label: tag,
+      };
+    });
+  };
+
   return {
     loadAvailableTags,
     availableTags,
     isLoadingAvailableTags,
+    getAvailableTagsOptions,
   };
 }

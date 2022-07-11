@@ -3,7 +3,7 @@ export default { name: "CCard" };
 </script>
 
 <script setup lang="ts">
-import { ref, Ref, defineExpose } from "vue";
+import { ref, Ref } from "vue";
 const props = defineProps({
   as: {
     type: String,
