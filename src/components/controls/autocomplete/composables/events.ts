@@ -1,8 +1,8 @@
 import { SelectOption } from "@/components/controls/select/types/select";
-import { ComputedRef, Ref, WritableComputedRef } from "vue";
+import { ComputedRef, Ref } from "vue";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
-export function useAutocompleteEvents(
+export function useEvents(
   getHoveredOptionIndex: () => number | null,
   setHoveredOptionIndex: (index: number | null) => void,
   decrementHoveredOptionIndex: () => void,
@@ -11,14 +11,18 @@ export function useAutocompleteEvents(
   selectOption: (option: SelectOption) => void,
   input: Ref<HTMLInputElement | undefined>,
   inputValue: Ref<string>,
-  selectedValue: WritableComputedRef<string | number | null>,
   shootingMode: ComputedRef<boolean>,
   isLoading: ComputedRef<boolean>,
-  hasFocus: Ref<boolean>
+  hasFocus: Ref<boolean>,
+  emits: any
 ) {
-  const onEnter = () => {
+  const { isMobile } = useWindowSize();
+
+  const onEnter = (e: InputEvent) => {
     const hoveredOptionIndex = getHoveredOptionIndex();
     if (hoveredOptionIndex === null) {
+      e.preventDefault();
+      emits("enter");
       return;
     }
 
@@ -50,20 +54,6 @@ export function useAutocompleteEvents(
     incrementHoveredOptionIndex();
   };
 
-  const getOptionMatchingInputValue = () => {
-    const matchingOptions = filteredOptions.value.filter(
-      (option) =>
-        option.label.toLowerCase().removeDiacritics() ===
-        inputValue.value.toLowerCase().removeDiacritics()
-    );
-    return matchingOptions[0];
-  };
-
-  const isInputValueMatchingAnyOption = () => {
-    return !!getOptionMatchingInputValue();
-  };
-
-  const { isMobile } = useWindowSize();
   const onInput = (e: any) => {
     if (isLoading.value) {
       e.preventDefault();
@@ -71,36 +61,35 @@ export function useAutocompleteEvents(
     }
 
     inputValue.value = e.target.value;
+  };
 
-    if (isInputValueMatchingAnyOption()) {
-      selectOption(getOptionMatchingInputValue());
-
-      if (isMobile.value) {
-        input.value?.blur();
-      }
-      return;
-    }
-
-    selectedValue.value = null;
+  const scrollInputIntoViewAfterDelay = () => {
+    setTimeout(() => {
+      input.value?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 400);
   };
 
   const onInputClick = () => {
     if (isMobile.value) {
-      setTimeout(() => {
-        input.value?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 400);
+      scrollInputIntoViewAfterDelay();
       return;
     }
 
     input.value?.select();
   };
 
+  const onFocus = () => {
+    hasFocus.value = true;
+    emits("focus");
+  };
+
   const onBlur = () => {
     hasFocus.value = false;
     setHoveredOptionIndex(null);
+    emits("blur");
   };
 
   return {
@@ -110,5 +99,6 @@ export function useAutocompleteEvents(
     onInput,
     onInputClick,
     onBlur,
+    onFocus,
   };
 }

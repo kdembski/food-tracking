@@ -5,6 +5,8 @@ export interface RecipeState {
   isLoadingRecipesList: boolean;
   recipesTags: string | null;
   isLoadingRecipesTags: boolean;
+  recipesSearchSuggestions: string[] | null;
+  isLoadingRecipesSearchSuggestions: boolean;
 }
 
 export interface Recipe {

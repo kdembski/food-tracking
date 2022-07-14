@@ -1,4 +1,4 @@
-String.prototype.removeDiacritics = function () {
+String.prototype.simplify = function () {
   return this.replace(/ą/g, "a")
     .replace(/Ą/g, "A")
     .replace(/ć/g, "c")
@@ -16,5 +16,6 @@ String.prototype.removeDiacritics = function () {
     .replace(/ż/g, "z")
     .replace(/Ż/g, "Z")
     .replace(/ź/g, "z")
-    .replace(/Ź/g, "Z");
+    .replace(/Ź/g, "Z")
+    .toLowerCase();
 };

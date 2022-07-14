@@ -7,7 +7,12 @@
       @mouseout="emitListMouseout(index)"
       ref="dropdown"
     >
-      <ul class="dropdown__list" :style="getDropdownMaxHeight()">
+      <ul v-if="isLoading" class="dropdown__loader">
+        <li v-for="index in 5">
+          <CSkeletonLoader />
+        </li>
+      </ul>
+      <ul v-else class="dropdown__list" :style="getDropdownMaxHeight()">
         <li
           v-for="(option, index) in options"
           class="dropdown__option"
@@ -16,10 +21,7 @@
           :class="getOptionClass(index)"
           v-html="getOptionContent(option.label)"
         ></li>
-        <li v-if="isLoading" class="dropdown__loader">
-          <CLoader v-if="isLoading" :circleWidth="25" :circleHeight="25" />
-        </li>
-        <li v-else-if="options.length === 0" class="dropdown__empty-message">
+        <li v-if="options.length === 0" class="dropdown__empty-message">
           Brak opcji dla wyszukanej frazy
         </li>
       </ul>

@@ -3,12 +3,20 @@ export interface ListSortFilters {
   sortDirection: string;
 }
 
-export interface ListFilters extends ListSortFilters {
+export interface ListPaginationFilters {
   currentPage: number;
   pageSize: number;
+}
+
+export interface ListBaseFilters {
   searchPhrase: string;
   tags?: string;
 }
+
+export interface ListFilters
+  extends ListBaseFilters,
+    ListSortFilters,
+    ListPaginationFilters {}
 
 export interface ListPagination {
   currentPage: number;

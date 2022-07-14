@@ -28,7 +28,7 @@ const { windowHeight, isMobile } = useWindowSize();
 
 const getLoaderItemsCount = () => {
   const containerHeight = windowHeight.value - 100;
-  return Math.floor(containerHeight / (isMobile.value ? 115 : 125));
+  return Math.floor(containerHeight / (isMobile.value ? 110 : 120));
 };
 </script>
 

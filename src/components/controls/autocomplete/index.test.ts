@@ -41,19 +41,37 @@ describe("Autocomplete Component", () => {
 
   it("Should set input and selected value based on modelValue prop", async () => {
     expect(wrapper.vm.selectedValue).toEqual(1);
-    expect(wrapper.vm.inputValue).toEqual("One");
+    expect(wrapper.vm._inputValue).toEqual("One");
+    expect(wrapper.emitted<any>()["update:inputValue"][0][0]).toEqual("One");
   });
 
   it("Should emit update:modelValue when input value met any of option labels", async () => {
-    await input.setValue("one");
-    expect(input.element.value).toEqual("One");
-    expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual(1);
+    await input.setValue("two");
+    expect(input.element.value).toEqual("Two");
+    expect(wrapper.vm._inputValue).toEqual("Two");
+    expect(wrapper.vm.selectedValue).toEqual(2);
+    expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual(2);
   });
 
   it("Should open dropdown on input click", async () => {
     await input.trigger("focus");
     await jest.runAllTimers();
     expect(wrapper.find("div.dropdown").exists()).toBe(true);
+  });
+
+  it("Should set option when input value met any of option labels on options change", async () => {
+    await input.setValue("four");
+    await wrapper.setProps({
+      options: [
+        {
+          value: 4,
+          label: "Four",
+        },
+      ],
+    });
+
+    expect(wrapper.vm._inputValue).toEqual("Four");
+    expect(wrapper.vm.selectedValue).toEqual(4);
   });
 
   it("Should filter options by input value", async () => {
@@ -66,14 +84,14 @@ describe("Autocomplete Component", () => {
   });
 
   it("Should select option on dropdown option click", async () => {
-    await wrapper.setProps({
-      modelValue: null,
-    });
+    await input.setValue("");
+    expect(wrapper.vm._inputValue).toEqual("");
+
     await input.trigger("focus");
     await jest.runAllTimers();
     await wrapper.findAll("li")[1].trigger("click");
 
-    expect(wrapper.vm.inputValue).toEqual("Two");
+    expect(wrapper.vm._inputValue).toEqual("Two");
   });
 
   it("Should add selected class to input when selected value exists", async () => {
@@ -87,7 +105,7 @@ describe("Autocomplete Component", () => {
   });
 
   it("Should clear selected value after loading on shooting mode", async () => {
-    expect(wrapper.vm.inputValue).toEqual("One");
+    expect(wrapper.vm._inputValue).toEqual("One");
     await wrapper.setProps({
       shootingMode: true,
       isLoading: true,
@@ -96,14 +114,12 @@ describe("Autocomplete Component", () => {
       isLoading: false,
     });
 
-    expect(wrapper.vm.inputValue).toEqual("");
+    expect(wrapper.vm._inputValue).toEqual("");
   });
 
   it("Should select option by enter click using arrow down", async () => {
-    await wrapper.setProps({
-      modelValue: null,
-    });
-    expect(wrapper.vm.inputValue).toEqual("");
+    await input.setValue("");
+    expect(wrapper.vm._inputValue).toEqual("");
 
     await input.trigger("focus");
     await jest.runAllTimers();
@@ -114,14 +130,12 @@ describe("Autocomplete Component", () => {
     await input.trigger("keydown.arrow-down");
     await input.trigger("keydown.enter");
 
-    expect(wrapper.vm.inputValue).toEqual("Two");
+    expect(wrapper.vm._inputValue).toEqual("Two");
   });
 
   it("Should select option by enter click using arrow up", async () => {
-    await wrapper.setProps({
-      modelValue: null,
-    });
-    expect(wrapper.vm.inputValue).toEqual("");
+    await input.setValue("");
+    expect(wrapper.vm._inputValue).toEqual("");
 
     await input.trigger("focus");
     await jest.runAllTimers();
@@ -132,14 +146,12 @@ describe("Autocomplete Component", () => {
     await input.trigger("keydown.arrow-up");
     await input.trigger("keydown.enter");
 
-    expect(wrapper.vm.inputValue).toEqual("Two");
+    expect(wrapper.vm._inputValue).toEqual("Two");
   });
 
   it("Should add option hovered class when option is hovered", async () => {
-    await wrapper.setProps({
-      modelValue: null,
-    });
-    expect(wrapper.vm.inputValue).toEqual("");
+    await input.setValue("");
+    expect(wrapper.vm._inputValue).toEqual("");
 
     await input.trigger("focus");
     await jest.runAllTimers();
@@ -192,16 +204,7 @@ describe("Autocomplete Component", () => {
     });
 
     await input.setValue("test");
-    expect(wrapper.vm.inputValue).toEqual("One");
-  });
-
-  it("Should set selectedValue when input value match any of options label", async () => {
-    await wrapper.setProps({
-      modelValue: "",
-    });
-
-    await input.setValue("Two");
-    expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual(2);
+    expect(wrapper.vm._inputValue).toEqual("One");
   });
 
   it("Should remove selectedValue when input value not match any of options label", async () => {

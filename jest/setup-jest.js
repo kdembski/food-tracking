@@ -1,6 +1,6 @@
 const FontAwesomeIcon = require("@/font-awesome.ts");
-require("../src/utils/removeDiacritics");
-require('jest-localstorage-mock');
+require("../src/utils/simplifyString");
+require("jest-localstorage-mock");
 
 const settings = {
   components: {

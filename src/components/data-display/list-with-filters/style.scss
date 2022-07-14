@@ -6,7 +6,7 @@
   &__filters {
     display: flex;
     margin-right: 30px;
-    width: 40%;
+    width: 35%;
     height: 100%;
   }
 
@@ -14,7 +14,7 @@
     &__wrapper {
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 20px;
       position: sticky;
       top: 0;
       align-self: flex-start;
@@ -37,44 +37,13 @@
       align-items: center;
       gap: 20px;
     }
-
-    &__select-tags {
-      .select-tags {
-        margin-left: -2px;
-      }
-
-      & > p {
-        white-space: nowrap;
-        font-size: $font-xs;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: $secondary;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-      }
-    }
-
-    .search-by {
-      position: relative;
-
-      &__input--with-slider:deep(input) {
-        padding-right: 132px;
-      }
-
-      &__slider {
-        position: absolute;
-        z-index: 1;
-        right: 8px;
-        top: 25px;
-      }
-    }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: 65%;
   }
 
   &__pagination {
@@ -166,7 +135,7 @@
 
     .filters {
       &__wrapper {
-        gap: 18px;
+        gap: 15px;
         max-height: unset;
         overflow-y: visible;
       }
@@ -197,12 +166,6 @@
 .dark-mode {
   .list-with-filters {
     .filters {
-      &__select-tags {
-        & > p {
-          color: $white;
-        }
-      }
-
       &__total-count {
         color: $white;
       }

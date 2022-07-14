@@ -1,11 +1,11 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
-import CLoader from "@/components/feedback/loader/index.vue";
+import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 import CTransition from "@/components/utils/transition/index.vue";
 
 export default {
   name: "CDropdown",
-  components: { CButton, CLoader, CTransition },
+  components: { CButton, CSkeletonLoader, CTransition },
 };
 </script>
 
@@ -103,13 +103,22 @@ const getDropdownMaxHeight = () => {
 };
 
 const getOptionContent = (label: string) => {
-  const searchPhrase = props.searchPhrase.toLocaleLowerCase();
+  const simplifiedSearchPhrase = props.searchPhrase?.simplify();
+  const simplifiedLabel = label?.simplify();
 
-  if (searchPhrase) {
-    return label.replace(searchPhrase, "<strong>" + searchPhrase + "</strong>");
+  if (!simplifiedSearchPhrase) {
+    return label;
   }
 
-  return label;
+  const highlightStart = simplifiedLabel.indexOf(simplifiedSearchPhrase);
+  const highlightEnd = highlightStart + simplifiedSearchPhrase.length;
+  return (
+    label.slice(0, highlightStart) +
+    "<strong>" +
+    label.slice(highlightStart, highlightEnd) +
+    "</strong>" +
+    label.slice(highlightEnd, label.length)
+  );
 };
 
 const getTransitionProps = () => {

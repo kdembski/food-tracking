@@ -33,11 +33,12 @@ import {
   faQuestion,
   faGear,
   faBoxOpen,
-  faTag,
+  faTags,
   faEllipsisVertical,
   faArrowUpRightFromSquare,
   faChartLine,
   faCalculator,
+  faArrowDownAZ,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faClock as faRegularClock } from "@fortawesome/free-regular-svg-icons";
@@ -75,12 +76,13 @@ library.add(
   faQuestion,
   faGear,
   faBoxOpen,
-  faTag,
+  faTags,
   faEllipsisVertical,
   faRegularClock,
   faArrowUpRightFromSquare,
   faChartLine,
-  faCalculator
+  faCalculator,
+  faArrowDownAZ
 );
 
 export default FontAwesomeIcon;

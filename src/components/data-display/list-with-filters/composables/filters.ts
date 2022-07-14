@@ -1,16 +1,19 @@
-import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useStore } from "vuex";
 import { computed } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/list";
 import { ref, Ref } from "vue";
 import { isEqual, clone } from "lodash";
 
-let filterBySearchPhraseTimeout = 0;
+let temporarySearchPhrase = "";
 
 export function useFilters(
   defaultFilters: ListFilters,
-  handleListLoadingProccess: () => void
+  handleListLoadingProccess: () => void,
+  suggestionsGetterName: string,
+  suggestionsLoadActionName: string,
+  suggestionsLoadingGetterName: string
 ) {
-  const { windowHeight, isMobile } = useWindowSize();
+  const store = useStore();
 
   const filters: Ref<ListFilters> = ref(clone(defaultFilters));
   const currentSort = computed(() => {
@@ -19,21 +22,51 @@ export function useFilters(
       sortDirection: filters.value.sortDirection,
     };
   });
-  const inputFilterBy = ref("byName");
-  const inputFilterByOptions = [
-    { value: "byName", label: "Nazwa" },
-    { value: "byTags", label: "Tagi" },
-  ];
 
-  const filterBySearchPhrase = (phrase: string) => {
-    clearTimeout(filterBySearchPhraseTimeout);
-
-    filterBySearchPhraseTimeout = setTimeout(() => {
-      filters.value.searchPhrase = phrase;
-      filters.value.currentPage = 1;
-      handleListLoadingProccess();
-    }, 800);
+  const filterBySearchPhrase = () => {
+    setTemporarySearchPhrase();
+    filters.value.currentPage = 1;
+    handleListLoadingProccess();
   };
+
+  const setTemporarySearchPhrase = () => {
+    temporarySearchPhrase = filters.value.searchPhrase;
+  };
+
+  const filterBySearchPhraseWithDelay = () => {
+    setTimeout(() => {
+      if (temporarySearchPhrase === filters.value.searchPhrase) {
+        return;
+      }
+      filterBySearchPhrase();
+    }, 100);
+  };
+
+  const loadSearchSuggestions = () => {
+    const filtersForSearchSuggestions = {
+      searchPhrase: "",
+      tags: filters.value.tags,
+    };
+
+    store.dispatch(suggestionsLoadActionName, filtersForSearchSuggestions);
+  };
+
+  const searchSuggestions = computed(() => {
+    const suggestions = store.getters[suggestionsGetterName];
+    if (!suggestions) {
+      return [];
+    }
+    return suggestions.map((item: string) => {
+      return {
+        value: null,
+        label: item,
+      };
+    });
+  });
+
+  const isLoadingSearchSuggestions = computed(
+    () => store.getters[suggestionsLoadingGetterName]
+  );
 
   const filterByTags = (tags: string) => {
     filters.value.tags = tags;
@@ -57,9 +90,7 @@ export function useFilters(
       tags = name;
     }
 
-    filters.value.tags = tags;
-    filters.value.currentPage = 1;
-    handleListLoadingProccess();
+    filterByTags(tags);
   };
 
   const filterBySort = (sort: ListSortFilters) => {
@@ -78,6 +109,7 @@ export function useFilters(
   const areFiltersEqualToDefault = () => {
     return isEqual(defaultFilters, filters.value);
   };
+
   const clearFilters = () => {
     if (areFiltersEqualToDefault()) {
       return false;
@@ -92,13 +124,16 @@ export function useFilters(
     filters,
     currentSort,
     filterBySearchPhrase,
+    setTemporarySearchPhrase,
+    filterBySearchPhraseWithDelay,
+    searchSuggestions,
+    isLoadingSearchSuggestions,
+    loadSearchSuggestions,
     filterBySort,
     filterByTags,
     addTagAndFilter,
     changeCurrentPage,
     areFiltersEqualToDefault,
     clearFilters,
-    inputFilterBy,
-    inputFilterByOptions,
   };
 }

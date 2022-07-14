@@ -122,22 +122,6 @@ const getTagColorStyles = (tagSettings: TagSettings) => {
     borderColor: tagSettings.darkColor + "20",
   };
 };
-
-const container = ref<HTMLElement | null>(null);
-const { isMobile } = useWindowSize();
-
-const getFirstRowLoaderItemsCount = () => {
-  if (!(container.value && container.value.clientWidth)) {
-    return 5;
-  }
-
-  const itemsCount = Math.floor(container.value.clientWidth / 80);
-  return itemsCount;
-};
-
-const getSecondRowLoaderItemsCount = () => {
-  return Math.ceil(getFirstRowLoaderItemsCount() / 2);
-};
 </script>
 
 <template src="./template.html"></template>

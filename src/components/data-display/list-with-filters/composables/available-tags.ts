@@ -5,7 +5,7 @@ import { ListFilters } from "@/types/list";
 export function useAvailableTags(
   tagsLoadActionName: string,
   tagsGetterName: string,
-  tagsIsLoadingGetterName: string
+  tagsLoadingGetterName: string
 ) {
   const store = useStore();
 
@@ -20,7 +20,7 @@ export function useAvailableTags(
 
   const availableTags = computed(() => store.getters[tagsGetterName]);
   const isLoadingAvailableTags = computed(
-    () => store.getters[tagsIsLoadingGetterName]
+    () => store.getters[tagsLoadingGetterName]
   );
 
   const getAvailableTagsOptions = (selectedTags: string) => {
@@ -33,7 +33,7 @@ export function useAvailableTags(
           !selectedTagsArray?.some((selectedTag) => selectedTag == availableTag)
       );
 
-    return availableTagsWithoutSelected.map((tag: string) => {
+    return availableTagsWithoutSelected?.map((tag: string) => {
       return {
         value: tag,
         label: tag,

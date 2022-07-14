@@ -1,4 +1,4 @@
-import { ListFilters } from "@/types/list";
+import { ListFilters, ListBaseFilters } from "@/types/list";
 
 export const getListQuery = (filters: ListFilters) => {
   const page = filters.currentPage || 1;
@@ -19,4 +19,20 @@ export const getListQuery = (filters: ListFilters) => {
   }
 
   return query;
+};
+
+export const getListBaseQuery = (filters: ListBaseFilters) => {
+  if (filters.searchPhrase && filters.tags) {
+    return "?search=" + filters.searchPhrase + "&tags=" + filters.tags;
+  }
+
+  if (filters.searchPhrase) {
+    return "?search=" + filters.searchPhrase;
+  }
+
+  if (filters.tags) {
+    return "?tags=" + filters.tags;
+  }
+
+  return "";
 };

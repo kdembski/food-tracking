@@ -5,7 +5,7 @@
 >
   <input
     :id="$attrs.id && $attrs.id + '-field'"
-    :value="inputValue"
+    :value="_inputValue"
     @input="onInput"
     :disabled="isDisabled"
     :type="$attrs.type"
@@ -13,7 +13,7 @@
     :placeholder="placeholder"
     class="autocomplete__input"
     :class="getSelectedClass()"
-    @focus="hasFocus = true"
+    @focus="onFocus"
     @blur="onBlur"
     @keydown.arrow-up="onArrowUp"
     @keydown.arrow-down="onArrowDown"
@@ -28,7 +28,7 @@
     @listMouseout="setHoveredOptionIndex"
     @optionMouseover="setHoveredOptionIndex"
     @optionClick="selectOption"
-    :searchPhrase="inputValue"
-    :isLoading="isLoading"
+    :searchPhrase="_inputValue"
+    :isLoading="isLoadingOptions"
   />
 </CFieldTemplate>

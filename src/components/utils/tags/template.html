@@ -1,16 +1,10 @@
-<div v-if="areTagsVisible()" class="tags" ref="container">
+<div v-if="areTagsVisible()" class="tags">
   <CSkeletonLoader v-if="isLoading" class="tags-loader">
     <div class="tags-loader__row">
-      <div
-        v-for="index in getFirstRowLoaderItemsCount()"
-        class="tags-loader__item skeleton-loader__item"
-      />
+      <div v-for="index in 5" class="tags-loader__item skeleton-loader__item" />
     </div>
     <div class="tags-loader__row">
-      <div
-        v-for="index in getSecondRowLoaderItemsCount()"
-        class="tags-loader__item skeleton-loader__item"
-      />
+      <div v-for="index in 3" class="tags-loader__item skeleton-loader__item" />
     </div>
   </CSkeletonLoader>
   <slot

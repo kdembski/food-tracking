@@ -1,4 +1,4 @@
-import { ref, ComputedRef } from "vue";
+import { ref, ComputedRef, watch } from "vue";
 import { SelectOption } from "../../select/types/select";
 
 export function useOptionHover(optionsList: ComputedRef<SelectOption[]>) {
@@ -48,6 +48,10 @@ export function useOptionHover(optionsList: ComputedRef<SelectOption[]>) {
 
     setHoveredOptionIndex(previousOptionIndex);
   };
+
+  watch(optionsList, () => {
+    hoveredOptionIndex.value = null;
+  });
 
   return {
     getHoveredOptionClass,

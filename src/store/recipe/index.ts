@@ -3,15 +3,18 @@ import { RecipeState, RecipeList } from "@/types/recipe";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { getListQuery } from "../helpers/list-query";
-import { ListFilters } from "@/types/list";
-import { getAvailableTagsQuery, TagsFilters } from "../helpers/tags-query";
+import { getListQuery, getListBaseQuery } from "../helpers/list-query";
+import { ListFilters, ListBaseFilters } from "@/types/list";
 
 const state: RecipeState = {
   recipesList: null,
   isLoadingRecipesList: false,
+
   recipesTags: null,
   isLoadingRecipesTags: false,
+
+  recipesSearchSuggestions: null,
+  isLoadingRecipesSearchSuggestions: false,
 };
 
 const getters: GetterTree<RecipeState, any> = {
@@ -20,6 +23,11 @@ const getters: GetterTree<RecipeState, any> = {
 
   getRecipesTags: (state): string | null => state.recipesTags,
   isLoadingRecipesTags: (state) => state.isLoadingRecipesTags,
+
+  getRecipesSearchSuggestions: (state): string[] | null =>
+    state.recipesSearchSuggestions,
+  isLoadingRecipesSearchSuggestions: (state) =>
+    state.isLoadingRecipesSearchSuggestions,
 };
 
 const actions: ActionTree<RecipeState, any> = {
@@ -44,14 +52,14 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  loadRecipesTags({ commit }, filters: TagsFilters) {
+  loadRecipesTags({ commit }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("loadRecipesTagsRequest");
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/recipes/tags" +
-          getAvailableTagsQuery(filters)
+          getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<{ recipesTags: string }>) => {
           commit("loadRecipesTagsSuccess", response.data.recipesTags);
@@ -62,6 +70,29 @@ const actions: ActionTree<RecipeState, any> = {
             error.response?.data?.message || error.code;
 
           commit("loadRecipesTagsError", errorMessage);
+          reject(errorMessage);
+        });
+    });
+  },
+
+  loadRecipesSearchSuggestions({ commit }, filters: ListBaseFilters) {
+    return new Promise<void>((resolve, reject) => {
+      commit("loadRecipesSearchSuggestionsRequest");
+
+      ApiService.get(
+        process.env.VUE_APP_SERVICE_URL +
+          "/recipes/names" +
+          getListBaseQuery(filters)
+      )
+        .then((response: AxiosResponse<string[]>) => {
+          commit("loadRecipesSearchSuggestionsSuccess", response.data);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          const errorMessage: string | undefined =
+            error.response?.data?.message || error.code;
+
+          commit("loadRecipesSearchSuggestionsError", errorMessage);
           reject(errorMessage);
         });
     });
@@ -93,6 +124,19 @@ const mutations: MutationTree<RecipeState> = {
 
   loadRecipesTagsError(state) {
     state.isLoadingRecipesTags = false;
+  },
+
+  loadRecipesSearchSuggestionsRequest(state) {
+    state.isLoadingRecipesSearchSuggestions = true;
+  },
+
+  loadRecipesSearchSuggestionsSuccess(state, suggestions: string[]) {
+    state.recipesSearchSuggestions = suggestions;
+    state.isLoadingRecipesSearchSuggestions = false;
+  },
+
+  loadRecipesSearchSuggestionsError(state) {
+    state.isLoadingRecipesSearchSuggestions = false;
   },
 };
 

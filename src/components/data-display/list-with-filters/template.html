@@ -13,7 +13,7 @@
         </p>
         <CSkeletonLoader
           v-else-if="_isLoading"
-          style="height: 14px; width: 40%"
+          style="height: 14px; width: 60%"
         />
         <div class="filters__btns-container">
           <CButton
@@ -34,53 +34,39 @@
             icon="question"
           />
         </div>
-        <div class="filters__search-by search-by">
-          <CSlider
-            v-if="isSearchBySliderVisible"
-            id="filters-search-by"
-            v-model="inputFilterBy"
-            :options="inputFilterByOptions"
-            class="search-by__slider"
-          />
-          <CInput
-            v-if="inputFilterBy === 'byName'"
-            id="search-by-name"
-            :modelValue="filters.searchPhrase"
-            @update:modelValue="filterBySearchPhrase"
-            class="search-by__input"
-            :class="{ 'search-by__input--with-slider': isSearchBySliderVisible }"
-            icon="magnifying-glass"
-            placeholder="Szukaj po nazwie"
-            :isLoading="_isLoading"
-            label="Szukaj"
-          />
-          <CAutocomplete
-            v-else
-            id="search-by-tags"
-            v-model="inputSelectedTag"
-            :options="getAvailableTagsOptions(filters.tags)"
-            @update:modelValue="addTagAndFilter"
-            shootingMode
-            class="search-by__input"
-            :class="{ 'search-by__input--with-slider': isSearchBySliderVisible }"
-            icon="magnifying-glass"
-            placeholder="Szukaj po tagach"
-            :isLoading="_isLoading"
-            label="Szukaj"
-          />
-        </div>
-        <div class="filters__sort-by">
-          <CInput label="Sortuj" />
-        </div>
-        <div v-if="enableTags" class="filters__select-tags">
-          <p>Dostępne tagi</p>
-          <CSelectTags
-            :selectedTags="filters.tags"
-            @update:selectedTags="filterByTags"
-            :tags="availableTags"
-            :isLoading="_isLoading"
-          />
-        </div>
+        <CAutocomplete
+          v-model:inputValue="filters.searchPhrase"
+          @enter="filterBySearchPhrase"
+          @blur="filterBySearchPhraseWithDelay"
+          @focus="setTemporarySearchPhrase"
+          :options="searchSuggestions"
+          icon="magnifying-glass"
+          placeholder="Szukaj"
+          :isLoading="_isLoading"
+          :isLoadingOptions="isLoadingSearchSuggestions"
+          @dropdownOpen="loadSearchSuggestions"
+          onlyInputValue
+          label="Szukaj"
+        />
+        <CInput label="Sortuj" icon="arrow-down-a-z" />
+        <CAutocomplete
+          v-if="enableTags"
+          :options="getAvailableTagsOptions(filters.tags)"
+          @update:modelValue="addTagAndFilter"
+          shootingMode
+          icon="tags"
+          placeholder="Wyszukaj tag"
+          :isLoading="_isLoading"
+          :isLoadingOptions="_isLoading"
+          label="Tagi"
+        />
+        <CSelectTags
+          v-if="enableTags"
+          :selectedTags="filters.tags"
+          @update:selectedTags="filterByTags"
+          :tags="availableTags"
+          :isLoading="_isLoading"
+        />
       </CCard>
     </div>
   </transition>

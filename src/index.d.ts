@@ -7,7 +7,7 @@ declare module "*.vue" {
 declare module "font-awesome";
 
 declare interface String {
-  removeDiacritics(): string;
+  simplify(): string;
 }
 
 declare var global: any;

@@ -3,9 +3,8 @@ import { OrderedFoodState, OrderedFoodList } from "@/types/ordered-food";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { getListQuery } from "../helpers/list-query";
-import { ListFilters } from "@/types/list";
-import { getAvailableTagsQuery, TagsFilters } from "../helpers/tags-query";
+import { getListQuery, getListBaseQuery } from "../helpers/list-query";
+import { ListFilters, ListBaseFilters } from "@/types/list";
 
 const state: OrderedFoodState = {
   orderedFoodList: null,
@@ -44,14 +43,14 @@ const actions: ActionTree<OrderedFoodState, any> = {
     });
   },
 
-  loadOrderedFoodTags({ commit }, filters: TagsFilters) {
+  loadOrderedFoodTags({ commit }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("loadOrderedFoodTagsRequest");
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/ordered/tags" +
-          getAvailableTagsQuery(filters)
+          getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<{ orderedFoodTags: string }>) => {
           commit("loadOrderedFoodTagsSuccess", response.data.orderedFoodTags);

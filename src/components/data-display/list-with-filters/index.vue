@@ -27,7 +27,7 @@ export default {
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { ListFilters } from "@/types/list";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
@@ -41,13 +41,19 @@ const store = useStore();
 
 const props = withDefaults(
   defineProps<{
-    listName: string;
     listGetterName: string;
     listLoadActionName: string;
-    listIsLoadingGetterName: string;
+    listLoadingGetterName: string;
+
     tagsGetterName?: string;
     tagsLoadActionName?: string;
-    tagsIsLoadingGetterName?: string;
+    tagsLoadingGetterName?: string;
+
+    suggestionsGetterName?: string;
+    suggestionsLoadActionName?: string;
+    suggestionsLoadingGetterName?: string;
+
+    listName: string;
     defaultFilters: ListFilters;
     isLoading?: boolean;
     enableTags?: boolean;
@@ -56,7 +62,10 @@ const props = withDefaults(
   {
     tagsGetterName: "",
     tagsLoadActionName: "",
-    tagsIsLoadingGetterName: "",
+    tagsLoadingGetterName: "",
+    suggestionsGetterName: "",
+    suggestionsLoadActionName: "",
+    suggestionsLoadingGetterName: "",
     isLoading: false,
     enableTags: true,
     enableRandomButton: true,
@@ -66,7 +75,7 @@ const props = withDefaults(
 const list = computed(() => store.getters[props.listGetterName]);
 
 const isLoadingList = computed(
-  () => store.getters[props.listIsLoadingGetterName]
+  () => store.getters[props.listLoadingGetterName]
 );
 
 const _isLoading = computed(() => {
@@ -76,10 +85,6 @@ const _isLoading = computed(() => {
     );
   }
   return isLoadingList.value || props.isLoading;
-});
-
-const isSearchBySliderVisible = computed(() => {
-  return !_isLoading.value && props.enableTags;
 });
 
 const loadList = (filters: ListFilters) => {
@@ -137,15 +142,24 @@ const {
   filters,
   currentSort,
   filterBySearchPhrase,
+  setTemporarySearchPhrase,
+  filterBySearchPhraseWithDelay,
+  searchSuggestions,
+  isLoadingSearchSuggestions,
+  loadSearchSuggestions,
   filterBySort,
   filterByTags,
   addTagAndFilter,
   changeCurrentPage,
   areFiltersEqualToDefault,
   clearFilters,
-  inputFilterBy,
-  inputFilterByOptions,
-} = useFilters(props.defaultFilters, handleListLoadingProccess);
+} = useFilters(
+  props.defaultFilters,
+  handleListLoadingProccess,
+  props.suggestionsGetterName,
+  props.suggestionsLoadActionName,
+  props.suggestionsLoadingGetterName
+);
 const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
@@ -158,9 +172,8 @@ const {
 } = useAvailableTags(
   props.tagsLoadActionName,
   props.tagsGetterName,
-  props.tagsIsLoadingGetterName
+  props.tagsLoadingGetterName
 );
-const inputSelectedTag = ref(""); // Needed to store autocomplete selected value
 
 const { isMobile, windowHeight } = useWindowSize();
 const {

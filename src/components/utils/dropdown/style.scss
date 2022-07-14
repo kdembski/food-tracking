@@ -10,10 +10,10 @@
   box-shadow: $shadow-md-light;
 
   &--top {
-    bottom: calc(100% + 15px);
+    bottom: calc(100% + 10px);
   }
   &--bottom {
-    top: calc(100% + 15px);
+    top: calc(100% + 10px);
   }
 
   &__list {
@@ -43,8 +43,12 @@
   }
 
   &__loader {
-    height: 49px;
-    color: $secondary-light-10;
+    padding: 8px 0;
+
+    .skeleton-loader {
+      height: 49px;
+      padding: 16px;
+    }
   }
 
   &__transition {
@@ -66,7 +70,7 @@
     position: sticky;
     overflow: unset;
     bottom: 0;
-    box-shadow: 0 -2px 6px 0 $shadow-color-light;
+    box-shadow: 0 -1px 4px 0 $shadow-color-light;
     border: 0;
     border-top: 1px solid $secondary-light-50;
     border-radius: 0;
@@ -101,7 +105,7 @@
 
   .dark-mode {
     .dropdown {
-      box-shadow: 0 -2px 6px 0 $shadow-color-dark;
+      box-shadow: 0 -1px 4px 0 $shadow-color-dark;
 
       &__close-btn {
         background-color: $secondary-dark-20;

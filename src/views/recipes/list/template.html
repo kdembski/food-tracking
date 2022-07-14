@@ -9,10 +9,13 @@
       listName="recipesList"
       listGetterName="recipe/getRecipesList"
       listLoadActionName="recipe/loadRecipesList"
-      listIsLoadingGetterName="recipe/isLoadingRecipesList"
+      listLoadingGetterName="recipe/isLoadingRecipesList"
       tagsGetterName="recipe/getRecipesTags"
       tagsLoadActionName="recipe/loadRecipesTags"
-      tagsIsLoadingGetterName="recipe/isLoadingRecipesTags"
+      tagsLoadingGetterName="recipe/isLoadingRecipesTags"
+      suggestionsGetterName="recipe/getRecipesSearchSuggestions"
+      suggestionsLoadActionName="recipe/loadRecipesSearchSuggestions"
+      suggestionsLoadingGetterName="recipe/isLoadingRecipesSearchSuggestions"
     >
       <template v-slot:default="{ item, addTagAndFilter }">
         <div class="recipes-list__item item">

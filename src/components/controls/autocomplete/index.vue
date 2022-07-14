@@ -13,7 +13,8 @@ import { SelectOption } from "../select/types/select";
 import { computed, ref, watch } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 import { useOptionHover } from "./composables/option-hover";
-import { useAutocompleteEvents } from "./composables/autocomplete-events";
+import { useEvents } from "./composables/events";
+import { useValues } from "./composables/values";
 
 const { getFieldTemplateProps } = useFieldProps();
 
@@ -29,9 +30,21 @@ const props = defineProps({
   },
   modelValue: {
     type: [String, Number],
+    default: null,
+  },
+  inputValue: {
+    type: String,
     default: "",
   },
   shootingMode: {
+    type: Boolean,
+    default: false,
+  },
+  isLoadingOptions: {
+    type: Boolean,
+    default: false,
+  },
+  onlyInputValue: {
     type: Boolean,
     default: false,
   },
@@ -39,67 +52,21 @@ const props = defineProps({
 
 const emits = defineEmits<{
   (event: "update:modelValue", value: string | number | null): void;
+  (event: "update:inputValue", value: string): void;
+  (event: "dropdownOpen"): void;
+  (event: "enter"): void;
+  (event: "blur"): void;
+  (event: "focus"): void;
 }>();
 
 const hasFocus = ref(false);
 const input = ref<HTMLInputElement>();
-const selectedValue = computed({
-  get(): string | number | null {
-    return props.modelValue;
-  },
-  set(value: string | number | null) {
-    emits("update:modelValue", value);
-  },
-});
-const inputValue = ref("");
-
-const getOptionLabelByValue = (value: string | number | null) => {
-  if (!value) {
-    return "";
-  }
-  return props.options.find((option) => option.value === value)?.label;
-};
-
-watch(
-  () => props.modelValue,
-  () => {
-    if (props.shootingMode) {
-      return;
-    }
-    inputValue.value = getOptionLabelByValue(props.modelValue) || "";
-  },
-  { immediate: true }
-);
 
 const filteredOptions = computed(() => {
-  return props.options.filter((option: SelectOption) => {
-    return option.label
-      .toLowerCase()
-      .removeDiacritics()
-      .includes(inputValue.value.toLowerCase().removeDiacritics());
+  return props.options?.filter((option: SelectOption) => {
+    return option.label.simplify().includes(_inputValue.value.simplify());
   });
 });
-
-const selectOption = (option: SelectOption) => {
-  selectedValue.value = option.value;
-  inputValue.value = option.label;
-};
-
-const getSelectedClass = () => {
-  if (selectedValue.value) {
-    return "autocomplete__input--option-selected";
-  }
-  return "";
-};
-
-const isDropdownOpen = computed(() => {
-  return hasFocus.value;
-});
-
-const clearSelectedAndInputValue = () => {
-  selectedValue.value = null;
-  inputValue.value = "";
-};
 
 const _isLoading = computed(() => {
   return props.isLoading;
@@ -116,6 +83,38 @@ watch(_isLoading, (value) => {
   clearSelectedAndInputValue();
 });
 
+const selectOption = (option: SelectOption) => {
+  selectedValue.value = option.value;
+  _inputValue.value = option.label;
+};
+
+const { selectedValue, _inputValue, clearSelectedAndInputValue } = useValues(
+  props,
+  emits,
+  filteredOptions,
+  selectOption,
+  input,
+  _isLoading
+);
+
+const getSelectedClass = () => {
+  if (selectedValue.value || props.onlyInputValue) {
+    return "autocomplete__input--option-selected";
+  }
+  return "";
+};
+
+const isDropdownOpen = computed(() => {
+  return hasFocus.value;
+});
+
+watch(isDropdownOpen, (value) => {
+  if (!value) {
+    return;
+  }
+  emits("dropdownOpen");
+});
+
 const {
   getHoveredOptionClass,
   setHoveredOptionIndex,
@@ -124,21 +123,28 @@ const {
   decrementHoveredOptionIndex,
 } = useOptionHover(filteredOptions);
 
-const { onEnter, onArrowUp, onArrowDown, onInput, onInputClick, onBlur } =
-  useAutocompleteEvents(
-    getHoveredOptionIndex,
-    setHoveredOptionIndex,
-    decrementHoveredOptionIndex,
-    incrementHoveredOptionIndex,
-    filteredOptions,
-    selectOption,
-    input,
-    inputValue,
-    selectedValue,
-    _shootingMode,
-    _isLoading,
-    hasFocus
-  );
+const {
+  onEnter,
+  onArrowUp,
+  onArrowDown,
+  onInput,
+  onInputClick,
+  onBlur,
+  onFocus,
+} = useEvents(
+  getHoveredOptionIndex,
+  setHoveredOptionIndex,
+  decrementHoveredOptionIndex,
+  incrementHoveredOptionIndex,
+  filteredOptions,
+  selectOption,
+  input,
+  _inputValue,
+  _shootingMode,
+  _isLoading,
+  hasFocus,
+  emits
+);
 </script>
 
 <template src="./template.html"></template>

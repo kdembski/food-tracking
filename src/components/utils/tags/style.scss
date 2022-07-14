@@ -30,13 +30,10 @@
     gap: 6px;
 
     &__row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       width: 100%;
-      display: flex;
       gap: 6px;
-
-      &:last-child {
-        width: calc(50% - 3px);
-      }
     }
 
     .skeleton-loader__item {
