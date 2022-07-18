@@ -5,7 +5,6 @@ import CButton from "@/components/controls/button/index.vue";
 import CList from "@/components/data-display/list/index.vue";
 import CPagination from "@/components/utils/pagination/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
-import CSlider from "@/components/controls/slider/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 
@@ -18,7 +17,6 @@ export default {
     CButton,
     CPagination,
     CCard,
-    CSlider,
     CAutocomplete,
     CSkeletonLoader,
   },
@@ -27,7 +25,7 @@ export default {
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, Ref, ref, watch, nextTick } from "vue";
 import { ListFilters } from "@/types/list";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
@@ -36,6 +34,7 @@ import { onMounted } from "vue";
 import { isEmpty } from "lodash";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 import { useMobileFilters } from "./composables/mobile-filters";
+import getWordPlurarForms from "@/utils/getWordPlurarForms";
 
 const store = useStore();
 
@@ -99,30 +98,6 @@ const handleListLoadingProccess = () => {
   loadList(filters.value);
 };
 
-const getTotalCountText = () => {
-  const totalCount = list.value?.pagination?.totalRecords;
-  if (!totalCount) {
-    return "";
-  }
-
-  if (totalCount === 1) {
-    return "Znaleziono 1 wynik";
-  }
-
-  if (totalCount >= 12 && totalCount <= 14) {
-    return "Znaleziono " + totalCount + " wyników";
-  }
-
-  const totalCountString = totalCount?.toString();
-  const firstDigit = parseInt(totalCountString[totalCountString?.length - 1]);
-
-  if (firstDigit >= 2 && firstDigit <= 4) {
-    return "Znaleziono " + totalCount + " wyniki";
-  }
-
-  return "Znaleziono " + totalCount + " wyników";
-};
-
 const loadListOnMounted = () => {
   const storedFilters = getFiltersFromStorage();
 
@@ -133,7 +108,7 @@ const loadListOnMounted = () => {
   handleListLoadingProccess();
 };
 
-onMounted(() => {
+onMounted(async () => {
   loadListOnMounted();
 });
 

@@ -1,12 +1,10 @@
 .sidebar {
   width: 92px;
-  height: 100vh;
   display: flex;
   flex-shrink: 0;
   position: relative;
   flex-direction: column;
-  background-color: $secondary-dark-20;
-  border-right: 1px solid transparent;
+  background-color: $secondary-light-60;
 
   &__items {
     flex-grow: 1;
@@ -16,37 +14,22 @@
   }
 
   .item {
-    &:last-child {
-      margin-top: auto;
-
-      .item__link {
-        padding: 20px 5px;
-      }
-
-      .item__icon {
-        font-size: $font-3xl;
-      }
-
-      .item__label {
-        display: none;
-      }
-    }
-
     &__link {
-      color: $white;
+      color: $secondary;
       display: flex;
       padding: 15px 5px;
       cursor: pointer;
       flex-direction: column;
       align-items: center;
-      transition: 0.15s ease-in-out;
+      transition: background-color 0.15s ease-in-out;
 
       &:hover:not(.item__link--active) {
-        background-color: $secondary-dark-15;
+        background-color: $secondary-light-55;
       }
 
       &--active {
-        background-color: $secondary-dark-10;
+        background-color: $secondary-light-50;
+        color: $secondary-dark-10;
       }
     }
 
@@ -58,6 +41,7 @@
 
     &__label {
       font-size: $font-xs;
+      font-weight: 600;
       letter-spacing: 1px;
       white-space: nowrap;
       margin-top: 8px;
@@ -70,26 +54,28 @@
     align-items: center;
     user-select: none;
     padding: 20px 0 25px;
-    color: $primary-light;
+    color: $secondary;
   }
 }
 
 .dark-mode {
   .sidebar {
     background-color: $secondary-dark-25;
-    border-color: $secondary-dark-20;
 
     &__logo {
       color: $primary;
     }
 
     .item__link {
+      color: $secondary-light-50;
+
       &:hover:not(.item__link--active) {
         background-color: $secondary-dark-20;
       }
 
       &--active {
         background-color: $secondary-dark-15;
+        color: $secondary-light-55;
       }
     }
   }

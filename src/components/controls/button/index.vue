@@ -27,7 +27,7 @@ const props = defineProps({
     type: String,
     default: "contained",
     validator: (value: string) => {
-      return ["contained", "outlined", "text"].indexOf(value) !== -1;
+      return ["contained", "text"].indexOf(value) !== -1;
     },
   },
   color: {

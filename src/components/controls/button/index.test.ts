@@ -12,11 +12,6 @@ describe("Button Component", () => {
     expect(wrapper.classes()).toContain("button--contained");
 
     await wrapper.setProps({
-      variant: "outlined",
-    });
-    expect(wrapper.classes()).toContain("button--outlined");
-
-    await wrapper.setProps({
       variant: "text",
     });
     expect(wrapper.classes()).toContain("button--text");

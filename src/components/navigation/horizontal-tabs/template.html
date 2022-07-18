@@ -1,0 +1,20 @@
+<nav class="horizontal-tabs" :class="getContainerClasses()">
+  <div
+    v-for="(item, index) in items"
+    class="horizontal-tabs__item"
+    ref="itemsRef"
+  >
+    <input
+      v-model="selected"
+      :value="item.code"
+      type="radio"
+      :name="$attrs.id"
+      :id="$attrs.id + '-' + index"
+    />
+    <label :for="$attrs.id + '-' + index">{{ item.label }}</label>
+  </div>
+  <div
+    class="horizontal-tabs__active-indicator"
+    :style="activeIndicatorStyle"
+  ></div>
+</nav>

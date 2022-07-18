@@ -88,7 +88,7 @@ a {
 .dark-mode {
   * {
     &::-webkit-scrollbar-thumb {
-      background: darken($secondary-dark-25, 2);
+      background: $secondary-dark-20;
       border-radius: 100px;
       border: 4px transparent solid;
       background-clip: padding-box;

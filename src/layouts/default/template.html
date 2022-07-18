@@ -1,9 +1,12 @@
 <div class="layout-default">
-  <CSidebar :items="sidebarItems" />
-  <div class="layout-default__content layout-content">
-    <div class="layout-content__wrapper" id="main-scroll-container">
-      <div class="layout-content__container">
-        <slot></slot>
+  <CTopbar />
+  <div class="layout-default__wrapper">
+    <CSidebar :items="sidebarItems" />
+    <div class="layout-default__content layout-content">
+      <div class="layout-content__wrapper" id="main-scroll-container">
+        <div class="layout-content__container">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>

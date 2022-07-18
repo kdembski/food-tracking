@@ -1,8 +1,8 @@
 .card {
   background-color: $white;
-  border: 1px solid $secondary-light-50;
+  border: 1px solid $secondary-light-45;
   padding: 25px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 @media screen and (max-width: $screen-md) {
@@ -13,7 +13,7 @@
 
 .dark-mode {
   .card {
-    background-color: $secondary-dark-25;
-    border-color: $secondary-dark-20;
+    background-color: $secondary-dark-30;
+    border-color: $secondary-dark-15;
   }
 }

@@ -1,8 +1,13 @@
 <div class="recipes-list">
   <header class="recipes-list__header">
     <h1>Lista przepisów</h1>
-    <CButton label="Dodaj przepis" icon="plus" />
+    <CButton label="Dodaj" icon="plus" size="small" />
   </header>
+  <CHorizontalTabs
+    class="recipes-list__navigation"
+    :items="tabs"
+    v-model="selectedTab"
+  />
   <main class="recipes-list__content">
     <CListWithFilters
       :defaultFilters="recipesListDefaultFilters"
@@ -21,15 +26,6 @@
         <div class="recipes-list__item item">
           <div class="item__row">
             <p class="item__recipe-name">{{ item.recipeName }}</p>
-            <CLink
-              v-if="item.cookidooLink"
-              :href="item.cookidooLink"
-              class="item__cookidoo-link"
-              label=""
-              external
-            >
-              <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
-            </CLink>
           </div>
           <div class="item__row">
             <div class="item__preparation-time">
@@ -49,6 +45,15 @@
             icon="ellipsis-vertical"
             class="item__menu"
           />
+          <CLink
+            v-if="item.cookidooLink"
+            :href="item.cookidooLink"
+            class="item__cookidoo-link"
+            label=""
+            external
+          >
+            <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+          </CLink>
         </div>
       </template>
     </CListWithFilters>

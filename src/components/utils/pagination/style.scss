@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: $secondary-light-20;
+  color: $secondary;
 
   &-pages {
     display: flex;
@@ -12,16 +12,17 @@
     &__item {
       padding: 5px 10px;
       border-radius: 3px;
+      font-weight: 600;
 
       &--active {
         cursor: default;
         color: $secondary;
-        font-weight: 600;
-        background-color: $secondary-light-50;
+
+        background-color: $secondary-light-55;
       }
 
       &:hover {
-        background-color: $secondary-light-50;
+        background-color: $secondary-light-55;
       }
     }
   }
@@ -33,17 +34,37 @@
 
     &--disabled {
       cursor: default;
-      color: $secondary-light-40;
+      color: $secondary-light-30;
     }
 
     &:hover:not(.pagination__arrow--disabled) {
-      background-color: $secondary-light-50;
+      background-color: $secondary-light-55;
     }
   }
 
   &__summary {
-    font-style: italic;
-    padding-right: 3px;
+    color: $secondary-light-20;
+    padding: 0 3px;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .pagination {
+    &-pages {
+      gap: 5px;
+
+      &__item {
+        padding: 3px 8px;
+      }
+    }
+
+    &__arrow {
+      padding: 3px 8px;
+    }
+
+    &__summary {
+      font-size: $font-sm;
+    }
   }
 }
 

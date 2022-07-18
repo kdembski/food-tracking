@@ -30,7 +30,7 @@ const props = defineProps({
   },
   getOptionClass: {
     type: Function,
-    default: null,
+    default: () => null,
   },
   searchPhrase: {
     type: String,
@@ -43,7 +43,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits<{
-  (e: "listMouseout", index: number): void;
+  (e: "listMouseout"): void;
   (e: "optionMouseover", index: number): void;
   (e: "optionClick", option: SelectOption): void;
   (e: "update:isOpen", value: boolean): void;
@@ -62,8 +62,8 @@ const closeDropdown = () => {
   _isOpen.value = false;
 };
 
-const emitListMouseout = (index: number) => {
-  emit("listMouseout", index);
+const emitListMouseout = () => {
+  emit("listMouseout");
 };
 
 const emitOptionMouseover = (index: number) => {

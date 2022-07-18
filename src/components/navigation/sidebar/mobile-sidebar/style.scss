@@ -1,6 +1,6 @@
 .mobile-sidebar {
   &__wrapper {
-    background-color: $secondary-dark-20;
+    background-color: $secondary-dark-15;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -26,12 +26,12 @@
 
     &__link {
       width: 100%;
-      color: $white;
+      color: $secondary-light-10;
       display: flex;
       transition: color 0.15s ease-in-out;
 
       &--active {
-        color: $primary-light;
+        color: $secondary-light-55;
       }
     }
 
@@ -52,6 +52,7 @@
 
     &__label {
       font-size: $font-xs;
+      font-weight: 600;
       letter-spacing: 1px;
       white-space: nowrap;
     }
@@ -70,10 +71,10 @@
       width: 5px;
       height: 5px;
       border-radius: 100%;
-      background-color: $secondary;
+      background-color: $secondary-light-10;
 
       &.active {
-        background-color: $secondary-light-40;
+        background-color: $secondary-light-55;
       }
     }
   }
@@ -82,8 +83,25 @@
 .dark-mode {
   .mobile-sidebar {
     &__wrapper {
-      background-color: darken($secondary-dark-25, 3);
-      border-top: 1px solid $secondary-dark-25;
+      background-color: $secondary-dark-25;
+    }
+
+    .item__link {
+      color: $secondary;
+
+      &--active {
+        color: $secondary-light-55;
+      }
+    }
+
+    &__active-indicator {
+      & > span {
+        background-color: $secondary;
+
+        &.active {
+          background-color: $secondary-light-55;
+        }
+      }
     }
   }
 }

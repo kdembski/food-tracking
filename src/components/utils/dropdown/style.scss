@@ -6,8 +6,8 @@
   overflow: hidden;
   z-index: 30;
   background-color: $white;
-  border: 1px solid $secondary-light-50;
-  box-shadow: $shadow-md-light;
+  border: 1px solid $secondary-light-45;
+  box-shadow: $shadow-sm-light;
 
   &--top {
     bottom: calc(100% + 10px);
@@ -29,7 +29,7 @@
 
     &:hover,
     &--hovered {
-      filter: brightness(95%);
+      background-color: $secondary-light-55;
     }
 
     &:deep(strong) {
@@ -70,9 +70,8 @@
     position: sticky;
     overflow: unset;
     bottom: 0;
-    box-shadow: 0 -1px 4px 0 $shadow-color-light;
     border: 0;
-    border-top: 1px solid $secondary-light-50;
+    border-top: 1px solid $secondary-light-45;
     border-radius: 0;
     margin-top: -62px;
 
@@ -105,8 +104,6 @@
 
   .dark-mode {
     .dropdown {
-      box-shadow: 0 -1px 4px 0 $shadow-color-dark;
-
       &__close-btn {
         background-color: $secondary-dark-20;
         border-color: $secondary-dark-15;
@@ -117,26 +114,22 @@
 
 .dark-mode {
   .dropdown {
-    background-color: $secondary-dark-20;
-    box-shadow: $shadow-md;
+    background-color: $secondary-dark-30;
+    box-shadow: $shadow-sm-dark;
     border-color: $secondary-dark-15;
 
     &__option {
-      background-color: $secondary-dark-20;
+      background-color: $secondary-dark-30;
       color: $white;
 
       &:hover,
       &--hovered {
-        filter: brightness(90%);
+        background-color: $secondary-dark-25;
       }
     }
 
     &__empty-message {
       color: $secondary-light-10;
-    }
-
-    &__loader {
-      color: $secondary-light-30;
     }
   }
 }

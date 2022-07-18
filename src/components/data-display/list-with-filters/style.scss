@@ -5,8 +5,9 @@
 
   &__filters {
     display: flex;
-    margin-right: 30px;
-    width: 35%;
+    margin-right: 45px;
+    margin-left: 1px;
+    width: 32%;
     height: 100%;
   }
 
@@ -20,16 +21,10 @@
       align-self: flex-start;
       height: 100%;
       width: 100%;
-      max-height: calc(100vh - 40px);
+      max-height: calc(100vh - 91px);
       overflow-y: auto;
-    }
-
-    &__total-count {
-      font-weight: 600;
-      font-size: $font-sm;
-      color: $secondary;
-      letter-spacing: 1px;
-      margin-bottom: -3px;
+      padding: 0 5px;
+      margin: 0 -5px;
     }
 
     &__btns-container {
@@ -43,11 +38,16 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 65%;
+    width: 68%;
   }
 
   &__pagination {
-    margin-top: 20px;
+    position: sticky;
+    z-index: 1;
+    top: -20px;
+    margin-top: -15px;
+    padding: 15px 0;
+    background-color: $white;
   }
 }
 
@@ -55,18 +55,18 @@
   .list-with-filters {
     display: inline-flex;
     align-items: flex-start;
+    max-width: 100vw;
 
     &__filters {
       height: unset;
       min-width: 100vw;
-      margin-right: 0;
+      margin: 0;
       padding: 0 10px;
     }
 
     &__content {
       min-width: 100vw;
       padding: 0 10px;
-      background-color: $secondary-light-55;
     }
 
     &__filters-transition,
@@ -127,7 +127,7 @@
       color: $white;
       right: 5px;
       top: 0;
-      box-shadow: $shadow-xs-dark;
+      box-shadow: $shadow-xs;
       z-index: 1;
       font-size: 20px;
       transition: transform 0.05s ease-in-out;
@@ -138,6 +138,8 @@
         gap: 15px;
         max-height: unset;
         overflow-y: visible;
+        padding: 0;
+        margin: 0;
       }
 
       &__btns-container {
@@ -146,18 +148,16 @@
     }
 
     &__pagination {
-      margin-top: 10px;
+      top: -10px;
+      margin-top: -12px;
+      padding: 10px 0;
     }
   }
 
   .dark-mode {
     .list-with-filters {
-      &__content {
-        background-color: $secondary-dark-30;
-      }
-
       &__toggle-mobile-filters {
-        color: $secondary-dark-20;
+        box-shadow: $shadow-xs-dark;
       }
     }
   }
@@ -165,10 +165,8 @@
 
 .dark-mode {
   .list-with-filters {
-    .filters {
-      &__total-count {
-        color: $white;
-      }
+    &__pagination {
+      background-color: $secondary-dark-30;
     }
   }
 }

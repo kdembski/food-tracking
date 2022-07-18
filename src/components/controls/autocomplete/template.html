@@ -25,7 +25,7 @@
     :isOpen="isDropdownOpen"
     :options="filteredOptions"
     :getOptionClass="getHoveredOptionClass"
-    @listMouseout="setHoveredOptionIndex"
+    @listMouseout="setHoveredOptionIndex(null)"
     @optionMouseover="setHoveredOptionIndex"
     @optionClick="selectOption"
     :searchPhrase="_inputValue"

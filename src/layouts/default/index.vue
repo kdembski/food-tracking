@@ -1,9 +1,10 @@
 <script lang="ts">
 import CSidebar from "@/components/navigation/sidebar/index.vue";
+import CTopbar from "@/components/navigation/topbar/index.vue";
 
 export default {
   name: "DefaultLayout",
-  components: { CSidebar },
+  components: { CSidebar, CTopbar },
 };
 </script>
 
@@ -17,7 +18,6 @@ const sidebarItems = ref([
   { route: "/", label: "Kalendarz", icon: "calendar-days" },
   { route: "/", label: "Zakupy", icon: "list" },
   { route: "/", label: "Statystyki", icon: "chart-line" },
-  { route: "/settings", label: "Ustawienia", icon: "gear" },
 ]);
 </script>
 

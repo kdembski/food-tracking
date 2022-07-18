@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
-import CSlider from "./index.vue";
+import CHorizontalTabs from "./index.vue";
 
-describe("Slider Component", () => {
+describe("Horizontal Tabs Component", () => {
   let wrapper: any = null;
 
   beforeEach(async () => {
@@ -11,23 +11,23 @@ describe("Slider Component", () => {
       unobserve: jest.fn(),
     }));
 
-    wrapper = mount(CSlider, {
+    wrapper = mount(CHorizontalTabs, {
       attrs: {
         id: "test-id",
       },
       props: {
-        modelValue: 1,
-        options: [
+        modelValue: "1",
+        items: [
           {
-            value: 1,
+            code: "1",
             label: "one",
           },
           {
-            value: 2,
+            code: "2",
             label: "two",
           },
           {
-            value: 3,
+            code: "3",
             label: "three",
           },
         ],
@@ -37,26 +37,26 @@ describe("Slider Component", () => {
   });
 
   it("Should render with default props", async () => {
-    wrapper = mount(CSlider, { global: global.settings });
-    expect(wrapper.vm.options).toEqual([]);
+    wrapper = mount(CHorizontalTabs, { global: global.settings });
+    expect(wrapper.vm.items).toEqual([]);
   });
 
   it("Should set selected based on modelValue prop", async () => {
-    expect(wrapper.vm.selected).toEqual(1);
+    expect(wrapper.vm.selected).toEqual("1");
   });
 
   it("Should emit update:modelValue on selected change", async () => {
     const input = wrapper.find("input#test-id-1");
     await input.setChecked();
     expect(input.element.checked).toBe(true);
-    expect(wrapper.emitted()["update:modelValue"][0][0]).toEqual(2);
+    expect(wrapper.emitted()["update:modelValue"][0][0]).toEqual("2");
   });
 
   it("Should add full width class to container if fullWidth is set to true", async () => {
     await wrapper.setProps({
       fullWidth: true,
     });
-    expect(wrapper.classes()).toContain("slider--full-width");
+    expect(wrapper.classes()).toContain("horizontal-tabs--full-width");
   });
 
   it("Should call resizeObserver observe on mounted", async () => {

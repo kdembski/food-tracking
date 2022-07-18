@@ -1,13 +1,20 @@
 .layout-default {
   display: flex;
-  background-color: $secondary-light-55;
+  flex-direction: column;
+  background-color: $white;
   position: relative;
   height: 100vh;
 
+  &__wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
   .layout-content {
     display: flex;
-    overflow: hidden;
     flex-grow: 1;
+    overflow: hidden;
 
     &__container {
       display: flex;
@@ -27,36 +34,31 @@
   }
 
   &:deep(header) {
-    margin: 0 0 20px;
-    color: $secondary-dark-30;
+    margin-bottom: 30px;
 
     & > h1 {
-      font-size: $font-3xl;
-      line-height: 100%;
+      font-size: $font-xl;
+      color: $secondary;
       letter-spacing: 1px;
-      padding: 6px 0;
     }
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .layout-default {
-    flex-direction: column;
-
     .layout-content {
       margin-bottom: 62px;
 
       &__wrapper {
-        padding: 15px 0;
+        padding: 10px 0;
       }
     }
 
     &:deep(header) {
-      margin: 0 10px 15px;
+      margin: 0 10px 20px;
 
       & > h1 {
-        font-size: $font-xl;
-        padding: 3px 0;
+        font-size: $font-lg;
       }
     }
   }
@@ -67,7 +69,9 @@
     background-color: $secondary-dark-30;
 
     &:deep(header) {
-      color: $white;
+      & > h1 {
+        color: $white;
+      }
     }
   }
 }

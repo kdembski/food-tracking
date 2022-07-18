@@ -45,49 +45,34 @@
       color: $white;
       background-color: $primary;
     }
-
-    &.button--outlined {
-      color: $primary;
-      background-color: $white;
-      border-color: $primary;
-    }
   }
 
   &--secondary {
     &.button--text {
-      color: $secondary-dark-30;
+      color: $secondary;
     }
 
     &.button--contained {
-      color: $secondary-dark-30;
-      background-color: $secondary-light-55;
-    }
-
-    &.button--outlined {
-      color: $secondary-dark-30;
-      background-color: $white;
-      border-color: $secondary-light-50;
+      color: $white;
+      background-color: $secondary;
     }
   }
 
   &--small {
     font-size: $font-sm;
     padding: 5px 10px;
-    box-shadow: $shadow-xs;
     border-radius: 3px;
   }
 
   &--medium {
     font-size: $font-base;
     padding: 10px 15px;
-    box-shadow: $shadow-xs;
     border-radius: 4px;
   }
 
   &--large {
     font-size: $font-lg;
     padding: 15px 20px;
-    box-shadow: $shadow-xs;
     border-radius: 5px;
   }
 
@@ -116,50 +101,15 @@
       }
     }
 
-    &--primary {
-      &.button--text {
-        color: $primary;
-      }
-
-      &.button--contained {
-        color: $secondary-dark-25;
-        background-color: $primary;
-      }
-
-      &.button--outlined {
-        color: $primary;
-        background-color: transparent;
-        border-color: $primary;
-      }
-    }
-
     &--secondary {
       &.button--text {
-        color: $secondary-light-30;
+        color: $secondary-light-50;
       }
 
       &.button--contained {
         color: $white;
         background-color: $secondary-dark-15;
       }
-
-      &.button--outlined {
-        color: $white;
-        background-color: transparent;
-        border-color: $secondary-dark-15;
-      }
-    }
-
-    &--small {
-      box-shadow: $shadow-xs-dark;
-    }
-
-    &--medium {
-      box-shadow: $shadow-xs-dark;
-    }
-
-    &--large {
-      box-shadow: $shadow-xs-dark;
     }
   }
 }

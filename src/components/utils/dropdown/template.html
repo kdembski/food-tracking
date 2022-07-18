@@ -4,7 +4,7 @@
       v-if="_isOpen"
       class="dropdown"
       :class="getDropdownDirectionClass()"
-      @mouseout="emitListMouseout(index)"
+      @mouseout="emitListMouseout()"
       ref="dropdown"
     >
       <ul v-if="isLoading" class="dropdown__loader">
@@ -26,13 +26,7 @@
         </li>
       </ul>
       <div v-if="isMobile" class="dropdown__close-btn">
-        <CButton
-          color="secondary"
-          variant="outlined"
-          size="small"
-          label="Zamknij"
-          fullWidth
-        />
+        <CButton color="secondary" size="small" label="Zamknij" fullWidth />
       </div>
     </div>
   </CTransition>

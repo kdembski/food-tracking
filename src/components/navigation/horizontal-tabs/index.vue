@@ -1,20 +1,24 @@
 <script lang="ts">
 export default {
-  name: "CSlider",
+  name: "CHorizontalTabs",
 };
 </script>
 
 <script setup lang="ts">
 import { computed, ref, Ref, watch, onMounted, onUnmounted } from "vue";
-import { SelectOption } from "@/components/controls/select/types/select";
+
+interface NavigationItem {
+  code: string;
+  label: string;
+}
 
 const props = defineProps({
   modelValue: {
-    type: [String, Number],
+    type: String,
     default: "",
   },
-  options: {
-    type: Array as () => Array<SelectOption>,
+  items: {
+    type: Array as () => Array<NavigationItem>,
     default: () => [],
   },
   fullWidth: {
@@ -23,17 +27,17 @@ const props = defineProps({
   },
 });
 
-const items: Ref<Array<HTMLElement>> = ref([]);
+const itemsRef: Ref<Array<HTMLElement>> = ref([]);
 
 const emits = defineEmits<{
-  (event: "update:modelValue", value: string | number): void;
+  (event: "update:modelValue", value: string): void;
 }>();
 
 const selected = computed({
-  get(): string | number {
+  get(): string {
     return props.modelValue;
   },
-  set(value: string | number) {
+  set(value: string) {
     emits("update:modelValue", value);
   },
 });
@@ -42,27 +46,25 @@ const getContainerClasses = () => {
   const classes = [];
 
   if (props.fullWidth) {
-    classes.push("slider--full-width");
+    classes.push("horizontal-tabs--full-width");
   }
 
   return classes;
 };
 
 const getActiveOptionIndex = () => {
-  const activeOption = props.options.find(
-    (option) => option.value === selected.value
-  );
+  const activeOption = props.items.find((item) => item.code === selected.value);
 
   if (!activeOption) {
     return -1;
   }
 
-  return props.options.indexOf(activeOption);
+  return props.items.indexOf(activeOption);
 };
 
 const activeItemRef = computed(() => {
   const activeOptionIndex = getActiveOptionIndex();
-  return items.value[activeOptionIndex];
+  return itemsRef.value[activeOptionIndex];
 });
 
 const getActiveIndicatorStyle = () => {
@@ -70,12 +72,10 @@ const getActiveIndicatorStyle = () => {
     return;
   }
 
-  const activeItemHeight = activeItemRef.value.getBoundingClientRect().height;
   const activeItemWidth = activeItemRef.value.getBoundingClientRect().width;
   const activeItemOffsetLeft = activeItemRef.value.offsetLeft;
 
   return {
-    height: activeItemHeight + "px",
     width: activeItemWidth + "px",
     left: activeItemOffsetLeft + "px",
   };
@@ -83,7 +83,6 @@ const getActiveIndicatorStyle = () => {
 
 const activeIndicatorStyle: Ref<
   | {
-      height: string;
       width: string;
       left: string;
     }

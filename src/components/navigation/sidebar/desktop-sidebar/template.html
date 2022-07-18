@@ -1,9 +1,6 @@
-<div class="sidebar">
-  <div class="sidebar__logo">
-    <InlineSvg width="30" :src="require('@/assets/icons/logo.svg')" />
-  </div>
+<nav class="sidebar">
   <ul class="sidebar__items">
-    <li v-for="item in items" class="item">
+    <li v-for="item in items" class="sidebar__item item">
       <RouterLink
         :to="item.route"
         class="item__link"
@@ -17,4 +14,4 @@
       </RouterLink>
     </li>
   </ul>
-</div>
+</nav>

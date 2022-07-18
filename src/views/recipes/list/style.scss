@@ -34,7 +34,6 @@
       min-width: 18px;
       padding: 4px 5px;
       border-radius: 4px;
-      box-shadow: $shadow-xs;
     }
 
     &__preparation-time {
@@ -75,12 +74,14 @@
       }
     }
   }
+
+  &__navigation {
+    margin-bottom: 20px;
+  }
 }
 
 @media screen and (max-width: $screen-md) {
   .recipes-list {
-    overflow: hidden;
-
     .item {
       &__menu {
         top: 8px;
@@ -93,12 +94,17 @@
 
       &__preparation-time {
         font-size: $font-xs;
+        color: $secondary-light-30;
       }
 
       &__cookidoo-link {
         bottom: 12px;
         right: 10px;
       }
+    }
+
+    &__navigation {
+      margin-bottom: 15px;
     }
   }
 }
@@ -108,10 +114,6 @@
     .item {
       &__recipe-name {
         color: $white;
-      }
-
-      &__cookidoo-link {
-        box-shadow: $shadow-xs-dark;
       }
     }
   }

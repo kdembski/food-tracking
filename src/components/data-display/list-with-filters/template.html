@@ -4,17 +4,7 @@
       v-show="!isMobile || areMobileFiltersOpen"
       class="list-with-filters__filters filters"
     >
-      <CCard class="filters__wrapper">
-        <p
-          v-if="getTotalCountText() && !_isLoading"
-          class="filters__total-count"
-        >
-          {{ getTotalCountText() }}
-        </p>
-        <CSkeletonLoader
-          v-else-if="_isLoading"
-          style="height: 14px; width: 60%"
-        />
+      <div class="filters__wrapper">
         <div class="filters__btns-container">
           <CButton
             color="secondary"
@@ -67,7 +57,7 @@
           :tags="availableTags"
           :isLoading="_isLoading"
         />
-      </CCard>
+      </div>
     </div>
   </transition>
   <transition name="list-with-filters__content-transition">
@@ -76,11 +66,6 @@
       class="list-with-filters__content"
       ref="content"
     >
-      <CList :items="list?.data" :isLoading="_isLoading">
-        <template v-slot:default="{ item }">
-          <slot :item="item" :addTagAndFilter="addTagAndFilter"></slot>
-        </template>
-      </CList>
       <CPagination
         class="list-with-filters__pagination"
         :currentPage="filters.currentPage"
@@ -88,6 +73,11 @@
         :paginationData="list?.pagination"
         :isLoading="_isLoading"
       />
+      <CList :items="list?.data" :isLoading="_isLoading">
+        <template v-slot:default="{ item }">
+          <slot :item="item" :addTagAndFilter="addTagAndFilter"></slot>
+        </template>
+      </CList>
     </div>
   </transition>
   <button

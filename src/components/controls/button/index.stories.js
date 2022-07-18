@@ -37,14 +37,14 @@ const Template = (args) => ({
       ],
     };
   },
-  template:
-    '<div v-for="prop in props" style="margin-bottom: 20px"><CButton v-bind="Object.assign(prop, args)" /></div>',
+  template: `
+    <div v-for="prop in props" style="margin-bottom: 20px">
+      <CButton v-bind="Object.assign(prop, args)" />
+    </div>
+    `,
 });
 
 export const Primary = Template.bind({});
-
-export const PrimaryOutlined = Template.bind({});
-PrimaryOutlined.args = Object.assign({ variant: "outlined" }, Primary.args);
 
 export const PrimaryText = Template.bind({});
 PrimaryText.args = Object.assign({ variant: "text" }, Primary.args);
@@ -53,9 +53,6 @@ export const Secondary = Template.bind({});
 Secondary.args = {
   color: "secondary",
 };
-
-export const SecondaryOutlined = Template.bind({});
-SecondaryOutlined.args = Object.assign({ variant: "outlined" }, Secondary.args);
 
 export const SecondaryText = Template.bind({});
 SecondaryText.args = Object.assign({ variant: "text" }, Secondary.args);

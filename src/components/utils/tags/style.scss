@@ -7,8 +7,9 @@
     display: inline-flex;
     align-items: center;
     padding: 5px 12px;
-    background-color: $secondary-light-55;
-    border: 1px solid $secondary-light-50;
+    background-color: $secondary-light-60;
+    color: $secondary-dark-10;
+    border: 1px solid $secondary-light-55;
     font-weight: 500;
     font-size: $font-sm;
     border-radius: 15px;
@@ -53,7 +54,7 @@
       border-color: $secondary-dark-15;
 
       &:hover {
-        filter: brightness(122%);
+        filter: brightness(125%);
       }
     }
   }
