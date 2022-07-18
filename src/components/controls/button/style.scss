@@ -101,6 +101,13 @@
       }
     }
 
+    &--primary {
+      &.button--contained {
+        color: $secondary-light-55;
+        background-color: $primary;
+      }
+    }
+
     &--secondary {
       &.button--text {
         color: $secondary-light-50;

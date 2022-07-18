@@ -9,7 +9,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, Ref } from "vue";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
 const props = defineProps({
@@ -25,9 +25,11 @@ const props = defineProps({
 
 const itemsCount = computed(() => props.items.length);
 const { windowHeight, isMobile } = useWindowSize();
+const container: Ref<HTMLElement | undefined> = ref();
 
 const getLoaderItemsCount = () => {
-  const containerHeight = windowHeight.value - 100;
+  const containerOffsetTop = container.value?.offsetTop;
+  const containerHeight = windowHeight.value - (containerOffsetTop || 0);
   return Math.floor(containerHeight / (isMobile.value ? 110 : 120));
 };
 </script>

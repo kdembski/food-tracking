@@ -1,4 +1,10 @@
-<div v-if="paginationData?.totalRecords > 0 && !isLoading" class="pagination">
+<div v-if="isLoading" class="pagination__loader">
+  <CSkeletonLoader>
+    <div class="skeleton-loader__item" />
+    <div class="skeleton-loader__item" />
+  </CSkeletonLoader>
+</div>
+<div v-else-if="paginationData?.totalRecords > 0" class="pagination">
   <div class="pagination__summary">
     <p>{{ getPaginationSummaryText() }}</p>
   </div>

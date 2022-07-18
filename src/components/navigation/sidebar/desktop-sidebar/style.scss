@@ -60,7 +60,7 @@
 
 .dark-mode {
   .sidebar {
-    background-color: $secondary-dark-25;
+    background-color: darken($secondary-dark-25, 3);
 
     &__logo {
       color: $primary;
@@ -70,11 +70,11 @@
       color: $secondary-light-50;
 
       &:hover:not(.item__link--active) {
-        background-color: $secondary-dark-20;
+        background-color: $secondary-dark-25;
       }
 
       &--active {
-        background-color: $secondary-dark-15;
+        background-color: $secondary-dark-20;
         color: $secondary-light-55;
       }
     }
