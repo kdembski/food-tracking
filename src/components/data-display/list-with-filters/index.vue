@@ -25,7 +25,7 @@ export default {
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed, Ref, ref, watch, nextTick } from "vue";
+import { computed } from "vue";
 import { ListFilters } from "@/types/list";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
@@ -34,7 +34,6 @@ import { onMounted } from "vue";
 import { isEmpty } from "lodash";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 import { useMobileFilters } from "./composables/mobile-filters";
-import getWordPlurarForms from "@/utils/getWordPlurarForms";
 
 const store = useStore();
 

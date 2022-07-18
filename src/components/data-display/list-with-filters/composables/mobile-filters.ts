@@ -12,7 +12,19 @@ export function useMobileFilters(
       return;
     }
     mainScrollContainer?.scrollTo(0, 0);
+    toggleChildTransitionClassOnListContainer();
     areMobileFiltersOpen.value = !areMobileFiltersOpen.value;
+  };
+
+  let childTransitionClassTimeout = 0;
+  const toggleChildTransitionClassOnListContainer = () => {
+    const container = document.querySelector(".list-with-filters");
+    container?.classList.add("list-with-filters--child-transition");
+
+    clearTimeout(childTransitionClassTimeout);
+    childTransitionClassTimeout = setTimeout(() => {
+      container?.classList.remove("list-with-filters--child-transition");
+    }, 400);
   };
 
   const maxPositionY = windowHeight.value - 122;
