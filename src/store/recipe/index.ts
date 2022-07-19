@@ -81,7 +81,7 @@ const actions: ActionTree<RecipeState, any> = {
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
-          "/recipes/names" +
+          "/recipes/suggestions" +
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
@@ -93,6 +93,20 @@ const actions: ActionTree<RecipeState, any> = {
             error.response?.data?.message || error.code;
 
           commit("loadRecipesSearchSuggestionsError", errorMessage);
+          reject(errorMessage);
+        });
+    });
+  },
+
+  getRecipesListCount({ commit }) {
+    return new Promise<number>((resolve, reject) => {
+      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/count")
+        .then((response: AxiosResponse<number>) => {
+          resolve(response.data);
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          const errorMessage: string | undefined =
+            error.response?.data?.message || error.code;
           reject(errorMessage);
         });
     });

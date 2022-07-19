@@ -20,7 +20,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import { useWindowSize } from "@/components/utils/composables/window-size";
+const store = useStore();
+const { isMobile } = useWindowSize();
 
 const recipesListDefaultFilters = {
   currentPage: 1,
@@ -31,13 +35,20 @@ const recipesListDefaultFilters = {
   tags: "",
 };
 
-const tabs = [
-  { code: "ALL", label: "Wszystkie" },
-  { code: "NEW", label: "Nowe" },
+const tabs = ref([
+  { code: "ALL", label: "Wszystkie", count: 0 },
   { code: "NOT_COMPLETED", label: "Nieuzupełnione" },
-];
-
+  { code: "NEW", label: "Nowe" },
+]);
 const selectedTab = ref("ALL");
+
+const setRecipesListCount = async () => {
+  tabs.value[0].count = await store.dispatch("recipe/getRecipesListCount");
+};
+
+onMounted(() => {
+  setRecipesListCount();
+});
 </script>
 
 <template src="./template.html"></template>

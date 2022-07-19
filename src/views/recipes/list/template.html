@@ -7,6 +7,7 @@
     class="recipes-list__navigation"
     :items="tabs"
     v-model="selectedTab"
+    :fullWidth="isMobile"
   />
   <main class="recipes-list__content">
     <CListWithFilters

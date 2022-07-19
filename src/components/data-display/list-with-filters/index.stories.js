@@ -25,10 +25,10 @@ Default.args = {
   },
   listName: "list",
   listGetterName: "list/getList",
-  listIsLoadingGetterName: "list/isLoadingList",
+  listLoadingGetterName: "list/isLoadingList",
   listLoadActionName: "list/loadList",
   tagsGetterName: "list/getTags",
-  tagsIsLoadingGetterName: "list/isLoadingTags",
+  tagsLoadingGetterName: "list/isLoadingTags",
   tagsLoadActionName: "list/loadTags",
 };
 

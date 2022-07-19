@@ -11,7 +11,10 @@
       :name="$attrs.id"
       :id="$attrs.id + '-' + index"
     />
-    <label :for="$attrs.id + '-' + index">{{ item.label }}</label>
+    <label :for="$attrs.id + '-' + index">
+      <p>{{ item.label }}</p>
+      <span v-if="item.count">{{ item.count }}</span>
+    </label>
   </div>
   <div
     class="horizontal-tabs__active-indicator"
