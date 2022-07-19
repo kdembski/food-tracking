@@ -7,16 +7,16 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
-import { useWindowSize } from "@/components/utils/composables/window-size";
-import { TagSettings } from "./types/tags";
+import { Tag, TagSettings } from "./types/tags";
+import { isArray } from "lodash";
 
 const store = useStore();
 
 const props = defineProps({
   tags: {
-    type: String,
+    type: [String, Array as () => Array<Tag>],
     default: "",
   },
   isLoading: {
@@ -57,24 +57,42 @@ const tagsSettings = [
   },
 ];
 
-const tagsArray = computed(() => {
-  if (!props.tags) {
-    return [];
-  }
-  const namesArray: Array<string> = props.tags.split(",");
+const convertTagsToArray = (tags: string) => {
+  return tags.split(",").map((tag) => {
+    return {
+      name: tag,
+    };
+  });
+};
 
-  return namesArray.map((name) => {
-    const tagSettings = tagsSettings.find((tag) => tag.name === name);
+const addSettingsToTags = (tags: Tag[]) => {
+  return tags.map((tag: Tag) => {
+    const tagSettings = tagsSettings.find(
+      (tagSettings: TagSettings) => tagSettings.name === tag.name
+    );
 
-    if (!tagSettings) {
-      return {
-        name,
-      } as TagSettings;
+    if (tagSettings) {
+      return Object.assign(tag, tagSettings);
     }
 
-    return tagSettings;
+    return tag;
   });
+};
+
+const tagsArray = computed(() => {
+  let tags = props.tags;
+
+  if (!tags) {
+    return [];
+  }
+
+  if (!isArray(tags)) {
+    tags = convertTagsToArray(tags);
+  }
+
+  return addSettingsToTags(tags);
 });
+
 const tagsCount = computed(() => tagsArray.value.length);
 
 const customizedTags = computed(() => {
@@ -118,7 +136,7 @@ const getTagColorStyles = (tagSettings: TagSettings) => {
 
   return {
     color: tagSettings.darkColor,
-    backgroundColor: tagSettings.lightColor,
+    backgroundColor: tagSettings.lightColor + "aa",
     borderColor: tagSettings.darkColor + "20",
   };
 };

@@ -15,7 +15,8 @@
           :style="getTagColorStyles(tag)"
         >
           <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
-          {{ tag.name }}
+          <p>{{ tag.name }}</p>
+          <span v-if="withCounts && tag.count > 1">{{ tag.count }}</span>
         </label>
       </div>
     </template>
@@ -30,7 +31,10 @@
           class="tag__checkbox"
           type="checkbox"
         />
-        <label class="tag" :for="'tag-' + tag.name"> {{ tag.name }} </label>
+        <label class="tag" :for="'tag-' + tag.name">
+          <p>{{ tag.name }}</p>
+          <span v-if="withCounts && tag.count > 1">{{ tag.count }}</span>
+        </label>
       </div>
     </template>
   </CTags>

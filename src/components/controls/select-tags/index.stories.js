@@ -20,7 +20,31 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  tags: "default,vege,ostre,szybkie,śniadanie,obiad,kolacja",
+  tags: [
+    {
+      name: "default",
+      count: 12,
+    },
+    {
+      name: "vege",
+      count: 23,
+    },
+    {
+      name: "ostre",
+    },
+    {
+      name: "szybkie",
+    },
+    {
+      name: "śniadanie",
+    },
+    {
+      name: "obiad",
+    },
+    {
+      name: "kolacja",
+    },
+  ],
 };
 
 export const isLoading = Template.bind({});
@@ -30,3 +54,6 @@ export const Empty = Template.bind({});
 Empty.args = {
   tags: "",
 };
+
+export const withCounts = Template.bind({});
+withCounts.args = Object.assign({ withCounts: true }, Default.args);

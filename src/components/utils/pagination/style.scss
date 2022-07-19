@@ -87,9 +87,10 @@
   .pagination {
     &-pages {
       &__item {
+        color: $secondary-light-30;
+
         &--active {
           background-color: $secondary-dark-20;
-          color: $secondary-light-30;
         }
 
         &:hover {

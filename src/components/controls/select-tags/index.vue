@@ -23,6 +23,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  withCounts: {
+    type: Boolean,
+    deafult: false,
+  },
 });
 
 const emit = defineEmits<{

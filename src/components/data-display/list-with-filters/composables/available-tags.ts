@@ -1,6 +1,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { ListFilters } from "@/types/list";
+import { Tag } from "@/components/utils/tags/types/tags";
 
 export function useAvailableTags(
   tagsLoadActionName: string,
@@ -26,17 +27,17 @@ export function useAvailableTags(
   const getAvailableTagsOptions = (selectedTags: string) => {
     const selectedTagsArray = selectedTags.split(",");
 
-    const availableTagsWithoutSelected = availableTags.value
-      ?.split(",")
-      .filter(
-        (availableTag: string) =>
-          !selectedTagsArray?.some((selectedTag) => selectedTag == availableTag)
-      );
+    const availableTagsWithoutSelected = availableTags.value?.filter(
+      (availableTag: Tag) =>
+        !selectedTagsArray?.some(
+          (selectedTag) => selectedTag == availableTag.name
+        )
+    );
 
-    return availableTagsWithoutSelected?.map((tag: string) => {
+    return availableTagsWithoutSelected?.map((tag: Tag) => {
       return {
-        value: tag,
-        label: tag,
+        value: tag.name,
+        label: tag.name,
       };
     });
   };
