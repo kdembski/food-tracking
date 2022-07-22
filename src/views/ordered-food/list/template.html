@@ -24,14 +24,16 @@
             external
           />
           <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
-          <CButton
-            color="secondary"
-            label=""
-            size="small"
-            variant="text"
-            icon="ellipsis-vertical"
-            class="item__menu"
-          />
+          <div class="item__buttons">
+            <CButton
+              color="secondary"
+              label=""
+              size="small"
+              variant="text"
+              icon="calendar-plus"
+              class="item__menu"
+            />
+          </div>
         </div>
       </template>
     </CListWithFilters>

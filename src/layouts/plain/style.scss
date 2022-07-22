@@ -1,10 +1,4 @@
 .layout-plain {
-  background-color: $white;
+  background-color: var(--surface-primary);
   height: 100vh;
-}
-
-.dark-mode {
-  &.layout-plain {
-    background-color: $secondary-dark-30;
-  }
 }

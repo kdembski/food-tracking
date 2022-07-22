@@ -1,6 +1,6 @@
 .topbar {
   padding: 12px 30px 12px 20px;
-  background-color: $secondary-dark-15;
+  background-color: $surface-dark;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,7 +15,7 @@
     }
 
     & > p {
-      color: $secondary-light-55;
+      color: $text-lightest;
       font-weight: 500;
       letter-spacing: 2px;
       font-size: $font-xl;
@@ -30,15 +30,9 @@
   }
 
   &__item {
-    color: $secondary-light-55;
+    color: $text-lightest;
     cursor: pointer;
     font-size: $font-xl;
-  }
-}
-
-.dark-mode {
-  .topbar {
-    background-color: $secondary-dark-25;
   }
 }
 
@@ -62,12 +56,6 @@
 
     &__item {
       font-size: $font-lg;
-    }
-  }
-
-  .dark-mode {
-    .topbar {
-      background-color: $secondary-dark-25;
     }
   }
 }

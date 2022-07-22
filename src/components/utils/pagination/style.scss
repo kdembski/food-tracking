@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: $secondary;
+  color: var(--text-secondary);
 
   &-pages {
     display: flex;
@@ -12,17 +12,16 @@
     &__item {
       padding: 5px 10px;
       border-radius: 3px;
-      font-weight: 600;
+      font-weight: 500;
 
       &--active {
         cursor: default;
-        color: $secondary;
-
-        background-color: $secondary-light-55;
+        color: var(--text-secondary);
+        background-color: var(--surface-tetriary);
       }
 
       &:hover {
-        background-color: $secondary-light-55;
+        background-color: var(--surface-tetriary);
       }
     }
   }
@@ -30,20 +29,20 @@
   &__arrow {
     padding: 5px 10px;
     border-radius: 3px;
-    color: $secondary;
+    color: var(--text-secondary);
 
     &--disabled {
       cursor: default;
-      color: $secondary-light-30;
+      color: var(--text-tetriary);
     }
 
     &:hover:not(.pagination__arrow--disabled) {
-      background-color: $secondary-light-55;
+      background-color: var(--surface-tetriary);
     }
   }
 
   &__summary {
-    color: $secondary-light-20;
+    color: var(--text-tetriary);
     padding: 0 3px;
   }
 
@@ -78,36 +77,6 @@
     &__loader {
       .skeleton-loader {
         height: 25px;
-      }
-    }
-  }
-}
-
-.dark-mode {
-  .pagination {
-    &-pages {
-      &__item {
-        color: $secondary-light-30;
-
-        &--active {
-          background-color: $secondary-dark-20;
-        }
-
-        &:hover {
-          background-color: $secondary-dark-20;
-        }
-      }
-    }
-
-    &__arrow {
-      color: $secondary-light-30;
-
-      &--disabled {
-        color: $secondary-dark-10;
-      }
-
-      &:hover:not(.pagination__arrow--disabled) {
-        background-color: $secondary-dark-20;
       }
     }
   }

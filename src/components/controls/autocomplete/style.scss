@@ -3,28 +3,16 @@
 
   &__input {
     font-style: italic;
-    color: $secondary-light-20;
+    color: var(--text-tetriary);
     scroll-margin: 25px;
 
     &--option-selected {
       font-style: normal;
-      color: $secondary-dark-30;
+      color: var(--text-primary);
     }
 
     &::placeholder {
       font-style: normal;
-    }
-  }
-}
-
-.dark-mode {
-  .autocomplete {
-    .autocomplete__input {
-      color: $secondary-light-30;
-
-      &--option-selected {
-        color: $white;
-      }
     }
   }
 }

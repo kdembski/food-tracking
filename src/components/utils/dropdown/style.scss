@@ -5,9 +5,10 @@
   border-radius: 6px;
   overflow: hidden;
   z-index: 30;
-  background-color: $white;
-  border: 1px solid $secondary-light-45;
-  box-shadow: $shadow-sm-light;
+  color: var(--text-primary);
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: $shadow-sm var(--shadow-color);
 
   &--top {
     bottom: calc(100% + 10px);
@@ -24,22 +25,21 @@
 
   &__option {
     padding: 15px;
-    background-color: $white;
     cursor: pointer;
 
     &:hover,
     &--hovered {
-      background-color: $secondary-light-55;
+      background-color: var(--surface-tetriary);
     }
 
     &:deep(strong) {
-      color: $primary;
+      color: var(--primary);
     }
   }
 
   &__empty-message {
     padding: 15px;
-    color: $secondary-light-20;
+    color: var(--text-tetriary);
   }
 
   &__loader {
@@ -71,7 +71,7 @@
     overflow: unset;
     bottom: 0;
     border: 0;
-    border-top: 1px solid $secondary-light-45;
+    border-top: 1px solid var(--border-color);
     border-radius: 0;
     margin-top: -62px;
 
@@ -97,39 +97,8 @@
       align-items: center;
       justify-content: center;
       padding: 15px;
-      background-color: $white;
-      border-top: 1px solid $secondary-light-55;
-    }
-  }
-
-  .dark-mode {
-    .dropdown {
-      &__close-btn {
-        background-color: $secondary-dark-30;
-        border-color: $secondary-dark-15;
-      }
-    }
-  }
-}
-
-.dark-mode {
-  .dropdown {
-    background-color: $secondary-dark-30;
-    box-shadow: $shadow-sm-dark;
-    border-color: $secondary-dark-15;
-
-    &__option {
-      background-color: $secondary-dark-30;
-      color: $white;
-
-      &:hover,
-      &--hovered {
-        background-color: $secondary-dark-25;
-      }
-    }
-
-    &__empty-message {
-      color: $secondary-light-10;
+      background-color: var(--surface-primary);
+      border-top: 1px solid (--border-color);
     }
   }
 }

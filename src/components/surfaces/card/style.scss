@@ -1,19 +1,19 @@
 .card {
-  background-color: $white;
-  border: 1px solid $secondary-light-45;
   padding: 25px;
   border-radius: 5px;
+
+  &--outlined {
+    background-color: var(--surface-primary);
+    border: 1px solid var(--border-color);
+  }
+
+  &--contained {
+    background-color: var(--surface-secondary);
+  }
 }
 
 @media screen and (max-width: $screen-md) {
   .card {
-    padding: 15px 10px;
-  }
-}
-
-.dark-mode {
-  .card {
-    background-color: $secondary-dark-30;
-    border-color: $secondary-dark-15;
+    padding: 10px;
   }
 }

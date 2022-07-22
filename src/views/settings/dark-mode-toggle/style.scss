@@ -27,7 +27,6 @@
     width: 32px;
     border-radius: 100%;
     background-color: $primary;
-    box-shadow: $shadow-xs;
     font-size: 20px;
     color: $white;
     transition: all 0.2s ease-in-out;
@@ -48,7 +47,6 @@
     &__icon {
       background-color: $secondary-dark-15;
       color: $primary-light;
-      box-shadow: $shadow-xs-dark;
       left: calc(100% - 30px);
     }
 

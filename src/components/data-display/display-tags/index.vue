@@ -9,7 +9,7 @@ export default {
 <script setup lang="ts">
 const props = defineProps({
   tags: {
-    type: String,
+    type: [String, Array],
     default: "",
   },
 });

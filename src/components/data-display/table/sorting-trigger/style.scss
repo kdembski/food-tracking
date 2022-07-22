@@ -15,7 +15,7 @@
   }
 
   &__icon {
-    color: $secondary-light-30;
+    color: var(--text-tetriary);
     font-size: $font-base;
 
     &:last-child {
@@ -23,7 +23,7 @@
     }
 
     &--active {
-      color: $secondary-dark-10;
+      color: var(--text-primary);
     }
   }
 }

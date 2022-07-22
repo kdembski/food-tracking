@@ -1,7 +1,7 @@
 .link {
   display: flex;
   gap: 5px;
-  color: $primary;
+  color: var(--primary);
   cursor: pointer;
 
   &:hover {

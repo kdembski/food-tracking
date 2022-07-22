@@ -1,8 +1,5 @@
 <template>
-  <component
-    :is="layoutComponentName"
-    :class="{ 'dark-mode': isDarkModeEnabled }"
-  >
+  <component :is="layoutComponentName">
     <router-view />
   </component>
 </template>
@@ -20,7 +17,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, onMounted, onUnmounted } from "vue";
+import { computed, onBeforeMount, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import ApiService from "./services/api.service";
 import { useWindowSize } from "@/components/utils/composables/window-size";
@@ -29,6 +26,17 @@ import { useStore } from "vuex";
 const store = useStore();
 
 const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
+watch(
+  isDarkModeEnabled,
+  (value) => {
+    if (value) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      return;
+    }
+    document.documentElement.setAttribute("data-theme", "light");
+  },
+  { immediate: true }
+);
 
 const layoutComponentName = computed(() => {
   const layoutType = useRoute().meta.layout;
@@ -65,34 +73,21 @@ a {
   all: unset;
 }
 
-@media screen and (min-width: $screen-md) {
-  * {
-    &::-webkit-scrollbar {
-      width: 12px;
-      height: 12px;
-    }
-
-    &::-webkit-scrollbar-track {
-      border-radius: 100px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: $secondary-light-40;
-      border-radius: 100px;
-      border: 4px transparent solid;
-      background-clip: padding-box;
-    }
+* {
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
   }
-}
 
-.dark-mode {
-  * {
-    &::-webkit-scrollbar-thumb {
-      background: $secondary-dark-20;
-      border-radius: 100px;
-      border: 4px transparent solid;
-      background-clip: padding-box;
-    }
+  &::-webkit-scrollbar-track {
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 100px;
+    border: 4px transparent solid;
+    background-clip: padding-box;
   }
 }
 </style>

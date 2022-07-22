@@ -40,6 +40,9 @@ import {
   faCalculator,
   faArrowDownAZ,
   faBell,
+  faCalendarPlus,
+  faCartShopping,
+  faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faClock as faRegularClock } from "@fortawesome/free-regular-svg-icons";
@@ -84,7 +87,10 @@ library.add(
   faChartLine,
   faCalculator,
   faArrowDownAZ,
-  faBell
+  faBell,
+  faCalendarPlus,
+  faCartShopping,
+  faCartPlus
 );
 
 export default FontAwesomeIcon;

@@ -38,6 +38,7 @@ Default.args = {
     {
       label: "label-1",
       value: "1",
+      sortable: true,
     },
     {
       label: "label-2",

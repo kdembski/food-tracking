@@ -1,0 +1,55 @@
+@function toRGB($color) {
+  @return red($color) + ", " + green($color) + ", " + blue($color);
+}
+
+:root,
+*:after,
+*:before {
+  --primary: #{$primary};
+  --primary-light: #{$primary-light};
+  --primary-dark: #{$primary-dark};
+
+  --surface-primary: #{$surface-lightest};
+  --surface-primary-rgb: #{toRGB($surface-lightest)};
+  --surface-secondary: #{$surface-lighter};
+  --surface-tetriary: #{$surface-light};
+
+  --border-color: #{$border-light};
+
+  --text-primary: #{$text-darkest};
+  --text-secondary: #{$text-darker};
+  --text-tetriary: #{$text-dark};
+
+  --shadow-color: #{$shadow-light};
+
+  --error-primary: #{$error};
+  --error-secondary: #{$error-light};
+
+  --success-primary: #{$success};
+  --success-secondary: #{$success-light};
+}
+
+[data-theme="dark"] {
+  &:root,
+  *:after,
+  *:before {
+    --surface-primary: #{$surface-darkest};
+    --surface-primary-rgb: #{toRGB($surface-darkest)};
+    --surface-secondary: #{$surface-darker};
+    --surface-tetriary: #{$surface-dark};
+
+    --border-color: #{$border-dark};
+
+    --text-primary: #{$text-lightest};
+    --text-secondary: #{$text-lighter};
+    --text-tetriary: #{$text-light};
+
+    --shadow-color: #{$shadow-dark};
+
+    --error-primary: #{$error-light};
+    --error-secondary: #{$error};
+
+    --success-primary: #{$success-light};
+    --success-secondary: #{$success};
+  }
+}

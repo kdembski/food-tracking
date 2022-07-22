@@ -15,10 +15,28 @@ $secondary-dark-10: darken($secondary, 10);
 $secondary-dark-15: darken($secondary, 15);
 $secondary-dark-20: darken($secondary, 20);
 $secondary-dark-25: darken($secondary, 25);
-$secondary-dark-30: darken($secondary, 30);
+$secondary-dark-30: darken($secondary, 28);
 
 $white: white;
 $black: black;
+
+$surface-lightest: $white;
+$surface-lighter: $secondary-light-60;
+$surface-light: $secondary-light-55;
+$border-light: $secondary-light-50;
+
+$text-darkest: $secondary-dark-30;
+$text-darker: $secondary;
+$text-dark: $secondary-light-30;
+
+$surface-darkest: $secondary-dark-30;
+$surface-darker: $secondary-dark-25;
+$surface-dark: $secondary-dark-20;
+$border-dark: $secondary-dark-15;
+
+$text-lightest: $secondary-light-55;
+$text-lighter: $secondary-light-45;
+$text-light: $secondary-light-10;
 
 $info: #003780;
 $info-light: #bfe5f2;
@@ -39,32 +57,14 @@ $font-xl: 20px;
 $font-2xl: 24px;
 $font-3xl: 28px;
 
-$shadow-color-light: rgba(0, 0, 0, 0.08);
+$shadow-light: rgba(0, 0, 0, 0.1);
 $shadow-color: rgba(0, 0, 0, 0.16);
-$shadow-color-dark: rgba(0, 0, 0, 0.6);
+$shadow-dark: rgba(0, 0, 0, 0.6);
 
-@use "sass:map";
-$shadow-sizes: (
-  xs: 0 2px 4px 0,
-  sm: 0 3px 6px 0,
-  md: 0 4px 8px 0,
-  lg: 0 6px 10px 0,
-);
-
-$shadow-xs: map.get($shadow-sizes, "xs") $shadow-color;
-$shadow-sm: map.get($shadow-sizes, "sm") $shadow-color;
-$shadow-md: map.get($shadow-sizes, "md") $shadow-color;
-$shadow-lg: map.get($shadow-sizes, "lg") $shadow-color;
-
-$shadow-xs-light: map.get($shadow-sizes, "xs") $shadow-color-light;
-$shadow-sm-light: map.get($shadow-sizes, "sm") $shadow-color-light;
-$shadow-md-light: map.get($shadow-sizes, "md") $shadow-color-light;
-$shadow-lg-light: map.get($shadow-sizes, "lg") $shadow-color-light;
-
-$shadow-xs-dark: map.get($shadow-sizes, "xs") $shadow-color-dark;
-$shadow-sm-dark: map.get($shadow-sizes, "sm") $shadow-color-dark;
-$shadow-md-dark: map.get($shadow-sizes, "md") $shadow-color-dark;
-$shadow-lg-dark: map.get($shadow-sizes, "lg") $shadow-color-dark;
+$shadow-xs: 0 2px 4px 0;
+$shadow-sm: 0 3px 6px 0;
+$shadow-md: 0 4px 8px 0;
+$shadow-lg: 0 6px 10px 0;
 
 $screen-xs: 320px;
 $screen-sm: 480px;

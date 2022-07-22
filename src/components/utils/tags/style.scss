@@ -7,16 +7,16 @@
     display: inline-flex;
     align-items: center;
     padding: 5px 12px;
-    background-color: $secondary-light-60;
-    color: $secondary-dark-10;
-    border: 1px solid $secondary-light-55;
+    background-color: var(--surface-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
     font-weight: 500;
     font-size: $font-sm;
     border-radius: 15px;
     cursor: pointer;
 
     &:hover {
-      filter: brightness(92%);
+      filter: brightness(94%);
     }
 
     svg {
@@ -46,15 +46,11 @@
   }
 }
 
-.dark-mode {
+[data-theme="dark"] {
   .tags {
     &:deep(.tag) {
-      color: $secondary-light-55;
-      background-color: $secondary-dark-20;
-      border-color: $secondary-dark-15;
-
       &:hover {
-        filter: brightness(125%);
+        filter: brightness(135%);
       }
     }
   }

@@ -12,7 +12,7 @@ import { TagSettings } from "@/components/utils/tags/types/tags";
 
 const props = defineProps({
   tags: {
-    type: String,
+    type: [String, Array],
     default: "",
   },
   isLoading: {

@@ -4,13 +4,14 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  color: var(--text-primary);
 
   &__content {
     border-collapse: collapse;
     min-width: 750px;
 
     tr {
-      border-bottom: 1px solid $secondary-light-50;
+      border-bottom: 1px solid var(--border-color);
     }
 
     th,
@@ -28,7 +29,7 @@
 
     th {
       text-align: left;
-      color: $secondary-light-20;
+      color: var(--text-tetriary);
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: $font-sm;
@@ -125,15 +126,5 @@
       gap: 10px;
       margin: 0 0 10px;
     }
-  }
-}
-
-.dark-mode {
-  .list {
-    color: $white;
-  }
-
-  tr {
-    border-color: $secondary-dark-20;
   }
 }

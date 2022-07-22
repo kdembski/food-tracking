@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  color: var(--text-primary);
 
   &__content {
     display: flex;
@@ -88,11 +89,5 @@
         padding: 15px 10px 12px;
       }
     }
-  }
-}
-
-.dark-mode {
-  .list {
-    color: $white;
   }
 }

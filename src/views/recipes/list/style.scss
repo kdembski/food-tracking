@@ -25,23 +25,12 @@
       }
     }
 
-    &__cookidoo-link {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      color: $white;
-      background-color: #009a3e;
-      min-width: 18px;
-      padding: 4px 5px;
-      border-radius: 4px;
-    }
-
     &__preparation-time {
       font-size: $font-sm;
       font-weight: 500;
       display: flex;
       gap: 5px;
-      color: $secondary-light-20;
+      color: var(--text-tetriary);
 
       & > svg {
         margin-top: 1px;
@@ -51,14 +40,7 @@
     &__recipe-name {
       font-size: $font-xl;
       font-weight: 500;
-      color: $secondary-dark-30;
-    }
-
-    &__menu {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: $font-xl;
+      color: var(--text-primary);
     }
 
     &__cooked-date {
@@ -69,8 +51,32 @@
       & > span {
         width: 8px;
         height: 8px;
-        background-color: $primary;
+        background-color: var(--primary);
         border-radius: 100%;
+      }
+    }
+
+    &__cookidoo-link {
+      color: var(--text-primary);
+      min-width: 18px;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: var(--surface-tetriary);
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      gap: 5px;
+
+      & > button,
+      & > a {
+        font-size: $font-base;
+        padding: 6px 8px;
       }
     }
   }
@@ -83,38 +89,23 @@
 @media screen and (max-width: $screen-md) {
   .recipes-list {
     .item {
-      &__menu {
-        top: 8px;
-        right: 10px;
-      }
-
       &__recipe-name {
         font-size: $font-lg;
       }
 
       &__preparation-time {
         font-size: $font-xs;
-        color: $secondary-light-30;
       }
 
-      &__cookidoo-link {
-        bottom: 12px;
-        right: 10px;
+      &__buttons {
+        & > button {
+          font-size: $font-lg;
+        }
       }
     }
 
     &__navigation {
       margin-bottom: 10px;
-    }
-  }
-}
-
-.dark-mode {
-  .recipes-list {
-    .item {
-      &__recipe-name {
-        color: $secondary-light-55;
-      }
     }
   }
 }

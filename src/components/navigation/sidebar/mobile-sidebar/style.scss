@@ -1,6 +1,6 @@
 .mobile-sidebar {
   &__wrapper {
-    background-color: $secondary-dark-15;
+    background-color: $surface-dark;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -26,12 +26,12 @@
 
     &__link {
       width: 100%;
-      color: $secondary-light-10;
+      color: $text-light;
       display: flex;
       transition: color 0.15s ease-in-out;
 
       &--active {
-        color: $secondary-light-55;
+        color: $text-lightest;
       }
     }
 
@@ -71,36 +71,10 @@
       width: 5px;
       height: 5px;
       border-radius: 100%;
-      background-color: $secondary-light-10;
+      background-color: $text-light;
 
       &.active {
-        background-color: $secondary-light-55;
-      }
-    }
-  }
-}
-
-.dark-mode {
-  .mobile-sidebar {
-    &__wrapper {
-      background-color: $secondary-dark-25;
-    }
-
-    .item__link {
-      color: $secondary;
-
-      &--active {
-        color: $secondary-light-55;
-      }
-    }
-
-    &__active-indicator {
-      & > span {
-        background-color: $secondary;
-
-        &.active {
-          background-color: $secondary-light-55;
-        }
+        background-color: $text-lightest;
       }
     }
   }

@@ -4,7 +4,7 @@
   border-radius: 3px;
   position: relative;
   gap: 20px;
-  border-bottom: 1px solid $secondary-light-45;
+  border-bottom: 1px solid var(--border-color);
 
   &__item {
     position: relative;
@@ -15,7 +15,7 @@
 
       &:checked {
         & + label {
-          color: $secondary;
+          color: var(--text-secondary);
           cursor: default;
         }
       }
@@ -24,12 +24,12 @@
     & > label {
       display: flex;
       align-items: center;
-      color: $secondary-light-30;
+      color: var(--text-tetriary);
       padding: 0 2px 15px;
       cursor: pointer;
 
       &:hover {
-        color: $secondary;
+        color: var(--text-secondary);
       }
 
       & > p {
@@ -40,9 +40,9 @@
 
       & > span {
         flex-grow: 1;
-        background-color: $secondary-light-55;
+        background-color: var(--surface-tetriary);
         font-size: $font-xs;
-        color: $secondary;
+        color: var(--text-secondary);
         font-weight: 500;
         padding: 2px 6px;
         height: 100%;
@@ -62,7 +62,7 @@
     position: absolute;
     height: 5px;
     bottom: -1px;
-    background-color: $primary;
+    background-color: var(--primary);
     transition: width 0.2s ease-in-out, left 0.2s ease-in-out;
   }
 }
@@ -74,35 +74,6 @@
     &__item {
       & > label {
         padding: 0 2px 10px;
-      }
-    }
-  }
-}
-
-.dark-mode {
-  .horizontal-tabs {
-    border-color: $secondary-dark-15;
-
-    &__item {
-      & > input {
-        &:checked {
-          & + label {
-            color: $secondary-light-55;
-          }
-        }
-      }
-
-      & > label {
-        color: $secondary;
-
-        &:hover {
-          color: $secondary-light-55;
-        }
-
-        & > span {
-          background-color: $secondary-dark-10;
-          color: $secondary-light-55;
-        }
       }
     }
   }

@@ -5,6 +5,7 @@ module.exports = {
         additionalData: `
         @import "@/styles/_variables.scss";
         @import "@/styles/_fonts.scss";
+        @import "@/styles/_themes.scss";
         `,
       },
     },

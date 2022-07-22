@@ -21,7 +21,7 @@
 
     & > span {
       flex-grow: 1;
-      background-color: transparentize($black, 0.9);
+      background-color: transparentize($black, 0.92);
       font-size: $font-xs;
       padding: 2px 6px;
       height: 100%;
@@ -29,22 +29,22 @@
       margin: 0 -5px 0 8px;
     }
   }
+
+  &__empty {
+    color: var(--text-primary);
+  }
 }
 
-.dark-mode {
+[data-theme="dark"] {
   .select-tags {
     .tag__checkbox:checked + .tag {
-      filter: brightness(40%);
+      filter: brightness(60%);
     }
 
     .tag {
       & > span {
-        background-color: transparentize($white, 0.85);
+        background-color: transparentize($white, 0.9);
       }
-    }
-
-    &__empty {
-      color: $white;
     }
   }
 }

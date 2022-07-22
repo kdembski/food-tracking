@@ -130,14 +130,14 @@ const getTagColorStyles = (tagSettings: TagSettings) => {
     return {
       color: tagSettings.lightColor,
       backgroundColor: tagSettings.darkColor,
-      borderColor: tagSettings.lightColor + "33",
+      borderColor: tagSettings.lightColor + "41",
     };
   }
 
   return {
     color: tagSettings.darkColor,
-    backgroundColor: tagSettings.lightColor + "aa",
-    borderColor: tagSettings.darkColor + "20",
+    backgroundColor: tagSettings.lightColor,
+    borderColor: tagSettings.darkColor + "21",
   };
 };
 </script>

@@ -18,21 +18,28 @@
     &__food-name {
       font-size: $font-xl;
       font-weight: 500;
-      color: $secondary-dark-30;
+      color: var(--text-primary);
     }
 
     &__place-name {
       font-size: $font-sm;
       font-weight: 500;
-      color: $secondary-light-20;
+      color: var(--text-secondary);
       margin: 5px 0 18px 1px;
     }
 
-    &__menu {
+    &__buttons {
+      display: flex;
       position: absolute;
       top: 10px;
-      right: 15px;
-      font-size: $font-xl;
+      right: 10px;
+      gap: 5px;
+
+      & > button,
+      & > a {
+        font-size: $font-base;
+        padding: 6px 8px;
+      }
     }
   }
 }
@@ -42,27 +49,14 @@
     overflow: hidden;
 
     .item {
-      &__menu {
-        top: 8px;
-        right: 10px;
+      &__buttons {
+        & > button {
+          font-size: $font-lg;
+        }
       }
 
       &__food-name {
         font-size: $font-lg;
-      }
-
-      &__place-name {
-        color: $secondary-light-30;
-      }
-    }
-  }
-}
-
-.dark-mode {
-  .ordered-food-list {
-    .item {
-      &__food-name {
-        color: $secondary-light-55;
       }
     }
   }

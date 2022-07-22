@@ -5,8 +5,8 @@
   justify-content: center;
 
   &--success {
-    color: $success;
-    background-color: $success-light;
+    color: var(--success-primary);
+    background-color: var(--success-secondary);
 
     &.icon--small {
       font-size: 14px;
@@ -18,8 +18,8 @@
   }
 
   &--error {
-    color: $error;
-    background-color: $error-light;
+    color: var(--error-primary);
+    background-color: var(--error-secondary);
 
     &.icon--medium {
       font-size: 20px;
@@ -42,21 +42,5 @@
   &--large {
     height: 30px;
     width: 30px;
-  }
-}
-
-.dark-mode {
-  .icon {
-    box-shadow: $shadow-xs-dark;
-
-    &--success {
-      color: $success-light;
-      background-color: $success;
-    }
-
-    &--error {
-      color: $error-light;
-      background-color: $error;
-    }
   }
 }

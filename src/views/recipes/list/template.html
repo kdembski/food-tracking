@@ -38,23 +38,39 @@
             </div>
           </div>
           <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
-          <CButton
-            color="secondary"
-            label=""
-            variant="text"
-            size="small"
-            icon="ellipsis-vertical"
-            class="item__menu"
-          />
-          <CLink
-            v-if="item.cookidooLink"
-            :href="item.cookidooLink"
-            class="item__cookidoo-link"
-            label=""
-            external
-          >
-            <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
-          </CLink>
+          <div class="item__buttons">
+            <template v-if="isMobile">
+              <CButton
+                color="secondary"
+                label=""
+                variant="text"
+                icon="ellipsis-vertical"
+              />
+            </template>
+            <template v-else>
+              <CButton
+                color="secondary"
+                label=""
+                variant="text"
+                icon="cart-plus"
+              />
+              <CButton
+                color="secondary"
+                label=""
+                variant="text"
+                icon="calendar-plus"
+              />
+              <CLink
+                v-if="item.cookidooLink"
+                :href="item.cookidooLink"
+                class="item__cookidoo-link"
+                label=""
+                external
+              >
+                <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+              </CLink>
+            </template>
+          </div>
         </div>
       </template>
     </CListWithFilters>

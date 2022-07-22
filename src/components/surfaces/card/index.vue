@@ -12,7 +12,18 @@ const props = defineProps({
       return ["div", "form", "li"].indexOf(value) !== -1;
     },
   },
+  variant: {
+    type: String,
+    default: "outlined",
+    validator: (value: string) => {
+      return ["contained", "outlined"].indexOf(value) !== -1;
+    },
+  },
 });
+
+const getVariantClass = () => {
+  return "card--" + props.variant;
+};
 
 const wrapper: Ref<HTMLElement | undefined> = ref();
 defineExpose({ wrapper });

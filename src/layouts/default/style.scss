@@ -1,7 +1,7 @@
 .layout-default {
   display: flex;
   flex-direction: column;
-  background-color: $white;
+  background-color: var(--surface-primary);
   position: relative;
   height: 100vh;
 
@@ -14,7 +14,6 @@
   .layout-content {
     display: flex;
     flex-grow: 1;
-    overflow: hidden;
 
     &__container {
       display: flex;
@@ -38,7 +37,7 @@
 
     & > h1 {
       font-size: $font-xl;
-      color: $secondary;
+      color: var(--text-secondary);
       letter-spacing: 1px;
     }
   }
@@ -59,18 +58,6 @@
 
       & > h1 {
         font-size: $font-lg;
-      }
-    }
-  }
-}
-
-.dark-mode {
-  &.layout-default {
-    background-color: $secondary-dark-30;
-
-    &:deep(header) {
-      & > h1 {
-        color: $secondary-light-55;
       }
     }
   }
