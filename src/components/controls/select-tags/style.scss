@@ -21,12 +21,9 @@
 
     & > span {
       flex-grow: 1;
-      background-color: transparentize($black, 0.92);
       font-size: $font-xs;
-      padding: 2px 6px;
       height: 100%;
-      border-radius: 10px;
-      margin: 0 -5px 0 8px;
+      margin-left: 8px;
     }
   }
 
@@ -39,12 +36,6 @@
   .select-tags {
     .tag__checkbox:checked + .tag {
       filter: brightness(60%);
-    }
-
-    .tag {
-      & > span {
-        background-color: transparentize($white, 0.9);
-      }
     }
   }
 }

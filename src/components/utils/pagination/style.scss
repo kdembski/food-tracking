@@ -12,16 +12,16 @@
     &__item {
       padding: 5px 10px;
       border-radius: 3px;
-      font-weight: 500;
+      font-weight: 600;
 
       &--active {
         cursor: default;
         color: var(--text-secondary);
-        background-color: var(--surface-tetriary);
+        background-color: rgba(var(--text-primary-rgb), 0.08);
       }
 
       &:hover {
-        background-color: var(--surface-tetriary);
+        background-color: rgba(var(--text-primary-rgb), 0.08);
       }
     }
   }
@@ -37,13 +37,14 @@
     }
 
     &:hover:not(.pagination__arrow--disabled) {
-      background-color: var(--surface-tetriary);
+      background-color: rgba(var(--text-primary-rgb), 0.08);
     }
   }
 
   &__summary {
-    color: var(--text-tetriary);
-    padding: 0 3px;
+    font-size: $font-sm;
+    color: var(--text-secondary);
+    padding: 0 5px;
   }
 
   &__loader {

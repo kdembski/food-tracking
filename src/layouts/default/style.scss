@@ -25,7 +25,7 @@
 
     &__wrapper {
       padding: 20px 30px;
-      padding-right: 20px;
+      padding-right: 18px;
       flex-grow: 1;
       width: 100%;
       overflow-y: scroll;
@@ -54,7 +54,7 @@
     }
 
     &:deep(header) {
-      margin: 0 10px 20px;
+      margin: 0 0 20px 10px;
 
       & > h1 {
         font-size: $font-lg;

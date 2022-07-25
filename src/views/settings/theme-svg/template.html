@@ -1,0 +1,69 @@
+<svg class="theme-svg" :class="getSvgClasses()" viewBox="0 0 800 600">
+  <rect class="theme-svg__background" x="0" y="59" width="100%" height="100%" />
+  <rect class="theme-svg__sidebar" x="0" y="59" width="100" height="100%" />
+  <rect class="theme-svg__topbar" x="0" y="0" width="100%" height="60" />
+  <rect class="theme-svg__logo" x="15" y="15" width="30" height="30" rx="10" />
+  <rect
+    class="theme-svg__logo-text"
+    x="60"
+    y="20"
+    width="100"
+    height="20"
+    rx="8"
+  />
+  <rect
+    class="theme-svg__header"
+    x="200"
+    y="100"
+    width="120"
+    height="20"
+    rx="8"
+  />
+  <rect
+    v-for="index in 3"
+    class="theme-svg__nav-item"
+    :class="{ 'theme-svg__nav-item--active': index === 1 }"
+    :x="200 + 90 * (index - 1)"
+    y="180"
+    width="80"
+    height="20"
+    rx="8"
+  />
+  <rect
+    class="theme-svg__active-indicator"
+    x="200"
+    y="210"
+    width="80"
+    height="8"
+    rx="4"
+  />
+  <rect
+    v-for="index in 2"
+    class="theme-svg__button"
+    :x="530 + 90 * (index - 1)"
+    y="95"
+    width="80"
+    height="30"
+    rx="8"
+  />
+  <g v-for="index in 3">
+    <rect
+      class="theme-svg__item-header"
+      x="200"
+      :y="240 + 120 * (index - 1)"
+      width="500"
+      height="35"
+      rx="10"
+    />
+    <rect
+      class="theme-svg__item-border"
+      x="200"
+      :y="240 + 120 * (index - 1)"
+      width="500"
+      height="95"
+      rx="10"
+      stroke-width="2"
+      fill="none"
+    />
+  </g>
+</svg>

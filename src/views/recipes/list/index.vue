@@ -46,6 +46,21 @@ const setRecipesListCount = async () => {
   tabs.value[0].count = await store.dispatch("recipe/getRecipesListCount");
 };
 
+const getPreparationTime = (time: number) => {
+  const minutes = time % 60;
+  const hours = Math.floor(time / 60);
+
+  if (hours && minutes) {
+    return hours + "h " + minutes + "m";
+  }
+
+  if (hours) {
+    return hours + "h";
+  }
+
+  return minutes + "m";
+};
+
 onMounted(() => {
   setRecipesListCount();
 });

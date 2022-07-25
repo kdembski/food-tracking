@@ -14,27 +14,27 @@
       tagsLoadActionName="orderedFood/loadOrderedFoodTags"
       tagsLoadingGetterName="orderedFood/isLoadingOrderedFoodTags"
     >
-      <template v-slot:default="{ item, addTagAndFilter }">
-        <div class="ordered-food-list__item item">
-          <p class="item__food-name">{{ item.foodName }}</p>
-          <CLink
-            class="item__place-name"
-            :label="item.placeName"
-            :href="item.placeLink"
-            external
+      <template #header="{ item }">
+        <p class="item__food-name">{{ item.foodName }}</p>
+        <div class="item__buttons">
+          <CButton
+            color="secondary"
+            label=""
+            size="small"
+            variant="text"
+            icon="calendar-plus"
+            class="item__menu"
           />
-          <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
-          <div class="item__buttons">
-            <CButton
-              color="secondary"
-              label=""
-              size="small"
-              variant="text"
-              icon="calendar-plus"
-              class="item__menu"
-            />
-          </div>
         </div>
+      </template>
+      <template #body="{ item, addTagAndFilter }">
+        <CLink
+          class="item__place-name"
+          :label="item.placeName"
+          :href="item.placeLink"
+          external
+        />
+        <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
       </template>
     </CListWithFilters>
   </main>

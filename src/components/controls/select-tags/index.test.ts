@@ -8,8 +8,8 @@ describe("Select Tags Component", () => {
 
   beforeEach(async () => {
     store = createStore({
-      state: {
-        isDarkModeEnabled: false,
+      getters: {
+        isDarkModeEnabled: () => false,
       },
     });
 

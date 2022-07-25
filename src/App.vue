@@ -25,15 +25,11 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
-const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
+const theme = computed(() => store.state.theme);
 watch(
-  isDarkModeEnabled,
+  theme,
   (value) => {
-    if (value) {
-      document.documentElement.setAttribute("data-theme", "dark");
-      return;
-    }
-    document.documentElement.setAttribute("data-theme", "light");
+    document.documentElement.setAttribute("data-theme", value);
   },
   { immediate: true }
 );
@@ -88,6 +84,22 @@ a {
     border-radius: 100px;
     border: 4px transparent solid;
     background-clip: padding-box;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  * {
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 100px;
+      border: 3px transparent solid;
+      background-clip: padding-box;
+    }
   }
 }
 </style>

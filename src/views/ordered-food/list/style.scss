@@ -25,14 +25,11 @@
       font-size: $font-sm;
       font-weight: 500;
       color: var(--text-secondary);
-      margin: 5px 0 18px 1px;
+      margin: 0 0 10px 2px;
     }
 
     &__buttons {
       display: flex;
-      position: absolute;
-      top: 10px;
-      right: 10px;
       gap: 5px;
 
       & > button,
@@ -57,6 +54,10 @@
 
       &__food-name {
         font-size: $font-lg;
+      }
+
+      &__place-name {
+        margin-bottom: 8px;
       }
     }
   }

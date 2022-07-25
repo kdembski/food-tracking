@@ -46,17 +46,17 @@
     position: sticky;
     z-index: 1;
     top: -20px;
-    margin-top: -15px;
-    padding: 15px 0;
+    margin-top: -10px;
+    padding: 10px 0;
     background-color: var(--surface-primary);
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .list-with-filters {
-    display: inline-flex;
+    display: flex;
     align-items: flex-start;
-    max-width: 100vw;
+    max-width: calc(100vw - 10px);
 
     &--child-transition {
       overflow: hidden;
@@ -64,14 +64,14 @@
 
     &__filters {
       height: unset;
-      min-width: 100vw;
+      min-width: 100%;
       margin: 0;
-      padding: 0 10px;
+      padding-left: 10px;
     }
 
     &__content {
-      min-width: 100vw;
-      padding: 0 10px;
+      min-width: 100%;
+      padding-left: 10px;
     }
 
     &__filters-transition,
@@ -154,8 +154,8 @@
 
     &__pagination {
       top: -10px;
-      margin-top: -10px;
-      padding: 10px 0;
+      margin-top: -8px;
+      padding: 8px 0;
     }
   }
 }

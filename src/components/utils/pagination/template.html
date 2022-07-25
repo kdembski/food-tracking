@@ -5,9 +5,6 @@
   </CSkeletonLoader>
 </div>
 <div v-else-if="paginationData?.totalRecords > 0" class="pagination">
-  <div class="pagination__summary">
-    <p>{{ getPaginationSummaryText() }}</p>
-  </div>
   <div class="pagination-pages">
     <div
       class="pagination__arrow"
@@ -31,5 +28,8 @@
     >
       <FontAwesomeIcon icon="chevron-right" />
     </div>
+  </div>
+  <div class="pagination__summary">
+    <p v-html="getPaginationSummaryText()" />
   </div>
 </div>

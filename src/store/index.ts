@@ -6,18 +6,25 @@ import orderedFood from "./ordered-food/index";
 
 export default createStore({
   state: {
-    isDarkModeEnabled: !!parseInt(
-      StorageService.getItem("isDarkModeEnabled") || "0"
-    ),
+    theme: StorageService.getItem("theme") || "light",
+    primaryColor: StorageService.getItem("primaryColor") || "orange",
   },
-  getters: {},
+
+  getters: {
+    isDarkModeEnabled: (state) => {
+      return state.theme === "dark";
+    },
+  },
+
   mutations: {
-    toggleDarkMode(state) {
-      state.isDarkModeEnabled = !state.isDarkModeEnabled;
-      StorageService.setItem(
-        "isDarkModeEnabled",
-        state.isDarkModeEnabled ? "1" : "0"
-      );
+    setTheme(state, value) {
+      StorageService.setItem("theme", value);
+      state.theme = value;
+    },
+
+    setPrimaryColor(state, value) {
+      StorageService.setItem("theme", value);
+      state.theme = value;
     },
   },
   actions: {},

@@ -120,7 +120,7 @@ const areTagsVisible = () => {
   return getTagsArrayBasedOnType().length > 0 || props.isLoading;
 };
 
-const isDarkModeEnabled = computed(() => store.state.isDarkModeEnabled);
+const isDarkModeEnabled = computed(() => store.getters["isDarkModeEnabled"]);
 const getTagColorStyles = (tagSettings: TagSettings) => {
   if (!tagSettings.darkColor || !tagSettings.lightColor) {
     return false;

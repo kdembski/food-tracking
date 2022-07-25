@@ -33,18 +33,24 @@ const getPaginationSummaryText = () => {
 
   if (isMobile.value) {
     return (
-      firstRecord + " - " + lastRecord + "\xa0\xa0z\xa0\xa0" + totalRecords
+      "<strong>" +
+      firstRecord +
+      "</strong> - <strong>" +
+      lastRecord +
+      "</strong>\xa0\xa0z\xa0\xa0<strong>" +
+      totalRecords +
+      "</strong>"
     );
   }
 
   return (
-    "Wyświetlono\xa0\xa0" +
+    "Wyświetlono \xa0<strong>" +
     firstRecord +
-    " - " +
+    "</strong> - <strong>" +
     lastRecord +
-    "\xa0\xa0z\xa0\xa0" +
+    "</strong>\xa0\xa0z\xa0\xa0<strong>" +
     totalRecords +
-    (totalRecords > 1 ? " wyników" : " wyniku")
+    (totalRecords > 1 ? "</strong> \xa0wyników" : " wyniku")
   );
 };
 
@@ -74,7 +80,11 @@ const getRightArrowClasses = () => {
 };
 
 const changePage = (pageNumber: number) => {
-  if (pageNumber <= 0 || pageNumber > props.paginationData.totalPages) {
+  if (
+    pageNumber <= 0 ||
+    pageNumber > props.paginationData.totalPages ||
+    isPageActive(pageNumber)
+  ) {
     return;
   }
   emit("update:currentPage", pageNumber);

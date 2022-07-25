@@ -69,7 +69,7 @@
 
 @media screen and (max-width: $screen-md) {
   .horizontal-tabs {
-    padding: 0 10px;
+    padding-left: 10px;
 
     &__item {
       & > label {

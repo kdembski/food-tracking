@@ -1,0 +1,16 @@
+<div class="select-theme">
+  <template v-for="theme in themes">
+    <input
+      v-model="selectedTheme"
+      :value="theme.code"
+      :id="'theme-' + theme.code"
+      name="theme"
+      type="radio"
+      class="select-theme__input"
+    />
+    <label :for="'theme-' + theme.code" class="select-theme__label">
+      <ThemeSvg :theme="theme.code" />
+      <div class="select-theme__caption">{{ theme.label }}</div>
+    </label>
+  </template>
+</div>

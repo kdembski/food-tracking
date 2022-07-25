@@ -1,0 +1,49 @@
+.select-theme {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 15px 0;
+
+  &__input {
+    display: none;
+
+    &:checked {
+      & + .select-theme__label {
+        outline: 2px solid var(--primary);
+        outline-offset: -1px;
+      }
+    }
+  }
+
+  &__label {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    padding-bottom: 10px;
+    position: relative;
+  }
+
+  &__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    margin-top: -38px;
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-primary);
+    background-color: var(--surface-primary);
+    font-size: $font-sm;
+    font-weight: 500;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .select-theme {
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px 0;
+  }
+}

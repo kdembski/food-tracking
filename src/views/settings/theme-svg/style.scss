@@ -1,0 +1,111 @@
+.theme-svg {
+  display: block;
+
+  &__background {
+    fill: var(--surface-primary);
+  }
+
+  &__topbar {
+    fill: $surface-dark;
+  }
+
+  &__sidebar {
+    fill: var(--surface-secondary);
+  }
+
+  &__logo {
+    fill: var(--primary);
+  }
+
+  &__logo-text {
+    fill: $text-lightest;
+  }
+
+  &__header {
+    fill: var(--text-secondary);
+  }
+
+  &__button {
+    fill: var(--primary);
+  }
+
+  &__nav-item {
+    fill: var(--text-tetriary);
+
+    &--active {
+      fill: var(--text-secondary);
+    }
+  }
+
+  &__active-indicator {
+    fill: var(--primary);
+  }
+
+  &__item-header {
+    fill: var(--surface-secondary);
+  }
+
+  &__item-border {
+    stroke: var(--border-color);
+  }
+}
+
+.theme-svg.theme-svg--dark .theme-svg {
+  &__background {
+    fill: $surface-darkest;
+  }
+
+  &__sidebar {
+    fill: $surface-darker;
+  }
+
+  &__header {
+    fill: $text-lighter;
+  }
+
+  &__nav-item {
+    fill: $text-light;
+
+    &--active {
+      fill: $text-lighter;
+    }
+  }
+
+  &__item-header {
+    fill: $surface-darker;
+  }
+
+  &__item-border {
+    stroke: $border-dark;
+  }
+}
+
+.theme-svg.theme-svg--light .theme-svg {
+  &__background {
+    fill: $surface-lightest;
+  }
+
+  &__sidebar {
+    fill: $surface-lighter;
+  }
+
+  &__header {
+    fill: $text-darker;
+  }
+
+  &__nav-item {
+    fill: $text-dark;
+
+    &--active {
+      fill: $text-darker;
+    }
+  }
+
+  &__item-header {
+    fill: $surface-lighter;
+  }
+
+  &__item-border {
+    stroke: $border-light;
+  }
+}

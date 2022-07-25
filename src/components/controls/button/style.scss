@@ -30,7 +30,7 @@
     background-color: transparent;
 
     &:hover:not(.button--disabled) {
-      background-color: var(--surface-tetriary);
+      background-color: rgba(var(--text-primary-rgb), 0.08);
     }
   }
 

@@ -7,7 +7,6 @@
     class="recipes-list__navigation"
     :items="tabs"
     v-model="selectedTab"
-    :fullWidth="isMobile"
   />
   <main class="recipes-list__content">
     <CListWithFilters
@@ -23,54 +22,54 @@
       suggestionsLoadActionName="recipe/loadRecipesSearchSuggestions"
       suggestionsLoadingGetterName="recipe/isLoadingRecipesSearchSuggestions"
     >
-      <template v-slot:default="{ item, addTagAndFilter }">
-        <div class="recipes-list__item item">
-          <div class="item__row">
-            <p class="item__recipe-name">{{ item.recipeName }}</p>
+      <template #header="{ item }">
+        <p class="item__recipe-name">{{ item.recipeName }}</p>
+        <div class="item__buttons">
+          <template v-if="isMobile">
+            <CButton
+              color="secondary"
+              label=""
+              variant="text"
+              icon="ellipsis-vertical"
+            />
+          </template>
+          <template v-else>
+            <CButton
+              color="secondary"
+              label=""
+              variant="text"
+              icon="cart-plus"
+            />
+            <CButton
+              color="secondary"
+              label=""
+              variant="text"
+              icon="calendar-plus"
+            />
+            <CLink
+              v-if="item.cookidooLink"
+              :href="item.cookidooLink"
+              class="item__cookidoo-link"
+              label=""
+              external
+            >
+              <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+            </CLink>
+          </template>
+        </div>
+      </template>
+      <template #body="{ item, addTagAndFilter }">
+        <div class="item__row">
+          <div class="item__preparation-time">
+            <FontAwesomeIcon :icon="['far', 'clock']" />
+            <p>{{ getPreparationTime(item.preparationTime) }}</p>
           </div>
-          <div class="item__row">
-            <div class="item__preparation-time">
-              <FontAwesomeIcon :icon="['far', 'clock']" />
-              <p>{{ item.preparationTime }} min</p>
-            </div>
-            <div v-if="false" class="item__cooked-date">
-              <span v-for="index in 5"></span>
-            </div>
+          <div v-if="false" class="item__cooked-date">
+            <span v-for="index in 5"></span>
           </div>
+        </div>
+        <div class="item__row">
           <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
-          <div class="item__buttons">
-            <template v-if="isMobile">
-              <CButton
-                color="secondary"
-                label=""
-                variant="text"
-                icon="ellipsis-vertical"
-              />
-            </template>
-            <template v-else>
-              <CButton
-                color="secondary"
-                label=""
-                variant="text"
-                icon="cart-plus"
-              />
-              <CButton
-                color="secondary"
-                label=""
-                variant="text"
-                icon="calendar-plus"
-              />
-              <CLink
-                v-if="item.cookidooLink"
-                :href="item.cookidooLink"
-                class="item__cookidoo-link"
-                label=""
-                external
-              >
-                <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
-              </CLink>
-            </template>
-          </div>
         </div>
       </template>
     </CListWithFilters>

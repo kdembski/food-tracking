@@ -75,8 +75,15 @@
         :isLoading="_isLoading"
       />
       <CList :items="list?.data" :isLoading="_isLoading">
-        <template v-slot:default="{ item }">
-          <slot :item="item" :addTagAndFilter="addTagAndFilter"></slot>
+        <template #header="{ item }">
+          <slot name="header" :item="item"></slot>
+        </template>
+        <template #body="{ item }">
+          <slot
+            name="body"
+            :item="item"
+            :addTagAndFilter="addTagAndFilter"
+          ></slot>
         </template>
       </CList>
     </div>

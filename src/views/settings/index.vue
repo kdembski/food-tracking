@@ -1,10 +1,10 @@
 <script lang="ts">
-import DarkModeToggle from "./dark-mode-toggle/index.vue";
+import SelectTheme from "./select-theme/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
 
 export default {
   name: "SettingsView",
-  components: { DarkModeToggle, CCard },
+  components: { SelectTheme, CCard },
 };
 </script>
 

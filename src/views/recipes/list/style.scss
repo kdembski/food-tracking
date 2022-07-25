@@ -18,10 +18,10 @@
     &__row {
       display: flex;
       align-items: center;
+      gap: 10px;
 
-      &:nth-child(2) {
-        gap: 20px;
-        margin: 4px 0 18px 2px;
+      &:nth-child(1) {
+        margin: 0 0 10px 3px;
       }
     }
 
@@ -30,7 +30,7 @@
       font-weight: 500;
       display: flex;
       gap: 5px;
-      color: var(--text-tetriary);
+      color: var(--text-secondary);
 
       & > svg {
         margin-top: 1px;
@@ -57,21 +57,19 @@
     }
 
     &__cookidoo-link {
-      color: var(--text-primary);
+      color: $text-darker;
       min-width: 18px;
       border-radius: 4px;
 
       &:hover {
-        background-color: var(--surface-tetriary);
+        background-color: rgba(var(--text-primary-rgb), 0.08);
       }
     }
 
     &__buttons {
       display: flex;
-      position: absolute;
-      top: 10px;
-      right: 10px;
       gap: 5px;
+      margin-right: -6px;
 
       & > button,
       & > a {
@@ -89,6 +87,12 @@
 @media screen and (max-width: $screen-md) {
   .recipes-list {
     .item {
+      &__row {
+        &:nth-child(1) {
+          margin-bottom: 8px;
+        }
+      }
+
       &__recipe-name {
         font-size: $font-lg;
       }
@@ -98,6 +102,8 @@
       }
 
       &__buttons {
+        margin-right: 0;
+
         & > button {
           font-size: $font-lg;
         }
@@ -105,7 +111,13 @@
     }
 
     &__navigation {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
+  }
+}
+
+[data-theme="dark"] {
+  .item__cookidoo-link {
+    color: $text-lightest;
   }
 }
