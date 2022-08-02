@@ -1,41 +1,23 @@
 <div v-if="tags || isLoading" class="select-tags">
   <CTags :tags="tags" :isLoading="isLoading" type="customized">
     <template #default="{ getTagColorStyles, tagsArray }">
-      <div v-for="tag in sortTagsBySelected(tagsArray)">
-        <input
-          v-model="_selectedTags"
-          :id="'tag-' + tag.name"
-          :value="tag.name"
-          class="tag__checkbox"
-          type="checkbox"
-        />
-        <label
-          class="tag"
-          :for="'tag-' + tag.name"
-          :style="getTagColorStyles(tag)"
-        >
-          <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
-          <p>{{ tag.name }}</p>
-          <span v-if="withCounts && tag.count > 1">{{ tag.count }}</span>
-        </label>
-      </div>
+      <Item
+        v-for="tag in sortTagsBySelected(tagsArray)"
+        v-model:selectedTags="_selectedTags"
+        :tag="tag"
+        :withCounts="withCounts"
+        :getTagColorStyles="getTagColorStyles"
+      />
     </template>
   </CTags>
   <CTags :tags="tags" :isLoading="isLoading" type="default">
     <template #default="{ tagsArray }">
-      <div v-for="tag in sortTagsBySelected(tagsArray)">
-        <input
-          v-model="_selectedTags"
-          :id="'tag-' + tag.name"
-          :value="tag.name"
-          class="tag__checkbox"
-          type="checkbox"
-        />
-        <label class="tag" :for="'tag-' + tag.name">
-          <p>{{ tag.name }}</p>
-          <span v-if="withCounts && tag.count > 1">{{ tag.count }}</span>
-        </label>
-      </div>
+      <Item
+        v-for="tag in sortTagsBySelected(tagsArray)"
+        v-model:selectedTags="_selectedTags"
+        :tag="tag"
+        :withCounts="withCounts"
+      />
     </template>
   </CTags>
 </div>

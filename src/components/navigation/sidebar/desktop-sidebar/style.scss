@@ -24,12 +24,11 @@
       transition: background-color 0.15s ease-in-out;
 
       &:hover:not(.item__link--active) {
-        background-color: var(--surface-tetriary);
+        color: var(--primary);
       }
 
       &--active {
-        background-color: var(--surface-tetriary);
-        color: var(--text-primary);
+        color: var(--primary);
       }
     }
 

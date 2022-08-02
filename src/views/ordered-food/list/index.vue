@@ -11,6 +11,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
 const orderedFoodListDefaultFilters = {
   currentPage: 1,
   pageSize: 10,
@@ -19,6 +21,41 @@ const orderedFoodListDefaultFilters = {
   sortDirection: "asc",
   tags: "",
 };
+
+const orderedFoodListSortOptions = ref([
+  {
+    value: {
+      sortAttribute: "foodName",
+      sortDirection: "asc",
+    },
+    label: "Nazwa jedzenia - rosnąco",
+    icon: "arrow-down-a-z",
+  },
+  {
+    value: {
+      sortAttribute: "foodName",
+      sortDirection: "desc",
+    },
+    label: "Nazwa jedzenia - malejąco",
+    icon: "arrow-down-z-a",
+  },
+  {
+    value: {
+      sortAttribute: "placeName",
+      sortDirection: "asc",
+    },
+    label: "Nazwa miejsca - rosnąco",
+    icon: "arrow-down-a-z",
+  },
+  {
+    value: {
+      sortAttribute: "placeName",
+      sortDirection: "desc",
+    },
+    label: "Nazwa miejsca - malejąco",
+    icon: "arrow-down-z-a",
+  },
+]);
 </script>
 
 <template src="./template.html"></template>

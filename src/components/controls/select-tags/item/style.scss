@@ -1,0 +1,40 @@
+.select-tags-item {
+  .tag {
+    user-select: none;
+
+    &__checkbox {
+      display: none;
+
+      &:checked {
+        & + .tag {
+          outline: 2px solid var(--primary);
+          outline-offset: -2px;
+
+          .tag__count {
+            display: none;
+          }
+
+          .tag__icon {
+            display: flex;
+          }
+        }
+      }
+    }
+
+    &__count {
+      flex-grow: 1;
+      font-size: $font-xs;
+      height: 100%;
+      margin-left: 8px;
+    }
+
+    &__icon {
+      color: var(--primary);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-size: $font-sm;
+      margin-left: 8px;
+    }
+  }
+}

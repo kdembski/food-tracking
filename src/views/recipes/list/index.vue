@@ -35,6 +35,41 @@ const recipesListDefaultFilters = {
   tags: "",
 };
 
+const recipeListSortOptions = ref([
+  {
+    value: {
+      sortAttribute: "recipeName",
+      sortDirection: "asc",
+    },
+    label: "Nazwa przepisu - rosnąco",
+    icon: "arrow-down-a-z",
+  },
+  {
+    value: {
+      sortAttribute: "recipeName",
+      sortDirection: "desc",
+    },
+    label: "Nazwa przepisu - malejąco",
+    icon: "arrow-down-z-a",
+  },
+  {
+    value: {
+      sortAttribute: "preparationTime",
+      sortDirection: "asc",
+    },
+    label: "Czas przygotowania - rosnąco",
+    icon: "arrow-down-1-9",
+  },
+  {
+    value: {
+      sortAttribute: "preparationTime",
+      sortDirection: "desc",
+    },
+    label: "Czas przygotowania - malejąco",
+    icon: "arrow-down-9-1",
+  },
+]);
+
 const tabs = ref([
   { code: "ALL", label: "Wszystkie", count: 0 },
   { code: "NOT_COMPLETED", label: "Nieuzupełnione" },

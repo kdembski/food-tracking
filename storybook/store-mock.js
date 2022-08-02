@@ -37,7 +37,15 @@ const list = {
     },
     isLoadingList: () => false,
 
-    getTags: () => "default,vege,ostre,szybkie,śniadanie,obiad,kolacja",
+    getTags: () => [
+      { name: "default" },
+      { name: "vege" },
+      { name: "ostre" },
+      { name: "szybkie" },
+      { name: "śniadanie" },
+      { name: "obiad" },
+      { name: "kolacja" },
+    ],
     isLoadingTags: () => false,
   },
   mutations: {},

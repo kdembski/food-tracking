@@ -26,6 +26,9 @@
   &__option {
     padding: 15px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 
     &:hover,
     &--hovered {
@@ -34,6 +37,11 @@
 
     &:deep(strong) {
       color: var(--primary);
+    }
+
+    & > svg {
+      font-size: 20px;
+      color: var(--text-secondary);
     }
   }
 

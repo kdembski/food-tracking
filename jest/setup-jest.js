@@ -1,10 +1,11 @@
-const FontAwesomeIcon = require("@/font-awesome.ts");
 require("../src/utils/simplifyString");
 require("jest-localstorage-mock");
 
 const settings = {
-  components: {
-    FontAwesomeIcon,
+  stubs: {
+    FontAwesomeIcon: {
+      template: "<svg />",
+    },
   },
 };
 global.settings = settings;

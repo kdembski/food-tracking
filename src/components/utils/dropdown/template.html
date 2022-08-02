@@ -19,8 +19,10 @@
           @mouseover="emitOptionMouseover(index)"
           @click="emitOptionClick(option)"
           :class="getOptionClass(index)"
-          v-html="getOptionContent(option.label)"
-        ></li>
+        >
+          <FontAwesomeIcon v-if="option.icon" :icon="option.icon" />
+          <p v-html="getOptionContent(option.label)"></p>
+        </li>
         <li v-if="options.length === 0" class="dropdown__empty-message">
           Brak opcji dla wyszukanej frazy
         </li>

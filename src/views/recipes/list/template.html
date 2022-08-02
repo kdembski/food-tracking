@@ -21,6 +21,7 @@
       suggestionsGetterName="recipe/getRecipesSearchSuggestions"
       suggestionsLoadActionName="recipe/loadRecipesSearchSuggestions"
       suggestionsLoadingGetterName="recipe/isLoadingRecipesSearchSuggestions"
+      :sortOptions="recipeListSortOptions"
     >
       <template #header="{ item }">
         <p class="item__recipe-name">{{ item.recipeName }}</p>

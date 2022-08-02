@@ -38,7 +38,14 @@
           onlyInputValue
           label="Szukaj"
         />
-        <CInput label="Sortuj" icon="arrow-down-a-z" />
+        <CSelect
+          :modelValue="selectedSort"
+          @update:modelValue="sort"
+          label="Sortuj"
+          :icon="getSelectedSortIcon(sortOptions)"
+          :options="sortOptions"
+          :isLoading="_isLoading"
+        />
         <CAutocomplete
           v-if="enableTags"
           :options="getAvailableTagsOptions(filters.tags)"

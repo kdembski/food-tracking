@@ -33,27 +33,26 @@ const props = defineProps({
 });
 
 const tagsSettings = [
-  { name: "vege", lightColor: "#c1ffd2", darkColor: "#077426" },
-  { name: "ostre", lightColor: "#ffdda9", darkColor: "#e70f00" },
+  { name: "vege", lightColor: "#c1ffd2", darkColor: "#05541c" },
   {
     name: "szybkie",
     lightColor: "#fff8bb",
-    darkColor: "#aa8200",
+    darkColor: "#806100",
   },
   {
     name: "śniadanie",
     lightColor: "#ffd9b5",
-    darkColor: "#594430",
+    darkColor: "#4a3522",
   },
   {
     name: "obiad",
     lightColor: "#ffd0d0",
-    darkColor: "#990000",
+    darkColor: "#750101",
   },
   {
     name: "kolacja",
     lightColor: "#bfe5f2",
-    darkColor: "#003780",
+    darkColor: "#002659",
   },
 ];
 

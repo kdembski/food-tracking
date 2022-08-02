@@ -1,0 +1,28 @@
+<CFieldTemplate
+  :modelValue="selected"
+  v-bind="getFieldTemplateProps(props)"
+  class="select"
+>
+  <input
+    :id="$attrs.id && $attrs.id + '-field'"
+    :value="getSelectedOptionLabel()"
+    :disabled="isDisabled"
+    :placeholder="placeholder"
+    readonly
+    class="select__input"
+    @focus="isDropdownOpen=true"
+    @blur="isDropdownOpen=false"
+    @mousedown="onMouseDown"
+    ref="input"
+  />
+  <FontAwesomeIcon
+    v-if="!isLoading"
+    icon="chevron-down"
+    class="select__chevron"
+  />
+  <CDropdown
+    :isOpen="isDropdownOpen"
+    :options="options"
+    @optionClick="selectOption"
+  />
+</CFieldTemplate>

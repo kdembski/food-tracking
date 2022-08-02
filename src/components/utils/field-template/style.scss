@@ -11,6 +11,7 @@
     padding: 12px 10px;
     background-color: var(--surface-primary);
     border: 1px solid var(--border-color);
+    color: var(--text-primary);
     border-radius: 4px;
     font-size: $font-base;
     z-index: 10;
@@ -70,7 +71,7 @@
 
   &.field--with-icon-right {
     &:deep(input) {
-      padding-right: 48px;
+      padding-right: 48px !important;
     }
   }
 

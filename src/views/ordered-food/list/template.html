@@ -13,6 +13,7 @@
       tagsGetterName="orderedFood/getOrderedFoodTags"
       tagsLoadActionName="orderedFood/loadOrderedFoodTags"
       tagsLoadingGetterName="orderedFood/isLoadingOrderedFoodTags"
+      :sortOptions="orderedFoodListSortOptions"
     >
       <template #header="{ item }">
         <p class="item__food-name">{{ item.foodName }}</p>

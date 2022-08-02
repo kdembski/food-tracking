@@ -1,0 +1,25 @@
+.select {
+  position: relative;
+
+  input.select__input {
+    padding-right: 38px;
+  }
+
+  &__input {
+    cursor: pointer;
+
+    &:focus {
+      & ~ .select__chevron {
+        color: var(--primary);
+      }
+    }
+  }
+
+  &__chevron {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: var(--text-secondary);
+    font-size: 16px;
+  }
+}

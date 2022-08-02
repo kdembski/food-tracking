@@ -6,6 +6,7 @@ import CList from "@/components/data-display/list/index.vue";
 import CPagination from "@/components/utils/pagination/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CSelect from "@/components/controls/select/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 
 export default {
@@ -18,6 +19,7 @@ export default {
     CPagination,
     CCard,
     CAutocomplete,
+    CSelect,
     CSkeletonLoader,
   },
 };
@@ -26,10 +28,11 @@ export default {
 <script setup lang="ts">
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { ListFilters } from "@/types/list";
+import { ListFilters, ListSortFilters } from "@/types/list";
+import { SelectOption } from "@/components/controls/select/types/select";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
-import { useFilters } from "./composables/filters";
+import { useFilters } from "./composables/filters/index";
 import { onMounted } from "vue";
 import { isEmpty } from "lodash";
 import { useWindowSize } from "@/components/utils/composables/window-size";
@@ -56,6 +59,8 @@ const props = withDefaults(
     isLoading?: boolean;
     enableTags?: boolean;
     enableRandomButton?: boolean;
+
+    sortOptions: SelectOption<ListSortFilters>[];
   }>(),
   {
     tagsGetterName: "",
@@ -114,14 +119,15 @@ onMounted(async () => {
 // Composables
 const {
   filters,
-  currentSort,
   filterBySearchPhrase,
   setTemporarySearchPhrase,
   filterBySearchPhraseWithDelay,
   searchSuggestions,
   isLoadingSearchSuggestions,
   loadSearchSuggestions,
-  filterBySort,
+  selectedSort,
+  sort,
+  getSelectedSortIcon,
   filterByTags,
   addTagAndFilter,
   changeCurrentPage,
@@ -134,6 +140,7 @@ const {
   props.suggestionsLoadActionName,
   props.suggestionsLoadingGetterName
 );
+
 const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
@@ -150,6 +157,7 @@ const {
 );
 
 const { isMobile, windowHeight } = useWindowSize();
+
 const {
   areMobileFiltersOpen,
   toggleFiltersOnMobile,
