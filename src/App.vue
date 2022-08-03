@@ -57,35 +57,21 @@ a {
   all: unset;
 }
 
-* {
-  &::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
-
-  &::-webkit-scrollbar-track {
-    border-radius: 100px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 100px;
-    border: 4px transparent solid;
-    background-clip: padding-box;
-  }
-}
-
-@media screen and (max-width: $screen-md) {
+@media screen and (min-width: $screen-md) {
   * {
     &::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 100px;
     }
 
     &::-webkit-scrollbar-thumb {
       background: var(--border-color);
       border-radius: 100px;
-      border: 3px transparent solid;
+      border: 4px transparent solid;
       background-clip: padding-box;
     }
   }
