@@ -17,12 +17,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, onMounted, onUnmounted, watch } from "vue";
+import { computed, onBeforeMount, watch } from "vue";
 import { useRoute } from "vue-router";
 import ApiService from "./services/api.service";
-import { useWindowSize } from "@/components/utils/composables/window-size";
 import { useStore } from "vuex";
-
 const store = useStore();
 
 const theme = computed(() => store.state.theme);
@@ -39,18 +37,8 @@ const layoutComponentName = computed(() => {
   return (layoutType || "default") + "-layout";
 });
 
-const { addResizeListener, removeResizeListener } = useWindowSize();
-
 onBeforeMount(() => {
   ApiService.setHeader();
-});
-
-onMounted(() => {
-  addResizeListener();
-});
-
-onUnmounted(() => {
-  removeResizeListener();
 });
 </script>
 

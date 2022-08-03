@@ -87,6 +87,36 @@
   &__icon {
     margin-top: 1px;
   }
+
+  &--only-icon {
+    padding: 0;
+
+    .button__icon {
+      margin-top: 0;
+    }
+
+    .button__content {
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    &.button--small {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.button--medium {
+      width: 28px;
+      height: 28px;
+    }
+
+    &.button--large {
+      width: 32px;
+      height: 32px;
+    }
+  }
 }
 
 [data-theme="dark"] {

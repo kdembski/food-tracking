@@ -22,6 +22,7 @@ describe("Select Tags Component", () => {
     actions = {
       loadList: jest.fn(),
       loadTags: jest.fn(),
+      loadSuggestions: jest.fn(),
     };
 
     getters = {
@@ -29,6 +30,8 @@ describe("Select Tags Component", () => {
       isListLoading: () => false,
       getTags: () => tags,
       isTagsLoading: () => false,
+      getSuggestions: () => tags,
+      isSuggestionsLoading: () => false,
     };
 
     store = createStore({
@@ -53,6 +56,7 @@ describe("Select Tags Component", () => {
         tagsGetterName: "test/getTags",
         tagsLoadActionName: "test/loadTags",
         tagsIsLoadingGetterName: "test/isTagsLoading",
+
         defaultFilters,
       },
       global: global.settings,

@@ -63,6 +63,7 @@ const getButtonClasses = (): Array<string> => {
   const disabledClass = "button--disabled";
   const loadingClass = "button--loading";
   const fullWidthClass = "button--full-width";
+  const onlyIconClass = "button--only-icon";
 
   let classes = [varaintClass, colorClass, sizeClass];
 
@@ -76,6 +77,10 @@ const getButtonClasses = (): Array<string> => {
 
   if (props.fullWidth) {
     classes.push(fullWidthClass);
+  }
+
+  if (!props.label) {
+    classes.push(onlyIconClass);
   }
 
   return classes;

@@ -77,6 +77,13 @@ describe("Button Component", () => {
     expect(wrapper.classes()).toContain("button--full-width");
   });
 
+  it("Should add only icon class if label is not provided", async () => {
+    await wrapper.setProps({
+      label: "",
+    });
+    expect(wrapper.classes()).toContain("button--only-icon");
+  });
+
   it("Should set loader size based on size prop", async () => {
     window.innerWidth = 1025;
     wrapper = shallowMount(CButton, {

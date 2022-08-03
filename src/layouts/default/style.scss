@@ -1,4 +1,4 @@
-.layout-default {
+.default-layout {
   display: flex;
   flex-direction: column;
   background-color: var(--surface-primary);
@@ -44,7 +44,7 @@
 }
 
 @media screen and (max-width: $screen-md) {
-  .layout-default {
+  .default-layout {
     .layout-content {
       margin-bottom: 62px;
 

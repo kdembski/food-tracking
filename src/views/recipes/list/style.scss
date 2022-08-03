@@ -58,8 +58,11 @@
 
     &__cookidoo-link {
       color: $text-darker;
-      min-width: 18px;
       border-radius: 4px;
+
+      & > svg {
+        width: 18px;
+      }
 
       &:hover {
         background-color: rgba(var(--text-primary-rgb), 0.08);
@@ -71,10 +74,14 @@
       gap: 5px;
       margin-right: -6px;
 
-      & > button,
       & > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: $font-base;
-        padding: 6px 8px;
+        padding: 0;
+        width: 28px;
+        height: 28px;
       }
     }
   }

@@ -119,6 +119,7 @@ const mutations: MutationTree<RecipeState> = {
   },
 
   loadRecipesListSuccess(state, list: RecipeList) {
+    state.recipesList = null;
     state.recipesList = list;
     state.isLoadingRecipesList = false;
   },
@@ -132,6 +133,7 @@ const mutations: MutationTree<RecipeState> = {
   },
 
   loadRecipesTagsSuccess(state, tags: string) {
+    state.recipesTags = null;
     state.recipesTags = tags;
     state.isLoadingRecipesTags = false;
   },
@@ -145,6 +147,7 @@ const mutations: MutationTree<RecipeState> = {
   },
 
   loadRecipesSearchSuggestionsSuccess(state, suggestions: string[]) {
+    state.recipesSearchSuggestions = null;
     state.recipesSearchSuggestions = suggestions;
     state.isLoadingRecipesSearchSuggestions = false;
   },
