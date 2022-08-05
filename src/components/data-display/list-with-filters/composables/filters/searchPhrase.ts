@@ -43,16 +43,7 @@ export function useSearchPhrase(
   };
 
   const searchSuggestions = computed(() => {
-    const suggestions = store.getters[suggestionsGetterName];
-    if (!suggestions) {
-      return [];
-    }
-    return suggestions.map((item: string) => {
-      return {
-        value: null,
-        label: item,
-      };
-    });
+    return store.getters[suggestionsGetterName];
   });
 
   const isLoadingSearchSuggestions = computed(

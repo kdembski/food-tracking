@@ -42,13 +42,22 @@
   }
 
   &__pagination {
-    align-items: flex-end;
-    position: sticky;
-    z-index: 1;
-    top: -20px;
-    margin-top: -10px;
-    padding: 10px 0;
     background-color: var(--surface-primary);
+    padding: 10px 0;
+    align-items: flex-end;
+
+    &--sticky {
+      box-shadow: 0 2px 6px 0 var(--shadow-color);
+    }
+
+    &-wrapper {
+      position: sticky;
+      z-index: 1;
+      top: -20px;
+      overflow: hidden;
+      padding-bottom: 10px;
+      margin: -10px 0 -9px;
+    }
   }
 }
 
@@ -153,9 +162,13 @@
     }
 
     &__pagination {
-      top: -10px;
-      margin-top: -8px;
       padding: 8px 0;
+
+      &-wrapper {
+        top: -10px;
+        padding-bottom: 8px;
+        margin: -8px 0 -7px;
+      }
     }
   }
 }

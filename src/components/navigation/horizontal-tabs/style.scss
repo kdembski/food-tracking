@@ -60,7 +60,7 @@
 
   &__active-indicator {
     position: absolute;
-    height: 5px;
+    height: 3px;
     bottom: -1px;
     background-color: var(--primary);
     transition: width 0.2s ease-in-out, left 0.2s ease-in-out;

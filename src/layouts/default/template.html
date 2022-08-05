@@ -3,7 +3,11 @@
   <div class="default-layout__wrapper">
     <CSidebar :items="sidebarItems" />
     <div class="default-layout__content layout-content">
-      <div class="layout-content__wrapper" id="main-scroll-container">
+      <div
+        class="layout-content__wrapper"
+        id="main-scroll-container"
+        ref="container"
+      >
         <div class="layout-content__container">
           <slot></slot>
         </div>

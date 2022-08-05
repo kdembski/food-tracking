@@ -37,7 +37,5 @@ export function useWindowSize() {
     windowWidth,
     isMobile,
     isMobileKeyboardOpen,
-    addResizeListener,
-    removeResizeListener,
   };
 }

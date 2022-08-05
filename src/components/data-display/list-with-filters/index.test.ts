@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
 import { mount } from "@vue/test-utils";
-import CSelectTags from "./index.vue";
+import CListWithFilters from "./index.vue";
 
-describe("Select Tags Component", () => {
+describe("List With Filters Component", () => {
   let wrapper: any = null;
   let store: any;
   let actions: any;
@@ -11,14 +11,30 @@ describe("Select Tags Component", () => {
     currentPage: 1,
     pageSize: 20,
     searchPhrase: "",
-    sortAttribute: "attribute",
+    sortAttribute: "attribute1",
     sortDirection: "asc",
     tags: "",
   };
   const list = ["item1", "item2", "item3"];
-  const tags = "tag1,tag2,tag3";
+  const tags = [
+    {
+      name: "tag1",
+    },
+    {
+      name: "tag2",
+    },
+    {
+      name: "tag3",
+    },
+  ];
+  const suggestions = [
+    {
+      value: null,
+      label: "suggestion1",
+    },
+  ];
 
-  beforeEach(async () => {
+  const mountComponent = (enableTags = true, enableRandomButton = true) => {
     actions = {
       loadList: jest.fn(),
       loadTags: jest.fn(),
@@ -30,7 +46,7 @@ describe("Select Tags Component", () => {
       isListLoading: () => false,
       getTags: () => tags,
       isTagsLoading: () => false,
-      getSuggestions: () => tags,
+      getSuggestions: () => suggestions,
       isSuggestionsLoading: () => false,
     };
 
@@ -39,6 +55,7 @@ describe("Select Tags Component", () => {
         test: {
           actions,
           getters,
+          namespaced: true,
         },
       },
     });
@@ -47,21 +64,85 @@ describe("Select Tags Component", () => {
       store,
     };
 
-    wrapper = mount(CSelectTags, {
+    wrapper = mount(CListWithFilters, {
       props: {
         listName: "testList",
         listGetterName: "test/getList",
         listLoadActionName: "test/loadList",
-        listIsLoadingGetterName: "test/isListLoading",
+        listLoadingGetterName: "test/isListLoading",
+
         tagsGetterName: "test/getTags",
         tagsLoadActionName: "test/loadTags",
-        tagsIsLoadingGetterName: "test/isTagsLoading",
+        tagsLoadingGetterName: "test/isTagsLoading",
+
+        suggestionsGetterName: "test/getSuggestions",
+        suggestionsLoadActionName: "test/loadSuggestions",
+        suggestionsLoadingGetterName: "test/isSuggestionsLoading",
 
         defaultFilters,
+        sortOptions: [
+          {
+            value: {
+              sortAttribute: "attribute1",
+              sortDirection: "asc",
+            },
+            label: "attribute1",
+            icon: "arrow-down-a-z",
+          },
+          {
+            value: {
+              sortAttribute: "attribute2",
+              sortDirection: "desc",
+            },
+            label: "attribute2",
+            icon: "arrow-down-z-a",
+          },
+        ],
+        enableTags,
+        enableRandomButton,
       },
       global: global.settings,
     });
+  };
+
+  beforeEach(async () => {
+    mountComponent();
   });
 
-  it("Should load list on mounted", async () => {});
+  it("Should load list on mounted", async () => {
+    expect(wrapper.vm.list).toStrictEqual(list);
+    expect(actions.loadList).toHaveBeenCalledWith(
+      expect.any(Object),
+      defaultFilters
+    );
+  });
+
+  it("Should load tags on mounted", async () => {
+    expect(wrapper.vm.availableTags).toStrictEqual(tags);
+    expect(actions.loadTags).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should not load tags on mounted if enableTags is false", async () => {
+    mountComponent(false);
+    expect(actions.loadTags).toHaveBeenCalledTimes(0);
+  });
+
+  it("Should set filters based on default filters", async () => {
+    expect(wrapper.vm.filters).toStrictEqual(defaultFilters);
+  });
+
+  it("Should pull filters from local storage", async () => {
+    const filters = {
+      currentPage: 2,
+      pageSize: 20,
+      searchPhrase: "",
+      sortAttribute: "attribute2",
+      sortDirection: "desc",
+      tags: "",
+    };
+    localStorage.setItem("testListFilters", JSON.stringify(filters));
+
+    mountComponent();
+    expect(wrapper.vm.filters).toStrictEqual(filters);
+  });
 });

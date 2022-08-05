@@ -9,7 +9,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, Ref, onMounted, onUnmounted } from "vue";
+import { useStore } from "vuex";
 
 const sidebarItems = ref([
   { route: "/recipes", label: "Przepisy", icon: "utensils" },
@@ -19,6 +20,21 @@ const sidebarItems = ref([
   { route: "/", label: "Zakupy", icon: "cart-shopping" },
   { route: "/", label: "Statystyki", icon: "chart-line" },
 ]);
+
+const store = useStore();
+const container: Ref<HTMLElement | undefined> = ref();
+
+const onContainerScroll = () => {
+  store.commit("setMainContainerScrollValue", container.value?.scrollTop);
+};
+
+onMounted(() => {
+  container.value?.addEventListener("scroll", onContainerScroll);
+});
+
+onUnmounted(() => {
+  container.value?.removeEventListener("scroll", onContainerScroll);
+});
 </script>
 
 <template src="./template.html"></template>

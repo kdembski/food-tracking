@@ -27,7 +27,7 @@ export default {
 
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref, Ref } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/list";
 import { SelectOption } from "@/components/controls/select/types/select";
 import { useAvailableTags } from "./composables/available-tags";
@@ -37,6 +37,7 @@ import { onMounted } from "vue";
 import { isEmpty } from "lodash";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 import { useMobileFilters } from "./composables/mobile-filters";
+import { useStickyPagination } from "./composables/sticky-pagination";
 
 const store = useStore();
 
@@ -165,6 +166,13 @@ const {
   onMobileBtnTouchStart,
   mobileBtnStyle,
 } = useMobileFilters(isMobile, windowHeight);
+
+const paginationRef: Ref<HTMLElement | undefined> = ref();
+const {
+  paginationStickyClass,
+  paginationInitialOffsetTop,
+  paginationCurrentOffsetTop,
+} = useStickyPagination(paginationRef);
 </script>
 
 <template src="./template.html"></template>

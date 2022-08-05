@@ -43,8 +43,6 @@
 
 @media screen and (max-width: $screen-md) {
   .ordered-food-list {
-    overflow: hidden;
-
     .item {
       &__buttons {
         & > button {

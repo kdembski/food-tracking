@@ -8,6 +8,7 @@ export default createStore({
   state: {
     theme: StorageService.getItem("theme") || "light",
     primaryColor: StorageService.getItem("primaryColor") || "orange",
+    mainContainerScrollValue: 0,
   },
 
   getters: {
@@ -25,6 +26,10 @@ export default createStore({
     setPrimaryColor(state, value) {
       StorageService.setItem("theme", value);
       state.theme = value;
+    },
+
+    setMainContainerScrollValue(state, value) {
+      state.mainContainerScrollValue = value;
     },
   },
   actions: {},
