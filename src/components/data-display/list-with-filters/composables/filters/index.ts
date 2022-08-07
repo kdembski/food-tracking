@@ -25,12 +25,11 @@ export function useFilters(
 
   const clearFilters = () => {
     if (areFiltersEqualToDefault()) {
-      return false;
+      return;
     }
 
     filters.value = clone(defaultFilters);
     handleListLoadingProccess();
-    return true;
   };
 
   const { filterByTags, addTagAndFilter } = useTags(

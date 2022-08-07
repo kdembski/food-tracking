@@ -69,7 +69,7 @@ a {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: var(--border-color);
+      background: var(--text-tetriary);
       border-radius: 100px;
       border: 4px transparent solid;
       background-clip: padding-box;

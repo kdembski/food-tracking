@@ -28,8 +28,10 @@ const props = defineProps({
     default: (value: string | number) => value,
   },
 });
+
 const columnsCount = computed(() => props.columns.length);
 const itemsCount = computed(() => props.items.length);
+
 const { windowHeight, isMobile } = useWindowSize();
 const getLoaderRowsCount = () => {
   const containerHeight = isMobile.value

@@ -3,42 +3,27 @@ $primary-light: #ffcc55;
 $primary-dark: #ec6a00;
 
 $secondary: #555b66;
-$secondary-light-10: lighten($secondary, 10);
-$secondary-light-20: lighten($secondary, 20);
-$secondary-light-30: lighten($secondary, 30);
-$secondary-light-40: lighten($secondary, 40);
-$secondary-light-45: lighten($secondary, 45);
-$secondary-light-50: lighten($secondary, 50);
-$secondary-light-55: lighten($secondary, 55);
-$secondary-light-57: lighten($secondary, 57);
-$secondary-light-60: lighten($secondary, 60);
-$secondary-dark-10: darken($secondary, 10);
-$secondary-dark-15: darken($secondary, 15);
-$secondary-dark-20: darken($secondary, 20);
-$secondary-dark-22: darken($secondary, 22);
-$secondary-dark-25: darken($secondary, 25);
-$secondary-dark-28: darken($secondary, 28);
 
 $white: white;
 $black: black;
 
 $surface-lightest: $white;
-$surface-lighter: $secondary-light-60;
-$surface-light: $secondary-light-57;
-$border-light: $secondary-light-55;
+$surface-lighter: lighten($secondary, 60);
+$surface-light: lighten($secondary, 57);
+$border-light: lighten($secondary, 54);
 
-$text-darkest: $secondary-dark-28;
+$text-darkest: darken($secondary, 28);
 $text-darker: $secondary;
-$text-dark: $secondary-light-30;
+$text-dark: lighten($secondary, 30);
 
-$surface-darkest: $secondary-dark-28;
-$surface-darker: $secondary-dark-25;
-$surface-dark: $secondary-dark-22;
-$border-dark: $secondary-dark-20;
+$surface-darkest: darken($secondary, 26);
+$surface-darker: darken($secondary, 23);
+$surface-dark: darken($secondary, 20);
+$border-dark: darken($secondary, 17);
 
-$text-lightest: $secondary-light-55;
-$text-lighter: $secondary-light-45;
-$text-light: $secondary-light-10;
+$text-lightest: lighten($secondary, 55);
+$text-lighter: lighten($secondary, 45);
+$text-light: lighten($secondary, 10);
 
 $info: #003780;
 $info-light: #bfe5f2;

@@ -40,7 +40,5 @@ export function useStickyPagination(
 
   return {
     paginationStickyClass,
-    paginationInitialOffsetTop,
-    paginationCurrentOffsetTop,
   };
 }

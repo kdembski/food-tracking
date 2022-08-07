@@ -168,11 +168,7 @@ const {
 } = useMobileFilters(isMobile, windowHeight);
 
 const paginationRef: Ref<HTMLElement | undefined> = ref();
-const {
-  paginationStickyClass,
-  paginationInitialOffsetTop,
-  paginationCurrentOffsetTop,
-} = useStickyPagination(paginationRef);
+const { paginationStickyClass } = useStickyPagination(paginationRef);
 </script>
 
 <template src="./template.html"></template>

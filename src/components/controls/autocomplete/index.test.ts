@@ -1,6 +1,7 @@
 import { mount, VueWrapper, DOMWrapper } from "@vue/test-utils";
 import CAutocomplete from "./index.vue";
 import { config } from "@vue/test-utils";
+import flushPromises from "flush-promises";
 
 describe("Autocomplete Component", () => {
   let wrapper: VueWrapper<any>;
@@ -232,9 +233,8 @@ describe("Autocomplete Component", () => {
 
   it("Should blur component after option selection by input event on mobile", async () => {
     window.innerWidth = 400;
-    const blurSpy = jest.spyOn(wrapper.vm.input, "blur");
     mountComponent();
-
+    const blurSpy = jest.spyOn(wrapper.vm.input, "blur");
     await input.setValue("Two");
     expect(blurSpy).toHaveBeenCalledTimes(1);
   });

@@ -33,6 +33,7 @@ describe("List With Filters Component", () => {
       label: "suggestion1",
     },
   ];
+  let mainContainerScrollValue = 0;
 
   const mountComponent = (enableTags = true, enableRandomButton = true) => {
     actions = {
@@ -51,6 +52,9 @@ describe("List With Filters Component", () => {
     };
 
     store = createStore({
+      state: {
+        mainContainerScrollValue,
+      },
       modules: {
         test: {
           actions,
@@ -107,6 +111,7 @@ describe("List With Filters Component", () => {
 
   beforeEach(async () => {
     mountComponent();
+    jest.useFakeTimers();
   });
 
   it("Should load list on mounted", async () => {
@@ -131,6 +136,12 @@ describe("List With Filters Component", () => {
     expect(wrapper.vm.filters).toStrictEqual(defaultFilters);
   });
 
+  it("Should set filters in local storage", async () => {
+    expect(localStorage.__STORE__["testListFilters"]).toBe(
+      JSON.stringify(defaultFilters)
+    );
+  });
+
   it("Should pull filters from local storage", async () => {
     const filters = {
       currentPage: 2,
@@ -144,5 +155,53 @@ describe("List With Filters Component", () => {
 
     mountComponent();
     expect(wrapper.vm.filters).toStrictEqual(filters);
+  });
+
+  it("getAvailableTagsOptions should return tags without selected in form of dropdown options", async () => {
+    expect(wrapper.vm.getAvailableTagsOptions("tag1")).toStrictEqual([
+      {
+        value: "tag2",
+        label: "tag2",
+      },
+      {
+        value: "tag3",
+        label: "tag3",
+      },
+    ]);
+  });
+
+  it("Should toggle mobile filter on toggleFiltersOnMobile call", async () => {
+    expect(wrapper.vm.areMobileFiltersOpen).toBe(false);
+    await wrapper.vm.toggleFiltersOnMobile();
+    expect(wrapper.vm.areMobileFiltersOpen).toBe(false);
+
+    window.innerWidth = 500;
+    mountComponent();
+
+    expect(wrapper.vm.areMobileFiltersOpen).toBe(false);
+    await wrapper.vm.toggleFiltersOnMobile();
+    expect(wrapper.vm.areMobileFiltersOpen).toBe(true);
+
+    await wrapper.vm.toggleFiltersOnMobile();
+    expect(wrapper.vm.areMobileFiltersOpen).toBe(false);
+    jest.runAllTimers();
+  });
+
+  it("Should set mobile button translateY based on touch move event", async () => {
+    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(641px)");
+
+    const touchEvent = {
+      changedTouches: [
+        {
+          pageY: 10,
+        },
+      ],
+    };
+    await wrapper.vm.onMobileBtnTouchMove(touchEvent);
+    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(641px)");
+
+    touchEvent.changedTouches[0].pageY = -10;
+    await wrapper.vm.onMobileBtnTouchMove(touchEvent);
+    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(621px)");
   });
 });

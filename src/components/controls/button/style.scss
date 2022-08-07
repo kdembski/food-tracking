@@ -134,7 +134,7 @@
 
       &.button--contained {
         color: $text-lightest;
-        background-color: $secondary-dark-10;
+        background-color: darken($secondary, 10);
       }
     }
   }
