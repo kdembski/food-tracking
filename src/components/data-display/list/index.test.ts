@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import CList from "./index.vue";
 
-describe("Select Tags Component", () => {
+describe("List Component", () => {
   let wrapper: any = null;
 
   beforeEach(async () => {

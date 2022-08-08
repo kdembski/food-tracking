@@ -8,7 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, Ref } from "vue";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 const props = defineProps({
   items: {
@@ -33,11 +33,12 @@ const columnsCount = computed(() => props.columns.length);
 const itemsCount = computed(() => props.items.length);
 
 const { windowHeight, isMobile } = useWindowSize();
+const container: Ref<HTMLElement | undefined> = ref();
+
 const getLoaderRowsCount = () => {
-  const containerHeight = isMobile.value
-    ? windowHeight.value
-    : windowHeight.value - 350;
-  return Math.floor(containerHeight / (isMobile.value ? 85 : 100));
+  const containerOffsetTop = container.value?.offsetTop;
+  const containerHeight = windowHeight.value - (containerOffsetTop || 0);
+  return Math.floor(containerHeight / (isMobile.value ? 65 : 80));
 };
 </script>
 

@@ -1,4 +1,4 @@
-.list {
+.table {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -55,7 +55,7 @@
     }
   }
 
-  .list-loader {
+  .table-loader {
     height: 100%;
     overflow: hidden;
     display: flex;
@@ -65,41 +65,44 @@
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-      gap: 20px;
     }
 
     &__row {
       display: flex;
       height: 100%;
       gap: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0 5px;
+
+      .skeleton-loader__item {
+        height: 30%;
+        margin-right: 20%;
+      }
     }
 
-    &__item {
+    &__item-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
       height: 100%;
     }
-  }
 
-  .loader-header {
-    height: 30px;
-    display: flex;
-    gap: 20px;
-    margin: 0 0 20px;
+    &__header {
+      height: 20px;
+      display: flex;
+      gap: 20px;
+      padding: 0 5px 5px;
+      border-bottom: 1px solid var(--border-color);
 
-    &__item {
-      height: 100%;
-      margin-right: 45%;
-
-      &-wrapper {
-        display: flex;
-        flex-grow: 1;
-        height: 100%;
+      .skeleton-loader__item {
+        margin-right: 45%;
       }
     }
   }
 }
 
 @media screen and (max-width: $screen-md) {
-  .list {
+  .table {
     &__content {
       td {
         padding: 12px 15px;
@@ -111,20 +114,10 @@
       }
     }
 
-    .list-loader {
-      &__content {
-        gap: 10px;
-      }
-
+    .table-loader {
       &__row {
         gap: 10px;
       }
-    }
-
-    .loader-header {
-      height: 22px;
-      gap: 10px;
-      margin: 0 0 10px;
     }
   }
 }

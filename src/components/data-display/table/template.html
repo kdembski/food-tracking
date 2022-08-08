@@ -1,20 +1,25 @@
-<div class="list" ref="container">
-  <div v-if="isLoading" class="list-loader">
-    <div class="list-loader__header loader-header">
-      <div v-for="item in columnsCount" class="loader-header__item-wrapper">
-        <CSkeletonLoader class="loader-header__item" />
+<div class="table" ref="container">
+  <div v-if="isLoading" class="table-loader">
+    <CSkeletonLoader class="table-loader__header">
+      <div v-for="item in columnsCount" class="table-loader__item-wrapper">
+        <div class="skeleton-loader__item" />
       </div>
-    </div>
-    <div class="list-loader__content">
-      <div v-for="row in getLoaderRowsCount()" class="list-loader__row">
-        <CSkeletonLoader
+    </CSkeletonLoader>
+    <div class="table-loader__content">
+      <CSkeletonLoader
+        v-for="row in getLoaderRowsCount()"
+        class="table-loader__row"
+      >
+        <div
           v-for="item in isMobile ? 1 : columnsCount"
-          class="list-loader__item"
-        />
-      </div>
+          class="table-loader__item-wrapper"
+        >
+          <div class="skeleton-loader__item" />
+        </div>
+      </CSkeletonLoader>
     </div>
   </div>
-  <table v-else class="list__content">
+  <table v-else class="table__content">
     <thead>
       <tr>
         <th v-for="col in columns">
@@ -27,7 +32,7 @@
         </th>
       </tr>
     </thead>
-    <tbody v-if="itemsCount < 1" class="list__empty-content">
+    <tbody v-if="itemsCount < 1" class="table__empty-content">
       <tr>
         <td>Brak wyników</td>
       </tr>

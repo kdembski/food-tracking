@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, Ref } from "vue";
 import { useStore } from "vuex";
 import { Tag, TagSettings } from "./types/tags";
 import { isArray } from "lodash";
@@ -138,6 +138,18 @@ const getTagColorStyles = (tagSettings: TagSettings) => {
     backgroundColor: tagSettings.lightColor,
     borderColor: tagSettings.darkColor + "21",
   };
+};
+
+const container: Ref<HTMLElement | undefined> = ref();
+const getLoaderItemsCount = () => {
+  const containerWidth = container.value?.clientWidth;
+  return Math.floor((containerWidth || 0) / 70);
+};
+const getHalfOfLoaderItemsCount = () => {
+  return Math.floor(getLoaderItemsCount() / 2);
+};
+const getLoaderRowGridTemplateColumns = () => {
+  return "grid-template-columns: repeat(" + getLoaderItemsCount() + ", 1fr);";
 };
 </script>
 

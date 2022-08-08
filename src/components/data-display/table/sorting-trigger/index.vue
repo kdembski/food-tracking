@@ -3,7 +3,6 @@ export default { name: "CSortingTrigger" };
 </script>
 
 <script setup lang="ts">
-import { inject, ComputedRef } from "vue";
 import { ListSortFilters } from "@/types/list";
 
 const props = defineProps({
@@ -16,16 +15,17 @@ const props = defineProps({
       };
     },
   },
+  currentSort: {
+    type: Object,
+    default() {
+      return { sortAttribute: "", sortDirection: "" };
+    },
+  },
 });
 
 const emit = defineEmits<{
   (e: "sortChange", sort: ListSortFilters): void;
 }>();
-
-const currentSort =
-  inject<ComputedRef<{ sortAttribute: string; sortDirection: string }>>(
-    "currentSort"
-  );
 
 const getActiveIconClass = (direction: string) => {
   if (isThisSortActive(direction)) {
@@ -35,13 +35,9 @@ const getActiveIconClass = (direction: string) => {
 };
 
 const isThisSortActive = (direction: string) => {
-  if (!currentSort) {
-    return;
-  }
-
   return (
-    isCurrentSortAttributeMatchingColValue(currentSort.value.sortAttribute) &&
-    currentSort.value.sortDirection === direction
+    isCurrentSortAttributeMatchingColValue(props.currentSort.sortAttribute) &&
+    props.currentSort.sortDirection === direction
   );
 };
 
@@ -57,14 +53,10 @@ const getOppositeSortDirection = (direction: string) => {
 };
 
 const changeSort = () => {
-  if (!currentSort) {
-    return;
-  }
-
-  if (isCurrentSortAttributeMatchingColValue(currentSort.value.sortAttribute)) {
+  if (isCurrentSortAttributeMatchingColValue(props.currentSort.sortAttribute)) {
     return emit("sortChange", {
-      sortAttribute: currentSort.value.sortAttribute,
-      sortDirection: getOppositeSortDirection(currentSort.value.sortDirection),
+      sortAttribute: props.currentSort.sortAttribute,
+      sortDirection: getOppositeSortDirection(props.currentSort.sortDirection),
     });
   }
 
