@@ -1,23 +1,23 @@
 <div class="list" ref="container">
   <div v-if="isLoading" class="list-loader">
-    <CCard v-for="row in getLoaderItemsCount()" class="list-loader__row">
+    <div v-for="row in getLoaderItemsCount()" class="list-loader__row">
       <CSkeletonLoader class="list-loader__wrapper">
         <div
           v-for="index in 3"
           class="list-loader__item skeleton-loader__item"
         />
       </CSkeletonLoader>
-    </CCard>
+    </div>
   </div>
   <template v-else>
     <div v-if="itemsCount < 1" class="list__empty-content">
       <p>Brak wyników</p>
     </div>
     <ul class="list__content">
-      <CCard v-for="item in items" as="li" class="list__item item">
+      <div v-for="item in items" as="li" class="list__item item">
         <div class="item__header"><slot name="header" :item="item"></slot></div>
         <div class="item__body"><slot name="body" :item="item"></slot></div>
-      </CCard>
+      </div>
     </ul>
   </template>
 </div>

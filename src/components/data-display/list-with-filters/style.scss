@@ -42,22 +42,14 @@
   }
 
   &__pagination {
+    position: sticky;
+    z-index: 1;
+    top: -20px;
     background-color: var(--surface-primary);
+    margin-top: -10px;
     padding: 10px 0;
     align-items: flex-end;
-
-    &--sticky {
-      box-shadow: 0 2px 6px 0 var(--shadow-color);
-    }
-
-    &-wrapper {
-      position: sticky;
-      z-index: 1;
-      top: -20px;
-      overflow: hidden;
-      padding-bottom: 13px;
-      margin: -10px 0;
-    }
+    border-bottom: 1px solid var(--border-color);
   }
 }
 
@@ -162,13 +154,9 @@
     }
 
     &__pagination {
+      top: -10px;
       padding: 8px 0;
-
-      &-wrapper {
-        top: -10px;
-        padding-bottom: 10px;
-        margin: -8px 0;
-      }
+      margin-top: -8px;
     }
   }
 }

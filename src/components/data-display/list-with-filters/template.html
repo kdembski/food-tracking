@@ -74,16 +74,14 @@
       class="list-with-filters__content"
       ref="content"
     >
-      <div class="list-with-filters__pagination-wrapper" ref="paginationRef">
-        <CPagination
-          class="list-with-filters__pagination"
-          :class="paginationStickyClass"
-          :currentPage="filters.currentPage"
-          @update:currentPage="changeCurrentPage"
-          :paginationData="list?.pagination"
-          :isLoading="_isLoading"
-        />
-      </div>
+      <CPagination
+        class="list-with-filters__pagination"
+        :class="paginationStickyClass"
+        :currentPage="filters.currentPage"
+        @update:currentPage="changeCurrentPage"
+        :paginationData="list?.pagination"
+        :isLoading="_isLoading"
+      />
       <CList :items="list?.data" :isLoading="_isLoading">
         <template #header="{ item }">
           <slot name="header" :item="item"></slot>
