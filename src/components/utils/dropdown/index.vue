@@ -81,7 +81,7 @@ const { dropdownDirection } = useDropdownPosition(
   computed(() => props.isOpen)
 );
 
-const { isMobile, windowHeight } = useWindowSize();
+const { isMobile, windowHeight, isMobileKeyboardOpen } = useWindowSize();
 
 const getDropdownDirectionClass = () => {
   if (!isMobile.value) {
@@ -91,12 +91,12 @@ const getDropdownDirectionClass = () => {
 };
 
 const getDropdownMaxHeight = () => {
-  if (isMobile.value && windowHeight.value < 600) {
-    return "max-height: " + windowHeight.value / 1.75 + "px";
+  if (isMobile.value && isMobileKeyboardOpen.value) {
+    return "max-height: " + Math.floor(windowHeight.value / 1.75) + "px";
   }
 
   if (isMobile.value) {
-    return "max-height: " + windowHeight.value / 2 + "px";
+    return "max-height: " + Math.floor(windowHeight.value / 2) + "px";
   }
 
   return "";

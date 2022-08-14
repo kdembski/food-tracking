@@ -13,6 +13,8 @@ module.exports = {
   moduleFileExtensions: ["js", "json", "vue", "ts"],
   moduleNameMapper: {
     "^@/(.*)": "<rootDir>/src/$1",
+    ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$":
+      "jest-transform-stub",
   },
   preset: "ts-jest",
   setupFiles: ["<rootDir>/jest/setup-jest"],
@@ -21,6 +23,8 @@ module.exports = {
   transform: {
     ".*\\.(vue)$": "@vue/vue3-jest",
     ".*\\.(ts)$": "ts-jest",
+    '.+\\.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
+    'jest-transform-stub'
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
 };

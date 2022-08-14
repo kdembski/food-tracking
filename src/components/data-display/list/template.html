@@ -14,10 +14,10 @@
       <p>Brak wyników</p>
     </div>
     <ul class="list__content">
-      <div v-for="item in items" as="li" class="list__item item">
+      <li v-for="item in items" class="list__item item">
         <div class="item__header"><slot name="header" :item="item"></slot></div>
         <div class="item__body"><slot name="body" :item="item"></slot></div>
-      </div>
+      </li>
     </ul>
   </template>
 </div>

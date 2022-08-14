@@ -1,13 +1,17 @@
 <div class="field" :class="getFieldClasses()">
   <slot></slot>
-  <div v-if="icon" class="field__icon-left">
+  <div v-if="icon" class="field__left-icon">
     <FontAwesomeIcon :icon="icon" />
   </div>
-  <div v-if="hasIconRight" class="field__icon-right">
+  <div v-if="hasRightIcon" class="field__right-icon">
     <CLoader v-if="isLoading" :circleWidth="25" :circleHeight="25" />
     <CIcon v-else :type="isInvalid ? 'error': 'success'" />
   </div>
-  <label :for="$attrs.id && $attrs.id + '-field'" class="field__label">
+  <label
+    v-if="label"
+    :for="$attrs.id && $attrs.id + '-field'"
+    class="field__label"
+  >
     {{ label }}
   </label>
   <CTransition

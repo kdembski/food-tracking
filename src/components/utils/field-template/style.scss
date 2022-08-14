@@ -20,7 +20,7 @@
       outline: none;
       border-color: var(--primary);
 
-      & ~ .field__icon-left {
+      & ~ .field__left-icon {
         color: var(--primary);
       }
     }
@@ -48,7 +48,7 @@
       border-color: $error !important;
     }
 
-    .field__icon-left {
+    .field__left-icon {
       color: $error !important;
     }
   }
@@ -58,18 +58,18 @@
       border-color: $success !important;
     }
 
-    .field__icon-left {
+    .field__left-icon {
       color: $success !important;
     }
   }
 
-  &.field--with-icon-left {
+  &.field--with-left-icon {
     &:deep(input) {
       padding-left: 38px;
     }
   }
 
-  &.field--with-icon-right {
+  &.field--with-right-icon {
     &:deep(input) {
       padding-right: 48px !important;
     }
@@ -99,7 +99,7 @@
     }
   }
 
-  &__icon-left {
+  &__left-icon {
     position: absolute;
     top: 12px;
     left: 12px;
@@ -107,7 +107,7 @@
     font-size: 18px;
   }
 
-  &__icon-right {
+  &__right-icon {
     position: absolute;
     top: 0;
     right: 12px;

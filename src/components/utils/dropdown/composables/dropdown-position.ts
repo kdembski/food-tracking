@@ -31,7 +31,7 @@ export function useDropdownPosition(
     setDropdownPosition();
   });
 
-  watch([windowHeight], () => {
+  watch(windowHeight, () => {
     setDropdownPosition();
   });
 

@@ -21,7 +21,7 @@ const isInvalid = computed((): boolean => {
   return !!props.errorMessage;
 });
 
-const hasIconRight = computed((): boolean => {
+const hasRightIcon = computed((): boolean => {
   return isInvalid.value || props.isSuccessful || props.isLoading;
 });
 
@@ -35,10 +35,10 @@ const getFieldClasses = (): Array<string> => {
     classes.push("field--successful");
   }
   if (props.icon) {
-    classes.push("field--with-icon-left");
+    classes.push("field--with-left-icon");
   }
-  if (hasIconRight.value) {
-    classes.push("field--with-icon-right");
+  if (hasRightIcon.value) {
+    classes.push("field--with-right-icon");
   }
   if (props.isDisabled || props.isLoading) {
     classes.push("field--disabled");

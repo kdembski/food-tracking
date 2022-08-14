@@ -10,8 +10,6 @@ const settings = {
 };
 global.settings = settings;
 
-jest.mock("vue-inline-svg", () => () => jest.fn());
-
 const layout = document.createElement("div");
-layout.classList.add("layout-default");
+layout.classList.add("default-layout");
 document.body.appendChild(layout);

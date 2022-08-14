@@ -28,8 +28,8 @@ const getIconSizeClass = () => {
   return "icon--" + props.size;
 };
 
-const getIconBasedOnType = () => {
-  switch (props.type) {
+const getIconBasedOnType = (type: string) => {
+  switch (type) {
     case "success":
       return "check";
     case "error":
