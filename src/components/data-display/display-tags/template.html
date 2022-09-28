@@ -6,7 +6,6 @@
       :style="getTagColorStyles(tag)"
       @click="onClick(tag.name)"
     >
-      <FontAwesomeIcon v-if="tag.icon" :icon="tag.icon" />
       {{ tag.name }}
     </div>
   </template>

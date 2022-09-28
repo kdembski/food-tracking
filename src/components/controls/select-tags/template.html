@@ -1,8 +1,26 @@
-<div v-if="tags || isLoading" class="select-tags">
-  <CTags :tags="tags" :isLoading="isLoading" type="customized">
+<div v-if="tags || isLoading" class="select-tags" ref="container">
+  <CSkeletonLoader v-if="isLoading" class="select-tags__loader loader">
+    <div
+      v-for="index in 2"
+      class="loader__row"
+      :style="getLoaderRowGridTemplateColumns()"
+    >
+      <div
+        v-for="index in getLoaderItemsCount()"
+        class="loader__item skeleton-loader__item"
+      />
+    </div>
+    <div class="loader__row" :style="getLoaderRowGridTemplateColumns()">
+      <div
+        v-for="index in getHalfOfLoaderItemsCount()"
+        class="loader__item skeleton-loader__item"
+      />
+    </div>
+  </CSkeletonLoader>
+  <CTags v-else-if="tags.length > 0" :tags="tags">
     <template #default="{ getTagColorStyles, tagsArray }">
       <Item
-        v-for="tag in sortTagsBySelected(tagsArray)"
+        v-for="tag in sortTags(tagsArray)"
         v-model:selectedTags="_selectedTags"
         :tag="tag"
         :withCounts="withCounts"
@@ -10,15 +28,5 @@
       />
     </template>
   </CTags>
-  <CTags :tags="tags" :isLoading="isLoading" type="default">
-    <template #default="{ tagsArray }">
-      <Item
-        v-for="tag in sortTagsBySelected(tagsArray)"
-        v-model:selectedTags="_selectedTags"
-        :tag="tag"
-        :withCounts="withCounts"
-      />
-    </template>
-  </CTags>
+  <div v-else class="select-tags__empty">Brak tagów</div>
 </div>
-<div v-else class="select-tags__empty">Brak tagów</div>

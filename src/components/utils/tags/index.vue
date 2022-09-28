@@ -1,13 +1,11 @@
 <script lang="ts">
-import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 export default {
   name: "CTags",
-  components: { CSkeletonLoader },
 };
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
 import { Tag, TagSettings } from "./types/tags";
 import { isArray } from "lodash";
@@ -18,17 +16,6 @@ const props = defineProps({
   tags: {
     type: [String, Array as () => Array<Tag>],
     default: "",
-  },
-  isLoading: {
-    type: Boolean,
-    deafult: false,
-  },
-  type: {
-    type: String,
-    default: "all",
-    validator: (value: string) => {
-      return ["all", "customized", "default"].indexOf(value) !== -1;
-    },
   },
 });
 
@@ -94,32 +81,8 @@ const tagsArray = computed(() => {
 
 const tagsCount = computed(() => tagsArray.value.length);
 
-const customizedTags = computed(() => {
-  return tagsArray.value.filter((tag) => tag.lightColor);
-});
-
-const defaultTags = computed(() => {
-  return tagsArray.value.filter((tag) => !tag.lightColor);
-});
-
-const getTagsArrayBasedOnType = () => {
-  switch (props.type) {
-    case "all":
-      return tagsArray.value;
-    case "customized":
-      return customizedTags.value;
-    case "default":
-      return defaultTags.value;
-    default:
-      return tagsArray.value;
-  }
-};
-
-const areTagsVisible = () => {
-  return getTagsArrayBasedOnType().length > 0 || props.isLoading;
-};
-
 const isDarkModeEnabled = computed(() => store.getters["isDarkModeEnabled"]);
+
 const getTagColorStyles = (tagSettings: TagSettings) => {
   if (!tagSettings.darkColor || !tagSettings.lightColor) {
     return false;
@@ -138,18 +101,6 @@ const getTagColorStyles = (tagSettings: TagSettings) => {
     backgroundColor: tagSettings.lightColor,
     borderColor: tagSettings.darkColor + "21",
   };
-};
-
-const container: Ref<HTMLElement | undefined> = ref();
-const getLoaderItemsCount = () => {
-  const containerWidth = container.value?.clientWidth;
-  return Math.floor((containerWidth || 0) / 70);
-};
-const getHalfOfLoaderItemsCount = () => {
-  return Math.floor(getLoaderItemsCount() / 2);
-};
-const getLoaderRowGridTemplateColumns = () => {
-  return "grid-template-columns: repeat(" + getLoaderItemsCount() + ", 1fr);";
 };
 </script>
 

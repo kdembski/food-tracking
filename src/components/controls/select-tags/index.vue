@@ -1,15 +1,16 @@
 <script lang="ts">
 import CTags from "@/components/utils/tags/index.vue";
+import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 import Item from "./item/index.vue";
 
 export default {
   name: "CSelectTags",
-  components: { CTags, Item },
+  components: { CTags, Item, CSkeletonLoader },
 };
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, Ref } from "vue";
 import { Tag } from "@/components/utils/tags/types/tags";
 
 const props = defineProps({
@@ -47,14 +48,37 @@ const _selectedTags = computed({
   },
 });
 
-const sortTagsBySelected = (tags: Array<Tag>) => {
+const sortTags = (tags: Array<Tag>) => {
+  return sortOutSelectedTags(tags);
+};
+
+const isTagSelected = (tag: Tag) => {
+  return _selectedTags.value.some((tagName) => tagName === tag.name);
+};
+
+const sortOutSelectedTags = (tags: Array<Tag>) => {
   return tags.sort((tag) => {
-    if (_selectedTags.value.some((tagName) => tagName === tag.name)) {
+    if (isTagSelected(tag)) {
       return -1;
     }
 
     return 1;
   });
+};
+
+const container: Ref<HTMLElement | undefined> = ref();
+
+const getLoaderItemsCount = () => {
+  const containerWidth = container.value?.clientWidth;
+  return Math.floor((containerWidth || 0) / 70);
+};
+
+const getHalfOfLoaderItemsCount = () => {
+  return Math.floor(getLoaderItemsCount() / 2);
+};
+
+const getLoaderRowGridTemplateColumns = () => {
+  return "grid-template-columns: repeat(" + getLoaderItemsCount() + ", 1fr);";
 };
 </script>
 

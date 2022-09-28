@@ -5,4 +5,25 @@
   &__empty {
     color: var(--text-primary);
   }
+
+  .loader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &__row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      gap: 6px;
+    }
+
+    .skeleton-loader__item {
+      padding: 0;
+      height: 29px;
+      border-radius: 15px;
+      width: 100%;
+    }
+  }
 }
