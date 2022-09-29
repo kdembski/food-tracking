@@ -5,7 +5,14 @@ describe("Pagination Component", () => {
   let wrapper: any = null;
 
   beforeEach(async () => {
-    wrapper = mount(CPagination, { global: global.settings });
+    wrapper = mount(CPagination, {
+      props: {
+        paginationData: {},
+        currentPage: 1,
+        isLoading: false,
+      },
+      global: global.settings,
+    });
   });
 
   it("Should render component", async () => {

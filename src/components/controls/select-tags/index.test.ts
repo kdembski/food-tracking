@@ -42,9 +42,9 @@ describe("Select Tags Component", () => {
     expect(wrapper.emitted()["update:selectedTags"][0][0]).toEqual("tag1,tag3");
   });
 
-  it("sortTagsBySelected should sort tags to selected tags be at front", async () => {
+  it("sortTags should sort tags to selected tags be at front", async () => {
     const tags = [{ name: "tag3" }, { name: "tag2" }, { name: "tag1" }];
-    expect(wrapper.vm.sortTagsBySelected(tags)).toEqual([
+    expect(wrapper.vm.sortTags(tags)).toEqual([
       { name: "tag1" },
       { name: "tag3" },
       { name: "tag2" },

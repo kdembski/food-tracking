@@ -46,7 +46,7 @@
     z-index: 1;
     top: -20px;
     background-color: var(--surface-primary);
-    margin-top: -10px;
+    margin: -10px 0 -1px;
     padding: 10px 0;
     align-items: flex-end;
     border-bottom: 1px solid var(--border-color);
@@ -79,7 +79,7 @@
     &__content-transition {
       &-enter-active,
       &-leave-active {
-        transition: 0.3s ease-in-out;
+        transition: 0.2s ease-in-out;
       }
 
       &-enter-active {
@@ -156,7 +156,7 @@
     &__pagination {
       top: -10px;
       padding: 8px 0;
-      margin-top: -8px;
+      margin: -8px 0 -1px;
     }
   }
 }
