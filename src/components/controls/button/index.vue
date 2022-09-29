@@ -9,50 +9,9 @@ export default {
 
 <script setup lang="ts">
 import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useButtonProps } from "./composables/props";
 
-const props = defineProps({
-  label: {
-    type: String,
-    default: "Button",
-  },
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
-  isDisabled: {
-    type: Boolean,
-    default: false,
-  },
-  variant: {
-    type: String,
-    default: "contained",
-    validator: (value: string) => {
-      return ["contained", "text"].indexOf(value) !== -1;
-    },
-  },
-  color: {
-    type: String,
-    default: "primary",
-    validator: (value: string) => {
-      return ["primary", "secondary"].indexOf(value) !== -1;
-    },
-  },
-  size: {
-    type: String,
-    default: "medium",
-    validator: (value: string) => {
-      return ["small", "medium", "large"].indexOf(value) !== -1;
-    },
-  },
-  icon: {
-    type: String,
-    default: "",
-  },
-  fullWidth: {
-    type: Boolean,
-    default: false,
-  },
-});
+const props = defineProps(useButtonProps().buttonProps);
 
 const { windowWidth } = useWindowSize();
 

@@ -10,42 +10,20 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { SelectOption } from "@/components/controls/select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 import { ref, Ref, computed } from "vue";
 import { useDropdownPosition } from "./composables/dropdown-position";
 import { useWindowSize } from "../composables/window-size";
+import { useDropdownProps } from "./composables/props";
 
-const props = defineProps({
-  isOpen: {
-    type: Boolean,
-    default: false,
-  },
-  options: {
-    type: Array as () => Array<SelectOption>,
-    default: () => [],
-  },
-  disabledOptions: {
-    type: Array,
-    default: () => [],
-  },
-  getOptionClass: {
-    type: Function,
-    default: () => null,
-  },
-  searchPhrase: {
-    type: String,
-    default: "",
-  },
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
-});
+const { isMobile, windowHeight, isMobileKeyboardOpen } = useWindowSize();
+
+const props = defineProps(useDropdownProps().dropdownProps);
 
 const emit = defineEmits<{
   (e: "listMouseout"): void;
   (e: "optionMouseover", index: number): void;
-  (e: "optionClick", option: SelectOption): void;
+  (e: "optionClick", option: DropdownOption): void;
   (e: "update:isOpen", value: boolean): void;
 }>();
 
@@ -70,7 +48,8 @@ const emitOptionMouseover = (index: number) => {
   emit("optionMouseover", index);
 };
 
-const emitOptionClick = (option: SelectOption) => {
+const onOptionClick = (option: DropdownOption) => {
+  option.action?.();
   emit("optionClick", option);
 };
 
@@ -80,8 +59,6 @@ const { dropdownDirection } = useDropdownPosition(
   dropdown,
   computed(() => props.isOpen)
 );
-
-const { isMobile, windowHeight, isMobileKeyboardOpen } = useWindowSize();
 
 const getDropdownDirectionClass = () => {
   if (!isMobile.value) {
@@ -102,7 +79,7 @@ const getDropdownMaxHeight = () => {
   return "";
 };
 
-const getOptionContent = (label: string) => {
+const getOptionLabelWithHighlight = (label: string) => {
   const simplifiedSearchPhrase = props.searchPhrase?.simplify();
   const simplifiedLabel = label?.simplify();
 

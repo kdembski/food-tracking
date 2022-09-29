@@ -87,7 +87,7 @@ describe("Dropdown Component", () => {
     await wrapper.setProps({
       searchPhrase: "abe",
     });
-    expect(wrapper.vm.getOptionContent("label")).toEqual(
+    expect(wrapper.vm.getOptionLabelWithHighlight("label")).toEqual(
       "l<strong>abe</strong>l"
     );
   });

@@ -1,0 +1,8 @@
+<div class="button-with-dropdown" v-click-away="closeDropdown">
+  <CButton v-bind="getButtonProps(props)" @click="toggleIsOpen" />
+  <CDropdown
+    v-bind="getDropdownProps(props)"
+    :isOpen="isDropdownOpen"
+    @optionClick="closeDropdown"
+  />
+</div>
