@@ -1,0 +1,32 @@
+<transition name="modal__transition">
+  <div v-if="_isOpen" class="modal__overlay" teleport="body">
+    <div class="modal__container">
+      <CLoader
+        v-if="isSubmitting"
+        :circleHeight="40"
+        :circleWidth="40"
+        withOverlay
+      />
+      <div class="modal__header">
+        <p>{{ title }}</p>
+        <CButton
+          color="secondary"
+          label=""
+          variant="text"
+          icon="times"
+          @click="closeModal"
+        />
+      </div>
+      <div class="modal__body">
+        <slot></slot>
+      </div>
+      <div class="modal__footer">
+        <CButton
+          :label="submitButtonLabel"
+          @click="onSubmit"
+          :isDisabled="isSubmitButtonDisabled"
+        />
+      </div>
+    </div>
+  </div>
+</transition>

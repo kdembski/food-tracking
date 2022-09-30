@@ -35,9 +35,10 @@ const value = computed({
 });
 
 const onInput = (e: KeyboardEvent) => {
-  if (props.isLoading) {
-    e.preventDefault();
+  if (!props.isLoading) {
+    return;
   }
+  e.preventDefault();
 };
 </script>
 

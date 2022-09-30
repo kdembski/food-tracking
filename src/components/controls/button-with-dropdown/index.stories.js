@@ -1,7 +1,7 @@
 import CButtonWithDropdown from "./index.vue";
 
 export default {
-  title: "Controls/ButtonWithDropdown",
+  title: "Controls/Button With Dropdown",
   component: CButtonWithDropdown,
 };
 
