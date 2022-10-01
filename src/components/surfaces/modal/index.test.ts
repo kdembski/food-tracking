@@ -13,7 +13,7 @@ describe("Modal Component", () => {
     });
   });
 
-  it("Should render component", async () => {
+  it("Should render component and show modal if isOpen is true", async () => {
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find(".modal__overlay").exists()).toBe(true);
   });

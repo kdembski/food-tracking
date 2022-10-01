@@ -12,7 +12,7 @@ export function useButtonProps() {
   const buttonProps = {
     label: {
       type: String,
-      default: "Button",
+      default: "",
     },
     isLoading: {
       type: Boolean,

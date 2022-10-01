@@ -1,0 +1,14 @@
+<div class="weekly-date-picker">
+  <div v-for="(date, index) in allDatesInWeek" class="weekly-date-picker__item">
+    <input
+      :id="'date-' + index"
+      v-model="selected"
+      :value="date"
+      type="checkbox"
+    />
+    <label :for="'date-' + index">
+      <p>{{ getFormattedDate(date, "d") }}</p>
+      <p>{{ getFormattedDate(date, "EEEE") }}</p>
+    </label>
+  </div>
+</div>

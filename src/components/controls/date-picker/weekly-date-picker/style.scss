@@ -1,0 +1,49 @@
+.weekly-date-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+
+  &__item {
+    > input {
+      display: none;
+    }
+
+    > label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 10px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 4px;
+      gap: 10px;
+      border: 1px solid var(--border-color);
+
+      & > p:first-child {
+        font-size: $font-xl;
+      }
+
+      & > p:last-child {
+        font-size: $font-xs;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      &:hover {
+        background-color: var(--surface-secondary);
+      }
+    }
+
+    > input:checked + label {
+      background-color: var(--primary);
+      color: $white;
+      box-shadow: $shadow-sm var(--shadow-color);
+
+      & > p:last-child {
+        color: $white;
+      }
+    }
+  }
+}

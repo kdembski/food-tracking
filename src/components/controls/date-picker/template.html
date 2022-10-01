@@ -1,0 +1,39 @@
+<div class="date-picker">
+  <div class="date-picker__toolbar">
+    <div class="date-picker__range">
+      <CButton
+        color="secondary"
+        variant="text"
+        size="large"
+        icon="chevron-left"
+        @click="decrementDate"
+      />
+      <p>{{ getDatePickerRange() }}</p>
+      <CButton
+        color="secondary"
+        variant="text"
+        size="large"
+        icon="chevron-right"
+        @click="incrementDate"
+      />
+    </div>
+    <CCalendarMode
+      v-model:mode="calendarMode"
+      ref="calendarModeRef"
+      @update:mode="clearSelected()"
+    />
+  </div>
+  <MonthlyDatePicker
+    v-if="calendarModeRef?.isMonthlyMode()"
+    v-model="selected"
+    :getFormattedDate="getFormattedDate"
+    :fullMonthGrid="fullMonthGrid"
+    :weekDays="getWeekDays()"
+  />
+  <WeeklyDatePicker
+    v-if="calendarModeRef?.isWeeklyMode()"
+    v-model="selected"
+    :getFormattedDate="getFormattedDate"
+    :allDatesInWeek="allDatesInWeek"
+  />
+</div>

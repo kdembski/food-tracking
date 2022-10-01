@@ -1,0 +1,56 @@
+.monthly-date-picker {
+  &__header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 10px 0;
+    margin-bottom: 5px;
+    background-color: var(--surface-secondary);
+    border-bottom: 1px solid var(--border-color);
+
+    & > p {
+      text-align: center;
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--disabled {
+      color: var(--text-tetriary);
+    }
+
+    > input {
+      display: none;
+    }
+
+    > label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 10px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: var(--surface-secondary);
+      }
+    }
+
+    > input:checked + label {
+      background-color: var(--primary);
+      color: $white;
+      box-shadow: $shadow-sm var(--shadow-color);
+    }
+  }
+}

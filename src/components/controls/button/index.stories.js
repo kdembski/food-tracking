@@ -45,12 +45,16 @@ const Template = (args) => ({
 });
 
 export const Primary = Template.bind({});
+Primary.args = {
+  label: "Button",
+};
 
 export const PrimaryText = Template.bind({});
 PrimaryText.args = Object.assign({ variant: "text" }, Primary.args);
 
 export const Secondary = Template.bind({});
 Secondary.args = {
+  label: "Button",
   color: "secondary",
 };
 

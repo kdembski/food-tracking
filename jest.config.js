@@ -23,8 +23,9 @@ module.exports = {
   transform: {
     ".*\\.(vue)$": "@vue/vue3-jest",
     ".*\\.(ts)$": "ts-jest",
-    '.+\\.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
-    'jest-transform-stub'
+    "^.+\\.(js|jsx)$": "babel-jest",
+    ".+\\.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$":
+      "jest-transform-stub",
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!date-fns/)"],
 };

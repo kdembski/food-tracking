@@ -9,7 +9,7 @@ const props = withDefaults(
   defineProps<{
     circleHeight: number;
     circleWidth: number;
-    withOverlay: boolean;
+    withOverlay?: boolean;
   }>(),
   { circleHeight: 55, circleWidth: 55, withOverlay: false }
 );

@@ -1,0 +1,25 @@
+<div class="monthly-date-picker">
+  <div class="monthly-date-picker__header">
+    <p v-for="weekDay in weekDays">{{ weekDay }}</p>
+  </div>
+  <div class="monthly-date-picker__body">
+    <div
+      v-for="(item, index) in fullMonthGrid"
+      class="monthly-date-picker__item"
+      :class="getItemDisabledClass(item)"
+    >
+      <template v-if="isDate(item)">
+        <input
+          :id="'date-' + index"
+          v-model="selected"
+          :value="item"
+          type="checkbox"
+        />
+        <label :for="'date-' + index">
+          {{ getFormattedDate(item, "d") }}
+        </label>
+      </template>
+      <template v-else> {{ item }} </template>
+    </div>
+  </div>
+</div>

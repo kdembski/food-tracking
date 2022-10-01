@@ -1,0 +1,19 @@
+.date-picker {
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    > p {
+      min-width: 130px;
+      text-align: center;
+    }
+  }
+}
