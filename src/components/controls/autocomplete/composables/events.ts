@@ -1,4 +1,4 @@
-import { SelectOption } from "@/components/controls/select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 import { ComputedRef, Ref } from "vue";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
@@ -7,8 +7,8 @@ export function useEvents(
   setHoveredOptionIndex: (index: number | null) => void,
   decrementHoveredOptionIndex: () => void,
   incrementHoveredOptionIndex: () => void,
-  filteredOptions: ComputedRef<Array<SelectOption>>,
-  selectOption: (option: SelectOption) => void,
+  filteredOptions: ComputedRef<Array<DropdownOption>>,
+  selectOption: (option: DropdownOption) => void,
   input: Ref<HTMLInputElement | undefined>,
   inputValue: Ref<string>,
   shootingMode: ComputedRef<boolean>,

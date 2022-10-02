@@ -1,12 +1,12 @@
 import { ref, watch, Ref, ComputedRef, nextTick } from "vue";
-import { SelectOption } from "../../select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
 export function useValues(
   props: any,
   emits: any,
-  filteredOptions: ComputedRef<Array<SelectOption>>,
-  selectOption: (option: SelectOption) => void,
+  filteredOptions: ComputedRef<Array<DropdownOption>>,
+  selectOption: (option: DropdownOption) => void,
   input: Ref<HTMLInputElement | undefined>,
   isLoading: ComputedRef<boolean>
 ) {
@@ -15,7 +15,7 @@ export function useValues(
   const { isMobile } = useWindowSize();
 
   const getOptionLabelByValue = (value: string | number) => {
-    return props.options.find((option: SelectOption) => option.value === value)
+    return props.options.find((option: DropdownOption) => option.value === value)
       ?.label;
   };
 
@@ -50,7 +50,7 @@ export function useValues(
 
   const getOptionMatchingInputValue = (value: string) => {
     const matchingOption = filteredOptions.value.find(
-      (option: SelectOption) => option.label.simplify() === value.simplify()
+      (option: DropdownOption) => option.label.simplify() === value.simplify()
     );
     return matchingOption;
   };

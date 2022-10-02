@@ -5,7 +5,7 @@ import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
 import { ListFilters, ListBaseFilters } from "@/types/list";
-import { SelectOption } from "@/components/controls/select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 
 const state: RecipeState = {
   recipesList: null,
@@ -25,7 +25,7 @@ const getters: GetterTree<RecipeState, any> = {
   getRecipesTags: (state): string | null => state.recipesTags,
   isLoadingRecipesTags: (state) => state.isLoadingRecipesTags,
 
-  getRecipesSearchSuggestions: (state): SelectOption<null>[] => {
+  getRecipesSearchSuggestions: (state): DropdownOption<null>[] => {
     const suggestions = state.recipesSearchSuggestions;
     if (!suggestions) {
       return [];

@@ -1,5 +1,5 @@
 import { isEqual } from "lodash";
-import { SelectOption } from "@/components/controls/select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 import { computed } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/list";
 import { Ref } from "vue";
@@ -16,7 +16,7 @@ export function useSort(
   });
 
   const getSelectedSortIcon = (
-    sortOptions: SelectOption<ListSortFilters>[]
+    sortOptions: DropdownOption<ListSortFilters>[]
   ) => {
     return sortOptions?.find((option) =>
       isEqual(option.value, selectedSort.value)

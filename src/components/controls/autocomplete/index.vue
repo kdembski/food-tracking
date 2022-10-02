@@ -9,7 +9,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { SelectOption } from "../select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 import { computed, ref, watch } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 import { useOptionHover } from "./composables/option-hover";
@@ -21,7 +21,7 @@ const { getFieldTemplateProps } = useFieldProps();
 const props = defineProps({
   ...useFieldProps().fieldProps,
   options: {
-    type: Array as () => Array<SelectOption>,
+    type: Array as () => Array<DropdownOption>,
     default: () => [],
   },
   disabledOptions: {
@@ -63,7 +63,7 @@ const hasFocus = ref(false);
 const input = ref<HTMLInputElement>();
 
 const filteredOptions = computed(() => {
-  return props.options?.filter((option: SelectOption) => {
+  return props.options?.filter((option: DropdownOption) => {
     return option.label.simplify().includes(_inputValue.value.simplify());
   });
 });
@@ -83,7 +83,7 @@ watch(_isLoading, (value) => {
   clearSelectedAndInputValue();
 });
 
-const selectOption = (option: SelectOption) => {
+const selectOption = (option: DropdownOption) => {
   selectedValue.value = option.value;
   _inputValue.value = option.label;
 };

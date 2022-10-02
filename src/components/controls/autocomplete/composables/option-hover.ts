@@ -1,7 +1,7 @@
 import { ref, ComputedRef, watch } from "vue";
-import { SelectOption } from "../../select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 
-export function useOptionHover(optionsList: ComputedRef<SelectOption[]>) {
+export function useOptionHover(options: ComputedRef<DropdownOption[]>) {
   const hoveredOptionIndex = ref<number | null>(null);
 
   const isOptionHovered = (index: number) => {
@@ -29,7 +29,7 @@ export function useOptionHover(optionsList: ComputedRef<SelectOption[]>) {
     }
 
     const nextOptionIndex = hoveredOptionIndex.value + 1;
-    if (nextOptionIndex > optionsList.value.length - 1) {
+    if (nextOptionIndex > options.value.length - 1) {
       return setHoveredOptionIndex(0);
     }
 
@@ -38,18 +38,18 @@ export function useOptionHover(optionsList: ComputedRef<SelectOption[]>) {
 
   const decrementHoveredOptionIndex = () => {
     if (hoveredOptionIndex.value === null) {
-      return setHoveredOptionIndex(optionsList.value.length - 1);
+      return setHoveredOptionIndex(options.value.length - 1);
     }
 
     const previousOptionIndex = hoveredOptionIndex.value - 1;
     if (previousOptionIndex < 0) {
-      return setHoveredOptionIndex(optionsList.value.length - 1);
+      return setHoveredOptionIndex(options.value.length - 1);
     }
 
     setHoveredOptionIndex(previousOptionIndex);
   };
 
-  watch(optionsList, () => {
+  watch(options, () => {
     hoveredOptionIndex.value = null;
   });
 

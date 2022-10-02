@@ -29,7 +29,7 @@ export default {
 import { useStore } from "vuex";
 import { computed, ref, Ref } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/list";
-import { SelectOption } from "@/components/controls/select/types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
 import { useFilters } from "./composables/filters/index";
@@ -61,7 +61,7 @@ const props = withDefaults(
     enableTags?: boolean;
     enableRandomButton?: boolean;
 
-    sortOptions: SelectOption<ListSortFilters>[];
+    sortOptions: DropdownOption<ListSortFilters>[];
   }>(),
   {
     tagsGetterName: "",

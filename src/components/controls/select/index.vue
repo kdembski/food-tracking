@@ -11,7 +11,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
-import { SelectOption } from "./types/select";
+import { DropdownOption } from "@/components/utils/dropdown/types/option";
 import { isEqual } from "lodash";
 
 const { getFieldTemplateProps } = useFieldProps();
@@ -23,7 +23,7 @@ const props = defineProps({
     default: "",
   },
   options: {
-    type: Array as () => Array<SelectOption>,
+    type: Array as () => Array<DropdownOption>,
     default: () => [],
   },
 });
@@ -63,7 +63,7 @@ const getSelectedOptionLabel = () => {
   return selectedOption?.label;
 };
 
-const selectOption = (option: SelectOption) => {
+const selectOption = (option: DropdownOption) => {
   selected.value = option.value;
 };
 </script>
