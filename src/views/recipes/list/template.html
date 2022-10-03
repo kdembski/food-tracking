@@ -24,42 +24,10 @@
       :sortOptions="recipeListSortOptions"
     >
       <template #header="{ item }">
-        <p class="item__recipe-name">{{ item.recipeName }}</p>
-        <div class="item__buttons">
-          <template v-if="isMobile">
-            <CButton
-              color="secondary"
-              variant="text"
-              icon="ellipsis-vertical"
-            />
-          </template>
-          <template v-else>
-            <CButton color="secondary" variant="text" icon="cart-shopping" />
-            <CButton color="secondary" variant="text" icon="calendar-days" />
-            <CLink
-              v-if="item.cookidooLink"
-              :href="item.cookidooLink"
-              class="item__cookidoo-link"
-              external
-            >
-              <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
-            </CLink>
-          </template>
-        </div>
+        <RecipesListItemHeader :item="item" />
       </template>
       <template #body="{ item, addTagAndFilter }">
-        <div class="item__row">
-          <div class="item__preparation-time">
-            <FontAwesomeIcon :icon="['far', 'clock']" />
-            <p>{{ getPreparationTime(item.preparationTime) }}</p>
-          </div>
-          <div v-if="false" class="item__cooked-date">
-            <span v-for="index in 5"></span>
-          </div>
-        </div>
-        <div class="item__row">
-          <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
-        </div>
+        <RecipesListItemBody :item="item" :addTagAndFilter="addTagAndFilter" />
       </template>
     </CListWithFilters>
   </main>

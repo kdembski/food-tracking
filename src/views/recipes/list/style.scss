@@ -14,78 +14,6 @@
     display: flex;
   }
 
-  .item {
-    &__row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      &:nth-child(1) {
-        margin: 0 0 10px 3px;
-      }
-    }
-
-    &__preparation-time {
-      font-size: $font-sm;
-      font-weight: 500;
-      display: flex;
-      gap: 5px;
-      color: var(--text-secondary);
-
-      & > svg {
-        margin-top: 1px;
-      }
-    }
-
-    &__recipe-name {
-      font-size: $font-xl;
-      font-weight: 500;
-      color: var(--text-primary);
-      line-height: 100%;
-    }
-
-    &__cooked-date {
-      display: flex;
-      justify-content: space-between;
-      gap: 4px;
-
-      & > span {
-        width: 8px;
-        height: 8px;
-        background-color: var(--primary);
-        border-radius: 100%;
-      }
-    }
-
-    &__cookidoo-link {
-      color: $text-darker;
-      border-radius: 4px;
-
-      & > svg {
-        width: 18px;
-      }
-
-      &:hover {
-        background-color: rgba(var(--text-primary-rgb), 0.08);
-      }
-    }
-
-    &__buttons {
-      display: flex;
-      gap: 5px;
-
-      & > a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: $font-base;
-        padding: 0;
-        width: 28px;
-        height: 28px;
-      }
-    }
-  }
-
   &__navigation {
     margin-bottom: 20px;
   }
@@ -93,36 +21,8 @@
 
 @media screen and (max-width: $screen-md) {
   .recipes-list {
-    .item {
-      &__row {
-        &:nth-child(1) {
-          margin-bottom: 8px;
-        }
-      }
-
-      &__recipe-name {
-        font-size: $font-lg;
-      }
-
-      &__preparation-time {
-        font-size: $font-xs;
-      }
-
-      &__buttons {
-        & > button {
-          font-size: $font-lg;
-        }
-      }
-    }
-
     &__navigation {
       margin-bottom: 15px;
     }
-  }
-}
-
-[data-theme="dark"] {
-  .item__cookidoo-link {
-    color: $text-lightest;
   }
 }

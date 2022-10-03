@@ -1,0 +1,12 @@
+<div class="item-body__row">
+  <div class="item-body__preparation-time">
+    <FontAwesomeIcon :icon="['far', 'clock']" />
+    <p>{{ getPreparationTime(item.preparationTime) }}</p>
+  </div>
+  <div v-if="false" class="item-body__cooked-date">
+    <span v-for="index in 5"></span>
+  </div>
+</div>
+<div class="item-body__row">
+  <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
+</div>

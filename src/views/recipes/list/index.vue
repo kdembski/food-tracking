@@ -1,20 +1,18 @@
 <script lang="ts">
 import CListWithFilters from "@/components/data-display/list-with-filters/index.vue";
-import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
-import CLink from "@/components/utils/link/index.vue";
 import CHorizontalTabs from "@/components/navigation/horizontal-tabs/index.vue";
-import InlineSvg from "vue-inline-svg";
+import RecipesListItemHeader from "./list-item/header/index.vue";
+import RecipesListItemBody from "./list-item/body/index.vue";
 
 export default {
   name: "RecipesListView",
   components: {
     CListWithFilters,
-    CDisplayTags,
     CButton,
-    InlineSvg,
-    CLink,
     CHorizontalTabs,
+    RecipesListItemHeader,
+    RecipesListItemBody,
   },
 };
 </script>
@@ -22,9 +20,7 @@ export default {
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
-import { useWindowSize } from "@/components/utils/composables/window-size";
 const store = useStore();
-const { isMobile } = useWindowSize();
 
 const recipesListDefaultFilters = {
   currentPage: 1,
@@ -79,21 +75,6 @@ const selectedTab = ref("ALL");
 
 const setRecipesListCount = async () => {
   tabs.value[0].count = await store.dispatch("recipe/getRecipesListCount");
-};
-
-const getPreparationTime = (time: number) => {
-  const minutes = time % 60;
-  const hours = Math.floor(time / 60);
-
-  if (hours && minutes) {
-    return hours + "h " + minutes + "m";
-  }
-
-  if (hours) {
-    return hours + "h";
-  }
-
-  return minutes + "m";
 };
 
 onMounted(() => {

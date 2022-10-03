@@ -1,0 +1,27 @@
+.item-header {
+  &__food-name {
+    font-size: $font-xl;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 100%;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 5px;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .item-header {
+    &__buttons {
+      & > button {
+        font-size: $font-lg;
+      }
+    }
+
+    &__food-name {
+      font-size: $font-lg;
+    }
+  }
+}

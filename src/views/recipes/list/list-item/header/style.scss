@@ -1,0 +1,56 @@
+.item-header {
+  &__recipe-name {
+    font-size: $font-xl;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 100%;
+  }
+
+  &__cookidoo-link {
+    color: $text-darker;
+    border-radius: 4px;
+
+    & > svg {
+      width: 18px;
+    }
+
+    &:hover {
+      background-color: rgba(var(--text-primary-rgb), 0.08);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 5px;
+
+    & > a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-base;
+      padding: 0;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .item-header {
+    &__recipe-name {
+      font-size: $font-lg;
+    }
+
+    &__buttons {
+      & > button {
+        font-size: $font-lg;
+      }
+    }
+  }
+}
+
+[data-theme="dark"] {
+  .item-header__cookidoo-link {
+    color: $text-lightest;
+  }
+}

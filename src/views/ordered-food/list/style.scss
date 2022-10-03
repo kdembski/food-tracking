@@ -13,46 +13,4 @@
     flex-grow: 1;
     display: flex;
   }
-
-  .item {
-    &__food-name {
-      font-size: $font-xl;
-      font-weight: 500;
-      color: var(--text-primary);
-      line-height: 100%;
-    }
-
-    &__place-name {
-      display: inline-block;
-      font-size: $font-sm;
-      font-weight: 500;
-      color: var(--text-secondary);
-      margin: 0 0 10px 2px;
-    }
-
-    &__buttons {
-      display: flex;
-      gap: 5px;
-    }
-  }
-}
-
-@media screen and (max-width: $screen-md) {
-  .ordered-food-list {
-    .item {
-      &__buttons {
-        & > button {
-          font-size: $font-lg;
-        }
-      }
-
-      &__food-name {
-        font-size: $font-lg;
-      }
-
-      &__place-name {
-        margin-bottom: 8px;
-      }
-    }
-  }
 }

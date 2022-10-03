@@ -16,24 +16,13 @@
       :sortOptions="orderedFoodListSortOptions"
     >
       <template #header="{ item }">
-        <p class="item__food-name">{{ item.foodName }}</p>
-        <div class="item__buttons">
-          <CButton
-            color="secondary"
-            variant="text"
-            icon="calendar-days"
-            class="item__menu"
-          />
-        </div>
+        <OrderedFoodListItemHeader :item="item" />
       </template>
       <template #body="{ item, addTagAndFilter }">
-        <CLink
-          class="item__place-name"
-          :label="item.placeName"
-          :href="item.placeLink"
-          external
+        <OrderedFoodListItemBody
+          :item="item"
+          :addTagAndFilter="addTagAndFilter"
         />
-        <CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
       </template>
     </CListWithFilters>
   </main>

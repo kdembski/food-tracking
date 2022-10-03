@@ -1,0 +1,17 @@
+.item-body {
+  &__place-name {
+    display: inline-block;
+    font-size: $font-sm;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0 0 10px 2px;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .item-body {
+    &__place-name {
+      margin-bottom: 8px;
+    }
+  }
+}

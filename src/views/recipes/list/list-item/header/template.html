@@ -1,0 +1,23 @@
+<p class="item-header__recipe-name">{{ item.recipeName }}</p>
+<div class="item-header__buttons">
+  <template v-if="isMobile">
+    <CButton color="secondary" variant="text" icon="ellipsis-vertical" />
+  </template>
+  <template v-else>
+    <CButton
+      color="secondary"
+      variant="text"
+      icon="cart-shopping"
+      :isDisabled="true"
+    />
+    <CButton color="secondary" variant="text" icon="calendar-days" />
+    <CLink
+      v-if="item.cookidooLink"
+      :href="item.cookidooLink"
+      class="item-header__cookidoo-link"
+      external
+    >
+      <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+    </CLink>
+  </template>
+</div>

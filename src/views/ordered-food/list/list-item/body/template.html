@@ -1,0 +1,7 @@
+<CLink
+  class="item-body__place-name"
+  :label="item.placeName"
+  :href="item.placeLink"
+  external
+/>
+<CDisplayTags :tags="item.tags" @click="addTagAndFilter" />
