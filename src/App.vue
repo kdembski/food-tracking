@@ -21,6 +21,7 @@ import { computed, onBeforeMount, watch } from "vue";
 import { useRoute } from "vue-router";
 import ApiService from "./services/api.service";
 import { useStore } from "vuex";
+
 const store = useStore();
 
 const theme = computed(() => store.state.theme);
