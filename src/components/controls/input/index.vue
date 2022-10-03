@@ -16,20 +16,20 @@ const { getFieldTemplateProps } = useFieldProps();
 const props = defineProps({
   ...useFieldProps().fieldProps,
   modelValue: {
-    type: String,
+    type: [String, Number],
     default: "",
   },
 });
 
 const emits = defineEmits<{
-  (event: "update:modelValue", value: string): void;
+  (event: "update:modelValue", value: string | number): void;
 }>();
 
 const value = computed({
-  get(): string {
+  get(): string | number {
     return props.modelValue;
   },
-  set(value: string) {
+  set(value: string | number) {
     emits("update:modelValue", value);
   },
 });

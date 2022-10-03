@@ -1,0 +1,17 @@
+<div class="set-portions">
+  <CButton
+    color="secondary"
+    variant="text"
+    size="large"
+    icon="minus"
+    @click="portions--"
+  />
+  <CInput v-model="portions" type="number" class="set-portions__input" />
+  <CButton
+    color="secondary"
+    variant="text"
+    size="large"
+    icon="plus"
+    @click="portions++"
+  />
+</div>

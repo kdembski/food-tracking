@@ -47,6 +47,7 @@ import {
   faCalendarPlus,
   faCartShopping,
   faCartPlus,
+  faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faClock as faRegularClock } from "@fortawesome/free-regular-svg-icons";
@@ -98,7 +99,8 @@ library.add(
   faBell,
   faCalendarPlus,
   faCartShopping,
-  faCartPlus
+  faCartPlus,
+  faMinus
 );
 
 export default FontAwesomeIcon;
