@@ -2,7 +2,7 @@
 import CButton from "@/components/controls/button/index.vue";
 import MonthlyDatePicker from "./monthly-date-picker/index.vue";
 import WeeklyDatePicker from "./weekly-date-picker/index.vue";
-import CCalendarMode from "@/components/utils/calendar-mode/index.vue";
+import CCalendarMode from "@/components/controls/calendar-mode/index.vue";
 
 export default {
   name: "CDatePicker",
