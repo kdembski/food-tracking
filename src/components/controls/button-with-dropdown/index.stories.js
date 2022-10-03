@@ -23,4 +23,5 @@ Default.args = {
     { value: 5, label: "Label-5" },
     { value: 6, label: "Label-6" },
   ],
+  label: "Click to open",
 };

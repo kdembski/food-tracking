@@ -2,7 +2,7 @@ import ApiService from "@/services/api.service";
 import StorageService from "@/services/storage.service";
 import { UserState, LoginResponse } from "@/types/user";
 import { ApiError } from "@/types/api";
-import { GetterTree, MutationTree, ActionTree, ActionContext } from "vuex";
+import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 
 const state: UserState = {
@@ -12,27 +12,27 @@ const state: UserState = {
 
 const getters: GetterTree<UserState, any> = {
   isLoggedIn: (state): boolean => !!state.accessToken,
-
   getAccessToken: (state): string | null => state.accessToken,
 };
 
 const actions: ActionTree<UserState, any> = {
   login({ commit }, password: string) {
     return new Promise<void>((resolve, reject) => {
-      commit("loginRequest");
+      commit("setIsloggingIn", true);
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/login", {
         password,
       })
         .then((response: AxiosResponse<LoginResponse>) => {
-          commit("loginSuccess", response.data.accessToken);
+          commit("setIsloggingIn", false);
+          commit("setAccessToken", response.data.accessToken);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
+          commit("setIsloggingIn", false);
+
           const errorMessage: string | undefined =
             error.response?.data.message || error.code;
-
-          commit("loginError", errorMessage);
           reject(errorMessage);
         });
     });
@@ -40,19 +40,14 @@ const actions: ActionTree<UserState, any> = {
 };
 
 const mutations: MutationTree<UserState> = {
-  loginRequest(state) {
-    state.isLoggingIn = true;
+  setIsloggingIn(state, value) {
+    state.isLoggingIn = value;
   },
 
-  loginSuccess(state, accessToken: string) {
-    state.isLoggingIn = false;
-    state.accessToken = accessToken;
-    StorageService.setItem("accessToken", accessToken);
+  setAccessToken(state, token) {
+    state.accessToken = token;
+    StorageService.setItem("accessToken", token);
     ApiService.setHeader();
-  },
-
-  loginError(state, error: string) {
-    state.isLoggingIn = false;
   },
 };
 

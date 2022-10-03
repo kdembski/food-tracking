@@ -45,20 +45,21 @@ const getters: GetterTree<RecipeState, any> = {
 const actions: ActionTree<RecipeState, any> = {
   loadRecipesList({ commit }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("loadRecipesListRequest");
+      commit("setIsLoadingRecipesList", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL + "/recipes" + getListQuery(filters)
       )
         .then((response: AxiosResponse<RecipeList>) => {
-          commit("loadRecipesListSuccess", response.data);
+          commit("setIsLoadingRecipesList", false);
+          commit("setRecipesList", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
 
-          commit("loadRecipesListError", errorMessage);
+          commit("setIsLoadingRecipesList", false);
           reject(errorMessage);
         });
     });
@@ -66,7 +67,7 @@ const actions: ActionTree<RecipeState, any> = {
 
   loadRecipesTags({ commit }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("loadRecipesTagsRequest");
+      commit("setIsLoadingRecipesTags", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
@@ -74,14 +75,15 @@ const actions: ActionTree<RecipeState, any> = {
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<{ recipesTags: string }>) => {
-          commit("loadRecipesTagsSuccess", response.data.recipesTags);
+          commit("setIsLoadingRecipesTags", false);
+          commit("setRecipesTags", response.data.recipesTags);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
 
-          commit("loadRecipesTagsError", errorMessage);
+          commit("setIsLoadingRecipesTags", false);
           reject(errorMessage);
         });
     });
@@ -89,7 +91,7 @@ const actions: ActionTree<RecipeState, any> = {
 
   loadRecipesSearchSuggestions({ commit }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("loadRecipesSearchSuggestionsRequest");
+      commit("setIsLoadingRecipesSearchSuggestions", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
@@ -97,14 +99,15 @@ const actions: ActionTree<RecipeState, any> = {
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
-          commit("loadRecipesSearchSuggestionsSuccess", response.data);
+          commit("setIsLoadingRecipesSearchSuggestions", false);
+          commit("setRecipesSearchSuggestions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
 
-          commit("loadRecipesSearchSuggestionsError", errorMessage);
+          commit("setIsLoadingRecipesSearchSuggestions", false);
           reject(errorMessage);
         });
     });
@@ -126,43 +129,28 @@ const actions: ActionTree<RecipeState, any> = {
 };
 
 const mutations: MutationTree<RecipeState> = {
-  loadRecipesListRequest(state) {
-    state.isLoadingRecipesList = true;
-  },
-
-  loadRecipesListSuccess(state, list: RecipeList) {
+  setRecipesList(state, list: RecipeList) {
     state.recipesList = list;
-    state.isLoadingRecipesList = false;
   },
 
-  loadRecipesListError(state) {
-    state.isLoadingRecipesList = false;
+  setIsLoadingRecipesList(state, value) {
+    state.isLoadingRecipesList = value;
   },
 
-  loadRecipesTagsRequest(state) {
-    state.isLoadingRecipesTags = true;
-  },
-
-  loadRecipesTagsSuccess(state, tags: string) {
+  setRecipesTags(state, tags: string) {
     state.recipesTags = tags;
-    state.isLoadingRecipesTags = false;
   },
 
-  loadRecipesTagsError(state) {
-    state.isLoadingRecipesTags = false;
+  setIsLoadingRecipesTags(state, value) {
+    state.isLoadingRecipesTags = value;
   },
 
-  loadRecipesSearchSuggestionsRequest(state) {
-    state.isLoadingRecipesSearchSuggestions = true;
-  },
-
-  loadRecipesSearchSuggestionsSuccess(state, suggestions: string[]) {
+  setRecipesSearchSuggestions(state, suggestions: string[]) {
     state.recipesSearchSuggestions = suggestions;
-    state.isLoadingRecipesSearchSuggestions = false;
   },
 
-  loadRecipesSearchSuggestionsError(state) {
-    state.isLoadingRecipesSearchSuggestions = false;
+  setIsLoadingRecipesSearchSuggestions(state, value) {
+    state.isLoadingRecipesSearchSuggestions = value;
   },
 };
 

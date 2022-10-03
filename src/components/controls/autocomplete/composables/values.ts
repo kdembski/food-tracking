@@ -15,8 +15,9 @@ export function useValues(
   const { isMobile } = useWindowSize();
 
   const getOptionLabelByValue = (value: string | number) => {
-    return props.options.find((option: DropdownOption) => option.value === value)
-      ?.label;
+    return props.options.find(
+      (option: DropdownOption) => option.value === value
+    )?.label;
   };
 
   const setInputValueWithSelectedLabel = (value: string | number) => {

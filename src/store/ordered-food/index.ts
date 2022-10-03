@@ -9,6 +9,7 @@ import { ListFilters, ListBaseFilters } from "@/types/list";
 const state: OrderedFoodState = {
   orderedFoodList: null,
   isLoadingOrderedFoodList: false,
+
   orderedFoodTags: null,
   isLoadingOrderedFoodTags: false,
 };
@@ -24,20 +25,21 @@ const getters: GetterTree<OrderedFoodState, any> = {
 const actions: ActionTree<OrderedFoodState, any> = {
   loadOrderedFoodList({ commit }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("loadOrderedFoodListRequest");
+      commit("setIsLoadingOrderedFoodList", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL + "/ordered" + getListQuery(filters)
       )
         .then((response: AxiosResponse<OrderedFoodList>) => {
-          commit("loadOrderedFoodListSuccess", response.data);
+          commit("setIsLoadingOrderedFoodList", false);
+          commit("setOrderedFoodList", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
 
-          commit("loadOrderedFoodListError", errorMessage);
+          commit("setIsLoadingOrderedFoodList", false);
           reject(errorMessage);
         });
     });
@@ -45,7 +47,7 @@ const actions: ActionTree<OrderedFoodState, any> = {
 
   loadOrderedFoodTags({ commit }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("loadOrderedFoodTagsRequest");
+      commit("setIsLoadingOrderedFoodTags", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
@@ -53,14 +55,15 @@ const actions: ActionTree<OrderedFoodState, any> = {
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<{ orderedFoodTags: string }>) => {
-          commit("loadOrderedFoodTagsSuccess", response.data.orderedFoodTags);
+          commit("setIsLoadingOrderedFoodTags", false);
+          commit("setOrderedFoodTags", response.data.orderedFoodTags);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
 
-          commit("loadOrderedFoodTagsError", errorMessage);
+          commit("setIsLoadingOrderedFoodTags", false);
           reject(errorMessage);
         });
     });
@@ -68,30 +71,20 @@ const actions: ActionTree<OrderedFoodState, any> = {
 };
 
 const mutations: MutationTree<OrderedFoodState> = {
-  loadOrderedFoodListRequest(state) {
-    state.isLoadingOrderedFoodList = true;
-  },
-
-  loadOrderedFoodListSuccess(state, list: OrderedFoodList) {
+  setOrderedFoodList(state, list: OrderedFoodList) {
     state.orderedFoodList = list;
-    state.isLoadingOrderedFoodList = false;
   },
 
-  loadOrderedFoodListError(state) {
-    state.isLoadingOrderedFoodList = false;
+  setIsLoadingOrderedFoodList(state, value: boolean) {
+    state.isLoadingOrderedFoodList = value;
   },
 
-  loadOrderedFoodTagsRequest(state) {
-    state.isLoadingOrderedFoodTags = true;
-  },
-
-  loadOrderedFoodTagsSuccess(state, tags: string) {
+  setOrderedFoodTags(state, tags: string) {
     state.orderedFoodTags = tags;
-    state.isLoadingOrderedFoodTags = false;
   },
 
-  loadOrderedFoodTagsError(state) {
-    state.isLoadingOrderedFoodTags = false;
+  setIsLoadingOrderedFoodTags(state, value: boolean) {
+    state.isLoadingOrderedFoodTags = value;
   },
 };
 
