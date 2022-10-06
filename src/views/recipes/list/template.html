@@ -24,7 +24,10 @@
       :sortOptions="recipeListSortOptions"
     >
       <template #header="{ item }">
-        <RecipesListItemHeader :item="item" />
+        <RecipesListItemHeader
+          :item="item"
+          @addToCalendar="openAddToCalendarModal"
+        />
       </template>
       <template #body="{ item, addTagAndFilter }">
         <RecipesListItemBody :item="item" :addTagAndFilter="addTagAndFilter" />
@@ -32,3 +35,7 @@
     </CListWithFilters>
   </main>
 </div>
+<AddToCalendarModal
+  v-model:isOpen="isAddToCalendarModalOpen"
+  :addedItem="recipeAddedToCalendar"
+/>

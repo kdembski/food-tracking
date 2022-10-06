@@ -18,7 +18,7 @@ export function useWeekHelpers(
     return endOfWeekWithOptions({ weekStartsOn: 1 }, date);
   };
 
-  const getWeekDays = (fullNames: boolean = false) => {
+  const getWeekDays = (fullNames = false) => {
     const now = new Date();
 
     return eachDayOfInterval({

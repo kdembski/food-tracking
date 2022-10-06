@@ -1,0 +1,15 @@
+<CModal
+  v-model:isOpen="_isOpen"
+  title="Dodaj do kalendarza"
+  submitButtonLabel="Dodaj"
+  :isSubmitButtonDisabled="isSelectedDatesEmpty()"
+>
+  <CDatePicker v-model="selectedDates" />
+  <div v-if="!isSelectedDatesEmpty()" class="add-to-calendar__portions">
+    <p>Określ liczbę porcji</p>
+    <div v-for="(date,index) in selectedDates">
+      <p>{{ getFormattedDate(date, 'd MMMM (EEEE)') }}</p>
+      <CSetPortions v-model="portions[index]" />
+    </div>
+  </div>
+</CModal>

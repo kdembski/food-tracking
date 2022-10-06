@@ -4,6 +4,7 @@ import CButton from "@/components/controls/button/index.vue";
 import CHorizontalTabs from "@/components/navigation/horizontal-tabs/index.vue";
 import RecipesListItemHeader from "./list-item/header/index.vue";
 import RecipesListItemBody from "./list-item/body/index.vue";
+import AddToCalendarModal from "@/views/calendar/add-to-calendar-modal/index.vue";
 
 export default {
   name: "RecipesListView",
@@ -13,6 +14,7 @@ export default {
     CHorizontalTabs,
     RecipesListItemHeader,
     RecipesListItemBody,
+    AddToCalendarModal,
   },
 };
 </script>
@@ -20,6 +22,7 @@ export default {
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
+import { Recipe } from "@/types/recipe";
 const store = useStore();
 
 const recipesListDefaultFilters = {
@@ -75,6 +78,14 @@ const selectedTab = ref("ALL");
 
 const setRecipesListCount = async () => {
   tabs.value[0].count = await store.dispatch("recipe/getRecipesListCount");
+};
+
+const isAddToCalendarModalOpen = ref(false);
+const recipeAddedToCalendar = ref({});
+
+const openAddToCalendarModal = (recipe: Recipe) => {
+  recipeAddedToCalendar.value = recipe;
+  isAddToCalendarModalOpen.value = true;
 };
 
 onMounted(() => {

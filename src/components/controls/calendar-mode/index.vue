@@ -8,8 +8,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
-
 const props = defineProps({
   mode: {
     type: String,
@@ -33,17 +31,9 @@ const isWeeklyMode = () => {
   return props.mode === "WEEKLY";
 };
 
-const initMode = () => {
-  setMode("WEEKLY");
-};
-
 defineExpose({
   isMonthlyMode,
   isWeeklyMode,
-});
-
-onMounted(() => {
-  initMode();
 });
 </script>
 

@@ -54,6 +54,10 @@ onBeforeMount(() => {
   -webkit-tap-highlight-color: transparentize($primary-light, 0.5);
 }
 
+body {
+  color: var(--text-primary);
+}
+
 a {
   all: unset;
 }

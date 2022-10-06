@@ -15,15 +15,22 @@ export default {
 
 <script setup lang="ts">
 import { useWindowSize } from "@/components/utils/composables/window-size";
+import { Recipe } from "@/types/recipe";
 
 const props = defineProps({
   item: {
-    type: Object,
+    type: Object as () => Recipe,
     required: true,
   },
 });
 
+const emits = defineEmits<{ (e: "addToCalendar", recipe: Recipe): void }>();
+
 const { isMobile } = useWindowSize();
+
+const addToCalendar = () => {
+  emits("addToCalendar", props.item);
+};
 </script>
 
 <template src="./template.html"></template>

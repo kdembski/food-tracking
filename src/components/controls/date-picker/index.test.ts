@@ -36,7 +36,7 @@ describe("Date Picker Component", () => {
   it("should add date to selected on item click while in weekly mode", async () => {
     const firstItem = wrapper.findAll("input")[0];
     await firstItem.setChecked();
-    expect(wrapper.emitted()["update:modelValue"][1][0]).toStrictEqual([
+    expect(wrapper.emitted()["update:modelValue"][0][0]).toStrictEqual([
       new Date(2000, 1, 7),
     ]);
   });
@@ -45,7 +45,7 @@ describe("Date Picker Component", () => {
     await monthlyModeBtn.trigger("click");
     const firstItem = wrapper.findAll("input")[0];
     await firstItem.setChecked();
-    expect(wrapper.emitted()["update:modelValue"][2][0]).toStrictEqual([
+    expect(wrapper.emitted()["update:modelValue"][1][0]).toStrictEqual([
       new Date(2000, 1, 1),
     ]);
   });

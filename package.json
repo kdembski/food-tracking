@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
+    "test:clear": "jest --clearCache",
     "storybook": "start-storybook -c storybook -p 6006",
     "storybook:build": "build-storybook -c storybook"
   },

@@ -10,7 +10,12 @@
       icon="cart-shopping"
       :isDisabled="true"
     />
-    <CButton color="secondary" variant="text" icon="calendar-days" />
+    <CButton
+      color="secondary"
+      variant="text"
+      icon="calendar-days"
+      @click="addToCalendar"
+    />
     <CLink
       v-if="item.cookidooLink"
       :href="item.cookidooLink"

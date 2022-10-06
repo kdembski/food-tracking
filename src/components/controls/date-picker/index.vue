@@ -38,7 +38,7 @@ const clearSelected = () => {
   selected.value = [];
 };
 
-const calendarMode = ref("");
+const calendarMode = ref("WEEKLY");
 
 const calendarModeRef = ref<{
   isMonthlyMode: () => void;
