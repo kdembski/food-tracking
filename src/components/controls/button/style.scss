@@ -60,18 +60,30 @@
     font-size: $font-sm;
     padding: 8px 12px;
     border-radius: 3px;
+
+    .button__content {
+      gap: 8px;
+    }
   }
 
   &--medium {
     font-size: $font-base;
     padding: 10px 15px;
     border-radius: 4px;
+
+    .button__content {
+      gap: 10px;
+    }
   }
 
   &--large {
     font-size: $font-lg;
     padding: 15px 20px;
     border-radius: 5px;
+
+    .button__content {
+      gap: 15px;
+    }
   }
 
   &__label {
@@ -81,7 +93,6 @@
 
   &__content {
     display: flex;
-    gap: 6px;
   }
 
   &__icon {

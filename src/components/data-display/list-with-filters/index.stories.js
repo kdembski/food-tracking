@@ -10,7 +10,7 @@ const Template = (args) => ({
   },
   components: { CListWithFilters },
   template:
-    '<CListWithFilters v-bind="args" style="height: 90vh"><template v-slot:default="{ item }"><div style="padding: 20px">{{ item[1] }}</div></template></CListWithFilters>',
+    '<CListWithFilters v-bind="args" style="height: 90vh"><template v-slot:header="{ item }"><div style="padding: 20px">{{ item.name }}</div></template></CListWithFilters>',
 });
 
 export const Default = Template.bind({});
