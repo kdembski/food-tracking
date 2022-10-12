@@ -8,23 +8,22 @@
       <div
         v-for="index in getLoaderItemsCount()"
         class="loader__item skeleton-loader__item"
-      />
+      ></div>
     </div>
     <div class="loader__row" :style="getLoaderRowGridTemplateColumns()">
       <div
         v-for="index in getHalfOfLoaderItemsCount()"
         class="loader__item skeleton-loader__item"
-      />
+      ></div>
     </div>
   </CSkeletonLoader>
   <CTags v-else-if="tags.length > 0" :tags="tags">
-    <template #default="{ getTagColorStyles, tagsArray }">
+    <template #default="{ tagsArray }">
       <Item
         v-for="tag in sortTags(tagsArray)"
         v-model:selectedTags="_selectedTags"
         :tag="tag"
         :withCounts="withCounts"
-        :getTagColorStyles="getTagColorStyles"
       />
     </template>
   </CTags>

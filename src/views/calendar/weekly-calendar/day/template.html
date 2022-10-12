@@ -1,0 +1,21 @@
+<CCard class="calendar-day" variant="contained">
+  <p class="calendar-day__header">{{ getFormattedDate(date, 'EEEE dd.M') }}</p>
+  <template v-if="!isLoadingCalendar">
+    <Draggable
+      :list="calendarDay?.items"
+      group="calendar"
+      class="calendar-day__draggable"
+      animation="150"
+      ghostClass="calendar-day__ghost"
+      itemKey="id"
+      @change="onMove"
+    >
+      <template #item="{element}">
+        <CCard class="calendar-day__item" :id="element.id">
+          <p>{{ element.name }}</p>
+          <CDisplayTags :tags="element.tags" size="small" />
+        </CCard>
+      </template>
+    </Draggable>
+  </template>
+</CCard>

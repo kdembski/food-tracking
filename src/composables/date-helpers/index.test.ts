@@ -13,7 +13,7 @@ describe("Date Helpers", () => {
     allDatesInWeek,
     incrementWeek,
     decrementWeek,
-  } = useDateHelpers();
+  } = useDateHelpers(() => true);
 
   beforeEach(() => {
     firstDateInMonth.value = new Date(2000, 1, 1);

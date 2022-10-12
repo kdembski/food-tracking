@@ -1,9 +1,4 @@
-export interface TagSettings {
+export interface Tag {
   name: string;
-  lightColor?: string;
-  darkColor?: string;
-}
-
-export interface Tag extends TagSettings {
   count?: number;
 }

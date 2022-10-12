@@ -67,6 +67,22 @@ const recipeListSortOptions = ref([
     label: "Czas przygotowania - malejąco",
     icon: "arrow-down-9-1",
   },
+  {
+    value: {
+      sortAttribute: "cookedDate",
+      sortDirection: "asc",
+    },
+    label: "Ostatni raz gotowane - rosnąco",
+    icon: "arrow-down-1-9",
+  },
+  {
+    value: {
+      sortAttribute: "cookedDate",
+      sortDirection: "desc",
+    },
+    label: "Ostatni raz gotowane - malejąco",
+    icon: "arrow-down-9-1",
+  },
 ]);
 
 const tabs = ref([

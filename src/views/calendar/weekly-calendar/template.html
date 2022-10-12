@@ -1,0 +1,9 @@
+<div class="weekly-calendar">
+  <WeeklyCalendarDay
+    v-for="date in allDatesInWeek"
+    :calendarDay="getCalendarDayByDate(date)"
+    :isLoadingCalendar="isLoadingCalendar"
+    :date="date"
+  >
+  </WeeklyCalendarDay>
+</div>

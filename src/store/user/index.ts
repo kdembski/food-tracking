@@ -20,7 +20,7 @@ const actions: ActionTree<UserState, any> = {
     return new Promise<void>((resolve, reject) => {
       commit("setIsloggingIn", true);
 
-      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/login", {
+      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/users/login", {
         password,
       })
         .then((response: AxiosResponse<LoginResponse>) => {

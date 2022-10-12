@@ -2,7 +2,19 @@
   gap: 4px;
 
   .tag {
-    padding: 2px 8px;
-    font-size: 13px;
+    &--small {
+      padding: 1px 6px;
+      font-size: 12px;
+    }
+
+    &--medium {
+      padding: 2px 8px;
+      font-size: 13px;
+    }
+
+    &--large {
+      padding: 5px 12px;
+      font-size: 14px;
+    }
   }
 }

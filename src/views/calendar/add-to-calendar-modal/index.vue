@@ -2,6 +2,7 @@
 import CModal from "@/components/surfaces/modal/index.vue";
 import CDatePicker from "@/components/controls/date-picker/index.vue";
 import CSetPortions from "@/components/controls/set-portions/index.vue";
+import { useStore } from "vuex";
 
 export default {
   name: "AddToCalendarModal",
@@ -16,15 +17,18 @@ import { OrderedFood } from "@/types/ordered-food";
 import { useDateHelpers } from "@/composables/date-helpers";
 
 const { getFormattedDate } = useDateHelpers();
+const store = useStore();
 
 const props = defineProps({
   isOpen: {
     type: Boolean,
     default: false,
   },
-  addedItem: {
-    type: Object as () => Recipe | OrderedFood,
-    required: true,
+  addedRecipe: {
+    type: Object as () => Recipe,
+  },
+  addedOrderedFood: {
+    type: Object as () => OrderedFood,
   },
 });
 
@@ -50,8 +54,30 @@ const isSelectedDatesEmpty = () => {
 const portions: Ref<number[]> = ref([]);
 
 watch(selectedDates, (dates) => {
-  portions.value = dates.map((_, index) => portions.value[index] || 2);
+  portions.value = dates
+    .sort((a, b) => a - b)
+    .map((_, index) => portions.value[index] || 2);
 });
+
+const isAddingToCalendar = ref(false);
+
+const addAllSelectedDatesToCalendar = () => {
+  isAddingToCalendar.value = true;
+
+  const promises = selectedDates.value.map((date, index) => {
+    return store.dispatch("calendar/addDateToCalendar", {
+      date,
+      recipeId: props.addedRecipe?.id,
+      orderedFoodId: props.addedOrderedFood?.id,
+      portions: portions.value[index],
+    });
+  });
+
+  Promise.all(promises).then(() => {
+    isAddingToCalendar.value = false;
+    _isOpen.value = false;
+  });
+};
 </script>
 
 <template src="./template.html"></template>

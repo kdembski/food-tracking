@@ -1,23 +1,11 @@
 import { mount, DOMWrapper } from "@vue/test-utils";
-import { createStore } from "vuex";
 import CDisplayTags from "./index.vue";
 
-describe("Select Tags Component", () => {
+describe("Display Tags Component", () => {
   let wrapper: any = null;
   let tags: DOMWrapper<HTMLElement>[];
-  let store;
 
   beforeEach(async () => {
-    store = createStore({
-      getters: {
-        isDarkModeEnabled: () => false,
-      },
-    });
-
-    global.settings.provide = {
-      store,
-    };
-
     wrapper = mount(CDisplayTags, {
       props: { tags: "tag1,tag2,tag3" },
       global: global.settings,

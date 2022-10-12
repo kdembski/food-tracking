@@ -10,6 +10,7 @@ export interface RecipeState {
 }
 
 export interface Recipe {
+  id: number;
   recipeName: string;
   preparationTime: number;
   tags: string;

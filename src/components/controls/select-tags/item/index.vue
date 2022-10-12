@@ -22,10 +22,6 @@ const props = defineProps({
     type: Boolean,
     deafult: false,
   },
-  getTagColorStyles: {
-    type: Function,
-    default: () => null,
-  },
 });
 
 const emit = defineEmits<{

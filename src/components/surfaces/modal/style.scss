@@ -20,6 +20,7 @@
     box-shadow: $shadow-md var(--shadow-color);
     margin: 30px 10px 0;
     transition: 0.1s ease-in-out;
+    overflow: hidden;
   }
 
   &__header {

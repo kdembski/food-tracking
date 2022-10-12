@@ -8,7 +8,10 @@
         id="main-scroll-container"
         ref="container"
       >
-        <div class="layout-content__container">
+        <div
+          class="layout-content__container"
+          :style="{ maxWidth: getContainerMaxWidth() }"
+        >
           <slot></slot>
         </div>
       </div>

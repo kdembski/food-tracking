@@ -8,6 +8,7 @@ export interface OrderedFoodState {
 }
 
 export interface OrderedFood {
+  id: number;
   foodName: string;
   placeName: string;
   tags: string;

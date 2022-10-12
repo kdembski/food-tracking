@@ -54,7 +54,6 @@ const closeModal = () => {
 
 const onSubmit = () => {
   emits("submit");
-  closeModal();
 };
 </script>
 

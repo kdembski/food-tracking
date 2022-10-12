@@ -1,22 +1,10 @@
-import { createStore } from "vuex";
 import { mount } from "@vue/test-utils";
 import CSelectTags from "./index.vue";
 
 describe("Select Tags Component", () => {
   let wrapper: any = null;
-  let store;
 
   beforeEach(async () => {
-    store = createStore({
-      getters: {
-        isDarkModeEnabled: () => false,
-      },
-    });
-
-    global.settings.provide = {
-      store,
-    };
-
     wrapper = mount(CSelectTags, {
       props: { tags: "tag1,tag2,tag3", selectedTags: "tag1" },
       global: global.settings,

@@ -41,48 +41,21 @@ const clearSelected = () => {
 const calendarMode = ref("WEEKLY");
 
 const calendarModeRef = ref<{
-  isMonthlyMode: () => void;
-  isWeeklyMode: () => void;
+  isMonthlyMode: () => boolean;
+  isWeeklyMode: () => boolean;
 }>();
-
-const incrementDate = () => {
-  if (calendarModeRef.value?.isMonthlyMode()) {
-    return incrementMonth();
-  }
-  return incrementWeek();
-};
-
-const decrementDate = () => {
-  if (calendarModeRef.value?.isMonthlyMode()) {
-    return decrementMonth();
-  }
-  return decrementWeek();
-};
-
-const getDatePickerRange = () => {
-  if (calendarModeRef.value?.isMonthlyMode()) {
-    return getFormattedDate(firstDateInMonth.value, "LLLL yyyy");
-  }
-
-  return (
-    getFormattedDate(allDatesInWeek.value[0], "d MMM") +
-    " - " +
-    getFormattedDate(allDatesInWeek.value[6], "d MMM")
-  );
-};
 
 const {
   getFormattedDate,
-  incrementMonth,
-  decrementMonth,
   fullMonthGrid,
   firstDateInMonth,
   firstDateInWeek,
   getWeekDays,
   allDatesInWeek,
-  incrementWeek,
-  decrementWeek,
-} = useDateHelpers();
+  incrementDate,
+  decrementDate,
+  getDateRange,
+} = useDateHelpers(() => calendarModeRef.value?.isMonthlyMode());
 </script>
 
 <template src="./template.html"></template>

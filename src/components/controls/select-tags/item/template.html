@@ -6,7 +6,7 @@
     class="tag__checkbox"
     type="checkbox"
   />
-  <label class="tag" :for="'tag-' + tag.name" :style="getTagColorStyles(tag)">
+  <label class="tag tag--with-hover" :for="'tag-' + tag.name">
     <p class="tag__name">{{ tag.name }}</p>
     <span v-if="withCounts && tag.count > 1" class="tag__count">
       {{ tag.count }}

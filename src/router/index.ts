@@ -5,6 +5,7 @@ import LoginView from "../views/login/index.vue";
 import RecipesListView from "../views/recipes/list/index.vue";
 import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 import SettingsView from "../views/settings/index.vue";
+import CalendarView from "../views/calendar/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -37,6 +38,15 @@ const routes: Array<RouteRecordRaw> = [
     component: OrderedFoodListView,
     meta: {
       isPublic: false,
+    },
+  },
+  {
+    path: "/calendar",
+    name: "calendar",
+    component: CalendarView,
+    meta: {
+      isPublic: false,
+      maxWidth: "unset",
     },
   },
   {

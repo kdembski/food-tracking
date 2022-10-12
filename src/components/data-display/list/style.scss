@@ -35,7 +35,7 @@
     flex-direction: column;
 
     &__row {
-      padding: 20px 5px;
+      padding: 25px 5px;
       height: 100%;
       border-top: 1px solid var(--border-color);
 
@@ -48,7 +48,7 @@
     }
 
     &__wrapper {
-      width: 70%;
+      width: 80%;
     }
 
     &__item {
@@ -59,11 +59,11 @@
       }
 
       &:nth-child(2) {
-        width: 40%;
+        width: 60%;
       }
 
       &:nth-child(3) {
-        width: 65%;
+        width: 50%;
       }
     }
   }
@@ -72,7 +72,7 @@
 @media screen and (max-width: $screen-md) {
   .list {
     .item {
-      padding: 20px 5px;
+      padding: 15px 5px;
       gap: 10px;
     }
 

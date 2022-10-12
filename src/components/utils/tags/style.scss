@@ -13,6 +13,9 @@
     font-weight: 500;
     font-size: $font-sm;
     border-radius: 15px;
+  }
+
+  &:deep(.tag--with-hover) {
     cursor: pointer;
 
     &:hover {
@@ -23,7 +26,7 @@
 
 [data-theme="dark"] {
   .tags {
-    &:deep(.tag) {
+    &:deep(.tag--with-hover) {
       &:hover {
         filter: brightness(135%);
       }

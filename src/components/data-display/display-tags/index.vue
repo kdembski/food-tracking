@@ -12,6 +12,17 @@ const props = defineProps({
     type: [String, Array],
     default: "",
   },
+  size: {
+    type: String,
+    default: "medium",
+    validator: (value: string) => {
+      return ["small", "medium", "large"].indexOf(value) !== -1;
+    },
+  },
+  onClick: {
+    type: Function,
+    default: null,
+  },
 });
 
 const emit = defineEmits<{
@@ -19,7 +30,22 @@ const emit = defineEmits<{
 }>();
 
 const onClick = (name: string) => {
-  emit("click", name);
+  props.onClick?.(name);
+};
+
+const getTagClasses = () => {
+  return [getSizeClass(), getWithHoverClass()];
+};
+
+const getWithHoverClass = () => {
+  if (props.onClick) {
+    return "tag--with-hover";
+  }
+  return "";
+};
+
+const getSizeClass = () => {
+  return "tag--" + props.size;
 };
 </script>
 

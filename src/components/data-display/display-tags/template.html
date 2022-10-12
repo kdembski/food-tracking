@@ -1,9 +1,9 @@
 <CTags v-if="tags" :tags="tags">
-  <template #default="{ tagsArray, getTagColorStyles }">
+  <template #default="{ tagsArray }">
     <div
       v-for="tag in tagsArray"
       class="tag"
-      :style="getTagColorStyles(tag)"
+      :class="getTagClasses()"
       @click="onClick(tag.name)"
     >
       {{ tag.name }}

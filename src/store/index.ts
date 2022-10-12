@@ -3,6 +3,7 @@ import StorageService from "@/services/storage.service";
 import user from "./user/index";
 import recipe from "./recipe/index";
 import orderedFood from "./ordered-food/index";
+import calendar from "./calendar/index";
 
 export default createStore({
   state: {
@@ -33,5 +34,5 @@ export default createStore({
     },
   },
   actions: {},
-  modules: { user, recipe, orderedFood },
+  modules: { user, recipe, orderedFood, calendar },
 });

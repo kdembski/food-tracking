@@ -29,7 +29,6 @@ describe("Modal Component", () => {
   it("Should emit submit event and close modal on submit button click", async () => {
     const submitButton = wrapper.findAllComponents(CButton)[1];
     submitButton.trigger("click");
-    expect(wrapper.emitted()["update:isOpen"][0][0]).toBe(false);
     expect(wrapper.emitted()["submit"]).toBeTruthy();
   });
 
