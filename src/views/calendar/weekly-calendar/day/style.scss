@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background-color: var(--surface-secondary);
+  border-radius: 6px;
 
   &__draggable {
     height: 100%;
@@ -23,14 +25,21 @@
     color: var(--text-secondary);
     padding: 5px 0 15px;
     border-bottom: 1px solid var(--border-color);
+
+    &--active {
+      color: var(--primary);
+    }
   }
 
   &__item {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 15px 10px;
+    padding: 10px;
     cursor: grab;
+    box-shadow: $shadow-xs var(--shadow-color);
+    background-color: var(--surface-primary);
+    border-radius: 4px;
 
     * {
       user-select: none;

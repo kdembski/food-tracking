@@ -3,7 +3,7 @@
     class="calendar-day__header"
     :class="{ 'calendar-day__header--active': isToday(date) }"
   >
-    {{ getFormattedDate(date, 'EEEE dd.M') }}
+    {{ getFormattedDate(date, 'd') }}
   </p>
   <template v-if="!isLoadingCalendar">
     <Draggable
@@ -16,9 +16,8 @@
       @change="onMove"
     >
       <template #item="{element}">
-        <div class="calendar-day__item" :id="element.id">
+        <div class="calendar-day__item">
           <p>{{ element.name }}</p>
-          <CDisplayTags :tags="element.tags" size="small" />
         </div>
       </template>
     </Draggable>

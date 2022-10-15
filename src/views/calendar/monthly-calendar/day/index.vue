@@ -1,11 +1,9 @@
 <script lang="ts">
-import CCard from "@/components/surfaces/card/index.vue";
-import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import Draggable from "vuedraggable";
 
 export default {
-  name: "WeeklyCalendarDay",
-  components: { CCard, CDisplayTags, Draggable },
+  name: "MonthlyCalendarDay",
+  components: { Draggable },
 };
 </script>
 

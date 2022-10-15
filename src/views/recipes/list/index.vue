@@ -49,7 +49,7 @@ const recipeListSortOptions = ref([
       sortDirection: "desc",
     },
     label: "Nazwa przepisu - malejąco",
-    icon: "arrow-down-z-a",
+    icon: "arrow-up-a-z",
   },
   {
     value: {
@@ -65,23 +65,23 @@ const recipeListSortOptions = ref([
       sortDirection: "desc",
     },
     label: "Czas przygotowania - malejąco",
-    icon: "arrow-down-9-1",
+    icon: "arrow-up-1-9",
   },
   {
     value: {
       sortAttribute: "cookedDate",
       sortDirection: "asc",
     },
-    label: "Ostatni raz gotowane - rosnąco",
-    icon: "arrow-down-1-9",
+    label: "Data gotowania - rosnąco",
+    icon: "arrow-down-short-wide",
   },
   {
     value: {
       sortAttribute: "cookedDate",
       sortDirection: "desc",
     },
-    label: "Ostatni raz gotowane - malejąco",
-    icon: "arrow-down-9-1",
+    label: "Data gotowania - malejąco",
+    icon: "arrow-up-short-wide",
   },
 ]);
 

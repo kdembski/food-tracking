@@ -20,16 +20,26 @@ const weeklyCalendar = ref();
 const onArrowLeftClick = async () => {
   decrementDate();
   await nextTick();
-  weeklyCalendar.value?.loadWeeklyCalendar();
+  loadCalendar();
 };
 
 const onArrowRightClick = async () => {
   incrementDate();
   await nextTick();
-  weeklyCalendar.value?.loadWeeklyCalendar();
+  loadCalendar();
 };
 
-const calendarMode = ref("WEEKLY");
+const loadCalendar = () => {
+  if (calendarModeRef.value?.isWeeklyMode()) {
+    weeklyCalendar.value?.loadWeeklyCalendar();
+  }
+
+  if (calendarModeRef.value?.isMonthlyMode()) {
+    monthlyCalendar.value?.loadMonthlyCalendar();
+  }
+};
+
+const calendarMode = ref("MONTHLY");
 const calendarModeRef = ref<{
   isMonthlyMode: () => boolean;
   isWeeklyMode: () => boolean;
@@ -49,6 +59,7 @@ const {
 } = useDateHelpers(() => calendarModeRef.value?.isMonthlyMode());
 
 provide("getFormattedDate", getFormattedDate);
+provide("getWeekDays", getWeekDays);
 </script>
 
 <template src="./template.html"></template>

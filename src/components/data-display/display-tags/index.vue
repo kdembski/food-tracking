@@ -19,6 +19,13 @@ const props = defineProps({
       return ["small", "medium", "large"].indexOf(value) !== -1;
     },
   },
+  backgroundColor: {
+    type: String,
+    default: "secondary",
+    validator: (value: string) => {
+      return ["primary", "secondary"].indexOf(value) !== -1;
+    },
+  },
   onClick: {
     type: Function,
     default: null,
@@ -34,7 +41,7 @@ const onClick = (name: string) => {
 };
 
 const getTagClasses = () => {
-  return [getSizeClass(), getWithHoverClass()];
+  return [getSizeClass(), getWithHoverClass(), getBackgroundColorClass()];
 };
 
 const getWithHoverClass = () => {
@@ -46,6 +53,10 @@ const getWithHoverClass = () => {
 
 const getSizeClass = () => {
   return "tag--" + props.size;
+};
+
+const getBackgroundColorClass = () => {
+  return "tag--bg-" + props.backgroundColor;
 };
 </script>
 

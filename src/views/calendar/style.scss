@@ -3,11 +3,16 @@
   flex-direction: column;
   flex-grow: 1;
 
-  &__toolbar {
+  &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+  }
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
 
   &__range {
@@ -15,7 +20,10 @@
     align-items: center;
 
     & > p {
-      min-width: 150px;
+      font-size: $font-lg;
+      font-weight: 600;
+      color: var(--text-secondary);
+      min-width: 180px;
       text-align: center;
     }
   }

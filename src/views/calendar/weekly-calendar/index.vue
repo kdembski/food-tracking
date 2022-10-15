@@ -8,10 +8,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onBeforeMount, ref, defineExpose, Ref } from "vue";
-import { useStore } from "vuex";
-import { isEqual } from "date-fns";
-import { CalendarDay } from "@/types/calendar";
+import { defineExpose, computed } from "vue";
+import { useLoadCalendar } from "../composables/load-calendar";
 
 const props = defineProps({
   allDatesInWeek: {
@@ -20,47 +18,11 @@ const props = defineProps({
   },
 });
 
-const store = useStore();
-const calendar: Ref<CalendarDay[] | undefined> = ref();
-const isLoadingCalendar = ref(false);
-
-onBeforeMount(() => {
-  loadWeeklyCalendar();
-});
-
-const loadWeeklyCalendar = async () => {
-  isLoadingCalendar.value = true;
-  calendar.value = await getWeeklyCalendar();
-  addMissingDaysToCalendar();
-  isLoadingCalendar.value = false;
-};
-
-const addMissingDaysToCalendar = () => {
-  calendar.value = props.allDatesInWeek.map((date) => {
-    const calendarDay = getCalendarDayByDate(date);
-
-    if (calendarDay) {
-      return calendarDay;
-    }
-
-    return {
-      date,
-      items: [],
-    };
-  });
-};
-
-const getCalendarDayByDate = (date: Date) => {
-  return calendar.value?.find((day) => isEqual(day.date, date));
-};
-
-const getWeeklyCalendar = () => {
-  const datesRange = {
-    fromDate: props.allDatesInWeek[0],
-    toDate: props.allDatesInWeek[props.allDatesInWeek.length - 1],
-  };
-  return store.dispatch("calendar/getCalendar", datesRange);
-};
+const {
+  loadCalendar: loadWeeklyCalendar,
+  isLoadingCalendar,
+  getCalendarDayByDate,
+} = useLoadCalendar(computed(() => props.allDatesInWeek));
 
 defineExpose({ loadWeeklyCalendar });
 </script>

@@ -1,30 +1,32 @@
 <div class="calendar">
   <header class="calendar__header">
     <h1>Kalendarz</h1>
-  </header>
-  <div class="calendar__toolbar">
-    <div class="calendar__range">
-      <CButton
-        color="secondary"
-        variant="text"
-        size="large"
-        icon="chevron-left"
-        @click="onArrowLeftClick"
-      />
-      <p>{{ getDateRange() }}</p>
-      <CButton
-        color="secondary"
-        variant="text"
-        size="large"
-        icon="chevron-right"
-        @click="onArrowRightClick"
-      />
+    <div class="calendar__toolbar">
+      <div class="calendar__range">
+        <CButton
+          color="secondary"
+          variant="text"
+          size="large"
+          icon="chevron-left"
+          @click="onArrowLeftClick"
+        />
+        <p>{{ getDateRange() }}</p>
+        <CButton
+          color="secondary"
+          variant="text"
+          size="large"
+          icon="chevron-right"
+          @click="onArrowRightClick"
+        />
+      </div>
+      <CCalendarMode v-model:mode="calendarMode" ref="calendarModeRef" />
     </div>
-    <CCalendarMode v-model:mode="calendarMode" ref="calendarModeRef" />
-  </div>
+  </header>
+
   <MonthlyCalendar
     v-if="calendarModeRef?.isMonthlyMode()"
     :allDatesInMonth="allDatesInMonth"
+    :fullMonthGrid="fullMonthGrid"
     ref="monthlyCalendar"
   />
   <WeeklyCalendar

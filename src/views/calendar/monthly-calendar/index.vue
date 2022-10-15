@@ -1,34 +1,38 @@
 <script lang="ts">
+import MonthlyCalendarDate from "./day/index.vue";
+
 export default {
   name: "MonthlyCalendar",
+  components: { MonthlyCalendarDate },
 };
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { useStore } from "vuex";
+import { defineExpose, computed, inject } from "vue";
+import { useLoadCalendar } from "../composables/load-calendar";
+import { isDate } from "date-fns";
 
 const props = defineProps({
   allDatesInMonth: {
+    type: Array as () => Date[],
+    required: true,
+  },
+
+  fullMonthGrid: {
     type: Array,
     required: true,
   },
 });
 
-const store = useStore();
-const calendar = ref();
+const {
+  loadCalendar: loadMonthlyCalendar,
+  isLoadingCalendar,
+  getCalendarDayByDate,
+} = useLoadCalendar(computed(() => props.allDatesInMonth));
 
-onMounted(async () => {
-  calendar.value = await getMonthlyCalendar();
-});
+const getWeekDays = inject("getWeekDays");
 
-const getMonthlyCalendar = () => {
-  const datesRange = {
-    fromDate: props.allDatesInMonth[0],
-    toDate: props.allDatesInMonth[props.allDatesInMonth.length - 1],
-  };
-  return store.dispatch("calendar/getCalendar", datesRange);
-};
+defineExpose({ loadMonthlyCalendar });
 </script>
 
 <template src="./template.html"></template>

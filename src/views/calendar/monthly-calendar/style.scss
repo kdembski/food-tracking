@@ -1,0 +1,35 @@
+.monthly-calendar {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  &__placeholder {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    font-weight: 600;
+    color: var(--text-tetriary);
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: var(--surface-primary);
+    padding: 10px 0;
+    position: sticky;
+    top: -20px;
+
+    > p {
+      text-align: center;
+      font-size: $font-sm;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  min-height: 130px;
+  margin: 0 -1px -1px 0;
+  padding: 10px;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-secondary);
+
+    &--active {
+      color: var(--primary);
+    }
+  }
+
+  &__draggable {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__item {
+    background-color: var(--surface-secondary);
+    box-shadow: $shadow-xs var(--shadow-color);
+    cursor: grab;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: $font-sm;
+    font-weight: 500;
+
+    * {
+      user-select: none;
+    }
+  }
+
+  &__ghost {
+    opacity: 0;
+  }
+}
