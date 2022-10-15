@@ -28,3 +28,14 @@
     }
   }
 }
+
+@media screen and (max-width: $screen-md) {
+  .calendar {
+    &__range {
+      & > p {
+        font-size: $font-base;
+        min-width: 130px;
+      }
+    }
+  }
+}

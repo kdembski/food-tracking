@@ -50,3 +50,9 @@
     }
   }
 }
+
+@media screen and (max-width: $screen-md) {
+  .calendar-day {
+    min-height: 135px;
+  }
+}

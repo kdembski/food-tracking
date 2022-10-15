@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "home",
     redirect: {
-      name: "recipesList",
+      name: "calendar",
     },
   },
   {

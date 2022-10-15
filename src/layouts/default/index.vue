@@ -14,10 +14,10 @@ import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
 const sidebarItems = ref([
+  { route: "/calendar", label: "Kalendarz", icon: "calendar-days" },
   { route: "/recipes", label: "Przepisy", icon: "utensils" },
   { route: "/ordered", label: "Zamawiane", icon: "box-open" },
   { route: "/", label: "Składniki", icon: "cheese" },
-  { route: "/calendar", label: "Kalendarz", icon: "calendar-days" },
   { route: "/", label: "Zakupy", icon: "cart-shopping" },
   { route: "/", label: "Statystyki", icon: "chart-line" },
 ]);

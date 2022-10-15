@@ -13,9 +13,12 @@ export default {
 <script setup lang="ts">
 import { ref, provide, nextTick } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
+import { useWindowSize } from "@/components/utils/composables/window-size";
 
 const monthlyCalendar = ref();
 const weeklyCalendar = ref();
+
+const { isMobile } = useWindowSize();
 
 const onArrowLeftClick = async () => {
   decrementDate();
@@ -39,7 +42,7 @@ const loadCalendar = () => {
   }
 };
 
-const calendarMode = ref("MONTHLY");
+const calendarMode = ref("WEEKLY");
 const calendarModeRef = ref<{
   isMonthlyMode: () => boolean;
   isWeeklyMode: () => boolean;

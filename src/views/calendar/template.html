@@ -19,7 +19,11 @@
           @click="onArrowRightClick"
         />
       </div>
-      <CCalendarMode v-model:mode="calendarMode" ref="calendarModeRef" />
+      <CCalendarMode
+        v-show="!isMobile"
+        v-model:mode="calendarMode"
+        ref="calendarModeRef"
+      />
     </div>
   </header>
 
