@@ -11,7 +11,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
-import { Tag } from "@/components/utils/tags/types/tags";
+import { Tag } from "@/types/components/tags";
 
 const props = defineProps({
   tags: {

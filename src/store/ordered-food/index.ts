@@ -4,7 +4,7 @@ import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
-import { ListFilters, ListBaseFilters } from "@/types/list";
+import { ListFilters, ListBaseFilters } from "@/types/components/list";
 
 const state: OrderedFoodState = {
   orderedFoodList: null,

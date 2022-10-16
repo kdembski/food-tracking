@@ -4,8 +4,8 @@ import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
-import { ListFilters, ListBaseFilters } from "@/types/list";
-import { DropdownOption } from "@/components/utils/dropdown/types/option";
+import { ListFilters, ListBaseFilters } from "@/types/components/list";
+import { DropdownOption } from "@/types/components/dropdown";
 
 const state: RecipeState = {
   recipesList: null,

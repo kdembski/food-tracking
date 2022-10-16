@@ -1,4 +1,4 @@
-import { DropdownOption } from "@/components/utils/dropdown/types/option";
+import { DropdownOption } from "@/types/components/dropdown";
 import { ComputedRef, Ref } from "vue";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 

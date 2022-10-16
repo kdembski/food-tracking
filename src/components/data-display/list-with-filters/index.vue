@@ -28,8 +28,8 @@ export default {
 <script setup lang="ts">
 import { useStore } from "vuex";
 import { computed, ref, Ref } from "vue";
-import { ListFilters, ListSortFilters } from "@/types/list";
-import { DropdownOption } from "@/components/utils/dropdown/types/option";
+import { ListFilters, ListSortFilters } from "@/types/components/list";
+import { DropdownOption } from "@/types/components/dropdown";
 import { useAvailableTags } from "./composables/available-tags";
 import { useStoredFilters } from "./composables/stored-filters";
 import { useFilters } from "./composables/filters/index";

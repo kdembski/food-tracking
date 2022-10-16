@@ -1,4 +1,4 @@
-import { ListFilters } from "@/types/list";
+import { ListFilters } from "@/types/components/list";
 import { ref, Ref } from "vue";
 import { isEqual, clone } from "lodash";
 import { useSearchPhrase } from "./searchPhrase";

@@ -1,4 +1,4 @@
-import { ListWithFilters } from "./list";
+import { ListWithFilters } from "@/types/components/list";
 
 export interface RecipeState {
   recipesList: RecipesList | null;

@@ -1,5 +1,5 @@
 import { ref, watch, Ref, ComputedRef, nextTick } from "vue";
-import { DropdownOption } from "@/components/utils/dropdown/types/option";
+import { DropdownOption } from "@/types/components/dropdown";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
 export function useValues(

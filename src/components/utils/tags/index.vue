@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { Tag } from "./types/tags";
+import { Tag } from "@/types/components/tags";
 import { isArray } from "lodash";
 
 const props = defineProps({

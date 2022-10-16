@@ -8,7 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ListPagination } from "@/types/list";
+import { ListPagination } from "@/types/components/list";
 import { useWindowSize } from "@/components/utils/composables/window-size";
 
 const props = withDefaults(

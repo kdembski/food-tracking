@@ -1,6 +1,6 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { ListFilters } from "@/types/list";
+import { ListFilters } from "@/types/components/list";
 import { Ref } from "vue";
 
 let temporarySearchPhrase = "";

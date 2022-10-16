@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
-import { ListFilters } from "@/types/list";
-import { Tag } from "@/components/utils/tags/types/tags";
+import { ListFilters } from "@/types/components/list";
+import { Tag } from "@/types/components/tags";
 
 export function useAvailableTags(
   tagsLoadActionName: string,

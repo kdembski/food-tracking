@@ -1,5 +1,5 @@
 import { ref, ComputedRef, watch } from "vue";
-import { DropdownOption } from "@/components/utils/dropdown/types/option";
+import { DropdownOption } from "@/types/components/dropdown";
 
 export function useOptionHover(options: ComputedRef<DropdownOption[]>) {
   const hoveredOptionIndex = ref<number | null>(null);

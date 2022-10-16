@@ -1,5 +1,5 @@
 import StorageService from "@/services/storage.service";
-import { ListFilters } from "@/types/list";
+import { ListFilters } from "@/types/components/list";
 
 export function useStoredFilters(listName: string) {
   const storageFiltersName = listName + "Filters";

@@ -9,7 +9,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { DropdownOption } from "@/components/utils/dropdown/types/option";
+import { DropdownOption } from "@/types/components/dropdown";
 import { computed, ref, watch } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 import { useOptionHover } from "./composables/option-hover";
