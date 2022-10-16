@@ -9,6 +9,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useWindowSize } from "@/components/utils/composables/window-size";
+
 const props = defineProps({
   item: {
     type: Object,
@@ -19,6 +21,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const { isMobile } = useWindowSize();
 </script>
 
 <template src="./template.html"></template>

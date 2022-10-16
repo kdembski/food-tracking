@@ -27,10 +27,10 @@ describe("Date Picker Component", () => {
   });
 
   it("getDatePickerRange should return date range based on delected mode", async () => {
-    expect(wrapper.vm.getDatePickerRange()).toEqual("7 lut - 13 lut");
+    expect(wrapper.vm.getDateRange()).toEqual("7 lut - 13 lut");
 
     await monthlyModeBtn.trigger("click");
-    expect(wrapper.vm.getDatePickerRange()).toEqual("luty 2000");
+    expect(wrapper.vm.getDateRange()).toEqual("luty 2000");
   });
 
   it("should add date to selected on item click while in weekly mode", async () => {

@@ -9,7 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { defineExpose, computed } from "vue";
-import { useLoadCalendar } from "../composables/load-calendar";
+import { useCalendar } from "../composables/calendar";
 
 const props = defineProps({
   allDatesInWeek: {
@@ -22,7 +22,7 @@ const {
   loadCalendar: loadWeeklyCalendar,
   isLoadingCalendar,
   getCalendarDayByDate,
-} = useLoadCalendar(computed(() => props.allDatesInWeek));
+} = useCalendar(computed(() => props.allDatesInWeek));
 
 defineExpose({ loadWeeklyCalendar });
 </script>

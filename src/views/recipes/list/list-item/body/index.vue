@@ -1,15 +1,31 @@
 <script lang="ts">
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
+import CMonthPreview from "@/components/data-display/month-preview/index.vue";
 
 export default {
   name: "RecipesListItemBody",
   components: {
     CDisplayTags,
+    CMonthPreview,
   },
 };
 </script>
 
 <script setup lang="ts">
+import { useDateHelpers } from "@/composables/date-helpers/index";
+import {
+  isEqual,
+  isFuture,
+  getDate,
+  getMonth,
+  getYear,
+  addDays,
+} from "date-fns";
+import { useWindowSize } from "@/components/utils/composables/window-size";
+
+const { getDistanceInWords } = useDateHelpers();
+const { isMobile } = useWindowSize();
+
 const props = defineProps({
   item: {
     type: Object,
@@ -34,6 +50,33 @@ const getPreparationTime = (time: number) => {
   }
 
   return minutes + "m";
+};
+
+const getFormattedCookedDate = (cookedDate: Date) => {
+  if (isEqual(cookedDate, new Date(1970, 0, 1, 1, 0, 0))) {
+    return "Brak";
+  }
+
+  const today = new Date();
+  const todayWithoutHours = new Date(
+    getYear(today),
+    getMonth(today),
+    getDate(today),
+    0,
+    0,
+    0
+  );
+  const distance = getDistanceInWords(today, cookedDate);
+
+  if (isFuture(cookedDate) || isEqual(todayWithoutHours, cookedDate)) {
+    return "Zaplanowane";
+  }
+
+  if (isEqual(todayWithoutHours, addDays(cookedDate, 1))) {
+    return "Wczoraj";
+  }
+
+  return distance + " temu";
 };
 </script>
 

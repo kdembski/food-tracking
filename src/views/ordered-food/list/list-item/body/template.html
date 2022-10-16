@@ -1,7 +1,13 @@
-<CLink
-  class="item-body__place-name"
-  :label="item.placeName"
-  :href="item.placeLink"
-  external
-/>
-<CDisplayTags :tags="item.tags" :onClick="addTagAndFilter" />
+<div class="item-body">
+  <CLink
+    class="item-body__place-name"
+    :label="item.placeName"
+    :href="item.placeLink"
+    external
+  />
+  <CDisplayTags
+    :tags="item.tags"
+    :onClick="addTagAndFilter"
+    :size="isMobile ? 'small' : 'medium'"
+  />
+</div>

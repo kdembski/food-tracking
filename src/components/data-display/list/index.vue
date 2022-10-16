@@ -30,7 +30,7 @@ const container: Ref<HTMLElement | undefined> = ref();
 const getLoaderItemsCount = () => {
   const containerOffsetTop = container.value?.offsetTop;
   const containerHeight = windowHeight.value - (containerOffsetTop || 0);
-  return Math.floor(containerHeight / (isMobile.value ? 110 : 120));
+  return Math.floor(containerHeight / (isMobile.value ? 110 : 130));
 };
 </script>
 

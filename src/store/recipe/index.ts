@@ -1,5 +1,5 @@
 import ApiService from "@/services/api.service";
-import { RecipeState, RecipeList } from "@/types/recipe";
+import { RecipeState, RecipesList } from "@/types/recipe";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
@@ -19,7 +19,7 @@ const state: RecipeState = {
 };
 
 const getters: GetterTree<RecipeState, any> = {
-  getRecipesList: (state): RecipeList | null => state.recipesList,
+  getRecipesList: (state): RecipesList | null => state.recipesList,
   isLoadingRecipesList: (state) => state.isLoadingRecipesList,
 
   getRecipesTags: (state): string | null => state.recipesTags,
@@ -50,9 +50,10 @@ const actions: ActionTree<RecipeState, any> = {
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL + "/recipes" + getListQuery(filters)
       )
-        .then((response: AxiosResponse<RecipeList>) => {
+        .then((response: AxiosResponse<RecipesList>) => {
+          const list = helpers.fixRecipesListDates(response.data);
           commit("setIsLoadingRecipesList", false);
-          commit("setRecipesList", response.data);
+          commit("setRecipesList", list);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -129,7 +130,7 @@ const actions: ActionTree<RecipeState, any> = {
 };
 
 const mutations: MutationTree<RecipeState> = {
-  setRecipesList(state, list: RecipeList) {
+  setRecipesList(state, list: RecipesList) {
     state.recipesList = list;
   },
 
@@ -151,6 +152,22 @@ const mutations: MutationTree<RecipeState> = {
 
   setIsLoadingRecipesSearchSuggestions(state, value) {
     state.isLoadingRecipesSearchSuggestions = value;
+  },
+};
+
+const helpers = {
+  fixRecipesListDates: (recipesList: RecipesList) => {
+    recipesList.data.forEach((recipe) => {
+      recipe.cookedDate = new Date(recipe.cookedDate);
+
+      recipe.cookedDatesInCurrentMonth = recipe.cookedDatesInCurrentMonth.map(
+        (date) => {
+          return new Date(date);
+        }
+      );
+    });
+
+    return recipesList;
   },
 };
 

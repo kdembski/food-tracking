@@ -48,14 +48,16 @@
     }
 
     &__wrapper {
-      width: 80%;
+      width: 70%;
     }
 
     &__item {
-      height: 20%;
+      height: 16%;
 
       &:nth-child(1) {
+        height: 22%;
         width: 100%;
+        margin-bottom: 15px;
       }
 
       &:nth-child(2) {
@@ -79,6 +81,12 @@
     .list-loader {
       &__wrapper {
         width: 95%;
+      }
+
+      &__item {
+        &:nth-child(1) {
+          margin-bottom: 10px;
+        }
       }
 
       &__row {

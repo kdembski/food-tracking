@@ -1,7 +1,7 @@
 import { ListWithFilters } from "./list";
 
 export interface RecipeState {
-  recipesList: RecipeList | null;
+  recipesList: RecipesList | null;
   isLoadingRecipesList: boolean;
   recipesTags: string | null;
   isLoadingRecipesTags: boolean;
@@ -14,6 +14,8 @@ export interface Recipe {
   recipeName: string;
   preparationTime: number;
   tags: string;
+  cookedDate: Date;
+  cookedDatesInCurrentMonth: Date[];
 }
 
-export type RecipeList = ListWithFilters<Recipe>;
+export type RecipesList = ListWithFilters<Recipe>;

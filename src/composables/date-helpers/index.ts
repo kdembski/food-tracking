@@ -1,4 +1,4 @@
-import { formatWithOptions } from "date-fns/esm/fp";
+import { formatWithOptions, formatDistanceWithOptions } from "date-fns/esm/fp";
 import { pl } from "date-fns/locale";
 import { useMonthHelpers } from "./month-helpers";
 import { useWeekHelpers } from "./week-helpers";
@@ -6,6 +6,10 @@ import { useWeekHelpers } from "./week-helpers";
 export function useDateHelpers(isMonthlyMode?: () => boolean | undefined) {
   const getFormattedDate = (date: Date, format: string) => {
     return formatWithOptions({ locale: pl }, format, date);
+  };
+
+  const getDistanceInWords = (from: Date, to: Date) => {
+    return formatDistanceWithOptions({ locale: pl }, to, from);
   };
 
   const incrementDate = () => {
@@ -65,5 +69,6 @@ export function useDateHelpers(isMonthlyMode?: () => boolean | undefined) {
     incrementDate,
     decrementDate,
     getDateRange,
+    getDistanceInWords,
   };
 }

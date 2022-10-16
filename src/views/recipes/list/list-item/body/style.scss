@@ -1,48 +1,56 @@
 .item-body {
-  &__row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: grid;
+  grid-template-columns: calc(100% - 114px) 104px;
+  align-items: flex-end;
+  gap: 10px;
 
-    &:nth-child(1) {
-      margin: 0 0 10px 3px;
-    }
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
+  &__row {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__cooked-date,
   &__preparation-time {
     font-size: $font-sm;
     font-weight: 500;
     display: flex;
     gap: 5px;
     color: var(--text-secondary);
+  }
+
+  &__preparation-time {
+    margin-left: 3px;
 
     & > svg {
       margin-top: 1px;
     }
   }
 
-  &__cooked-date {
-    display: flex;
-    justify-content: space-between;
-    gap: 4px;
-
-    & > span {
-      width: 8px;
-      height: 8px;
-      background-color: var(--primary);
-      border-radius: 100%;
-    }
+  &__month-preview {
+    margin-left: auto;
   }
 }
 
 @media screen and (max-width: $screen-md) {
-  .list-item {
-    &__row {
-      &:nth-child(1) {
-        margin-bottom: 8px;
-      }
+  .item-body {
+    grid-template-columns: calc(100% - 79px) 69px;
+    gap: 8px;
+
+    &__col {
+      gap: 8px;
     }
 
+    &__row {
+      gap: 10px;
+    }
+
+    &__cooked-date,
     &__preparation-time {
       font-size: $font-xs;
     }

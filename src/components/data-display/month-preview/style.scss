@@ -1,0 +1,28 @@
+.month-preview {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  width: 104px;
+
+  &__item {
+    height: 8px;
+    width: 12px;
+    background-color: var(--surface-tetriary);
+    border-radius: 2px;
+
+    &--active {
+      background-color: var(--primary);
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .month-preview {
+    width: 69px;
+
+    &__item {
+      height: 7px;
+      width: 7px;
+    }
+  }
+}

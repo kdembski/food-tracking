@@ -1,0 +1,10 @@
+<div class="month-preview">
+  <template v-for="item in fullMonthGrid">
+    <div
+      v-if="isDate(item)"
+      class="month-preview__item"
+      :class="getActiveItemClass(item)"
+    ></div>
+    <div v-else class="month-preview__placeholder"></div>
+  </template>
+</div>

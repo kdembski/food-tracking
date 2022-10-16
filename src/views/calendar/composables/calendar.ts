@@ -3,7 +3,7 @@ import { useStore } from "vuex";
 import { isEqual } from "date-fns";
 import { CalendarDay } from "@/types/calendar";
 
-export function useLoadCalendar(allDatesInRange: ComputedRef<Date[]>) {
+export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   const store = useStore();
   const calendar: Ref<CalendarDay[] | undefined> = ref();
   const isLoadingCalendar = ref(false);

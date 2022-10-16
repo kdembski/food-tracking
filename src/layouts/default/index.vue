@@ -14,7 +14,7 @@ import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
 const sidebarItems = ref([
-  { route: "/calendar", label: "Kalendarz", icon: "calendar-days" },
+  { route: "/calendar", label: "Kalendarz", icon: ["far", "calendar"] },
   { route: "/recipes", label: "Przepisy", icon: "utensils" },
   { route: "/ordered", label: "Zamawiane", icon: "box-open" },
   { route: "/", label: "Składniki", icon: "cheese" },

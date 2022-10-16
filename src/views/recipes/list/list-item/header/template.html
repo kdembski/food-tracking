@@ -4,16 +4,11 @@
     <CButton color="secondary" variant="text" icon="ellipsis-vertical" />
   </template>
   <template v-else>
+    <CButton color="secondary" variant="text" icon="cart-shopping" />
     <CButton
       color="secondary"
       variant="text"
-      icon="cart-shopping"
-      :isDisabled="true"
-    />
-    <CButton
-      color="secondary"
-      variant="text"
-      icon="calendar-days"
+      :icon="['far', 'calendar']"
       @click="addToCalendar"
     />
     <CLink

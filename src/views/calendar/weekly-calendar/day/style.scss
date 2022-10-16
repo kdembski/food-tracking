@@ -31,7 +31,7 @@
     }
   }
 
-  &__item {
+  .item {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -45,8 +45,22 @@
       user-select: none;
     }
 
-    & > p {
-      font-weight: 500;
+    &__header {
+      display: flex;
+
+      & > p {
+        font-weight: 500;
+
+        strong {
+          font-size: $font-sm;
+          color: var(--text-tetriary);
+          margin-left: 5px;
+        }
+      }
+
+      & > button {
+        margin-left: auto;
+      }
     }
   }
 }

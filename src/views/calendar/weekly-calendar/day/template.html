@@ -16,8 +16,16 @@
       @change="onMove"
     >
       <template #item="{element}">
-        <div class="calendar-day__item" :id="element.id">
-          <p>{{ element.name }}</p>
+        <div class="calendar-day__item item" :id="element.id">
+          <div class="item__header">
+            <p>{{ element.name }}<strong>x{{ element.portions }}</strong></p>
+            <CButton
+              color="secondary"
+              variant="text"
+              icon="times"
+              size="small"
+            />
+          </div>
           <CDisplayTags :tags="element.tags" size="small" />
         </div>
       </template>

@@ -1,17 +1,23 @@
 .item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   &__place-name {
     display: inline-block;
     font-size: $font-sm;
     font-weight: 500;
     color: var(--text-secondary);
-    margin: 0 0 10px 2px;
+    margin-left: 2px;
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .item-body {
+    gap: 8px;
+
     &__place-name {
-      margin-bottom: 8px;
+      font-size: $font-xs;
     }
   }
 }

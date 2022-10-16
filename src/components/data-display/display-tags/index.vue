@@ -41,7 +41,7 @@ const onClick = (name: string) => {
 };
 
 const getTagClasses = () => {
-  return [getSizeClass(), getWithHoverClass(), getBackgroundColorClass()];
+  return [getWithHoverClass(), getBackgroundColorClass()];
 };
 
 const getWithHoverClass = () => {
@@ -51,12 +51,16 @@ const getWithHoverClass = () => {
   return "";
 };
 
-const getSizeClass = () => {
-  return "tag--" + props.size;
-};
-
 const getBackgroundColorClass = () => {
   return "tag--bg-" + props.backgroundColor;
+};
+
+const getContainerClasses = () => {
+  return [getSizeClass()];
+};
+
+const getSizeClass = () => {
+  return "tags--" + props.size;
 };
 </script>
 

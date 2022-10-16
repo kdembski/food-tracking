@@ -44,7 +44,7 @@ export function useButtonProps() {
       },
     },
     icon: {
-      type: String,
+      type: [String, Array],
       default: "",
     },
     fullWidth: {

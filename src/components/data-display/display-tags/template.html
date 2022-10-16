@@ -1,4 +1,4 @@
-<CTags v-if="tags" :tags="tags">
+<CTags v-if="tags" :tags="tags" :class="getContainerClasses()">
   <template #default="{ tagsArray }">
     <div
       v-for="tag in tagsArray"

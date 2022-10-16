@@ -1,12 +1,23 @@
-<div class="item-body__row">
-  <div class="item-body__preparation-time">
-    <FontAwesomeIcon :icon="['far', 'clock']" />
-    <p>{{ getPreparationTime(item.preparationTime) }}</p>
+<div class="item-body">
+  <div class="item-body__col">
+    <div class="item-body__row">
+      <div class="item-body__preparation-time">
+        <FontAwesomeIcon :icon="['far', 'clock']" />
+        <p>{{ getPreparationTime(item.preparationTime) }}</p>
+      </div>
+      <div class="item-body__cooked-date">
+        <FontAwesomeIcon :icon="['far', 'calendar']" />
+        <p>{{ getFormattedCookedDate(item.cookedDate) }}</p>
+      </div>
+    </div>
+    <CDisplayTags
+      :tags="item.tags"
+      :onClick="addTagAndFilter"
+      :size="isMobile ? 'small' : 'medium'"
+    />
   </div>
-  <div v-if="false" class="item-body__cooked-date">
-    <span v-for="index in 5"></span>
-  </div>
-</div>
-<div class="item-body__row">
-  <CDisplayTags :tags="item.tags" :onClick="addTagAndFilter" />
+  <CMonthPreview
+    class="item-body__month-preview"
+    :dates="item.cookedDatesInCurrentMonth"
+  />
 </div>

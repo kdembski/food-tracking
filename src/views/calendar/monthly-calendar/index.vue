@@ -9,7 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { defineExpose, computed, inject } from "vue";
-import { useLoadCalendar } from "../composables/load-calendar";
+import { useCalendar } from "../composables/calendar";
 import { isDate } from "date-fns";
 
 const props = defineProps({
@@ -28,7 +28,7 @@ const {
   loadCalendar: loadMonthlyCalendar,
   isLoadingCalendar,
   getCalendarDayByDate,
-} = useLoadCalendar(computed(() => props.allDatesInMonth));
+} = useCalendar(computed(() => props.allDatesInMonth));
 
 const getWeekDays = inject("getWeekDays");
 

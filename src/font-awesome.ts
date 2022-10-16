@@ -17,6 +17,7 @@ import {
   faCheck,
   faUtensils,
   faCheese,
+  faCalendar,
   faCalendarDays,
   faCalendarWeek,
   faList,
@@ -52,7 +53,10 @@ import {
   faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { faClock as faRegularClock } from "@fortawesome/free-regular-svg-icons";
+import {
+  faClock as faRegularClock,
+  faCalendar as faRegularCalendar,
+} from "@fortawesome/free-regular-svg-icons";
 
 library.add(
   faChevronRight,
@@ -71,6 +75,8 @@ library.add(
   faCheck,
   faUtensils,
   faCheese,
+  faCalendar,
+  faRegularCalendar,
   faCalendarDays,
   faCalendarWeek,
   faList,

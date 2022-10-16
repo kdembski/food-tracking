@@ -4,10 +4,11 @@ import CDisplayTags from "./index.vue";
 describe("Display Tags Component", () => {
   let wrapper: any = null;
   let tags: DOMWrapper<HTMLElement>[];
+  const onClick = jest.fn();
 
   beforeEach(async () => {
     wrapper = mount(CDisplayTags, {
-      props: { tags: "tag1,tag2,tag3" },
+      props: { tags: "tag1,tag2,tag3", onClick },
       global: global.settings,
     });
 
@@ -20,6 +21,6 @@ describe("Display Tags Component", () => {
 
   it("Should emit click event on tag click", async () => {
     await tags[0].trigger("click");
-    expect(wrapper.emitted()["click"][0][0]).toEqual("tag1");
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
