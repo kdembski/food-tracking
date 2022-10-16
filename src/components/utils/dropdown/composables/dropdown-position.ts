@@ -1,5 +1,5 @@
 import { ref, Ref, watch, nextTick, ComputedRef } from "vue";
-import { useWindowSize } from "../../composables/window-size";
+import { useWindowSize } from "../../../../composables/window-size";
 
 export function useDropdownPosition(
   dropdown: Ref<HTMLElement | null>,

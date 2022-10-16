@@ -8,7 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useWindowSize } from "@/composables/window-size";
 import { useButtonProps } from "./composables/props";
 
 const props = defineProps(useButtonProps().buttonProps);

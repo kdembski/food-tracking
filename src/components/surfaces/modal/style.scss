@@ -19,7 +19,7 @@
     position: relative;
     box-shadow: $shadow-md var(--shadow-color);
     margin: 30px 10px 0;
-    transition: 0.1s ease-in-out;
+    transition: 0.2s ease-in-out;
     overflow: hidden;
   }
 
@@ -50,7 +50,7 @@
   &__transition {
     &-enter-active,
     &-leave-active {
-      transition: 0.1s ease-in-out;
+      transition: 0.2s ease-in-out;
     }
 
     &-leave-to,
@@ -58,7 +58,7 @@
       opacity: 0;
 
       .modal__container {
-        transform: translateY(-10px);
+        transform: translateY(-30px);
       }
     }
   }

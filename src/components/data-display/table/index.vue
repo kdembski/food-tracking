@@ -9,7 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
-import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useWindowSize } from "@/composables/window-size";
 const props = defineProps({
   items: {
     type: Array,

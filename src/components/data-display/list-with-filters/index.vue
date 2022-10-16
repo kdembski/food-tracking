@@ -35,7 +35,7 @@ import { useStoredFilters } from "./composables/stored-filters";
 import { useFilters } from "./composables/filters/index";
 import { onMounted } from "vue";
 import { isEmpty } from "lodash";
-import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useWindowSize } from "@/composables/window-size";
 import { useMobileFilters } from "./composables/mobile-filters";
 import { useStickyPagination } from "./composables/sticky-pagination";
 

@@ -1,6 +1,6 @@
 import { DropdownOption } from "@/types/components/dropdown";
 import { ComputedRef, Ref } from "vue";
-import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useWindowSize } from "@/composables/window-size";
 
 export function useEvents(
   getHoveredOptionIndex: () => number | null,

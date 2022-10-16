@@ -13,7 +13,7 @@ export default {
 import { DropdownOption } from "@/types/components/dropdown";
 import { ref, Ref, computed } from "vue";
 import { useDropdownPosition } from "./composables/dropdown-position";
-import { useWindowSize } from "../composables/window-size";
+import { useWindowSize } from "../../../composables/window-size";
 import { useDropdownProps } from "./composables/props";
 
 const { isMobile, windowHeight, isMobileKeyboardOpen } = useWindowSize();

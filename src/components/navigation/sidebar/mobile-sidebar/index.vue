@@ -5,8 +5,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useWindowSize } from "@/components/utils/composables/window-size";
-import { useSwipeScreen } from "@/components/utils/composables/swipe-screen";
+import { useWindowSize } from "@/composables/window-size";
+import { useSwipeScreen } from "./composables/swipe-screen";
 import { ref, computed, reactive } from "vue";
 import { RouterLink } from "vue-router";
 const { windowWidth } = useWindowSize();

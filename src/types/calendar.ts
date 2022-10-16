@@ -1,7 +1,3 @@
-export interface CalendarState {
-  isLoadingCalendar: boolean;
-}
-
 export interface CalendarDay {
   date: Date;
   items: CalendarItem[];

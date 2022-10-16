@@ -21,7 +21,7 @@ import {
   getYear,
   addDays,
 } from "date-fns";
-import { useWindowSize } from "@/components/utils/composables/window-size";
+import { useWindowSize } from "@/composables/window-size";
 
 const { getDistanceInWords } = useDateHelpers();
 const { isMobile } = useWindowSize();
