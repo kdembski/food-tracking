@@ -115,16 +115,19 @@
 
     &.button--small {
       width: 24px;
+      min-width: 24px;
       height: 24px;
     }
 
     &.button--medium {
       width: 28px;
+      min-width: 28px;
       height: 28px;
     }
 
     &.button--large {
       width: 32px;
+      min-width: 32px;
       height: 32px;
     }
   }

@@ -1,12 +1,13 @@
 <script lang="ts">
-import CCard from "@/components/surfaces/card/index.vue";
-import CDisplayTags from "@/components/data-display/display-tags/index.vue";
-import CButton from "@/components/controls/button/index.vue";
 import Draggable from "vuedraggable";
+import WeeklyCalendarDayItem from "./item/index.vue";
 
 export default {
   name: "WeeklyCalendarDay",
-  components: { CCard, CDisplayTags, Draggable, CButton },
+  components: {
+    Draggable,
+    WeeklyCalendarDayItem,
+  },
 };
 </script>
 
@@ -28,6 +29,10 @@ const props = defineProps({
   isLoadingCalendar: {
     type: Boolean,
     default: false,
+  },
+  deleteDateFromCalendar: {
+    type: Function,
+    default: null,
   },
 });
 
@@ -52,6 +57,17 @@ const updateDayItemsSortOrder = (items: CalendarItem[]) => {
   items.forEach((item, index) => {
     item.sortOrder = index;
   });
+};
+
+const deleteDateFromCalendar = (id: number) => {
+  props.deleteDateFromCalendar(id, props.calendarDay.date);
+};
+
+const getHeaderActiveClass = (date: Date) => {
+  if (isToday(date)) {
+    return "calendar-day__header--active";
+  }
+  return "";
 };
 </script>
 

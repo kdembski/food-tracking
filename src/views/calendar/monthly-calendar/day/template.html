@@ -16,8 +16,16 @@
       @change="onMove"
     >
       <template #item="{element}">
-        <div class="calendar-day__item">
+        <div class="calendar-day__item item">
           <p>{{ element.name }}</p>
+          <CButton
+            class="item__delete-button"
+            color="secondary"
+            variant="text"
+            icon="times"
+            size="small"
+            @click="emits('delete', element.id, date)"
+          />
         </div>
       </template>
     </Draggable>

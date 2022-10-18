@@ -1,9 +1,10 @@
 <script lang="ts">
 import Draggable from "vuedraggable";
+import CButton from "@/components/controls/button/index.vue";
 
 export default {
   name: "MonthlyCalendarDay",
-  components: { Draggable },
+  components: { Draggable, CButton },
 };
 </script>
 
@@ -27,6 +28,10 @@ const props = defineProps({
     default: false,
   },
 });
+
+const emits = defineEmits<{
+  (event: "delete", id: number, date: Date): void;
+}>();
 
 const store = useStore();
 const getFormattedDate = inject("getFormattedDate");

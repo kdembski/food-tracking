@@ -21,7 +21,7 @@ const actions: ActionTree<any, any> = {
             date.items.sort((a, b) => a.sortOrder - b.sortOrder);
             return date;
           });
-          resolve(dates);
+          setTimeout(() => resolve(dates), 500);
         })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =

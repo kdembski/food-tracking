@@ -2,10 +2,14 @@
   <div v-if="isLoading" class="list-loader">
     <div v-for="row in getLoaderItemsCount()" class="list-loader__row">
       <CSkeletonLoader class="list-loader__wrapper">
-        <div
-          v-for="index in 3"
-          class="list-loader__item skeleton-loader__item"
-        />
+        <div class="list-loader__item skeleton-loader__item"></div>
+        <div class="list-loader__item skeleton-loader__item"></div>
+        <div class="list-loader__item-row">
+          <div
+            v-for="index in 5"
+            class="list-loader__row-item skeleton-loader__item"
+          ></div>
+        </div>
       </CSkeletonLoader>
     </div>
   </div>

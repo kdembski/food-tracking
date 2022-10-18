@@ -1,4 +1,4 @@
-<div class="monthly-calendar">
+<component :is="getContainerElement()" class="monthly-calendar">
   <div class="monthly-calendar__header">
     <p v-for="weekDay in getWeekDays(true)" class="monthly-calendar__week-day">
       {{weekDay}}
@@ -6,14 +6,15 @@
   </div>
   <div class="monthly-calendar__body">
     <template v-for="item in fullMonthGrid">
-      <MonthlyCalendarDate
+      <MonthlyCalendarDay
         v-if="isDate(item)"
         :calendarDay="getCalendarDayByDate(item)"
         :isLoadingCalendar="isLoadingCalendar"
         :date="item"
+        @delete="deleteDateFromCalendar"
       >
-      </MonthlyCalendarDate>
+      </MonthlyCalendarDay>
       <div class="monthly-calendar__placeholder" v-else>{{ item }}</div>
     </template>
   </div>
-</div>
+</component>

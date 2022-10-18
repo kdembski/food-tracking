@@ -1,0 +1,17 @@
+<div class="day-item" :id="item.id">
+  <div class="day-item__header">
+    <p>
+      {{ item.name }}<strong v-if="item.portions > 1"
+        >x{{ item.portions }}
+      </strong>
+    </p>
+    <CButton
+      color="secondary"
+      variant="text"
+      icon="times"
+      size="small"
+      @click="emits('delete', item.id)"
+    />
+  </div>
+  <CDisplayTags :tags="item.tags" size="small" />
+</div>

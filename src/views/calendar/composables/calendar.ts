@@ -46,9 +46,22 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     return store.dispatch("calendar/getCalendar", datesRange);
   };
 
+  const deleteDateFromCalendar = (id: number, date: Date) => {
+    const day = getCalendarDayByDate(date);
+    const itemToRemove = day?.items.find((item) => item.id === id);
+
+    if (!(itemToRemove && day)) {
+      return;
+    }
+    const indexOfItemToRemove = day.items.indexOf(itemToRemove);
+    day.items.splice(indexOfItemToRemove, 1);
+    store.dispatch("calendar/deleteDateFromCalendar", id);
+  };
+
   return {
     loadCalendar,
     isLoadingCalendar,
     getCalendarDayByDate,
+    deleteDateFromCalendar,
   };
 }

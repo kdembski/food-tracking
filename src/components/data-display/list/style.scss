@@ -48,7 +48,7 @@
     }
 
     &__wrapper {
-      width: 70%;
+      width: 75%;
     }
 
     &__item {
@@ -61,11 +61,19 @@
       }
 
       &:nth-child(2) {
-        width: 60%;
+        width: 45%;
       }
+    }
 
-      &:nth-child(3) {
-        width: 50%;
+    &__item-row {
+      display: flex;
+      gap: 4px;
+      height: 21px;
+      width: 55%;
+
+      .list-loader__row-item {
+        height: 100%;
+        border-radius: 15px;
       }
     }
   }
@@ -87,6 +95,15 @@
         &:nth-child(1) {
           margin-bottom: 10px;
         }
+
+        &:nth-child(2) {
+          width: 65%;
+        }
+      }
+
+      &__item-row {
+        width: 75%;
+        height: 18px;
       }
 
       &__row {

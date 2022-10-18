@@ -1,9 +1,10 @@
 <script lang="ts">
-import MonthlyCalendarDate from "./day/index.vue";
+import MonthlyCalendarDay from "./day/index.vue";
+import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 
 export default {
   name: "MonthlyCalendar",
-  components: { MonthlyCalendarDate },
+  components: { MonthlyCalendarDay, CSkeletonLoader },
 };
 </script>
 
@@ -28,9 +29,14 @@ const {
   loadCalendar: loadMonthlyCalendar,
   isLoadingCalendar,
   getCalendarDayByDate,
+  deleteDateFromCalendar,
 } = useCalendar(computed(() => props.allDatesInMonth));
 
 const getWeekDays = inject("getWeekDays");
+
+const getContainerElement = () => {
+  return isLoadingCalendar.value ? "c-skeleton-loader" : "div";
+};
 
 defineExpose({ loadMonthlyCalendar });
 </script>

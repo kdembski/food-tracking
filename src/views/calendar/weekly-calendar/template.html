@@ -1,9 +1,10 @@
-<div class="weekly-calendar">
+<component :is="getContainerElement()" class="weekly-calendar">
   <WeeklyCalendarDay
     v-for="date in allDatesInWeek"
     :calendarDay="getCalendarDayByDate(date)"
     :isLoadingCalendar="isLoadingCalendar"
     :date="date"
+    :deleteDateFromCalendar="deleteDateFromCalendar"
   >
   </WeeklyCalendarDay>
-</div>
+</component>

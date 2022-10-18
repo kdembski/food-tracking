@@ -1,9 +1,10 @@
 <script lang="ts">
 import WeeklyCalendarDay from "./day/index.vue";
+import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 
 export default {
   name: "WeeklyCalendar",
-  components: { WeeklyCalendarDay },
+  components: { WeeklyCalendarDay, CSkeletonLoader },
 };
 </script>
 
@@ -22,7 +23,12 @@ const {
   loadCalendar: loadWeeklyCalendar,
   isLoadingCalendar,
   getCalendarDayByDate,
+  deleteDateFromCalendar,
 } = useCalendar(computed(() => props.allDatesInWeek));
+
+const getContainerElement = () => {
+  return isLoadingCalendar.value ? "c-skeleton-loader" : "div";
+};
 
 defineExpose({ loadWeeklyCalendar });
 </script>

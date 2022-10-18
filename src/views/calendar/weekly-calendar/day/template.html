@@ -1,34 +1,19 @@
 <div class="calendar-day">
-  <p
-    class="calendar-day__header"
-    :class="{ 'calendar-day__header--active': isToday(date) }"
-  >
+  <p class="calendar-day__header" :class="getHeaderActiveClass(date)">
     {{ getFormattedDate(date, 'EEEE dd.M') }}
   </p>
-  <template v-if="!isLoadingCalendar">
-    <Draggable
-      :list="calendarDay?.items"
-      group="calendar"
-      class="calendar-day__draggable"
-      animation="150"
-      ghostClass="calendar-day__ghost"
-      itemKey="id"
-      @change="onMove"
-    >
-      <template #item="{element}">
-        <div class="calendar-day__item item" :id="element.id">
-          <div class="item__header">
-            <p>{{ element.name }}<strong>x{{ element.portions }}</strong></p>
-            <CButton
-              color="secondary"
-              variant="text"
-              icon="times"
-              size="small"
-            />
-          </div>
-          <CDisplayTags :tags="element.tags" size="small" />
-        </div>
-      </template>
-    </Draggable>
-  </template>
+  <Draggable
+    v-if="!isLoadingCalendar"
+    :list="calendarDay?.items"
+    group="calendar"
+    class="calendar-day__draggable"
+    animation="150"
+    ghostClass="calendar-day__ghost"
+    itemKey="id"
+    @change="onMove"
+  >
+    <template #item="{ element }">
+      <WeeklyCalendarDayItem :item="element" @delete="deleteDateFromCalendar" />
+    </template>
+  </Draggable>
 </div>

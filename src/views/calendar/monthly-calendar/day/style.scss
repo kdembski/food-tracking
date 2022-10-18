@@ -24,17 +24,25 @@
     gap: 6px;
   }
 
-  &__item {
+  .item {
     background-color: var(--surface-secondary);
     box-shadow: $shadow-xs var(--shadow-color);
     cursor: grab;
-    padding: 2px 6px;
     border-radius: 3px;
+    padding: 2px 2px 2px 6px;
     font-size: $font-sm;
     font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
 
     * {
       user-select: none;
+    }
+
+    &__delete-button {
+      height: 18px;
     }
   }
 
