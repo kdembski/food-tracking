@@ -1,7 +1,12 @@
 <p class="item-header__recipe-name">{{ item.recipeName }}</p>
 <div class="item-header__buttons">
   <template v-if="isMobile">
-    <CButton color="secondary" variant="text" icon="ellipsis-vertical" />
+    <CButtonWithDropdown
+      color="secondary"
+      variant="text"
+      icon="ellipsis-vertical"
+      :options="mobileDropdownOptions"
+    />
   </template>
   <template v-else>
     <CButton color="secondary" variant="text" icon="cart-shopping" />

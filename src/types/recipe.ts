@@ -14,6 +14,7 @@ export interface Recipe {
   recipeName: string;
   preparationTime: number;
   tags: string;
+  cookidooLink: string;
   cookedDate: Date;
   cookedDatesInCurrentMonth: Date[];
 }

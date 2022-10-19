@@ -12,6 +12,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
 import { Tag } from "@/types/components/tags";
+import { cloneDeep } from "lodash";
 
 const props = defineProps({
   tags: {
@@ -57,7 +58,8 @@ const isTagSelected = (tag: Tag) => {
 };
 
 const sortOutSelectedTags = (tags: Array<Tag>) => {
-  return tags.sort((tag) => {
+  const tagsClone = cloneDeep(tags);
+  return tagsClone.sort((tag) => {
     if (isTagSelected(tag)) {
       return -1;
     }

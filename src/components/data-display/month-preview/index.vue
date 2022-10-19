@@ -9,7 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { useDateHelpers } from "@/composables/date-helpers/index";
-import { isDate, isEqual } from "date-fns";
+import { isDate, isEqual, isFuture, isToday, isThisWeek } from "date-fns";
 
 const props = defineProps({
   dates: {
@@ -20,12 +20,32 @@ const props = defineProps({
 
 const { fullMonthGrid } = useDateHelpers();
 
+const getItemClasses = (itemDate: Date) => {
+  return [getActiveItemClass(itemDate), getCurrentWeekClass(itemDate)];
+};
+
 const getActiveItemClass = (itemDate: Date) => {
-  if (props.dates.some((date) => isEqual(date, itemDate))) {
-    return "month-preview__item--active";
+  if (!isDateMatchingAnyFromPropsDates(itemDate)) {
+    return "";
+  }
+
+  if (isToday(itemDate) || isFuture(itemDate)) {
+    return "month-preview__item--planned";
+  }
+
+  return "month-preview__item--cooked";
+};
+
+const getCurrentWeekClass = (itemDate: Date) => {
+  if (isThisWeek(itemDate, { weekStartsOn: 1 })) {
+    return "month-preview__item--current-week";
   }
 
   return "";
+};
+
+const isDateMatchingAnyFromPropsDates = (itemDate: Date) => {
+  return props.dates.some((date) => isEqual(date, itemDate));
 };
 </script>
 

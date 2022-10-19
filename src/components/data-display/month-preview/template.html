@@ -3,7 +3,7 @@
     <div
       v-if="isDate(item)"
       class="month-preview__item"
-      :class="getActiveItemClass(item)"
+      :class="getItemClasses(item)"
     ></div>
     <div v-else class="month-preview__placeholder"></div>
   </template>
