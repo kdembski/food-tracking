@@ -1,11 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
-import CDesktopSidebar from "./index.vue";
+import CBottomBar from "./index.vue";
 
-describe("Desktop Sidebar Component", () => {
+describe("Bottom Bar Component", () => {
   let wrapper: any = null;
 
   beforeEach(async () => {
-    wrapper = shallowMount(CDesktopSidebar, {
+    wrapper = shallowMount(CBottomBar, {
       props: {
         items: [
           { route: "/recipes", label: "Przepisy", icon: "utensils" },

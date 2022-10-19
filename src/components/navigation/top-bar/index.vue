@@ -1,18 +1,14 @@
 <script lang="ts">
+import InlineSvg from "vue-inline-svg";
+
 export default {
-  name: "CDesktopSidebar",
+  name: "CTopBar",
+  components: { InlineSvg },
 };
 </script>
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
-
-const props = defineProps({
-  items: {
-    type: Array,
-    required: true,
-  },
-});
 </script>
 
 <template src="./template.html"></template>

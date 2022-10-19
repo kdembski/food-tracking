@@ -1,4 +1,4 @@
-.topbar {
+.top-bar {
   padding: 12px 20px;
   background-color: $surface-dark;
   display: flex;
@@ -44,7 +44,7 @@
 }
 
 @media screen and (max-width: $screen-md) {
-  .topbar {
+  .top-bar {
     padding: 10px;
 
     &__logo {

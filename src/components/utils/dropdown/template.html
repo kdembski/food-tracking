@@ -1,4 +1,4 @@
-<Teleport to=".default-layout" :disabled="!isMobile">
+<Teleport to="#mobile-dropdowns-container" :disabled="!isMobile">
   <CTransition v-bind="getTransitionProps()">
     <div
       v-if="_isOpen"
@@ -7,36 +7,34 @@
       @mouseout="emitListMouseout()"
       ref="dropdown"
     >
-      <div class="dropdown__wrapper">
-        <ul v-if="isLoading" class="dropdown__loader">
-          <li v-for="index in 5">
-            <CSkeletonLoader />
-          </li>
-        </ul>
-        <ul v-else class="dropdown__list" :style="getDropdownMaxHeight()">
-          <li
-            v-for="(option, index) in options"
-            class="dropdown__option"
-            @mouseover="emitOptionMouseover(index)"
-            @click="onOptionClick(option)"
-            :class="getOptionClass(index)"
-          >
-            <FontAwesomeIcon v-if="option.icon" :icon="option.icon" />
-            <p v-html="getOptionLabelWithHighlight(option.label)"></p>
-          </li>
-          <li v-if="options.length === 0" class="dropdown__empty-message">
-            Brak opcji dla wyszukanej frazy
-          </li>
-        </ul>
-        <div v-if="isMobile" class="dropdown__close-btn">
-          <CButton
-            color="secondary"
-            size="small"
-            label="Zamknij"
-            fullWidth
-            @click="closeDropdown"
-          />
-        </div>
+      <ul v-if="isLoading" class="dropdown__loader">
+        <li v-for="index in 5">
+          <CSkeletonLoader />
+        </li>
+      </ul>
+      <ul v-else class="dropdown__list" :style="getDropdownMaxHeight()">
+        <li
+          v-for="(option, index) in options"
+          class="dropdown__option"
+          @mouseover="emitOptionMouseover(index)"
+          @click="onOptionClick(option)"
+          :class="getOptionClass(index)"
+        >
+          <FontAwesomeIcon v-if="option.icon" :icon="option.icon" />
+          <p v-html="getOptionLabelWithHighlight(option.label)"></p>
+        </li>
+        <li v-if="options.length === 0" class="dropdown__empty-message">
+          Brak opcji dla wyszukanej frazy
+        </li>
+      </ul>
+      <div v-if="isMobile" class="dropdown__close-btn">
+        <CButton
+          color="secondary"
+          size="small"
+          label="Zamknij"
+          fullWidth
+          @click="closeDropdown"
+        />
       </div>
     </div>
   </CTransition>

@@ -1,7 +1,7 @@
 <div class="default-layout">
-  <CTopbar />
+  <CTopBar />
   <div class="default-layout__wrapper">
-    <CSidebar :items="sidebarItems" />
+    <CSideBar v-if="!isMobile" :items="navItems" />
     <div class="default-layout__content layout-content">
       <div
         class="layout-content__wrapper"
@@ -17,4 +17,6 @@
       </div>
     </div>
   </div>
+  <div id="mobile-dropdowns-container"></div>
+  <CBottomBar v-if="isMobile" :items="navItems" />
 </div>

@@ -14,6 +14,6 @@ const settings = {
 };
 global.settings = settings;
 
-const layout = document.createElement("div");
-layout.classList.add("default-layout");
-document.body.appendChild(layout);
+const mobileDropdownsContainer = document.createElement("div");
+mobileDropdownsContainer.id = "mobile-dropdowns-container";
+document.body.appendChild(mobileDropdownsContainer);

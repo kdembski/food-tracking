@@ -1,11 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
-import CMobileSidebar from "./index.vue";
+import CSideBar from "./index.vue";
 
-describe("Mobile Sidebar Component", () => {
+describe("Side Bar Component", () => {
   let wrapper: any = null;
 
   beforeEach(async () => {
-    wrapper = shallowMount(CMobileSidebar, {
+    wrapper = shallowMount(CSideBar, {
       props: {
         items: [
           { route: "/recipes", label: "Przepisy", icon: "utensils" },

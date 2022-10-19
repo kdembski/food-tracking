@@ -1,10 +1,10 @@
-<nav class="mobile-sidebar">
+<nav class="bottom-bar">
   <div
-    class="mobile-sidebar__wrapper"
-    :class="'mobile-sidebar--active-' + (activeListIndex + 1)"
+    class="bottom-bar__wrapper"
+    :class="'bottom-bar--active-' + (activeListIndex + 1)"
     v-bind="swipeConfig"
   >
-    <ul v-for="limit in mobileListLimits" class="mobile-sidebar__items">
+    <ul v-for="limit in mobileListLimits" class="bottom-bar__items">
       <li v-for="item in items.slice(limit.start, limit.end)" class="item">
         <RouterLink
           :to="item.route"
@@ -23,7 +23,7 @@
       </li>
     </ul>
   </div>
-  <div class="mobile-sidebar__active-indicator">
+  <div class="bottom-bar__active-indicator">
     <span
       v-for="index in mobileListLimits.length"
       :class="getActiveIndicatorClass(index)"
