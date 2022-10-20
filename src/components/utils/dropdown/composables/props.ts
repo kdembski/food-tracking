@@ -35,6 +35,10 @@ export function useDropdownProps() {
       type: Boolean,
       default: false,
     },
+    onClickAway: {
+      type: Function,
+      default: null,
+    },
   };
 
   const getDropdownProps = (props: DropdownProps): DropdownProps => {

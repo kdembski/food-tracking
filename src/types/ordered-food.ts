@@ -12,6 +12,8 @@ export interface OrderedFood {
   foodName: string;
   placeName: string;
   tags: string;
+  orderDate: Date;
+  orderDatesInCurrentMonth: Date[];
 }
 
 export type OrderedFoodList = ListWithFilters<OrderedFood>;

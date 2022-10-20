@@ -6,6 +6,7 @@
       :class="getDropdownDirectionClass()"
       @mouseout="emitListMouseout()"
       ref="dropdown"
+      v-click-away="onClickAway"
     >
       <ul v-if="isLoading" class="dropdown__loader">
         <li v-for="index in 5">
@@ -20,7 +21,9 @@
           @click="onOptionClick(option)"
           :class="getOptionClass(index)"
         >
-          <FontAwesomeIcon v-if="option.icon" :icon="option.icon" />
+          <div v-if="option.icon">
+            <FontAwesomeIcon :icon="option.icon" />
+          </div>
           <p v-html="getOptionLabelWithHighlight(option.label)"></p>
         </li>
         <li v-if="options.length === 0" class="dropdown__empty-message">

@@ -11,10 +11,6 @@
     margin-bottom: 10px;
     font-weight: 600;
     color: var(--text-secondary);
-
-    &--active {
-      color: var(--primary);
-    }
   }
 
   &__draggable {
@@ -22,6 +18,16 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+  }
+
+  &--active {
+    position: relative;
+    z-index: 1;
+    border: 1px solid var(--primary);
+
+    .calendar-day__header {
+      color: var(--primary);
+    }
   }
 
   .item {

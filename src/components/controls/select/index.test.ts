@@ -53,8 +53,17 @@ describe("Select Component", () => {
     expect(input.element.value).toEqual("One");
   });
 
+  it("Should set empty input value if selected option not exists", async () => {
+    await wrapper.setProps({
+      modelValue: 4,
+    });
+    expect(input.element.value).toEqual("");
+  });
+
   it("Should toggle dropdown on input click", async () => {
     const blurSpy = jest.spyOn(wrapper.vm.input, "blur");
+
+    await input.trigger("mousedown");
 
     await input.trigger("focus");
     await jest.runAllTimers();

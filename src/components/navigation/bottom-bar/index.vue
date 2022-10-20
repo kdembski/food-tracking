@@ -42,6 +42,7 @@ const slideLeft = () => {
   }
   activeListIndex.value++;
 };
+
 const slideRight = () => {
   if (activeListIndex.value <= 0) {
     return;

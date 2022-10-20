@@ -13,5 +13,8 @@
       @click="emits('delete', item.id)"
     />
   </div>
-  <CDisplayTags :tags="item.tags" size="small" />
+  <div class="day-item__body">
+    <CDisplayTags :tags="item.tags" size="small" />
+    <FontAwesomeIcon :icon="getItemIcon()" />
+  </div>
 </div>

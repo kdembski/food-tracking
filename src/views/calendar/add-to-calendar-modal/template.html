@@ -4,7 +4,7 @@
   submitButtonLabel="Dodaj"
   :isSubmitButtonDisabled="isSelectedDatesEmpty()"
   :isSubmitting="isAddingToCalendar"
-  @submit="addAllSelectedDatesToCalendar"
+  @submit="addSelectedDatesToCalendar"
 >
   <CDatePicker v-model="selectedDates" />
   <div v-if="!isSelectedDatesEmpty()" class="add-to-calendar__portions">

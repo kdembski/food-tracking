@@ -6,6 +6,7 @@
 *:after,
 *:before {
   --primary: #{$primary};
+  --primary-rgb: #{toRGB($primary)};
   --primary-light: #{$primary-light};
   --primary-dark: #{$primary-dark};
 

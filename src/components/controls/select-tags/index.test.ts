@@ -38,4 +38,11 @@ describe("Select Tags Component", () => {
       { name: "tag2" },
     ]);
   });
+
+  it("Should show loader if isLoading is true", async () => {
+    await wrapper.setProps({
+      isLoading: true,
+    });
+    expect(wrapper.find(".select-tags__loader").exists()).toBe(true);
+  });
 });

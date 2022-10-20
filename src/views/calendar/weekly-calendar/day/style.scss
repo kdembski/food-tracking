@@ -25,16 +25,21 @@
     color: var(--text-secondary);
     padding: 5px 0 15px;
     border-bottom: 1px solid var(--border-color);
-
-    &--active {
-      color: var(--primary);
-    }
   }
 
   &__loader {
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+
+  &--active {
+    background-color: rgba(var(--primary-rgb), 0.15);
+
+    .calendar-day__header {
+      color: var(--primary);
+      border-bottom: 1px solid var(--primary);
+    }
   }
 }
 

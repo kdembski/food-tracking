@@ -12,7 +12,7 @@ export default {
 <script setup lang="ts">
 import { DropdownOption } from "@/types/components/dropdown";
 import { ref, Ref, computed } from "vue";
-import { useDropdownPosition } from "./composables/dropdown-position";
+import { useDropdownPosition } from "./composables/position";
 import { useWindowSize } from "../../../composables/window-size";
 import { useDropdownProps } from "./composables/props";
 

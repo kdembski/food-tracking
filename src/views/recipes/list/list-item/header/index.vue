@@ -42,11 +42,22 @@ const openInCookidooOption = {
   value: "",
   label: "Otwórz w Cookidoo",
   action: openCookidoLink,
+  icon: "arrow-up-right-from-square",
 };
 
 const mobileDropdownOptions = [
-  { value: "", label: "Dodaj do kalendarza", action: addToCalendar },
-  { value: "", label: "Dodaj do listy zakupów", action: () => false },
+  {
+    value: "",
+    label: "Dodaj do kalendarza",
+    action: addToCalendar,
+    icon: ["far", "calendar"],
+  },
+  {
+    value: "",
+    label: "Dodaj do listy zakupów",
+    action: () => false,
+    icon: "shopping-cart",
+  },
   ...(props.item.cookidooLink ? [openInCookidooOption] : []),
 ];
 </script>

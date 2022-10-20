@@ -31,14 +31,6 @@ const toggleIsOpen = () => {
 const closeDropdown = () => {
   isDropdownOpen.value = false;
 };
-
-const onClickAway = () => {
-  if (isMobile.value) {
-    setTimeout(closeDropdown, 100);
-    return;
-  }
-  closeDropdown();
-};
 </script>
 
 <template src="./template.html"></template>

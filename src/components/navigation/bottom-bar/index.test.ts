@@ -3,6 +3,7 @@ import CBottomBar from "./index.vue";
 
 describe("Bottom Bar Component", () => {
   let wrapper: any = null;
+  let bottomBarWrapper: any;
 
   beforeEach(async () => {
     wrapper = shallowMount(CBottomBar, {
@@ -18,10 +19,16 @@ describe("Bottom Bar Component", () => {
       },
       global: global.settings,
     });
+
+    bottomBarWrapper = wrapper.find("bottom-bar__wrapper");
   });
 
   it("Should router link for each item", async () => {
     const routerLinks = wrapper.findAll("router-link-stub");
     expect(routerLinks.length).toEqual(6);
+  });
+
+  it("Should trigger active list change on wrapper screen swipe", async () => {
+    expect(wrapper.active);
   });
 });

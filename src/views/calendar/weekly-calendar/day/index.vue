@@ -63,9 +63,9 @@ const deleteDateFromCalendar = (id: number) => {
   props.deleteDateFromCalendar(id, props.calendarDay.date);
 };
 
-const getHeaderActiveClass = (date: Date) => {
+const getActiveClass = (date: Date) => {
   if (isToday(date)) {
-    return "calendar-day__header--active";
+    return "calendar-day--active";
   }
   return "";
 };

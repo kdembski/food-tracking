@@ -40,8 +40,11 @@
       color: var(--primary);
     }
 
-    & > svg {
-      font-size: 20px;
+    & > div {
+      display: flex;
+      justify-content: center;
+      min-width: 24px;
+      font-size: 18px;
       color: var(--text-secondary);
     }
   }
@@ -61,9 +64,13 @@
   }
 
   &__transition {
-    &-enter-active,
-    &-leave-active {
+    &-enter-active {
       transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+    }
+
+    &-leave-active {
+      transition: opacity 0.15s 0.05s ease-in-out,
+        transform 0.15s 0.05s ease-in-out;
     }
 
     &-enter-from,
@@ -85,8 +92,8 @@
 
     &__transition {
       &-enter-active {
-        transition: height 0.25s ease-in-out, margin 0.25s ease-in-out,
-          opacity 0.25s ease-in-out;
+        transition: height 0.25s 0.05s ease-in-out,
+          margin 0.25s 0.05s ease-in-out, opacity 0.25s ease-in-out;
       }
 
       &-leave-active {

@@ -21,6 +21,13 @@ const props = defineProps({
 const emits = defineEmits<{
   (event: "delete", id: number): void;
 }>();
+
+const getItemIcon = () => {
+  if (props.item.isRecipe) {
+    return "utensils";
+  }
+  return "box-open";
+};
 </script>
 
 <template src="./template.html"></template>
