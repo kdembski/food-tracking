@@ -5,7 +5,10 @@
         <FontAwesomeIcon :icon="['far', 'clock']" />
         <p>{{ getPreparationTime(item.preparationTime) }}</p>
       </div>
-      <div class="item-body__cooked-date">
+      <div
+        class="item-body__cooked-date"
+        :class="{'item-body__cooked-date--planned': isPlanned}"
+      >
         <FontAwesomeIcon :icon="['far', 'calendar']" />
         <p>{{ getFormattedCookedDate(item.cookedDate) }}</p>
       </div>

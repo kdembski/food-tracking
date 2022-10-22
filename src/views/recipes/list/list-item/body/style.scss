@@ -32,6 +32,12 @@
     }
   }
 
+  &__cooked-date {
+    &--planned {
+      color: var(--success-primary);
+    }
+  }
+
   &__month-preview {
     margin-left: auto;
   }

@@ -55,6 +55,13 @@ const updateDayItemsSortOrder = (items: CalendarItem[]) => {
     item.sortOrder = index;
   });
 };
+
+const getItemIcon = (item: CalendarItem) => {
+  if (item.isRecipe) {
+    return "utensils";
+  }
+  return "box-open";
+};
 </script>
 
 <template src="./template.html"></template>

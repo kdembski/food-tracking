@@ -12,6 +12,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
 import {
   isEqual,
@@ -36,6 +37,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const isPlanned = ref(false);
 
 const getPreparationTime = (time: number) => {
   const minutes = time % 60;
@@ -66,9 +69,11 @@ const getFormattedCookedDate = (cookedDate: Date) => {
     0,
     0
   );
-  const distance = getDistanceInWords(today, cookedDate);
+
+  const distance = getDistanceInWords(todayWithoutHours, cookedDate);
 
   if (isFuture(cookedDate) || isEqual(todayWithoutHours, cookedDate)) {
+    isPlanned.value = true;
     return "Zaplanowane";
   }
 

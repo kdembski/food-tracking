@@ -36,8 +36,9 @@
     align-items: flex-end;
 
     & > svg {
-      padding: 5px;
+      padding: 0 7px;
       color: var(--text-tetriary);
+      font-size: 14px;
     }
   }
 }

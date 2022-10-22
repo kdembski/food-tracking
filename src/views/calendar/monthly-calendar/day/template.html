@@ -1,17 +1,22 @@
-<div class="calendar-day" :class="{ 'calendar-day--active': isToday(date) }">
+<div
+  class="calendar-day"
+  :class="{ 'calendar-day--active': isToday(date) || isDraggingOver }"
+>
   <p class="calendar-day__header">{{ getFormattedDate(date, 'd') }}</p>
   <template v-if="!isLoadingCalendar">
     <Draggable
       :list="calendarDay?.items"
       group="calendar"
-      class="calendar-day__draggable"
       animation="150"
       ghostClass="calendar-day__ghost"
       itemKey="id"
       @change="onMove"
+      tag="ul"
+      class="calendar-day__list"
     >
       <template #item="{element}">
-        <div class="calendar-day__item item">
+        <li class="calendar-day__item item">
+          <FontAwesomeIcon :icon="getItemIcon(element)" />
           <p>{{ element.name }}</p>
           <CButton
             class="item__delete-button"
@@ -21,7 +26,7 @@
             size="small"
             @click="emits('delete', element.id, date)"
           />
-        </div>
+        </li>
       </template>
     </Draggable>
   </template>
