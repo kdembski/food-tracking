@@ -1,7 +1,4 @@
-<div
-  class="calendar-day"
-  :class="{ 'calendar-day--active': isToday(date) || isDraggingOver }"
->
+<div class="calendar-day" :class="{ 'calendar-day--active': isToday(date) }">
   <p class="calendar-day__header">{{ getFormattedDate(date, 'd') }}</p>
   <template v-if="!isLoadingCalendar">
     <Draggable

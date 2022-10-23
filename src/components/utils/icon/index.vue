@@ -1,5 +1,5 @@
 <script lang="ts">
-export default { name: "TSuccessIcon" };
+export default { name: "CIcon" };
 </script>
 
 <script setup lang="ts">

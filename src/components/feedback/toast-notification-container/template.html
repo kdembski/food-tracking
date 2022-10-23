@@ -1,0 +1,15 @@
+<Transition name="toast-notification-container__transition">
+  <div v-show="!isEmpty()" class="toast-notification-container">
+    <CTransition v-bind="getTransitionListProps()">
+      <CToastNotification
+        v-for="notification in toastNotifications"
+        :id="notification.id"
+        :type="notification.type"
+        :message="notification.message"
+        :action="notification.action"
+        :actionText="notification.actionText"
+        :key="notification.id"
+      />
+    </CTransition>
+  </div>
+</Transition>

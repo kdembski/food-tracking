@@ -1,3 +1,4 @@
+import { useToastNotification } from "@/composables/toast-notification";
 import ApiService from "@/services/api.service";
 import { CalendarDay } from "@/types/calendar";
 import { ApiError } from "@/types/api";
@@ -35,7 +36,9 @@ const actions: ActionTree<any, any> = {
   addDateToCalendar(_, data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/calendar", data)
-        .then(() => resolve())
+        .then(() => {
+          resolve();
+        })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;
@@ -61,10 +64,13 @@ const actions: ActionTree<any, any> = {
     });
   },
 
-  deleteDateFromCalendar(_, id) {
+  deleteDateFromCalendar({ rootState }, id) {
     return new Promise<void>((resolve, reject) => {
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/calendar/" + id)
-        .then(() => resolve())
+        .then(() => {
+          rootState.toastNotification.success("Udało sie usunąć z kalendarza.");
+          resolve();
+        })
         .catch((error: AxiosError<ApiError>) => {
           const errorMessage: string | undefined =
             error.response?.data?.message || error.code;

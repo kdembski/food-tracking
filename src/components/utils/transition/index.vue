@@ -29,6 +29,10 @@ const props = defineProps({
       return ["height", "width", "none"].indexOf(value) !== -1;
     },
   },
+  isGroup: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const getTransitionProps = () => {

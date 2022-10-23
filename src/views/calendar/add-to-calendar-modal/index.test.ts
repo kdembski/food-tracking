@@ -4,6 +4,12 @@ import { createStore } from "vuex";
 import AddToCalendarModal from "./index.vue";
 import CDatePicker from "@/components/controls/date-picker/index.vue";
 
+jest.mock("vue-router", () => ({
+  useRouter: () => ({
+    push: () => false,
+  }),
+}));
+
 describe("Add To Calendar Modal Component", () => {
   let wrapper: any = null;
   let store: any;
@@ -29,6 +35,10 @@ describe("Add To Calendar Modal Component", () => {
     };
 
     store = createStore({
+      mutations: {
+        unshiftToastNotification: jest.fn(),
+        popToastNotification: jest.fn(),
+      },
       modules: {
         calendar: {
           actions: calendarActions,

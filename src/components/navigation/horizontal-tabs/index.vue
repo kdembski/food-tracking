@@ -6,11 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, Ref, watch, onMounted, onUnmounted } from "vue";
-
-interface NavigationItem {
-  code: string;
-  label: string;
-}
+import { NavigationItem } from "@/types/components/horizontal-tabs";
 
 const props = defineProps({
   modelValue: {

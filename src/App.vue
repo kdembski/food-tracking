@@ -2,11 +2,14 @@
   <component :is="layoutComponentName">
     <router-view />
   </component>
+  <CToastNotificationContainer />
 </template>
 
 <script lang="ts">
 import PlainLayout from "@/layouts/plain/index.vue";
 import DefaultLayout from "@/layouts/default/index.vue";
+import CToastNotificationContainer from "@/components/feedback/toast-notification-container/index.vue";
+import { useToastNotification } from "@/composables/toast-notification";
 
 export default {
   components: {
@@ -18,11 +21,16 @@ export default {
 
 <script setup lang="ts">
 import { computed, onBeforeMount, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import ApiService from "./services/api.service";
 import { useStore } from "vuex";
 
 const store = useStore();
+const toastNotification = useToastNotification();
+const router = useRouter();
+
+store.state.toastNotification = toastNotification;
+store.state.router = router;
 
 const theme = computed(() => store.state.theme);
 watch(

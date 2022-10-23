@@ -1,8 +1,10 @@
+import { useToastNotification } from "@/composables/toast-notification";
 import { useStore } from "vuex";
 import { ref, Ref, ComputedRef } from "vue";
 import { Recipe } from "@/types/recipe";
 import { OrderedFood } from "@/types/ordered-food";
 import { isAfter } from "date-fns";
+import { useRouter } from "vue-router";
 
 export function useAddToCalendar(
   selectedDates: Ref<Date[]>,
@@ -13,6 +15,8 @@ export function useAddToCalendar(
 ) {
   const isAddingToCalendar = ref(false);
   const store = useStore();
+  const toastNotification = useToastNotification();
+  const router = useRouter();
 
   const addSelectedDatesToCalendar = () => {
     isAddingToCalendar.value = true;
@@ -26,11 +30,22 @@ export function useAddToCalendar(
       });
     });
 
-    Promise.all(promises).then(() => {
-      isAddingToCalendar.value = false;
-      isOpen.value = false;
-      updateAddedItemDates();
-    });
+    Promise.all(promises)
+      .then(() => {
+        isAddingToCalendar.value = false;
+        isOpen.value = false;
+        updateAddedItemDates();
+
+        const pushRouterToCalendar = () => router.push("/calendar");
+        toastNotification.success(
+          "Udało sie dodać do kalendarza.",
+          pushRouterToCalendar,
+          "Otwórz Kalendarz"
+        );
+      })
+      .catch(() => {
+        toastNotification.error("Dodawanie do kalendarza nie powiodło się.");
+      });
   };
 
   const updateAddedItemDates = () => {

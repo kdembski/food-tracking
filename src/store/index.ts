@@ -4,12 +4,14 @@ import user from "./user/index";
 import recipe from "./recipe/index";
 import orderedFood from "./ordered-food/index";
 import calendar from "./calendar/index";
+import { State } from "@/types/store";
 
-export default createStore({
+export default createStore<State>({
   state: {
     theme: StorageService.getItem("theme") || "light",
     primaryColor: StorageService.getItem("primaryColor") || "orange",
     mainContainerScrollValue: 0,
+    toastNotifications: [],
   },
 
   getters: {
@@ -31,6 +33,18 @@ export default createStore({
 
     setMainContainerScrollValue(state, value) {
       state.mainContainerScrollValue = value;
+    },
+
+    unshiftToastNotification(state, value) {
+      state.toastNotifications.unshift(value);
+    },
+
+    popToastNotification(state) {
+      state.toastNotifications.pop();
+    },
+
+    spliceToastNotification(state, index) {
+      state.toastNotifications.splice(index, 1);
     },
   },
   actions: {},

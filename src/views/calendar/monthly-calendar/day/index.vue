@@ -27,6 +27,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  updateCalendarDay: {
+    type: Function,
+    required: true,
+  },
 });
 
 const emits = defineEmits<{
@@ -37,23 +41,7 @@ const store = useStore();
 const getFormattedDate = inject("getFormattedDate");
 
 const onMove = () => {
-  const date = props.calendarDay.date;
-  const items = props.calendarDay.items;
-
-  updateDayItemsSortOrder(items);
-
-  items.forEach((item) => {
-    store.dispatch("calendar/updateDateInCalendar", {
-      date,
-      ...item,
-    });
-  });
-};
-
-const updateDayItemsSortOrder = (items: CalendarItem[]) => {
-  items.forEach((item, index) => {
-    item.sortOrder = index;
-  });
+  props.updateCalendarDay(props.calendarDay);
 };
 
 const getItemIcon = (item: CalendarItem) => {

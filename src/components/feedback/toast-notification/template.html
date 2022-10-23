@@ -1,0 +1,21 @@
+<div class="toast-notification">
+  <div class="toast-notification__wrapper" :class="getTypeClass()">
+    <div class="toast-notification__icon">
+      <CIcon :type="type" size="medium" />
+    </div>
+    <div class="toast-notification__body">
+      <p class="toast-notification__message">{{ message }}</p>
+      <button v-if="action" @click="action" class="toast-notification__action">
+        {{ actionText }}
+      </button>
+    </div>
+    <CButton
+      color="secondary"
+      variant="text"
+      icon="times"
+      size="small"
+      @click="onRemoveButtonClick"
+      class="toast-notification__remove-button"
+    />
+  </div>
+</div>

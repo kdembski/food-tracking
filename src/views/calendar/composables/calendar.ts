@@ -1,12 +1,15 @@
-import { onBeforeMount, ref, Ref, ComputedRef } from "vue";
+import { onBeforeMount, ref, Ref, ComputedRef, watch } from "vue";
 import { useStore } from "vuex";
 import { isEqual } from "date-fns";
-import { CalendarDay } from "@/types/calendar";
+import { CalendarDay, CalendarItem } from "@/types/calendar";
+import { useToastNotification } from "@/composables/toast-notification";
 
 export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   const store = useStore();
+  const toastNotification = useToastNotification();
   const calendar: Ref<CalendarDay[] | undefined> = ref();
   const isLoadingCalendar = ref(false);
+  const updatePromises: Ref<any[]> = ref([]);
 
   onBeforeMount(() => {
     loadCalendar();
@@ -58,10 +61,49 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     store.dispatch("calendar/deleteDateFromCalendar", id);
   };
 
+  const updateCalendarDay = (calendarDay: CalendarDay) => {
+    const date = calendarDay.date;
+    const items = calendarDay.items;
+
+    updateDayItemsSortOrder(items);
+
+    const promises = items.map((item) => {
+      return store.dispatch("calendar/updateDateInCalendar", {
+        date,
+        ...item,
+      });
+    });
+
+    updatePromises.value = updatePromises.value.concat(promises);
+  };
+
+  watch(updatePromises, (promises) => {
+    if (promises.length === 0) {
+      return;
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        toastNotification.success("Kalendarz zaktualizowany pomyślnie!");
+        updatePromises.value = [];
+      })
+      .catch(() => {
+        toastNotification.error("Nie udało sie zaktualizować kalendarza.");
+        updatePromises.value = [];
+      });
+  });
+
+  const updateDayItemsSortOrder = (items: CalendarItem[]) => {
+    items.forEach((item, index) => {
+      item.sortOrder = index;
+    });
+  };
+
   return {
     loadCalendar,
     isLoadingCalendar,
     getCalendarDayByDate,
     deleteDateFromCalendar,
+    updateCalendarDay,
   };
 }

@@ -1,3 +1,6 @@
-<transition v-bind="getTransitionProps()">
+<TransitionGroup v-if="isGroup" v-bind="getTransitionProps()">
   <slot></slot>
-</transition>
+</TransitionGroup>
+<Transition v-else v-bind="getTransitionProps()">
+  <slot></slot>
+</Transition>

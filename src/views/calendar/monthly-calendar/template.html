@@ -12,6 +12,7 @@
         :isLoadingCalendar="isLoadingCalendar"
         :date="item"
         @delete="deleteDateFromCalendar"
+        :updateCalendarDay="updateCalendarDay"
       >
       </MonthlyCalendarDay>
       <div class="monthly-calendar__placeholder" v-else>{{ item }}</div>

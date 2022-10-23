@@ -30,6 +30,7 @@ const {
   isLoadingCalendar,
   getCalendarDayByDate,
   deleteDateFromCalendar,
+  updateCalendarDay,
 } = useCalendar(computed(() => props.allDatesInMonth));
 
 const getWeekDays = inject("getWeekDays");

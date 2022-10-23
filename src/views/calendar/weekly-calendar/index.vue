@@ -24,6 +24,7 @@ const {
   isLoadingCalendar,
   getCalendarDayByDate,
   deleteDateFromCalendar,
+  updateCalendarDay,
 } = useCalendar(computed(() => props.allDatesInWeek));
 
 const getContainerElement = () => {
