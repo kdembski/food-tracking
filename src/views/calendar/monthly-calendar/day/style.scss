@@ -58,10 +58,9 @@
   }
 
   &__ghost {
-    opacity: 0.5;
+    opacity: 0.8;
     position: relative;
     overflow: hidden;
-    box-shadow: $shadow-xs var(--shadow-color);
 
     &:after {
       content: "";

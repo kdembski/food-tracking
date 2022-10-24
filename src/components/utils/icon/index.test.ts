@@ -15,7 +15,7 @@ describe("Icon Component", () => {
 
   it("getIconBasedOnType should return corrent icon based on type provided", async () => {
     expect(wrapper.vm.getIconBasedOnType("success")).toEqual("check");
-    expect(wrapper.vm.getIconBasedOnType("error")).toEqual("exclamation");
+    expect(wrapper.vm.getIconBasedOnType("error")).toEqual("times");
     expect(wrapper.vm.getIconBasedOnType("")).toEqual("");
   });
 });

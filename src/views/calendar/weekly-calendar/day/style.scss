@@ -18,10 +18,9 @@
   }
 
   &__ghost {
-    opacity: 0.5;
+    opacity: 0.6;
     position: relative;
     overflow: hidden;
-    box-shadow: $shadow-xs var(--shadow-color);
 
     &:after {
       content: "";
@@ -35,11 +34,8 @@
   }
 
   &__header {
+    @include uppercasedSecondaryText;
     text-align: center;
-    font-size: $font-sm;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--text-secondary);
     padding: 5px 0 15px;
     border-bottom: 1px solid var(--border-color);
   }

@@ -1,10 +1,13 @@
+$desktopTransitionDuration: 0.15s;
+$mobileTransitionDuration: 0.25s;
+
 .dropdown {
   position: absolute;
   left: 0;
   right: 0;
   border-radius: 6px;
   overflow: hidden;
-  z-index: 20;
+  z-index: $layer-2;
   background-color: var(--surface-primary);
   border: 1px solid var(--border-color);
   box-shadow: $shadow-sm var(--shadow-color);
@@ -65,12 +68,13 @@
 
   &__transition {
     &-enter-active {
-      transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+      transition: opacity $desktopTransitionDuration ease-in-out,
+        transform $desktopTransitionDuration ease-in-out;
     }
 
     &-leave-active {
-      transition: opacity 0.15s 0.05s ease-in-out,
-        transform 0.15s 0.05s ease-in-out;
+      transition: opacity $desktopTransitionDuration 0.05s ease-in-out,
+        transform $desktopTransitionDuration 0.05s ease-in-out;
     }
 
     &-enter-from,
@@ -92,13 +96,15 @@
 
     &__transition {
       &-enter-active {
-        transition: height 0.25s 0.05s ease-in-out,
-          margin 0.25s 0.05s ease-in-out, opacity 0.25s ease-in-out;
+        transition: height $mobileTransitionDuration 0.05s ease-in-out,
+          margin $mobileTransitionDuration 0.05s ease-in-out,
+          opacity $mobileTransitionDuration ease-in-out;
       }
 
       &-leave-active {
-        transition: height 0.25s ease-in-out, margin 0.25s ease-in-out,
-          opacity 0.25s 0.1s ease-in-out;
+        transition: height $mobileTransitionDuration ease-in-out,
+          margin $mobileTransitionDuration ease-in-out,
+          opacity $mobileTransitionDuration 0.1s ease-in-out;
       }
 
       &-enter-from,

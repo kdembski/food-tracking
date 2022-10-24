@@ -25,10 +25,7 @@
       }
 
       & > p:last-child {
-        font-size: $font-xs;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: var(--text-secondary);
+        @include uppercasedSecondaryText;
       }
 
       &:hover {

@@ -33,7 +33,7 @@ const getIconBasedOnType = (type: string) => {
     case "success":
       return "check";
     case "error":
-      return "exclamation";
+      return "times";
     default:
       return "";
   }

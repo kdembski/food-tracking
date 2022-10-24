@@ -25,11 +25,8 @@
     top: -20px;
 
     > p {
+      @include uppercasedSecondaryText;
       text-align: center;
-      font-size: $font-sm;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: var(--text-secondary);
     }
   }
 }

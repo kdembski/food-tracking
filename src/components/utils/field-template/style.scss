@@ -14,7 +14,7 @@
     color: var(--text-primary);
     border-radius: 4px;
     font-size: $font-base;
-    z-index: 10;
+    z-index: $layer-1;
 
     &:focus {
       outline: none;
@@ -34,11 +34,13 @@
     }
 
     &[type="number"] {
+      appearance: none;
       -moz-appearance: textfield;
     }
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
+      appearance: none;
       -webkit-appearance: none;
     }
   }
@@ -88,11 +90,7 @@
     position: absolute;
     top: -16px;
     left: 0;
-    font-size: $font-xs;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    letter-spacing: 1px;
+    @include uppercasedSecondaryText;
   }
 
   &__error-message {

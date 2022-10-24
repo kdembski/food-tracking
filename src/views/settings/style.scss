@@ -10,10 +10,7 @@
     flex-direction: column;
 
     & > p {
-      font-size: $font-xs;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      font-weight: 600;
+      @include uppercasedSecondaryText;
       width: 100%;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 2px;

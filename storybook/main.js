@@ -25,6 +25,8 @@ module.exports = {
             resources: [
               path.resolve("src/styles/_variables.scss"),
               path.resolve("src/styles/_fonts.scss"),
+              path.resolve("src/styles/_themes.scss"),
+              path.resolve("src/styles/_mixins.scss"),
             ],
           },
         },
