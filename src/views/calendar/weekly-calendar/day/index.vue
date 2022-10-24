@@ -12,9 +12,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject } from "vue";
+import { inject, ref } from "vue";
 import { useStore } from "vuex";
-import { CalendarDay, CalendarItem } from "@/types/calendar";
+import { CalendarDay } from "@/types/calendar";
 import { isToday } from "date-fns";
 
 const props = defineProps({
@@ -42,6 +42,7 @@ const props = defineProps({
 
 const store = useStore();
 const getFormattedDate = inject("getFormattedDate");
+const isDragging = ref(false);
 
 const onMove = () => {
   props.updateCalendarDay(props.calendarDay);
@@ -51,11 +52,25 @@ const deleteDateFromCalendar = (id: number) => {
   props.deleteDateFromCalendar(id, props.calendarDay.date);
 };
 
-const getActiveClass = (date: Date) => {
-  if (isToday(date)) {
+const getContainerClasses = () => {
+  return [getActiveClass()];
+};
+
+const getActiveClass = () => {
+  if (isToday(props.date)) {
     return "calendar-day--active";
   }
   return "";
+};
+
+const onDragStart = () => {
+  document.body.classList.add("grabbing");
+  isDragging.value = true;
+};
+
+const onDragEnd = () => {
+  document.body.classList.remove("grabbing");
+  isDragging.value = false;
 };
 </script>
 

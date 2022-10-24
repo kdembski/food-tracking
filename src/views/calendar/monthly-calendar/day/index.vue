@@ -50,6 +50,14 @@ const getItemIcon = (item: CalendarItem) => {
   }
   return "box-open";
 };
+
+const onDragStart = () => {
+  document.body.classList.add("grabbing");
+};
+
+const onDragEnd = () => {
+  document.body.classList.remove("grabbing");
+};
 </script>
 
 <template src="./template.html"></template>

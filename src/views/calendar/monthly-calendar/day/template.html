@@ -10,6 +10,9 @@
       @change="onMove"
       tag="ul"
       class="calendar-day__list"
+      :forceFallback="true"
+      @start="onDragStart"
+      @end="onDragEnd"
     >
       <template #item="{element}">
         <li class="calendar-day__item item">
