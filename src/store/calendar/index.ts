@@ -1,34 +1,29 @@
-import { useToastNotification } from "@/composables/toast-notification";
 import ApiService from "@/services/api.service";
 import { CalendarDay } from "@/types/calendar";
 import { ApiError } from "@/types/api";
 import { ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { formatISO } from "date-fns";
+import {
+  getErrorMessage,
+  showDefualtErrorNotification,
+} from "../helpers/error-message";
 
 const actions: ActionTree<any, any> = {
-  getCalendar(_, { fromDate, toDate }) {
+  getCalendar({ rootState }, { fromDate, toDate }) {
     return new Promise<CalendarDay[]>((resolve, reject) => {
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
-          "/calendar?fromDate=" +
-          formatISO(fromDate, { representation: "date" }) +
-          "&toDate=" +
-          formatISO(toDate, { representation: "date" })
+          "/calendar?" +
+          helpers.getCalendarRangeQuery(fromDate, toDate)
       )
         .then((response: AxiosResponse<CalendarDay[]>) => {
-          const dates = response.data.map((date) => {
-            date.date = new Date(date.date);
-            date.items.sort((a, b) => a.sortOrder - b.sortOrder);
-            return date;
-          });
-          setTimeout(() => resolve(dates), 500);
+          const calendar = helpers.getPreparedCalendar(response.data);
+          setTimeout(() => resolve(calendar), 500);
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
   },
@@ -36,15 +31,8 @@ const actions: ActionTree<any, any> = {
   addDateToCalendar(_, data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/calendar", data)
-        .then(() => {
-          resolve();
-        })
-        .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
-          reject(errorMessage);
-        });
+        .then(() => resolve())
+        .catch(() => reject());
     });
   },
 
@@ -55,12 +43,7 @@ const actions: ActionTree<any, any> = {
         data
       )
         .then(() => resolve())
-        .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
-          reject(errorMessage);
-        });
+        .catch(() => reject());
     });
   },
 
@@ -72,12 +55,29 @@ const actions: ActionTree<any, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
+  },
+};
+
+const helpers = {
+  getPreparedCalendar: (calendar: CalendarDay[]) => {
+    return calendar.map((day) => {
+      day.date = new Date(day.date);
+      day.items.sort((a, b) => a.sortOrder - b.sortOrder);
+      return day;
+    });
+  },
+
+  getCalendarRangeQuery: (fromDate: Date, toDate: Date) => {
+    return (
+      "fromDate=" +
+      formatISO(fromDate, { representation: "date" }) +
+      "&toDate=" +
+      formatISO(toDate, { representation: "date" })
+    );
   },
 };
 

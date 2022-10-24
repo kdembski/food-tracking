@@ -2,29 +2,34 @@
   margin-bottom: 10px;
 
   &__wrapper {
-    padding: 10px;
+    padding: 10px 15px;
     border: 2px solid transparent;
     border-radius: 4px;
     box-shadow: $shadow-lg var(--shadow-color);
     background-color: var(--surface-primary);
     display: flex;
-    gap: 10px;
+    gap: 15px;
   }
 
   &--success {
-    border-color: var(--success-primary);
+    border-color: $success;
 
     .toast-notification__action {
-      color: var(--success-primary);
+      color: $success;
     }
   }
 
   &--error {
-    border-color: var(--error-primary);
+    border-color: $error;
 
     .toast-notification__action {
-      color: var(--error-primary);
+      color: $error;
     }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
   }
 
   &__body {

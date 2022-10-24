@@ -4,6 +4,7 @@ import { UserState, LoginResponse } from "@/types/user";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
+import { getErrorMessage } from "../helpers/error-message";
 
 const state: UserState = {
   accessToken: StorageService.getItem("accessToken"),
@@ -30,10 +31,7 @@ const actions: ActionTree<UserState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsloggingIn", false);
-
-          const errorMessage: string | undefined =
-            error.response?.data.message || error.code;
-          reject(errorMessage);
+          reject(getErrorMessage(error));
         });
     });
   },

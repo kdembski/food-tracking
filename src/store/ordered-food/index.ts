@@ -5,6 +5,10 @@ import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
 import { ListFilters, ListBaseFilters } from "@/types/components/list";
+import {
+  getErrorMessage,
+  showDefualtErrorNotification,
+} from "../helpers/error-message";
 
 const state: OrderedFoodState = {
   orderedFoodList: null,
@@ -23,7 +27,7 @@ const getters: GetterTree<OrderedFoodState, any> = {
 };
 
 const actions: ActionTree<OrderedFoodState, any> = {
-  loadOrderedFoodList({ commit }, filters: ListFilters) {
+  loadOrderedFoodList({ commit, rootState }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingOrderedFoodList", true);
 
@@ -36,16 +40,14 @@ const actions: ActionTree<OrderedFoodState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
           commit("setIsLoadingOrderedFoodList", false);
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
   },
 
-  loadOrderedFoodTags({ commit }, filters: ListBaseFilters) {
+  loadOrderedFoodTags({ commit, rootState }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingOrderedFoodTags", true);
 
@@ -60,11 +62,9 @@ const actions: ActionTree<OrderedFoodState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
           commit("setIsLoadingOrderedFoodTags", false);
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
   },

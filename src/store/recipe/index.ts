@@ -6,6 +6,10 @@ import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
 import { ListFilters, ListBaseFilters } from "@/types/components/list";
 import { DropdownOption } from "@/types/components/dropdown";
+import {
+  getErrorMessage,
+  showDefualtErrorNotification,
+} from "../helpers/error-message";
 
 const state: RecipeState = {
   recipesList: null,
@@ -43,7 +47,7 @@ const getters: GetterTree<RecipeState, any> = {
 };
 
 const actions: ActionTree<RecipeState, any> = {
-  loadRecipesList({ commit }, filters: ListFilters) {
+  loadRecipesList({ commit, rootState }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingRecipesList", true);
 
@@ -57,16 +61,14 @@ const actions: ActionTree<RecipeState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
           commit("setIsLoadingRecipesList", false);
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
   },
 
-  loadRecipesTags({ commit }, filters: ListBaseFilters) {
+  loadRecipesTags({ commit, rootState }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingRecipesTags", true);
 
@@ -81,16 +83,17 @@ const actions: ActionTree<RecipeState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
           commit("setIsLoadingRecipesTags", false);
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
   },
 
-  loadRecipesSearchSuggestions({ commit }, filters: ListBaseFilters) {
+  loadRecipesSearchSuggestions(
+    { commit, rootState },
+    filters: ListBaseFilters
+  ) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingRecipesSearchSuggestions", true);
 
@@ -105,25 +108,22 @@ const actions: ActionTree<RecipeState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-
           commit("setIsLoadingRecipesSearchSuggestions", false);
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
   },
 
-  getRecipesListCount({ commit }) {
+  getRecipesListCount({ rootState }) {
     return new Promise<number>((resolve, reject) => {
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/count")
         .then((response: AxiosResponse<number>) => {
           resolve(response.data);
         })
         .catch((error: AxiosError<ApiError>) => {
-          const errorMessage: string | undefined =
-            error.response?.data?.message || error.code;
-          reject(errorMessage);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
         });
     });
   },
