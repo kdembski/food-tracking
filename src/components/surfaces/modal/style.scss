@@ -1,3 +1,6 @@
+$sectionPadding: 15px 20px;
+$mobileSectionPadding: 10px 15px;
+
 .modal {
   &__overlay {
     position: fixed;
@@ -25,7 +28,7 @@
   }
 
   &__header {
-    padding: 15px 20px;
+    padding: $sectionPadding;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
@@ -38,11 +41,11 @@
   }
 
   &__body {
-    padding: 15px 20px;
+    padding: $sectionPadding;
   }
 
   &__footer {
-    padding: 15px 20px;
+    padding: $sectionPadding;
     border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: flex-end;
@@ -73,15 +76,15 @@
     }
 
     &__header {
-      padding: 10px 15px;
+      padding: $mobileSectionPadding;
     }
 
     &__body {
-      padding: 10px 15px;
+      padding: $mobileSectionPadding;
     }
 
     &__footer {
-      padding: 10px 15px;
+      padding: $mobileSectionPadding;
     }
   }
 }

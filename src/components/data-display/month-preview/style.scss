@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
-  width: 104px;
+  width: $monthPreviewWidth;
 
   &__item {
     height: 8px;
@@ -23,7 +23,7 @@
 
 @media screen and (max-width: $screen-md) {
   .month-preview {
-    width: 69px;
+    width: $mobileMonthPreviewWidth;
 
     &__item {
       height: 6px;

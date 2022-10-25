@@ -1,8 +1,10 @@
+$spaceForChevron: 38px;
+
 .select {
   position: relative;
 
   input.select__input {
-    padding-right: 38px;
+    padding-right: $spaceForChevron;
   }
 
   &__input {

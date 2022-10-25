@@ -14,7 +14,7 @@
     }
 
     &:hover {
-      background-color: rgba(var(--text-primary-rgb), 0.08);
+      background-color: $textButtonHoverBackground;
     }
   }
 

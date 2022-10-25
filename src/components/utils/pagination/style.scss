@@ -1,3 +1,6 @@
+$itemPadding: 5px 10px;
+$mobileItemPadding: 3px 8px;
+
 .pagination {
   display: flex;
   justify-content: space-between;
@@ -10,24 +13,24 @@
     gap: 5px;
 
     &__item {
-      padding: 5px 10px;
+      padding: $itemPadding;
       border-radius: 3px;
       font-weight: 600;
 
       &--active {
         cursor: default;
         color: var(--primary);
-        background-color: rgba(var(--text-primary-rgb), 0.06);
+        background-color: $textButtonHoverBackground;
       }
 
       &:hover {
-        background-color: rgba(var(--text-primary-rgb), 0.06);
+        background-color: $textButtonHoverBackground;
       }
     }
   }
 
   &__arrow {
-    padding: 5px 10px;
+    padding: $itemPadding;
     border-radius: 3px;
     color: var(--text-secondary);
 
@@ -37,7 +40,7 @@
     }
 
     &:hover:not(.pagination__arrow--disabled) {
-      background-color: rgba(var(--text-primary-rgb), 0.08);
+      background-color: $textButtonHoverBackground;
     }
   }
 
@@ -63,12 +66,12 @@
       gap: 5px;
 
       &__item {
-        padding: 3px 8px;
+        padding: $mobileItemPadding;
       }
     }
 
     &__arrow {
-      padding: 3px 8px;
+      padding: $mobileItemPadding;
     }
 
     &__summary {

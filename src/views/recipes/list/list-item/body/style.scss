@@ -1,18 +1,21 @@
+$itemGap: 10px;
+$mobileItemGap: 8px;
+
 .item-body {
   display: grid;
-  grid-template-columns: calc(100% - 114px) 104px;
+  grid-template-columns: calc(100% - $monthPreviewWidth + 10px) $monthPreviewWidth;
   align-items: flex-end;
-  gap: 10px;
+  gap: $itemGap;
 
   &__col {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: $itemGap;
   }
 
   &__row {
     display: flex;
-    gap: 15px;
+    gap: $itemGap + 5px;
   }
 
   &__cooked-date,
@@ -45,15 +48,15 @@
 
 @media screen and (max-width: $screen-md) {
   .item-body {
-    grid-template-columns: calc(100% - 79px) 69px;
-    gap: 8px;
+    grid-template-columns: calc(100% - $mobileMonthPreviewWidth + 10px) $mobileMonthPreviewWidth;
+    gap: $mobileItemGap;
 
     &__col {
-      gap: 8px;
+      gap: $mobileItemGap;
     }
 
     &__row {
-      gap: 10px;
+      gap: $mobileItemGap + 2px;
     }
 
     &__cooked-date,
