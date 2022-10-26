@@ -1,6 +1,6 @@
 @mixin uppercasedSecondaryText {
   font-size: $font-xs;
-  font-weight: 600;
+  font-weight: $font-bold;
   text-transform: uppercase;
   color: var(--text-secondary);
   letter-spacing: 1px;

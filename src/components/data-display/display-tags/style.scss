@@ -3,8 +3,8 @@
     gap: 2px;
 
     .tag {
-      padding: 1px 4px;
-      font-size: 12px;
+      padding: 1px 5px;
+      font-size: $font-2xs;
     }
   }
 
@@ -13,7 +13,7 @@
 
     .tag {
       padding: 2px 8px;
-      font-size: 13px;
+      font-size: $font-xs;
     }
   }
 
@@ -22,7 +22,7 @@
 
     .tag {
       padding: 5px 12px;
-      font-size: 14px;
+      font-size: $font-sm;
     }
   }
 

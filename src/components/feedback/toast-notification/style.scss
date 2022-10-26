@@ -4,7 +4,7 @@
   &__wrapper {
     padding: 10px 15px;
     border: 2px solid transparent;
-    border-radius: 4px;
+    border-radius: $radius-sm;
     box-shadow: $shadow-lg var(--shadow-color);
     background-color: var(--surface-primary);
     display: flex;
@@ -46,7 +46,7 @@
     display: inline;
     background-color: transparent;
     border: 0;
-    font-weight: 600;
+    font-weight: $font-bold;
     cursor: pointer;
   }
 

@@ -6,7 +6,7 @@
   &__place-name {
     display: inline-block;
     font-size: $font-sm;
-    font-weight: 500;
+    font-weight: $font-medium;
     color: var(--text-secondary);
     margin-left: 2px;
   }

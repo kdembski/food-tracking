@@ -17,7 +17,7 @@
 
   &__label {
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: $radius-lg;
     cursor: pointer;
     overflow: hidden;
     padding-bottom: 10px;
@@ -36,7 +36,7 @@
     color: var(--text-primary);
     background-color: var(--surface-primary);
     font-size: $font-sm;
-    font-weight: 500;
+    font-weight: $font-medium;
   }
 }
 

@@ -1,13 +1,13 @@
 .item-header {
   &__recipe-name {
     font-size: $font-xl;
-    font-weight: 500;
+    font-weight: $font-medium;
     line-height: 100%;
   }
 
   &__cookidoo-link {
     color: $text-darker;
-    border-radius: 4px;
+    border-radius: $radius-sm;
 
     & > svg {
       width: 17px;

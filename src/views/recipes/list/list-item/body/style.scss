@@ -3,7 +3,7 @@ $mobileItemGap: 8px;
 
 .item-body {
   display: grid;
-  grid-template-columns: calc(100% - $monthPreviewWidth + 10px) $monthPreviewWidth;
+  grid-template-columns: calc(100% - ($monthPreviewWidth + 10px)) $monthPreviewWidth;
   align-items: flex-end;
   gap: $itemGap;
 
@@ -21,7 +21,7 @@ $mobileItemGap: 8px;
   &__cooked-date,
   &__preparation-time {
     font-size: $font-sm;
-    font-weight: 500;
+    font-weight: $font-medium;
     display: flex;
     gap: 5px;
     color: var(--text-secondary);
@@ -48,7 +48,7 @@ $mobileItemGap: 8px;
 
 @media screen and (max-width: $screen-md) {
   .item-body {
-    grid-template-columns: calc(100% - $mobileMonthPreviewWidth + 10px) $mobileMonthPreviewWidth;
+    grid-template-columns: calc(100% - ($mobileMonthPreviewWidth + 10px)) $mobileMonthPreviewWidth;
     gap: $mobileItemGap;
 
     &__col {

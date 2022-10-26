@@ -17,7 +17,7 @@ $mobileSectionPadding: 10px 15px;
 
   &__container {
     background-color: var(--surface-primary);
-    border-radius: 5px;
+    border-radius: $radius-md;
     position: relative;
     box-shadow: $shadow-md var(--shadow-color);
     margin: 30px 10px 0;
@@ -36,7 +36,7 @@ $mobileSectionPadding: 10px 15px;
 
     & > p {
       font-size: $font-lg;
-      font-weight: 500;
+      font-weight: $font-medium;
     }
   }
 

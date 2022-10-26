@@ -21,7 +21,7 @@
 
     & > p {
       font-size: $font-lg;
-      font-weight: 600;
+      font-weight: $font-bold;
       color: var(--text-secondary);
       min-width: 180px;
       text-align: center;

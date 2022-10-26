@@ -8,8 +8,7 @@
     height: 8px;
     width: 12px;
     background-color: var(--surface-tetriary);
-    border-radius: 2px;
-    font-size: 8px;
+    border-radius: $radius-2xs;
 
     &--cooked {
       background-color: var(--primary);
@@ -24,6 +23,7 @@
 @media screen and (max-width: $screen-md) {
   .month-preview {
     width: $mobileMonthPreviewWidth;
+    gap: 1px;
 
     &__item {
       height: 6px;

@@ -16,12 +16,12 @@
       <ul v-else class="dropdown__list" :style="getDropdownMaxHeight()">
         <li
           v-for="(option, index) in options"
-          class="dropdown__option"
+          class="dropdown__option option"
           @mouseover="emitOptionMouseover(index)"
           @click="onOptionClick(option)"
           :class="getOptionClass(index)"
         >
-          <div v-if="option.icon">
+          <div v-if="option.icon" class="option__icon">
             <FontAwesomeIcon :icon="option.icon" />
           </div>
           <p v-html="getOptionLabelWithHighlight(option.label)"></p>

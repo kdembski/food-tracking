@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 10px;
   background-color: var(--surface-secondary);
-  border-radius: 6px;
+  border-radius: $radius-lg;
 
   &__draggable {
     height: 100%;

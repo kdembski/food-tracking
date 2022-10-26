@@ -36,6 +36,7 @@ $error: #cc0000;
 $error-light: #ffcece;
 $error-dark: #3a0000;
 
+$font-2xs: 11px;
 $font-xs: 12px;
 $font-sm: 14px;
 $font-base: 16px;
@@ -43,6 +44,11 @@ $font-lg: 18px;
 $font-xl: 20px;
 $font-2xl: 24px;
 $font-3xl: 28px;
+
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-bold: 600;
 
 $shadow-light: rgba(0, 0, 0, 0.1);
 $shadow-color: rgba(0, 0, 0, 0.16);
@@ -65,6 +71,14 @@ $layer-2: 20; //dropdown, filters-button
 $layer-3: 30; //bottom bar
 $layer-4: 40; //modal
 $layer-5: 50; //toast notification
+
+$radius-2xs: 2px;
+$radius-xs: 3px;
+$radius-sm: 4px;
+$radius-md: 5px;
+$radius-lg: 6px;
+$radius-xl: 10px;
+$radius-2xl: 15px;
 
 $monthPreviewWidth: 104px;
 $mobileMonthPreviewWidth: 69px;

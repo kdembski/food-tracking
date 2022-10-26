@@ -1,6 +1,6 @@
 .card {
   padding: 25px;
-  border-radius: 5px;
+  border-radius: $radius-md;
 
   &--outlined {
     background-color: var(--surface-primary);

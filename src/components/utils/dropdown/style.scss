@@ -5,7 +5,7 @@ $mobileTransitionDuration: 0.25s;
   position: absolute;
   left: 0;
   right: 0;
-  border-radius: 6px;
+  border-radius: $radius-lg;
   overflow: hidden;
   z-index: $layer-2;
   background-color: var(--surface-primary);
@@ -43,7 +43,7 @@ $mobileTransitionDuration: 0.25s;
       color: var(--primary);
     }
 
-    & > div {
+    .option__icon {
       display: flex;
       justify-content: center;
       min-width: 24px;

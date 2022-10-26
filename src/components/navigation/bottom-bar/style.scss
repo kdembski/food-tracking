@@ -50,12 +50,12 @@
       display: flex;
       justify-content: center;
       margin-bottom: 5px;
-      font-size: $font-base;
+      font-size: 16px;
     }
 
     &__label {
       font-size: $font-xs;
-      font-weight: 600;
+      font-weight: $font-bold;
       letter-spacing: 1px;
       white-space: nowrap;
     }

@@ -10,9 +10,9 @@
     color: var(--text-secondary);
     background-color: var(--surface-secondary);
     border: 1px solid var(--border-color);
-    font-weight: 500;
+    font-weight: $font-medium;
     font-size: $font-sm;
-    border-radius: 15px;
+    border-radius: $radius-2xl;
   }
 
   &:deep(.tag--with-hover) {

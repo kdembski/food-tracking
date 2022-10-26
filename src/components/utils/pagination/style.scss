@@ -14,8 +14,8 @@ $mobileItemPadding: 3px 8px;
 
     &__item {
       padding: $itemPadding;
-      border-radius: 3px;
-      font-weight: 600;
+      border-radius: $radius-xs;
+      font-weight: $font-bold;
 
       &--active {
         cursor: default;
@@ -31,7 +31,7 @@ $mobileItemPadding: 3px 8px;
 
   &__arrow {
     padding: $itemPadding;
-    border-radius: 3px;
+    border-radius: $radius-xs;
     color: var(--text-secondary);
 
     &--disabled {
@@ -72,10 +72,6 @@ $mobileItemPadding: 3px 8px;
 
     &__arrow {
       padding: $mobileItemPadding;
-    }
-
-    &__summary {
-      font-size: $font-sm;
     }
 
     &__loader {
