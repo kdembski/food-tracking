@@ -1,60 +1,14 @@
 .weekly-calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 20px;
+  gap: $spacing-xl;
   flex-grow: 1;
-
-  .column {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    &__draggable {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    &__ghost {
-      opacity: 0;
-    }
-
-    &__header {
-      @include uppercasedSecondaryText;
-      text-align: center;
-      padding: 5px 0 15px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    &__item {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 15px 10px;
-
-      * {
-        user-select: none;
-      }
-
-      & > p {
-        font-weight: $font-medium;
-      }
-    }
-  }
-
-  &__transition {
-    &-move {
-      transition: all 0.5s ease-in-out;
-    }
-  }
 }
 
 @media screen and (max-width: $screen-md) {
   .weekly-calendar {
-    padding: 0 10px;
-    gap: 10px;
+    padding: 0 $spacing-lg;
+    gap: $spacing-lg;
     grid-template-columns: repeat(1, 1fr);
   }
 }

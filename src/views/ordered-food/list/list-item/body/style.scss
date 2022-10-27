@@ -1,20 +1,20 @@
 .item-body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: $spacing-md;
 
   &__place-name {
     display: inline-block;
     font-size: $font-sm;
     font-weight: $font-medium;
     color: var(--text-secondary);
-    margin-left: 2px;
+    margin-left: $spacing-2xs;
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .item-body {
-    gap: 8px;
+    gap: $spacing-sm;
 
     &__place-name {
       font-size: $font-xs;

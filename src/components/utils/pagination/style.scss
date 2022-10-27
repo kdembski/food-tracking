@@ -1,5 +1,5 @@
-$itemPadding: 5px 10px;
-$mobileItemPadding: 3px 8px;
+$itemPadding: $spacing-sm $spacing-lg;
+$mobileItemPadding: $spacing-xs $spacing-md;
 
 .pagination {
   display: flex;
@@ -10,7 +10,7 @@ $mobileItemPadding: 3px 8px;
   &-pages {
     display: flex;
     cursor: pointer;
-    gap: 5px;
+    gap: $spacing-sm;
 
     &__item {
       padding: $itemPadding;
@@ -47,12 +47,12 @@ $mobileItemPadding: 3px 8px;
   &__summary {
     font-size: $font-sm;
     color: var(--text-secondary);
-    padding: 0 5px;
+    padding: 0 $spacing-sm;
   }
 
   &__loader {
     .skeleton-loader {
-      padding: 5px;
+      padding: $spacing-sm;
       height: 29px;
       display: flex;
       gap: 40%;
@@ -63,7 +63,7 @@ $mobileItemPadding: 3px 8px;
 @media screen and (max-width: $screen-md) {
   .pagination {
     &-pages {
-      gap: 5px;
+      gap: $spacing-sm;
 
       &__item {
         padding: $mobileItemPadding;

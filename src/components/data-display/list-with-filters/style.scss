@@ -1,4 +1,4 @@
-$filtersHeightOffset: 91px; //topbar height + paddings
+$filtersHeightOffset: 92px; //topbar height + paddings
 
 .list-with-filters {
   display: flex;
@@ -17,7 +17,7 @@ $filtersHeightOffset: 91px; //topbar height + paddings
     &__wrapper {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: $spacing-2xl;
       position: sticky;
       top: 0;
       align-self: flex-start;
@@ -25,14 +25,14 @@ $filtersHeightOffset: 91px; //topbar height + paddings
       width: 100%;
       max-height: calc(100vh - $filtersHeightOffset);
       overflow-y: auto;
-      padding: 0 5px;
-      margin: 0 -5px;
+      padding: 0 $spacing-sm;
+      margin: 0 (-$spacing-sm);
     }
 
     &__btns-container {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: $spacing-2xl;
     }
   }
 
@@ -46,10 +46,10 @@ $filtersHeightOffset: 91px; //topbar height + paddings
   &__pagination {
     position: sticky;
     z-index: 1;
-    top: -20px;
+    top: -$spacing-2xl;
     background-color: var(--surface-primary);
-    margin: -10px 0 -1px;
-    padding: 10px 0;
+    margin: -$spacing-md 0 -1px;
+    padding: $spacing-md 0;
     align-items: flex-end;
     border-bottom: 1px solid var(--border-color);
   }
@@ -69,12 +69,12 @@ $filtersHeightOffset: 91px; //topbar height + paddings
       height: unset;
       min-width: 100%;
       margin: 0;
-      padding: 0 10px;
+      padding: 0 $spacing-lg;
     }
 
     &__content {
       min-width: 100%;
-      padding: 0 10px;
+      padding: 0 $spacing-lg;
     }
 
     &__filters-transition,
@@ -143,7 +143,7 @@ $filtersHeightOffset: 91px; //topbar height + paddings
 
     .filters {
       &__wrapper {
-        gap: 15px;
+        gap: $spacing-xl;
         max-height: unset;
         overflow-y: visible;
         padding: 0;
@@ -151,14 +151,12 @@ $filtersHeightOffset: 91px; //topbar height + paddings
       }
 
       &__btns-container {
-        gap: 15px;
+        gap: $spacing-xl;
       }
     }
 
     &__pagination {
-      top: -10px;
-      padding: 8px 0;
-      margin: -8px 0 -1px;
+      top: -$spacing-lg;
     }
   }
 }

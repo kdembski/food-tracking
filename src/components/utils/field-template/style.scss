@@ -1,14 +1,16 @@
+$labelPosition: 16px;
+
 .field {
   position: relative;
 
   &--with-label {
-    margin-top: 16px;
+    margin-top: $labelPosition;
   }
 
   &:deep(input) {
     appearance: none;
     width: 100%;
-    padding: 12px 10px;
+    padding: $spacing-lg;
     background-color: var(--surface-primary);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
@@ -88,7 +90,7 @@
 
   &__label {
     position: absolute;
-    top: -16px;
+    top: -$labelPosition;
     left: 0;
     @include uppercasedSecondaryText;
   }
@@ -97,7 +99,7 @@
     font-size: $font-xs;
     font-weight: $font-bold;
     color: $error;
-    margin: 4px 0;
+    margin: $spacing-xs 0;
     transition: all 0.15s ease-in-out;
 
     &--transition-class {
@@ -108,8 +110,8 @@
 
   &__left-icon {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: $spacing-lg;
+    left: $spacing-lg;
     color: var(--text-secondary);
     font-size: 18px;
   }
@@ -117,7 +119,7 @@
   &__right-icon {
     position: absolute;
     top: 0;
-    right: 12px;
+    right: $spacing-lg;
     min-width: 25px;
     display: flex;
     align-items: center;

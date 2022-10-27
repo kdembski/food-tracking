@@ -1,7 +1,7 @@
 .weekly-date-picker {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
+  gap: $spacing-md;
 
   &__item {
     > input {
@@ -13,11 +13,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px 10px;
+      padding: $spacing-2xl $spacing-lg;
       width: 100%;
       cursor: pointer;
       border-radius: $radius-md;
-      gap: 10px;
+      gap: $spacing-lg;
       border: 1px solid var(--border-color);
 
       & > p:first-child {

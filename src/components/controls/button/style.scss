@@ -58,7 +58,7 @@
 
   &--small {
     font-size: $font-sm;
-    padding: 8px 12px;
+    padding: $spacing-md $spacing-lg;
     border-radius: $radius-xs;
 
     .button__content {
@@ -68,21 +68,21 @@
 
   &--medium {
     font-size: $font-base;
-    padding: 10px 15px;
+    padding: $spacing-lg $spacing-xl;
     border-radius: $radius-sm;
 
     .button__content {
-      gap: 10px;
+      gap: $spacing-lg;
     }
   }
 
   &--large {
     font-size: $font-lg;
-    padding: 15px 20px;
+    padding: $spacing-xl $spacing-2xl;
     border-radius: $radius-md;
 
     .button__content {
-      gap: 15px;
+      gap: $spacing-xl;
     }
   }
 

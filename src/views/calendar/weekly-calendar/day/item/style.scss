@@ -1,9 +1,9 @@
 .day-item {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 10px;
-  padding-right: 4px;
+  gap: $spacing-xl;
+  padding: $spacing-lg;
+  padding-right: $spacing-sm;
   cursor: grab;
   box-shadow: $shadow-xs var(--shadow-color);
   background-color: var(--surface-primary);
@@ -15,7 +15,7 @@
 
   &__header {
     display: flex;
-    gap: 5px;
+    gap: $spacing-md;
 
     & > p {
       font-weight: $font-medium;
@@ -24,7 +24,7 @@
       strong {
         font-size: $font-xs;
         color: var(--text-tetriary);
-        margin-left: 5px;
+        margin-left: $spacing-md;
       }
     }
 
@@ -37,10 +37,10 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 5px;
+    gap: $spacing-md;
 
     & > svg {
-      padding: 0 7px;
+      padding: 0 $spacing-sm;
       color: var(--text-tetriary);
       font-size: 14px;
     }

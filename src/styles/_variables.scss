@@ -35,6 +35,7 @@ $warning-light: #fdff8c;
 $error: #cc0000;
 $error-light: #ffcece;
 $error-dark: #3a0000;
+$overlay-color: rgba($black, 0.5);
 
 $font-2xs: 11px;
 $font-xs: 12px;
@@ -79,6 +80,16 @@ $radius-md: 5px;
 $radius-lg: 6px;
 $radius-xl: 10px;
 $radius-2xl: 15px;
+
+$spacing-2xs: 2px;
+$spacing-xs: 4px;
+$spacing-sm: 6px;
+$spacing-md: 8px;
+$spacing-lg: 12px;
+$spacing-xl: 16px;
+$spacing-2xl: 20px;
+$spacing-3xl: 25px;
+$spacing-4xl: 30px;
 
 $monthPreviewWidth: 104px;
 $mobileMonthPreviewWidth: 69px;

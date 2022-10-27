@@ -5,12 +5,12 @@
   height: 100vh;
 
   &__form {
-    padding: 30px;
+    padding: $spacing-4xl;
     width: 500px;
-    margin: 0 10px;
+    margin: 0 $spacing-lg;
   }
 
   &__password {
-    margin-bottom: 20px;
+    margin-bottom: $spacing-2xl;
   }
 }

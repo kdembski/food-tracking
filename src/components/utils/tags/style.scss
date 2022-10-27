@@ -1,12 +1,12 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: $spacing-sm;
 
   &:deep(.tag) {
     display: inline-flex;
     align-items: center;
-    padding: 5px 12px;
+    padding: $spacing-sm $spacing-lg;
     color: var(--text-secondary);
     background-color: var(--surface-secondary);
     border: 1px solid var(--border-color);

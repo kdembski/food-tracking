@@ -1,5 +1,6 @@
 $desktopTransitionDuration: 0.15s;
 $mobileTransitionDuration: 0.25s;
+$optionPadding: $spacing-xl;
 
 .dropdown {
   position: absolute;
@@ -28,11 +29,11 @@ $mobileTransitionDuration: 0.25s;
   }
 
   &__option {
-    padding: 15px;
+    padding: $optionPadding;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: $spacing-xl;
 
     &:hover,
     &--hovered {
@@ -53,16 +54,16 @@ $mobileTransitionDuration: 0.25s;
   }
 
   &__empty-message {
-    padding: 15px;
+    padding: $optionPadding;
     color: var(--text-tetriary);
   }
 
   &__loader {
-    padding: 8px 0;
+    padding: $spacing-md 0;
 
     .skeleton-loader {
-      height: 49px;
-      padding: 16px;
+      height: 50px;
+      padding: $optionPadding;
     }
   }
 
@@ -117,7 +118,7 @@ $mobileTransitionDuration: 0.25s;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 15px;
+      padding: $optionPadding;
       background-color: var(--surface-primary);
       border-top: 1px solid var(--border-color);
     }

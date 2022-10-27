@@ -1,27 +1,27 @@
 .tags {
   &--small {
-    gap: 2px;
+    gap: $spacing-2xs;
 
     .tag {
-      padding: 1px 5px;
+      padding: 1px $spacing-sm;
       font-size: $font-2xs;
     }
   }
 
   &--medium {
-    gap: 4px;
+    gap: $spacing-xs;
 
     .tag {
-      padding: 2px 8px;
+      padding: $spacing-2xs $spacing-md;
       font-size: $font-xs;
     }
   }
 
   &--large {
-    gap: 6px;
+    gap: $spacing-sm;
 
     .tag {
-      padding: 5px 12px;
+      padding: $spacing-sm $spacing-lg;
       font-size: $font-sm;
     }
   }

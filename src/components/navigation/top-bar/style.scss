@@ -1,5 +1,5 @@
 .top-bar {
-  padding: 12px 20px;
+  padding: $spacing-lg $spacing-2xl;
   background-color: $surface-dark;
   display: flex;
   justify-content: space-between;
@@ -19,14 +19,14 @@
       font-weight: $font-medium;
       letter-spacing: 2px;
       font-size: $font-xl;
-      margin: 3px 0 0 10px;
+      margin: $spacing-xs 0 0 $spacing-lg;
     }
   }
 
   &__items {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: $spacing-2xl;
   }
 
   &__item {
@@ -45,7 +45,7 @@
 
 @media screen and (max-width: $screen-md) {
   .top-bar {
-    padding: 10px;
+    padding: $spacing-lg;
 
     &__logo {
       & > svg {
@@ -59,7 +59,7 @@
     }
 
     &__items {
-      gap: 15px;
+      gap: $spacing-xl;
     }
 
     &__item {

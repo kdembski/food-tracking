@@ -27,13 +27,13 @@ const Template = (args) => ({
   data() {
     return {
       props: [
-        { size: "small" },
-        { size: "medium" },
-        { size: "large" },
-        { isDisabled: true },
-        { icon: "plus" },
+        { size: "small", label: "Button" },
+        { size: "medium", label: "Button" },
+        { size: "large", label: "Button" },
+        { isDisabled: true, label: "Button" },
+        { icon: "plus", label: "Button" },
         { icon: "plus", label: "" },
-        { isLoading: true },
+        { isLoading: true, label: "Button" },
       ],
     };
   },
@@ -45,16 +45,12 @@ const Template = (args) => ({
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-  label: "Button",
-};
 
 export const PrimaryText = Template.bind({});
 PrimaryText.args = Object.assign({ variant: "text" }, Primary.args);
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  label: "Button",
   color: "secondary",
 };
 

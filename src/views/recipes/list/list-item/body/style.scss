@@ -1,5 +1,5 @@
-$itemGap: 10px;
-$mobileItemGap: 8px;
+$itemGap: $spacing-md;
+$mobileItemGap: $spacing-sm;
 
 .item-body {
   display: grid;
@@ -28,7 +28,7 @@ $mobileItemGap: 8px;
   }
 
   &__preparation-time {
-    margin-left: 3px;
+    margin-left: $spacing-xs;
 
     & > svg {
       margin-top: 1px;

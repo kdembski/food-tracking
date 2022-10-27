@@ -1,7 +1,7 @@
 .set-portions {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: $spacing-sm;
 
   &__input {
     max-width: 50px;

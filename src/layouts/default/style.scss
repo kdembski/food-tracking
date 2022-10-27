@@ -23,8 +23,8 @@
     }
 
     &__wrapper {
-      padding: 20px 30px;
-      padding-right: 18px;
+      padding: $spacing-2xl;
+      padding-right: $spacing-md;
       flex-grow: 1;
       width: 100%;
       overflow-y: scroll;
@@ -32,7 +32,7 @@
   }
 
   &:deep(header) {
-    margin-bottom: 30px;
+    margin-bottom: $spacing-4xl;
 
     & > h1 {
       font-size: $font-2xl;
@@ -46,12 +46,12 @@
   .default-layout {
     .layout-content {
       &__wrapper {
-        padding: 10px 0;
+        padding: $spacing-lg 0;
       }
     }
 
     &:deep(header) {
-      margin: 0 10px 20px;
+      margin: 0 $spacing-lg $spacing-2xl;
 
       & > h1 {
         font-size: $font-xl;

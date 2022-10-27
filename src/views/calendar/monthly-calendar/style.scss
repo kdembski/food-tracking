@@ -11,7 +11,7 @@
   &__placeholder {
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: $spacing-md;
     font-weight: $font-bold;
     color: var(--text-tetriary);
   }
@@ -20,9 +20,9 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     background-color: var(--surface-primary);
-    padding: 10px 0;
+    padding: $spacing-lg 0;
     position: sticky;
-    top: -20px;
+    top: -$spacing-2xl;
 
     > p {
       @include uppercasedSecondaryText;

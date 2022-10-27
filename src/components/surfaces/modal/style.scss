@@ -1,5 +1,5 @@
-$sectionPadding: 15px 20px;
-$mobileSectionPadding: 10px 15px;
+$sectionPadding: $spacing-xl $spacing-2xl;
+$mobileSectionPadding: $spacing-lg $spacing-xl;
 
 .modal {
   &__overlay {
@@ -8,7 +8,7 @@ $mobileSectionPadding: 10px 15px;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba($black, 0.5);
+    background-color: $overlay-color;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -20,7 +20,7 @@ $mobileSectionPadding: 10px 15px;
     border-radius: $radius-md;
     position: relative;
     box-shadow: $shadow-md var(--shadow-color);
-    margin: 30px 10px 0;
+    margin: $spacing-4xl $spacing-lg 0;
     transition: 0.2s ease-in-out;
     overflow: hidden;
     min-width: 450px;
@@ -71,7 +71,7 @@ $mobileSectionPadding: 10px 15px;
 @media screen and (max-width: $screen-md) {
   .modal {
     &__container {
-      margin: 10px 10px 0;
+      margin: $spacing-lg $spacing-lg 0;
       min-width: calc(100vw - 20px);
     }
 

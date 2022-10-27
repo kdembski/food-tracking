@@ -1,27 +1,27 @@
 .add-to-calendar {
   &__heading {
-    padding: 0 2px;
-    margin-bottom: 10px;
+    padding: 0 $spacing-2xs;
+    margin-bottom: $spacing-lg;
   }
 
   &__portions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 30px;
-    padding: 0 5px;
+    gap: $spacing-lg;
+    margin-top: $spacing-4xl;
+    padding: 0 $spacing-sm;
 
     & > p {
       @include uppercasedSecondaryText;
       border-bottom: 1px solid var(--border-color);
-      padding-bottom: 2px;
+      padding-bottom: $spacing-2xs;
     }
 
     & > div {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: $spacing-lg;
     }
   }
 }

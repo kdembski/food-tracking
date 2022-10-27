@@ -15,14 +15,14 @@
   }
 
   &__navigation {
-    margin-bottom: 20px;
+    margin-bottom: $spacing-2xl;
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .recipes-list {
     &__navigation {
-      margin-bottom: 15px;
+      margin-bottom: $spacing-xl;
     }
   }
 }

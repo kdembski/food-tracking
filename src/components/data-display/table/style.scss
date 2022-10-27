@@ -15,21 +15,21 @@
 
     th,
     td {
-      padding: 25px;
+      padding: $spacing-3xl;
 
       &:first-child {
-        padding-left: 5px;
+        padding-left: $spacing-sm;
       }
 
       &:last-child {
-        padding-right: 5px;
+        padding-right: $spacing-sm;
       }
     }
 
     th {
       @include uppercasedSecondaryText;
       text-align: left;
-      padding: 0 25px 5px;
+      padding: 0 $spacing-3xl $spacing-sm;
 
       & > p {
         display: inline;
@@ -47,7 +47,7 @@
       position: absolute;
       left: 50%;
       transform: translate(-50%);
-      padding: 10px;
+      padding: $spacing-lg;
     }
   }
 
@@ -66,9 +66,9 @@
     &__row {
       display: flex;
       height: 100%;
-      gap: 20px;
+      gap: $spacing-2xl;
       border-bottom: 1px solid var(--border-color);
-      padding: 0 5px;
+      padding: 0 $spacing-sm;
 
       .skeleton-loader__item {
         height: 30%;
@@ -86,8 +86,8 @@
     &__header {
       height: 20px;
       display: flex;
-      gap: 20px;
-      padding: 0 5px 5px;
+      gap: $spacing-2xl;
+      padding: 0 $spacing-sm $spacing-sm;
       border-bottom: 1px solid var(--border-color);
 
       .skeleton-loader__item {
@@ -101,18 +101,18 @@
   .table {
     &__content {
       td {
-        padding: 12px 15px;
+        padding: $spacing-lg $spacing-xl;
       }
 
       th {
-        padding: 0 15px 5px;
+        padding: 0 $spacing-xl $spacing-sm;
         font-size: $font-xs;
       }
     }
 
     .table-loader {
       &__row {
-        gap: 10px;
+        gap: $spacing-lg;
       }
     }
   }

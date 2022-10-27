@@ -10,12 +10,12 @@
   z-index: 1;
 
   &--with-overlay {
-    background-color: rgba($black, 0.4);
+    background-color: $overlay-color;
   }
 
   svg {
     animation-name: spin;
-    animation-duration: 1000ms;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
   }

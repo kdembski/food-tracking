@@ -3,13 +3,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: $spacing-lg;
   }
 
   &__range {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: $spacing-lg;
 
     > p {
       min-width: 130px;
