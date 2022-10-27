@@ -43,8 +43,9 @@ export function useAddToCalendar(
           "Otwórz Kalendarz"
         );
       })
-      .catch(() => {
+      .catch((error) => {
         toastNotification.error("Dodawanie do kalendarza nie powiodło się.");
+        console.log(error);
       });
   };
 
@@ -75,6 +76,10 @@ export function useAddToCalendar(
     const lastSelectedDate = getLastSelectedDate();
     if (isAfter(lastSelectedDate, addedOrderedFood.value.orderDate)) {
       addedOrderedFood.value.orderDate = lastSelectedDate;
+    }
+
+    if (!addedOrderedFood.value.orderDatesInCurrentMonth) {
+      return;
     }
 
     addedOrderedFood.value.orderDatesInCurrentMonth =

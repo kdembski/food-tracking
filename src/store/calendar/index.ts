@@ -8,6 +8,7 @@ import {
   getErrorMessage,
   showDefualtErrorNotification,
 } from "../helpers/error-message";
+import { isNil } from "lodash";
 
 const actions: ActionTree<any, any> = {
   getCalendar({ rootState }, { fromDate, toDate }) {
@@ -66,7 +67,15 @@ const helpers = {
   getPreparedCalendar: (calendar: CalendarDay[]) => {
     return calendar.map((day) => {
       day.date = new Date(day.date);
-      day.items.sort((a, b) => a.sortOrder - b.sortOrder);
+      day.items.sort((a, b) => {
+        if (isNil(a.sortOrder)) {
+          return 1;
+        }
+        if (isNil(b.sortOrder)) {
+          return -1;
+        }
+        return a.sortOrder - b.sortOrder;
+      });
       return day;
     });
   },

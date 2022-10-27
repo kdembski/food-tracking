@@ -11,12 +11,22 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { OrderedFood } from "@/types/ordered-food";
+
 const props = defineProps({
   item: {
-    type: Object,
+    type: Object as () => OrderedFood,
     required: true,
   },
 });
+
+const emits = defineEmits<{
+  (e: "addToCalendar", orderedFood: OrderedFood): void;
+}>();
+
+const addToCalendar = () => {
+  emits("addToCalendar", props.item);
+};
 </script>
 
 <template src="./template.html"></template>

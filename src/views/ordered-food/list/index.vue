@@ -3,6 +3,7 @@ import CListWithFilters from "@/components/data-display/list-with-filters/index.
 import OrderedFoodListItemHeader from "./list-item/header/index.vue";
 import OrderedFoodListItemBody from "./list-item/body/index.vue";
 import CButton from "@/components/controls/button/index.vue";
+import AddToCalendarModal from "@/views/calendar/add-to-calendar-modal/index.vue";
 
 export default {
   name: "OrderedFoodListView",
@@ -11,12 +12,14 @@ export default {
     CButton,
     OrderedFoodListItemHeader,
     OrderedFoodListItemBody,
+    AddToCalendarModal,
   },
 };
 </script>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { OrderedFood } from "@/types/ordered-food";
 
 const orderedFoodListDefaultFilters = {
   currentPage: 1,
@@ -61,6 +64,14 @@ const orderedFoodListSortOptions = ref([
     icon: "arrow-down-z-a",
   },
 ]);
+
+const isAddToCalendarModalOpen = ref(false);
+const orderedFoodAddedToCalendar = ref({});
+
+const openAddToCalendarModal = (orderedFood: OrderedFood) => {
+  orderedFoodAddedToCalendar.value = orderedFood;
+  isAddToCalendarModalOpen.value = true;
+};
 </script>
 
 <template src="./template.html"></template>

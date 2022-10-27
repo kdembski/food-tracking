@@ -2,13 +2,13 @@
   margin-bottom: $spacing-lg;
 
   &__wrapper {
-    padding: $spacing-lg $spacing-xl;
+    padding: $spacing-lg $spacing-md;
     border: 2px solid transparent;
     border-radius: $radius-sm;
     box-shadow: $shadow-lg var(--shadow-color);
     background-color: var(--surface-primary);
     display: flex;
-    gap: $spacing-xl;
+    gap: $spacing-md;
   }
 
   &--success {
@@ -30,6 +30,7 @@
   &__icon {
     display: flex;
     align-items: center;
+    padding: 0 $spacing-sm;
   }
 
   &__body {

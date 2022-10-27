@@ -27,6 +27,10 @@ const props = defineProps({
   addedOrderedFood: {
     type: Object as () => OrderedFood,
   },
+  defaultPortions: {
+    type: Number,
+    default: 2,
+  },
 });
 
 const emits = defineEmits<{
@@ -52,7 +56,9 @@ watch(_isOpen, () => {
 
 watch(selectedDates, (dates) => {
   dates.sort((a, b) => a.getTime() - b.getTime());
-  portions.value = dates.map((_, index) => portions.value[index] || 2);
+  portions.value = dates.map(
+    (_, index) => portions.value[index] || props.defaultPortions
+  );
 });
 
 const isSelectedDatesEmpty = () => {
