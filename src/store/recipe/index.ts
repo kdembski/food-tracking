@@ -1,11 +1,12 @@
 import ApiService from "@/services/api.service";
-import { RecipeState, RecipesList } from "@/types/recipe";
+import { RecipeState, RecipesList, Recipe } from "@/types/recipe";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
 import { ListFilters, ListBaseFilters } from "@/types/components/list";
 import { DropdownOption } from "@/types/components/dropdown";
+import { Tag } from "@/types/components/tags";
 import {
   getErrorMessage,
   showDefualtErrorNotification,
@@ -20,13 +21,15 @@ const state: RecipeState = {
 
   recipesSearchSuggestions: null,
   isLoadingRecipesSearchSuggestions: false,
+
+  isSubmittingRecipe: false,
 };
 
 const getters: GetterTree<RecipeState, any> = {
   getRecipesList: (state): RecipesList | null => state.recipesList,
   isLoadingRecipesList: (state) => state.isLoadingRecipesList,
 
-  getRecipesTags: (state): string | null => state.recipesTags,
+  getRecipesTags: (state): Tag[] | null => state.recipesTags,
   isLoadingRecipesTags: (state) => state.isLoadingRecipesTags,
 
   getRecipesSearchSuggestions: (state): DropdownOption<null>[] => {
@@ -127,6 +130,24 @@ const actions: ActionTree<RecipeState, any> = {
         });
     });
   },
+
+  createRecipe({ commit, rootState }, recipe: Recipe) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsSubmittingRecipe", true);
+
+      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", recipe)
+        .then(() => {
+          rootState.toastNotification.success("Udało sie dodać przepis.");
+          commit("setIsSubmittingRecipe", false);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsSubmittingRecipe", false);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
+        });
+    });
+  },
 };
 
 const mutations: MutationTree<RecipeState> = {
@@ -138,7 +159,7 @@ const mutations: MutationTree<RecipeState> = {
     state.isLoadingRecipesList = value;
   },
 
-  setRecipesTags(state, tags: string) {
+  setRecipesTags(state, tags: Tag[]) {
     state.recipesTags = tags;
   },
 
@@ -152,6 +173,10 @@ const mutations: MutationTree<RecipeState> = {
 
   setIsLoadingRecipesSearchSuggestions(state, value) {
     state.isLoadingRecipesSearchSuggestions = value;
+  },
+
+  setIsSubmittingRecipe(state, value) {
+    state.isSubmittingRecipe = value;
   },
 };
 

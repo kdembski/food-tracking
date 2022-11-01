@@ -22,6 +22,10 @@ export const getListQuery = (filters: ListFilters) => {
 };
 
 export const getListBaseQuery = (filters: ListBaseFilters) => {
+  if (!filters) {
+    return "";
+  }
+
   if (filters.searchPhrase && filters.tags) {
     return "?search=" + filters.searchPhrase + "&tags=" + filters.tags;
   }

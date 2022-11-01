@@ -1,22 +1,17 @@
+<CAutocomplete
+  :options="getTagsOptions(tags)"
+  @update:modelValue="addTagToSelected"
+  @addOption="addTagToOptions"
+  shootingMode
+  :enableAddingOption="enableAddingTags"
+  :icon="inputIcon"
+  placeholder="Wyszukaj tag"
+  :isLoading="isLoading"
+  :isLoadingOptions="isLoading"
+  label="Tagi"
+/>
 <div v-if="tags || isLoading" class="select-tags" ref="container">
-  <CSkeletonLoader v-if="isLoading" class="select-tags__loader loader">
-    <div
-      v-for="index in 2"
-      class="loader__row"
-      :style="getLoaderRowGridTemplateColumns()"
-    >
-      <div
-        v-for="index in getLoaderItemsCount()"
-        class="loader__item skeleton-loader__item"
-      ></div>
-    </div>
-    <div class="loader__row" :style="getLoaderRowGridTemplateColumns()">
-      <div
-        v-for="index in getHalfOfLoaderItemsCount()"
-        class="loader__item skeleton-loader__item"
-      ></div>
-    </div>
-  </CSkeletonLoader>
+  <Loader v-if="isLoading" :containerWidth="container?.clientWidth" />
   <CTags v-else-if="tags.length > 0" :tags="tags">
     <template #default="{ tagsArray }">
       <Item

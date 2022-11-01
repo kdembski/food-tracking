@@ -76,6 +76,7 @@ const props = withDefaults(
   }
 );
 
+const selectedTagsRef = ref();
 const list = computed(() => store.getters[props.listGetterName]);
 
 const isLoadingList = computed(
@@ -130,7 +131,6 @@ const {
   sort,
   getSelectedSortIcon,
   filterByTags,
-  addTagAndFilter,
   changeCurrentPage,
   areFiltersEqualToDefault,
   clearFilters,
@@ -146,16 +146,12 @@ const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
 
-const {
-  loadAvailableTags,
-  availableTags,
-  isLoadingAvailableTags,
-  getAvailableTagsOptions,
-} = useAvailableTags(
-  props.tagsLoadActionName,
-  props.tagsGetterName,
-  props.tagsLoadingGetterName
-);
+const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
+  useAvailableTags(
+    props.tagsLoadActionName,
+    props.tagsGetterName,
+    props.tagsLoadingGetterName
+  );
 
 const { isMobile, windowHeight } = useWindowSize();
 

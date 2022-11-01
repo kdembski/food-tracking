@@ -37,8 +37,13 @@ export function useValues(
     { immediate: true }
   );
 
-  watch(selectedValue, (value) => {
+  watch(selectedValue, async (value) => {
     emits("update:modelValue", value);
+
+    await nextTick();
+    if (props.shootingMode && !isLoading.value) {
+      clearSelectedAndInputValue();
+    }
   });
 
   watch(

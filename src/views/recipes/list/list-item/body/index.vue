@@ -32,9 +32,9 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  addTagAndFilter: {
+  addTagToSelected: {
     type: Function,
-    required: true,
+    default: () => false,
   },
 });
 

@@ -157,19 +157,6 @@ describe("List With Filters Component", () => {
     expect(wrapper.vm.filters).toStrictEqual(filters);
   });
 
-  it("getAvailableTagsOptions should return tags without selected in form of dropdown options", async () => {
-    expect(wrapper.vm.getAvailableTagsOptions("tag1")).toStrictEqual([
-      {
-        value: "tag2",
-        label: "tag2",
-      },
-      {
-        value: "tag3",
-        label: "tag3",
-      },
-    ]);
-  });
-
   it("Should toggle mobile filter on toggleFiltersOnMobile call", async () => {
     expect(wrapper.vm.areMobileFiltersOpen).toBe(false);
     await wrapper.vm.toggleFiltersOnMobile();

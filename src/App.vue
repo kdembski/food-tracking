@@ -59,7 +59,6 @@ onBeforeMount(() => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparentize($primary-light, 0.5);
 }
 
 body {

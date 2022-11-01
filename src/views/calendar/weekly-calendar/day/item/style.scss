@@ -15,7 +15,7 @@
 
   &__header {
     display: flex;
-    gap: $spacing-md;
+    gap: $spacing-sm;
 
     & > p {
       font-weight: $font-medium;
@@ -37,7 +37,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: $spacing-md;
+    gap: $spacing-sm;
 
     & > svg {
       padding: 0 $spacing-sm;

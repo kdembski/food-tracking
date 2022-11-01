@@ -3,6 +3,7 @@ import store from "@/store";
 
 import LoginView from "../views/login/index.vue";
 import RecipesListView from "../views/recipes/list/index.vue";
+import NewRecipeView from "../views/recipes/new/index.vue";
 import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 import SettingsView from "../views/settings/index.vue";
 import CalendarView from "../views/calendar/index.vue";
@@ -28,24 +29,25 @@ const routes: Array<RouteRecordRaw> = [
     path: "/recipes",
     name: "recipesList",
     component: RecipesListView,
+  },
+  {
+    path: "/recipes/new",
+    name: "addRecipe",
+    component: NewRecipeView,
     meta: {
-      isPublic: false,
+      maxWidth: 600,
     },
   },
   {
     path: "/ordered",
     name: "orderedFoodList",
     component: OrderedFoodListView,
-    meta: {
-      isPublic: false,
-    },
   },
   {
     path: "/calendar",
     name: "calendar",
     component: CalendarView,
     meta: {
-      isPublic: false,
       maxWidth: "unset",
     },
   },
@@ -53,9 +55,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/settings",
     name: "settings",
     component: SettingsView,
-    meta: {
-      isPublic: false,
-    },
   },
 ];
 

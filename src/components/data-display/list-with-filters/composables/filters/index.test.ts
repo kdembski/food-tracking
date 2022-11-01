@@ -65,22 +65,6 @@ describe("List With Filters - Filters", () => {
     expect(handleListLoadingProccess).toHaveBeenCalledTimes(1);
   });
 
-  it("addTagAndFilter should add tag to filter tags and reload list", async () => {
-    composable.addTagAndFilter("");
-    expect(handleListLoadingProccess).toHaveBeenCalledTimes(0);
-
-    composable.addTagAndFilter("test1");
-    expect(handleListLoadingProccess).toHaveBeenCalledTimes(1);
-    expect(composable.filters.value.tags).toEqual("test1");
-
-    composable.addTagAndFilter("test2");
-    expect(handleListLoadingProccess).toHaveBeenCalledTimes(2);
-    expect(composable.filters.value.tags).toEqual("test1,test2");
-
-    composable.addTagAndFilter("test2");
-    expect(handleListLoadingProccess).toHaveBeenCalledTimes(2);
-  });
-
   it("filterBySearchPhrase should reload list", async () => {
     composable.filterBySearchPhrase();
     expect(handleListLoadingProccess).toHaveBeenCalledTimes(1);

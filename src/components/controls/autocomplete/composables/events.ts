@@ -7,7 +7,7 @@ export function useEvents(
   setHoveredOptionIndex: (index: number | null) => void,
   decrementHoveredOptionIndex: () => void,
   incrementHoveredOptionIndex: () => void,
-  filteredOptions: ComputedRef<Array<DropdownOption>>,
+  getDropdownOptions: () => DropdownOption<string | number>[],
   selectOption: (option: DropdownOption) => void,
   input: Ref<HTMLInputElement | undefined>,
   inputValue: Ref<string>,
@@ -26,7 +26,7 @@ export function useEvents(
       return;
     }
 
-    const hoveredOption = filteredOptions.value[hoveredOptionIndex];
+    const hoveredOption = getDropdownOptions()[hoveredOptionIndex];
     if (!hoveredOption) {
       return;
     }

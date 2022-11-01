@@ -21,10 +21,10 @@
           @addToCalendar="openAddToCalendarModal"
         />
       </template>
-      <template #body="{ item, addTagAndFilter }">
+      <template #body="{ item, addTagToSelected }">
         <OrderedFoodListItemBody
           :item="item"
-          :addTagAndFilter="addTagAndFilter"
+          :addTagToSelected="addTagToSelected"
         />
       </template>
     </CListWithFilters>

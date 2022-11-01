@@ -23,7 +23,7 @@
   />
   <CDropdown
     :isOpen="isDropdownOpen"
-    :options="filteredOptions"
+    :options="getDropdownOptions()"
     :getOptionClass="getHoveredOptionClass"
     @listMouseout="setHoveredOptionIndex(null)"
     @optionMouseover="setHoveredOptionIndex"

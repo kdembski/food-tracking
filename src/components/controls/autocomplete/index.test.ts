@@ -1,7 +1,7 @@
+import { nextTick } from "vue";
 import { mount, VueWrapper, DOMWrapper } from "@vue/test-utils";
 import CAutocomplete from "./index.vue";
 import { config } from "@vue/test-utils";
-import flushPromises from "flush-promises";
 
 describe("Autocomplete Component", () => {
   let wrapper: VueWrapper<any>;
@@ -231,6 +231,43 @@ describe("Autocomplete Component", () => {
     expect(wrapper.vm.getHoveredOptionIndex()).toEqual(null);
   });
 
+  it("getDropdownOption should return new option if filteredOptions length is less than zero and enableAddingOption is true", async () => {
+    expect(wrapper.vm.getDropdownOptions()).toStrictEqual([
+      {
+        value: 1,
+        label: "One",
+      },
+    ]);
+
+    await input.setValue("test");
+    expect(wrapper.vm.getDropdownOptions()).toStrictEqual([]);
+
+    await wrapper.setProps({
+      enableAddingOption: true,
+    });
+
+    expect(wrapper.vm.getDropdownOptions()).toStrictEqual([
+      {
+        value: "test",
+        label: "Dodaj test...",
+      },
+    ]);
+  });
+
+  it("Should emit addOption event after click on new option", async () => {
+    await input.setValue("test");
+    await wrapper.setProps({
+      enableAddingOption: true,
+    });
+    await input.trigger("focus");
+    await jest.runAllTimers();
+    await wrapper.findAll("li")[0].trigger("click");
+    expect(wrapper.emitted<any>()["addOption"][0][0]).toEqual({
+      value: "test",
+      label: "test",
+    });
+  });
+
   it("Should blur component after option selection by input event on mobile", async () => {
     window.innerWidth = 400;
     mountComponent();
@@ -240,9 +277,9 @@ describe("Autocomplete Component", () => {
   });
 
   it("Should scroll input into view on input click on mobile", async () => {
-    window.innerWidth = 400;
     let scrollIntoViewMock = jest.fn();
     window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+    window.innerWidth = 400;
     mountComponent();
 
     await input.trigger("click");

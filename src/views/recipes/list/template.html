@@ -1,7 +1,12 @@
 <div class="recipes-list">
   <header class="recipes-list__header">
     <h1>Lista przepisów</h1>
-    <CButton label="Dodaj" icon="plus" size="small" />
+    <CButton
+      label="Dodaj"
+      icon="plus"
+      size="small"
+      @click="goToNewRecipeView"
+    />
   </header>
   <CHorizontalTabs
     class="recipes-list__navigation"
@@ -29,8 +34,11 @@
           @addToCalendar="openAddToCalendarModal"
         />
       </template>
-      <template #body="{ item, addTagAndFilter }">
-        <RecipesListItemBody :item="item" :addTagAndFilter="addTagAndFilter" />
+      <template #body="{ item, addTagToSelected }">
+        <RecipesListItemBody
+          :item="item"
+          :addTagToSelected="addTagToSelected"
+        />
       </template>
     </CListWithFilters>
   </main>

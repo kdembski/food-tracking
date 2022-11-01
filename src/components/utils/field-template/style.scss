@@ -31,10 +31,6 @@ $labelPosition: 16px;
       color: var(--text-tetriary);
     }
 
-    &::selection {
-      background: var(--primary-light);
-    }
-
     &[type="number"] {
       appearance: none;
       -moz-appearance: textfield;

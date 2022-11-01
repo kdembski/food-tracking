@@ -1,12 +1,14 @@
 import { ListWithFilters } from "@/types/components/list";
+import { Tag } from "./components/tags";
 
 export interface RecipeState {
   recipesList: RecipesList | null;
   isLoadingRecipesList: boolean;
-  recipesTags: string | null;
+  recipesTags: Tag[] | null;
   isLoadingRecipesTags: boolean;
   recipesSearchSuggestions: string[] | null;
   isLoadingRecipesSearchSuggestions: boolean;
+  isSubmittingRecipe: boolean;
 }
 
 export interface Recipe {

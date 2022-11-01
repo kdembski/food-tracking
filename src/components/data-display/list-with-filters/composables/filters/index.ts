@@ -32,10 +32,7 @@ export function useFilters(
     handleListLoadingProccess();
   };
 
-  const { filterByTags, addTagAndFilter } = useTags(
-    filters,
-    handleListLoadingProccess
-  );
+  const { filterByTags } = useTags(filters, handleListLoadingProccess);
 
   const { selectedSort, sort, getSelectedSortIcon } = useSort(
     filters,
@@ -69,7 +66,6 @@ export function useFilters(
     sort,
     getSelectedSortIcon,
     filterByTags,
-    addTagAndFilter,
     changeCurrentPage,
     areFiltersEqualToDefault,
     clearFilters,

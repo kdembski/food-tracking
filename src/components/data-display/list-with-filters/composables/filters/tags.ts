@@ -11,27 +11,7 @@ export function useTags(
     handleListLoadingProccess();
   };
 
-  const addTagAndFilter = (name: string) => {
-    if (!name) {
-      return;
-    }
-    let tags = filters.value.tags;
-
-    if (tags?.includes(name)) {
-      return;
-    }
-
-    if (tags) {
-      tags += "," + name;
-    } else {
-      tags = name;
-    }
-
-    filterByTags(tags);
-  };
-
   return {
     filterByTags,
-    addTagAndFilter,
   };
 }

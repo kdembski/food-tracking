@@ -46,17 +46,6 @@
           :options="sortOptions"
           :isLoading="_isLoading"
         />
-        <CAutocomplete
-          v-if="enableTags"
-          :options="getAvailableTagsOptions(filters.tags)"
-          @update:modelValue="addTagAndFilter"
-          shootingMode
-          icon="tags"
-          placeholder="Wyszukaj tag"
-          :isLoading="_isLoading"
-          :isLoadingOptions="_isLoading"
-          label="Tagi"
-        />
         <CSelectTags
           v-if="enableTags"
           :selectedTags="filters.tags"
@@ -64,6 +53,8 @@
           :tags="availableTags"
           :isLoading="_isLoading"
           withCounts
+          enableSortOutSelected
+          ref="selectedTagsRef"
         />
       </div>
     </div>
@@ -89,7 +80,7 @@
           <slot
             name="body"
             :item="item"
-            :addTagAndFilter="addTagAndFilter"
+            :addTagToSelected="selectedTagsRef?.addTagToSelected"
           ></slot>
         </template>
       </CList>

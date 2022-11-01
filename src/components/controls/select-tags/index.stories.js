@@ -15,7 +15,7 @@ const Template = (args) => ({
   },
   components: { CSelectTags },
   template:
-    '<CSelectTags v-bind="args" v-model:selectedTags="selected"></CSelectTags>',
+    '<div style="display:flex; flex-direction:column; gap:10px"><CSelectTags v-bind="args" v-model:selectedTags="selected" ></CSelectTags></div>',
 });
 
 export const Default = Template.bind({});
@@ -52,7 +52,7 @@ isLoading.args = Object.assign({ isLoading: true }, Default.args);
 
 export const Empty = Template.bind({});
 Empty.args = {
-  tags: "",
+  tags: [],
 };
 
 export const withCounts = Template.bind({});

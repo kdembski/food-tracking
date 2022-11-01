@@ -1,11 +1,12 @@
 <script lang="ts">
 import CTags from "@/components/utils/tags/index.vue";
-import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
+import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 import Item from "./item/index.vue";
+import Loader from "./loader/index.vue";
 
 export default {
   name: "CSelectTags",
-  components: { CTags, Item, CSkeletonLoader },
+  components: { CTags, Item, Loader, CAutocomplete },
 };
 </script>
 
@@ -13,11 +14,12 @@ export default {
 import { computed, ref, Ref } from "vue";
 import { Tag } from "@/types/components/tags";
 import { cloneDeep } from "lodash";
+import { DropdownOption } from "@/types/components/dropdown";
 
 const props = defineProps({
   tags: {
-    type: [String, Array],
-    default: "",
+    type: Array as () => Tag[],
+    default: () => [],
   },
   isLoading: {
     type: Boolean,
@@ -31,25 +33,49 @@ const props = defineProps({
     type: Boolean,
     deafult: false,
   },
+  enableAddingTags: {
+    type: Boolean,
+    default: false,
+  },
+  enableSortOutSelected: {
+    type: Boolean,
+    default: false,
+  },
+  inputIcon: {
+    type: String,
+    default: "tags",
+  },
 });
 
 const emit = defineEmits<{
   (e: "update:selectedTags", tags: string): void;
+  (e: "update:tags", tags: Tag[]): void;
 }>();
 
+const container: Ref<HTMLElement | undefined> = ref();
+
 const _selectedTags = computed({
-  get(): Array<string> {
+  get(): string[] {
     if (!props.selectedTags) {
       return [];
     }
     return props.selectedTags.split(",");
   },
-  set(tags: Array<string>) {
+  set(tags: string[]) {
     emit("update:selectedTags", tags.join(","));
   },
 });
 
-const sortTags = (tags: Array<Tag>) => {
+const _tags = computed({
+  get(): Tag[] {
+    return props.tags;
+  },
+  set(tags: Tag[]) {
+    emit("update:tags", tags);
+  },
+});
+
+const sortTags = (tags: Tag[]) => {
   return sortOutSelectedTags(tags);
 };
 
@@ -57,7 +83,11 @@ const isTagSelected = (tag: Tag) => {
   return _selectedTags.value.some((tagName) => tagName === tag.name);
 };
 
-const sortOutSelectedTags = (tags: Array<Tag>) => {
+const sortOutSelectedTags = (tags: Tag[]) => {
+  if (!props.enableSortOutSelected) {
+    return tags;
+  }
+
   const tagsClone = cloneDeep(tags);
   return tagsClone.sort((tag) => {
     if (isTagSelected(tag)) {
@@ -68,20 +98,37 @@ const sortOutSelectedTags = (tags: Array<Tag>) => {
   });
 };
 
-const container: Ref<HTMLElement | undefined> = ref();
+const getTagsOptions = (): DropdownOption<string>[] => {
+  const tagsWithoutSelected = props.tags?.filter(
+    (tag: Tag) =>
+      !_selectedTags.value?.some((selectedTag) => selectedTag == tag.name)
+  );
 
-const getLoaderItemsCount = () => {
-  const containerWidth = container.value?.clientWidth;
-  return Math.floor((containerWidth || 0) / 70);
+  return tagsWithoutSelected?.map((tag: Tag) => {
+    return {
+      value: tag.name,
+      label: tag.name,
+    };
+  });
 };
 
-const getHalfOfLoaderItemsCount = () => {
-  return Math.floor(getLoaderItemsCount() / 2);
+const addTagToSelected = (tagName: string) => {
+  if (!tagName) {
+    return;
+  }
+
+  if (isTagSelected({ name: tagName })) {
+    return;
+  }
+
+  _selectedTags.value = _selectedTags.value.concat(tagName);
 };
 
-const getLoaderRowGridTemplateColumns = () => {
-  return "grid-template-columns: repeat(" + getLoaderItemsCount() + ", 1fr);";
+const addTagToOptions = (option: DropdownOption) => {
+  _tags.value = _tags.value.concat({ name: option.label });
 };
+
+defineExpose({ addTagToSelected });
 </script>
 
 <template src="./template.html"></template>

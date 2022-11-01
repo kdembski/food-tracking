@@ -48,6 +48,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  enableAddingOption: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits<{
@@ -57,6 +61,7 @@ const emits = defineEmits<{
   (event: "enter"): void;
   (event: "blur"): void;
   (event: "focus"): void;
+  (event: "addOption", option: DropdownOption): void;
 }>();
 
 const hasFocus = ref(false);
@@ -64,7 +69,7 @@ const input = ref<HTMLInputElement>();
 
 const filteredOptions = computed(() => {
   return props.options?.filter((option: DropdownOption) => {
-    return option.label.simplify().includes(_inputValue.value.simplify());
+    return option.label?.simplify().includes(_inputValue.value?.simplify());
   });
 });
 
@@ -83,9 +88,30 @@ watch(_isLoading, (value) => {
   clearSelectedAndInputValue();
 });
 
+const optionExists = (value: string | number) => {
+  return props.options.some((option) => option.value === value);
+};
+
 const selectOption = (option: DropdownOption) => {
+  if (!optionExists(option.value)) {
+    option.label = option.value.toString();
+    emits("addOption", option);
+  }
+
   selectedValue.value = option.value;
   _inputValue.value = option.label;
+};
+
+const getDropdownOptions = (): DropdownOption<string | number>[] => {
+  if (filteredOptions.value.length > 0 || !props.enableAddingOption) {
+    return filteredOptions.value;
+  }
+
+  const newOption = {
+    value: _inputValue.value,
+    label: "Dodaj " + _inputValue.value + "...",
+  };
+  return [newOption];
 };
 
 const { selectedValue, _inputValue, clearSelectedAndInputValue } = useValues(
@@ -136,7 +162,7 @@ const {
   setHoveredOptionIndex,
   decrementHoveredOptionIndex,
   incrementHoveredOptionIndex,
-  filteredOptions,
+  getDropdownOptions,
   selectOption,
   input,
   _inputValue,

@@ -23,7 +23,9 @@ export default {
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { Recipe } from "@/types/recipe";
+import { useRouter } from "vue-router";
 const store = useStore();
+const router = useRouter();
 
 const recipesListDefaultFilters = {
   currentPage: 1,
@@ -102,6 +104,10 @@ const recipeAddedToCalendar = ref({});
 const openAddToCalendarModal = (recipe: Recipe) => {
   recipeAddedToCalendar.value = recipe;
   isAddToCalendarModalOpen.value = true;
+};
+
+const goToNewRecipeView = () => {
+  router.push("/recipes/new");
 };
 
 onMounted(() => {
