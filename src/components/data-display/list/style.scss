@@ -69,12 +69,12 @@
     &__item-row {
       display: flex;
       gap: $spacing-xs;
-      height: 20px;
+      height: $tag-medium-height;
       width: 40%;
 
       .list-loader__row-item {
         height: 100%;
-        border-radius: $radius-lg;
+        border-radius: $tag-medium-radius;
       }
     }
   }

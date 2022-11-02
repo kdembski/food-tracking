@@ -13,8 +13,8 @@
 
   .skeleton-loader__item {
     padding: 0;
-    height: 31px;
-    border-radius: $radius-xl;
+    height: $tag-large-height;
+    border-radius: $tag-large-radius;
     width: 100%;
   }
 }

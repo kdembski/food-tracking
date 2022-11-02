@@ -3,9 +3,10 @@
     gap: $spacing-2xs;
 
     .tag {
-      padding: 1px $spacing-xs;
+      padding: 0 $spacing-sm;
       font-size: $font-2xs;
-      border-radius: $radius-md;
+      border-radius: $tag-small-radius;
+      height: $tag-small-height;
     }
   }
 
@@ -13,9 +14,10 @@
     gap: $spacing-xs;
 
     .tag {
-      padding: $spacing-2xs $spacing-sm;
+      padding: 0 $spacing-md;
       font-size: $font-xs;
-      border-radius: $radius-lg;
+      border-radius: $tag-medium-radius;
+      height: $tag-medium-height;
     }
   }
 
@@ -23,19 +25,10 @@
     gap: $spacing-sm;
 
     .tag {
-      padding: $spacing-sm $spacing-md;
+      padding: 0 $spacing-lg;
       font-size: $font-sm;
-      border-radius: $radius-xl;
-    }
-  }
-
-  .tag {
-    &--bg-primary {
-      background-color: var(--surface-primary);
-    }
-
-    &--bg-secondary {
-      background-color: var(--surface-secondary);
+      border-radius: $tag-large-radius;
+      height: $tag-large-height;
     }
   }
 }

@@ -41,7 +41,7 @@ const onClick = (name: string) => {
 };
 
 const getTagClasses = () => {
-  return [getWithHoverClass(), getBackgroundColorClass()];
+  return [getWithHoverClass()];
 };
 
 const getWithHoverClass = () => {
@@ -49,10 +49,6 @@ const getWithHoverClass = () => {
     return "tag--with-hover";
   }
   return "";
-};
-
-const getBackgroundColorClass = () => {
-  return "tag--bg-" + props.backgroundColor;
 };
 
 const getContainerClasses = () => {

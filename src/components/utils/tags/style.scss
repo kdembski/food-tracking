@@ -6,13 +6,13 @@
   &:deep(.tag) {
     display: inline-flex;
     align-items: center;
-    padding: $spacing-sm $spacing-md;
-    color: var(--text-secondary);
-    background-color: var(--surface-secondary);
-    border: 1px solid var(--border-color);
+    padding: 0 $spacing-lg;
+    color: var(--text-primary);
+    background-color: var(--surface-tetriary);
     font-weight: $font-medium;
     font-size: $font-sm;
-    border-radius: $radius-xl;
+    border-radius: $tag-large-radius;
+    height: $tag-large-height;
   }
 
   &:deep(.tag--with-hover) {
