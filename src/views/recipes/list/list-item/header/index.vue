@@ -3,6 +3,7 @@ import CButton from "@/components/controls/button/index.vue";
 import CButtonWithDropdown from "@/components/controls/button-with-dropdown/index.vue";
 import CLink from "@/components/utils/link/index.vue";
 import InlineSvg from "vue-inline-svg";
+import recipe from "@/store/recipe";
 
 export default {
   name: "RecipesListItemHeader",
@@ -18,6 +19,10 @@ export default {
 <script setup lang="ts">
 import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipe";
+import { useRouter, RouterLink } from "vue-router";
+
+const router = useRouter();
+const { isMobile } = useWindowSize();
 
 const props = defineProps({
   item: {
@@ -27,8 +32,6 @@ const props = defineProps({
 });
 
 const emits = defineEmits<{ (e: "addToCalendar", recipe: Recipe): void }>();
-
-const { isMobile } = useWindowSize();
 
 const addToCalendar = () => {
   emits("addToCalendar", props.item);

@@ -13,6 +13,9 @@ import {
 } from "../helpers/error-message";
 
 const state: RecipeState = {
+  recipe: null,
+  isLoadingRecipe: false,
+
   recipesList: null,
   isLoadingRecipesList: false,
 
@@ -131,6 +134,24 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
+  loadRecipe({ commit, rootState }, recipeId) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsLoadingRecipe", true);
+
+      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/" + recipeId)
+        .then((response: AxiosResponse<string[]>) => {
+          commit("setIsLoadingRecipe", false);
+          commit("setRecipe", response.data);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsLoadingRecipe", false);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
+        });
+    });
+  },
+
   createRecipe({ commit, rootState }, recipe: Recipe) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmittingRecipe", true);
@@ -138,6 +159,27 @@ const actions: ActionTree<RecipeState, any> = {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", recipe)
         .then(() => {
           rootState.toastNotification.success("Udało sie dodać przepis.");
+          commit("setIsSubmittingRecipe", false);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsSubmittingRecipe", false);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
+        });
+    });
+  },
+
+  updateRecipe({ commit, rootState }, recipe: Recipe) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsSubmittingRecipe", true);
+
+      ApiService.put(
+        process.env.VUE_APP_SERVICE_URL + "/recipes/" + recipe.id,
+        recipe
+      )
+        .then(() => {
+          rootState.toastNotification.success("Udało sie zapisać przepis.");
           commit("setIsSubmittingRecipe", false);
           resolve();
         })
@@ -177,6 +219,14 @@ const mutations: MutationTree<RecipeState> = {
 
   setIsSubmittingRecipe(state, value) {
     state.isSubmittingRecipe = value;
+  },
+
+  setRecipe(state, recipe: Recipe) {
+    state.recipe = recipe;
+  },
+
+  setIsLoadingRecipe(state, value) {
+    state.isLoadingRecipe = value;
   },
 };
 

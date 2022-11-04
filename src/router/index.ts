@@ -1,24 +1,36 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  RouteRecordRaw,
+  RouterView,
+} from "vue-router";
 import store from "@/store";
+import { h } from "vue";
 
 import LoginView from "../views/login/index.vue";
 import RecipesListView from "../views/recipes/list/index.vue";
 import NewRecipeView from "../views/recipes/new/index.vue";
+import EditRecipeView from "../views/recipes/edit/index.vue";
 import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 import SettingsView from "../views/settings/index.vue";
 import CalendarView from "../views/calendar/index.vue";
 
+const Recipes = {
+  name: "Recipes",
+  render: () => h(RouterView),
+};
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
+    name: "Home",
     redirect: {
-      name: "calendar",
+      name: "Calendar",
     },
   },
   {
     path: "/login",
-    name: "login",
+    name: "Login",
     component: LoginView,
     meta: {
       layout: "plain",
@@ -27,25 +39,40 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/recipes",
-    name: "recipesList",
-    component: RecipesListView,
-  },
-  {
-    path: "/recipes/new",
-    name: "addRecipe",
-    component: NewRecipeView,
-    meta: {
-      maxWidth: 600,
-    },
+    name: "Recipes",
+    component: Recipes,
+    children: [
+      {
+        path: "",
+        name: "RecipesList",
+        component: RecipesListView,
+      },
+      {
+        path: "new",
+        name: "AddRecipe",
+        component: NewRecipeView,
+        meta: {
+          maxWidth: 600,
+        },
+      },
+      {
+        path: ":id",
+        name: "EditRecipe",
+        component: EditRecipeView,
+        meta: {
+          maxWidth: 600,
+        },
+      },
+    ],
   },
   {
     path: "/ordered",
-    name: "orderedFoodList",
+    name: "OrderedFoodList",
     component: OrderedFoodListView,
   },
   {
     path: "/calendar",
-    name: "calendar",
+    name: "Calendar",
     component: CalendarView,
     meta: {
       maxWidth: "unset",
@@ -53,7 +80,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/settings",
-    name: "settings",
+    name: "Settings",
     component: SettingsView,
   },
 ];

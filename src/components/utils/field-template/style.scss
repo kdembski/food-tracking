@@ -44,7 +44,9 @@ $labelPosition: 16px;
   }
 
   &--disabled {
-    opacity: 0.5;
+    &:deep(> *:not(.dropdown)) {
+      opacity: 0.5;
+    }
 
     &:deep(input) {
       background-color: var(--surface-tetriary) !important;

@@ -9,7 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { useDateHelpers } from "@/composables/date-helpers/index";
-import { isDate, isEqual, isFuture, isToday, isThisWeek } from "date-fns";
+import { isDate, isEqual, isFuture, isThisWeek } from "date-fns";
 
 const props = defineProps({
   dates: {
@@ -29,7 +29,7 @@ const getActiveItemClass = (itemDate: Date) => {
     return "";
   }
 
-  if (isToday(itemDate) || isFuture(itemDate)) {
+  if (isFuture(itemDate)) {
     return "month-preview__item--planned";
   }
 

@@ -2,6 +2,8 @@ import { ListWithFilters } from "@/types/components/list";
 import { Tag } from "./components/tags";
 
 export interface RecipeState {
+  recipe: Recipe | null;
+  isLoadingRecipe: boolean;
   recipesList: RecipesList | null;
   isLoadingRecipesList: boolean;
   recipesTags: Tag[] | null;

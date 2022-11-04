@@ -5,4 +5,8 @@
   &__empty {
     color: var(--text-primary);
   }
+
+  &__input {
+    z-index: 1;
+  }
 }

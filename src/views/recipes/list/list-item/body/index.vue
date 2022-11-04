@@ -72,7 +72,11 @@ const getFormattedCookedDate = (cookedDate: Date) => {
 
   const distance = getDistanceInWords(todayWithoutHours, cookedDate);
 
-  if (isFuture(cookedDate) || isEqual(todayWithoutHours, cookedDate)) {
+  if (isEqual(todayWithoutHours, cookedDate)) {
+    return "Dzisiaj";
+  }
+
+  if (isFuture(cookedDate)) {
     isPlanned.value = true;
     return "Zaplanowane";
   }
