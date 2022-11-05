@@ -8,7 +8,7 @@ describe("Display Tags Component", () => {
 
   beforeEach(async () => {
     wrapper = mount(CDisplayTags, {
-      props: { tags: "tag1,tag2,tag3", onClick },
+      props: { tags: "tag1,tag2,tag3" },
       global: global.settings,
     });
 
@@ -20,7 +20,18 @@ describe("Display Tags Component", () => {
   });
 
   it("Should emit click event on tag click", async () => {
+    await wrapper.setProps({
+      onClick,
+    });
     await tags[0].trigger("click");
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should not add hover class if onClick is not set", async () => {
+    expect(wrapper.vm.getWithHoverClass()).toEqual("");
+    await wrapper.setProps({
+      onClick,
+    });
+    expect(wrapper.vm.getWithHoverClass()).toEqual("tag--with-hover");
   });
 });

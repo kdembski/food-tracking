@@ -95,7 +95,7 @@ const clearSearchPhrase = () => {
 
 const filterBySearchPhrase = (tags: Tag[]) => {
   return tags.filter((tag) => {
-    return tag.name.simplify().includes(searchPhrase.value?.simplify());
+    return tag.name.simplify().startsWith(searchPhrase.value?.simplify());
   });
 };
 

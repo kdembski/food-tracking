@@ -66,7 +66,7 @@
       ref="content"
     >
       <CPagination
-        class="list-with-filters__pagination"
+        class="list-with-filters__pagination-top"
         :currentPage="filters.currentPage"
         @update:currentPage="changeCurrentPage"
         :paginationData="list?.pagination"
@@ -84,6 +84,14 @@
           ></slot>
         </template>
       </CList>
+      <CPagination
+        v-if="list?.data?.length > 6"
+        class="list-with-filters__pagination-bottom"
+        :currentPage="filters.currentPage"
+        @update:currentPage="changeCurrentPage"
+        :paginationData="list?.pagination"
+        :isLoading="_isLoading"
+      />
     </div>
   </transition>
   <button

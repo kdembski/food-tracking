@@ -44,14 +44,21 @@ $filtersHeightOffset: 92px; //topbar height + paddings
   }
 
   &__pagination {
-    position: sticky;
-    z-index: 1;
-    top: -$spacing-2xl;
-    background-color: var(--surface-primary);
-    margin: -$spacing-md 0 -1px;
-    padding: $spacing-md 0;
-    align-items: flex-end;
-    border-bottom: 1px solid var(--border-color);
+    &-top {
+      position: sticky;
+      z-index: 1;
+      top: -$spacing-2xl;
+      background-color: var(--surface-primary);
+      margin: -$spacing-md 0 -1px;
+      padding: $spacing-md 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    &-bottom {
+      padding: $spacing-md 0;
+      background-color: var(--surface-primary);
+      border-top: 1px solid var(--border-color);
+    }
   }
 }
 
@@ -156,7 +163,9 @@ $filtersHeightOffset: 92px; //topbar height + paddings
     }
 
     &__pagination {
-      top: -$spacing-lg;
+      &-top {
+        top: -$spacing-lg;
+      }
     }
   }
 }

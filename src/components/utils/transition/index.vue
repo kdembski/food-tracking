@@ -66,7 +66,7 @@ const getTransitionEvents = (prop: string) => {
       beforeLeave(el, prop);
     },
     onLeave: (el: HTMLElement) => {
-      beforeEnter(el, prop);
+      leave(el, prop);
     },
   };
 };

@@ -28,7 +28,20 @@ describe("Bottom Bar Component", () => {
     expect(routerLinks.length).toEqual(6);
   });
 
-  it("Should trigger active list change on wrapper screen swipe", async () => {
-    expect(wrapper.active);
+  it("slideLeft should increment activeListIndex if lower or equal than listLimits length", async () => {
+    expect(wrapper.vm.activeListIndex).toEqual(0);
+    await wrapper.vm.slideLeft();
+    expect(wrapper.vm.activeListIndex).toEqual(1);
+    await wrapper.vm.slideLeft();
+    expect(wrapper.vm.activeListIndex).toEqual(1);
+  });
+
+  it("slideRight should decrement activeListIndex if greater than 0", async () => {
+    await wrapper.vm.slideLeft();
+    expect(wrapper.vm.activeListIndex).toEqual(1);
+    await wrapper.vm.slideRight();
+    expect(wrapper.vm.activeListIndex).toEqual(0);
+    await wrapper.vm.slideRight();
+    expect(wrapper.vm.activeListIndex).toEqual(0);
   });
 });

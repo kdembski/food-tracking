@@ -19,7 +19,8 @@ const props = defineProps({
 });
 
 const activeListIndex = ref(0);
-const mobileListLimits = [
+
+const listLimits = [
   {
     start: 0,
     end: 4,
@@ -29,15 +30,17 @@ const mobileListLimits = [
     end: 8,
   },
 ];
+
 const wrapperCurrentTranslateX = computed(
   () => windowWidth.value * activeListIndex.value
 );
+
 const wrapperWidth = computed(
-  () => windowWidth.value * (mobileListLimits.length - 1)
+  () => windowWidth.value * (listLimits.length - 1)
 );
 
 const slideLeft = () => {
-  if (activeListIndex.value >= mobileListLimits.length - 1) {
+  if (activeListIndex.value >= listLimits.length - 1) {
     return;
   }
   activeListIndex.value++;
