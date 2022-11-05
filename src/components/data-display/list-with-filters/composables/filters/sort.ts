@@ -4,7 +4,7 @@ import { computed } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/components/list";
 import { Ref } from "vue";
 
-export function useSort(
+export function useSortFilter(
   filters: Ref<ListFilters>,
   handleListLoadingProccess: () => void
 ) {

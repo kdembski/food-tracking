@@ -8,7 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, Ref } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 
 const { getFieldTemplateProps } = useFieldProps();
@@ -24,6 +24,9 @@ const props = defineProps({
 const emits = defineEmits<{
   (event: "update:modelValue", value: string | number): void;
 }>();
+
+const input: Ref<HTMLInputElement | undefined> = ref();
+defineExpose({ input });
 
 const value = computed({
   get(): string | number {

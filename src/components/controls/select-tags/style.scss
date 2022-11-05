@@ -6,7 +6,10 @@
     color: var(--text-primary);
   }
 
-  &__input {
-    z-index: 1;
+  .select-tags__new-tag {
+    color: var(--success-primary);
+    background-color: var(--success-secondary);
+    display: flex;
+    gap: 5px;
   }
 }

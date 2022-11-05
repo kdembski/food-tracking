@@ -1,12 +1,12 @@
 <script lang="ts">
 import CTags from "@/components/utils/tags/index.vue";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CInput from "@/components/controls/input/index.vue";
 import Item from "./item/index.vue";
 import Loader from "./loader/index.vue";
 
 export default {
   name: "CSelectTags",
-  components: { CTags, Item, Loader, CAutocomplete },
+  components: { CTags, Item, Loader, CInput },
 };
 </script>
 
@@ -14,7 +14,6 @@ export default {
 import { computed, ref, Ref } from "vue";
 import { Tag } from "@/types/components/tags";
 import { cloneDeep } from "lodash";
-import { DropdownOption } from "@/types/components/dropdown";
 
 const props = defineProps({
   tags: {
@@ -37,7 +36,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  enableSortOutSelected: {
+  enableSortingSelectedToFront: {
     type: Boolean,
     default: false,
   },
@@ -53,6 +52,8 @@ const emit = defineEmits<{
 }>();
 
 const container: Ref<HTMLElement | undefined> = ref();
+const inputRef: Ref<{ input: HTMLInputElement } | undefined> = ref();
+const searchPhrase = ref("");
 
 const _selectedTags = computed({
   get(): string[] {
@@ -62,6 +63,7 @@ const _selectedTags = computed({
     return props.selectedTags.split(",");
   },
   set(tags: string[]) {
+    clearSearchPhrase();
     emit("update:selectedTags", tags.join(","));
   },
 });
@@ -75,16 +77,30 @@ const _tags = computed({
   },
 });
 
-const sortTags = (tags: Tag[]) => {
-  return sortOutSelectedTags(tags);
+const getPreparedTags = (tags: Tag[]) => {
+  return sortSelectedToFront(filterBySearchPhrase(tags));
 };
 
 const isTagSelected = (tag: Tag) => {
   return _selectedTags.value.some((tagName) => tagName === tag.name);
 };
 
-const sortOutSelectedTags = (tags: Tag[]) => {
-  if (!props.enableSortOutSelected) {
+const isTagExisting = (newTag: Tag) => {
+  return _tags.value.some((tag) => tag.name === newTag.name);
+};
+
+const clearSearchPhrase = () => {
+  searchPhrase.value = "";
+};
+
+const filterBySearchPhrase = (tags: Tag[]) => {
+  return tags.filter((tag) => {
+    return tag.name.simplify().includes(searchPhrase.value?.simplify());
+  });
+};
+
+const sortSelectedToFront = (tags: Tag[]) => {
+  if (!props.enableSortingSelectedToFront) {
     return tags;
   }
 
@@ -98,18 +114,14 @@ const sortOutSelectedTags = (tags: Tag[]) => {
   });
 };
 
-const getTagsOptions = (): DropdownOption<string>[] => {
-  const tagsWithoutSelected = props.tags?.filter(
-    (tag: Tag) =>
-      !_selectedTags.value?.some((selectedTag) => selectedTag == tag.name)
-  );
+const onNewTagClick = () => {
+  if (!searchPhrase.value) {
+    inputRef.value?.input.focus();
+    return;
+  }
 
-  return tagsWithoutSelected?.map((tag: Tag) => {
-    return {
-      value: tag.name,
-      label: tag.name,
-    };
-  });
+  addTagToOptions(searchPhrase.value);
+  addTagToSelected(searchPhrase.value);
 };
 
 const addTagToSelected = (tagName: string) => {
@@ -124,8 +136,12 @@ const addTagToSelected = (tagName: string) => {
   _selectedTags.value = _selectedTags.value.concat(tagName);
 };
 
-const addTagToOptions = (option: DropdownOption) => {
-  _tags.value = _tags.value.concat({ name: option.label });
+const addTagToOptions = (tagName: string) => {
+  if (isTagExisting({ name: tagName })) {
+    return;
+  }
+
+  _tags.value = _tags.value.concat({ name: tagName });
 };
 
 defineExpose({ addTagToSelected });

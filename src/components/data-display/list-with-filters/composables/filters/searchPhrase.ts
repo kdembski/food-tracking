@@ -5,7 +5,7 @@ import { Ref } from "vue";
 
 let temporarySearchPhrase = "";
 
-export function useSearchPhrase(
+export function useSearchPhraseFilter(
   filters: Ref<ListFilters>,
   handleListLoadingProccess: () => void,
   suggestionsGetterName: string,

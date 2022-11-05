@@ -1,26 +1,30 @@
-<CAutocomplete
+<CInput
   class="select-tags__input"
-  :options="getTagsOptions(tags)"
-  @update:modelValue="addTagToSelected"
-  @addOption="addTagToOptions"
-  shootingMode
-  :enableAddingOption="enableAddingTags"
+  v-model="searchPhrase"
   :icon="inputIcon"
   placeholder="Wyszukaj tag"
   :isLoading="isLoading"
-  :isLoadingOptions="isLoading"
   label="Tagi"
+  ref="inputRef"
 />
 <div v-if="tags || isLoading" class="select-tags" ref="container">
   <Loader v-if="isLoading" :containerWidth="container?.clientWidth" />
   <CTags v-else-if="tags.length > 0" :tags="tags">
     <template #default="{ tagsArray }">
       <Item
-        v-for="tag in sortTags(tagsArray)"
+        v-for="tag in getPreparedTags(tagsArray)"
         v-model:selectedTags="_selectedTags"
         :tag="tag"
         :withCounts="withCounts"
       />
+      <div
+        v-if="enableAddingTags"
+        class="select-tags__new-tag tag tag--with-hover"
+        @click="onNewTagClick"
+      >
+        <FontAwesomeIcon icon="plus" />
+        <p v-if="searchPhrase">{{ searchPhrase }}...</p>
+      </div>
     </template>
   </CTags>
   <div v-else class="select-tags__empty">Brak tagów</div>

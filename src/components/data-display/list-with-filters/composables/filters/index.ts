@@ -1,9 +1,9 @@
 import { ListFilters } from "@/types/components/list";
 import { ref, Ref } from "vue";
 import { isEqual, clone } from "lodash";
-import { useSearchPhrase } from "./searchPhrase";
-import { useSort } from "./sort";
-import { useTags } from "./tags";
+import { useSearchPhraseFilter } from "./searchPhrase";
+import { useSortFilter } from "./sort";
+import { useTagsFilter } from "./tags";
 
 export function useFilters(
   defaultFilters: ListFilters,
@@ -32,9 +32,9 @@ export function useFilters(
     handleListLoadingProccess();
   };
 
-  const { filterByTags } = useTags(filters, handleListLoadingProccess);
+  const { filterByTags } = useTagsFilter(filters, handleListLoadingProccess);
 
-  const { selectedSort, sort, getSelectedSortIcon } = useSort(
+  const { selectedSort, sort, getSelectedSortIcon } = useSortFilter(
     filters,
     handleListLoadingProccess
   );
@@ -46,7 +46,7 @@ export function useFilters(
     searchSuggestions,
     isLoadingSearchSuggestions,
     loadSearchSuggestions,
-  } = useSearchPhrase(
+  } = useSearchPhraseFilter(
     filters,
     handleListLoadingProccess,
     suggestionsGetterName,

@@ -1,7 +1,7 @@
 import { ListFilters } from "@/types/components/list";
 import { Ref } from "vue";
 
-export function useTags(
+export function useTagsFilter(
   filters: Ref<ListFilters>,
   handleListLoadingProccess: () => void
 ) {

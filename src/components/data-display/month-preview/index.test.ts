@@ -25,7 +25,7 @@ describe("Month Preview Component", () => {
     );
 
     expect(wrapper.vm.getActiveItemClass(new Date(2000, 1, 2))).toEqual(
-      "month-preview__item--planned"
+      "month-preview__item--cooked"
     );
 
     expect(wrapper.vm.getActiveItemClass(new Date(2000, 1, 3))).toEqual(
