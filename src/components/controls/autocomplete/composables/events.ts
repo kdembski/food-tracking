@@ -11,7 +11,6 @@ export function useEvents(
   selectOption: (option: DropdownOption) => void,
   input: Ref<HTMLInputElement | undefined>,
   inputValue: Ref<string>,
-  shootingMode: ComputedRef<boolean>,
   isLoading: ComputedRef<boolean>,
   hasFocus: Ref<boolean>,
   emits: any
@@ -33,14 +32,6 @@ export function useEvents(
 
     selectOption(hoveredOption);
     setHoveredOptionIndex(null);
-    afterOptionSelectOnEnter();
-  };
-
-  const afterOptionSelectOnEnter = () => {
-    if (shootingMode.value) {
-      return;
-    }
-
     input.value?.blur();
   };
 

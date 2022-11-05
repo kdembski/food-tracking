@@ -36,10 +36,6 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  shootingMode: {
-    type: Boolean,
-    default: false,
-  },
   isLoadingOptions: {
     type: Boolean,
     default: false,
@@ -77,23 +73,12 @@ const _isLoading = computed(() => {
   return props.isLoading;
 });
 
-const _shootingMode = computed(() => {
-  return props.shootingMode;
-});
-
-watch(_isLoading, (value) => {
-  if (value || !props.shootingMode) {
-    return;
-  }
-  clearSelectedAndInputValue();
-});
-
-const optionExists = (value: string | number) => {
+const isOptionExisting = (value: string | number) => {
   return props.options.some((option) => option.value === value);
 };
 
 const selectOption = (option: DropdownOption) => {
-  if (!optionExists(option.value)) {
+  if (!isOptionExisting(option.value)) {
     option.label = option.value.toString();
     emits("addOption", option);
   }
@@ -114,7 +99,7 @@ const getDropdownOptions = (): DropdownOption<string | number>[] => {
   return [newOption];
 };
 
-const { selectedValue, _inputValue, clearSelectedAndInputValue } = useValues(
+const { selectedValue, _inputValue } = useValues(
   props,
   emits,
   filteredOptions,
@@ -166,7 +151,6 @@ const {
   selectOption,
   input,
   _inputValue,
-  _shootingMode,
   _isLoading,
   hasFocus,
   emits

@@ -29,7 +29,7 @@ export function useValues(
     async (value) => {
       selectedValue.value = value;
 
-      if (!props.shootingMode && value) {
+      if (value) {
         await nextTick();
         setInputValueWithSelectedLabel(value);
       }
@@ -39,11 +39,6 @@ export function useValues(
 
   watch(selectedValue, async (value) => {
     emits("update:modelValue", value);
-
-    await nextTick();
-    if (props.shootingMode && !isLoading.value) {
-      clearSelectedAndInputValue();
-    }
   });
 
   watch(
@@ -54,12 +49,22 @@ export function useValues(
     { immediate: true }
   );
 
-  const getOptionMatchingInputValue = (value: string) => {
-    const matchingOption = filteredOptions.value.find(
-      (option: DropdownOption) => option.label.simplify() === value.simplify()
-    );
-    return matchingOption;
-  };
+  watch(_inputValue, async (value) => {
+    if (isLoading.value) {
+      return;
+    }
+    emits("update:inputValue", value);
+
+    await nextTick();
+    setSelectedIfInputValueIsMatchingAnyOption(value);
+  });
+
+  watch(
+    () => props.options,
+    () => {
+      setSelectedIfInputValueIsMatchingAnyOption(_inputValue.value);
+    }
+  );
 
   const setSelectedIfInputValueIsMatchingAnyOption = (value: string) => {
     if (isLoading.value) {
@@ -79,31 +84,15 @@ export function useValues(
     selectedValue.value = null;
   };
 
-  watch(_inputValue, async (value) => {
-    if (isLoading.value) {
-      return;
-    }
-    emits("update:inputValue", value);
-
-    await nextTick();
-    setSelectedIfInputValueIsMatchingAnyOption(value);
-  });
-
-  watch(
-    () => props.options,
-    () => {
-      setSelectedIfInputValueIsMatchingAnyOption(_inputValue.value);
-    }
-  );
-
-  const clearSelectedAndInputValue = () => {
-    selectedValue.value = null;
-    _inputValue.value = "";
+  const getOptionMatchingInputValue = (value: string) => {
+    const matchingOption = filteredOptions.value.find(
+      (option: DropdownOption) => option.label.simplify() === value.simplify()
+    );
+    return matchingOption;
   };
 
   return {
     selectedValue,
     _inputValue,
-    clearSelectedAndInputValue,
   };
 }

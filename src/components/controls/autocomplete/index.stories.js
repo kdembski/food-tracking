@@ -48,6 +48,3 @@ InvalidWithIcon.args = Object.assign(
   { errorMessage: "Field is required" },
   WithIcon.args
 );
-
-export const ShootingMode = Template.bind({});
-ShootingMode.args = Object.assign({ shootingMode: true }, Default.args);

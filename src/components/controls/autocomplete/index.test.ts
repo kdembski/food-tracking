@@ -54,6 +54,14 @@ describe("Autocomplete Component", () => {
     expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual(2);
   });
 
+  it("Should not emit update:inputValue on _inputValue change if isLoading is true", async () => {
+    await wrapper.setProps({
+      isLoading: true,
+    });
+    wrapper.vm._inputValue = "test";
+    expect(wrapper.emitted<any>()["update:inputValue"]).toEqual([["One"]]);
+  });
+
   it("Should open dropdown on input click", async () => {
     await input.trigger("focus");
     await jest.runAllTimers();
@@ -73,6 +81,23 @@ describe("Autocomplete Component", () => {
 
     expect(wrapper.vm._inputValue).toEqual("Four");
     expect(wrapper.vm.selectedValue).toEqual(4);
+  });
+
+  it("Should not set option when input value met any of option labels on options change if isLoading is true", async () => {
+    await wrapper.setProps({
+      isLoading: true,
+    });
+    await input.setValue("four");
+    await wrapper.setProps({
+      options: [
+        {
+          value: 4,
+          label: "Four",
+        },
+      ],
+    });
+
+    expect(wrapper.vm.selectedValue).toEqual(1);
   });
 
   it("Should filter options by input value", async () => {
@@ -103,19 +128,6 @@ describe("Autocomplete Component", () => {
     expect(input.classes()).not.toContain(
       "autocomplete__input--option-selected"
     );
-  });
-
-  it("Should clear selected value after loading on shooting mode", async () => {
-    expect(wrapper.vm._inputValue).toEqual("One");
-    await wrapper.setProps({
-      shootingMode: true,
-      isLoading: true,
-    });
-    await wrapper.setProps({
-      isLoading: false,
-    });
-
-    expect(wrapper.vm._inputValue).toEqual("");
   });
 
   it("Should select option by enter click using arrow down", async () => {
@@ -183,20 +195,6 @@ describe("Autocomplete Component", () => {
     await input.trigger("keydown.arrow-down");
     await input.trigger("keydown.enter");
     expect(blurSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should keep focus after enter click if shooting mode is active", async () => {
-    await wrapper.setProps({
-      shootingMode: true,
-    });
-    const blurSpy = jest.spyOn(wrapper.vm.input, "blur");
-
-    expect(wrapper.vm.hasFocus).toBe(false);
-    await input.trigger("focus");
-    await jest.runAllTimers();
-    await input.trigger("keydown.arrow-down");
-    await input.trigger("keydown.enter");
-    expect(blurSpy).toHaveBeenCalledTimes(0);
   });
 
   it("Should prevent input event if isLoading set to true", async () => {
