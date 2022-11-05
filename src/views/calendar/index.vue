@@ -14,11 +14,14 @@ export default {
 import { ref, provide, nextTick } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
 import { useWindowSize } from "@/composables/window-size";
+import { useCalendarModes } from "@/components/controls/calendar-mode/composables/calendar-modes";
+
+const { calendarModes, isMonthlyMode, isWeeklyMode } = useCalendarModes();
+const { isMobile } = useWindowSize();
 
 const monthlyCalendar = ref();
 const weeklyCalendar = ref();
-
-const { isMobile } = useWindowSize();
+const calendarMode = ref(calendarModes.WEEKLY);
 
 const onArrowLeftClick = async () => {
   decrementDate();
@@ -33,20 +36,14 @@ const onArrowRightClick = async () => {
 };
 
 const loadCalendar = () => {
-  if (calendarModeRef.value?.isWeeklyMode()) {
+  if (isWeeklyMode(calendarMode.value)) {
     weeklyCalendar.value?.loadWeeklyCalendar();
   }
 
-  if (calendarModeRef.value?.isMonthlyMode()) {
+  if (isMonthlyMode(calendarMode.value)) {
     monthlyCalendar.value?.loadMonthlyCalendar();
   }
 };
-
-const calendarMode = ref("WEEKLY");
-const calendarModeRef = ref<{
-  isMonthlyMode: () => boolean;
-  isWeeklyMode: () => boolean;
-}>();
 
 const {
   getFormattedDate,
@@ -59,7 +56,7 @@ const {
   incrementDate,
   decrementDate,
   getDateRange,
-} = useDateHelpers(() => calendarModeRef.value?.isMonthlyMode());
+} = useDateHelpers(calendarMode);
 
 provide("getFormattedDate", getFormattedDate);
 provide("getWeekDays", getWeekDays);

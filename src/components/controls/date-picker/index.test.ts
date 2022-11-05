@@ -73,10 +73,10 @@ describe("Date Picker Component", () => {
   });
 
   it("should change calendar mode using buttons", async () => {
-    expect(wrapper.vm.calendarMode).toEqual("WEEKLY");
+    expect(wrapper.vm.calendarMode).toEqual(wrapper.vm.calendarModes.WEEKLY);
     monthlyModeBtn.trigger("click");
-    expect(wrapper.vm.calendarMode).toEqual("MONTHLY");
+    expect(wrapper.vm.calendarMode).toEqual(wrapper.vm.calendarModes.MONTHLY);
     weeklyModeBtn.trigger("click");
-    expect(wrapper.vm.calendarMode).toEqual("WEEKLY");
+    expect(wrapper.vm.calendarMode).toEqual(wrapper.vm.calendarModes.WEEKLY);
   });
 });

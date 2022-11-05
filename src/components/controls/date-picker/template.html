@@ -17,21 +17,17 @@
         @click="incrementDate"
       />
     </div>
-    <CCalendarMode
-      v-model:mode="calendarMode"
-      ref="calendarModeRef"
-      @update:mode="clearSelected()"
-    />
+    <CCalendarMode v-model:mode="calendarMode" @update:mode="clearSelected()" />
   </div>
   <MonthlyDatePicker
-    v-if="calendarModeRef?.isMonthlyMode()"
+    v-if="isMonthlyMode(calendarMode)"
     v-model="selected"
     :getFormattedDate="getFormattedDate"
     :fullMonthGrid="fullMonthGrid"
     :weekDays="getWeekDays()"
   />
   <WeeklyDatePicker
-    v-if="calendarModeRef?.isWeeklyMode()"
+    v-if="isWeeklyMode(calendarMode)"
     v-model="selected"
     :getFormattedDate="getFormattedDate"
     :allDatesInWeek="allDatesInWeek"

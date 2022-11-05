@@ -1,3 +1,4 @@
+import { ref } from "vue";
 import { useDateHelpers } from ".";
 
 describe("Date Helpers", () => {
@@ -13,7 +14,7 @@ describe("Date Helpers", () => {
     allDatesInWeek,
     incrementWeek,
     decrementWeek,
-  } = useDateHelpers(() => true);
+  } = useDateHelpers(ref("MONTHLY"));
 
   beforeEach(() => {
     firstDateInMonth.value = new Date(2000, 1, 1);

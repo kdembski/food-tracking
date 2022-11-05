@@ -19,22 +19,18 @@
           @click="onArrowRightClick"
         />
       </div>
-      <CCalendarMode
-        v-show="!isMobile"
-        v-model:mode="calendarMode"
-        ref="calendarModeRef"
-      />
+      <CCalendarMode v-show="!isMobile" v-model:mode="calendarMode" />
     </div>
   </header>
 
   <MonthlyCalendar
-    v-if="calendarModeRef?.isMonthlyMode()"
+    v-if="isMonthlyMode(calendarMode)"
     :allDatesInMonth="allDatesInMonth"
     :fullMonthGrid="fullMonthGrid"
     ref="monthlyCalendar"
   />
   <WeeklyCalendar
-    v-if="calendarModeRef?.isWeeklyMode()"
+    v-if="isWeeklyMode(calendarMode)"
     :allDatesInWeek="allDatesInWeek"
     ref="weeklyCalendar"
   />

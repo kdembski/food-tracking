@@ -13,6 +13,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
+import { useCalendarModes } from "../calendar-mode/composables/calendar-modes";
 
 const props = defineProps({
   modelValue: {
@@ -38,12 +39,8 @@ const clearSelected = () => {
   selected.value = [];
 };
 
-const calendarMode = ref("WEEKLY");
-
-const calendarModeRef = ref<{
-  isMonthlyMode: () => boolean;
-  isWeeklyMode: () => boolean;
-}>();
+const { calendarModes, isMonthlyMode, isWeeklyMode } = useCalendarModes();
+const calendarMode = ref(calendarModes.WEEKLY);
 
 const {
   getFormattedDate,
@@ -55,7 +52,7 @@ const {
   incrementDate,
   decrementDate,
   getDateRange,
-} = useDateHelpers(() => calendarModeRef.value?.isMonthlyMode());
+} = useDateHelpers(calendarMode);
 </script>
 
 <template src="./template.html"></template>

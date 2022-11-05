@@ -8,6 +8,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useCalendarModes } from "./composables/calendar-modes";
+
 const props = defineProps({
   mode: {
     type: String,
@@ -23,18 +25,7 @@ const setMode = (mode: string) => {
   emits("update:mode", mode);
 };
 
-const isMonthlyMode = () => {
-  return props.mode === "MONTHLY";
-};
-
-const isWeeklyMode = () => {
-  return props.mode === "WEEKLY";
-};
-
-defineExpose({
-  isMonthlyMode,
-  isWeeklyMode,
-});
+const { calendarModes } = useCalendarModes();
 </script>
 
 <template src="./template.html"></template>
