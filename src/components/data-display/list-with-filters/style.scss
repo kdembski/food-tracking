@@ -55,9 +55,10 @@ $filtersHeightOffset: 92px; //topbar height + paddings
     }
 
     &-bottom {
-      padding: $spacing-md 0;
+      padding-top: $spacing-md;
       background-color: var(--surface-primary);
       border-top: 1px solid var(--border-color);
+      justify-content: center;
     }
   }
 }

@@ -15,9 +15,10 @@ const props = withDefaults(
   defineProps<{
     paginationData: ListPagination;
     currentPage: number;
-    isLoading: boolean;
+    isLoading?: boolean;
+    withSummary?: boolean;
   }>(),
-  { currentPage: 1, isLoading: false }
+  { currentPage: 1, isLoading: false, withSummary: true }
 );
 
 const emit = defineEmits<{
