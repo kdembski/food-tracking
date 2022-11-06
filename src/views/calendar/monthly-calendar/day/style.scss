@@ -38,8 +38,9 @@
   }
 
   .item {
-    background-color: var(--surface-tetriary);
+    background-color: var(--surface-secondary);
     cursor: grab;
+    box-shadow: $shadow-xs $shadow-color;
     border-radius: $radius-xs;
     padding: $spacing-xs;
     padding-left: $spacing-md;

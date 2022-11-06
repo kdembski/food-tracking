@@ -1,0 +1,10 @@
+.tooltip {
+  position: fixed;
+  padding: $spacing-md;
+  box-shadow: $shadow-md $shadow-color;
+  border-radius: $radius-sm;
+
+  &__text {
+    color: var(--text-secondary);
+  }
+}

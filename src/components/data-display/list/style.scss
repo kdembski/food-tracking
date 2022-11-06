@@ -17,7 +17,7 @@
     overflow: hidden;
     padding: 0;
     border-top: 1px solid var(--border-color);
-    padding: $spacing-2xl $spacing-sm $spacing-3xl;
+    padding: $spacing-3xl $spacing-sm $spacing-4xl;
     gap: $spacing-2xl;
   }
 
@@ -36,7 +36,7 @@
     flex-direction: column;
 
     &__row {
-      padding: $spacing-3xl $spacing-sm;
+      padding: $spacing-4xl $spacing-sm;
       height: 100%;
       border-top: 1px solid var(--border-color);
 
@@ -58,7 +58,7 @@
       &:nth-child(1) {
         height: 22%;
         width: 75%;
-        margin-bottom: $spacing-xl;
+        margin-bottom: $spacing-lg;
       }
 
       &:nth-child(2) {
@@ -105,7 +105,7 @@
       }
 
       &__row {
-        padding: $spacing-xl $spacing-sm;
+        padding: $spacing-2xl $spacing-sm;
       }
     }
   }
