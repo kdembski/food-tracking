@@ -45,6 +45,7 @@
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
+        gap: $spacing-md;
       }
     }
 
@@ -88,6 +89,12 @@
     }
 
     .list-loader {
+      &__row {
+        .skeleton-loader {
+          gap: $spacing-sm;
+        }
+      }
+
       &__item {
         &:nth-child(1) {
           width: 100%;

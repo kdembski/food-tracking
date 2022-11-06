@@ -5,3 +5,9 @@
   color: var(--text-secondary);
   letter-spacing: 1px;
 }
+
+@mixin uppercasedSecondaryTextWithBorder {
+  @include uppercasedSecondaryText();
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: $spacing-2xs;
+}

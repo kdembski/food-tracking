@@ -3,12 +3,14 @@
     <router-view />
   </component>
   <CToastNotificationContainer />
+  <CTooltip />
 </template>
 
 <script lang="ts">
 import PlainLayout from "@/layouts/plain/index.vue";
 import DefaultLayout from "@/layouts/default/index.vue";
 import CToastNotificationContainer from "@/components/feedback/toast-notification-container/index.vue";
+import CTooltip from "@/components/feedback/tooltip/index.vue";
 import { useToastNotification } from "@/composables/toast-notification";
 
 export default {

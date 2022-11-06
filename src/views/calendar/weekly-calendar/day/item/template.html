@@ -13,8 +13,49 @@
       @click="emits('delete', item.id)"
     />
   </div>
-  <div class="day-item__body">
-    <CDisplayTags :tags="item.tags" size="small" />
-    <FontAwesomeIcon :icon="getItemIcon()" />
+  <div class="day-item__body body">
+    <div class="body__left-part">
+      <div
+        class="body__icon"
+        @mouseover.self="openTagsTooltip($event, getTagsTooltipId(item.id))"
+        @mouseleave.self="tooltip.close()"
+      >
+        <FontAwesomeIcon icon="tags" />
+      </div>
+      <CButton
+        color="secondary"
+        variant="text"
+        icon="clone"
+        size="small"
+        @mouseenter.self="openCloneTooltip"
+        @mouseleave.self="tooltip.close"
+      />
+      <CButton
+        color="secondary"
+        variant="text"
+        icon="pen-to-square"
+        size="small"
+        @mouseenter.self="openEditTooltip"
+        @mouseleave.self="tooltip.close"
+      />
+    </div>
+    <RouterLink v-if="item.isRecipe" :to="'/recipes/' + item.recipeId">
+      <CButton
+        color="secondary"
+        variant="text"
+        icon="utensils"
+        @mouseenter.self="openRecipeTooltip"
+        @mouseleave.self="tooltip.close"
+      />
+    </RouterLink>
+    <RouterLink v-else to="/ordered">
+      <CButton color="secondary" variant="text" icon="box-open" />
+    </RouterLink>
   </div>
+  <Teleport v-if="isTagsTooltipContentVisible(item.id)" to="#tooltip-content">
+    <div class="day-item__tags-tooltip">
+      <p>Tagi</p>
+      <CDisplayTags :tags="item.tags" />
+    </div>
+  </Teleport>
 </div>

@@ -1,9 +1,8 @@
 .day-item {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xl;
-  padding: $spacing-lg;
-  padding-right: $spacing-sm;
+  gap: $spacing-lg;
+  padding: $spacing-sm;
   cursor: grab;
   box-shadow: $shadow-xs var(--shadow-color);
   background-color: var(--surface-primary);
@@ -18,8 +17,9 @@
     gap: $spacing-sm;
 
     & > p {
-      font-weight: $font-medium;
       font-size: $font-sm;
+      font-weight: $font-bold;
+      margin: $spacing-xs 0 0 $spacing-2xs;
 
       strong {
         font-size: $font-xs;
@@ -33,16 +33,37 @@
     }
   }
 
-  &__body {
+  .body {
     display: flex;
-    justify-content: space-between;
     align-items: flex-end;
-    gap: $spacing-sm;
+    gap: $spacing-xs;
 
-    & > svg {
-      padding: 0 $spacing-sm;
-      color: var(--text-tetriary);
-      font-size: 14px;
+    &__left-part {
+      display: flex;
+      gap: $spacing-xs;
+    }
+
+    &__icon {
+      font-size: $font-base;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      width: 24px;
+      color: var(--text-secondary);
+    }
+
+    & > *:last-child {
+      margin-left: auto;
+    }
+  }
+
+  &__tags-tooltip {
+    padding: $spacing-2xs;
+
+    & > p {
+      @include uppercasedSecondaryTextWithBorder;
+      margin-bottom: $spacing-md;
     }
   }
 }

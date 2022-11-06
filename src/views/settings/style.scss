@@ -10,10 +10,8 @@
     flex-direction: column;
 
     & > p {
-      @include uppercasedSecondaryText;
+      @include uppercasedSecondaryTextWithBorder;
       width: 100%;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: $spacing-2xs;
     }
   }
 }

@@ -1,5 +1,19 @@
-<div class="tooltip" :style="getTooltipStyle()">
-  <slot>
-    <p class="tooltip__text">{{ text }}</p>
-  </slot>
-</div>
+<Transition name="tooltip__transition">
+  <div
+    v-show="isOpen"
+    class="tooltip"
+    :style="getTooltipStyle()"
+    :class="getTooltipClasses()"
+  >
+    <div
+      id="tooltip-content"
+      class="tooltip__content"
+      ref="content"
+      :style="getTooltipContentStyle()"
+    >
+      <p v-if="!config.withCustomContent" class="tooltip__text">
+        {{ config.text }}
+      </p>
+    </div>
+  </div>
+</Transition>

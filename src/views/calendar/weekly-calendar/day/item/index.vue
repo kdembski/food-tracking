@@ -10,6 +10,10 @@ export default {
 
 <script setup lang="ts">
 import { CalendarItem } from "@/types/calendar";
+import { useTooltip } from "@/composables/tooltip";
+import { RouterLink } from "vue-router";
+
+const tooltip = useTooltip();
 
 const props = defineProps({
   item: {
@@ -22,11 +26,33 @@ const emits = defineEmits<{
   (event: "delete", id: number): void;
 }>();
 
-const getItemIcon = () => {
-  if (props.item.isRecipe) {
-    return "utensils";
-  }
-  return "box-open";
+const openRecipeTooltip = (e: any) => {
+  return tooltip.open({ parent: e.target, width: 110, text: "Otwórz przepis" });
+};
+
+const openCloneTooltip = (e: any) => {
+  return tooltip.open({ parent: e.target, width: 58, text: "Duplikuj" });
+};
+
+const openEditTooltip = (e: any) => {
+  return tooltip.open({ parent: e.target, width: 45, text: "Edytuj" });
+};
+
+const getTagsTooltipId = (id: number) => {
+  return "calendar-tags-" + id;
+};
+
+const isTagsTooltipContentVisible = (id: number) => {
+  return tooltip.activeCustomContent.value === getTagsTooltipId(id);
+};
+
+const openTagsTooltip = (e: any, id: string) => {
+  tooltip.open({
+    parent: e.target,
+    width: 220,
+    withCustomContent: true,
+    activeCustomContent: id,
+  });
 };
 </script>
 

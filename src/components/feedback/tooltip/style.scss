@@ -1,10 +1,30 @@
 .tooltip {
   position: fixed;
-  padding: $spacing-md;
   box-shadow: $shadow-md $shadow-color;
-  border-radius: $radius-sm;
+  border-radius: $radius-lg;
+  background-color: var(--surface-primary);
+  transition: opacity 0.1s ease-in-out;
+  overflow: hidden;
+
+  &--transition-all {
+    transition: all 0.1s ease-in-out;
+  }
+
+  &__content {
+    padding: $spacing-md;
+  }
 
   &__text {
     color: var(--text-secondary);
+  }
+
+  &__transition {
+    &-enter-from {
+      opacity: 0;
+    }
+
+    &-leave-to {
+      opacity: 0;
+    }
   }
 }

@@ -6,7 +6,9 @@
     class="button__loader"
   />
   <div class="button__content">
-    <FontAwesomeIcon v-if="icon" :icon="icon" class="button__icon" />
+    <slot>
+      <FontAwesomeIcon v-if="icon" :icon="icon" class="button__icon" />
+    </slot>
     <p v-if="label" class="button__label">{{ label }}</p>
   </div>
 </button>

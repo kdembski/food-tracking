@@ -51,6 +51,9 @@ import {
   faCartShopping,
   faCartPlus,
   faMinus,
+  faChartPie,
+  faClone,
+  faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -110,7 +113,10 @@ library.add(
   faCalendarPlus,
   faCartShopping,
   faCartPlus,
-  faMinus
+  faMinus,
+  faChartPie,
+  faClone,
+  faPenToSquare
 );
 
 export default FontAwesomeIcon;

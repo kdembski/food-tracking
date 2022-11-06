@@ -1,3 +1,4 @@
+import { TooltipConfig } from "./components/tooltip";
 import { ToastNotification } from "@/types/components/toast-notification";
 
 export interface State {
@@ -5,4 +6,6 @@ export interface State {
   primaryColor: string;
   mainContainerScrollValue: number;
   toastNotifications: ToastNotification[];
+  isTooltipOpen: boolean;
+  tooltipConfig: TooltipConfig;
 }

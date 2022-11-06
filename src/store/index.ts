@@ -12,6 +12,8 @@ export default createStore<State>({
     primaryColor: StorageService.getItem("primaryColor") || "orange",
     mainContainerScrollValue: 0,
     toastNotifications: [],
+    isTooltipOpen: false,
+    tooltipConfig: {},
   },
 
   getters: {
@@ -46,7 +48,17 @@ export default createStore<State>({
     spliceToastNotification(state, index) {
       state.toastNotifications.splice(index, 1);
     },
+
+    setIsTooltipOpen(state, value) {
+      state.isTooltipOpen = value;
+    },
+
+    setTooltipConfig(state, value) {
+      state.tooltipConfig = value;
+    },
   },
+
   actions: {},
+
   modules: { user, recipe, orderedFood, calendar },
 });

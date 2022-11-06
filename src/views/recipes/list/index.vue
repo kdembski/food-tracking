@@ -31,8 +31,8 @@ const recipesListDefaultFilters = {
   currentPage: 1,
   pageSize: 20,
   searchPhrase: "",
-  sortAttribute: "recipeName",
-  sortDirection: "asc",
+  sortAttribute: "cookedDate",
+  sortDirection: "desc",
   tags: "",
 };
 
