@@ -27,8 +27,8 @@ const portions = computed({
     return props.modelValue;
   },
   set(portions: number) {
-    if (!portions || portions < 0) {
-      return emit("update:modelValue", 0);
+    if (!portions || portions < 1) {
+      return emit("update:modelValue", 1);
     }
     emit("update:modelValue", portions);
   },

@@ -1,7 +1,9 @@
 import { useStore } from "vuex";
 import { computed, onUnmounted } from "vue";
+import { useWindowSize } from "./window-size";
 
 export function useTooltip() {
+  const { windowWidth, isMobile } = useWindowSize();
   const store = useStore();
   let closeTimeout = 0;
   let openTimeout = 0;
@@ -27,14 +29,18 @@ export function useTooltip() {
     activeCustomContent?: string;
     text?: string;
   }) => {
+    if (isMobile.value) {
+      return;
+    }
+
     const {
       bottom: parentBottom,
       left: parentLeft,
       width: parentWidth,
     } = parent.getBoundingClientRect();
 
-    const top = parentBottom + 20;
-    const left = parentLeft + parentWidth / 2 - width / 2;
+    const top = parentBottom + 10;
+    const left = getLeftPosition(parentLeft, parentWidth, width);
 
     clearTimeout(closeTimeout);
     clearTimeout(openTimeout);
@@ -52,6 +58,24 @@ export function useTooltip() {
       },
       isOpen.value ? 0 : 200
     );
+  };
+
+  const getLeftPosition = (
+    parentLeft: number,
+    parentWidth: number,
+    width: number
+  ) => {
+    const left = parentLeft + parentWidth / 2 - width / 2;
+
+    if (left < 10) {
+      return 10;
+    }
+
+    if (left + width > windowWidth.value - 10) {
+      return windowWidth.value - width - 10;
+    }
+
+    return left;
   };
 
   const close = () => {

@@ -9,7 +9,7 @@ describe("Set Portions Component", () => {
   beforeEach(async () => {
     wrapper = mount(CSetPortions, {
       props: {
-        modelValue: 0,
+        modelValue: 1,
       },
       global: global.settings,
     });
@@ -20,11 +20,11 @@ describe("Set Portions Component", () => {
 
   it("Should emit increased portions value on plus button click", async () => {
     await plusButton.trigger("click");
-    expect(wrapper.emitted()["update:modelValue"][0][0]).toEqual(1);
+    expect(wrapper.emitted()["update:modelValue"][0][0]).toEqual(2);
   });
 
   it("Should emit decreased portions value on minus button click", async () => {
     await minusButton.trigger("click");
-    expect(wrapper.emitted()["update:modelValue"][0][0]).toEqual(0);
+    expect(wrapper.emitted()["update:modelValue"][0][0]).toEqual(1);
   });
 });

@@ -1,15 +1,17 @@
 <script lang="ts">
 import WeeklyCalendarDay from "./day/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
+import EditItemModal from "./edit-item-modal/index.vue";
+import { CalendarItem } from "@/types/calendar";
 
 export default {
   name: "WeeklyCalendar",
-  components: { WeeklyCalendarDay, CSkeletonLoader },
+  components: { WeeklyCalendarDay, CSkeletonLoader, EditItemModal },
 };
 </script>
 
 <script setup lang="ts">
-import { defineExpose, computed } from "vue";
+import { ref, computed, Ref } from "vue";
 import { useCalendar } from "../composables/calendar";
 
 const props = defineProps({
@@ -23,12 +25,23 @@ const {
   loadCalendar: loadWeeklyCalendar,
   isLoadingCalendar,
   getCalendarDayByDate,
-  deleteDateFromCalendar,
+  deleteCalendarItem,
   updateCalendarDay,
+  updateCalendarItem,
 } = useCalendar(computed(() => props.allDatesInWeek));
 
 const getContainerElement = () => {
   return isLoadingCalendar.value ? "c-skeleton-loader" : "div";
+};
+
+const isEditModalOpen = ref(false);
+const editedItem: Ref<CalendarItem | undefined> = ref();
+const editedItemDate: Ref<Date | undefined> = ref();
+
+const openEditModal = (item: CalendarItem, date: Date) => {
+  editedItem.value = item;
+  editedItemDate.value = date;
+  isEditModalOpen.value = true;
 };
 
 defineExpose({ loadWeeklyCalendar });

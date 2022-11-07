@@ -49,7 +49,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     return store.dispatch("calendar/getCalendar", datesRange);
   };
 
-  const deleteDateFromCalendar = (id: number, date: Date) => {
+  const deleteCalendarItem = (id: number, date: Date) => {
     const day = getCalendarDayByDate(date);
     const itemToRemove = day?.items.find((item) => item.id === id);
 
@@ -61,6 +61,13 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     store.dispatch("calendar/deleteDateFromCalendar", id);
   };
 
+  const updateCalendarItem = (item: CalendarItem, date: Date) => {
+    return store.dispatch("calendar/updateDateInCalendar", {
+      date,
+      ...item,
+    });
+  };
+
   const updateCalendarDay = (calendarDay: CalendarDay) => {
     const date = calendarDay.date;
     const items = calendarDay.items;
@@ -68,10 +75,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     updateDayItemsSortOrder(items);
 
     const promises = items.map((item) => {
-      return store.dispatch("calendar/updateDateInCalendar", {
-        date,
-        ...item,
-      });
+      return updateCalendarItem(item, date);
     });
 
     updatePromises.value = updatePromises.value.concat(promises);
@@ -103,7 +107,8 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     loadCalendar,
     isLoadingCalendar,
     getCalendarDayByDate,
-    deleteDateFromCalendar,
+    deleteCalendarItem,
     updateCalendarDay,
+    updateCalendarItem,
   };
 }

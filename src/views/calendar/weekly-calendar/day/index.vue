@@ -1,6 +1,6 @@
 <script lang="ts">
 import Draggable from "vuedraggable";
-import WeeklyCalendarDayItem from "./item/index.vue";
+import WeeklyCalendarDayItem from "../day-item/index.vue";
 
 export default {
   name: "WeeklyCalendarDay",
@@ -14,7 +14,7 @@ export default {
 <script setup lang="ts">
 import { inject, ref } from "vue";
 import { useStore } from "vuex";
-import { CalendarDay } from "@/types/calendar";
+import { CalendarDay, CalendarItem } from "@/types/calendar";
 import { isToday } from "date-fns";
 
 const props = defineProps({
@@ -30,7 +30,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  deleteDateFromCalendar: {
+  deleteCalendarItem: {
     type: Function,
     required: true,
   },
@@ -40,6 +40,10 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits<{
+  (event: "edit", item: CalendarItem, date: Date): void;
+}>();
+
 const store = useStore();
 const getFormattedDate = inject("getFormattedDate");
 const isDragging = ref(false);
@@ -48,8 +52,8 @@ const onMove = () => {
   props.updateCalendarDay(props.calendarDay);
 };
 
-const deleteDateFromCalendar = (id: number) => {
-  props.deleteDateFromCalendar(id, props.calendarDay.date);
+const deleteCalendarItem = (id: number) => {
+  props.deleteCalendarItem(id, props.calendarDay.date);
 };
 
 const getContainerClasses = () => {

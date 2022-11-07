@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref, watch, onMounted, onUnmounted } from "vue";
+import { computed, ref, Ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { NavigationItem } from "@/types/components/horizontal-tabs";
 
 const props = defineProps({
@@ -97,7 +97,7 @@ onMounted(() => {
   activeItemResizeObserver.observe(activeItemRef.value);
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   activeItemResizeObserver.unobserve(activeItemRef.value);
 });
 </script>

@@ -4,8 +4,15 @@
     :calendarDay="getCalendarDayByDate(date)"
     :isLoadingCalendar="isLoadingCalendar"
     :date="date"
-    :deleteDateFromCalendar="deleteDateFromCalendar"
+    :deleteCalendarItem="deleteCalendarItem"
     :updateCalendarDay="updateCalendarDay"
+    @edit="openEditModal"
   >
   </WeeklyCalendarDay>
 </component>
+<EditItemModal
+  v-model:isOpen="isEditModalOpen"
+  :date="editedItemDate"
+  :calendarItem="editedItem"
+  :updateCalendarItem="updateCalendarItem"
+/>

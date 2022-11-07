@@ -12,8 +12,10 @@ export default {
 import { CalendarItem } from "@/types/calendar";
 import { useTooltip } from "@/composables/tooltip";
 import { RouterLink } from "vue-router";
+import { useWindowSize } from "@/composables/window-size";
 
 const tooltip = useTooltip();
+const { isMobile } = useWindowSize();
 
 const props = defineProps({
   item: {
@@ -24,18 +26,19 @@ const props = defineProps({
 
 const emits = defineEmits<{
   (event: "delete", id: number): void;
+  (event: "edit", item: CalendarItem): void;
 }>();
 
 const openRecipeTooltip = (e: any) => {
-  return tooltip.open({ parent: e.target, width: 110, text: "Otwórz przepis" });
+  return tooltip.open({ parent: e.target, width: 125, text: "Otwórz przepis" });
 };
 
 const openCloneTooltip = (e: any) => {
-  return tooltip.open({ parent: e.target, width: 58, text: "Duplikuj" });
+  return tooltip.open({ parent: e.target, width: 74, text: "Duplikuj" });
 };
 
 const openEditTooltip = (e: any) => {
-  return tooltip.open({ parent: e.target, width: 45, text: "Edytuj" });
+  return tooltip.open({ parent: e.target, width: 60, text: "Edytuj" });
 };
 
 const getTagsTooltipId = (id: number) => {
@@ -49,7 +52,7 @@ const isTagsTooltipContentVisible = (id: number) => {
 const openTagsTooltip = (e: any, id: string) => {
   tooltip.open({
     parent: e.target,
-    width: 220,
+    width: 240,
     withCustomContent: true,
     activeCustomContent: id,
   });

@@ -16,9 +16,10 @@
   <div class="day-item__body body">
     <div class="body__left-part">
       <div
+        v-if="!isMobile"
         class="body__icon"
         @mouseover.self="openTagsTooltip($event, getTagsTooltipId(item.id))"
-        @mouseleave.self="tooltip.close()"
+        @mouseleave.self="tooltip.close"
       >
         <FontAwesomeIcon icon="tags" />
       </div>
@@ -37,6 +38,7 @@
         size="small"
         @mouseenter.self="openEditTooltip"
         @mouseleave.self="tooltip.close"
+        @click="emits('edit', item)"
       />
     </div>
     <RouterLink v-if="item.isRecipe" :to="'/recipes/' + item.recipeId">

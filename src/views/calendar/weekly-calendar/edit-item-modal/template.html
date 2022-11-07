@@ -1,0 +1,12 @@
+<CModal
+  v-model:isOpen="_isOpen"
+  title="Edytuj kalendarz"
+  submitButtonLabel="Zapisz"
+  :isSubmitting="isUpdating"
+  @submit="updateCalendarItem"
+>
+  <div class="edit-calendar-item">
+    <p>Określ liczbę porcji</p>
+    <CSetPortions v-model="calendarItem.portions" />
+  </div>
+</CModal>

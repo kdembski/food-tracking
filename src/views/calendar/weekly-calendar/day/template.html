@@ -14,7 +14,11 @@
     @end="onDragEnd"
   >
     <template #item="{ element }">
-      <WeeklyCalendarDayItem :item="element" @delete="deleteDateFromCalendar" />
+      <WeeklyCalendarDayItem
+        :item="element"
+        @delete="deleteCalendarItem"
+        @edit="emits('edit', $event, calendarDay?.date)"
+      />
     </template>
   </Draggable>
 </div>

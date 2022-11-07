@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref, onMounted, onUnmounted, watch } from "vue";
+import { computed, ref, Ref, onMounted, onBeforeUnmount, watch } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -43,14 +43,14 @@ const getTooltipStyle = () => {
   return {
     left: config.value.left + "px",
     top: config.value.top + "px",
-    width: config.value.width + 16 + "px",
+    width: config.value.width + "px",
     height: contentHeight.value + "px",
   };
 };
 
 const getTooltipContentStyle = () => {
   return {
-    width: config.value.width + 16 + "px",
+    width: config.value.width + "px",
   };
 };
 
@@ -71,7 +71,7 @@ onMounted(() => {
   contentResizeObserver.observe(content.value);
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   if (!content.value) {
     return;
   }

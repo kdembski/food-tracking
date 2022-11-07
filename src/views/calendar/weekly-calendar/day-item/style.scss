@@ -59,11 +59,11 @@
   }
 
   &__tags-tooltip {
-    padding: $spacing-2xs;
+    padding: $spacing-xs;
 
     & > p {
       @include uppercasedSecondaryTextWithBorder;
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-lg;
     }
   }
 }

@@ -12,9 +12,7 @@
     padding: 0 $spacing-sm;
 
     & > p {
-      @include uppercasedSecondaryText;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: $spacing-2xs;
+      @include uppercasedSecondaryTextWithBorder;
     }
 
     & > div {
@@ -22,6 +20,7 @@
       align-items: center;
       justify-content: space-between;
       gap: $spacing-lg;
+      padding: 0 $spacing-sm;
     }
   }
 }
