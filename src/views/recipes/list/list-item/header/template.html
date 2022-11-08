@@ -11,20 +11,27 @@
     />
   </template>
   <template v-else>
-    <CButton color="secondary" variant="text" icon="cart-shopping" />
+    <CButton
+      color="secondary"
+      variant="text"
+      icon="cart-shopping"
+      v-on="getTooltipEvents({ width: 182, text: 'Dodaj do listy zakupów' })"
+    />
     <CButton
       color="secondary"
       variant="text"
       :icon="['far', 'calendar']"
       @click="addToCalendar"
+      v-on="getTooltipEvents({ width: 162, text: 'Dodaj do kalendarza' })"
     />
-    <CLink
-      v-if="item.cookidooLink"
-      :href="item.cookidooLink"
+    <CButton
+      color="secondary"
+      variant="text"
+      @click="openCookidoLink"
       class="item-header__cookidoo-link"
-      external
+      v-on="getTooltipEvents({ width: 155, text: 'Otwórz w Cookidoo' })"
     >
       <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
-    </CLink>
+    </CButton>
   </template>
 </div>

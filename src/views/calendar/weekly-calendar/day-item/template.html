@@ -18,8 +18,11 @@
       <div
         v-if="!isMobile"
         class="body__icon"
-        @mouseover.self="openTagsTooltip($event, getTagsTooltipId(item.id))"
-        @mouseleave.self="tooltip.close"
+        v-on="getTooltipEvents({ 
+          width: 240, 
+          withCustomContent: true,
+          activeCustomContent: getTagsTooltipId(item.id)
+        })"
       >
         <FontAwesomeIcon icon="tags" />
       </div>
@@ -28,8 +31,7 @@
         variant="text"
         icon="clone"
         size="small"
-        @mouseenter.self="openCloneTooltip"
-        @mouseleave.self="tooltip.close"
+        v-on="getTooltipEvents({ width: 74, text: 'Duplikuj' })"
         @click="emits('clone', item)"
       />
       <CButton
@@ -37,8 +39,7 @@
         variant="text"
         icon="pen-to-square"
         size="small"
-        @mouseenter.self="openEditTooltip"
-        @mouseleave.self="tooltip.close"
+        v-on="getTooltipEvents({ width: 60, text: 'Edytuj' })"
         @click="emits('edit', item)"
       />
     </div>
@@ -47,8 +48,7 @@
         color="secondary"
         variant="text"
         icon="utensils"
-        @mouseenter.self="openRecipeTooltip"
-        @mouseleave.self="tooltip.close"
+        v-on="getTooltipEvents({ width: 125, text: 'Otwórz przepis' })"
       />
     </RouterLink>
     <RouterLink v-else to="/ordered">

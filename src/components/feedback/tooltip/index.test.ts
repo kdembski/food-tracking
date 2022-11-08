@@ -11,8 +11,19 @@ describe("Tooltip Component", () => {
   let state: any;
   let tooltip: any;
   let mutations: any;
+  let parentRect: any;
+  let parent: any;
 
   beforeEach(async () => {
+    parentRect = {
+      bottom: 10,
+      left: 20,
+      width: 30,
+    };
+    parent = {
+      getBoundingClientRect: () => parentRect,
+    };
+
     window.ResizeObserver = jest.fn().mockImplementation((callback) => ({
       disconnect: jest.fn(),
       observe: jest.fn(),
@@ -107,14 +118,6 @@ describe("Tooltip Component", () => {
 
   it("Should set isTooltipOpen to true and tooltipConfig appropriate values after open method call", async () => {
     await store.commit("setIsTooltipOpen", false);
-    const parentRect = {
-      bottom: 10,
-      left: 20,
-      width: 30,
-    };
-    const parent = {
-      getBoundingClientRect: () => parentRect,
-    };
 
     tooltip.open({ parent, width: 100, text: "test text" });
     jest.runAllTimers();
@@ -124,7 +127,7 @@ describe("Tooltip Component", () => {
         activeCustomContent: undefined,
         left: 10,
         text: "test text",
-        top: 20,
+        top: 30,
         width: 100,
         withCustomContent: undefined,
       }
@@ -139,7 +142,7 @@ describe("Tooltip Component", () => {
         activeCustomContent: undefined,
         left: 30,
         text: "test text",
-        top: 20,
+        top: 30,
         width: 10,
         withCustomContent: undefined,
       }
@@ -154,8 +157,29 @@ describe("Tooltip Component", () => {
         activeCustomContent: undefined,
         left: 1004,
         text: "test text",
-        top: 20,
+        top: 30,
         width: 10,
+        withCustomContent: undefined,
+      }
+    );
+  });
+
+  it("Should call open method on mouseenter event", async () => {
+    const events = tooltip.getTooltipEvents({ width: 100, text: "test text" });
+
+    await events.mouseenter({ currentTarget: "parent1", target: "parent2" });
+    expect(mutations.setTooltipConfig).toHaveBeenCalledTimes(0);
+
+    await events.mouseenter({ currentTarget: parent, target: parent });
+    jest.runAllTimers();
+    expect(mutations.setTooltipConfig).toHaveBeenLastCalledWith(
+      expect.any(Object),
+      {
+        activeCustomContent: undefined,
+        left: 10,
+        text: "test text",
+        top: 30,
+        width: 100,
         withCustomContent: undefined,
       }
     );
@@ -163,6 +187,17 @@ describe("Tooltip Component", () => {
 
   it("Should set isTooltipOpen to false after close method call", async () => {
     tooltip.close();
+    jest.runAllTimers();
+    expect(state.isTooltipOpen).toBe(false);
+  });
+
+  it("Should call close method on mouseleave event", async () => {
+    const events = tooltip.getTooltipEvents({ width: 100, text: "test text" });
+
+    await events.mouseleave({ currentTarget: "parent1", target: "parent2" });
+    expect(state.isTooltipOpen).toBe(true);
+
+    await events.mouseleave({ currentTarget: "parent1", target: "parent1" });
     jest.runAllTimers();
     expect(state.isTooltipOpen).toBe(false);
   });

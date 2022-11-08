@@ -7,21 +7,14 @@
   }
 
   &__cookidoo-link {
-    color: $text-darker;
-    border-radius: $radius-sm;
-
-    & > svg {
+    svg {
       width: 17px;
-    }
-
-    &:hover {
-      background-color: $textButtonHoverBackground;
     }
   }
 
   &__buttons {
     display: flex;
-    gap: $spacing-sm;
+    gap: $spacing-xs;
 
     & > a {
       display: flex;

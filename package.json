@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "jest",
-    "test:coverage": "jest --collect-coverage",
+    "test": "jest --runInBand",
+    "test:coverage": "jest --runInBand --collect-coverage",
     "test:clear": "jest --clearCache",
     "storybook": "start-storybook -c storybook -p 6006",
     "storybook:build": "build-storybook -c storybook"

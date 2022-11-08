@@ -10,11 +10,11 @@ export default {
 
 <script setup lang="ts">
 import { CalendarItem } from "@/types/calendar";
-import { useTooltip } from "@/composables/tooltip";
 import { RouterLink } from "vue-router";
 import { useWindowSize } from "@/composables/window-size";
+import { useTooltip } from "@/composables/tooltip";
 
-const tooltip = useTooltip();
+const { activeCustomContent, getTooltipEvents } = useTooltip();
 const { isMobile } = useWindowSize();
 
 const props = defineProps({
@@ -30,33 +30,12 @@ const emits = defineEmits<{
   (event: "clone", item: CalendarItem): void;
 }>();
 
-const openRecipeTooltip = (e: any) => {
-  return tooltip.open({ parent: e.target, width: 125, text: "Otwórz przepis" });
-};
-
-const openCloneTooltip = (e: any) => {
-  return tooltip.open({ parent: e.target, width: 74, text: "Duplikuj" });
-};
-
-const openEditTooltip = (e: any) => {
-  return tooltip.open({ parent: e.target, width: 60, text: "Edytuj" });
-};
-
 const getTagsTooltipId = (id: number) => {
   return "calendar-tags-" + id;
 };
 
 const isTagsTooltipContentVisible = (id: number) => {
-  return tooltip.activeCustomContent.value === getTagsTooltipId(id);
-};
-
-const openTagsTooltip = (e: any, id: string) => {
-  tooltip.open({
-    parent: e.target,
-    width: 240,
-    withCustomContent: true,
-    activeCustomContent: id,
-  });
+  return activeCustomContent.value === getTagsTooltipId(id);
 };
 </script>
 

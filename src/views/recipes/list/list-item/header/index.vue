@@ -1,16 +1,13 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
 import CButtonWithDropdown from "@/components/controls/button-with-dropdown/index.vue";
-import CLink from "@/components/utils/link/index.vue";
 import InlineSvg from "vue-inline-svg";
-import recipe from "@/store/recipe";
 
 export default {
   name: "RecipesListItemHeader",
   components: {
     CButton,
     InlineSvg,
-    CLink,
     CButtonWithDropdown,
   },
 };
@@ -20,9 +17,11 @@ export default {
 import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipe";
 import { useRouter, RouterLink } from "vue-router";
+import { useTooltip } from "@/composables/tooltip";
 
 const router = useRouter();
 const { isMobile } = useWindowSize();
+const { getTooltipEvents } = useTooltip();
 
 const props = defineProps({
   item: {

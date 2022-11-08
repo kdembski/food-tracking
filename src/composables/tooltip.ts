@@ -1,5 +1,5 @@
 import { useStore } from "vuex";
-import { computed, onUnmounted } from "vue";
+import { computed } from "vue";
 import { useWindowSize } from "./window-size";
 
 export function useTooltip() {
@@ -39,7 +39,7 @@ export function useTooltip() {
       width: parentWidth,
     } = parent.getBoundingClientRect();
 
-    const top = parentBottom + 10;
+    const top = parentBottom + 20;
     const left = getLeftPosition(parentLeft, parentWidth, width);
 
     clearTimeout(closeTimeout);
@@ -85,14 +85,45 @@ export function useTooltip() {
     }, 50);
   };
 
-  onUnmounted(() => {
-    clearTimeout(openTimeout);
-    store.commit("setIsTooltipOpen", false);
-  });
+  const getTooltipEvents = ({
+    width,
+    text,
+    withCustomContent,
+    activeCustomContent,
+  }: {
+    width: number;
+    text?: string;
+    withCustomContent?: boolean;
+    activeCustomContent?: string;
+  }) => {
+    return {
+      mouseenter: (e: any) => {
+        if (e.currentTarget !== e.target) {
+          return;
+        }
+
+        open({
+          parent: e.currentTarget,
+          width,
+          text,
+          withCustomContent,
+          activeCustomContent,
+        });
+      },
+      mouseleave: (e: any) => {
+        if (e.currentTarget !== e.target) {
+          return;
+        }
+
+        close();
+      },
+    };
+  };
 
   return {
     open,
     close,
     activeCustomContent,
+    getTooltipEvents,
   };
 }
