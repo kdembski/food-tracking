@@ -27,6 +27,7 @@ const props = defineProps({
 const emits = defineEmits<{
   (event: "delete", id: number): void;
   (event: "edit", item: CalendarItem): void;
+  (event: "clone", item: CalendarItem): void;
 }>();
 
 const openRecipeTooltip = (e: any) => {

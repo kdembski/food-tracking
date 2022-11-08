@@ -30,31 +30,18 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  deleteCalendarItem: {
-    type: Function,
-    required: true,
-  },
-  updateCalendarDay: {
-    type: Function,
-    required: true,
-  },
 });
 
 const emits = defineEmits<{
   (event: "edit", item: CalendarItem, date: Date): void;
+  (event: "clone", item: CalendarItem, date: Date): void;
+  (event: "update", day: CalendarDay): void;
+  (event: "delete", id: number, date: Date): void;
 }>();
 
 const store = useStore();
 const getFormattedDate = inject("getFormattedDate");
 const isDragging = ref(false);
-
-const onMove = () => {
-  props.updateCalendarDay(props.calendarDay);
-};
-
-const deleteCalendarItem = (id: number) => {
-  props.deleteCalendarItem(id, props.calendarDay.date);
-};
 
 const getContainerClasses = () => {
   return [getActiveClass()];

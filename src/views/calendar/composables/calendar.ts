@@ -3,6 +3,7 @@ import { useStore } from "vuex";
 import { isEqual } from "date-fns";
 import { CalendarDay, CalendarItem } from "@/types/calendar";
 import { useToastNotification } from "@/composables/toast-notification";
+import { cloneDeep } from "lodash";
 
 export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   const store = useStore();
@@ -49,6 +50,27 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     return store.dispatch("calendar/getCalendar", datesRange);
   };
 
+  const addCalendarItem = (item: CalendarItem, date: Date) => {
+    return store.dispatch("calendar/addDateToCalendar", { date, ...item });
+  };
+
+  const cloneCalendarItem = (item: CalendarItem, date: Date) => {
+    const clone = cloneDeep(item);
+    addCalendarItem(clone, date)
+      .then((response) => {
+        toastNotification.success("Udało się zduplikować");
+
+        const id = response.data.insertId;
+        const day = getCalendarDayByDate(date);
+        clone.id = id;
+        day?.items.push(clone);
+      })
+      .catch((error) => {
+        toastNotification.error("Nie udało się zduplikować.");
+        console.log(error);
+      });
+  };
+
   const deleteCalendarItem = (id: number, date: Date) => {
     const day = getCalendarDayByDate(date);
     const itemToRemove = day?.items.find((item) => item.id === id);
@@ -92,7 +114,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
         updatePromises.value = [];
       })
       .catch(() => {
-        toastNotification.error("Nie udało sie zaktualizować kalendarza.");
+        toastNotification.error("Nie udało się zaktualizować kalendarza.");
         updatePromises.value = [];
       });
   });
@@ -110,5 +132,6 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     deleteCalendarItem,
     updateCalendarDay,
     updateCalendarItem,
+    cloneCalendarItem,
   };
 }

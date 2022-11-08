@@ -30,9 +30,9 @@ const actions: ActionTree<any, any> = {
   },
 
   addDateToCalendar(_, data) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<AxiosResponse>((resolve, reject) => {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/calendar", data)
-        .then(() => resolve())
+        .then((response) => resolve(response))
         .catch(() => reject());
     });
   },

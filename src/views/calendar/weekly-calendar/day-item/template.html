@@ -30,6 +30,7 @@
         size="small"
         @mouseenter.self="openCloneTooltip"
         @mouseleave.self="tooltip.close"
+        @click="emits('clone', item)"
       />
       <CButton
         color="secondary"

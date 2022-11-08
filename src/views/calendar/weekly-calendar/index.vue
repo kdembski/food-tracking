@@ -28,6 +28,7 @@ const {
   deleteCalendarItem,
   updateCalendarDay,
   updateCalendarItem,
+  cloneCalendarItem,
 } = useCalendar(computed(() => props.allDatesInWeek));
 
 const getContainerElement = () => {

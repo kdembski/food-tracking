@@ -4,9 +4,10 @@
     :calendarDay="getCalendarDayByDate(date)"
     :isLoadingCalendar="isLoadingCalendar"
     :date="date"
-    :deleteCalendarItem="deleteCalendarItem"
-    :updateCalendarDay="updateCalendarDay"
+    @delete="deleteCalendarItem"
+    @update="updateCalendarDay"
     @edit="openEditModal"
+    @clone="cloneCalendarItem"
   >
   </WeeklyCalendarDay>
 </component>

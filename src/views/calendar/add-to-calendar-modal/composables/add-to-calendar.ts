@@ -18,16 +18,30 @@ export function useAddToCalendar(
   const toastNotification = useToastNotification();
   const router = useRouter();
 
+  const addDateToCalendar = (
+    date: Date,
+    recipeId: number | undefined,
+    orderedFoodId: number | undefined,
+    portions: number
+  ) => {
+    return store.dispatch("calendar/addDateToCalendar", {
+      date,
+      recipeId,
+      orderedFoodId,
+      portions,
+    });
+  };
+
   const addSelectedDatesToCalendar = () => {
     isAddingToCalendar.value = true;
 
     const promises = selectedDates.value.map((date, index) => {
-      return store.dispatch("calendar/addDateToCalendar", {
+      return addDateToCalendar(
         date,
-        recipeId: addedRecipe.value?.id,
-        orderedFoodId: addedOrderedFood.value?.id,
-        portions: portions.value[index],
-      });
+        addedRecipe.value?.id,
+        addedOrderedFood.value?.id,
+        portions.value[index]
+      );
     });
 
     Promise.all(promises)

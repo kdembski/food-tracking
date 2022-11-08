@@ -8,7 +8,7 @@
     animation="150"
     ghostClass="calendar-day__ghost"
     itemKey="id"
-    @change="onMove"
+    @change="emits('update', calendarDay)"
     :forceFallback="true"
     @start="onDragStart"
     @end="onDragEnd"
@@ -16,8 +16,9 @@
     <template #item="{ element }">
       <WeeklyCalendarDayItem
         :item="element"
-        @delete="deleteCalendarItem"
+        @delete="emits('delete', $event, calendarDay?.date)"
         @edit="emits('edit', $event, calendarDay?.date)"
+        @clone="emits('clone', $event, calendarDay?.date)"
       />
     </template>
   </Draggable>
