@@ -17,15 +17,14 @@
     overflow: hidden;
     padding: 0;
     border-top: 1px solid var(--border-color);
-    padding: $spacing-3xl $spacing-sm $spacing-4xl;
-    gap: $spacing-2xl;
+    padding: $spacing-4xl $spacing-sm;
+    gap: $spacing-xl;
   }
 
   .item {
     &__header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: $spacing-lg;
     }
 
@@ -86,7 +85,7 @@
 @media screen and (max-width: $screen-md) {
   .list {
     .item {
-      padding: $spacing-xl $spacing-xs $spacing-2xl;
+      padding: $spacing-2xl $spacing-xs;
       gap: $spacing-lg;
     }
 

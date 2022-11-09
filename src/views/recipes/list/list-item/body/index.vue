@@ -12,7 +12,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
 import {
   isEqual,
@@ -23,9 +23,11 @@ import {
   addDays,
 } from "date-fns";
 import { useWindowSize } from "@/composables/window-size";
+import { useTooltip } from "@/composables/tooltip";
 
-const { getDistanceInWords } = useDateHelpers();
+const { getDistanceInWords, getFormattedDate } = useDateHelpers();
 const { isMobile } = useWindowSize();
+const { getTooltipEvents } = useTooltip();
 
 const props = defineProps({
   item: {
@@ -39,6 +41,11 @@ const props = defineProps({
 });
 
 const isPlanned = ref(false);
+const plannedDates = computed(() => {
+  return props.item.cookedDatesInCurrentMonth
+    .filter((date: Date) => isFuture(date))
+    .map((date: Date) => getFormattedDate(date, "d MMM"));
+});
 
 const getPreparationTime = (time: number) => {
   const minutes = time % 60;
@@ -86,6 +93,21 @@ const getFormattedCookedDate = (cookedDate: Date) => {
   }
 
   return distance + " temu";
+};
+
+const getCookedDateTooltipConfig = () => {
+  if (isPlanned.value) {
+    return {
+      width: 300,
+      text: "Zaplanowane na: " + plannedDates.value.join(", "),
+    };
+  }
+  return {
+    width: 220,
+    text:
+      "Ostatnio gotowane " +
+      getFormattedCookedDate(props.item.cookedDate).toLowerCase(),
+  };
 };
 </script>
 

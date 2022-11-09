@@ -47,11 +47,27 @@ $filtersHeightOffset: 92px; //topbar height + paddings
     &-top {
       position: sticky;
       z-index: 1;
-      top: -$spacing-2xl;
-      background-color: var(--surface-primary);
-      margin: -$spacing-md 0 -1px;
+      top: -($spacing-2xl + $spacing-md);
+      overflow: hidden;
       padding: $spacing-md 0;
-      border-bottom: 1px solid var(--border-color);
+      margin: -$spacing-xl 0 (-$spacing-md);
+
+      .pagination {
+        background-color: var(--surface-primary);
+        padding: $spacing-md 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .pagination__loader {
+        padding: $spacing-md 0;
+      }
+
+      &--sticky {
+        .pagination {
+          box-shadow: $shadow-sm var(--shadow-color);
+          border: 0;
+        }
+      }
     }
 
     &-bottom {
@@ -165,7 +181,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
 
     &__pagination {
       &-top {
-        top: -$spacing-lg;
+        top: -($spacing-lg + $spacing-md);
       }
     }
   }

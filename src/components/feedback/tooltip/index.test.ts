@@ -127,7 +127,7 @@ describe("Tooltip Component", () => {
         activeCustomContent: undefined,
         left: 10,
         text: "test text",
-        top: 30,
+        top: 25,
         width: 100,
         withCustomContent: undefined,
       }
@@ -142,7 +142,7 @@ describe("Tooltip Component", () => {
         activeCustomContent: undefined,
         left: 30,
         text: "test text",
-        top: 30,
+        top: 25,
         width: 10,
         withCustomContent: undefined,
       }
@@ -157,7 +157,7 @@ describe("Tooltip Component", () => {
         activeCustomContent: undefined,
         left: 1004,
         text: "test text",
-        top: 30,
+        top: 25,
         width: 10,
         withCustomContent: undefined,
       }
@@ -178,7 +178,7 @@ describe("Tooltip Component", () => {
         activeCustomContent: undefined,
         left: 10,
         text: "test text",
-        top: 30,
+        top: 25,
         width: 100,
         withCustomContent: undefined,
       }

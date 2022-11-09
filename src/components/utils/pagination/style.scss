@@ -4,7 +4,7 @@ $mobileItemPadding: $spacing-xs $spacing-md;
 .pagination {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   color: var(--text-secondary);
 
   &-pages {

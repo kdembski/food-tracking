@@ -33,7 +33,7 @@ export function useStickyPagination(
       paginationCurrentOffsetTop.value >
       paginationInitialOffsetTop.value + 5
     ) {
-      return "list-with-filters__pagination--sticky";
+      return "list-with-filters__pagination-top--sticky";
     }
     return "";
   });

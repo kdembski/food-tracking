@@ -39,7 +39,7 @@ export function useTooltip() {
       width: parentWidth,
     } = parent.getBoundingClientRect();
 
-    const top = parentBottom + 20;
+    const top = parentBottom + 15;
     const left = getLeftPosition(parentLeft, parentWidth, width);
 
     clearTimeout(closeTimeout);
