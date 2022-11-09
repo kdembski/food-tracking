@@ -2,6 +2,29 @@
   display: grid;
   gap: $spacing-xl;
 
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &:deep(.tag) {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 $spacing-lg;
+    color: var(--text-primary);
+    background-color: var(--surface-tetriary);
+    font-weight: $font-medium;
+    font-size: $font-sm;
+    border-radius: $tag-radius;
+    height: $tag-height;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(94%);
+    }
+  }
+
   &__empty {
     color: var(--text-primary);
   }
@@ -11,5 +34,13 @@
     background-color: var(--success-secondary);
     display: flex;
     gap: 5px;
+  }
+}
+
+[data-theme="dark"] {
+  .select-tags:deep(.tag) {
+    &:hover {
+      filter: brightness(135%);
+    }
   }
 }

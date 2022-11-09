@@ -95,9 +95,5 @@ $monthPreviewWidth: 104px;
 $mobileMonthPreviewWidth: 69px;
 $textButtonHoverBackground: rgba(var(--text-primary-rgb), 0.08);
 
-$tag-small-radius: $radius-xl;
-$tag-small-height: 18px;
-$tag-medium-radius: $radius-xl;
-$tag-medium-height: 22px;
-$tag-large-radius: $radius-2xl;
-$tag-large-height: 32px;
+$tag-radius: $radius-2xl;
+$tag-height: 32px;

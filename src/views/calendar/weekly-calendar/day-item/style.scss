@@ -63,7 +63,7 @@
 
     & > p {
       @include uppercasedSecondaryTextWithBorder;
-      margin-bottom: $spacing-lg;
+      margin-bottom: $spacing-md;
     }
   }
 }

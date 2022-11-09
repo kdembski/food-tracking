@@ -1,5 +1,5 @@
-$itemGap: $spacing-md;
-$mobileItemGap: $spacing-sm;
+$itemGap: $spacing-sm;
+$mobileItemGap: $spacing-xs;
 
 .item-body {
   display: grid;
@@ -28,8 +28,6 @@ $mobileItemGap: $spacing-sm;
   }
 
   &__preparation-time {
-    margin-left: $spacing-2xs;
-
     & > svg {
       margin-top: 1px;
     }
@@ -56,7 +54,7 @@ $mobileItemGap: $spacing-sm;
     }
 
     &__row {
-      gap: $mobileItemGap + 4px;
+      gap: $mobileItemGap + 6px;
     }
 
     &__cooked-date,

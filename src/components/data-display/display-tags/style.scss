@@ -1,34 +1,57 @@
 .tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .tag {
+    font-weight: $font-medium;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    position: relative;
+
+    &--with-hover:hover {
+      color: var(--text-primary);
+    }
+
+    &:not(:last-child):after {
+      content: "";
+      height: 3px;
+      width: 3px;
+      background-color: var(--text-secondary);
+      border-radius: 100%;
+      position: absolute;
+    }
+
+    &--last-in-row:after {
+      visibility: hidden;
+    }
+  }
+
   &--small {
-    gap: $spacing-2xs;
+    column-gap: $spacing-lg;
 
     .tag {
-      padding: 0 $spacing-sm;
-      font-size: $font-2xs;
-      border-radius: $tag-small-radius;
-      height: $tag-small-height;
+      font-size: $font-xs;
+
+      &:not(:last-child):after {
+        top: 6px;
+        right: -7.5px;
+      }
     }
   }
 
   &--medium {
-    gap: $spacing-xs;
+    column-gap: $spacing-xl;
+    row-gap: $spacing-2xs;
 
     .tag {
-      padding: 0 $spacing-md;
-      font-size: $font-xs;
-      border-radius: $tag-medium-radius;
-      height: $tag-medium-height;
-    }
-  }
-
-  &--large {
-    gap: $spacing-sm;
-
-    .tag {
-      padding: 0 $spacing-lg;
       font-size: $font-sm;
-      border-radius: $tag-large-radius;
-      height: $tag-large-height;
+
+      &:not(:last-child):after {
+        top: 7.5px;
+        right: -9.5px;
+      }
     }
   }
 }

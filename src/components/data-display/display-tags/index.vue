@@ -7,6 +7,9 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { nextTick, ref, Ref, watch } from "vue";
+import { useWindowSize } from "@/composables/window-size";
+
 const props = defineProps({
   tags: {
     type: [String, Array],
@@ -32,6 +35,9 @@ const props = defineProps({
   },
 });
 
+const { windowWidth } = useWindowSize();
+const tagRefs: Ref<HTMLElement[] | undefined> = ref();
+
 const emit = defineEmits<{
   (e: "click", name: string): void;
 }>();
@@ -40,7 +46,15 @@ const onClick = (name: string) => {
   props.onClick?.(name);
 };
 
-const getTagClasses = () => {
+const getContainerClasses = () => {
+  return [getSizeClass()];
+};
+
+const getSizeClass = () => {
+  return "tags--" + props.size;
+};
+
+const getItemClasses = () => {
   return [getWithHoverClass()];
 };
 
@@ -51,13 +65,33 @@ const getWithHoverClass = () => {
   return "";
 };
 
-const getContainerClasses = () => {
-  return [getSizeClass()];
+const addLastInRowClass = (tagElements: HTMLElement[] | undefined) => {
+  let previousElement: HTMLElement;
+  tagElements?.forEach((element, index) => {
+    if (index === 0) {
+      previousElement = element;
+      return;
+    }
+
+    if (previousElement.offsetTop === element.offsetTop) {
+      previousElement.classList.remove("tag--last-in-row");
+      previousElement = element;
+      return;
+    }
+
+    previousElement.classList.add("tag--last-in-row");
+    previousElement = element;
+  });
 };
 
-const getSizeClass = () => {
-  return "tags--" + props.size;
-};
+watch(
+  windowWidth,
+  async () => {
+    await nextTick();
+    addLastInRowClass(tagRefs.value);
+  },
+  { immediate: true }
+);
 </script>
 
 <template src="./template.html"></template>

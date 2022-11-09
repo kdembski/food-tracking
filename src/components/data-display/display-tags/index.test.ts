@@ -34,4 +34,18 @@ describe("Display Tags Component", () => {
     });
     expect(wrapper.vm.getWithHoverClass()).toEqual("tag--with-hover");
   });
+
+  it("Should add last in row class when element has different offset top than previous element", async () => {
+    const elements = [
+      { offsetTop: 10, classList: { add: jest.fn(), remove: jest.fn() } },
+      { offsetTop: 10, classList: { add: jest.fn(), remove: jest.fn() } },
+      { offsetTop: 10, classList: { add: jest.fn(), remove: jest.fn() } },
+      { offsetTop: 20, classList: { add: jest.fn(), remove: jest.fn() } },
+    ];
+    await wrapper.vm.addLastInRowClass(elements);
+    expect(elements[1].classList.remove).toHaveBeenCalledWith(
+      "tag--last-in-row"
+    );
+    expect(elements[2].classList.add).toHaveBeenCalledWith("tag--last-in-row");
+  });
 });
