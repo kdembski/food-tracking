@@ -52,7 +52,7 @@ export function useAddToCalendar(
 
         const pushRouterToCalendar = () => router.push("/calendar");
         toastNotification.success(
-          "Udało sie dodać do kalendarza.",
+          "Dodano do kalendarza.",
           pushRouterToCalendar,
           "Otwórz Kalendarz"
         );

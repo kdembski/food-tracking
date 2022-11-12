@@ -12,9 +12,9 @@ export default {
 import { CalendarItem } from "@/types/calendar";
 import { RouterLink } from "vue-router";
 import { useWindowSize } from "@/composables/window-size";
-import { useTooltip } from "@/composables/tooltip";
+import { useStore } from "vuex";
 
-const { activeCustomContent, getTooltipEvents } = useTooltip();
+const store = useStore();
 const { isMobile } = useWindowSize();
 
 const props = defineProps({
@@ -35,7 +35,8 @@ const getTagsTooltipId = (id: number) => {
 };
 
 const isTagsTooltipContentVisible = (id: number) => {
-  return activeCustomContent.value === getTagsTooltipId(id);
+  const activeCustomContent = store.state.tooltipConfig.activeCustomContent;
+  return activeCustomContent === getTagsTooltipId(id);
 };
 </script>
 

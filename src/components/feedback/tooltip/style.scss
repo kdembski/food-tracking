@@ -1,22 +1,20 @@
 .tooltip {
-  position: fixed;
-  box-shadow: $shadow-md $shadow-color;
-  border-radius: $radius-lg;
-  background-color: var(--surface-primary);
+  position: absolute;
   transition: opacity 0.1s ease-in-out;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-
-  &--transition-all {
-    transition: all 0.1s ease-in-out;
-  }
 
   &__content {
+    position: absolute;
+    box-shadow: $shadow-md $shadow-color;
+    border-radius: $radius-lg;
+    background-color: var(--surface-primary);
+    border: 1px solid var(--border-color);
     padding: $spacing-md;
+    transform: translateX(-50%);
   }
 
   &__text {
     color: var(--text-secondary);
+    white-space: nowrap;
   }
 
   &__transition {

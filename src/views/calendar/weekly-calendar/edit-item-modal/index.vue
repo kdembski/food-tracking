@@ -61,7 +61,7 @@ const updateCalendarItem = () => {
       toastNotification.success("Kalendarz zaktualizowany pomyślnie!");
     })
     .catch(() => {
-      toastNotification.error("Nie udało sie zaktualizować kalendarza.");
+      toastNotification.error("Aktualizacja kalendarza nie powiodła się.");
     })
     .finally(() => {
       isUpdating.value = false;

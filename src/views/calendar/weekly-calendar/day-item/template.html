@@ -18,11 +18,11 @@
       <div
         v-if="!isMobile"
         class="body__icon"
-        v-on="getTooltipEvents({ 
-          width: 240, 
+        v-tooltip="{ 
+          maxWidth: 240, 
           withCustomContent: true,
           activeCustomContent: getTagsTooltipId(item.id)
-        })"
+        }"
       >
         <FontAwesomeIcon icon="tags" />
       </div>
@@ -31,7 +31,7 @@
         variant="text"
         icon="clone"
         size="small"
-        v-on="getTooltipEvents({ width: 74, text: 'Duplikuj' })"
+        v-tooltip="{ text: 'Duplikuj' }"
         @click="emits('clone', item)"
       />
       <CButton
@@ -39,7 +39,7 @@
         variant="text"
         icon="pen-to-square"
         size="small"
-        v-on="getTooltipEvents({ width: 60, text: 'Edytuj' })"
+        v-tooltip="{ text: 'Edytuj' }"
         @click="emits('edit', item)"
       />
     </div>
@@ -48,7 +48,7 @@
         color="secondary"
         variant="text"
         icon="utensils"
-        v-on="getTooltipEvents({ width: 125, text: 'Otwórz przepis' })"
+        v-tooltip="{ text: 'Otwórz przepis' }"
       />
     </RouterLink>
     <RouterLink v-else to="/ordered">

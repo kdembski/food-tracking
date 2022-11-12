@@ -1,7 +1,5 @@
 export interface TooltipConfig {
-  left?: number;
-  right?: number;
-  width?: number;
+  parent?: EventTarget;
   text?: string;
   withCustomContent?: boolean;
   activeCustomContent?: string;

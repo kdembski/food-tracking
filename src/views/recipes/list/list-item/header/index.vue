@@ -17,11 +17,9 @@ export default {
 import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipe";
 import { useRouter, RouterLink } from "vue-router";
-import { useTooltip } from "@/composables/tooltip";
 
 const router = useRouter();
 const { isMobile } = useWindowSize();
-const { getTooltipEvents } = useTooltip();
 
 const props = defineProps({
   item: {

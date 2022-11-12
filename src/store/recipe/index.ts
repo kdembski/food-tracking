@@ -158,7 +158,7 @@ const actions: ActionTree<RecipeState, any> = {
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", recipe)
         .then(() => {
-          rootState.toastNotification.success("Udało sie dodać przepis.");
+          rootState.toastNotification.success("Dodano przepis.");
           commit("setIsSubmittingRecipe", false);
           resolve();
         })
@@ -179,7 +179,7 @@ const actions: ActionTree<RecipeState, any> = {
         recipe
       )
         .then(() => {
-          rootState.toastNotification.success("Udało sie zapisać przepis.");
+          rootState.toastNotification.success("Zapisano przepis.");
           commit("setIsSubmittingRecipe", false);
           resolve();
         })

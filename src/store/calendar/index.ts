@@ -52,7 +52,7 @@ const actions: ActionTree<any, any> = {
     return new Promise<void>((resolve, reject) => {
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/calendar/" + id)
         .then(() => {
-          rootState.toastNotification.success("Udało sie usunąć z kalendarza.");
+          rootState.toastNotification.success("Usunięto z kalendarza.");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

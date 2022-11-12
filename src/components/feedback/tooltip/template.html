@@ -1,16 +1,11 @@
 <Transition name="tooltip__transition">
   <div
+    v-if="!isMobile"
     v-show="isOpen"
     class="tooltip"
     :style="getTooltipStyle()"
-    :class="getTooltipClasses()"
   >
-    <div
-      id="tooltip-content"
-      class="tooltip__content"
-      ref="content"
-      :style="getTooltipContentStyle()"
-    >
+    <div id="tooltip-content" class="tooltip__content" ref="content">
       <p v-if="!config.withCustomContent" class="tooltip__text">
         {{ config.text }}
       </p>

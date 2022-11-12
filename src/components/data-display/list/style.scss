@@ -17,7 +17,7 @@
     overflow: hidden;
     padding: 0;
     border-top: 1px solid var(--border-color);
-    padding: $spacing-4xl $spacing-sm;
+    padding: $spacing-3xl $spacing-sm;
     gap: $spacing-xl;
   }
 
@@ -39,7 +39,7 @@
     flex-direction: column;
 
     &__row {
-      padding: $spacing-4xl $spacing-sm;
+      padding: $spacing-3xl $spacing-sm;
       height: 100%;
       border-top: 1px solid var(--border-color);
 
@@ -85,7 +85,7 @@
 @media screen and (max-width: $screen-md) {
   .list {
     .item {
-      padding: $spacing-2xl $spacing-xs;
+      padding: $spacing-xl $spacing-xs;
       gap: $spacing-lg;
     }
 
@@ -111,7 +111,7 @@
       }
 
       &__row {
-        padding: $spacing-2xl $spacing-xs;
+        padding: $spacing-xl $spacing-xs;
       }
     }
   }

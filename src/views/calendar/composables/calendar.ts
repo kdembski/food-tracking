@@ -58,7 +58,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     const clone = cloneDeep(item);
     addCalendarItem(clone, date)
       .then((response) => {
-        toastNotification.success("Udało się zduplikować");
+        toastNotification.success("Zduplikowano.");
 
         const id = response.data.insertId;
         const day = getCalendarDayByDate(date);
@@ -66,7 +66,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
         day?.items.push(clone);
       })
       .catch((error) => {
-        toastNotification.error("Nie udało się zduplikować.");
+        toastNotification.error("Duplikowanie nie powiodło się.");
         console.log(error);
       });
   };
@@ -114,7 +114,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
         updatePromises.value = [];
       })
       .catch(() => {
-        toastNotification.error("Nie udało się zaktualizować kalendarza.");
+        toastNotification.error("Aktualizacja kalendarza nie powiodła się.");
         updatePromises.value = [];
       });
   });

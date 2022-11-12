@@ -3,7 +3,7 @@
     <div class="item-body__row">
       <div
         class="item-body__preparation-time"
-        v-on="getTooltipEvents({ width: 160, text:'Czas przygotowania' })"
+        v-tooltip="{ text:'Czas przygotowania' }"
       >
         <FontAwesomeIcon :icon="['far', 'clock']" />
         <p>{{ getPreparationTime(item.preparationTime) }}</p>
@@ -11,7 +11,7 @@
       <div
         class="item-body__cooked-date"
         :class="{'item-body__cooked-date--planned': isPlanned}"
-        v-on="getTooltipEvents(getCookedDateTooltipConfig())"
+        v-tooltip="{ text: getCookedDateTooltipText() }"
       >
         <FontAwesomeIcon :icon="['far', 'calendar']" />
         <p>{{ getFormattedCookedDate(item.cookedDate) }}</p>

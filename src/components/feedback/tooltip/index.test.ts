@@ -1,42 +1,25 @@
-import { provide } from "vue";
+import flushPromises from "flush-promises";
 import { mount } from "@vue/test-utils";
 import CTooltip from "./index.vue";
 import { createStore } from "vuex";
-import { mount as composableMount } from "vue-composable-tester";
-import { useTooltip } from "@/composables/tooltip";
+import { useTooltipDirective } from "@/directives/tooltip";
 
 describe("Tooltip Component", () => {
   let wrapper: any = null;
   let store: any;
   let state: any;
-  let tooltip: any;
+  let tooltipDirective: any;
   let mutations: any;
-  let parentRect: any;
   let parent: any;
 
   beforeEach(async () => {
-    parentRect = {
-      bottom: 10,
-      left: 20,
-      width: 30,
-    };
-    parent = {
-      getBoundingClientRect: () => parentRect,
-    };
-
-    window.ResizeObserver = jest.fn().mockImplementation((callback) => ({
-      disconnect: jest.fn(),
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      callback,
-    }));
+    parent = document.createElement("div");
 
     state = {
       isTooltipOpen: true,
       tooltipConfig: {
-        left: 10,
-        top: 10,
-        width: 100,
+        parent,
+        maxWidth: 200,
         text: "test text",
         withCustomContent: false,
         activeCustomContent: "test custom content",
@@ -59,150 +42,95 @@ describe("Tooltip Component", () => {
       store,
     };
 
-    tooltip = composableMount(() => useTooltip(), {
-      provider: () => {
-        provide("store", store);
-      },
-    }).result;
+    tooltipDirective = useTooltipDirective(store).tooltipDirective;
 
     jest.useFakeTimers();
     wrapper = mount(CTooltip, { global: global.settings });
   });
 
-  it("Should get tooltip styles based on tooltipConfig", async () => {
+  it("Should get tooltip styles based on top and left variables", async () => {
     expect(wrapper.vm.getTooltipStyle()).toEqual({
-      left: "10px",
-      top: "10px",
-      width: "100px",
-      height: "0px",
+      left: "-999px",
+      top: "-999px",
     });
   });
 
-  it("Should get tooltip content styles based on tooltipConfig", async () => {
-    expect(wrapper.vm.getTooltipContentStyle()).toEqual({
-      width: "100px",
-    });
-  });
-
-  it("Should set enableTransitionAll based on tooltip open state", async () => {
+  it("Should set left and top position based on parent and content dimensions", async () => {
+    document.body.appendChild(parent);
     await store.commit("setIsTooltipOpen", false);
-    expect(wrapper.vm.enableTransitionAll).toBe(false);
-    await store.commit("setIsTooltipOpen", true);
-    expect(wrapper.vm.enableTransitionAll).toBe(false);
-    jest.runAllTimers();
-    expect(wrapper.vm.enableTransitionAll).toBe(true);
+    await flushPromises();
+
+    expect(wrapper.vm.tooltipTop).toEqual(15);
+    expect(wrapper.vm.tooltipLeft).toEqual(12);
+    document.body.removeChild(parent);
   });
 
-  it("Should set contentHeight on ResizeObserver trigger", async () => {
-    wrapper.vm.content = {
-      getBoundingClientRect: () => ({
-        height: 100,
-      }),
-    };
-    await wrapper.vm.contentResizeObserver.callback();
-    expect(wrapper.vm.contentHeight).toEqual(100);
-
-    wrapper.vm.content = null;
-    await wrapper.vm.contentResizeObserver.callback();
-    expect(wrapper.vm.contentHeight).toEqual(0);
-  });
-
-  it("Should run observe method on mounted", async () => {
-    expect(wrapper.vm.contentResizeObserver.observe).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should run unobserve method on unmounted", async () => {
-    await wrapper.unmount();
-    expect(wrapper.vm.contentResizeObserver.unobserve).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should set isTooltipOpen to true and tooltipConfig appropriate values after open method call", async () => {
+  it("Should set left and top position to -999 if parent not exists in DOM", async () => {
     await store.commit("setIsTooltipOpen", false);
+    await flushPromises();
 
-    tooltip.open({ parent, width: 100, text: "test text" });
-    jest.runAllTimers();
-    expect(mutations.setTooltipConfig).toHaveBeenLastCalledWith(
-      expect.any(Object),
-      {
-        activeCustomContent: undefined,
-        left: 10,
-        text: "test text",
-        top: 25,
-        width: 100,
-        withCustomContent: undefined,
-      }
+    expect(wrapper.vm.tooltipTop).toEqual(-999);
+    expect(wrapper.vm.tooltipLeft).toEqual(-999);
+  });
+
+  it("Should prevent tooltip left position to be greater than window size", async () => {
+    expect(wrapper.vm.getLeftPosition(2000, 10, 10)).toEqual(1007);
+  });
+
+  it("Should prevent tooltip left position to be lower than provided offset", async () => {
+    expect(wrapper.vm.getLeftPosition(0, 10, 100)).toEqual(62);
+  });
+
+  it("Should prevent tooltip top position to be greater than window size", async () => {
+    expect(wrapper.vm.getTopPosition(2000, 10, 10)).toEqual(1965);
+  });
+
+  it("Should add event listeners on tooltip directive mounted", async () => {
+    jest.spyOn(parent, "addEventListener");
+    await tooltipDirective.mounted(parent);
+    expect(parent.addEventListener).toBeCalledWith(
+      "mouseenter",
+      expect.any(Function)
     );
-    expect(state.isTooltipOpen).toBe(true);
-
-    tooltip.open({ parent, width: 10, text: "test text" });
-    jest.runAllTimers();
-    expect(mutations.setTooltipConfig).toHaveBeenLastCalledWith(
-      expect.any(Object),
-      {
-        activeCustomContent: undefined,
-        left: 30,
-        text: "test text",
-        top: 25,
-        width: 10,
-        withCustomContent: undefined,
-      }
+    expect(parent.addEventListener).toBeCalledWith(
+      "mouseleave",
+      expect.any(Function)
     );
+  });
 
-    parentRect.left = 1200;
-    tooltip.open({ parent, width: 10, text: "test text" });
+  it("Should remove event listeners on tooltip directive unmounted", async () => {
+    jest.spyOn(parent, "removeEventListener");
+    await tooltipDirective.mounted(parent);
+    await tooltipDirective.unmounted(parent);
+    expect(parent.removeEventListener).toBeCalledWith(
+      "mouseenter",
+      expect.any(Function)
+    );
+    expect(parent.removeEventListener).toBeCalledWith(
+      "mouseleave",
+      expect.any(Function)
+    );
+  });
+
+  it("Should open tooltip on parent mouseenter", async () => {
+    await tooltipDirective.mounted(parent, { value: { text: "test text" } });
+    await parent.dispatchEvent(new Event("mouseenter"));
     jest.runAllTimers();
     expect(mutations.setTooltipConfig).toHaveBeenLastCalledWith(
       expect.any(Object),
       {
-        activeCustomContent: undefined,
-        left: 1004,
+        parent,
         text: "test text",
-        top: 25,
-        width: 10,
         withCustomContent: undefined,
+        activeCustomContent: undefined,
       }
     );
   });
 
-  it("Should call open method on mouseenter event", async () => {
-    const events = tooltip.getTooltipEvents({ width: 100, text: "test text" });
-
-    await events.mouseenter({ currentTarget: "parent1", target: "parent2" });
-    expect(mutations.setTooltipConfig).toHaveBeenCalledTimes(0);
-
-    await events.mouseenter({ currentTarget: parent, target: parent });
-    jest.runAllTimers();
-    expect(mutations.setTooltipConfig).toHaveBeenLastCalledWith(
-      expect.any(Object),
-      {
-        activeCustomContent: undefined,
-        left: 10,
-        text: "test text",
-        top: 25,
-        width: 100,
-        withCustomContent: undefined,
-      }
-    );
-  });
-
-  it("Should set isTooltipOpen to false after close method call", async () => {
-    tooltip.close();
+  it("Should close tooltip on parent mouseleave", async () => {
+    await tooltipDirective.mounted(parent, { value: { text: "test text" } });
+    await parent.dispatchEvent(new Event("mouseleave"));
     jest.runAllTimers();
     expect(state.isTooltipOpen).toBe(false);
-  });
-
-  it("Should call close method on mouseleave event", async () => {
-    const events = tooltip.getTooltipEvents({ width: 100, text: "test text" });
-
-    await events.mouseleave({ currentTarget: "parent1", target: "parent2" });
-    expect(state.isTooltipOpen).toBe(true);
-
-    await events.mouseleave({ currentTarget: "parent1", target: "parent1" });
-    jest.runAllTimers();
-    expect(state.isTooltipOpen).toBe(false);
-  });
-
-  it("Should get activeCustomContent from stored tooltip config", async () => {
-    expect(tooltip.activeCustomContent.value).toEqual("test custom content");
   });
 });

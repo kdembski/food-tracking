@@ -5,12 +5,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref, onMounted, onBeforeUnmount, watch } from "vue";
+import { computed, ref, Ref, watch, nextTick } from "vue";
 import { useStore } from "vuex";
+import { useWindowSize } from "@/composables/window-size";
 
+const { windowWidth, windowHeight, isMobile } = useWindowSize();
 const store = useStore();
 const content: Ref<HTMLElement | undefined> = ref();
-const contentHeight = ref(0);
+const tooltipTop = ref(0);
+const tooltipLeft = ref(0);
 
 const isOpen = computed(() => {
   return store.state.isTooltipOpen;
@@ -20,63 +23,75 @@ const config = computed(() => {
   return store.state.tooltipConfig;
 });
 
-const enableTransitionAll = ref(false);
+const getLeftPosition = (
+  parentLeft: number,
+  parentWidth: number,
+  contentWidth: number
+) => {
+  const left = parentLeft + parentWidth / 2;
 
-watch(isOpen, (value) => {
-  if (value) {
-    setTimeout(() => {
-      enableTransitionAll.value = true;
-    }, 100);
-    return;
+  if (left - contentWidth / 2 < 12) {
+    return contentWidth / 2 + 12;
   }
-  enableTransitionAll.value = false;
-});
 
-const getTooltipClasses = () => {
-  if (enableTransitionAll.value) {
-    return "tooltip--transition-all";
+  if (left + contentWidth / 2 > windowWidth.value - 10) {
+    return windowWidth.value - contentWidth / 2 - 12;
   }
-  return "";
+
+  return left;
 };
+
+const getTopPosition = (
+  parentBottom: number,
+  parentHeight: number,
+  contentHeight: number
+) => {
+  const gapFromParent = 15;
+  const top = parentBottom + gapFromParent;
+
+  if (top + contentHeight > windowHeight.value - 10) {
+    return parentBottom - parentHeight - contentHeight - gapFromParent;
+  }
+
+  return top;
+};
+
+watch(
+  [config, isOpen],
+  async ([config]) => {
+    if (!document.body.contains(config?.parent)) {
+      tooltipTop.value = -999;
+      tooltipLeft.value = -999;
+      return;
+    }
+
+    await nextTick();
+    const contentHeight = content.value?.getBoundingClientRect().height || 0;
+    const contentWidth = content.value?.getBoundingClientRect().width || 0;
+
+    const {
+      bottom: parentBottom,
+      left: parentLeft,
+      width: parentWidth,
+      height: parentHeight,
+    } = config.parent.getBoundingClientRect();
+
+    tooltipTop.value = getTopPosition(
+      parentBottom,
+      parentHeight,
+      contentHeight
+    );
+    tooltipLeft.value = getLeftPosition(parentLeft, parentWidth, contentWidth);
+  },
+  { deep: true, immediate: true }
+);
 
 const getTooltipStyle = () => {
   return {
-    left: config.value.left + "px",
-    top: config.value.top + "px",
-    width: config.value.width + "px",
-    height: contentHeight.value + "px",
+    left: tooltipLeft.value + "px",
+    top: tooltipTop.value + "px",
   };
 };
-
-const getTooltipContentStyle = () => {
-  return {
-    width: config.value.width + "px",
-  };
-};
-
-const contentResizeObserver = new ResizeObserver(() => {
-  const height = content.value?.getBoundingClientRect().height;
-  if (!height) {
-    contentHeight.value = 0;
-    return;
-  }
-
-  contentHeight.value = height;
-});
-
-onMounted(() => {
-  if (!content.value) {
-    return;
-  }
-  contentResizeObserver.observe(content.value);
-});
-
-onBeforeUnmount(() => {
-  if (!content.value) {
-    return;
-  }
-  contentResizeObserver.unobserve(content.value);
-});
 </script>
 
 <template src="./template.html"></template>

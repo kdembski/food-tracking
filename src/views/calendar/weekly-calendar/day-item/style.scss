@@ -60,6 +60,7 @@
 
   &__tags-tooltip {
     padding: $spacing-xs;
+    min-width: 200px;
 
     & > p {
       @include uppercasedSecondaryTextWithBorder;

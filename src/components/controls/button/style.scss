@@ -47,7 +47,7 @@
 
   &--secondary {
     &.button--text {
-      color: $secondary;
+      color: var(--text-secondary);
     }
 
     &.button--contained {
@@ -142,10 +142,6 @@
     }
 
     &--secondary {
-      &.button--text {
-        color: $text-lightest;
-      }
-
       &.button--contained {
         color: $text-lightest;
         background-color: darken($secondary, 10);
