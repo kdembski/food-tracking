@@ -27,8 +27,8 @@ export function useMobileFilters(
     }, 400);
   };
 
-  const maxPositionY = windowHeight.value - 122;
-  const mobileBtnPositionY = ref(maxPositionY - 5);
+  const maxPositionY = windowHeight.value - 124;
+  const mobileBtnPositionY = ref(maxPositionY - 40);
   const currentPageY = ref(0);
 
   const onMobileBtnTouchMove = (e: TouchEvent) => {

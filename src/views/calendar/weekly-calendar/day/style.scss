@@ -34,6 +34,7 @@
     text-align: center;
     padding: $spacing-sm 0 $spacing-xl;
     border-bottom: 1px solid var(--border-color);
+    user-select: none;
   }
 
   &__loader {
@@ -54,6 +55,6 @@
 
 @media screen and (max-width: $screen-md) {
   .calendar-day {
-    min-height: 140px;
+    min-height: 145px;
   }
 }

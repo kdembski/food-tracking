@@ -81,12 +81,7 @@ const helpers = {
   },
 
   getCalendarRangeQuery: (fromDate: Date, toDate: Date) => {
-    return (
-      "fromDate=" +
-      formatISO(fromDate, { representation: "date" }) +
-      "&toDate=" +
-      formatISO(toDate, { representation: "date" })
-    );
+    return "fromDate=" + formatISO(fromDate) + "&toDate=" + formatISO(toDate);
   },
 };
 

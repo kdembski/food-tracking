@@ -23,7 +23,7 @@
       font-size: $font-lg;
       font-weight: $font-bold;
       color: var(--text-secondary);
-      min-width: 180px;
+      min-width: 150px;
       text-align: center;
     }
   }
@@ -34,7 +34,7 @@
     &__range {
       & > p {
         font-size: $font-base;
-        min-width: 130px;
+        min-width: 120px;
       }
     }
   }

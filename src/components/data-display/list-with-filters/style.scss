@@ -94,18 +94,20 @@ $filtersHeightOffset: 92px; //topbar height + paddings
       min-width: 100%;
       margin: 0;
       padding: 0 $spacing-lg;
+      background-color: var(--surface-primary);
     }
 
     &__content {
       min-width: 100%;
       padding: 0 $spacing-lg;
+      background-color: var(--surface-primary);
     }
 
     &__filters-transition,
     &__content-transition {
       &-enter-active,
       &-leave-active {
-        transition: 0.2s ease-in-out;
+        transition: 0.25s ease-in-out;
       }
 
       &-enter-active {
@@ -116,10 +118,11 @@ $filtersHeightOffset: 92px; //topbar height + paddings
 
     &__filters-transition {
       &-enter-from {
-        transform: translateX(-100%);
+        transform: translateX(-15%);
+        opacity: 0;
       }
       &-leave-to {
-        transform: translateX(-30%);
+        transform: translateX(-15%);
         opacity: 0;
       }
 
@@ -132,10 +135,11 @@ $filtersHeightOffset: 92px; //topbar height + paddings
 
     &__content-transition {
       &-enter-from {
-        transform: translateX(0%);
+        transform: translateX(-85%);
+        opacity: 0;
       }
       &-leave-to {
-        transform: translateX(-30%);
+        transform: translateX(-85%);
         opacity: 0;
       }
 

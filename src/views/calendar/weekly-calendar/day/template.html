@@ -12,6 +12,8 @@
     :forceFallback="true"
     @start="onDragStart"
     @end="onDragEnd"
+    delay="200"
+    :delay-on-touch-only="true"
   >
     <template #item="{ element }">
       <WeeklyCalendarDayItem
