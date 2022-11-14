@@ -36,11 +36,7 @@
     }
 
     &__buttons {
-      margin-top: -$spacing-2xs;
-
-      & > button {
-        font-size: $font-lg;
-      }
+      margin-top: -$spacing-xs;
     }
   }
 }

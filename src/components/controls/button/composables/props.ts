@@ -4,6 +4,7 @@ interface ButtonProps {
   isDisabled: boolean;
   variant: string;
   color: string;
+  size: string;
   icon: string;
   fullWidth: boolean;
 }
@@ -60,6 +61,7 @@ export function useButtonProps() {
       isDisabled: props.isDisabled,
       variant: props.variant,
       color: props.color,
+      size: props.size,
       icon: props.icon,
       fullWidth: props.fullWidth,
     };

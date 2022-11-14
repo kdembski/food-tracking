@@ -1,7 +1,6 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
 import CInput from "@/components/controls/input/index.vue";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 import CSelectTags from "@/components/controls/select-tags/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 
@@ -10,7 +9,6 @@ export default {
   components: {
     CButton,
     CInput,
-    CAutocomplete,
     CSelectTags,
     CLoader,
   },
@@ -32,7 +30,6 @@ const isLoadingRecipesTags = computed(
 );
 const recipeId = computed(() => route.params.id);
 const recipe = computed(() => store.state.recipe.recipe);
-
 const recipesTags = ref();
 
 onBeforeMount(() => {

@@ -1,12 +1,12 @@
 <div class="select-tags-item">
   <input
     v-model="_selectedTags"
-    :id="'tag-' + tag.name"
+    :id="getItemId()"
     :value="tag.name"
     class="tag__checkbox"
     type="checkbox"
   />
-  <label class="tag tag--with-hover" :for="'tag-' + tag.name">
+  <label class="tag tag--with-hover" :for="getItemId()">
     <p class="tag__name">{{ tag.name }}</p>
     <span v-if="withCounts && tag.count > 1" class="tag__count">
       {{ tag.count }}

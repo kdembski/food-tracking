@@ -1,8 +1,8 @@
 <div v-if="!isLoadingRecipe" class="new-recipe">
-  <header class="new-recipe__header">
+  <header class="edit-recipe__header">
     <h1>{{ recipe.recipeName }}</h1>
   </header>
-  <div class="new-recipe__body">
+  <div class="edit-recipe__body">
     <CInput v-model="recipe.recipeName" label="Nazwa" />
     <CInput
       v-model="recipe.preparationTime"
@@ -18,7 +18,7 @@
       enableAddingTags
     />
   </div>
-  <div class="new-recipe__buttons">
+  <div class="edit-recipe__buttons">
     <CButton label="Zapisz" @click="updateRecipe" />
   </div>
   <CLoader v-if="isUpdatingRecipe" withOverlay />

@@ -1,9 +1,28 @@
 <p class="item-header__food-name">{{ item.foodName }}</p>
 <div class="item-header__buttons">
-  <CButton
-    color="secondary"
-    variant="text"
-    :icon="['far', 'calendar']"
-    @click="addToCalendar"
-  />
+  <template v-if="isMobile">
+    <CButtonWithDropdown
+      color="secondary"
+      variant="text"
+      icon="ellipsis-vertical"
+      size="large"
+      :options="mobileDropdownOptions"
+    />
+  </template>
+  <template v-else>
+    <CButton
+      color="secondary"
+      variant="text"
+      icon="pen-to-square"
+      @click="edit"
+      v-tooltip="{ text: 'Edytuj' }"
+    />
+    <CButton
+      color="secondary"
+      variant="text"
+      :icon="['far', 'calendar']"
+      @click="addToCalendar"
+      v-tooltip="{ text: 'Dodaj do kalendarza' }"
+    />
+  </template>
 </div>

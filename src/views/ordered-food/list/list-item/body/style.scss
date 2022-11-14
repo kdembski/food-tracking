@@ -4,7 +4,7 @@
   gap: $spacing-sm;
 
   &__place-name {
-    display: inline-block;
+    display: inline-flex;
     font-size: $font-sm;
     font-weight: $font-medium;
     color: var(--text-secondary);

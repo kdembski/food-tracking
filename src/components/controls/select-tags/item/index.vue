@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useAttrs } from "vue";
 
 const props = defineProps({
   tag: {
@@ -36,6 +36,15 @@ const _selectedTags = computed({
     emit("update:selectedTags", tags);
   },
 });
+
+const getItemId = () => {
+  const attrs = useAttrs();
+
+  if (attrs.id) {
+    return attrs.id + "-tag-" + props.tag.name;
+  }
+  return "tag-" + props.tag.name;
+};
 </script>
 
 <template src="./template.html"></template>

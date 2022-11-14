@@ -1,7 +1,7 @@
 <div class="ordered-food-list">
   <header class="ordered-food-list__header">
     <h1>Jedzenie do zamówienia</h1>
-    <CButton label="Dodaj" icon="plus" size="small" />
+    <CButton label="Dodaj" icon="plus" size="small" @click="onAddButtonClick" />
   </header>
   <main class="ordered-food-list__content">
     <CListWithFilters
@@ -19,6 +19,7 @@
         <OrderedFoodListItemHeader
           :item="item"
           @addToCalendar="openAddToCalendarModal"
+          @edit="editOrderedFood"
         />
       </template>
       <template #body="{ item, addTagToSelected }">
@@ -34,4 +35,8 @@
   v-model:isOpen="isAddToCalendarModalOpen"
   :addedOrderedFood="orderedFoodAddedToCalendar"
   :defaultPortions="1"
+/>
+<EditModal
+  v-model:isOpen="isEditModalOpen"
+  :orderedFoodId="editedOrderedFoodId"
 />

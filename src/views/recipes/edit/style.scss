@@ -1,4 +1,4 @@
-.new-recipe {
+.edit-recipe {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (max-width: $screen-md) {
-  .new-recipe {
+  .edit-recipe {
     &__body {
       padding: 0 $spacing-lg;
       gap: $spacing-xl;

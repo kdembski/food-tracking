@@ -5,6 +5,9 @@ export interface OrderedFoodState {
   isLoadingOrderedFoodList: boolean;
   orderedFoodTags: string | null;
   isLoadingOrderedFoodTags: boolean;
+  orderedFood: OrderedFood | null;
+  isSubmittingOrderedFood: boolean;
+  isLoadingOrderedFood: boolean;
 }
 
 export interface OrderedFood {

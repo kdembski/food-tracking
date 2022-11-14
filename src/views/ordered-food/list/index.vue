@@ -4,6 +4,7 @@ import OrderedFoodListItemHeader from "./list-item/header/index.vue";
 import OrderedFoodListItemBody from "./list-item/body/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import AddToCalendarModal from "@/views/calendar/add-to-calendar-modal/index.vue";
+import EditModal from "../edit-modal/index.vue";
 
 export default {
   name: "OrderedFoodListView",
@@ -13,12 +14,13 @@ export default {
     OrderedFoodListItemHeader,
     OrderedFoodListItemBody,
     AddToCalendarModal,
+    EditModal,
   },
 };
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 import { OrderedFood } from "@/types/ordered-food";
 
 const orderedFoodListDefaultFilters = {
@@ -68,9 +70,22 @@ const orderedFoodListSortOptions = ref([
 const isAddToCalendarModalOpen = ref(false);
 const orderedFoodAddedToCalendar = ref({});
 
+const isEditModalOpen = ref(false);
+const editedOrderedFoodId: Ref<number | undefined> = ref();
+
 const openAddToCalendarModal = (orderedFood: OrderedFood) => {
   orderedFoodAddedToCalendar.value = orderedFood;
   isAddToCalendarModalOpen.value = true;
+};
+
+const onAddButtonClick = () => {
+  editedOrderedFoodId.value = undefined;
+  isEditModalOpen.value = true;
+};
+
+const editOrderedFood = (id: number) => {
+  editedOrderedFoodId.value = id;
+  isEditModalOpen.value = true;
 };
 </script>
 

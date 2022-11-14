@@ -1,10 +1,12 @@
 <div class="item-body">
-  <CLink
-    class="item-body__place-name"
-    :label="item.placeName"
-    :href="item.placeLink"
-    external
-  />
+  <div>
+    <CLink
+      class="item-body__place-name"
+      :label="item.placeName"
+      :href="item.placeLink"
+      external
+    />
+  </div>
   <CDisplayTags
     :tags="item.tags"
     :onClick="addTagToSelected"

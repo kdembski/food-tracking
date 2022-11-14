@@ -139,7 +139,7 @@ const actions: ActionTree<RecipeState, any> = {
       commit("setIsLoadingRecipe", true);
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/" + recipeId)
-        .then((response: AxiosResponse<string[]>) => {
+        .then((response: AxiosResponse<Recipe>) => {
           commit("setIsLoadingRecipe", false);
           commit("setRecipe", response.data);
           resolve();

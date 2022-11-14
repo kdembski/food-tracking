@@ -7,7 +7,7 @@
 
   &__buttons {
     display: flex;
-    gap: $spacing-sm;
+    gap: $spacing-xs;
     margin-top: -$spacing-xs;
   }
 }
@@ -15,11 +15,7 @@
 @media screen and (max-width: $screen-md) {
   .item-header {
     &__buttons {
-      margin-top: -$spacing-2xs;
-
-      & > button {
-        font-size: $font-lg;
-      }
+      margin-top: -$spacing-xs;
     }
 
     &__food-name {

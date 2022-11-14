@@ -7,6 +7,7 @@ import Loader from "./loader/index.vue";
 export default {
   name: "CSelectTags",
   components: { CTags, Item, Loader, CInput },
+  inheritAttrs: false,
 };
 </script>
 

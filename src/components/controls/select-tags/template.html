@@ -16,11 +16,12 @@
         v-model:selectedTags="_selectedTags"
         :tag="tag"
         :withCounts="withCounts"
+        :id="$attrs.id"
       />
       <div
         v-if="enableAddingTags"
-        class="select-tags__new-tag tag tag--with-hover"
-        @click="onNewTagClick"
+        class="select-tags__new-tag tag"
+        @click.stop="onNewTagClick"
       >
         <FontAwesomeIcon icon="plus" />
         <p v-if="searchPhrase">{{ searchPhrase }}...</p>
