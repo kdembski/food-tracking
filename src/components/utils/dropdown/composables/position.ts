@@ -5,11 +5,11 @@ export function useDropdownPosition(
   dropdown: Ref<HTMLElement | null>,
   isOpen: ComputedRef<boolean>
 ) {
-  const { windowHeight, isMobileKeyboardOpen, isMobile } = useWindowSize();
+  const { windowHeight, isMobile } = useWindowSize();
   const dropdownDirection = ref("bottom");
 
   const getAvailableSpaceBelow = (parentBottomPosition: number) => {
-    const bottomOffset = isMobileKeyboardOpen.value ? 10 : 72;
+    const bottomOffset = 10;
     return windowHeight.value - parentBottomPosition - bottomOffset;
   };
 

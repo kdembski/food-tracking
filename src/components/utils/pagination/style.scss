@@ -52,7 +52,7 @@ $mobileItemPadding: $spacing-xs $spacing-md;
 
   &__loader {
     .skeleton-loader {
-      padding: $spacing-md;
+      padding: $spacing-md $spacing-sm;
       height: 32px;
       display: flex;
       gap: 40%;
@@ -72,6 +72,13 @@ $mobileItemPadding: $spacing-xs $spacing-md;
 
     &__arrow {
       padding: $mobileItemPadding;
+    }
+
+    &__loader {
+      .skeleton-loader {
+        height: 28px;
+        padding: $spacing-sm $spacing-xs;
+      }
     }
   }
 }

@@ -88,23 +88,24 @@ $optionPadding: $spacing-xl;
 
 @media screen and (max-width: $screen-md) {
   .dropdown {
-    position: sticky;
+    position: static;
     overflow: unset;
     bottom: 0;
     border-radius: 0;
     border: 0;
     border-top: 1px solid var(--border-color);
+    box-shadow: 0 -1px 6px 0 var(--shadow-color);
 
     &__transition {
       &-enter-active {
-        transition: height $mobileTransitionDuration 0.05s ease-in-out,
-          margin $mobileTransitionDuration 0.05s ease-in-out,
+        transition: height $mobileTransitionDuration ease-in-out,
+          margin $mobileTransitionDuration ease-in-out,
           opacity $mobileTransitionDuration ease-in-out;
       }
 
       &-leave-active {
-        transition: height $mobileTransitionDuration ease-in-out,
-          margin $mobileTransitionDuration ease-in-out,
+        transition: height $mobileTransitionDuration 0.05s ease-in-out,
+          margin $mobileTransitionDuration 0.05s ease-in-out,
           opacity $mobileTransitionDuration 0.1s ease-in-out;
       }
 

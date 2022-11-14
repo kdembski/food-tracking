@@ -29,12 +29,9 @@ const container: Ref<HTMLElement | undefined> = ref();
 
 const getLoaderMaxHeight = () => {
   const containerOffsetTop = container.value?.offsetTop;
-  const paddingBottom = isMobile.value ? 20 : 30;
+  const paddingBottom = isMobile.value ? 15 : 25;
   const containerHeight =
-    windowHeight.value -
-    (containerOffsetTop || 0) -
-    paddingBottom -
-    (isMobile.value ? 64 : 0);
+    windowHeight.value - (containerOffsetTop || 0) - (isMobile.value ? 64 : 0);
   return { maxHeight: containerHeight + "px" };
 };
 </script>
