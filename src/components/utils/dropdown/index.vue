@@ -15,8 +15,10 @@ import { ref, Ref, computed } from "vue";
 import { useDropdownPosition } from "./composables/position";
 import { useWindowSize } from "../../../composables/window-size";
 import { useDropdownProps } from "./composables/props";
+import { useStore } from "vuex";
 
 const { isMobile, windowHeight, isMobileKeyboardOpen } = useWindowSize();
+const store = useStore();
 
 const props = defineProps(useDropdownProps().dropdownProps);
 
@@ -35,6 +37,8 @@ const _isOpen = computed({
     emit("update:isOpen", value);
   },
 });
+
+const isMobileDropdownOpen = computed(() => store.state.isMobileDropdownOpen);
 
 const closeDropdown = () => {
   _isOpen.value = false;
@@ -101,7 +105,9 @@ const getOptionLabelWithHighlight = (label: string) => {
 const getTransitionProps = () => {
   return {
     dimensionDecreased: isMobile.value ? "height" : "none",
-    enterActiveClass: "dropdown__transition-enter-active",
+    enterActiveClass: isMobileDropdownOpen.value
+      ? "dropdown__transition--delayed-enter-active"
+      : "dropdown__transition-enter-active",
     leaveActiveClass: "dropdown__transition-leave-active",
     enterFromClass: "dropdown__transition-enter-from",
     leaveToClass: "dropdown__transition-leave-to",

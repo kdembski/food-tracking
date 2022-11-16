@@ -8,4 +8,5 @@ export interface State {
   toastNotifications: ToastNotification[];
   isTooltipOpen: boolean;
   tooltipConfig: TooltipConfig;
+  isMobileDropdownOpen: boolean;
 }

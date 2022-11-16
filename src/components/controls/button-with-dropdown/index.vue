@@ -8,10 +8,9 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 import { useDropdownProps } from "@/components/utils/dropdown/composables/props";
 import { useButtonProps } from "@/components/controls/button/composables/props";
-import { useWindowSize } from "@/composables/window-size";
 
 const { getDropdownProps } = useDropdownProps();
 const { getButtonProps } = useButtonProps();
@@ -22,7 +21,7 @@ const props = defineProps({
 });
 
 const isDropdownOpen = ref(false);
-const { isMobile } = useWindowSize();
+const buttonRef: Ref<{ button: HTMLButtonElement } | undefined> = ref();
 
 const toggleIsOpen = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
@@ -30,6 +29,18 @@ const toggleIsOpen = () => {
 
 const closeDropdown = () => {
   isDropdownOpen.value = false;
+};
+
+const onClickAway = (e: any) => {
+  const isButtonClicked = e.path.some(
+    (element: HTMLElement) => element === buttonRef.value?.button
+  );
+
+  if (isButtonClicked) {
+    return;
+  }
+
+  closeDropdown();
 };
 </script>
 

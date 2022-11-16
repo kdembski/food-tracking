@@ -1,5 +1,5 @@
 $desktopTransitionDuration: 0.15s;
-$mobileTransitionDuration: 0.25s;
+$mobileTransitionDuration: 0.2s;
 $optionPadding: $spacing-xl;
 
 .dropdown {
@@ -97,20 +97,29 @@ $optionPadding: $spacing-xl;
     box-shadow: 0 -1px 6px 0 var(--shadow-color);
 
     &__transition {
+      &--delayed {
+        &-enter-active {
+          transition: opacity $mobileTransitionDuration
+              $mobileTransitionDuration ease-in-out,
+            height $mobileTransitionDuration $mobileTransitionDuration,
+            margin $mobileTransitionDuration $mobileTransitionDuration;
+        }
+      }
+
       &-enter-active {
-        transition: height $mobileTransitionDuration ease-in-out,
-          margin $mobileTransitionDuration ease-in-out,
-          opacity $mobileTransitionDuration ease-in-out;
+        transition: opacity $mobileTransitionDuration ease-in-out,
+          height $mobileTransitionDuration ease-in-out,
+          margin $mobileTransitionDuration ease-in-out;
       }
 
       &-leave-active {
-        transition: height $mobileTransitionDuration 0.05s ease-in-out,
-          margin $mobileTransitionDuration 0.05s ease-in-out,
-          opacity $mobileTransitionDuration 0.1s ease-in-out;
+        transition: opacity $mobileTransitionDuration 0.1s ease-in-out,
+          height $mobileTransitionDuration ease-in-out,
+          margin $mobileTransitionDuration ease-in-out;
       }
 
-      &-enter-from,
-      &-leave-to {
+      &-leave-to,
+      &-enter-from {
         transform: translateY(0);
       }
     }

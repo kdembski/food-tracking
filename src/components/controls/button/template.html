@@ -1,4 +1,9 @@
-<button class="button" :class="getButtonClasses()" :disabled="isDisabled">
+<button
+  class="button"
+  :class="getButtonClasses()"
+  :disabled="isDisabled"
+  ref="button"
+>
   <CLoader
     v-if="isLoading"
     :circleWidth="getLoaderSize()"

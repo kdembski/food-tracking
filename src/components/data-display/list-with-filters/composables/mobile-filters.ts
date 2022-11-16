@@ -28,7 +28,7 @@ export function useMobileFilters(
   };
 
   const maxPositionY = windowHeight.value - 124;
-  const mobileBtnPositionY = ref(maxPositionY - 40);
+  const mobileBtnPositionY = ref(maxPositionY);
   const currentPageY = ref(0);
 
   const onMobileBtnTouchMove = (e: TouchEvent) => {

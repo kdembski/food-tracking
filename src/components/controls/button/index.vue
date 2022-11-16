@@ -10,10 +10,13 @@ export default {
 <script setup lang="ts">
 import { useWindowSize } from "@/composables/window-size";
 import { useButtonProps } from "./composables/props";
+import { Ref, ref } from "vue";
 
 const props = defineProps(useButtonProps().buttonProps);
-
+const button: Ref<HTMLButtonElement | undefined> = ref();
 const { windowWidth } = useWindowSize();
+
+defineExpose({ button });
 
 const getButtonClasses = (): Array<string> => {
   const varaintClass = "button--" + props.variant;

@@ -14,6 +14,7 @@ export default createStore<State>({
     toastNotifications: [],
     isTooltipOpen: false,
     tooltipConfig: {},
+    isMobileDropdownOpen: false,
   },
 
   getters: {
@@ -55,6 +56,10 @@ export default createStore<State>({
 
     setTooltipConfig(state, value) {
       state.tooltipConfig = value;
+    },
+
+    setIsMobileDropdownOpen(state, value) {
+      state.isMobileDropdownOpen = value;
     },
   },
 

@@ -26,20 +26,34 @@ const navItems = ref([
 
 const store = useStore();
 const route = useRoute();
-const container: Ref<HTMLElement | undefined> = ref();
-
 const { isMobile } = useWindowSize();
+
+const container: Ref<HTMLElement | undefined> = ref();
+const mobileDropdownsContainer: Ref<HTMLElement | undefined> = ref();
 
 const onContainerScroll = () => {
   store.commit("setMainContainerScrollValue", container.value?.scrollTop);
 };
 
+const mutationObserverCallback = () => {
+  const childCount = mobileDropdownsContainer.value?.childElementCount;
+  store.commit("setIsMobileDropdownOpen", !!childCount);
+};
+const mutationObserver = new MutationObserver(mutationObserverCallback);
+
 onMounted(() => {
   container.value?.addEventListener("scroll", onContainerScroll);
+
+  if (mobileDropdownsContainer.value) {
+    mutationObserver.observe(mobileDropdownsContainer.value, {
+      childList: true,
+    });
+  }
 });
 
 onUnmounted(() => {
   container.value?.removeEventListener("scroll", onContainerScroll);
+  mutationObserver.disconnect();
 });
 
 const getContainerMaxWidth = () => {
