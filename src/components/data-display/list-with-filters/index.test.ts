@@ -175,7 +175,7 @@ describe("List With Filters Component", () => {
   });
 
   it("Should set mobile button translateY based on touch move event", async () => {
-    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(604px)");
+    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(644px)");
 
     const touchEvent = {
       changedTouches: [
@@ -185,10 +185,10 @@ describe("List With Filters Component", () => {
       ],
     };
     await wrapper.vm.onMobileBtnTouchMove(touchEvent);
-    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(614px)");
+    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(644px)");
 
     touchEvent.changedTouches[0].pageY = -10;
     await wrapper.vm.onMobileBtnTouchMove(touchEvent);
-    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(594px)");
+    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(624px)");
   });
 });

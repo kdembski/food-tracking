@@ -1,12 +1,24 @@
 import { mount, VueWrapper, DOMWrapper } from "@vue/test-utils";
 import CSelect from "./index.vue";
 import { config } from "@vue/test-utils";
+import { createStore } from "vuex";
 
 describe("Select Component", () => {
   let wrapper: VueWrapper<any>;
   let input: DOMWrapper<HTMLInputElement>;
+  let store: any;
 
   const mountComponent = () => {
+    store = createStore({
+      state: {
+        isMobileDropdownOpen: true,
+      },
+    });
+
+    global.settings.provide = {
+      store,
+    };
+
     wrapper = mount(CSelect, {
       props: {
         modelValue: 1,

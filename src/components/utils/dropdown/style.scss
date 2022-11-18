@@ -1,5 +1,5 @@
 $desktopTransitionDuration: 0.15s;
-$mobileTransitionDuration: 0.2s;
+$mobileTransitionDuration: 0.25s;
 $optionPadding: $spacing-xl;
 
 .dropdown {
@@ -94,7 +94,7 @@ $optionPadding: $spacing-xl;
     border-radius: 0;
     border: 0;
     border-top: 1px solid var(--border-color);
-    box-shadow: 0 -1px 6px 0 var(--shadow-color);
+    box-shadow: 0 -2px 4px 0 var(--shadow-color);
 
     &__transition {
       &--delayed {

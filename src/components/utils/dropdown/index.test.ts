@@ -1,8 +1,10 @@
 import { mount } from "@vue/test-utils";
 import CDropdown from "./index.vue";
+import { createStore } from "vuex";
 
 describe("Dropdown Component", () => {
   let wrapper: any = null;
+  let store: any;
 
   const mountComponent = () => {
     wrapper = mount(CDropdown, {
@@ -25,6 +27,16 @@ describe("Dropdown Component", () => {
       },
       global: global.settings,
     });
+  };
+
+  store = createStore({
+    state: {
+      isMobileDropdownOpen: true,
+    },
+  });
+
+  global.settings.provide = {
+    store,
   };
 
   beforeEach(async () => {

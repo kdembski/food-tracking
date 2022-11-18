@@ -1,11 +1,23 @@
 import { mount, DOMWrapper } from "@vue/test-utils";
 import CButtonWithDropdown from "./index.vue";
+import { createStore } from "vuex";
 
 describe("Button Component", () => {
   let wrapper: any = null;
   let button: DOMWrapper<HTMLButtonElement>;
+  let store: any;
 
   beforeEach(async () => {
+    store = createStore({
+      state: {
+        isMobileDropdownOpen: true,
+      },
+    });
+
+    global.settings.provide = {
+      store,
+    };
+
     wrapper = mount(CButtonWithDropdown, {
       props: {
         options: [
@@ -33,5 +45,17 @@ describe("Button Component", () => {
 
     await wrapper.findAll("li")[1].trigger("click");
     expect(wrapper.vm.isDropdownOpen).toBe(false);
+  });
+
+  it("Should close dropdown when clicked away from component", async () => {
+    wrapper.vm.isDropdownOpen = true;
+    await wrapper.vm.onClickAway({ path: [] });
+    expect(wrapper.vm.isDropdownOpen).toBe(false);
+  });
+
+  it("Should NOT close dropdown when clicked away from component if button was clicked", async () => {
+    wrapper.vm.isDropdownOpen = true;
+    await wrapper.vm.onClickAway({ path: [wrapper.vm.buttonRef.button] });
+    expect(wrapper.vm.isDropdownOpen).toBe(true);
   });
 });

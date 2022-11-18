@@ -17,9 +17,17 @@ describe("Default Layout Component", () => {
   let mutations: any;
 
   beforeEach(async () => {
+    window.MutationObserver = jest.fn().mockImplementation(() => ({
+      disconnect: jest.fn(),
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+    }));
+
     mutations = {
       setMainContainerScrollValue: jest.fn(),
+      setIsMobileDropdownOpen: jest.fn(),
     };
+
     store = createStore({
       mutations,
     });
@@ -49,5 +57,15 @@ describe("Default Layout Component", () => {
     expect(wrapper.vm.getContainerMaxWidth()).toEqual("");
     routeMeta.maxWidth = 1000;
     expect(wrapper.vm.getContainerMaxWidth()).toEqual("1000px");
+  });
+
+  it("Should commit isMobileDropdownOpen on mutationObserver callback", async () => {
+    await wrapper.vm.mutationObserverCallback();
+    expect(mutations.setIsMobileDropdownOpen).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should disconnect mutationObserver before component is unmounted", async () => {
+    await wrapper.unmount();
+    expect(wrapper.vm.mutationObserver.disconnect).toHaveBeenCalledTimes(1);
   });
 });

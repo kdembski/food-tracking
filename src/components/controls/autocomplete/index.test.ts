@@ -1,13 +1,24 @@
-import { nextTick } from "vue";
 import { mount, VueWrapper, DOMWrapper } from "@vue/test-utils";
 import CAutocomplete from "./index.vue";
 import { config } from "@vue/test-utils";
+import { createStore } from "vuex";
 
 describe("Autocomplete Component", () => {
   let wrapper: VueWrapper<any>;
   let input: DOMWrapper<HTMLInputElement>;
+  let store: any;
 
   const mountComponent = () => {
+    store = createStore({
+      state: {
+        isMobileDropdownOpen: true,
+      },
+    });
+
+    global.settings.provide = {
+      store,
+    };
+
     wrapper = mount(CAutocomplete, {
       props: {
         modelValue: 1,

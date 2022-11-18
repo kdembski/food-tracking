@@ -22,8 +22,8 @@ $surface-dark: darken($secondary, 20);
 $border-dark: darken($secondary, 15);
 
 $text-lightest: lighten($secondary, 55);
-$text-lighter: lighten($secondary, 40);
-$text-light: lighten($secondary, 10);
+$text-lighter: lighten($secondary, 25);
+$text-light: darken($secondary, 5);
 
 $info: #003780;
 $info-light: #bfe5f2;
@@ -53,7 +53,7 @@ $font-bold: 600;
 
 $shadow-light: rgba(0, 0, 0, 0.1);
 $shadow-color: rgba(0, 0, 0, 0.16);
-$shadow-dark: rgba(0, 0, 0, 0.6);
+$shadow-dark: rgba(0, 0, 0, 0.5);
 
 $shadow-xs: 0 2px 4px 0;
 $shadow-sm: 0 2px 6px 0;

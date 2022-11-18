@@ -10,7 +10,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, Ref, onMounted, onUnmounted } from "vue";
+import { ref, Ref, onMounted, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { useWindowSize } from "@/composables/window-size";
@@ -51,7 +51,7 @@ onMounted(() => {
   }
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   container.value?.removeEventListener("scroll", onContainerScroll);
   mutationObserver.disconnect();
 });
