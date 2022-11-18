@@ -4,6 +4,15 @@ import { createStore } from "vuex";
 import AddToCalendarModal from "./index.vue";
 import CDatePicker from "@/components/controls/date-picker/index.vue";
 
+let toastSuccess: any;
+let toastError: any;
+jest.mock("@/composables/toast-notification", () => ({
+  useToastNotification: () => ({
+    success: toastSuccess,
+    error: toastError,
+  }),
+}));
+
 jest.mock("vue-router", () => ({
   useRouter: () => ({
     push: () => false,
@@ -50,6 +59,9 @@ describe("Add To Calendar Modal Component", () => {
     global.settings.provide = {
       store,
     };
+
+    toastSuccess = jest.fn();
+    toastError = jest.fn();
 
     wrapper = mount(AddToCalendarModal, {
       props: { isOpen: true },
@@ -154,5 +166,24 @@ describe("Add To Calendar Modal Component", () => {
     expect(addedOrderedFood.orderDatesInCurrentMonth).toEqual([
       new Date(2000, 1, 2),
     ]);
+    expect(toastSuccess).toHaveBeenCalledWith(
+      "Dodano do kalendarza.",
+      expect.any(Function),
+      "Otwórz Kalendarz"
+    );
+  });
+
+  it("Should show error notification if addDateToCalendar actions fails", async () => {
+    calendarActions.addDateToCalendar.mockImplementation(() =>
+      Promise.reject()
+    );
+    wrapper.vm.selectedDates = [new Date(2000, 1, 2)];
+    wrapper.vm.addSelectedDatesToCalendar();
+    await flushPromises();
+
+    expect(toastError).toHaveBeenCalledTimes(1);
+    expect(toastError).toHaveBeenCalledWith(
+      "Dodawanie do kalendarza nie powiodło się."
+    );
   });
 });

@@ -9,7 +9,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineExpose, computed, inject } from "vue";
+import { computed, inject } from "vue";
 import { useCalendar } from "../composables/calendar";
 import { isDate } from "date-fns";
 
@@ -29,7 +29,7 @@ const {
   loadCalendar: loadMonthlyCalendar,
   isLoadingCalendar,
   getCalendarDayByDate,
-  deleteDateFromCalendar,
+  deleteCalendarItem,
   updateCalendarDay,
 } = useCalendar(computed(() => props.allDatesInMonth));
 

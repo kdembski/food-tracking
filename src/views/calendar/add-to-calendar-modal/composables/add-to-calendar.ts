@@ -59,7 +59,6 @@ export function useAddToCalendar(
       })
       .catch((error) => {
         toastNotification.error("Dodawanie do kalendarza nie powiodło się.");
-        console.log(error);
       });
   };
 

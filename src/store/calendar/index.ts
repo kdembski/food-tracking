@@ -1,31 +1,54 @@
 import ApiService from "@/services/api.service";
-import { CalendarDay } from "@/types/calendar";
+import { CalendarDay, CalendarState } from "@/types/calendar";
 import { ApiError } from "@/types/api";
-import { ActionTree } from "vuex";
+import { ActionTree, MutationTree, GetterTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { formatISO } from "date-fns";
+import { formatISO, isEqual } from "date-fns";
 import {
   getErrorMessage,
   showDefualtErrorNotification,
 } from "../helpers/error-message";
 import { isNil } from "lodash";
 
-const actions: ActionTree<any, any> = {
-  getCalendar({ rootState }, { fromDate, toDate }) {
-    return new Promise<CalendarDay[]>((resolve, reject) => {
+const state: CalendarState = {
+  calendar: null,
+  isLoadingCalendar: false,
+};
+
+const getters: GetterTree<CalendarState, any> = {
+  getCalendarDayByDate: (state) => (date: Date) => {
+    return helpers.getCalendarDayByDate(date, state.calendar);
+  },
+};
+
+const actions: ActionTree<CalendarState, any> = {
+  loadCalendar({ rootState, commit }, allDatesInRange) {
+    commit("setIsLoadingCalendar", true);
+
+    const fromDate = allDatesInRange[0];
+    const toDate = allDatesInRange[allDatesInRange.length - 1];
+
+    return new Promise<void>((resolve, reject) => {
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/calendar?" +
           helpers.getCalendarRangeQuery(fromDate, toDate)
       )
         .then((response: AxiosResponse<CalendarDay[]>) => {
-          const calendar = helpers.getPreparedCalendar(response.data);
-          setTimeout(() => resolve(calendar), 500);
+          const calendar = helpers.addMissingDaysToCalendar(
+            allDatesInRange,
+            helpers.sortCalendarItemsAndFixDates(response.data)
+          );
+          commit("setCalendar", calendar);
+          resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
-        });
+        })
+        .finally(() =>
+          setTimeout(() => commit("setIsLoadingCalendar", false), 500)
+        );
     });
   },
 
@@ -63,8 +86,22 @@ const actions: ActionTree<any, any> = {
   },
 };
 
+const mutations: MutationTree<CalendarState> = {
+  setCalendar(state, value) {
+    state.calendar = value;
+  },
+
+  setIsLoadingCalendar(state, value) {
+    state.isLoadingCalendar = value;
+  },
+};
+
 const helpers = {
-  getPreparedCalendar: (calendar: CalendarDay[]) => {
+  getCalendarRangeQuery: (fromDate: Date, toDate: Date) => {
+    return "fromDate=" + formatISO(fromDate) + "&toDate=" + formatISO(toDate);
+  },
+
+  sortCalendarItemsAndFixDates: (calendar: CalendarDay[]) => {
     return calendar.map((day) => {
       day.date = new Date(day.date);
       day.items.sort((a, b) => {
@@ -80,12 +117,33 @@ const helpers = {
     });
   },
 
-  getCalendarRangeQuery: (fromDate: Date, toDate: Date) => {
-    return "fromDate=" + formatISO(fromDate) + "&toDate=" + formatISO(toDate);
+  addMissingDaysToCalendar: (
+    allDatesInRange: Date[],
+    calendar: CalendarDay[]
+  ) => {
+    return allDatesInRange.map((date) => {
+      const calendarDay = helpers.getCalendarDayByDate(date, calendar);
+
+      if (calendarDay) {
+        return calendarDay;
+      }
+
+      return {
+        date,
+        items: [],
+      };
+    });
+  },
+
+  getCalendarDayByDate: (date: Date, calendar: CalendarDay[] | null) => {
+    return calendar?.find((day) => isEqual(day.date, date));
   },
 };
 
 export default {
   namespaced: true,
+  state,
+  getters,
+  mutations,
   actions,
 };

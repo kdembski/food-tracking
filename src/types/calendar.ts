@@ -14,3 +14,8 @@ export interface CalendarItem {
   tags: string;
   sortOrder: number;
 }
+
+export interface CalendarState {
+  calendar: CalendarDay[] | null;
+  isLoadingCalendar: boolean;
+}

@@ -1,6 +1,5 @@
-import { onBeforeMount, ref, Ref, ComputedRef, watch } from "vue";
+import { onBeforeMount, ref, Ref, ComputedRef, watch, computed } from "vue";
 import { useStore } from "vuex";
-import { isEqual } from "date-fns";
 import { CalendarDay, CalendarItem } from "@/types/calendar";
 import { useToastNotification } from "@/composables/toast-notification";
 import { cloneDeep } from "lodash";
@@ -8,8 +7,10 @@ import { cloneDeep } from "lodash";
 export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   const store = useStore();
   const toastNotification = useToastNotification();
-  const calendar: Ref<CalendarDay[] | undefined> = ref();
-  const isLoadingCalendar = ref(false);
+  const calendar = computed(() => store.state.calendar.calendar);
+  const isLoadingCalendar = computed(
+    () => store.state.calendar.isLoadingCalendar
+  );
   const updatePromises: Ref<any[]> = ref([]);
 
   onBeforeMount(() => {
@@ -17,37 +18,11 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   });
 
   const loadCalendar = async () => {
-    isLoadingCalendar.value = true;
-    calendar.value = await getCalendar();
-    addMissingDaysToCalendar();
-    isLoadingCalendar.value = false;
+    store.dispatch("calendar/loadCalendar", allDatesInRange.value);
   };
 
-  const addMissingDaysToCalendar = () => {
-    calendar.value = allDatesInRange.value.map((date) => {
-      const calendarDay = getCalendarDayByDate(date);
-
-      if (calendarDay) {
-        return calendarDay;
-      }
-
-      return {
-        date,
-        items: [],
-      };
-    });
-  };
-
-  const getCalendarDayByDate = (date: Date) => {
-    return calendar.value?.find((day) => isEqual(day.date, date));
-  };
-
-  const getCalendar = () => {
-    const datesRange = {
-      fromDate: allDatesInRange.value[0],
-      toDate: allDatesInRange.value[allDatesInRange.value.length - 1],
-    };
-    return store.dispatch("calendar/getCalendar", datesRange);
+  const getCalendarDayByDate: (date: Date) => CalendarDay = (date) => {
+    return store.getters["calendar/getCalendarDayByDate"](date);
   };
 
   const addCalendarItem = (item: CalendarItem, date: Date) => {
@@ -65,9 +40,8 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
         clone.id = id;
         day?.items.push(clone);
       })
-      .catch((error) => {
+      .catch(() => {
         toastNotification.error("Duplikowanie nie powiodło się.");
-        console.log(error);
       });
   };
 
@@ -133,5 +107,6 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     updateCalendarDay,
     updateCalendarItem,
     cloneCalendarItem,
+    addCalendarItem,
   };
 }
