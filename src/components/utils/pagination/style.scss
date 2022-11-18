@@ -52,10 +52,24 @@ $mobileItemPadding: $spacing-xs $spacing-md;
 
   &__loader {
     .skeleton-loader {
-      padding: $spacing-md $spacing-sm;
-      height: 32px;
+      padding: 0 $spacing-sm;
+      height: 31px;
       display: flex;
       gap: 40%;
+
+      > div:first-child {
+        display: flex;
+        gap: $spacing-sm;
+
+        .skeleton-loader__item {
+          width: 33px;
+        }
+      }
+
+      > div:last-child {
+        height: 60%;
+        align-self: flex-end;
+      }
     }
   }
 }
@@ -76,8 +90,15 @@ $mobileItemPadding: $spacing-xs $spacing-md;
 
     &__loader {
       .skeleton-loader {
-        height: 28px;
-        padding: $spacing-sm $spacing-xs;
+        display: flex;
+        height: 27px;
+        gap: 25%;
+
+        > div:first-child {
+          .skeleton-loader__item {
+            width: 25px;
+          }
+        }
       }
     }
   }

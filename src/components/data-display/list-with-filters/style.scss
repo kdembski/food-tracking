@@ -60,6 +60,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
 
       .pagination__loader {
         padding: $spacing-md 0;
+        margin-bottom: 2px;
       }
 
       &--sticky {
@@ -186,6 +187,10 @@ $filtersHeightOffset: 92px; //topbar height + paddings
     &__pagination {
       &-top {
         top: -($spacing-lg + $spacing-md);
+
+        .pagination__loader {
+          margin-bottom: 3px;
+        }
       }
     }
   }

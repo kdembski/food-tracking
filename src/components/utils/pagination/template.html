@@ -1,6 +1,8 @@
 <div v-if="isLoading" class="pagination__loader">
   <CSkeletonLoader>
-    <div class="skeleton-loader__item"></div>
+    <div>
+      <div v-for="index in 6" class="skeleton-loader__item"></div>
+    </div>
     <div class="skeleton-loader__item"></div>
   </CSkeletonLoader>
 </div>
