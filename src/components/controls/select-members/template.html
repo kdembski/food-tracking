@@ -1,0 +1,25 @@
+<div class="select-members">
+  <CSkeletonLoader v-if="isLoading" class="select-members__loader">
+    <div v-for="index in 5" class="skeleton-loader__item"></div>
+  </CSkeletonLoader>
+  <CMembers v-else :members="members">
+    <template #default="{ label, backgroundColor, member }">
+      <div class="select-members__item">
+        <input
+          v-model="_selectedMembers"
+          :id="getItemId(member.id)"
+          type="checkbox"
+          :value="member.id"
+        />
+        <label
+          :for="getItemId(member.id)"
+          :style="{ backgroundColor }"
+          class="item"
+          v-tooltip="{ text: member.name }"
+        >
+          {{ label }}
+        </label>
+      </div>
+    </template>
+  </CMembers>
+</div>

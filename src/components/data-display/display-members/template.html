@@ -1,0 +1,11 @@
+<CMembers :members="members" class="display-members">
+  <template #default="{ label, backgroundColor, member }">
+    <div
+      class="item"
+      :style="{ backgroundColor }"
+      v-tooltip="{ text: member.name }"
+    >
+      {{ label }}
+    </div>
+  </template>
+</CMembers>

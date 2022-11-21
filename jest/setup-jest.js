@@ -1,6 +1,7 @@
 require("../src/utils/simplifyString");
 require("jest-localstorage-mock");
 const ClickAway = require("vue3-click-away");
+const Tooltip = require("../src/directives/tooltip");
 
 const settings = {
   stubs: {
@@ -10,6 +11,7 @@ const settings = {
   },
   directives: {
     ClickAway,
+    Tooltip,
   },
 };
 global.settings = settings;

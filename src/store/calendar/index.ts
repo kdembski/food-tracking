@@ -52,7 +52,7 @@ const actions: ActionTree<CalendarState, any> = {
     });
   },
 
-  addDateToCalendar(_, data) {
+  addCalendarItem(_, data) {
     return new Promise<AxiosResponse>((resolve, reject) => {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/calendar", data)
         .then((response) => resolve(response))
@@ -60,7 +60,7 @@ const actions: ActionTree<CalendarState, any> = {
     });
   },
 
-  updateDateInCalendar(_, data) {
+  updateCalendarItem(_, data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(
         process.env.VUE_APP_SERVICE_URL + "/calendar/" + data.id,
@@ -71,7 +71,7 @@ const actions: ActionTree<CalendarState, any> = {
     });
   },
 
-  deleteDateFromCalendar({ rootState }, id) {
+  deleteCalendarItem({ rootState }, id) {
     return new Promise<void>((resolve, reject) => {
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/calendar/" + id)
         .then(() => {

@@ -1,0 +1,17 @@
+.members {
+  display: flex;
+  gap: $spacing-xs;
+
+  &:deep(.item) {
+    width: 36px;
+    height: 36px;
+    color: $text-darker;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $font-xl;
+    border-radius: 100%;
+    cursor: pointer;
+    user-select: none;
+  }
+}

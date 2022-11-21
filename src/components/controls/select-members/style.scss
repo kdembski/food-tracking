@@ -1,0 +1,24 @@
+.select-members {
+  &__item {
+    > input {
+      display: none;
+
+      &:checked {
+        & + label {
+          filter: brightness(70%);
+        }
+      }
+    }
+  }
+
+  &__loader {
+    display: flex;
+    gap: $spacing-xs;
+
+    .skeleton-loader__item {
+      width: 36px;
+      height: 36px;
+      border-radius: 100%;
+    }
+  }
+}

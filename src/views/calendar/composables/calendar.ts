@@ -26,7 +26,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   };
 
   const addCalendarItem = (item: CalendarItem, date: Date) => {
-    return store.dispatch("calendar/addDateToCalendar", { date, ...item });
+    return store.dispatch("calendar/addCalendarItem", { date, ...item });
   };
 
   const cloneCalendarItem = (item: CalendarItem, date: Date) => {
@@ -54,11 +54,11 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     }
     const indexOfItemToRemove = day.items.indexOf(itemToRemove);
     day.items.splice(indexOfItemToRemove, 1);
-    store.dispatch("calendar/deleteDateFromCalendar", id);
+    store.dispatch("calendar/deleteCalendarItem", id);
   };
 
   const updateCalendarItem = (item: CalendarItem, date: Date) => {
-    return store.dispatch("calendar/updateDateInCalendar", {
+    return store.dispatch("calendar/updateCalendarItem", {
       date,
       ...item,
     });

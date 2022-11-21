@@ -49,10 +49,19 @@ const list = {
   },
 };
 
+const member = {
+  state: {
+    members: [
+      { id: 1, name: "Karol" },
+      { id: 2, name: "Roksana" },
+    ],
+  },
+};
+
 export default createStore({
   state: {},
   getters: {},
   mutations: {},
   actions: {},
-  modules: { list },
+  modules: { list, member },
 });

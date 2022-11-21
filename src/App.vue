@@ -50,6 +50,7 @@ const layoutComponentName = computed(() => {
 
 onBeforeMount(() => {
   ApiService.setHeader();
+  store.dispatch("member/loadMembers");
 });
 </script>
 

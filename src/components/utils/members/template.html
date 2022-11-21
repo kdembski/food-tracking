@@ -1,0 +1,9 @@
+<div class="members">
+  <template v-for="member in members">
+    <slot
+      :label="getItemLabel(member)"
+      :backgroundColor="getItemBackgroundColor(member)"
+      :member="member"
+    ></slot>
+  </template>
+</div>

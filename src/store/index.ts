@@ -4,6 +4,7 @@ import user from "./user/index";
 import recipe from "./recipe/index";
 import orderedFood from "./ordered-food/index";
 import calendar from "./calendar/index";
+import member from "./member";
 import { State } from "@/types/store";
 
 export default createStore<State>({
@@ -63,7 +64,5 @@ export default createStore<State>({
     },
   },
 
-  actions: {},
-
-  modules: { user, recipe, orderedFood, calendar },
+  modules: { user, recipe, orderedFood, calendar, member },
 });

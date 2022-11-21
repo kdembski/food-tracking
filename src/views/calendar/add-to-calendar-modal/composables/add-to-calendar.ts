@@ -18,13 +18,13 @@ export function useAddToCalendar(
   const toastNotification = useToastNotification();
   const router = useRouter();
 
-  const addDateToCalendar = (
+  const addCalendarItem = (
     date: Date,
     recipeId: number | undefined,
     orderedFoodId: number | undefined,
     portions: number
   ) => {
-    return store.dispatch("calendar/addDateToCalendar", {
+    return store.dispatch("calendar/addCalendarItem", {
       date,
       recipeId,
       orderedFoodId,
@@ -36,7 +36,7 @@ export function useAddToCalendar(
     isAddingToCalendar.value = true;
 
     const promises = selectedDates.value.map((date, index) => {
-      return addDateToCalendar(
+      return addCalendarItem(
         date,
         addedRecipe.value?.id,
         addedOrderedFood.value?.id,
