@@ -9,7 +9,8 @@ export function useTooltipDirective(store: Store<State>) {
     parent: EventTarget | null,
     text?: string,
     withCustomContent?: boolean,
-    activeCustomContent?: string
+    activeCustomContent?: string,
+    delay = 800
   ) => {
     const isOpen = store.state.isTooltipOpen;
 
@@ -25,7 +26,7 @@ export function useTooltipDirective(store: Store<State>) {
         });
         store.commit("setIsTooltipOpen", true);
       },
-      isOpen ? 0 : 500
+      isOpen ? 0 : delay
     );
   };
 
@@ -54,6 +55,7 @@ export function useTooltipDirective(store: Store<State>) {
           text?: string;
           withCustomContent?: boolean;
           activeCustomContent?: string;
+          delay?: number;
         };
       }
     ) => {
@@ -66,7 +68,8 @@ export function useTooltipDirective(store: Store<State>) {
           e.currentTarget,
           bounding.value.text,
           bounding.value.withCustomContent,
-          bounding.value.activeCustomContent
+          bounding.value.activeCustomContent,
+          bounding.value.delay
         );
       };
 

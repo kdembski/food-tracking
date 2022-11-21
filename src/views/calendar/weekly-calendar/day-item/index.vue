@@ -1,14 +1,16 @@
 <script lang="ts">
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
+import CDisplayMembers from "@/components/data-display/display-members/index.vue";
 
 export default {
   name: "WeeklyCalendarDayItem",
-  components: { CDisplayTags, CButton },
+  components: { CDisplayTags, CButton, CDisplayMembers },
 };
 </script>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import { CalendarItem } from "@/types/calendar";
 import { RouterLink } from "vue-router";
 import { useWindowSize } from "@/composables/window-size";
@@ -29,6 +31,10 @@ const emits = defineEmits<{
   (event: "edit", item: CalendarItem): void;
   (event: "clone", item: CalendarItem): void;
 }>();
+
+const membersLength = computed(() => {
+  return props.item.members.length;
+});
 
 const getTagsTooltipId = (id: number) => {
   return "calendar-tags-" + id;

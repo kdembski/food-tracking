@@ -1,8 +1,8 @@
 <div class="day-item" :id="item.id">
   <div class="day-item__header">
     <p>
-      {{ item.name }}<strong v-if="item.portions > 1"
-        >x{{ item.portions }}
+      {{ item.name }}<strong v-if="membersLength > 1"
+        >x{{ membersLength }}
       </strong>
     </p>
     <CButton
@@ -19,10 +19,10 @@
         v-if="!isMobile"
         class="body__icon"
         v-tooltip="{ 
-          maxWidth: 240, 
-          withCustomContent: true,
-          activeCustomContent: getTagsTooltipId(item.id)
-        }"
+            withCustomContent: true,
+            activeCustomContent: getTagsTooltipId(item.id),
+            delay: 100
+          }"
       >
         <FontAwesomeIcon icon="tags" />
       </div>
@@ -42,18 +42,27 @@
         v-tooltip="{ text: 'Edytuj' }"
         @click="emits('edit', item)"
       />
+      <RouterLink v-if="item.isRecipe" :to="'/recipes/' + item.recipeId">
+        <CButton
+          color="secondary"
+          variant="text"
+          icon="utensils"
+          size="small"
+          v-tooltip="{ text: 'Otwórz przepis' }"
+        />
+      </RouterLink>
+      <RouterLink v-else to="/ordered">
+        <CButton
+          color="secondary"
+          variant="text"
+          icon="box-open"
+          size="small"
+        />
+      </RouterLink>
     </div>
-    <RouterLink v-if="item.isRecipe" :to="'/recipes/' + item.recipeId">
-      <CButton
-        color="secondary"
-        variant="text"
-        icon="utensils"
-        v-tooltip="{ text: 'Otwórz przepis' }"
-      />
-    </RouterLink>
-    <RouterLink v-else to="/ordered">
-      <CButton color="secondary" variant="text" icon="box-open" />
-    </RouterLink>
+    <div class="body__right-part">
+      <CDisplayMembers :memberIds="item.members" />
+    </div>
   </div>
   <Teleport v-if="isTagsTooltipContentVisible(item.id)" to="#tooltip-content">
     <div class="day-item__tags-tooltip">

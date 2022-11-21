@@ -53,6 +53,20 @@ describe("Add To Calendar Modal Component", () => {
           actions: calendarActions,
           namespaced: true,
         },
+        member: {
+          state: {
+            members: [
+              {
+                id: 1,
+                name: "test1",
+              },
+              {
+                id: 2,
+                name: "test2",
+              },
+            ],
+          },
+        },
       },
     });
 
@@ -83,13 +97,13 @@ describe("Add To Calendar Modal Component", () => {
     expect(wrapper.vm.selectedDates).toEqual([]);
   });
 
-  it("Should set portions based on selectedDates when selectedDates change", async () => {
+  it("Should set members based on selectedDates when selectedDates change", async () => {
     const datePicker = wrapper.getComponent(CDatePicker);
     const firstDateBtn = datePicker.find("input#date-0");
-    expect(wrapper.vm.portions).toEqual([]);
+    expect(wrapper.vm.members).toEqual([]);
 
     await firstDateBtn.setChecked();
-    expect(wrapper.vm.portions).toEqual([2]);
+    expect(wrapper.vm.members).toEqual([[1, 2]]);
   });
 
   it("Should trigger addCalendarItem with provided recipe and NOT change cooked date", async () => {
@@ -97,7 +111,7 @@ describe("Add To Calendar Modal Component", () => {
       addedRecipe,
     });
     wrapper.vm.selectedDates = [new Date(2000, 0, 1)];
-    wrapper.vm.portions = [2];
+    wrapper.vm.members = [[1, 2]];
     wrapper.vm.addSelectedDatesToCalendar();
     wrapper.vm.isAddingToCalendar = true;
 
@@ -110,7 +124,7 @@ describe("Add To Calendar Modal Component", () => {
         date: new Date(2000, 0, 1),
         recipeId: 1,
         orderedFoodId: undefined,
-        portions: 2,
+        members: [1, 2],
       }
     );
     expect(addedRecipe.cookedDate).toEqual(new Date(2000, 1, 1));
@@ -124,7 +138,7 @@ describe("Add To Calendar Modal Component", () => {
       addedRecipe,
     });
     wrapper.vm.selectedDates = [new Date(2000, 1, 3), new Date(2000, 1, 2)];
-    wrapper.vm.portions = [3, 2];
+    wrapper.vm.members = [[1, 2], [1]];
     wrapper.vm.addSelectedDatesToCalendar();
 
     await flushPromises();
@@ -134,7 +148,7 @@ describe("Add To Calendar Modal Component", () => {
         date: new Date(2000, 1, 2),
         recipeId: 1,
         orderedFoodId: undefined,
-        portions: 2,
+        members: [1],
       }
     );
     expect(addedRecipe.cookedDate).toEqual(new Date(2000, 1, 3));
@@ -149,7 +163,7 @@ describe("Add To Calendar Modal Component", () => {
       addedOrderedFood,
     });
     wrapper.vm.selectedDates = [new Date(2000, 1, 2)];
-    wrapper.vm.portions = [2];
+    wrapper.vm.members = [[1, 2]];
     wrapper.vm.addSelectedDatesToCalendar();
 
     await flushPromises();
@@ -159,7 +173,7 @@ describe("Add To Calendar Modal Component", () => {
         date: new Date(2000, 1, 2),
         recipeId: undefined,
         orderedFoodId: 2,
-        portions: 2,
+        members: [1, 2],
       }
     );
     expect(addedOrderedFood.orderDate).toEqual(new Date(2000, 1, 2));

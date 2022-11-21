@@ -1,11 +1,11 @@
 <script lang="ts">
 import CModal from "@/components/surfaces/modal/index.vue";
 import CDatePicker from "@/components/controls/date-picker/index.vue";
-import CSetPortions from "@/components/controls/set-portions/index.vue";
+import CSelectMembers from "@/components/controls/select-members/index.vue";
 
 export default {
   name: "AddToCalendarModal",
-  components: { CModal, CDatePicker, CSetPortions },
+  components: { CModal, CDatePicker, CSelectMembers },
 };
 </script>
 
@@ -27,9 +27,9 @@ const props = defineProps({
   addedOrderedFood: {
     type: Object as () => OrderedFood,
   },
-  defaultPortions: {
-    type: Number,
-    default: 2,
+  defaultMembers: {
+    type: Array,
+    default: () => [1, 2],
   },
 });
 
@@ -39,7 +39,7 @@ const emits = defineEmits<{
 
 const { getFormattedDate } = useDateHelpers();
 const selectedDates: Ref<Date[]> = ref([]);
-const portions: Ref<number[]> = ref([]);
+const members: Ref<number[][]> = ref([]);
 
 const _isOpen = computed({
   get(): boolean {
@@ -56,8 +56,8 @@ watch(_isOpen, () => {
 
 watch(selectedDates, (dates) => {
   dates.sort((a, b) => a.getTime() - b.getTime());
-  portions.value = dates.map(
-    (_, index) => portions.value[index] || props.defaultPortions
+  members.value = dates.map(
+    (_, index) => members.value[index] || props.defaultMembers
   );
 });
 
@@ -67,7 +67,7 @@ const isSelectedDatesEmpty = () => {
 
 const { addSelectedDatesToCalendar, isAddingToCalendar } = useAddToCalendar(
   selectedDates,
-  portions,
+  members,
   _isOpen,
   computed(() => props.addedRecipe),
   computed(() => props.addedOrderedFood)

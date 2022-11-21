@@ -9,7 +9,7 @@ export interface CalendarItem {
   orderedFoodId?: number;
   isRecipe?: boolean;
   isOrderedFood?: boolean;
-  portions: number;
+  members: number[];
   name: string;
   tags: string;
   sortOrder: number;

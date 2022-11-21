@@ -1,7 +1,7 @@
 .day-item {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: $spacing-xl;
   padding: $spacing-sm;
   cursor: grab;
   box-shadow: $shadow-xs var(--shadow-color);
@@ -35,12 +35,17 @@
 
   .body {
     display: flex;
-    align-items: flex-end;
     gap: $spacing-xs;
+    justify-content: space-between;
+    align-items: flex-end;
 
     &__left-part {
       display: flex;
       gap: $spacing-xs;
+    }
+
+    &__right-part {
+      margin-right: $spacing-2xs;
     }
 
     &__icon {
@@ -51,10 +56,6 @@
       flex-grow: 1;
       width: 24px;
       color: var(--text-secondary);
-    }
-
-    & > *:last-child {
-      margin-left: auto;
     }
   }
 

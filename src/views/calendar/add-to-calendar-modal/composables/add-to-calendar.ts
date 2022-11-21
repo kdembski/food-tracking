@@ -8,7 +8,7 @@ import { useRouter } from "vue-router";
 
 export function useAddToCalendar(
   selectedDates: Ref<Date[]>,
-  portions: Ref<number[]>,
+  members: Ref<number[][]>,
   isOpen: Ref<boolean>,
   addedRecipe: ComputedRef<Recipe | undefined>,
   addedOrderedFood: ComputedRef<OrderedFood | undefined>
@@ -22,13 +22,13 @@ export function useAddToCalendar(
     date: Date,
     recipeId: number | undefined,
     orderedFoodId: number | undefined,
-    portions: number
+    members: number[]
   ) => {
     return store.dispatch("calendar/addCalendarItem", {
       date,
       recipeId,
       orderedFoodId,
-      portions,
+      members,
     });
   };
 
@@ -40,7 +40,7 @@ export function useAddToCalendar(
         date,
         addedRecipe.value?.id,
         addedOrderedFood.value?.id,
-        portions.value[index]
+        members.value[index]
       );
     });
 

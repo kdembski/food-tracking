@@ -4,7 +4,10 @@
   </CSkeletonLoader>
   <CMembers v-else :members="members">
     <template #default="{ label, backgroundColor, member }">
-      <div class="select-members__item">
+      <div
+        class="select-members__item"
+        v-tooltip="{ text: member.name, delay: 1500 }"
+      >
         <input
           v-model="_selectedMembers"
           :id="getItemId(member.id)"
@@ -15,7 +18,6 @@
           :for="getItemId(member.id)"
           :style="{ backgroundColor }"
           class="item"
-          v-tooltip="{ text: member.name }"
         >
           {{ label }}
         </label>

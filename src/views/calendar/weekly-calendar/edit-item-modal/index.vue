@@ -1,12 +1,12 @@
 <script lang="ts">
 import CModal from "@/components/surfaces/modal/index.vue";
-import CSetPortions from "@/components/controls/set-portions/index.vue";
+import CSelectMembers from "@/components/controls/select-members/index.vue";
 
 export default {
   name: "WeeklyCalendarDay",
   components: {
     CModal,
-    CSetPortions,
+    CSelectMembers,
   },
 };
 </script>
@@ -14,8 +14,10 @@ export default {
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useToastNotification } from "@/composables/toast-notification";
+import { useStore } from "vuex";
 
 const toastNotification = useToastNotification();
+const store = useStore();
 
 const props = defineProps({
   isOpen: {
@@ -27,10 +29,6 @@ const props = defineProps({
   },
   calendarItem: {
     type: Object,
-  },
-  updateCalendarItem: {
-    type: Function,
-    required: true,
   },
 });
 
@@ -53,10 +51,10 @@ const closeModal = () => {
 
 const isUpdating = ref(false);
 
-const updateCalendarItem = () => {
+const updateCalendarItemMembers = () => {
   isUpdating.value = true;
-  props
-    .updateCalendarItem(props.calendarItem, props.date)
+  store
+    .dispatch("calendar/updateCalendarItemMembers", props.calendarItem)
     .then(() => {
       toastNotification.success("Kalendarz zaktualizowany pomyślnie!");
     })

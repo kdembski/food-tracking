@@ -6,13 +6,13 @@
   &__header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: $spacing-2xl;
   }
 
   &__toolbar {
     display: flex;
     align-items: center;
-    gap: $spacing-2xl;
+    gap: $spacing-xl;
   }
 
   &__range {

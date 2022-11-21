@@ -3,10 +3,10 @@
   title="Edytuj kalendarz"
   submitButtonLabel="Zapisz"
   :isSubmitting="isUpdating"
-  @submit="updateCalendarItem"
+  @submit="updateCalendarItemMembers"
 >
   <div class="edit-calendar-item">
-    <p>Określ liczbę porcji</p>
-    <CSetPortions v-model="calendarItem.portions" />
+    <p>Wybierz członków</p>
+    <CSelectMembers v-model:selectedMembers="calendarItem.members" />
   </div>
 </CModal>

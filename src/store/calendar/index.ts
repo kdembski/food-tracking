@@ -46,9 +46,7 @@ const actions: ActionTree<CalendarState, any> = {
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         })
-        .finally(() =>
-          setTimeout(() => commit("setIsLoadingCalendar", false), 500)
-        );
+        .finally(() => commit("setIsLoadingCalendar"));
     });
   },
 
@@ -82,6 +80,17 @@ const actions: ActionTree<CalendarState, any> = {
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
+    });
+  },
+
+  updateCalendarItemMembers(_, item) {
+    return new Promise<void>((resolve, reject) => {
+      ApiService.patch(
+        process.env.VUE_APP_SERVICE_URL + "/calendar/" + item.id + "/members",
+        item.members
+      )
+        .then(() => resolve())
+        .catch(() => reject());
     });
   },
 };

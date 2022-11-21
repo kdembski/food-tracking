@@ -1,11 +1,19 @@
 .select-members {
+  .members {
+    gap: $spacing-md;
+  }
   &__item {
+    > label {
+      filter: brightness(60%);
+    }
     > input {
       display: none;
 
       &:checked {
         & + label {
-          filter: brightness(70%);
+          filter: brightness(100%);
+          outline: 2px solid var(--primary);
+          outline-offset: 1px;
         }
       }
     }

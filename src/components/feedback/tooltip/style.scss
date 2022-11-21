@@ -1,6 +1,7 @@
 .tooltip {
   position: absolute;
   transition: opacity 0.1s ease-in-out;
+  z-index: $layer-5;
 
   &__content {
     position: absolute;

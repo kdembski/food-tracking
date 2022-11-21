@@ -7,11 +7,14 @@
   @submit="addSelectedDatesToCalendar"
 >
   <CDatePicker v-model="selectedDates" />
-  <div v-if="!isSelectedDatesEmpty()" class="add-to-calendar__portions">
-    <p>Określ liczbę porcji</p>
+  <div v-if="!isSelectedDatesEmpty()" class="add-to-calendar__members">
+    <p>Wybierz członków</p>
     <div v-for="(date,index) in selectedDates">
       <p>{{ getFormattedDate(date, 'd MMMM (EEEE)') }}</p>
-      <CSetPortions v-model="portions[index]" />
+      <CSelectMembers
+        v-model:selectedMembers="members[index]"
+        :id="'add-to-calendar-'+ index"
+      />
     </div>
   </div>
 </CModal>

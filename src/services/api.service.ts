@@ -27,6 +27,10 @@ const ApiService = {
     return axios.put(url, data);
   },
 
+  patch(url: string, data: object) {
+    return axios.patch(url, data);
+  },
+
   delete(url: string) {
     return axios.delete(url);
   },
