@@ -3,25 +3,38 @@ import CCalendarMode from "@/components/controls/calendar-mode/index.vue";
 import MonthlyCalendar from "./monthly-calendar/index.vue";
 import WeeklyCalendar from "./weekly-calendar/index.vue";
 import CButton from "@/components/controls/button/index.vue";
+import CSelectMembers from "@/components/controls/select-members/index.vue";
+import CInput from "@/components/controls/input/index.vue";
 
 export default {
   name: "CalendarView",
-  components: { CCalendarMode, MonthlyCalendar, WeeklyCalendar, CButton },
+  components: {
+    CCalendarMode,
+    MonthlyCalendar,
+    WeeklyCalendar,
+    CButton,
+    CSelectMembers,
+    CInput,
+  },
 };
 </script>
 
 <script setup lang="ts">
-import { ref, provide, nextTick } from "vue";
+import { useStore } from "vuex";
+import { ref, provide, nextTick, computed } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
 import { useWindowSize } from "@/composables/window-size";
 import { useCalendarModes } from "@/components/controls/calendar-mode/composables/calendar-modes";
 
 const { calendarModes, isMonthlyMode, isWeeklyMode } = useCalendarModes();
 const { isMobile } = useWindowSize();
+const store = useStore();
 
 const monthlyCalendar = ref();
 const weeklyCalendar = ref();
 const calendarMode = ref(calendarModes.WEEKLY);
+const selectedMembers = ref([]);
+const isLoading = computed(() => store.state.calendar.isLoadingCalendar);
 
 const onArrowLeftClick = async () => {
   decrementDate();
@@ -37,11 +50,11 @@ const onArrowRightClick = async () => {
 
 const loadCalendar = () => {
   if (isWeeklyMode(calendarMode.value)) {
-    weeklyCalendar.value?.loadWeeklyCalendar();
+    weeklyCalendar.value?.loadWeeklyCalendar(selectedMembers.value);
   }
 
   if (isMonthlyMode(calendarMode.value)) {
-    monthlyCalendar.value?.loadMonthlyCalendar();
+    monthlyCalendar.value?.loadMonthlyCalendar(selectedMembers.value);
   }
 };
 

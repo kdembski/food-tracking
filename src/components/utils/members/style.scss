@@ -15,3 +15,9 @@
     user-select: none;
   }
 }
+
+[data-theme="dark"] {
+  .members:deep(.item) {
+    color: $white;
+  }
+}

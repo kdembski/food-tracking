@@ -17,8 +17,11 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     loadCalendar();
   });
 
-  const loadCalendar = async () => {
-    store.dispatch("calendar/loadCalendar", allDatesInRange.value);
+  const loadCalendar = async (selectedMembers?: number[]) => {
+    store.dispatch("calendar/loadCalendar", {
+      allDatesInRange: allDatesInRange.value,
+      selectedMembers,
+    });
   };
 
   const getCalendarDayByDate: (date: Date) => CalendarDay = (date) => {

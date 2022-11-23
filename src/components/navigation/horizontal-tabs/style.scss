@@ -15,7 +15,7 @@
 
       &:checked {
         & + label {
-          color: var(--text-secondary);
+          color: var(--text-primary);
           cursor: default;
         }
       }
@@ -29,7 +29,7 @@
       cursor: pointer;
 
       &:hover {
-        color: var(--text-secondary);
+        color: var(--text-primary);
       }
 
       & > p {

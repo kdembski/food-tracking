@@ -22,17 +22,18 @@ const getters: GetterTree<CalendarState, any> = {
 };
 
 const actions: ActionTree<CalendarState, any> = {
-  loadCalendar({ rootState, commit }, allDatesInRange) {
+  loadCalendar({ rootState, commit }, { allDatesInRange, selectedMembers }) {
     commit("setIsLoadingCalendar", true);
 
     const fromDate = allDatesInRange[0];
     const toDate = allDatesInRange[allDatesInRange.length - 1];
+    selectedMembers = selectedMembers?.join(",");
 
     return new Promise<void>((resolve, reject) => {
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/calendar?" +
-          helpers.getCalendarRangeQuery(fromDate, toDate)
+          helpers.getCalendarRangeQuery(fromDate, toDate, selectedMembers)
       )
         .then((response: AxiosResponse<CalendarDay[]>) => {
           const calendar = helpers.addMissingDaysToCalendar(
@@ -46,7 +47,7 @@ const actions: ActionTree<CalendarState, any> = {
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         })
-        .finally(() => commit("setIsLoadingCalendar"));
+        .finally(() => commit("setIsLoadingCalendar", false));
     });
   },
 
@@ -106,8 +107,18 @@ const mutations: MutationTree<CalendarState> = {
 };
 
 const helpers = {
-  getCalendarRangeQuery: (fromDate: Date, toDate: Date) => {
-    return "fromDate=" + formatISO(fromDate) + "&toDate=" + formatISO(toDate);
+  getCalendarRangeQuery: (
+    fromDate: Date,
+    toDate: Date,
+    selectedMembers: string
+  ) => {
+    return (
+      "fromDate=" +
+      formatISO(fromDate) +
+      "&toDate=" +
+      formatISO(toDate) +
+      (selectedMembers ? "&members=" + selectedMembers : "")
+    );
   },
 
   sortCalendarItemsAndFixDates: (calendar: CalendarDay[]) => {

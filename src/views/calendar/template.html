@@ -22,7 +22,18 @@
       <CCalendarMode v-show="!isMobile" v-model:mode="calendarMode" />
     </div>
   </header>
-
+  <div class="calendar__filters">
+    <CInput
+      icon="magnifying-glass"
+      placeholder="Szukaj"
+      :isLoading="isLoading"
+    />
+    <CSelectMembers
+      v-model:selectedMembers="selectedMembers"
+      @update:selectedMembers="loadCalendar"
+      :isLoading="isLoading"
+    />
+  </div>
   <MonthlyCalendar
     v-if="isMonthlyMode(calendarMode)"
     :allDatesInMonth="allDatesInMonth"

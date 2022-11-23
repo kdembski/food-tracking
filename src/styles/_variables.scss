@@ -12,16 +12,16 @@ $surface-lighter: lighten($secondary, 60);
 $surface-light: lighten($secondary, 57);
 $border-light: lighten($secondary, 52);
 
-$text-darkest: darken($secondary, 28);
+$text-darkest: darken($secondary, 30);
 $text-darker: $secondary;
-$text-dark: lighten($secondary, 30);
+$text-dark: lighten($secondary, 40);
 
-$surface-darkest: darken($secondary, 26);
-$surface-darker: darken($secondary, 23);
+$surface-darkest: darken($secondary, 28);
+$surface-darker: darken($secondary, 24);
 $surface-dark: darken($secondary, 20);
 $border-dark: darken($secondary, 15);
 
-$text-lightest: lighten($secondary, 55);
+$text-lightest: lighten($secondary, 60);
 $text-lighter: lighten($secondary, 35);
 $text-light: $secondary;
 

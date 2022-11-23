@@ -3,6 +3,17 @@
   flex-direction: column;
   flex-grow: 1;
 
+  &__filters {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+
+    > .field {
+      width: 280px;
+    }
+  }
+
   &__header {
     display: flex;
     align-items: center;
@@ -21,7 +32,7 @@
 
     & > p {
       font-size: $font-lg;
-      font-weight: $font-bold;
+      font-weight: $font-medium;
       color: var(--text-secondary);
       min-width: 150px;
       text-align: center;
@@ -35,6 +46,18 @@
       & > p {
         font-size: $font-base;
         min-width: 120px;
+      }
+    }
+
+    &__filters {
+      padding-left: $spacing-lg;
+
+      > .select-members {
+        width: calc(100vw - 268px);
+      }
+
+      > .field {
+        width: 240px;
       }
     }
   }

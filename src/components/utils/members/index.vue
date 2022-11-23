@@ -6,6 +6,10 @@ export default {
 
 <script setup lang="ts">
 import { Member } from "@/types/member";
+import { useStore } from "vuex";
+import { computed } from "vue";
+
+const store = useStore();
 
 const props = defineProps({
   members: {
@@ -18,9 +22,13 @@ const getItemLabel = (member: Member) => {
   return member.name[0].toUpperCase();
 };
 
+const isDarkModeEnabled = computed(() => store.getters["isDarkModeEnabled"]);
+
 const getItemBackgroundColor = (member: Member) => {
-  const color = member.id === 1 ? "#80d7e0" : "#f0b1b1";
-  return color;
+  if (isDarkModeEnabled.value) {
+    return member.id === 1 ? "#4C8186" : "#A87B7B";
+  }
+  return member.id === 1 ? "#80d7e0" : "#f0b1b1";
 };
 </script>
 

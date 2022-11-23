@@ -1,6 +1,11 @@
 <div class="day-item" :id="item.id">
   <div class="day-item__header">
-    <p>
+    <p
+      v-tooltip="{ 
+        withCustomContent: true,
+        activeCustomContent: getTagsTooltipId(item.id),
+      }"
+    >
       {{ item.name }}<strong v-if="membersLength > 1"
         >x{{ membersLength }}
       </strong>
@@ -15,17 +20,6 @@
   </div>
   <div class="day-item__body body">
     <div class="body__left-part">
-      <div
-        v-if="!isMobile"
-        class="body__icon"
-        v-tooltip="{ 
-            withCustomContent: true,
-            activeCustomContent: getTagsTooltipId(item.id),
-            delay: 100
-          }"
-      >
-        <FontAwesomeIcon icon="tags" />
-      </div>
       <CButton
         color="secondary"
         variant="text"
