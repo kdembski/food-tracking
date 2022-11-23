@@ -2,6 +2,7 @@ import { nextTick } from "vue";
 import flushPromises from "flush-promises";
 import { shallowMount } from "@vue/test-utils";
 import CalendarView from "./index.vue";
+import { createStore } from "vuex";
 import { useCalendarModes } from "@/components/controls/calendar-mode/composables/calendar-modes";
 
 let incrementDate: any;
@@ -21,10 +22,29 @@ describe("Calendar View", () => {
   let wrapper: any = null;
   let monthlyCalendar: any;
   let weeklyCalendar: any;
+  let store: any;
+  let state: any;
 
   beforeEach(async () => {
     decrementDate = jest.fn();
     incrementDate = jest.fn();
+
+    state = {
+      isLoadingCalendar: false,
+    };
+
+    store = createStore({
+      modules: {
+        calendar: {
+          namespaced: true,
+          state,
+        },
+      },
+    });
+
+    global.settings.provide = {
+      store,
+    };
 
     wrapper = shallowMount(CalendarView, {
       global: global.settings,

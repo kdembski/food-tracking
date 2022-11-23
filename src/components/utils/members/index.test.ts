@@ -1,10 +1,22 @@
 import { mount } from "@vue/test-utils";
 import CMembers from "./index.vue";
+import { createStore } from "vuex";
 
 describe("Members Component", () => {
   let wrapper: any = null;
+  let store: any;
 
   beforeEach(async () => {
+    store = createStore({
+      getters: {
+        isDarkModeEnabled: () => false,
+      },
+    });
+
+    global.settings.provide = {
+      store,
+    };
+
     wrapper = mount(CMembers, {
       props: {
         members: [
