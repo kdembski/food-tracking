@@ -13,11 +13,9 @@ export default {
 import { computed } from "vue";
 import { CalendarItem } from "@/types/calendar";
 import { RouterLink } from "vue-router";
-import { useWindowSize } from "@/composables/window-size";
 import { useStore } from "vuex";
 
 const store = useStore();
-const { isMobile } = useWindowSize();
 
 const props = defineProps({
   item: {

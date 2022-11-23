@@ -13,7 +13,6 @@ export default {
 
 <script setup lang="ts">
 import { inject, ref } from "vue";
-import { useStore } from "vuex";
 import { CalendarDay, CalendarItem } from "@/types/calendar";
 import { isToday } from "date-fns";
 
@@ -39,7 +38,6 @@ const emits = defineEmits<{
   (event: "delete", id: number, date: Date): void;
 }>();
 
-const store = useStore();
 const getFormattedDate = inject("getFormattedDate");
 const isDragging = ref(false);
 
