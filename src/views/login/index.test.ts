@@ -63,4 +63,10 @@ describe("Login View", () => {
     expect(wrapper.vm.passwordErrorMessage).toEqual("error");
     expect(wrapper.vm.password).toEqual("");
   });
+
+  it("Should clear error message on clearPasswordErrorMessage call", async () => {
+    wrapper.vm.passwordErrorMessage = "error";
+    await wrapper.vm.clearPasswordErrorMessage();
+    expect(wrapper.vm.passwordErrorMessage).toEqual("");
+  });
 });
