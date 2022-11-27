@@ -12,7 +12,7 @@ export interface CalendarItem {
   members: number[];
   name: string;
   tags: string;
-  sortOrder: number;
+  sortOrder: number | null;
 }
 
 export interface CalendarState {

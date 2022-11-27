@@ -26,6 +26,7 @@
       v-tooltip="{ text: 'Dodaj do kalendarza' }"
     />
     <CButton
+      v-if="item.cookidooLink"
       color="secondary"
       variant="text"
       @click="openCookidoLink"

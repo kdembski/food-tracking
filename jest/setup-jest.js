@@ -19,3 +19,5 @@ global.settings = settings;
 const mobileDropdownsContainer = document.createElement("div");
 mobileDropdownsContainer.id = "mobile-dropdowns-container";
 document.body.appendChild(mobileDropdownsContainer);
+
+process.env.VUE_APP_SERVICE_URL = "service";
