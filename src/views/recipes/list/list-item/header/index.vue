@@ -16,9 +16,9 @@ export default {
 <script setup lang="ts">
 import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipe";
-import { useRouter, RouterLink } from "vue-router";
+import { RouterLink } from "vue-router";
+import { computed } from "vue";
 
-const router = useRouter();
 const { isMobile } = useWindowSize();
 
 const props = defineProps({
@@ -45,7 +45,7 @@ const openInCookidooOption = {
   icon: "arrow-up-right-from-square",
 };
 
-const mobileDropdownOptions = [
+const mobileDropdownOptions = computed(() => [
   {
     value: "",
     label: "Dodaj do kalendarza",
@@ -59,7 +59,7 @@ const mobileDropdownOptions = [
     icon: "shopping-cart",
   },
   ...(props.item.cookidooLink ? [openInCookidooOption] : []),
-];
+]);
 </script>
 
 <template src="./template.html"></template>

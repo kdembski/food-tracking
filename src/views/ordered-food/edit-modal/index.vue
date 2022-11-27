@@ -51,7 +51,7 @@ const emptyOrderedFood = {
 };
 const orderedFood = ref();
 const orderedFoodTags = ref();
-const isAddingNewFood = ref();
+const isAddingNewFood = computed(() => !props.orderedFoodId);
 const isSubmitting = computed(() => {
   return store.state.orderedFood.isSubmittingOrderedFood;
 });
@@ -68,7 +68,6 @@ onBeforeMount(() => {
 
 watch(_isOpen, (value) => {
   orderedFood.value = cloneDeep(emptyOrderedFood);
-  isAddingNewFood.value = !props.orderedFoodId;
 
   if (!value) {
     return;

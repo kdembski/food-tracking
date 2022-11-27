@@ -7,6 +7,9 @@
 >
   <div class="edit-calendar-item">
     <p>Wybierz członków</p>
-    <CSelectMembers v-model:selectedMembers="calendarItem.members" />
+    <CSelectMembers
+      id="edit-calendar-item"
+      v-model:selectedMembers="calendarItem.members"
+    />
   </div>
 </CModal>
