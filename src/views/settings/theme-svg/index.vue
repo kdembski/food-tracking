@@ -6,16 +6,16 @@ export default { name: "ThemeSvg" };
 const props = defineProps({
   theme: {
     type: String,
-    default: "",
+    default: "light",
     validator: (value: string) => {
-      return ["", "dark", "light"].indexOf(value) !== -1;
+      return ["dark", "light"].indexOf(value) !== -1;
     },
   },
   primaryColor: {
     type: String,
-    default: "",
+    default: "orange",
     validator: (value: string) => {
-      return ["", "orange"].indexOf(value) !== -1;
+      return ["orange"].indexOf(value) !== -1;
     },
   },
 });
@@ -25,16 +25,10 @@ const getSvgClasses = () => {
 };
 
 const getThemeClass = () => {
-  if (!props.theme) {
-    return "";
-  }
   return "theme-svg--" + props.theme;
 };
 
 const getPrimaryColorClass = () => {
-  if (!props.primaryColor) {
-    return "";
-  }
   return "theme-svg--" + props.primaryColor;
 };
 </script>

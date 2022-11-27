@@ -16,7 +16,7 @@
     text-align: center;
     font-weight: $font-bold;
     color: var(--text-secondary);
-    padding: $spacing-sm $spacing-md;
+    padding: $spacing-md;
   }
 
   &__list {
@@ -38,17 +38,15 @@
   }
 
   .item {
-    background-color: var(--surface-secondary);
     cursor: grab;
-    box-shadow: $shadow-xs $shadow-color;
-    border-radius: $radius-xs;
-    padding: $spacing-xs;
-    padding-left: $spacing-md;
+    padding: $spacing-md;
+    padding-right: $spacing-xs;
     font-size: $font-xs;
     font-weight: $font-medium;
     display: flex;
     align-items: center;
     gap: $spacing-md;
+    background-color: var(--surface-secondary);
 
     * {
       user-select: none;
@@ -59,7 +57,7 @@
     }
 
     & > svg {
-      color: var(--text-tetriary);
+      color: var(--text-secondary);
       font-size: 13px;
     }
   }

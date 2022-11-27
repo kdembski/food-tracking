@@ -1,10 +1,9 @@
 <script lang="ts">
 import SelectTheme from "./select-theme/index.vue";
-import CCard from "@/components/surfaces/card/index.vue";
 
 export default {
   name: "SettingsView",
-  components: { SelectTheme, CCard },
+  components: { SelectTheme },
 };
 </script>
 

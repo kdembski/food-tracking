@@ -24,6 +24,7 @@
     padding: $spacing-lg 0;
     position: sticky;
     top: -$spacing-2xl;
+    z-index: 1;
 
     > p {
       @include uppercasedSecondaryText;
