@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import CSideBar from "./index.vue";
 
 describe("Side Bar Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = shallowMount(CSideBar, {

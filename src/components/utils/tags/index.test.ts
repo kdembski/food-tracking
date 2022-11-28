@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CTags from "./index.vue";
 
 describe("Tags Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CTags, { global: global.settings });

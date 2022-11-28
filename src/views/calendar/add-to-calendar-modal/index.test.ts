@@ -20,7 +20,7 @@ jest.mock("vue-router", () => ({
 }));
 
 describe("Add To Calendar Modal Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
   let addedRecipe: any;
   let addedOrderedFood: any;

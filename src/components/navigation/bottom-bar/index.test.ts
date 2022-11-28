@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import CBottomBar from "./index.vue";
 
 describe("Bottom Bar Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let bottomBarWrapper: any;
 
   beforeEach(async () => {

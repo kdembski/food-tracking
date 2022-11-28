@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CFieldTemplate from "./index.vue";
 
 describe("Field Template Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CFieldTemplate, { global: global.settings });

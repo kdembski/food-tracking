@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CIcon from "./index.vue";
 
 describe("Icon Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CIcon, { global: global.settings });

@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import PlainLayout from "./index.vue";
 
 describe("Plain Layout Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(PlainLayout, { global: global.settings });

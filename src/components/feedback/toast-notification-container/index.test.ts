@@ -7,7 +7,7 @@ import { createStore } from "vuex";
 import { provide } from "vue";
 
 describe("Toast Notification Container Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
   let toastNotification: any;
   let state: any;

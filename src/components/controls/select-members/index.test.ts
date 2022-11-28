@@ -4,9 +4,9 @@ import { createStore } from "vuex";
 import * as vue from "vue";
 
 describe("Select Members Component", () => {
-  let wrapper: any = null;
-  let store: any = null;
-  let state: any = null;
+  let wrapper: any;
+  let store: any;
+  let state: any;
 
   beforeEach(async () => {
     state = {

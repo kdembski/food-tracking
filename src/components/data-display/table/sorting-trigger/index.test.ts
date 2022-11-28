@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CSortingTrigger from "./index.vue";
 
 describe("Sorting Trigger Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CSortingTrigger, {

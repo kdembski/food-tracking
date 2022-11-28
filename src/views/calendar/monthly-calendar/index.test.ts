@@ -12,7 +12,7 @@ jest.mock("../composables/calendar", () => ({
 }));
 
 describe("Monthly Calendar", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   global.settings.provide = {
     getWeekDays: jest.fn(),

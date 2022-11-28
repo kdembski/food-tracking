@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CInput from "./index.vue";
 
 describe("Input Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CInput, {

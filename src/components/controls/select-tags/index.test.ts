@@ -2,9 +2,9 @@ import { mount } from "@vue/test-utils";
 import CSelectTags from "./index.vue";
 
 describe("Select Tags Component", () => {
-  let wrapper: any = null;
-  let input: any = null;
-  let newTag: any = null;
+  let wrapper: any;
+  let input: any;
+  let newTag: any;
 
   beforeEach(async () => {
     wrapper = mount(CSelectTags, {

@@ -4,7 +4,7 @@ import CButton from "@/components/controls/button/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 
 describe("Modal Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CModal, {

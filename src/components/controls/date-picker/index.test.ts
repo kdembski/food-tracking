@@ -2,7 +2,7 @@ import { mount, DOMWrapper } from "@vue/test-utils";
 import CDatePicker from "./index.vue";
 
 describe("Date Picker Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let monthlyModeBtn: DOMWrapper<HTMLButtonElement>;
   let weeklyModeBtn: DOMWrapper<HTMLButtonElement>;
   let incrementDateBtn: DOMWrapper<HTMLButtonElement>;

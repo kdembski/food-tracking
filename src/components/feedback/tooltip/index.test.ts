@@ -5,7 +5,7 @@ import { createStore } from "vuex";
 import { useTooltipDirective } from "@/directives/tooltip";
 
 describe("Tooltip Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
   let state: any;
   let tooltipDirective: any;

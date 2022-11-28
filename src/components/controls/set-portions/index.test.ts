@@ -2,7 +2,7 @@ import { mount, DOMWrapper } from "@vue/test-utils";
 import CSetPortions from "./index.vue";
 
 describe("Set Portions Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let minusButton: DOMWrapper<HTMLButtonElement>;
   let plusButton: DOMWrapper<HTMLButtonElement>;
 

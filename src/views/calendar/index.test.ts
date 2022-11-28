@@ -19,7 +19,7 @@ jest.mock("@/composables/date-helpers/index", () => ({
 }));
 
 describe("Calendar View", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let monthlyCalendar: any;
   let weeklyCalendar: any;
   let store: any;

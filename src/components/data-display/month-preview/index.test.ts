@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CMonthPreview from "./index.vue";
 
 describe("Month Preview Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CMonthPreview, {

@@ -3,14 +3,14 @@ import CToastNotification from "./index.vue";
 import { createStore } from "vuex";
 
 describe("Toast Notification Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
   let toastNotification = {
     id: "id",
     action: jest.fn(),
     actionText: "actionText",
   };
-  let state;
+  let state: any;
   let mutations: any;
 
   beforeEach(async () => {

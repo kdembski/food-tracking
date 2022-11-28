@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import CButton from "./index.vue";
 
 describe("Button Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = shallowMount(CButton, { global: global.settings });

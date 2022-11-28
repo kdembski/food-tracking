@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CTable from "./index.vue";
 
 describe("Table Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CTable, {

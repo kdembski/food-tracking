@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import CTopBar from "./index.vue";
 
 describe("Top Bar Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = shallowMount(CTopBar, { global: global.settings });

@@ -3,7 +3,7 @@ import CMembers from "./index.vue";
 import { createStore } from "vuex";
 
 describe("Members Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
 
   beforeEach(async () => {

@@ -3,7 +3,7 @@ import CDropdown from "./index.vue";
 import { createStore } from "vuex";
 
 describe("Dropdown Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
 
   const mountComponent = () => {

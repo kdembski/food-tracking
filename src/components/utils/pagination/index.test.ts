@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CPagination from "./index.vue";
 
 describe("Pagination Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let arrowLeft: any;
   let arrowRight: any;
   let pages: any;

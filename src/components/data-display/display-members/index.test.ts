@@ -3,9 +3,9 @@ import CDisplayMembers from "./index.vue";
 import { createStore } from "vuex";
 
 describe("Display Members Component", () => {
-  let wrapper: any = null;
-  let store: any = null;
-  let state: any = null;
+  let wrapper: any;
+  let store: any;
+  let state: any;
 
   beforeEach(async () => {
     state = {

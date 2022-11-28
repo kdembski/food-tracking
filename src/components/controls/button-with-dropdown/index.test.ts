@@ -3,7 +3,7 @@ import CButtonWithDropdown from "./index.vue";
 import { createStore } from "vuex";
 
 describe("Button Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let button: DOMWrapper<HTMLButtonElement>;
   let store: any;
 

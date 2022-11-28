@@ -2,7 +2,7 @@ import { mount, DOMWrapper } from "@vue/test-utils";
 import CDisplayTags from "./index.vue";
 
 describe("Display Tags Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let tags: DOMWrapper<HTMLElement>[];
   const onClick = jest.fn();
 

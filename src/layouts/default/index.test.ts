@@ -12,7 +12,7 @@ jest.mock("vue-router", () => ({
 }));
 
 describe("Default Layout Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
   let mutations: any;
 

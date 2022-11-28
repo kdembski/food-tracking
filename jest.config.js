@@ -9,6 +9,10 @@ module.exports = {
     "!src/**/*.stories.js",
     "!src/main.ts",
     "!src/App.vue",
+    "!src/font-awesome.ts",
+    "!src/index.d.ts",
+    "!src/services/*",
+    "!src/types/**",
   ],
   moduleFileExtensions: ["js", "json", "vue", "ts"],
   moduleNameMapper: {

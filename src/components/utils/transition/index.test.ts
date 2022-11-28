@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CTransition from "./index.vue";
 
 describe("Transition Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = mount(CTransition, { global: global.settings });

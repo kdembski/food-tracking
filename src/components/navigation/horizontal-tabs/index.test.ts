@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import CHorizontalTabs from "./index.vue";
 
 describe("Horizontal Tabs Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
 
   beforeEach(async () => {
     window.ResizeObserver = jest.fn().mockImplementation(() => ({

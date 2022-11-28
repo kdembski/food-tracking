@@ -3,7 +3,7 @@ import { mount } from "@vue/test-utils";
 import CListWithFilters from "./index.vue";
 
 describe("List With Filters Component", () => {
-  let wrapper: any = null;
+  let wrapper: any;
   let store: any;
   let actions: any;
   let getters: any;
