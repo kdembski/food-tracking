@@ -81,14 +81,14 @@ describe("Ordered Food Store Module", () => {
       Promise.resolve({ data: recipesList })
     );
     store.dispatch("recipe/loadRecipesList", listFilters);
-    expect(store.state.recipe.isLoadingRecipesList).toBe(true);
+    expect(store.getters["recipe/isLoadingRecipesList"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/recipes?page=1&size=10&search=test&attr=attr&dir=dir&tags=tag"
     );
-    expect(store.state.recipe.recipesList).toEqual(recipesList);
-    expect(store.state.recipe.isLoadingRecipesList).toBe(false);
+    expect(store.getters["recipe/recipesList"]).toEqual(recipesList);
+    expect(store.getters["recipe/isLoadingRecipesList"]).toBe(false);
   });
 
   it("Should show error notification on failed loadRecipesList action dispatch", async () => {
@@ -111,14 +111,14 @@ describe("Ordered Food Store Module", () => {
       Promise.resolve({ data: { recipesTags: tags } })
     );
     store.dispatch("recipe/loadRecipesTags", filters);
-    expect(store.state.recipe.isLoadingRecipesTags).toBe(true);
+    expect(store.getters["recipe/isLoadingRecipesTags"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/recipes/tags?search=test&tags=tag"
     );
-    expect(store.state.recipe.recipesTags).toEqual(tags);
-    expect(store.state.recipe.isLoadingRecipesTags).toBe(false);
+    expect(store.getters["recipe/recipesTags"]).toEqual(tags);
+    expect(store.getters["recipe/isLoadingRecipesTags"]).toBe(false);
   });
 
   it("Should show error notification on failed loadRecipesTags action dispatch", async () => {
@@ -137,18 +137,20 @@ describe("Ordered Food Store Module", () => {
     };
     const suggestions = ["test"];
 
-    mockAxiosGet.mockImplementation(() =>
-      Promise.resolve({ data: suggestions })
-    );
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: ["test"] }));
     store.dispatch("recipe/loadRecipesSearchSuggestions", filters);
-    expect(store.state.recipe.isLoadingRecipesSearchSuggestions).toBe(true);
+    expect(store.getters["recipe/isLoadingRecipesSearchSuggestions"]).toBe(
+      true
+    );
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/recipes/suggestions?search=test&tags=tag"
     );
     expect(store.state.recipe.recipesSearchSuggestions).toEqual(suggestions);
-    expect(store.state.recipe.isLoadingRecipesSearchSuggestions).toBe(false);
+    expect(store.getters["recipe/isLoadingRecipesSearchSuggestions"]).toBe(
+      false
+    );
   });
 
   it("Should show error notification on failed loadRecipesSearchSuggestions action dispatch", async () => {
@@ -244,12 +246,12 @@ describe("Ordered Food Store Module", () => {
 
   it("Should return search suggestion options from getRecipesSearchSuggestions getter", async () => {
     await store.commit("recipe/setRecipesSearchSuggestions", null);
-    expect(store.getters["recipe/getRecipesSearchSuggestions"]).toEqual([]);
+    expect(store.getters["recipe/recipesSearchSuggestions"]).toEqual([]);
     await store.commit("recipe/setRecipesSearchSuggestions", [
       "test1",
       "test2",
     ]);
-    expect(store.getters["recipe/getRecipesSearchSuggestions"]).toEqual([
+    expect(store.getters["recipe/recipesSearchSuggestions"]).toEqual([
       { value: null, label: "test1" },
       { value: null, label: "test2" },
     ]);

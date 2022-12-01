@@ -29,13 +29,13 @@ const state: RecipeState = {
 };
 
 const getters: GetterTree<RecipeState, any> = {
-  getRecipesList: (state): RecipesList | null => state.recipesList,
+  recipesList: (state): RecipesList | null => state.recipesList,
   isLoadingRecipesList: (state) => state.isLoadingRecipesList,
 
-  getRecipesTags: (state): Tag[] | null => state.recipesTags,
+  recipesTags: (state): Tag[] | null => state.recipesTags,
   isLoadingRecipesTags: (state) => state.isLoadingRecipesTags,
 
-  getRecipesSearchSuggestions: (state): DropdownOption<null>[] => {
+  recipesSearchSuggestions: (state): DropdownOption<null>[] => {
     const suggestions = state.recipesSearchSuggestions;
     if (!suggestions) {
       return [];

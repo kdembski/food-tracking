@@ -27,10 +27,10 @@ const state: OrderedFoodState = {
 };
 
 const getters: GetterTree<OrderedFoodState, any> = {
-  getOrderedFoodList: (state): OrderedFoodList | null => state.orderedFoodList,
+  orderedFoodList: (state): OrderedFoodList | null => state.orderedFoodList,
   isLoadingOrderedFoodList: (state) => state.isLoadingOrderedFoodList,
 
-  getOrderedFoodTags: (state): string | null => state.orderedFoodTags,
+  orderedFoodTags: (state): string | null => state.orderedFoodTags,
   isLoadingOrderedFoodTags: (state) => state.isLoadingOrderedFoodTags,
 };
 

@@ -43,7 +43,7 @@ const loadRecipe = () => {
 
 const setRecipesTags = async () => {
   await store.dispatch("recipe/loadRecipesTags");
-  recipesTags.value = store.getters["recipe/getRecipesTags"];
+  recipesTags.value = store.getters["recipe/recipesTags"];
 };
 
 const updateRecipe = async () => {

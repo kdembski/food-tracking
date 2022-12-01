@@ -79,14 +79,16 @@ describe("Ordered Food Store Module", () => {
       Promise.resolve({ data: orderedFoodList })
     );
     store.dispatch("orderedFood/loadOrderedFoodList", listFilters);
-    expect(store.state.orderedFood.isLoadingOrderedFoodList).toBe(true);
+    expect(store.getters["orderedFood/isLoadingOrderedFoodList"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/ordered?page=1&size=10&search=test&attr=attr&dir=dir&tags=tag"
     );
-    expect(store.state.orderedFood.orderedFoodList).toEqual(orderedFoodList);
-    expect(store.state.orderedFood.isLoadingOrderedFoodList).toBe(false);
+    expect(store.getters["orderedFood/orderedFoodList"]).toEqual(
+      orderedFoodList
+    );
+    expect(store.getters["orderedFood/isLoadingOrderedFoodList"]).toBe(false);
   });
 
   it("Should show error notification on failed loadOrderedFoodList action dispatch", async () => {
@@ -109,14 +111,14 @@ describe("Ordered Food Store Module", () => {
       Promise.resolve({ data: { orderedFoodTags: tags } })
     );
     store.dispatch("orderedFood/loadOrderedFoodTags", filters);
-    expect(store.state.orderedFood.isLoadingOrderedFoodTags).toBe(true);
+    expect(store.getters["orderedFood/isLoadingOrderedFoodTags"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/ordered/tags?search=test&tags=tag"
     );
-    expect(store.state.orderedFood.orderedFoodTags).toEqual(tags);
-    expect(store.state.orderedFood.isLoadingOrderedFoodTags).toBe(false);
+    expect(store.getters["orderedFood/orderedFoodTags"]).toEqual(tags);
+    expect(store.getters["orderedFood/isLoadingOrderedFoodTags"]).toBe(false);
   });
 
   it("Should show error notification on failed loadOrderedFoodTags action dispatch", async () => {
