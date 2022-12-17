@@ -97,7 +97,7 @@ describe("Calendar Store Module", () => {
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/calendar?fromDate=2000-02-01T00:00:00+01:00&toDate=2000-02-03T00:00:00+01:00&members=1"
+      "service/calendar?fromDate=Tue Feb 01 2000 00:00:00 GMT+0100 (Central European Standard Time)&toDate=Thu Feb 03 2000 00:00:00 GMT+0100 (Central European Standard Time)&members=1"
     );
     expect(store.state.calendar.calendar).toEqual([
       ...calendarMock,

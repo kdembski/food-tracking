@@ -85,7 +85,7 @@ describe("Ordered Food Store Module", () => {
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/recipes?page=1&size=10&search=test&attr=attr&dir=dir&tags=tag"
+      "service/recipes?page=1&size=10&searchPhrase=test&sortAttribute=attr&sortDirection=dir&tags=tag"
     );
     expect(store.getters["recipe/recipesList"]).toEqual(recipesList);
     expect(store.getters["recipe/isLoadingRecipesList"]).toBe(false);
@@ -107,15 +107,13 @@ describe("Ordered Food Store Module", () => {
     };
     const tags = "tag1,tag2";
 
-    mockAxiosGet.mockImplementation(() =>
-      Promise.resolve({ data: { recipesTags: tags } })
-    );
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: tags }));
     store.dispatch("recipe/loadRecipesTags", filters);
     expect(store.getters["recipe/isLoadingRecipesTags"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/recipes/tags?search=test&tags=tag"
+      "service/recipes/tags?searchPhrase=test&tags=tag"
     );
     expect(store.getters["recipe/recipesTags"]).toEqual(tags);
     expect(store.getters["recipe/isLoadingRecipesTags"]).toBe(false);
@@ -145,7 +143,7 @@ describe("Ordered Food Store Module", () => {
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/recipes/suggestions?search=test&tags=tag"
+      "service/recipes/suggestions?searchPhrase=test&tags=tag"
     );
     expect(store.state.recipe.recipesSearchSuggestions).toEqual(suggestions);
     expect(store.getters["recipe/isLoadingRecipesSearchSuggestions"]).toBe(
