@@ -83,9 +83,9 @@ const actions: ActionTree<RecipeState, any> = {
           "/recipes/tags" +
           getListBaseQuery(filters)
       )
-        .then((response: AxiosResponse<{ recipesTags: string }>) => {
+        .then((response: AxiosResponse<string[]>) => {
           commit("setIsLoadingRecipesTags", false);
-          commit("setRecipesTags", response.data.recipesTags);
+          commit("setRecipesTags", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -233,7 +233,9 @@ const mutations: MutationTree<RecipeState> = {
 const helpers = {
   fixRecipesListDates: (recipesList: RecipesList) => {
     recipesList.data.forEach((recipe) => {
-      recipe.cookedDate = new Date(recipe.cookedDate);
+      if (recipe.cookedDate) {
+        recipe.cookedDate = new Date(recipe.cookedDate);
+      }
 
       recipe.cookedDatesInCurrentMonth = recipe.cookedDatesInCurrentMonth.map(
         (date) => {

@@ -64,9 +64,9 @@ const actions: ActionTree<OrderedFoodState, any> = {
           "/ordered/tags" +
           getListBaseQuery(filters)
       )
-        .then((response: AxiosResponse<{ orderedFoodTags: string }>) => {
+        .then((response: AxiosResponse<string[]>) => {
           commit("setIsLoadingOrderedFoodTags", false);
-          commit("setOrderedFoodTags", response.data.orderedFoodTags);
+          commit("setOrderedFoodTags", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

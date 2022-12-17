@@ -61,7 +61,7 @@ const getPreparationTime = (time: number) => {
 };
 
 const getFormattedCookedDate = (cookedDate: Date) => {
-  if (isEqual(cookedDate, new Date(1970, 0, 1, 1, 0, 0))) {
+  if (!cookedDate) {
     return "Brak";
   }
 

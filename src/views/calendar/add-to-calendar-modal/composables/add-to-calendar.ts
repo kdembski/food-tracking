@@ -73,12 +73,15 @@ export function useAddToCalendar(
     }
 
     const lastSelectedDate = getLastSelectedDate();
+    addedRecipe.value.cookedDatesInCurrentMonth =
+      addedRecipe.value.cookedDatesInCurrentMonth.concat(selectedDates.value);
+
+    if (!addedRecipe.value.cookedDate) {
+      return;
+    }
     if (isAfter(lastSelectedDate, addedRecipe.value.cookedDate)) {
       addedRecipe.value.cookedDate = lastSelectedDate;
     }
-
-    addedRecipe.value.cookedDatesInCurrentMonth =
-      addedRecipe.value.cookedDatesInCurrentMonth.concat(selectedDates.value);
   };
 
   const updateAddedOrderedFood = () => {

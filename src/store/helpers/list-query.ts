@@ -6,13 +6,13 @@ export const getListQuery = (filters: ListFilters) => {
   let query = "?page=" + page + "&size=" + size;
 
   if (filters.searchPhrase) {
-    query += "&search=" + filters.searchPhrase;
+    query += "&searchPhrase=" + filters.searchPhrase;
   }
   if (filters.sortAttribute) {
-    query += "&attr=" + filters.sortAttribute;
+    query += "&sortAttribute=" + filters.sortAttribute;
   }
   if (filters.sortDirection) {
-    query += "&dir=" + filters.sortDirection;
+    query += "&sortDirection=" + filters.sortDirection;
   }
   if (filters.tags) {
     query += "&tags=" + filters.tags;
@@ -27,11 +27,11 @@ export const getListBaseQuery = (filters: ListBaseFilters) => {
   }
 
   if (filters.searchPhrase && filters.tags) {
-    return "?search=" + filters.searchPhrase + "&tags=" + filters.tags;
+    return "?searchPhrase=" + filters.searchPhrase + "&tags=" + filters.tags;
   }
 
   if (filters.searchPhrase) {
-    return "?search=" + filters.searchPhrase;
+    return "?searchPhrase=" + filters.searchPhrase;
   }
 
   if (filters.tags) {

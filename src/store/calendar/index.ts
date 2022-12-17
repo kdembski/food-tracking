@@ -114,9 +114,9 @@ const helpers = {
   ) => {
     return (
       "fromDate=" +
-      formatISO(fromDate) +
+      fromDate +
       "&toDate=" +
-      formatISO(toDate) +
+      toDate +
       (selectedMembers ? "&members=" + selectedMembers : "")
     );
   },

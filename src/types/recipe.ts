@@ -19,7 +19,7 @@ export interface Recipe {
   preparationTime: number;
   tags: string;
   cookidooLink: string;
-  cookedDate: Date;
+  cookedDate?: Date;
   cookedDatesInCurrentMonth: Date[];
 }
 
