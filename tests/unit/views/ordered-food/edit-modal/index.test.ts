@@ -24,7 +24,9 @@ describe("Edit Ordered Food Modal", () => {
       updateOrderedFood: jest.fn(),
       createOrderedFood: jest.fn(),
       loadOrderedFood: jest.fn(),
-      loadOrderedFoodTags: jest.fn(),
+      loadOrderedFoodTags: jest
+        .fn()
+        .mockImplementation(() => Promise.resolve(["tag1"])),
     };
 
     store = createStore({
