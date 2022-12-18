@@ -56,7 +56,7 @@ const actions: ActionTree<OrderedFoodState, any> = {
   },
 
   loadOrderedFoodTags({ commit, rootState }, filters: ListBaseFilters) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<string[]>((resolve, reject) => {
       commit("setIsLoadingOrderedFoodTags", true);
 
       ApiService.get(
@@ -65,9 +65,10 @@ const actions: ActionTree<OrderedFoodState, any> = {
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
+          const tags = response.data;
           commit("setIsLoadingOrderedFoodTags", false);
-          commit("setOrderedFoodTags", response.data);
-          resolve();
+          commit("setOrderedFoodTags", tags);
+          resolve(tags);
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingOrderedFoodTags", false);

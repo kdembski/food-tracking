@@ -84,8 +84,9 @@ const setOrderedFood = async () => {
 };
 
 const setOrderedFoodTags = async () => {
-  await store.dispatch("orderedFood/loadOrderedFoodTags");
-  orderedFoodTags.value = store.getters["orderedFood/getOrderedFoodTags"];
+  orderedFoodTags.value = await store.dispatch(
+    "orderedFood/loadOrderedFoodTags"
+  );
 };
 
 const updateOrderedFood = () => {
