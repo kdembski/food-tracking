@@ -114,9 +114,9 @@ const helpers = {
   ) => {
     return (
       "fromDate=" +
-      fromDate +
+      fromDate.getTime() +
       "&toDate=" +
-      toDate +
+      toDate.getTime() +
       (selectedMembers ? "&members=" + selectedMembers : "")
     );
   },
