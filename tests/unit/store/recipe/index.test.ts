@@ -45,7 +45,7 @@ describe("Ordered Food Store Module", () => {
           tags: "tag1,tag2",
           cookidooLink: "link 1",
           cookedDate: new Date(2000, 1, 1),
-          cookedDatesInCurrentMonth: [new Date(2000, 1, 1)],
+          datesFromLastYear: [[new Date(2000, 1, 1)]],
         },
         {
           id: 2,
@@ -54,7 +54,7 @@ describe("Ordered Food Store Module", () => {
           tags: "tag1,tag2",
           cookidooLink: "link 2",
           cookedDate: new Date(2000, 1, 2),
-          cookedDatesInCurrentMonth: [new Date(2000, 1, 2)],
+          datesFromLastYear: [[new Date(2000, 1, 2)]],
         },
       ],
       pagination: {

@@ -128,9 +128,6 @@ describe("Add To Calendar Modal Component", () => {
       }
     );
     expect(addedRecipe.cookedDate).toEqual(new Date(2000, 1, 1));
-    expect(addedRecipe.cookedDatesInCurrentMonth).toEqual([
-      new Date(2000, 0, 1),
-    ]);
   });
 
   it("Should trigger addCalendarItem with provided recipe and change cooked date", async () => {
@@ -152,10 +149,6 @@ describe("Add To Calendar Modal Component", () => {
       }
     );
     expect(addedRecipe.cookedDate).toEqual(new Date(2000, 1, 3));
-    expect(addedRecipe.cookedDatesInCurrentMonth).toEqual([
-      new Date(2000, 1, 2),
-      new Date(2000, 1, 3),
-    ]);
   });
 
   it("Should trigger addCalendarItem with provided ordered food and change order date", async () => {
@@ -177,9 +170,6 @@ describe("Add To Calendar Modal Component", () => {
       }
     );
     expect(addedOrderedFood.orderDate).toEqual(new Date(2000, 1, 2));
-    expect(addedOrderedFood.orderDatesInCurrentMonth).toEqual([
-      new Date(2000, 1, 2),
-    ]);
     expect(toastSuccess).toHaveBeenCalledWith(
       "Dodano do kalendarza.",
       expect.any(Function),

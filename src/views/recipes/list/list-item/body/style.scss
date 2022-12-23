@@ -2,15 +2,16 @@ $itemGap: $spacing-sm;
 $mobileItemGap: $spacing-xs;
 
 .item-body {
-  display: grid;
-  grid-template-columns: calc(100% - ($monthPreviewWidth + 10px)) $monthPreviewWidth;
+  display: flex;
   align-items: flex-end;
   gap: $itemGap;
+  margin-top: -$spacing-lg;
 
   &__col {
     display: flex;
     flex-direction: column;
     gap: $itemGap;
+    width: 100%;
   }
 
   &__row {
@@ -39,15 +40,15 @@ $mobileItemGap: $spacing-xs;
     }
   }
 
-  &__month-preview {
+  &__year-preview {
     margin-left: auto;
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .item-body {
-    grid-template-columns: calc(100% - ($mobileMonthPreviewWidth + 10px)) $mobileMonthPreviewWidth;
     gap: $mobileItemGap;
+    margin-top: 0;
 
     &__col {
       gap: $mobileItemGap;

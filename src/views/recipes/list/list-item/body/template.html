@@ -23,8 +23,9 @@
       :size="isMobile ? 'small' : 'medium'"
     />
   </div>
-  <CMonthPreview
-    class="item-body__month-preview"
-    :dates="item.cookedDatesInCurrentMonth"
+  <CYearPreview
+    class="item-body__year-preview"
+    :months="item.datesFromLastYear"
+    :id="item.id"
   />
 </div>

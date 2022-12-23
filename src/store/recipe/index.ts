@@ -237,10 +237,8 @@ const helpers = {
         recipe.cookedDate = new Date(recipe.cookedDate);
       }
 
-      recipe.cookedDatesInCurrentMonth = recipe.cookedDatesInCurrentMonth.map(
-        (date) => {
-          return new Date(date);
-        }
+      recipe.datesFromLastYear = recipe.datesFromLastYear.map((month) =>
+        month.map((date) => new Date(date))
       );
     });
 

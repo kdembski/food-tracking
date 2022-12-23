@@ -22,10 +22,6 @@ describe("Recipes List Item Body", () => {
     });
   });
 
-  it("Should return on dates form future to plannedDates computed", async () => {
-    expect(wrapper.vm.plannedDates).toEqual(["2 lut", "3 lut"]);
-  });
-
   it("Should return formatted preparation time on getPreparationTime call", async () => {
     expect(wrapper.vm.getPreparationTime(40)).toEqual("40m");
     expect(wrapper.vm.getPreparationTime(60)).toEqual("1h");

@@ -1,0 +1,31 @@
+<div class="year-preview">
+  <svg
+    :viewBox="'0 0 220 ' + getChartHeight()"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    class="year-preview__chart chart"
+  >
+    <defs>
+      <linearGradient :id="'gradient-' + $attrs.id" x1="0" x2="0" y1="0" y2="1">
+        <stop class="chart__gradient--start" offset="20%" />
+        <stop class="chart__gradient--stop" offset="100%" />
+      </linearGradient>
+      <clipPath :id="'clip-' + $attrs.id">
+        <path :d="getPath()" />
+      </clipPath>
+    </defs>
+    <rect
+      class="chart__rect"
+      x="0"
+      y="0"
+      width="100%"
+      height="100%"
+      :fill="'url(#gradient-' + $attrs.id + ')'"
+      :clip-path="'url(#clip-' + $attrs.id + ')'"
+    />
+    <line class="chart__line" x1="0" y1="100%" x2="100%" y2="100%" />
+  </svg>
+  <div class="year-preview__caption">
+    <p v-for="shortcut in getMonthsShortcuts()">{{ shortcut }}</p>
+  </div>
+</div>

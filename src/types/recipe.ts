@@ -20,7 +20,7 @@ export interface Recipe {
   tags: string;
   cookidooLink: string;
   cookedDate?: Date;
-  cookedDatesInCurrentMonth: Date[];
+  datesFromLastYear: Date[][];
 }
 
 export type RecipesList = ListWithFilters<Recipe>;

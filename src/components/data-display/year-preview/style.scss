@@ -1,0 +1,45 @@
+.year-preview {
+  width: 250px;
+  min-width: 250px;
+
+  .chart {
+    width: 100%;
+
+    &__line {
+      stroke: var(--surface-tetriary);
+      stroke-width: 2px;
+    }
+
+    &__gradient {
+      &--start {
+        stop-color: var(--primary);
+      }
+
+      &--stop {
+        stop-color: var(--surface-tetriary);
+      }
+    }
+  }
+
+  &__caption {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 (-$spacing-sm);
+
+    > p {
+      font-size: $font-2xs;
+      color: var(--text-tetriary);
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .year-preview {
+    width: 100px;
+    min-width: 100px;
+
+    &__caption {
+      display: none;
+    }
+  }
+}

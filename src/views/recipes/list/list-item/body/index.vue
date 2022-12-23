@@ -1,18 +1,20 @@
 <script lang="ts">
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import CMonthPreview from "@/components/data-display/month-preview/index.vue";
+import CYearPreview from "@/components/data-display/year-preview/index.vue";
 
 export default {
   name: "RecipesListItemBody",
   components: {
     CDisplayTags,
     CMonthPreview,
+    CYearPreview,
   },
 };
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
 import {
   isEqual,
@@ -24,7 +26,7 @@ import {
 } from "date-fns";
 import { useWindowSize } from "@/composables/window-size";
 
-const { getDistanceInWords, getFormattedDate } = useDateHelpers();
+const { getDistanceInWords } = useDateHelpers();
 const { isMobile } = useWindowSize();
 
 const props = defineProps({
@@ -39,11 +41,6 @@ const props = defineProps({
 });
 
 const isPlanned = ref(false);
-const plannedDates = computed(() => {
-  return props.item.cookedDatesInCurrentMonth
-    .filter((date: Date) => isFuture(date))
-    .map((date: Date) => getFormattedDate(date, "d MMM"));
-});
 
 const getPreparationTime = (time: number) => {
   const minutes = time % 60;

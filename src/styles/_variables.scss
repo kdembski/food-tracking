@@ -16,10 +16,10 @@ $text-darkest: darken($secondary, 30);
 $text-darker: $secondary;
 $text-dark: lighten($secondary, 40);
 
-$surface-darkest: darken($secondary, 28);
-$surface-darker: darken($secondary, 24);
-$surface-dark: darken($secondary, 20);
-$border-dark: darken($secondary, 15);
+$surface-darkest: darken($secondary, 26);
+$surface-darker: darken($secondary, 22);
+$surface-dark: darken($secondary, 18);
+$border-dark: darken($secondary, 14);
 
 $text-lightest: lighten($secondary, 60);
 $text-lighter: lighten($secondary, 35);
@@ -91,9 +91,6 @@ $spacing-2xl: 20px;
 $spacing-3xl: 25px;
 $spacing-4xl: 30px;
 
-$monthPreviewWidth: 104px;
-$mobileMonthPreviewWidth: 60px;
 $textButtonHoverBackground: rgba(var(--text-primary-rgb), 0.08);
-
 $tag-radius: $radius-2xl;
 $tag-height: 32px;
