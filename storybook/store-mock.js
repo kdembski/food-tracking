@@ -59,7 +59,7 @@ const member = {
 };
 
 export default createStore({
-  state: {},
+  state: { isTooltipOpen: true, tooltipConfig: { text: "Text" } },
   getters: {},
   mutations: {},
   actions: {},

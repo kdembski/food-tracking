@@ -14,8 +14,3 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
-Default.args = {
-  top: 20,
-  left: 20,
-  text: "Tooltip content",
-};

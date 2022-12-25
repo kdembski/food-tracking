@@ -84,7 +84,7 @@ const getControlPoint = (
   previous = previous || current;
   next = next || current;
 
-  const smoothing = 0.15;
+  const smoothing = 0.2;
   const opposedLine = getLine(previous, next);
 
   const angle = opposedLine.angle + (reverse ? Math.PI : 0);
