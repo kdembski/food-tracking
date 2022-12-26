@@ -46,12 +46,12 @@ describe("Year Preview Component", () => {
 
   it("Should get chart path based on provided dates", async () => {
     expect(wrapper.vm.getPath()).toEqual(
-      "M 0 50 C 1.3777276490407724e-16 47.75 -3 35.75 0 35 C 3 34.25 14 44.25 20 45 C 26 45.75 34 39.25 40 40 C 46 40.75 54 50 60 50 C 66 50 74 40 80 40 C 86 40 94 48.5 100 50 C 106 51.5 114 50 120 50 C 126 50 134 50 140 50 C 146 50 154 50 160 50 C 166 50 174 50 180 50 C 186 50 194 50 200 50 C 206 50 217 50 220 50"
+      "M 0 40 C 1.8369701987210297e-16 37 -4 26 0 25 C 4 24 12 34 20 35 C 28 36 32 29.000000000000004 40 30 C 48 31 52 40 60 40 C 68 40 72 30 80 30 C 88 30 92 38 100 40 C 108 42 112 40 120 40 C 128 40 132 40 140 40 C 148 40 152 40 160 40 C 168 40 172 40 180 40 C 188 40 192 40 200 40 C 208 40 216 40 220 40"
     );
   });
 
   it("Should return chart height based on window width", async () => {
-    expect(wrapper.vm.getChartHeight()).toEqual(50);
+    expect(wrapper.vm.getChartHeight()).toEqual(40);
     window.innerWidth = 400;
     wrapper = mount(CYearPreview);
     expect(wrapper.vm.getChartHeight()).toEqual(90);

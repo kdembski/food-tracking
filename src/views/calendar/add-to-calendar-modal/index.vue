@@ -11,7 +11,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, watch, Ref } from "vue";
-import { Recipe } from "@/types/recipe";
+import { Recipe } from "@/types/recipes/recipe";
 import { OrderedFood } from "@/types/ordered-food";
 import { useDateHelpers } from "@/composables/date-helpers";
 import { useAddToCalendar } from "./composables/add-to-calendar";

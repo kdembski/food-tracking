@@ -1,5 +1,5 @@
 import ApiService from "@/services/api.service";
-import { RecipeState, RecipesList, Recipe } from "@/types/recipe";
+import { RecipeState, RecipesList, Recipe } from "@/types/recipes/recipe";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";

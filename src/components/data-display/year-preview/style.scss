@@ -24,7 +24,7 @@
   &__caption {
     display: flex;
     justify-content: space-between;
-    margin: 0 (-$spacing-sm);
+    margin: (-$spacing-2xs) (-$spacing-sm) 0 (-$spacing-sm);
 
     > p {
       font-size: $font-2xs;

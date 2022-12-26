@@ -22,7 +22,7 @@ export default {
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
-import { Recipe } from "@/types/recipe";
+import { Recipe } from "@/types/recipes/recipe";
 import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();

@@ -1,4 +1,4 @@
-import { RecipesList } from "@/types/recipe";
+import { RecipesList } from "@/types/recipes/recipe";
 import flushPromises from "flush-promises";
 import { createStore } from "vuex";
 
@@ -17,7 +17,7 @@ jest.mock("@/services/api.service", () => ({
   patch: mockAxiosPatch,
 }));
 
-describe("Ordered Food Store Module", () => {
+describe("Recipe Store Module", () => {
   let store: any;
   let toastNotification: any;
   let recipesList: RecipesList;

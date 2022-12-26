@@ -15,7 +15,7 @@ export default {
 
 <script setup lang="ts">
 import { useWindowSize } from "@/composables/window-size";
-import { Recipe } from "@/types/recipe";
+import { Recipe } from "@/types/recipes/recipe";
 import { RouterLink } from "vue-router";
 import { computed } from "vue";
 

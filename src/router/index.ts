@@ -14,6 +14,7 @@ import EditRecipeView from "../views/recipes/edit/index.vue";
 import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 import SettingsView from "../views/settings/index.vue";
 import CalendarView from "../views/calendar/index.vue";
+import IngredientsListView from "../views/ingredients/list/index.vue";
 
 const Recipes = {
   name: "Recipes",
@@ -64,6 +65,11 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
     ],
+  },
+  {
+    path: "/ingredients",
+    name: "IngredientsListView",
+    component: IngredientsListView,
   },
   {
     path: "/ordered",

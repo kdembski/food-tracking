@@ -22,6 +22,11 @@ const props = defineProps({
   },
 });
 
+const desktopHeight = 40;
+const mobileHeight = 90;
+const maxOnYAxis = 8;
+const smoothing = 0.2;
+
 const getMonthsShortcuts = () => {
   const shortcuts: string[] = [];
 
@@ -37,9 +42,9 @@ const getMonthsShortcuts = () => {
 
 const getChartHeight = () => {
   if (isMobile.value) {
-    return 90;
+    return mobileHeight;
   }
-  return 50;
+  return desktopHeight;
 };
 
 const getPath = () => {
@@ -84,7 +89,6 @@ const getControlPoint = (
   previous = previous || current;
   next = next || current;
 
-  const smoothing = 0.2;
   const opposedLine = getLine(previous, next);
 
   const angle = opposedLine.angle + (reverse ? Math.PI : 0);
@@ -108,7 +112,7 @@ const getPoints = () => {
   return props.months.map((month, index) => {
     const datesLength = month.length;
     const x = index * 20;
-    const y = getChartHeight() - datesLength * (getChartHeight() / 10);
+    const y = getChartHeight() - datesLength * (getChartHeight() / maxOnYAxis);
     return [x, y];
   });
 };
