@@ -96,7 +96,7 @@ const getControlPoint = (
 
   const x = current[0] + Math.cos(angle) * length;
   const y = current[1] + Math.sin(angle) * length;
-  return [x, y];
+  return [parseFloat(x.toFixed(2)), parseFloat(y.toFixed(2))];
 };
 
 const getLine = (pointA: number[], pointB: number[]) => {
