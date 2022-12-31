@@ -1,5 +1,5 @@
 <script lang="ts">
-import CListWithFilters from "@/components/data-display/list-with-filters/index.vue";
+import CListWithFilters from "@/components/data-display/listings/list-with-filters/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import CHorizontalTabs from "@/components/navigation/horizontal-tabs/index.vue";
 import RecipesListItemHeader from "./list-item/header/index.vue";

@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CList from "@/components/data-display/list/index.vue";
+import CList from "@/components/data-display/listings/list/index.vue";
 
 describe("List Component", () => {
   let wrapper: any;

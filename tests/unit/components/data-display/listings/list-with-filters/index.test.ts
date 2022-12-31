@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { mount } from "@vue/test-utils";
-import CListWithFilters from "@/components/data-display/list-with-filters/index.vue";
+import CListWithFilters from "@/components/data-display/listings/list-with-filters/index.vue";
 
 describe("List With Filters Component", () => {
   let wrapper: any;

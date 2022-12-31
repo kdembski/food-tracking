@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CTable from "@/components/data-display/table/index.vue";
+import CTable from "@/components/data-display/listings/table/index.vue";
 
 describe("Table Component", () => {
   let wrapper: any;

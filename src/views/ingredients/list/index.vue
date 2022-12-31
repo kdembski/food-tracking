@@ -1,5 +1,5 @@
 <script lang="ts">
-import CTable from "@/components/data-display/table/index.vue";
+import CTable from "@/components/data-display/listings/table/index.vue";
 
 export default {
   name: "IngredientsListView",

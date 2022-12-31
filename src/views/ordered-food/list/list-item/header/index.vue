@@ -1,5 +1,4 @@
 <script lang="ts">
-import CListWithFilters from "@/components/data-display/list-with-filters/index.vue";
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import CLink from "@/components/utils/link/index.vue";
@@ -8,7 +7,6 @@ import CButtonWithDropdown from "@/components/controls/button-with-dropdown/inde
 export default {
   name: "OrderedFoodListView",
   components: {
-    CListWithFilters,
     CDisplayTags,
     CButton,
     CLink,
