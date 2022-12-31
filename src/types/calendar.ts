@@ -7,8 +7,6 @@ export interface CalendarItem {
   id: number;
   recipeId?: number;
   orderedFoodId?: number;
-  isRecipe?: boolean;
-  isOrderedFood?: boolean;
   members: number[];
   name: string;
   tags: string;

@@ -36,7 +36,7 @@
         v-tooltip="{ text: 'Edytuj' }"
         @click="emits('edit', item)"
       />
-      <RouterLink v-if="item.isRecipe" :to="'/recipes/' + item.recipeId">
+      <RouterLink v-if="item.recipeId" :to="'/recipes/' + item.recipeId">
         <CButton
           color="secondary"
           variant="text"

@@ -55,11 +55,13 @@ $mobileItemPadding: $spacing-xs $spacing-md;
       padding: 0 $spacing-sm;
       height: 31px;
       display: flex;
+      align-items: flex-end;
       gap: 40%;
 
       > div:first-child {
         display: flex;
         gap: $spacing-sm;
+        height: 100%;
 
         .skeleton-loader__item {
           width: 33px;
@@ -69,7 +71,6 @@ $mobileItemPadding: $spacing-xs $spacing-md;
 
       > div:last-child {
         height: 60%;
-        align-self: flex-end;
       }
     }
   }

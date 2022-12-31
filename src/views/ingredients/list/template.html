@@ -1,3 +1,10 @@
 <div class="ingredients-list">
-  <CTable></CTable>
+  <CTable
+    listName="ingredientsList"
+    listGetterName="ingredient/ingredientsList"
+    listLoadActionName="ingredient/loadIngredientsList"
+    listLoadingGetterName="ingredient/isLoadingIngredientsList"
+    :defaultFilters="ingredientsListDefaultFilters"
+    :columns="ingredientsListColumns"
+  />
 </div>

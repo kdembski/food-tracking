@@ -1,4 +1,4 @@
-import { useFilters } from "@/components/data-display/list-with-filters/composables/filters/index";
+import { useFilters } from "@/components/data-display/composables/filters/index";
 
 const store = {
   getters: {

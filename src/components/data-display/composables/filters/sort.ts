@@ -18,7 +18,7 @@ export function useSortFilter(
   const getSelectedSortIcon = (
     sortOptions: DropdownOption<ListSortFilters>[]
   ) => {
-    return sortOptions?.find((option) =>
+    return sortOptions?.find((option: DropdownOption<ListSortFilters>) =>
       isEqual(option.value, selectedSort.value)
     )?.icon;
   };

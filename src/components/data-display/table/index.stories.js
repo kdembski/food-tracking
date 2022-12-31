@@ -14,26 +14,18 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  items: [
-    {
-      1: "1-1",
-      2: "1-2",
-      3: "1-3",
-      4: "1-4",
-    },
-    {
-      1: "2-1",
-      2: "2-2",
-      3: "2-3",
-      4: "2-4",
-    },
-    {
-      1: "3-1",
-      2: "3-2",
-      3: "3-3",
-      4: "3-4",
-    },
-  ],
+  defaultFilters: {
+    currentPage: 1,
+    pageSize: 10,
+    searchPhrase: "",
+    sortAttribute: "1",
+    sortDirection: "asc",
+    tags: "",
+  },
+  listName: "list",
+  listGetterName: "list/getList",
+  listLoadingGetterName: "list/isLoadingList",
+  listLoadActionName: "list/loadList",
   columns: [
     {
       label: "label-1",

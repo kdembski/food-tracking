@@ -1,16 +1,16 @@
 import { ListFilters } from "@/types/components/list";
 import { ref, Ref } from "vue";
 import { isEqual, clone } from "lodash";
-import { useSearchPhraseFilter } from "./searchPhrase";
+import { useSearchPhraseFilter } from "./search-phrase";
 import { useSortFilter } from "./sort";
 import { useTagsFilter } from "./tags";
 
 export function useFilters(
   defaultFilters: ListFilters,
   handleListLoadingProccess: () => void,
-  suggestionsGetterName: string,
-  suggestionsLoadActionName: string,
-  suggestionsLoadingGetterName: string
+  suggestionsGetterName?: string,
+  suggestionsLoadActionName?: string,
+  suggestionsLoadingGetterName?: string
 ) {
   const filters: Ref<ListFilters> = ref(clone(defaultFilters));
 

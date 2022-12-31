@@ -43,7 +43,7 @@ const onMove = () => {
 };
 
 const getItemIcon = (item: CalendarItem) => {
-  if (item.isRecipe) {
+  if (item.recipeId) {
     return "utensils";
   }
   return "box-open";

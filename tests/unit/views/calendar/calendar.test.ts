@@ -36,7 +36,7 @@ describe("Calendar View", () => {
           {
             id: 1,
             recipeId: 1,
-            isRecipe: true,
+            orderedFoodId: undefined,
             portions: 2,
             name: "test name",
             tags: "tag1,tag2",
@@ -45,7 +45,7 @@ describe("Calendar View", () => {
           {
             id: 2,
             recipeId: 2,
-            isRecipe: true,
+            orderedFoodId: undefined,
             portions: 2,
             name: "test name2",
             tags: "tag1,tag2",
@@ -54,7 +54,7 @@ describe("Calendar View", () => {
           {
             id: 3,
             orderedFoodId: 1,
-            isOrderedFood: true,
+            recipeId: undefined,
             portions: 2,
             name: "test name3",
             tags: "tag1,tag2",

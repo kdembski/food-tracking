@@ -1,24 +1,9 @@
 <div class="table" ref="container">
-  <div v-if="isLoading" class="table-loader">
-    <CSkeletonLoader class="table-loader__header">
-      <div v-for="item in columnsCount" class="table-loader__item-wrapper">
-        <div class="skeleton-loader__item" />
-      </div>
-    </CSkeletonLoader>
-    <div class="table-loader__content">
-      <CSkeletonLoader
-        v-for="row in getLoaderRowsCount()"
-        class="table-loader__row"
-      >
-        <div
-          v-for="item in isMobile ? 1 : columnsCount"
-          class="table-loader__item-wrapper"
-        >
-          <div class="skeleton-loader__item" />
-        </div>
-      </CSkeletonLoader>
-    </div>
-  </div>
+  <CTableLoader
+    v-if="_isLoading"
+    :container="container"
+    :columnsCount="columnsCount"
+  />
   <table v-else class="table__content">
     <thead>
       <tr>
@@ -26,7 +11,8 @@
           <CSortingTrigger
             v-if="col.sortable"
             :column="col"
-            @sortChange="$attrs.onSortChange"
+            :currentSort="selectedSort"
+            @sortChange="sort"
           />
           <p v-else>{{ col.label }}</p>
         </th>
@@ -38,13 +24,21 @@
       </tr>
     </tbody>
     <tbody v-else>
-      <tr v-for="item in items">
+      <tr v-for="item in list?.data">
         <td v-for="col in columns">
           <slot :name="col.value" :itemValue="item[col.value]">
-            {{ getItemColumnValue(item[col.value]) }}
+            {{ col.getItemColumnValue ? col.getItemColumnValue(item[col.value])
+            : item[col.value] }}
           </slot>
         </td>
       </tr>
     </tbody>
   </table>
+  <CPagination
+    class="table__pagination"
+    :currentPage="filters.currentPage"
+    @update:currentPage="changeCurrentPage"
+    :paginationData="list?.pagination"
+    :isLoading="_isLoading"
+  />
 </div>

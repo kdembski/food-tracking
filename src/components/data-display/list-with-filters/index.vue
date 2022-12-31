@@ -4,7 +4,6 @@ import CSelectTags from "@/components/controls/select-tags/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import CList from "@/components/data-display/list/index.vue";
 import CPagination from "@/components/utils/pagination/index.vue";
-import CCard from "@/components/surfaces/card/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 import CSelect from "@/components/controls/select/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
@@ -17,7 +16,6 @@ export default {
     CList,
     CButton,
     CPagination,
-    CCard,
     CAutocomplete,
     CSelect,
     CSkeletonLoader,
@@ -31,10 +29,9 @@ import { computed, ref, Ref } from "vue";
 import { ListFilters, ListSortFilters } from "@/types/components/list";
 import { DropdownOption } from "@/types/components/dropdown";
 import { useAvailableTags } from "./composables/available-tags";
-import { useStoredFilters } from "./composables/stored-filters";
-import { useFilters } from "./composables/filters/index";
+import { useStoredFilters } from "../composables/stored-filters";
+import { useFilters } from "../composables/filters/index";
 import { onMounted } from "vue";
-import { isEmpty } from "lodash";
 import { useWindowSize } from "@/composables/window-size";
 import { useMobileFilters } from "./composables/mobile-filters";
 import { useStickyPagination } from "./composables/sticky-pagination";
@@ -105,12 +102,7 @@ const handleListLoadingProccess = () => {
 };
 
 const loadListOnMounted = () => {
-  const storedFilters = getFiltersFromStorage();
-
-  if (!isEmpty(storedFilters)) {
-    filters.value = storedFilters;
-  }
-
+  setFiltersFromStorage(filters);
   handleListLoadingProccess();
 };
 
@@ -118,7 +110,7 @@ onMounted(async () => {
   loadListOnMounted();
 });
 
-// Composables
+// __composables__
 const {
   filters,
   filterBySearchPhrase,
@@ -142,7 +134,7 @@ const {
   props.suggestionsLoadingGetterName
 );
 
-const { getFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
+const { setFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
 
