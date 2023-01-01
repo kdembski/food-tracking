@@ -1,15 +1,16 @@
-import CTable from "./index.vue";
+import CTableWithFilters from "./index.vue";
 
 export default {
-  title: "Data Display/Table",
+  title: "Data Display/Table With Filters",
 };
 
 const Template = (args) => ({
   setup() {
     return { args };
   },
-  components: { CTable },
-  template: '<CTable v-bind="args" style="height: 90vh"></CTable>',
+  components: { CTableWithFilters },
+  template:
+    '<CTableWithFilters v-bind="args" style="height: 90vh"></CTableWithFilters>',
 });
 
 export const Default = Template.bind({});

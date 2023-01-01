@@ -11,7 +11,7 @@ const Template = (args) => ({
     return { args, selected };
   },
   components: { CDatePicker },
-  template: `<CDatePicker v-bind="args" v-model="selected"></CDatePicker>`,
+  template: `<CDatePicker v-bind="args" v-model="selected" style="width: 40%"></CDatePicker>`,
 });
 
 export const Default = Template.bind({});

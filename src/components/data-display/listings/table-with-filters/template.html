@@ -1,0 +1,28 @@
+<div class="table-with-filters">
+  <CInput
+    class="table-with-filters__search"
+    v-model="filters.searchPhrase"
+    @enter="filterBySearchPhrase"
+    @blur="filterBySearchPhraseWithDelay"
+    @focus="setTemporarySearchPhrase"
+    icon="magnifying-glass"
+    placeholder="Szukaj"
+    :isLoading="_isLoading"
+  />
+  <CTable :items="list?.data" :isLoading="_isLoading" :columns="columns">
+    <template #label="{ column }">
+      <CSortingTrigger
+        v-if="column.sortable"
+        :column="column"
+        :currentSort="selectedSort"
+        @sortChange="sort"
+    /></template>
+  </CTable>
+  <CPagination
+    class="table-with-filters__pagination"
+    :currentPage="filters.currentPage"
+    @update:currentPage="changeCurrentPage"
+    :paginationData="list?.pagination"
+    :isLoading="_isLoading"
+  />
+</div>

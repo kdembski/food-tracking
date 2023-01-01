@@ -7,6 +7,9 @@
     autocomplete="off"
     :placeholder="placeholder"
     @input="onInput"
+    @keydown.enter="$attrs.onEnter"
+    @focus="$attrs.onFocus"
+    @blur="$attrs.onBlur"
     ref="input"
   />
 </CFieldTemplate>

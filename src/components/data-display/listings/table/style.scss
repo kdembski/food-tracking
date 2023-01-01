@@ -1,16 +1,22 @@
 .table {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
   width: 100%;
-  overflow-y: auto;
 
   &__content {
     border-collapse: collapse;
-    min-width: 750px;
+
+    thead {
+      > tr {
+        background-color: var(--surface-primary);
+        position: sticky;
+        top: -$spacing-2xl;
+      }
+    }
 
     tr {
-      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 1px var(--border-color);
     }
 
     th,
@@ -29,7 +35,7 @@
     th {
       @include uppercasedSecondaryText;
       text-align: left;
-      padding: 0 $spacing-3xl $spacing-sm;
+      padding: $spacing-sm $spacing-3xl;
 
       & > p {
         display: inline;
@@ -50,19 +56,14 @@
       padding: $spacing-lg;
     }
   }
-
-  &__pagination {
-    margin-top: $spacing-xl;
-    align-items: flex-start;
-
-    &:deep(.skeleton-loader) {
-      align-items: flex-start;
-    }
-  }
 }
 
 @media screen and (max-width: $screen-md) {
   .table {
+    overflow-x: auto;
+    max-width: 100vw;
+    padding: 0 $spacing-lg 1px;
+
     &__content {
       td {
         padding: $spacing-lg $spacing-xl;

@@ -1,0 +1,32 @@
+.table-with-filters {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__pagination {
+    margin-top: $spacing-xl;
+    align-items: flex-start;
+
+    &:deep(.skeleton-loader) {
+      align-items: flex-start;
+    }
+  }
+
+  &__search {
+    width: 33%;
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .table-with-filters {
+    &__pagination {
+      margin: $spacing-lg $spacing-lg 0;
+    }
+
+    &__search {
+      width: unset;
+      margin: 0 $spacing-lg $spacing-2xl;
+    }
+  }
+}

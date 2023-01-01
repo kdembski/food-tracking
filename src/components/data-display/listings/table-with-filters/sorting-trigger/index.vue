@@ -4,24 +4,12 @@ export default { name: "CSortingTrigger" };
 
 <script setup lang="ts">
 import { ListSortFilters } from "@/types/components/list";
+import { TableColumn } from "@/types/components/table";
 
-const props = defineProps({
-  column: {
-    type: Object,
-    default() {
-      return {
-        value: "",
-        label: "",
-      };
-    },
-  },
-  currentSort: {
-    type: Object,
-    default() {
-      return { sortAttribute: "", sortDirection: "" };
-    },
-  },
-});
+const props = defineProps<{
+  column: TableColumn;
+  currentSort: ListSortFilters;
+}>();
 
 const emit = defineEmits<{
   (e: "sortChange", sort: ListSortFilters): void;

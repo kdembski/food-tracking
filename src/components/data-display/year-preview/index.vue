@@ -23,7 +23,7 @@ const props = defineProps({
 });
 
 const desktopHeight = 40;
-const mobileHeight = 90;
+const mobileHeight = 80;
 const maxOnYAxis = 8;
 const smoothing = 0.2;
 

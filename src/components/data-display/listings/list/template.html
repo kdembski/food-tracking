@@ -1,18 +1,7 @@
 <div class="list" ref="container">
-  <div v-if="isLoading" class="list-loader" :style="getLoaderMaxHeight()">
-    <div v-for="row in 10" class="list-loader__row">
-      <CSkeletonLoader class="list-loader__wrapper">
-        <div class="list-loader__item skeleton-loader__item"></div>
-        <div class="list-loader__item skeleton-loader__item"></div>
-        <div class="list-loader__item-row">
-          <div
-            v-for="index in 5"
-            class="list-loader__row-item skeleton-loader__item"
-          ></div>
-        </div>
-      </CSkeletonLoader>
-    </div>
-  </div>
+  <slot v-if="isLoading" name="loader">
+    <ListLoader />
+  </slot>
   <template v-else>
     <div v-if="itemsCount < 1" class="list__empty-content">
       <p>Brak wyników</p>

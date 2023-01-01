@@ -8,13 +8,14 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    padding: 1px 0;
   }
 
   &__row {
     display: flex;
     height: 100%;
     gap: $spacing-2xl;
-    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px var(--border-color);
     padding: 0 $spacing-sm;
 
     .skeleton-loader__item {
@@ -31,11 +32,11 @@
   }
 
   &__header {
-    height: 20px;
+    height: 27px;
     display: flex;
     gap: $spacing-2xl;
-    padding: 0 $spacing-sm $spacing-sm;
-    border-bottom: 1px solid var(--border-color);
+    padding: $spacing-sm;
+    box-shadow: 0 1px var(--border-color);
 
     .skeleton-loader__item {
       margin-right: 45%;
@@ -47,6 +48,15 @@
   .table-loader {
     &__row {
       gap: $spacing-lg;
+    }
+
+    &__header {
+      height: 20px;
+      padding-top: 0;
+
+      .skeleton-loader__item {
+        margin-right: 25%;
+      }
     }
   }
 }

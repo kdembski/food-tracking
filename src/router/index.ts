@@ -70,6 +70,9 @@ const routes: Array<RouteRecordRaw> = [
     path: "/ingredients",
     name: "IngredientsListView",
     component: IngredientsListView,
+    meta: {
+      maxWidth: 1000,
+    },
   },
   {
     path: "/ordered",

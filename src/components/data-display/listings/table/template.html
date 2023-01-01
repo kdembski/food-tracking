@@ -1,20 +1,16 @@
 <div class="table" ref="container">
-  <CTableLoader
-    v-if="_isLoading"
+  <TableLoader
+    v-if="isLoading"
     :container="container"
     :columnsCount="columnsCount"
   />
   <table v-else class="table__content">
     <thead>
       <tr>
-        <th v-for="col in columns">
-          <CSortingTrigger
-            v-if="col.sortable"
-            :column="col"
-            :currentSort="selectedSort"
-            @sortChange="sort"
-          />
-          <p v-else>{{ col.label }}</p>
+        <th v-for="column in columns">
+          <slot name="label" :column="column">
+            <p>{{ column.label }}</p>
+          </slot>
         </th>
       </tr>
     </thead>
@@ -24,21 +20,13 @@
       </tr>
     </tbody>
     <tbody v-else>
-      <tr v-for="item in list?.data">
-        <td v-for="col in columns">
-          <slot :name="col.value" :itemValue="item[col.value]">
-            {{ col.getItemColumnValue ? col.getItemColumnValue(item[col.value])
-            : item[col.value] }}
+      <tr v-for="item in items">
+        <td v-for="column in columns">
+          <slot :name="column.value" :itemValue="item[column.value]">
+            {{ getItemColumnValue(column, item) }}
           </slot>
         </td>
       </tr>
     </tbody>
   </table>
-  <CPagination
-    class="table__pagination"
-    :currentPage="filters.currentPage"
-    @update:currentPage="changeCurrentPage"
-    :paginationData="list?.pagination"
-    :isLoading="_isLoading"
-  />
 </div>

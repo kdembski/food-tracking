@@ -1,16 +1,14 @@
 <script lang="ts">
-import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
-import CCard from "@/components/surfaces/card/index.vue";
+import ListLoader from "./loader/index.vue";
 
 export default {
   name: "CList",
-  components: { CSkeletonLoader, CCard },
+  components: { ListLoader },
 };
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref } from "vue";
-import { useWindowSize } from "@/composables/window-size";
+import { computed } from "vue";
 
 const props = defineProps({
   items: {
@@ -24,16 +22,6 @@ const props = defineProps({
 });
 
 const itemsCount = computed(() => props.items.length);
-const { windowHeight, isMobile } = useWindowSize();
-const container: Ref<HTMLElement | undefined> = ref();
-
-const getLoaderMaxHeight = () => {
-  const containerOffsetTop = container.value?.offsetTop;
-  const paddingBottom = isMobile.value ? 15 : 25;
-  const containerHeight =
-    windowHeight.value - (containerOffsetTop || 0) - (isMobile.value ? 64 : 0);
-  return { maxHeight: containerHeight + "px" };
-};
 </script>
 
 <template src="./template.html"></template>

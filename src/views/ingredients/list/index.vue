@@ -1,9 +1,9 @@
 <script lang="ts">
-import CTable from "@/components/data-display/listings/table/index.vue";
+import CTableWithFilters from "@/components/data-display/listings/table-with-filters/index.vue";
 
 export default {
   name: "IngredientsListView",
-  components: { CTable },
+  components: { CTableWithFilters },
 };
 </script>
 
@@ -23,7 +23,7 @@ const ingredientsListColumns = [
   {
     value: "unitNames",
     label: "Jednostki",
-    getItemColumnValue: (value: string[]) => value.join(", "),
+    getItemColumnValue: (value: string[]) => value.join("\xa0\xa0|\xa0\xa0"),
   },
 ];
 </script>
