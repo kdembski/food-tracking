@@ -7,7 +7,7 @@
   white-space: nowrap;
 
   &--disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: default;
   }
 
@@ -28,6 +28,13 @@
 
   &.button--text {
     background-color: transparent;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    box-shadow: none;
+
+    .button__content {
+      gap: $spacing-md;
+    }
 
     &:hover:not(.button--disabled) {
       background-color: $textButtonHoverBackground;
@@ -59,17 +66,19 @@
   &--small {
     font-size: $font-sm;
     padding: $spacing-md $spacing-lg;
-    border-radius: $radius-xs;
+    border-radius: $radius-sm;
+    box-shadow: $shadow-xs var(--shadow-color);
 
     .button__content {
-      gap: 8px;
+      gap: $spacing-md;
     }
   }
 
   &--medium {
     font-size: $font-base;
-    padding: $spacing-lg $spacing-xl;
-    border-radius: $radius-sm;
+    padding: $spacing-lg - 1 $spacing-xl;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm var(--shadow-color);
 
     .button__content {
       gap: $spacing-lg;
@@ -78,8 +87,9 @@
 
   &--large {
     font-size: $font-lg;
-    padding: $spacing-xl $spacing-2xl;
-    border-radius: $radius-md;
+    padding: $spacing-xl - 1 $spacing-2xl;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md var(--shadow-color);
 
     .button__content {
       gap: $spacing-xl;
@@ -100,7 +110,7 @@
   }
 
   &--only-icon {
-    padding: 0;
+    padding: 0 !important;
 
     .button__icon {
       margin-top: 0;

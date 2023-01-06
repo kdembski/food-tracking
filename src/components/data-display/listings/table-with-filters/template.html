@@ -17,6 +17,9 @@
         :currentSort="selectedSort"
         @sortChange="sort"
     /></template>
+    <template v-for="column in columns" #[column.value]="{ itemValue, item }">
+      <slot :name="column.value" :itemValue="itemValue" :item="item"></slot>
+    </template>
   </CTable>
   <CPagination
     class="table-with-filters__pagination"

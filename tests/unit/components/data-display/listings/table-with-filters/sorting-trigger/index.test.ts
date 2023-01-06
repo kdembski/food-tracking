@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CSortingTrigger from "@/components/data-display/listings/table/sorting-trigger/index.vue";
+import CSortingTrigger from "@/components/data-display/listings/table-with-filters/sorting-trigger/index.vue";
 
 describe("Sorting Trigger Component", () => {
   let wrapper: any;

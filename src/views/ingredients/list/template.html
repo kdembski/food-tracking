@@ -1,4 +1,13 @@
 <div class="ingredients-list">
+  <div class="ingredients-list__buttons">
+    <CButton
+      :label="isMobile ? '' : 'Dodaj składnik'"
+      icon="plus"
+      variant="text"
+      :size="isMobile ? 'large' : 'small'"
+      @click=""
+    />
+  </div>
   <CTableWithFilters
     listName="ingredientsList"
     listGetterName="ingredient/ingredientsList"
@@ -6,5 +15,16 @@
     listLoadingGetterName="ingredient/isLoadingIngredientsList"
     :defaultFilters="ingredientsListDefaultFilters"
     :columns="ingredientsListColumns"
-  />
+  >
+    <template #editButton="{ item }">
+      <CButton
+        class="ingredients-list__edit-button"
+        color="secondary"
+        variant="text"
+        icon="pen-to-square"
+        v-tooltip="{ text: 'Edytuj ' + item.name }"
+        @click=""
+      />
+    </template>
+  </CTableWithFilters>
 </div>

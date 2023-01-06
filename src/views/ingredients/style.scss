@@ -1,0 +1,18 @@
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__navigation {
+    width: 100%;
+    margin-bottom: $spacing-3xl;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .ingredients {
+    &__navigation {
+      margin-bottom: $spacing-2xl;
+    }
+  }
+}

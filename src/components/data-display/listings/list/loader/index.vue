@@ -8,17 +8,19 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, Ref } from "vue";
 import { useWindowSize } from "@/composables/window-size";
 
 const { windowHeight, isMobile } = useWindowSize();
-const container: Ref<HTMLElement | undefined> = ref();
+
+const props = defineProps<{ container?: HTMLElement }>();
 
 const getLoaderMaxHeight = () => {
-  const containerOffsetTop = container.value?.offsetTop;
-  const paddingBottom = isMobile.value ? 15 : 25;
+  const containerOffsetTop = props.container?.offsetTop;
   const containerHeight =
-    windowHeight.value - (containerOffsetTop || 0) - (isMobile.value ? 64 : 0);
+    windowHeight.value -
+    (containerOffsetTop || 0) -
+    (isMobile.value ? 64 : 0) -
+    4;
   return { maxHeight: containerHeight + "px" };
 };
 </script>

@@ -1,0 +1,11 @@
+<div class="ingredients">
+  <header class="ingredients__header">
+    <h1>Składniki</h1>
+  </header>
+  <CHorizontalTabs
+    class="ingredients__navigation"
+    :items="tabs"
+    v-model="selectedTab"
+  />
+  <IngredientsList v-if="isListActive()" />
+</div>

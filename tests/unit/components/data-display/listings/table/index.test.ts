@@ -33,6 +33,7 @@ describe("Table Component", () => {
           {
             label: "label-2",
             value: "2",
+            getItemColumnValue: (value: any) => "formatted " + value,
           },
           {
             label: "label-3",
@@ -63,11 +64,9 @@ describe("Table Component", () => {
     expect(wrapper.find(".table-loader").exists()).toBe(true);
   });
 
-  it("Should render sorting triger if column has sortable property", async () => {
-    const sortableItemTh = wrapper
-      .find("thead")
-      .findAll("th")[0]
-      .find(".sorting-trigger");
-    expect(sortableItemTh.exists()).toBe(true);
+  it("Should format column value if getItemColumnValue is provided", async () => {
+    expect(
+      wrapper.vm.getItemColumnValue(wrapper.vm.columns[1], wrapper.vm.items[1])
+    ).toEqual("formatted 2-2");
   });
 });

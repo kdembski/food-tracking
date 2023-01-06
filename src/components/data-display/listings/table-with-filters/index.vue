@@ -68,8 +68,6 @@ const {
   selectedSort,
   sort,
   changeCurrentPage,
-  areFiltersEqualToDefault,
-  clearFilters,
 } = useFilters(props.defaultFilters, handleListLoadingProccess);
 
 const { setFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(

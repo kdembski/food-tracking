@@ -1,0 +1,86 @@
+.multi-input {
+  &__label {
+    margin-bottom: $spacing-2xs;
+    @include uppercasedSecondaryText;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__item {
+    display: flex;
+    gap: $spacing-md;
+
+    & > :deep(*:first-child) {
+      width: 100%;
+    }
+  }
+
+  &__remove-button {
+    position: relative;
+    top: 7px;
+  }
+
+  &__add-button {
+    display: flex;
+    justify-content: center;
+    margin-top: $spacing-lg;
+    width: calc(100% - 38px);
+
+    > button {
+      border-radius: 100%;
+    }
+  }
+
+  &__loader {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+
+    > .skeleton-loader__item {
+      &:first-child {
+        height: 14px;
+        width: 20%;
+        margin-bottom: -8px;
+        margin-top: -2px;
+      }
+
+      &:last-child {
+        height: 35px;
+        width: 35px;
+        border-radius: 100%;
+        position: relative;
+        left: calc(50% - 20px);
+        transform: translate(-50%);
+      }
+    }
+
+    .loader__item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      > .skeleton-loader__item {
+        &:first-child {
+          height: 45px;
+        }
+
+        &:last-child {
+          height: 30px;
+          width: 32px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .multi-input {
+    &__remove-button {
+      top: 9px;
+    }
+  }
+}

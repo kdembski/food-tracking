@@ -22,7 +22,11 @@
     <tbody v-else>
       <tr v-for="item in items">
         <td v-for="column in columns">
-          <slot :name="column.value" :itemValue="item[column.value]">
+          <slot
+            :name="column.value"
+            :itemValue="item[column.value]"
+            :item="item"
+          >
             {{ getItemColumnValue(column, item) }}
           </slot>
         </td>

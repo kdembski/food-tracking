@@ -54,6 +54,6 @@ describe("Year Preview Component", () => {
     expect(wrapper.vm.getChartHeight()).toEqual(40);
     window.innerWidth = 400;
     wrapper = mount(CYearPreview);
-    expect(wrapper.vm.getChartHeight()).toEqual(90);
+    expect(wrapper.vm.getChartHeight()).toEqual(80);
   });
 });

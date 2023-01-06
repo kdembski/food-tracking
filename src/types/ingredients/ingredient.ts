@@ -18,3 +18,9 @@ export interface Ingredient {
 }
 
 export type IngredientsList = ListWithFilters<Ingredient>;
+
+export enum IngredientsNavItems {
+  LIST = "LIST",
+  UNITS = "UNITS",
+  CATEGORIES = "CATEGORIES",
+}

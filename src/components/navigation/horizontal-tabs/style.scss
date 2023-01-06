@@ -25,7 +25,7 @@
       display: flex;
       align-items: center;
       color: var(--text-tetriary);
-      padding: 0 $spacing-2xs $spacing-xl;
+      padding: 0 $spacing-2xs $spacing-lg;
       cursor: pointer;
 
       &:hover {
@@ -71,11 +71,5 @@
 @media screen and (max-width: $screen-md) {
   .horizontal-tabs {
     padding: 0 $spacing-lg;
-
-    &__item {
-      & > label {
-        padding: 0 $spacing-2xs $spacing-lg;
-      }
-    }
   }
 }

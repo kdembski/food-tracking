@@ -1,0 +1,35 @@
+<CSkeletonLoader v-if="isLoading" class="multi-input__loader loader">
+  <div class="skeleton-loader__item"></div>
+  <div class="loader__item">
+    <div class="skeleton-loader__item"></div>
+    <div class="skeleton-loader__item"></div>
+  </div>
+  <div class="loader__item">
+    <div class="skeleton-loader__item"></div>
+    <div class="skeleton-loader__item"></div>
+  </div>
+  <div class="loader__item">
+    <div class="skeleton-loader__item"></div>
+    <div class="skeleton-loader__item"></div>
+  </div>
+  <div class="skeleton-loader__item"></div>
+</CSkeletonLoader>
+<div v-else class="multi-input">
+  <p v-if="label" class="multi-input__label">{{ label }}</p>
+  <div class="multi-input__items">
+    <div v-for="(value, index) in values" class="multi-input__item">
+      <slot :values="values" :index="index"></slot>
+      <CButton
+        class="multi-input__remove-button"
+        color="secondary"
+        variant="text"
+        size="large"
+        icon="times"
+        @click="removeItem(index)"
+      />
+    </div>
+  </div>
+  <div class="multi-input__add-button">
+    <CButton color="secondary" size="large" icon="plus" @click="addItem()" />
+  </div>
+</div>

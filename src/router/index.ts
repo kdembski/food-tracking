@@ -14,7 +14,7 @@ import EditRecipeView from "../views/recipes/edit/index.vue";
 import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 import SettingsView from "../views/settings/index.vue";
 import CalendarView from "../views/calendar/index.vue";
-import IngredientsListView from "../views/ingredients/list/index.vue";
+import IngredientsView from "../views/ingredients/index.vue";
 
 const Recipes = {
   name: "Recipes",
@@ -68,8 +68,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/ingredients",
-    name: "IngredientsListView",
-    component: IngredientsListView,
+    name: "IngredientsView",
+    component: IngredientsView,
     meta: {
       maxWidth: 1000,
     },
@@ -95,6 +95,11 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
+  scrollBehavior() {
+    return {
+      top: 0,
+    };
+  },
   history: createWebHashHistory(),
   routes,
 });
@@ -113,6 +118,8 @@ router.beforeEach((to, from, next) => {
   if (isPublic && isLoggedIn) {
     return next(from.fullPath);
   }
+
+  document.getElementById("main-scroll-container")?.scrollTo(0, 0);
 
   next();
 });

@@ -1,6 +1,6 @@
 <div class="list" ref="container">
   <slot v-if="isLoading" name="loader">
-    <ListLoader />
+    <ListLoader :container="container" />
   </slot>
   <template v-else>
     <div v-if="itemsCount < 1" class="list__empty-content">

@@ -8,7 +8,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, Ref } from "vue";
 
 const props = defineProps({
   items: {
@@ -21,6 +21,7 @@ const props = defineProps({
   },
 });
 
+const container: Ref<HTMLElement | undefined> = ref();
 const itemsCount = computed(() => props.items.length);
 </script>
 
