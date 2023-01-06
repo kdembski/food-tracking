@@ -37,7 +37,7 @@
     }
 
     &:hover:not(.button--disabled) {
-      background-color: $textButtonHoverBackground;
+      background-color: var(--text-button-hover-background);
     }
   }
 

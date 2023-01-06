@@ -20,11 +20,11 @@ $mobileItemPadding: $spacing-xs $spacing-md;
       &--active {
         cursor: default;
         color: var(--primary-dark);
-        background-color: $textButtonHoverBackground;
+        background-color: var(--text-button-hover-background);
       }
 
       &:hover {
-        background-color: $textButtonHoverBackground;
+        background-color: var(--text-button-hover-background);
       }
     }
   }
@@ -40,7 +40,7 @@ $mobileItemPadding: $spacing-xs $spacing-md;
     }
 
     &:hover:not(.pagination__arrow--disabled) {
-      background-color: $textButtonHoverBackground;
+      background-color: var(--text-button-hover-background);
     }
   }
 

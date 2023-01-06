@@ -29,6 +29,8 @@
 
   --success-primary: #{$success};
   --success-secondary: #{$success-light};
+
+  --text-button-hover-background: #{$text-button-hover-background-light};
 }
 
 [data-theme="dark"] {
@@ -54,5 +56,7 @@
 
     --success-primary: #{$success-light};
     --success-secondary: #{$success};
+
+    --text-button-hover-background: #{$text-button-hover-background-dark};
   }
 }
