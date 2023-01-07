@@ -16,30 +16,30 @@ import {
 } from "../helpers/error-message";
 
 const state: RecipeState = {
-  recipe: null,
-  isLoadingRecipe: false,
+  single: null,
+  isLoading: false,
 
-  recipesList: null,
-  isLoadingRecipesList: false,
+  list: null,
+  isLoadingList: false,
 
-  recipesTags: null,
-  isLoadingRecipesTags: false,
+  tags: null,
+  isLoadingTags: false,
 
-  recipesSearchSuggestions: null,
-  isLoadingRecipesSearchSuggestions: false,
+  searchSuggestions: null,
+  isLoadingSearchSuggestions: false,
 
-  isSubmittingRecipe: false,
+  isSubmitting: false,
 };
 
 const getters: GetterTree<RecipeState, any> = {
-  recipesList: (state): RecipesList | null => state.recipesList,
-  isLoadingRecipesList: (state) => state.isLoadingRecipesList,
+  list: (state): RecipesList | null => state.list,
+  isLoadingList: (state) => state.isLoadingList,
 
-  recipesTags: (state): Tag[] | null => state.recipesTags,
-  isLoadingRecipesTags: (state) => state.isLoadingRecipesTags,
+  tags: (state): Tag[] | null => state.tags,
+  isLoadingTags: (state) => state.isLoadingTags,
 
-  recipesSearchSuggestions: (state): DropdownOption<null>[] => {
-    const suggestions = state.recipesSearchSuggestions;
+  searchSuggestions: (state): DropdownOption<null>[] => {
+    const suggestions = state.searchSuggestions;
     if (!suggestions) {
       return [];
     }
@@ -51,35 +51,34 @@ const getters: GetterTree<RecipeState, any> = {
     });
   },
 
-  isLoadingRecipesSearchSuggestions: (state) =>
-    state.isLoadingRecipesSearchSuggestions,
+  isLoadingSearchSuggestions: (state) => state.isLoadingSearchSuggestions,
 };
 
 const actions: ActionTree<RecipeState, any> = {
-  loadRecipesList({ commit, rootState }, filters: ListFilters) {
+  loadList({ commit, rootState }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingRecipesList", true);
+      commit("setIsLoadingList", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL + "/recipes" + getListQuery(filters)
       )
         .then((response: AxiosResponse<RecipesList>) => {
-          const list = helpers.fixRecipesListDates(response.data);
-          commit("setIsLoadingRecipesList", false);
-          commit("setRecipesList", list);
+          const list = helpers.fixListDates(response.data);
+          commit("setIsLoadingList", false);
+          commit("setList", list);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingRecipesList", false);
+          commit("setIsLoadingList", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  loadRecipesTags({ commit, rootState }, filters: ListBaseFilters) {
+  loadTags({ commit, rootState }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingRecipesTags", true);
+      commit("setIsLoadingTags", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
@@ -87,24 +86,21 @@ const actions: ActionTree<RecipeState, any> = {
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
-          commit("setIsLoadingRecipesTags", false);
-          commit("setRecipesTags", response.data);
+          commit("setIsLoadingTags", false);
+          commit("setTags", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingRecipesTags", false);
+          commit("setIsLoadingTags", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  loadRecipesSearchSuggestions(
-    { commit, rootState },
-    filters: ListBaseFilters
-  ) {
+  loadSearchSuggestions({ commit, rootState }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingRecipesSearchSuggestions", true);
+      commit("setIsLoadingSearchSuggestions", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
@@ -112,19 +108,19 @@ const actions: ActionTree<RecipeState, any> = {
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
-          commit("setIsLoadingRecipesSearchSuggestions", false);
-          commit("setRecipesSearchSuggestions", response.data);
+          commit("setIsLoadingSearchSuggestions", false);
+          commit("setSearchSuggestions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingRecipesSearchSuggestions", false);
+          commit("setIsLoadingSearchSuggestions", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  getRecipesListCount({ rootState }) {
+  getCount({ rootState }) {
     return new Promise<number>((resolve, reject) => {
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/count")
         .then((response: AxiosResponse<number>) => {
@@ -137,57 +133,75 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  loadRecipe({ commit, rootState }, recipeId) {
+  load({ commit, rootState }, itemId) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingRecipe", true);
+      commit("setIsLoading", true);
 
-      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/" + recipeId)
+      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
         .then((response: AxiosResponse<Recipe>) => {
-          commit("setIsLoadingRecipe", false);
-          commit("setRecipe", response.data);
+          commit("setIsLoading", false);
+          commit("setSingle", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingRecipe", false);
+          commit("setIsLoading", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  createRecipe({ commit, rootState }, recipe: Recipe) {
+  create({ commit, rootState }, item: Recipe) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsSubmittingRecipe", true);
+      commit("setIsSubmitting", true);
 
-      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", recipe)
+      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", item)
         .then(() => {
           rootState.toastNotification.success("Dodano przepis.");
-          commit("setIsSubmittingRecipe", false);
+          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingRecipe", false);
+          commit("setIsSubmitting", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  updateRecipe({ commit, rootState }, recipe: Recipe) {
+  update({ commit, rootState }, item: Recipe) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsSubmittingRecipe", true);
+      commit("setIsSubmitting", true);
 
       ApiService.put(
-        process.env.VUE_APP_SERVICE_URL + "/recipes/" + recipe.id,
-        recipe
+        process.env.VUE_APP_SERVICE_URL + "/recipes/" + item.id,
+        item
       )
         .then(() => {
           rootState.toastNotification.success("Zapisano przepis.");
-          commit("setIsSubmittingRecipe", false);
+          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingRecipe", false);
+          commit("setIsSubmitting", false);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
+        });
+    });
+  },
+
+  delete({ commit, rootState }, itemId: number) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsSubmitting", true);
+
+      ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
+        .then(() => {
+          rootState.toastNotification.success("Usunięto przepis.");
+          commit("setIsSubmitting", false);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsSubmitting", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
@@ -196,45 +210,45 @@ const actions: ActionTree<RecipeState, any> = {
 };
 
 const mutations: MutationTree<RecipeState> = {
-  setRecipesList(state, list: RecipesList) {
-    state.recipesList = list;
+  setList(state, list: RecipesList) {
+    state.list = list;
   },
 
-  setIsLoadingRecipesList(state, value) {
-    state.isLoadingRecipesList = value;
+  setIsLoadingList(state, value) {
+    state.isLoadingList = value;
   },
 
-  setRecipesTags(state, tags: Tag[]) {
-    state.recipesTags = tags;
+  setTags(state, tags: Tag[]) {
+    state.tags = tags;
   },
 
-  setIsLoadingRecipesTags(state, value) {
-    state.isLoadingRecipesTags = value;
+  setIsLoadingTags(state, value) {
+    state.isLoadingTags = value;
   },
 
-  setRecipesSearchSuggestions(state, suggestions: string[]) {
-    state.recipesSearchSuggestions = suggestions;
+  setSearchSuggestions(state, suggestions: string[]) {
+    state.searchSuggestions = suggestions;
   },
 
-  setIsLoadingRecipesSearchSuggestions(state, value) {
-    state.isLoadingRecipesSearchSuggestions = value;
+  setIsLoadingSearchSuggestions(state, value) {
+    state.isLoadingSearchSuggestions = value;
   },
 
-  setIsSubmittingRecipe(state, value) {
-    state.isSubmittingRecipe = value;
+  setIsSubmitting(state, value) {
+    state.isSubmitting = value;
   },
 
-  setRecipe(state, recipe: Recipe) {
-    state.recipe = recipe;
+  setSingle(state, recipe: Recipe) {
+    state.single = recipe;
   },
 
-  setIsLoadingRecipe(state, value) {
-    state.isLoadingRecipe = value;
+  setIsLoading(state, value) {
+    state.isLoading = value;
   },
 };
 
 const helpers = {
-  fixRecipesListDates: (recipesList: RecipesList) => {
+  fixListDates: (recipesList: RecipesList) => {
     recipesList.data.forEach((recipe) => {
       if (recipe.cookedDate) {
         recipe.cookedDate = new Date(recipe.cookedDate);

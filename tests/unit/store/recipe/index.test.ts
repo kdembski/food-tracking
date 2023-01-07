@@ -8,7 +8,7 @@ let mockAxiosPut = jest.fn();
 let mockAxiosDelete = jest.fn();
 let mockAxiosPatch = jest.fn();
 
-import recipe from "@/store/recipe/index";
+import module from "@/store/recipe/index";
 jest.mock("@/services/api.service", () => ({
   get: mockAxiosGet,
   post: mockAxiosPost,
@@ -20,7 +20,7 @@ jest.mock("@/services/api.service", () => ({
 describe("Recipe Store Module", () => {
   let store: any;
   let toastNotification: any;
-  let recipesList: RecipesList;
+  let list: RecipesList;
   const listFilters = {
     currentPage: 1,
     pageSize: 10,
@@ -36,7 +36,7 @@ describe("Recipe Store Module", () => {
       error: jest.fn(),
     };
 
-    recipesList = {
+    list = {
       data: [
         {
           id: 1,
@@ -71,36 +71,34 @@ describe("Recipe Store Module", () => {
         toastNotification,
       },
       modules: {
-        recipe,
+        module,
       },
     });
   });
 
-  it("Should set recipes list to state on successful loadRecipesList action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() =>
-      Promise.resolve({ data: recipesList })
-    );
-    store.dispatch("recipe/loadRecipesList", listFilters);
-    expect(store.getters["recipe/isLoadingRecipesList"]).toBe(true);
+  it("Should set list to state on successful loadList action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: list }));
+    store.dispatch("module/loadList", listFilters);
+    expect(store.getters["module/isLoadingList"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/recipes?page=1&size=10&searchPhrase=test&sortAttribute=attr&sortDirection=dir&tags=tag"
     );
-    expect(store.getters["recipe/recipesList"]).toEqual(recipesList);
-    expect(store.getters["recipe/isLoadingRecipesList"]).toBe(false);
+    expect(store.getters["module/list"]).toEqual(list);
+    expect(store.getters["module/isLoadingList"]).toBe(false);
   });
 
-  it("Should show error notification on failed loadRecipesList action dispatch", async () => {
+  it("Should show error notification on failed loadList action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
     await expect(
-      store.dispatch("recipe/loadRecipesList", listFilters)
+      store.dispatch("module/loadList", listFilters)
     ).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should set recipes tags to state on successful loadRecipesTags action dispatch", async () => {
+  it("Should set tags to state on successful loadTags action dispatch", async () => {
     const filters = {
       searchPhrase: "test",
       tags: "tag",
@@ -108,27 +106,25 @@ describe("Recipe Store Module", () => {
     const tags = "tag1,tag2";
 
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: tags }));
-    store.dispatch("recipe/loadRecipesTags", filters);
-    expect(store.getters["recipe/isLoadingRecipesTags"]).toBe(true);
+    store.dispatch("module/loadTags", filters);
+    expect(store.getters["module/isLoadingTags"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/recipes/tags?searchPhrase=test&tags=tag"
     );
-    expect(store.getters["recipe/recipesTags"]).toEqual(tags);
-    expect(store.getters["recipe/isLoadingRecipesTags"]).toBe(false);
+    expect(store.getters["module/tags"]).toEqual(tags);
+    expect(store.getters["module/isLoadingTags"]).toBe(false);
   });
 
-  it("Should show error notification on failed loadRecipesTags action dispatch", async () => {
+  it("Should show error notification on failed loadTags action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("recipe/loadRecipesTags")).rejects.toEqual(
-      "error"
-    );
+    await expect(store.dispatch("module/loadTags")).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should set recipes suggestions to state on successful loadRecipesSearchSuggestions action dispatch", async () => {
+  it("Should set suggestions to state on successful loadSearchSuggestions action dispatch", async () => {
     const filters = {
       searchPhrase: "test",
       tags: "tag",
@@ -136,122 +132,127 @@ describe("Recipe Store Module", () => {
     const suggestions = ["test"];
 
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: ["test"] }));
-    store.dispatch("recipe/loadRecipesSearchSuggestions", filters);
-    expect(store.getters["recipe/isLoadingRecipesSearchSuggestions"]).toBe(
-      true
-    );
+    store.dispatch("module/loadSearchSuggestions", filters);
+    expect(store.getters["module/isLoadingSearchSuggestions"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/recipes/suggestions?searchPhrase=test&tags=tag"
     );
-    expect(store.state.recipe.recipesSearchSuggestions).toEqual(suggestions);
-    expect(store.getters["recipe/isLoadingRecipesSearchSuggestions"]).toBe(
-      false
-    );
+    expect(store.state.module.searchSuggestions).toEqual(suggestions);
+    expect(store.getters["module/isLoadingSearchSuggestions"]).toBe(false);
   });
 
-  it("Should show error notification on failed loadRecipesSearchSuggestions action dispatch", async () => {
+  it("Should show error notification on failed loadSearchSuggestions action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
     await expect(
-      store.dispatch("recipe/loadRecipesSearchSuggestions")
+      store.dispatch("module/loadSearchSuggestions")
     ).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should return recipes count on successful getRecipesListCount action dispatch", async () => {
+  it("Should return count on successful getCount action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: 30 }));
-    await expect(store.dispatch("recipe/getRecipesListCount")).resolves.toEqual(
-      30
-    );
+    await expect(store.dispatch("module/getCount")).resolves.toEqual(30);
     await flushPromises();
     expect(mockAxiosGet).toHaveBeenCalledWith("service/recipes/count");
   });
 
-  it("Should show error notification on failed getRecipesListCount action dispatch", async () => {
+  it("Should show error notification on failed getCount action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("recipe/getRecipesListCount")).rejects.toEqual(
-      "error"
-    );
+    await expect(store.dispatch("module/getCount")).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should set recipe to state on successful loadRecipe action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: "test" }));
-    store.dispatch("recipe/loadRecipe", 1);
-    expect(store.state.recipe.isLoadingRecipe).toBe(true);
-    await flushPromises();
-
-    expect(mockAxiosGet).toHaveBeenCalledWith("service/recipes/1");
-    expect(store.state.recipe.recipe).toEqual("test");
-    expect(store.state.recipe.isLoadingRecipe).toBe(false);
-  });
-
-  it("Should show error notification on failed loadRecipe action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("recipe/loadRecipe", 1)).rejects.toEqual(
-      "error"
-    );
-    await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should show success notification on successful createRecipe action dispatch", async () => {
-    const recipe = { id: 1 };
-    mockAxiosPost.mockImplementation(() => Promise.resolve());
-    store.dispatch("recipe/createRecipe", recipe);
-    expect(store.state.recipe.isSubmittingRecipe).toBe(true);
-    await flushPromises();
-
-    expect(mockAxiosPost).toHaveBeenCalledWith("service/recipes", recipe);
-    expect(toastNotification.success).toHaveBeenCalledTimes(1);
-    expect(store.state.recipe.isSubmittingRecipe).toBe(false);
-  });
-
-  it("Should show error notification on failed createRecipe action dispatch", async () => {
-    const recipe = { id: 1 };
-    mockAxiosPost.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("recipe/createRecipe", recipe)).rejects.toEqual(
-      "error"
-    );
-    await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should show success notification on successful updateRecipe action dispatch", async () => {
-    const recipe = { id: 1 };
-    mockAxiosPut.mockImplementation(() => Promise.resolve());
-    store.dispatch("recipe/updateRecipe", recipe);
-    expect(store.state.recipe.isSubmittingRecipe).toBe(true);
-    await flushPromises();
-
-    expect(mockAxiosPut).toHaveBeenCalledWith("service/recipes/1", recipe);
-    expect(toastNotification.success).toHaveBeenCalledTimes(1);
-    expect(store.state.recipe.isSubmittingRecipe).toBe(false);
-  });
-
-  it("Should show error notification on failed updateRecipe action dispatch", async () => {
-    const recipe = { id: 1 };
-    mockAxiosPut.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("recipe/updateRecipe", recipe)).rejects.toEqual(
-      "error"
-    );
-    await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
-  });
-
-  it("Should return search suggestion options from getRecipesSearchSuggestions getter", async () => {
-    await store.commit("recipe/setRecipesSearchSuggestions", null);
-    expect(store.getters["recipe/recipesSearchSuggestions"]).toEqual([]);
-    await store.commit("recipe/setRecipesSearchSuggestions", [
-      "test1",
-      "test2",
-    ]);
-    expect(store.getters["recipe/recipesSearchSuggestions"]).toEqual([
+  it("Should return search suggestion options from getSearchSuggestions getter", async () => {
+    await store.commit("module/setSearchSuggestions", null);
+    expect(store.getters["module/searchSuggestions"]).toEqual([]);
+    await store.commit("module/setSearchSuggestions", ["test1", "test2"]);
+    expect(store.getters["module/searchSuggestions"]).toEqual([
       { value: null, label: "test1" },
       { value: null, label: "test2" },
     ]);
+  });
+
+  it("Should set single to state on successful load action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: "test" }));
+    store.dispatch("module/load", 1);
+    expect(store.state.module.isLoading).toBe(true);
+    await flushPromises();
+
+    expect(mockAxiosGet).toHaveBeenCalledWith("service/recipes/1");
+    expect(store.state.module.single).toEqual("test");
+    expect(store.state.module.isLoading).toBe(false);
+  });
+
+  it("Should show error notification on failed load action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
+    await expect(store.dispatch("module/load", 1)).rejects.toEqual("error");
+    await flushPromises();
+    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should show success notification on successful create action dispatch", async () => {
+    const item = { id: 1 };
+    mockAxiosPost.mockImplementation(() => Promise.resolve());
+    store.dispatch("module/create", item);
+    expect(store.state.module.isSubmitting).toBe(true);
+    await flushPromises();
+
+    expect(mockAxiosPost).toHaveBeenCalledWith("service/recipes", item);
+    expect(toastNotification.success).toHaveBeenCalledTimes(1);
+    expect(store.state.module.isSubmitting).toBe(false);
+  });
+
+  it("Should show error notification on failed create action dispatch", async () => {
+    const item = { id: 1 };
+    mockAxiosPost.mockImplementation(() => Promise.reject({ code: "error" }));
+    await expect(store.dispatch("module/create", item)).rejects.toEqual(
+      "error"
+    );
+    await flushPromises();
+    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should show success notification on successful update action dispatch", async () => {
+    const item = { id: 1 };
+    mockAxiosPut.mockImplementation(() => Promise.resolve());
+    store.dispatch("module/update", item);
+    expect(store.state.module.isSubmitting).toBe(true);
+    await flushPromises();
+
+    expect(mockAxiosPut).toHaveBeenCalledWith("service/recipes/1", item);
+    expect(toastNotification.success).toHaveBeenCalledTimes(1);
+    expect(store.state.module.isSubmitting).toBe(false);
+  });
+
+  it("Should show error notification on failed update action dispatch", async () => {
+    const item = { id: 1 };
+    mockAxiosPut.mockImplementation(() => Promise.reject({ code: "error" }));
+    await expect(store.dispatch("module/update", item)).rejects.toEqual(
+      "error"
+    );
+    await flushPromises();
+    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should show success notification on successful delete action dispatch", async () => {
+    mockAxiosDelete.mockImplementation(() => Promise.resolve());
+    store.dispatch("module/delete", 1);
+    expect(store.state.module.isSubmitting).toBe(true);
+    await flushPromises();
+
+    expect(mockAxiosDelete).toHaveBeenCalledWith("service/recipes/1");
+    expect(toastNotification.success).toHaveBeenCalledTimes(1);
+    expect(store.state.module.isSubmitting).toBe(false);
+  });
+
+  it("Should show error notification on failed delete action dispatch", async () => {
+    mockAxiosDelete.mockImplementation(() => Promise.reject({ code: "error" }));
+    await expect(store.dispatch("module/delete", 1)).rejects.toEqual("error");
+    await flushPromises();
+    expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 });

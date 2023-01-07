@@ -94,8 +94,8 @@ const tabs = ref([
 ]);
 const selectedTab = ref("ALL");
 
-const setRecipesListCount = async () => {
-  tabs.value[0].count = await store.dispatch("recipe/getRecipesListCount");
+const setRecipesCount = async () => {
+  tabs.value[0].count = await store.dispatch("recipe/getCount");
 };
 
 const isAddToCalendarModalOpen = ref(false);
@@ -111,7 +111,7 @@ const goToNewRecipeView = () => {
 };
 
 onMounted(() => {
-  setRecipesListCount();
+  setRecipesCount();
 });
 </script>
 

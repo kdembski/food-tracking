@@ -2,15 +2,15 @@ import { ListWithFilters } from "@/types/components/data-display/list";
 import { Tag } from "../components/utils/tags";
 
 export interface RecipeState {
-  recipe: Recipe | null;
-  isLoadingRecipe: boolean;
-  recipesList: RecipesList | null;
-  isLoadingRecipesList: boolean;
-  recipesTags: Tag[] | null;
-  isLoadingRecipesTags: boolean;
-  recipesSearchSuggestions: string[] | null;
-  isLoadingRecipesSearchSuggestions: boolean;
-  isSubmittingRecipe: boolean;
+  single: Recipe | null;
+  isLoading: boolean;
+  list: RecipesList | null;
+  isLoadingList: boolean;
+  tags: Tag[] | null;
+  isLoadingTags: boolean;
+  searchSuggestions: string[] | null;
+  isLoadingSearchSuggestions: boolean;
+  isSubmitting: boolean;
 }
 
 export interface Recipe {

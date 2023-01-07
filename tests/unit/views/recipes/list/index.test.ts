@@ -1,4 +1,3 @@
-import flushPromises from "flush-promises";
 import { shallowMount } from "@vue/test-utils";
 import RecipesListView from "@/views/recipes/list/index.vue";
 import { createStore } from "vuex";
@@ -17,7 +16,7 @@ describe("Recipes List View", () => {
 
   beforeEach(async () => {
     actions = {
-      getRecipesListCount: jest.fn(),
+      getCount: jest.fn(),
     };
 
     store = createStore({
@@ -40,8 +39,8 @@ describe("Recipes List View", () => {
     });
   });
 
-  it("Should get recipes list count on component mount", async () => {
-    expect(actions.getRecipesListCount).toHaveBeenCalledTimes(1);
+  it("Should get recipes count on component mount", async () => {
+    expect(actions.getCount).toHaveBeenCalledTimes(1);
   });
 
   it("Should open modal and set added recipe on openAddToCalendarModal call", async () => {

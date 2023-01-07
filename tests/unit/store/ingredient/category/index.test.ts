@@ -20,7 +20,7 @@ jest.mock("@/services/api.service", () => ({
   patch: mockAxiosPatch,
 }));
 
-describe("IngredientCategory Category Store Module", () => {
+describe("Ingredient Category Store Module", () => {
   let store: any;
   let toastNotification: any;
   let list: IngredientCategoriesList;

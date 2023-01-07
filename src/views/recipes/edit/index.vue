@@ -23,13 +23,11 @@ import { useRoute } from "vue-router";
 const store = useStore();
 const route = useRoute();
 
-const isLoadingRecipe = computed(() => store.state.recipe.isLoadingRecipe);
-const isUpdatingRecipe = computed(() => store.state.recipe.isSubmittingRecipe);
-const isLoadingRecipesTags = computed(
-  () => store.state.recipe.isLoadingRecipesTags
-);
+const isLoadingRecipe = computed(() => store.state.recipe.isLoading);
+const isUpdatingRecipe = computed(() => store.state.recipe.isSubmitting);
+const isLoadingRecipesTags = computed(() => store.state.recipe.isLoadingTags);
 const recipeId = computed(() => route.params.id);
-const recipe = computed(() => store.state.recipe.recipe);
+const recipe = computed(() => store.state.recipe.single);
 const recipesTags = ref();
 
 onBeforeMount(() => {
@@ -38,16 +36,16 @@ onBeforeMount(() => {
 });
 
 const loadRecipe = () => {
-  return store.dispatch("recipe/loadRecipe", recipeId.value);
+  return store.dispatch("recipe/load", recipeId.value);
 };
 
 const setRecipesTags = async () => {
-  await store.dispatch("recipe/loadRecipesTags");
-  recipesTags.value = store.getters["recipe/recipesTags"];
+  await store.dispatch("recipe/loadTags");
+  recipesTags.value = store.getters["recipe/tags"];
 };
 
 const updateRecipe = async () => {
-  await store.dispatch("recipe/updateRecipe", recipe.value);
+  await store.dispatch("recipe/update", recipe.value);
 };
 </script>
 
