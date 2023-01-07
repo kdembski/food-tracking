@@ -62,14 +62,15 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
 
   const updateCalendarItem = (item: CalendarItem, date: Date) => {
     return store.dispatch("calendar/updateCalendarItem", {
-      date,
       ...item,
+      date,
     });
   };
 
   const updateCalendarDay = (calendarDay: CalendarDay) => {
     const date = calendarDay.date;
     const items = calendarDay.items;
+    console.log(date);
 
     updateDayItemsSortOrder(items);
 

@@ -5,7 +5,7 @@
       icon="plus"
       variant="text"
       :size="isMobile ? 'large' : 'small'"
-      @click=""
+      @click="onAddButtonClick"
     />
   </div>
   <CTableWithFilters
@@ -23,8 +23,12 @@
         variant="text"
         icon="pen-to-square"
         v-tooltip="{ text: 'Edytuj ' + item.name }"
-        @click=""
+        @click="editIngredient(item.id)"
       />
     </template>
   </CTableWithFilters>
 </div>
+<EditIngedientModal
+  v-model:isOpen="isEditModalOpen"
+  :ingredientId="editedIngredientId"
+/>

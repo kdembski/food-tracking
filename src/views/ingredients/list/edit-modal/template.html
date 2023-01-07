@@ -5,17 +5,11 @@
   :isSubmitting="isSubmitting"
   @submit="submit"
 >
-  <div class="edit-ordered-food-modal">
-    <CInput v-model="orderedFood.foodName" label="Nazwa składnika" />
-    <CInput v-model="orderedFood.placeName" label="Kategoria" />
-    <CInput v-model="orderedFood.placeLink" label="Jednostki" />
-    <CSelectTags
-      id="edit-modal-select-tags"
-      v-model:selectedTags="orderedFood.tags"
-      v-model:tags="orderedFoodTags"
-      :isLoading="isLoadingTags"
-      inputIcon=""
-      enableAddingTags
+  <div class="edit-ingredient-modal">
+    <CInput
+      v-model="ingredient.name"
+      label="Nazwa składnika"
+      :isLoading="isLoadingIngredient"
     />
   </div>
 </CModal>

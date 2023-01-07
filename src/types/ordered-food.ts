@@ -15,7 +15,7 @@ export interface OrderedFood {
   foodName: string;
   placeName: string;
   tags: string;
-  orderDate: Date;
+  orderDate?: Date;
   orderDatesInCurrentMonth: Date[];
 }
 

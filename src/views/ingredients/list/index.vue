@@ -1,10 +1,11 @@
 <script lang="ts">
 import CTableWithFilters from "@/components/data-display/listings/table-with-filters/index.vue";
 import CButton from "@/components/controls/button/index.vue";
+import EditIngedientModal from "./edit-modal/index.vue";
 
 export default {
   name: "IngredientsList",
-  components: { CTableWithFilters, CButton },
+  components: { CTableWithFilters, CButton, EditIngedientModal },
 };
 </script>
 

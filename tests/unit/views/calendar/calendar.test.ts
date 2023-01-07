@@ -153,13 +153,16 @@ describe("Calendar View", () => {
   });
 
   it("Should dispatch updateCalendarItem on updateCalendarItem call", async () => {
-    await calendarComposable.updateCalendarItem({ item: "test" }, "test");
+    await calendarComposable.updateCalendarItem(
+      { item: "test", date: "old" },
+      "new"
+    );
     expect(actions.updateCalendarItem).toHaveBeenCalledTimes(1);
     expect(actions.updateCalendarItem).toHaveBeenCalledWith(
       expect.any(Object),
       {
         item: "test",
-        date: "test",
+        date: "new",
       }
     );
   });

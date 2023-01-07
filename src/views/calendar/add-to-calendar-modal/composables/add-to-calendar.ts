@@ -64,7 +64,7 @@ export function useAddToCalendar(
 
   const updateAddedItemDates = () => {
     updateAddedRecipeDates();
-    updateAddedOrderedFood();
+    updateAddedOrderedFoodDates();
   };
 
   const updateAddedRecipeDates = () => {
@@ -73,21 +73,25 @@ export function useAddToCalendar(
     }
 
     const lastSelectedDate = getLastSelectedDate();
-    if (!addedRecipe.value.cookedDate) {
-      return;
-    }
-    if (isAfter(lastSelectedDate, addedRecipe.value.cookedDate)) {
+
+    if (
+      !addedRecipe.value.cookedDate ||
+      isAfter(lastSelectedDate, addedRecipe.value.cookedDate)
+    ) {
       addedRecipe.value.cookedDate = lastSelectedDate;
     }
   };
 
-  const updateAddedOrderedFood = () => {
+  const updateAddedOrderedFoodDates = () => {
     if (!addedOrderedFood.value) {
       return;
     }
 
     const lastSelectedDate = getLastSelectedDate();
-    if (isAfter(lastSelectedDate, addedOrderedFood.value.orderDate)) {
+    if (
+      !addedOrderedFood.value.orderDate ||
+      isAfter(lastSelectedDate, addedOrderedFood.value.orderDate)
+    ) {
       addedOrderedFood.value.orderDate = lastSelectedDate;
     }
   };
