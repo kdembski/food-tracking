@@ -10,6 +10,7 @@ import {
 } from "../helpers/error-message";
 import {
   Ingredient,
+  IngredientOption,
   IngredientsList,
   IngredientState,
 } from "@/types/ingredients/ingredient";
@@ -21,11 +22,20 @@ const state: IngredientState = {
 
   ingredientsList: null,
   isLoadingIngredientsList: false,
+
+  ingredientOptions: null,
+  isLoadingIngredientOptions: false,
 };
 
 const getters: GetterTree<IngredientState, any> = {
   ingredientsList: (state): IngredientsList | null => state.ingredientsList,
   isLoadingIngredientsList: (state) => state.isLoadingIngredientsList,
+
+  ingredientOptions: (state) =>
+    state.ingredientOptions?.map((option) => ({
+      value: option.id,
+      label: option.name,
+    })),
 };
 
 const actions: ActionTree<IngredientState, any> = {
@@ -43,6 +53,24 @@ const actions: ActionTree<IngredientState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingIngredientsList", false);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
+        });
+    });
+  },
+
+  loadIngredientOptions({ commit, rootState }) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsLoadingIngredientOptions", true);
+
+      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ingredients/options")
+        .then((response: AxiosResponse<IngredientOption[]>) => {
+          commit("setIsLoadingIngredientOptions", false);
+          commit("setIngredientOptions", response.data);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsLoadingIngredientOptions", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
@@ -119,6 +147,14 @@ const mutations: MutationTree<IngredientState> = {
 
   setIsLoadingIngredientsList(state, value) {
     state.isLoadingIngredientsList = value;
+  },
+
+  setIngredientOptions(state, list: IngredientOption[]) {
+    state.ingredientOptions = list;
+  },
+
+  setIsLoadingIngredientOptions(state, value) {
+    state.isLoadingIngredientOptions = value;
   },
 
   setIsSubmittingIngredient(state, value) {

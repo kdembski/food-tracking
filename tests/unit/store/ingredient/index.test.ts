@@ -8,7 +8,10 @@ let mockAxiosDelete = jest.fn();
 let mockAxiosPatch = jest.fn();
 
 import ingredient from "@/store/ingredient/index";
-import { IngredientsList } from "@/types/ingredients/ingredient";
+import {
+  IngredientOption,
+  IngredientsList,
+} from "@/types/ingredients/ingredient";
 jest.mock("@/services/api.service", () => ({
   get: mockAxiosGet,
   post: mockAxiosPost,
@@ -21,6 +24,7 @@ describe("Ingredient Store Module", () => {
   let store: any;
   let toastNotification: any;
   let ingredientsList: IngredientsList;
+  let ingredientOptions: IngredientOption[];
   const listFilters = {
     currentPage: 1,
     pageSize: 10,
@@ -62,6 +66,17 @@ describe("Ingredient Store Module", () => {
       },
     };
 
+    ingredientOptions = [
+      {
+        id: 1,
+        name: "name 1",
+      },
+      {
+        id: 2,
+        name: "name 2",
+      },
+    ];
+
     store = createStore({
       state: {
         toastNotification,
@@ -93,6 +108,38 @@ describe("Ingredient Store Module", () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
     await expect(
       store.dispatch("ingredient/loadIngredientsList", listFilters)
+    ).rejects.toEqual("error");
+    await flushPromises();
+    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should set ingredients options to state on successful loadIngredientsOptions action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() =>
+      Promise.resolve({ data: ingredientOptions })
+    );
+    store.dispatch("ingredient/loadIngredientOptions");
+    expect(store.state.ingredient.isLoadingIngredientOptions).toBe(true);
+    await flushPromises();
+
+    expect(mockAxiosGet).toHaveBeenCalledWith("service/ingredients/options");
+    expect(store.state.ingredient.ingredientOptions).toEqual(ingredientOptions);
+    expect(store.state.ingredient.isLoadingIngredientOptions).toBe(false);
+    expect(store.getters["ingredient/ingredientOptions"]).toEqual([
+      {
+        value: 1,
+        label: "name 1",
+      },
+      {
+        value: 2,
+        label: "name 2",
+      },
+    ]);
+  });
+
+  it("Should show error notification on failed loadIngredientOptions action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
+    await expect(
+      store.dispatch("ingredient/loadIngredientOptions")
     ).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);

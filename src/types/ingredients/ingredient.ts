@@ -7,6 +7,9 @@ export interface IngredientState {
   ingredientsList: IngredientsList | null;
   isLoadingIngredientsList: boolean;
   isSubmittingIngredient: boolean;
+
+  ingredientOptions: IngredientOption[] | null;
+  isLoadingIngredientOptions: boolean;
 }
 
 export interface Ingredient {
@@ -15,6 +18,11 @@ export interface Ingredient {
   categoryId: number;
   categoryName: string;
   unitNames: string[];
+}
+
+export interface IngredientOption {
+  id: number;
+  name: string;
 }
 
 export type IngredientsList = ListWithFilters<Ingredient>;
