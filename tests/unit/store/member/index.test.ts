@@ -30,15 +30,15 @@ describe("Member Store Module", () => {
     });
   });
 
-  it("Should set members to state on successful loadMembers action dispatch", async () => {
+  it("Should set members to state on successful loadAll action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: members }));
-    await store.dispatch("member/loadMembers");
+    await store.dispatch("member/loadAll");
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith("service/members");
-    expect(store.state.member.members).toEqual(members);
+    expect(store.state.member.all).toEqual(members);
 
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("member/loadMembers")).rejects.toEqual("error");
+    await expect(store.dispatch("member/loadAll")).rejects.toEqual("error");
   });
 });

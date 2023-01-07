@@ -10,7 +10,7 @@ describe("Select Members Component", () => {
 
   beforeEach(async () => {
     state = {
-      members: [
+      all: [
         { id: 1, name: "test1" },
         { id: 2, name: "test2" },
       ],

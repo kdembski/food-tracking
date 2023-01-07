@@ -30,7 +30,7 @@ const emit = defineEmits<{
   (e: "update:selectedMembers", members: number[]): void;
 }>();
 
-const members = computed(() => store.state.member.members);
+const members = computed(() => store.state.member.all);
 
 const _selectedMembers = computed({
   get(): number[] {

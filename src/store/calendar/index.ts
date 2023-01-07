@@ -11,19 +11,19 @@ import {
 import { isNil } from "lodash";
 
 const state: CalendarState = {
-  calendar: null,
-  isLoadingCalendar: false,
+  days: null,
+  isLoadingDays: false,
 };
 
 const getters: GetterTree<CalendarState, any> = {
-  getCalendarDayByDate: (state) => (date: Date) => {
-    return helpers.getCalendarDayByDate(date, state.calendar);
+  getDayByDate: (state) => (date: Date) => {
+    return helpers.getDayByDate(date, state.days);
   },
 };
 
 const actions: ActionTree<CalendarState, any> = {
-  loadCalendar({ rootState, commit }, { allDatesInRange, selectedMembers }) {
-    commit("setIsLoadingCalendar", true);
+  loadDays({ rootState, commit }, { allDatesInRange, selectedMembers }) {
+    commit("setIsLoadingDays", true);
 
     const fromDate = allDatesInRange[0];
     const toDate = allDatesInRange[allDatesInRange.length - 1];
@@ -33,25 +33,25 @@ const actions: ActionTree<CalendarState, any> = {
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/calendar?" +
-          helpers.getCalendarRangeQuery(fromDate, toDate, selectedMembers)
+          helpers.getCalendarQuery(fromDate, toDate, selectedMembers)
       )
         .then((response: AxiosResponse<CalendarDay[]>) => {
-          const calendar = helpers.addMissingDaysToCalendar(
+          const days = helpers.addMissingDays(
             allDatesInRange,
-            helpers.sortCalendarItemsAndFixDates(response.data)
+            helpers.sortItemsAndFixDates(response.data)
           );
-          commit("setCalendar", calendar);
+          commit("setDays", days);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         })
-        .finally(() => commit("setIsLoadingCalendar", false));
+        .finally(() => commit("setIsLoadingDays", false));
     });
   },
 
-  addCalendarItem(_, data) {
+  createItem(_, data) {
     return new Promise<AxiosResponse>((resolve, reject) => {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/calendar", data)
         .then((response) => resolve(response))
@@ -59,7 +59,7 @@ const actions: ActionTree<CalendarState, any> = {
     });
   },
 
-  updateCalendarItem(_, data) {
+  updateItem(_, data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(
         process.env.VUE_APP_SERVICE_URL + "/calendar/" + data.id,
@@ -70,7 +70,7 @@ const actions: ActionTree<CalendarState, any> = {
     });
   },
 
-  deleteCalendarItem({ rootState }, id) {
+  deleteItem({ rootState }, id) {
     return new Promise<void>((resolve, reject) => {
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/calendar/" + id)
         .then(() => {
@@ -84,7 +84,7 @@ const actions: ActionTree<CalendarState, any> = {
     });
   },
 
-  updateCalendarItemMembers(_, item) {
+  updateItemMembers(_, item) {
     return new Promise<void>((resolve, reject) => {
       ApiService.patch(
         process.env.VUE_APP_SERVICE_URL + "/calendar/" + item.id + "/members",
@@ -97,21 +97,17 @@ const actions: ActionTree<CalendarState, any> = {
 };
 
 const mutations: MutationTree<CalendarState> = {
-  setCalendar(state, value) {
-    state.calendar = value;
+  setDays(state, value) {
+    state.days = value;
   },
 
-  setIsLoadingCalendar(state, value) {
-    state.isLoadingCalendar = value;
+  setIsLoadingDays(state, value) {
+    state.isLoadingDays = value;
   },
 };
 
 const helpers = {
-  getCalendarRangeQuery: (
-    fromDate: Date,
-    toDate: Date,
-    selectedMembers: string
-  ) => {
+  getCalendarQuery: (fromDate: Date, toDate: Date, selectedMembers: string) => {
     return (
       "fromDate=" +
       fromDate.getTime() +
@@ -121,7 +117,7 @@ const helpers = {
     );
   },
 
-  sortCalendarItemsAndFixDates: (calendar: CalendarDay[]) => {
+  sortItemsAndFixDates: (calendar: CalendarDay[]) => {
     return calendar.map((day) => {
       day.date = new Date(day.date);
       day.items.sort((a, b) => {
@@ -137,12 +133,9 @@ const helpers = {
     });
   },
 
-  addMissingDaysToCalendar: (
-    allDatesInRange: Date[],
-    calendar: CalendarDay[]
-  ) => {
+  addMissingDays: (allDatesInRange: Date[], calendar: CalendarDay[]) => {
     return allDatesInRange.map((date) => {
-      const calendarDay = helpers.getCalendarDayByDate(date, calendar);
+      const calendarDay = helpers.getDayByDate(date, calendar);
 
       if (calendarDay) {
         return calendarDay;
@@ -155,7 +148,7 @@ const helpers = {
     });
   },
 
-  getCalendarDayByDate: (date: Date, calendar: CalendarDay[] | null) => {
+  getDayByDate: (date: Date, calendar: CalendarDay[] | null) => {
     return calendar?.find((day) => isEqual(day.date, date));
   },
 };

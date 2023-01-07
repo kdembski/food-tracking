@@ -19,7 +19,7 @@ jest.mock("@/services/api.service", () => ({
 
 describe("Calendar Store Module", () => {
   let store: any;
-  let calendarMock: CalendarDay[];
+  let daysMock: CalendarDay[];
   let allDatesInRange: Date[];
   let toastNotification: any;
 
@@ -30,7 +30,7 @@ describe("Calendar Store Module", () => {
       new Date(2000, 1, 3),
     ];
 
-    calendarMock = [
+    daysMock = [
       {
         date: new Date(2000, 1, 1),
         items: [
@@ -85,31 +85,29 @@ describe("Calendar Store Module", () => {
     });
   });
 
-  it("Should set calendar to state on successful loadCalendar action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() =>
-      Promise.resolve({ data: calendarMock })
-    );
-    await store.dispatch("calendar/loadCalendar", {
+  it("Should set days to state on successful loadDays action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: daysMock }));
+    await store.dispatch("calendar/loadDays", {
       allDatesInRange,
       selectedMembers: [1],
     });
-    expect(store.state.calendar.isLoadingCalendar).toBe(true);
+    expect(store.state.calendar.isLoadingDays).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
       "service/calendar?fromDate=949359600000&toDate=949532400000&members=1"
     );
-    expect(store.state.calendar.calendar).toEqual([
-      ...calendarMock,
+    expect(store.state.calendar.days).toEqual([
+      ...daysMock,
       { date: new Date(2000, 1, 3), items: [] },
     ]);
-    expect(store.state.calendar.isLoadingCalendar).toBe(false);
+    expect(store.state.calendar.isLoadingDays).toBe(false);
   });
 
-  it("Should show error notification on failed loadCalendar action dispatch", async () => {
+  it("Should show error notification on failed loadDays action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
     await expect(
-      store.dispatch("calendar/loadCalendar", {
+      store.dispatch("calendar/loadDays", {
         allDatesInRange,
         selectedMembers: [],
       })
@@ -118,49 +116,49 @@ describe("Calendar Store Module", () => {
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should send request on addCalendarItem dispatch", async () => {
+  it("Should send post request on createItem dispatch", async () => {
     mockAxiosPost.mockImplementation(() => Promise.resolve());
-    await store.dispatch("calendar/addCalendarItem", { data: "data" });
+    await store.dispatch("calendar/createItem", { data: "data" });
     await flushPromises();
     expect(mockAxiosPost).toHaveBeenCalledWith("service/calendar", {
       data: "data",
     });
 
     mockAxiosPost.mockImplementation(() => Promise.reject());
-    await expect(store.dispatch("calendar/addCalendarItem")).rejects.toEqual(
+    await expect(store.dispatch("calendar/createItem")).rejects.toEqual(
       undefined
     );
   });
 
-  it("Should send request on updateCalendarItem dispatch", async () => {
+  it("Should send put request on updateItem dispatch", async () => {
     mockAxiosPut.mockImplementation(() => Promise.resolve());
-    await store.dispatch("calendar/updateCalendarItem", { id: 1 });
+    await store.dispatch("calendar/updateItem", { id: 1 });
     await flushPromises();
     expect(mockAxiosPut).toHaveBeenCalledWith("service/calendar/1", { id: 1 });
 
     mockAxiosPut.mockImplementation(() => Promise.reject());
     await expect(
-      store.dispatch("calendar/updateCalendarItem", { id: 1 })
+      store.dispatch("calendar/updateItem", { id: 1 })
     ).rejects.toEqual(undefined);
   });
 
-  it("Should send request on deleteCalendarItem dispatch", async () => {
+  it("Should send delete request on deleteItem dispatch", async () => {
     mockAxiosDelete.mockImplementation(() => Promise.resolve());
-    await store.dispatch("calendar/deleteCalendarItem", 1);
+    await store.dispatch("calendar/deleteItem", 1);
     await flushPromises();
     expect(mockAxiosDelete).toHaveBeenCalledWith("service/calendar/1");
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
 
     mockAxiosDelete.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(
-      store.dispatch("calendar/deleteCalendarItem", 1)
-    ).rejects.toEqual("error");
+    await expect(store.dispatch("calendar/deleteItem", 1)).rejects.toEqual(
+      "error"
+    );
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
   });
 
-  it("Should send request on updateCalendarItemMembers dispatch", async () => {
+  it("Should send request on updateItemMembers dispatch", async () => {
     mockAxiosPatch.mockImplementation(() => Promise.resolve());
-    await store.dispatch("calendar/updateCalendarItemMembers", {
+    await store.dispatch("calendar/updateItemMembers", {
       id: 1,
       members: [1],
     });
@@ -171,14 +169,14 @@ describe("Calendar Store Module", () => {
 
     mockAxiosPatch.mockImplementation(() => Promise.reject());
     await expect(
-      store.dispatch("calendar/updateCalendarItemMembers", { id: 1 })
+      store.dispatch("calendar/updateItemMembers", { id: 1 })
     ).rejects.toEqual(undefined);
   });
 
-  it("Should return calendarDay on getCalendarDayByDate getter call", async () => {
-    await store.commit("calendar/setCalendar", calendarMock);
+  it("Should return calendarDay on getDayByDate getter call", async () => {
+    await store.commit("calendar/setDays", daysMock);
     expect(
-      store.getters["calendar/getCalendarDayByDate"](new Date(2000, 1, 1))
-    ).toEqual(calendarMock[0]);
+      store.getters["calendar/getDayByDate"](new Date(2000, 1, 1))
+    ).toEqual(daysMock[0]);
   });
 });

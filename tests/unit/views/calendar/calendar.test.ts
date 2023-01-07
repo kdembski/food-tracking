@@ -69,13 +69,13 @@ describe("Calendar View", () => {
       isLoadingCalendar: false,
     };
     actions = {
-      loadCalendar: jest.fn(),
-      addCalendarItem: jest.fn(),
-      deleteCalendarItem: jest.fn(),
-      updateCalendarItem: jest.fn(),
+      loadDays: jest.fn(),
+      addItem: jest.fn(),
+      deleteItem: jest.fn(),
+      updateItem: jest.fn(),
     };
     getters = {
-      getCalendarDayByDate: () => () => calendar[0],
+      getDayByDate: () => () => calendar[0],
     };
 
     store = createStore({
@@ -100,26 +100,26 @@ describe("Calendar View", () => {
   });
 
   it("Should load calendar on before mount", async () => {
-    expect(actions.loadCalendar).toBeCalledTimes(1);
+    expect(actions.loadDays).toBeCalledTimes(1);
   });
 
-  it("Should retrun value from getCalendarDayByDate getter on getCalendarDayByDate method call", async () => {
+  it("Should return value from getDayByDate getter on getCalendarDayByDate method call", async () => {
     expect(calendarComposable.getCalendarDayByDate("test")).toEqual(
       calendar[0]
     );
   });
 
-  it("Should dispatch addCalendarItem action on addCalendarItem method call", async () => {
+  it("Should dispatch addItem action on addCalendarItem method call", async () => {
     await calendarComposable.addCalendarItem({ item: "test" }, "test");
-    expect(actions.addCalendarItem).toHaveBeenCalledTimes(1);
-    expect(actions.addCalendarItem).toHaveBeenCalledWith(expect.any(Object), {
+    expect(actions.addItem).toHaveBeenCalledTimes(1);
+    expect(actions.addItem).toHaveBeenCalledWith(expect.any(Object), {
       item: "test",
       date: "test",
     });
   });
 
   it("Should push cloned element to calendarDay items on cloneCalendarItem method call", async () => {
-    actions.addCalendarItem.mockImplementation(() =>
+    actions.addItem.mockImplementation(() =>
       Promise.resolve({ data: { insertId: 1 } })
     );
     await calendarComposable.cloneCalendarItem({});
@@ -129,58 +129,52 @@ describe("Calendar View", () => {
     expect(toastSuccess).toHaveBeenCalledWith("Zduplikowano.");
   });
 
-  it("Should show error toast notification if addCalendarItem is rejected", async () => {
-    actions.addCalendarItem.mockImplementation(() => Promise.reject());
+  it("Should show error toast notification if addItem is rejected", async () => {
+    actions.addItem.mockImplementation(() => Promise.reject());
     await calendarComposable.cloneCalendarItem({});
     await flushPromises();
     expect(toastError).toHaveBeenCalledTimes(1);
     expect(toastError).toHaveBeenCalledWith("Duplikowanie nie powiodło się.");
   });
 
-  it("Should delete item from dat items and dispatch deleteCalendarItem on deleteCalendarItem call", async () => {
+  it("Should delete item from dat items and dispatch deleteItem on deleteCalendarItem call", async () => {
     await calendarComposable.deleteCalendarItem(4, "test");
     await nextTick();
-    expect(actions.deleteCalendarItem).toHaveBeenCalledTimes(0);
+    expect(actions.deleteItem).toHaveBeenCalledTimes(0);
 
     await calendarComposable.deleteCalendarItem(1, "test");
     await nextTick();
-    expect(actions.deleteCalendarItem).toHaveBeenCalledTimes(1);
-    expect(actions.deleteCalendarItem).toHaveBeenCalledWith(
-      expect.any(Object),
-      1
-    );
+    expect(actions.deleteItem).toHaveBeenCalledTimes(1);
+    expect(actions.deleteItem).toHaveBeenCalledWith(expect.any(Object), 1);
     expect(calendar[0].items.length).toEqual(2);
   });
 
-  it("Should dispatch updateCalendarItem on updateCalendarItem call", async () => {
+  it("Should dispatch updateItem on updateCalendarItem call", async () => {
     await calendarComposable.updateCalendarItem(
       { item: "test", date: "old" },
       "new"
     );
-    expect(actions.updateCalendarItem).toHaveBeenCalledTimes(1);
-    expect(actions.updateCalendarItem).toHaveBeenCalledWith(
-      expect.any(Object),
-      {
-        item: "test",
-        date: "new",
-      }
-    );
+    expect(actions.updateItem).toHaveBeenCalledTimes(1);
+    expect(actions.updateItem).toHaveBeenCalledWith(expect.any(Object), {
+      item: "test",
+      date: "new",
+    });
   });
 
-  it("Should dispatch updateCalendarItem for every item in day on updateCalendarDay call", async () => {
-    actions.updateCalendarItem.mockImplementation(() => Promise.resolve());
+  it("Should dispatch updateItem for every item in day on updateCalendarDay call", async () => {
+    actions.updateItem.mockImplementation(() => Promise.resolve());
     await calendarComposable.updateCalendarDay(calendar[0]);
     await flushPromises();
 
-    expect(actions.updateCalendarItem).toHaveBeenCalledTimes(3);
+    expect(actions.updateItem).toHaveBeenCalledTimes(3);
     expect(toastSuccess).toHaveBeenCalledTimes(1);
     expect(toastSuccess).toHaveBeenCalledWith(
       "Kalendarz zaktualizowany pomyślnie!"
     );
   });
 
-  it("Should show error notification if on updateCalendarDay call any of updateCalendarItem fails", async () => {
-    actions.updateCalendarItem.mockImplementation(() => Promise.reject());
+  it("Should show error notification if on updateCalendarDay call any of updateItem fails", async () => {
+    actions.updateItem.mockImplementation(() => Promise.reject());
     await calendarComposable.updateCalendarDay(calendar[0]);
     await flushPromises();
 

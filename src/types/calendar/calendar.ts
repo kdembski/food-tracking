@@ -14,6 +14,6 @@ export interface CalendarItem {
 }
 
 export interface CalendarState {
-  calendar: CalendarDay[] | null;
-  isLoadingCalendar: boolean;
+  days: CalendarDay[] | null;
+  isLoadingDays: boolean;
 }

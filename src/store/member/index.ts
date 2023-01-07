@@ -6,15 +6,15 @@ import { AxiosResponse, AxiosError } from "axios";
 import { getErrorMessage } from "../helpers/error-message";
 
 const state: MemberState = {
-  members: [],
+  all: [],
 };
 
 const actions: ActionTree<MemberState, any> = {
-  loadMembers({ commit }) {
+  loadAll({ commit }) {
     return new Promise<void>((resolve, reject) => {
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/members")
         .then((response: AxiosResponse<Member[]>) => {
-          commit("setMembers", response.data);
+          commit("setAll", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -25,8 +25,8 @@ const actions: ActionTree<MemberState, any> = {
 };
 
 const mutations: MutationTree<MemberState> = {
-  setMembers(state, value) {
-    state.members = value;
+  setAll(state, value) {
+    state.all = value;
   },
 };
 

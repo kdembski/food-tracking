@@ -22,7 +22,7 @@ const props = defineProps({
 });
 
 const members = computed(() => {
-  return store.state.member.members.filter((member: Member) =>
+  return store.state.member.all.filter((member: Member) =>
     props.memberIds.some((id) => id === member.id)
   );
 });

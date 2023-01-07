@@ -18,18 +18,18 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   });
 
   const loadCalendar = async (selectedMembers?: number[]) => {
-    store.dispatch("calendar/loadCalendar", {
+    store.dispatch("calendar/loadDays", {
       allDatesInRange: allDatesInRange.value,
       selectedMembers,
     });
   };
 
   const getCalendarDayByDate: (date: Date) => CalendarDay = (date) => {
-    return store.getters["calendar/getCalendarDayByDate"](date);
+    return store.getters["calendar/getDayByDate"](date);
   };
 
   const addCalendarItem = (item: CalendarItem, date: Date) => {
-    return store.dispatch("calendar/addCalendarItem", { date, ...item });
+    return store.dispatch("calendar/addItem", { date, ...item });
   };
 
   const cloneCalendarItem = (item: CalendarItem, date: Date) => {
@@ -57,11 +57,11 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
     }
     const indexOfItemToRemove = day.items.indexOf(itemToRemove);
     day.items.splice(indexOfItemToRemove, 1);
-    store.dispatch("calendar/deleteCalendarItem", id);
+    store.dispatch("calendar/deleteItem", id);
   };
 
   const updateCalendarItem = (item: CalendarItem, date: Date) => {
-    return store.dispatch("calendar/updateCalendarItem", {
+    return store.dispatch("calendar/updateItem", {
       ...item,
       date,
     });

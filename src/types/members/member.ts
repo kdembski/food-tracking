@@ -1,5 +1,5 @@
 export interface MemberState {
-  members: Member[];
+  all: Member[];
 }
 
 export interface Member {
