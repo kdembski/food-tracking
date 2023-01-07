@@ -16,51 +16,52 @@ import {
   getErrorMessage,
   showDefualtErrorNotification,
 } from "../helpers/error-message";
+import { Tag } from "@/types/components/utils/tags";
 
 const state: OrderedFoodState = {
-  orderedFoodList: null,
-  isLoadingOrderedFoodList: false,
+  single: null,
+  isLoading: false,
+  isSubmitting: false,
 
-  orderedFoodTags: null,
-  isLoadingOrderedFoodTags: false,
+  list: null,
+  isLoadingList: false,
 
-  orderedFood: null,
-  isSubmittingOrderedFood: false,
-  isLoadingOrderedFood: false,
+  tags: null,
+  isLoadingTags: false,
 };
 
 const getters: GetterTree<OrderedFoodState, any> = {
-  orderedFoodList: (state): OrderedFoodList | null => state.orderedFoodList,
-  isLoadingOrderedFoodList: (state) => state.isLoadingOrderedFoodList,
+  list: (state): OrderedFoodList | null => state.list,
+  isLoadingList: (state) => state.isLoadingList,
 
-  orderedFoodTags: (state): string | null => state.orderedFoodTags,
-  isLoadingOrderedFoodTags: (state) => state.isLoadingOrderedFoodTags,
+  tags: (state): Tag[] | null => state.tags,
+  isLoadingTags: (state) => state.isLoadingTags,
 };
 
 const actions: ActionTree<OrderedFoodState, any> = {
-  loadOrderedFoodList({ commit, rootState }, filters: ListFilters) {
+  loadList({ commit, rootState }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingOrderedFoodList", true);
+      commit("setIsLoadingList", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL + "/ordered" + getListQuery(filters)
       )
         .then((response: AxiosResponse<OrderedFoodList>) => {
-          commit("setIsLoadingOrderedFoodList", false);
-          commit("setOrderedFoodList", response.data);
+          commit("setIsLoadingList", false);
+          commit("setList", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingOrderedFoodList", false);
+          commit("setIsLoadingList", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  loadOrderedFoodTags({ commit, rootState }, filters: ListBaseFilters) {
-    return new Promise<string[]>((resolve, reject) => {
-      commit("setIsLoadingOrderedFoodTags", true);
+  loadTags({ commit, rootState }, filters: ListBaseFilters) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsLoadingTags", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
@@ -68,72 +69,87 @@ const actions: ActionTree<OrderedFoodState, any> = {
           getListBaseQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
-          const tags = response.data;
-          commit("setIsLoadingOrderedFoodTags", false);
-          commit("setOrderedFoodTags", tags);
-          resolve(tags);
+          commit("setIsLoadingTags", false);
+          commit("setTags", response.data);
+          resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingOrderedFoodTags", false);
+          commit("setIsLoadingTags", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  loadOrderedFood({ commit, rootState }, orderedFoodId) {
+  load({ commit, rootState }, itemId) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingOrderedFood", true);
+      commit("setIsLoading", true);
 
-      ApiService.get(
-        process.env.VUE_APP_SERVICE_URL + "/ordered/" + orderedFoodId
-      )
+      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ordered/" + itemId)
         .then((response: AxiosResponse<OrderedFood>) => {
-          commit("setIsLoadingOrderedFood", false);
-          commit("setOrderedFood", response.data);
+          commit("setIsLoading", false);
+          commit("setSingle", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingOrderedFood", false);
+          commit("setIsLoading", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  createOrderedFood({ commit, rootState }, orderedFood: OrderedFood) {
+  create({ commit, rootState }, item: OrderedFood) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsSubmittingOrderedFood", true);
+      commit("setIsSubmitting", true);
 
-      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/ordered", orderedFood)
+      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/ordered", item)
         .then(() => {
-          rootState.toastNotification.success("Dodano zamawiane jedzenie.");
-          commit("setIsSubmittingOrderedFood", false);
+          rootState.toastNotification.success("Dodano jedzenie.");
+          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingOrderedFood", false);
+          commit("setIsSubmitting", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  updateOrderedFood({ commit, rootState }, orderedFood: OrderedFood) {
+  update({ commit, rootState }, item: OrderedFood) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsSubmittingOrderedFood", true);
+      commit("setIsSubmitting", true);
 
       ApiService.put(
-        process.env.VUE_APP_SERVICE_URL + "/ordered/" + orderedFood.id,
-        orderedFood
+        process.env.VUE_APP_SERVICE_URL + "/ordered/" + item.id,
+        item
       )
         .then(() => {
-          rootState.toastNotification.success("Zapisano zamawiane jedzenie.");
-          commit("setIsSubmittingOrderedFood", false);
+          rootState.toastNotification.success("Zapisano jedzenie.");
+          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingOrderedFood", false);
+          commit("setIsSubmitting", false);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
+        });
+    });
+  },
+
+  delete({ commit, rootState }, itemId: number) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsSubmitting", true);
+
+      ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/ordered/" + itemId)
+        .then(() => {
+          rootState.toastNotification.success("Usunięto jedzenie.");
+          commit("setIsSubmitting", false);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsSubmitting", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
@@ -142,32 +158,32 @@ const actions: ActionTree<OrderedFoodState, any> = {
 };
 
 const mutations: MutationTree<OrderedFoodState> = {
-  setOrderedFoodList(state, list: OrderedFoodList) {
-    state.orderedFoodList = list;
+  setList(state, list: OrderedFoodList) {
+    state.list = list;
   },
 
-  setIsLoadingOrderedFoodList(state, value: boolean) {
-    state.isLoadingOrderedFoodList = value;
+  setIsLoadingList(state, value) {
+    state.isLoadingList = value;
   },
 
-  setOrderedFoodTags(state, tags: string) {
-    state.orderedFoodTags = tags;
+  setTags(state, tags: Tag[]) {
+    state.tags = tags;
   },
 
-  setIsLoadingOrderedFoodTags(state, value: boolean) {
-    state.isLoadingOrderedFoodTags = value;
+  setIsLoadingTags(state, value) {
+    state.isLoadingTags = value;
   },
 
-  setIsSubmittingOrderedFood(state, value) {
-    state.isSubmittingOrderedFood = value;
+  setIsSubmitting(state, value) {
+    state.isSubmitting = value;
   },
 
-  setOrderedFood(state, orderedFood: OrderedFood) {
-    state.orderedFood = orderedFood;
+  setSingle(state, recipe: OrderedFood) {
+    state.single = recipe;
   },
 
-  setIsLoadingOrderedFood(state, value) {
-    state.isLoadingOrderedFood = value;
+  setIsLoading(state, value) {
+    state.isLoading = value;
   },
 };
 

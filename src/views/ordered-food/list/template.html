@@ -12,12 +12,12 @@
     <CListWithFilters
       :defaultFilters="orderedFoodListDefaultFilters"
       listName="orderedFoodList"
-      listGetterName="orderedFood/orderedFoodList"
-      listLoadActionName="orderedFood/loadOrderedFoodList"
-      listLoadingGetterName="orderedFood/isLoadingOrderedFoodList"
-      tagsGetterName="orderedFood/orderedFoodTags"
-      tagsLoadActionName="orderedFood/loadOrderedFoodTags"
-      tagsLoadingGetterName="orderedFood/isLoadingOrderedFoodTags"
+      listGetterName="orderedFood/list"
+      listLoadActionName="orderedFood/loadList"
+      listLoadingGetterName="orderedFood/isLoadingList"
+      tagsGetterName="orderedFood/tags"
+      tagsLoadActionName="orderedFood/loadTags"
+      tagsLoadingGetterName="orderedFood/isLoadingTags"
       :sortOptions="orderedFoodListSortOptions"
     >
       <template #header="{ item }">

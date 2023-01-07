@@ -18,6 +18,7 @@ import {
 const state: RecipeState = {
   single: null,
   isLoading: false,
+  isSubmitting: false,
 
   list: null,
   isLoadingList: false,
@@ -27,8 +28,6 @@ const state: RecipeState = {
 
   searchSuggestions: null,
   isLoadingSearchSuggestions: false,
-
-  isSubmitting: false,
 };
 
 const getters: GetterTree<RecipeState, any> = {

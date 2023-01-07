@@ -53,14 +53,10 @@ const orderedFood = ref();
 const orderedFoodTags = ref();
 const isAddingNewFood = computed(() => !props.orderedFoodId);
 const isSubmitting = computed(() => {
-  return store.state.orderedFood.isSubmittingOrderedFood;
+  return store.state.orderedFood.isSubmitting;
 });
-const isLoadingOrderedFood = computed(
-  () => store.state.orderedFood.isLoadingOrderedFood
-);
-const isLoadingTags = computed(
-  () => store.state.orderedFood.isLoadingOrderedFoodTags
-);
+const isLoadingOrderedFood = computed(() => store.state.orderedFood.isLoading);
+const isLoadingTags = computed(() => store.state.orderedFood.isLoadingTags);
 
 onBeforeMount(() => {
   setOrderedFoodTags();
@@ -79,22 +75,20 @@ watch(_isOpen, (value) => {
 });
 
 const setOrderedFood = async () => {
-  await store.dispatch("orderedFood/loadOrderedFood", props.orderedFoodId);
-  orderedFood.value = store.state.orderedFood.orderedFood;
+  await store.dispatch("orderedFood/load", props.orderedFoodId);
+  orderedFood.value = store.state.orderedFood.single;
 };
 
 const setOrderedFoodTags = async () => {
-  orderedFoodTags.value = await store.dispatch(
-    "orderedFood/loadOrderedFoodTags"
-  );
+  orderedFoodTags.value = await store.dispatch("orderedFood/loadTags");
 };
 
 const updateOrderedFood = () => {
-  return store.dispatch("orderedFood/updateOrderedFood", orderedFood.value);
+  return store.dispatch("orderedFood/update", orderedFood.value);
 };
 
 const createOrderedFood = () => {
-  return store.dispatch("orderedFood/createOrderedFood", orderedFood.value);
+  return store.dispatch("orderedFood/create", orderedFood.value);
 };
 
 const submit = async () => {

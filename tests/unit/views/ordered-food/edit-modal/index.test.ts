@@ -11,22 +11,20 @@ describe("Edit Ordered Food Modal", () => {
 
   beforeEach(async () => {
     state = {
-      orderedFood: {
+      single: {
         id: 1,
       },
     };
 
     getters = {
-      getOrderedFoodTags: () => ["tag1"],
+      getTags: () => ["tag1"],
     };
 
     actions = {
-      updateOrderedFood: jest.fn(),
-      createOrderedFood: jest.fn(),
-      loadOrderedFood: jest.fn(),
-      loadOrderedFoodTags: jest
-        .fn()
-        .mockImplementation(() => Promise.resolve(["tag1"])),
+      update: jest.fn(),
+      create: jest.fn(),
+      load: jest.fn(),
+      loadTags: jest.fn().mockImplementation(() => Promise.resolve(["tag1"])),
     };
 
     store = createStore({
@@ -62,12 +60,12 @@ describe("Edit Ordered Food Modal", () => {
   });
 
   it("Should load and set tags on component mount", async () => {
-    expect(actions.loadOrderedFoodTags).toHaveBeenCalledTimes(1);
+    expect(actions.loadTags).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.orderedFoodTags).toEqual(["tag1"]);
   });
 
   it("Should load and set ordered food on component mount", async () => {
-    expect(actions.loadOrderedFood).toHaveBeenCalledTimes(1);
+    expect(actions.load).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.orderedFood).toEqual({
       id: 1,
     });
@@ -75,7 +73,7 @@ describe("Edit Ordered Food Modal", () => {
     await wrapper.setProps({
       isOpen: false,
     });
-    expect(actions.loadOrderedFood).toHaveBeenCalledTimes(1);
+    expect(actions.load).toHaveBeenCalledTimes(1);
   });
 
   it("Should get submit button label based on isAddingNewFood value", async () => {
@@ -96,15 +94,15 @@ describe("Edit Ordered Food Modal", () => {
 
   it("Should trigger correct store action based on isAddingNewFood value on submit", async () => {
     await wrapper.vm.submit();
-    expect(actions.updateOrderedFood).toHaveBeenCalledTimes(1);
-    expect(actions.createOrderedFood).toHaveBeenCalledTimes(0);
+    expect(actions.update).toHaveBeenCalledTimes(1);
+    expect(actions.create).toHaveBeenCalledTimes(0);
 
     await wrapper.setProps({
       orderedFoodId: null,
     });
 
     await wrapper.vm.submit();
-    expect(actions.updateOrderedFood).toHaveBeenCalledTimes(1);
-    expect(actions.createOrderedFood).toHaveBeenCalledTimes(1);
+    expect(actions.update).toHaveBeenCalledTimes(1);
+    expect(actions.create).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,13 +1,14 @@
 import { ListWithFilters } from "@/types/components/data-display/list";
+import { Tag } from "../components/utils/tags";
 
 export interface OrderedFoodState {
-  orderedFoodList: OrderedFoodList | null;
-  isLoadingOrderedFoodList: boolean;
-  orderedFoodTags: string | null;
-  isLoadingOrderedFoodTags: boolean;
-  orderedFood: OrderedFood | null;
-  isSubmittingOrderedFood: boolean;
-  isLoadingOrderedFood: boolean;
+  list: OrderedFoodList | null;
+  isLoadingList: boolean;
+  tags: Tag[] | null;
+  isLoadingTags: boolean;
+  single: OrderedFood | null;
+  isSubmitting: boolean;
+  isLoading: boolean;
 }
 
 export interface OrderedFood {
