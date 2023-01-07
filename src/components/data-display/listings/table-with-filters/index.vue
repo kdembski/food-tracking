@@ -14,10 +14,10 @@ export default {
 import { computed, onMounted } from "vue";
 import { useWindowSize } from "@/composables/window-size";
 import { useStore } from "vuex";
-import { ListFilters } from "@/types/components/list";
+import { ListFilters } from "@/types/components/data-display/list";
 import { useFilters } from "../composables/filters";
 import { useStoredFilters } from "../composables/stored-filters";
-import { TableColumn } from "@/types/components/table";
+import { TableColumn } from "@/types/components/data-display/table";
 
 const store = useStore();
 const { windowHeight, isMobile } = useWindowSize();

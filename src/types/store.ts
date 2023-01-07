@@ -1,5 +1,5 @@
-import { TooltipConfig } from "./components/tooltip";
-import { ToastNotification } from "@/types/components/toast-notification";
+import { TooltipConfig } from "./components/feedback/tooltip";
+import { ToastNotification } from "@/types/components/feedback/toast-notification";
 
 export interface State {
   theme: string;

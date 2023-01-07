@@ -9,7 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
-import { TableColumn } from "@/types/components/table";
+import { TableColumn } from "@/types/components/data-display/table";
 
 const props = withDefaults(
   defineProps<{

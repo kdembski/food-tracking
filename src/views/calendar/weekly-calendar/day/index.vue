@@ -13,7 +13,7 @@ export default {
 
 <script setup lang="ts">
 import { inject, ref } from "vue";
-import { CalendarDay, CalendarItem } from "@/types/calendar";
+import { CalendarDay, CalendarItem } from "@/types/calendar/calendar";
 import { isToday } from "date-fns";
 
 const props = defineProps({

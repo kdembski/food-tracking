@@ -87,6 +87,10 @@ describe("Ingredient Store Module", () => {
     });
   });
 
+  afterEach(() => {
+    store = null;
+  });
+
   it("Should set list to state on successful loadList action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: list }));
     store.dispatch("module/loadList", listFilters);

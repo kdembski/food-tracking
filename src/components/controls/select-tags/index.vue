@@ -13,7 +13,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
-import { Tag } from "@/types/components/tags";
+import { Tag } from "@/types/components/utils/tags";
 import { cloneDeep } from "lodash";
 
 const props = defineProps({

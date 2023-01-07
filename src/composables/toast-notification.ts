@@ -1,4 +1,4 @@
-import { ToastNotification } from "@/types/components/toast-notification";
+import { ToastNotification } from "@/types/components/feedback/toast-notification";
 import { useStore } from "vuex";
 import { v4 as uuid } from "uuid";
 import { computed } from "vue";

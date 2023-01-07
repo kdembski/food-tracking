@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { Member } from "@/types/member";
+import { Member } from "@/types/members/member";
 import { useStore } from "vuex";
 import { computed } from "vue";
 

@@ -1,4 +1,7 @@
-import { ListFilters, ListBaseFilters } from "@/types/components/list";
+import {
+  ListFilters,
+  ListBaseFilters,
+} from "@/types/components/data-display/list";
 
 export const getListQuery = (filters: ListFilters) => {
   const page = filters.currentPage || 1;

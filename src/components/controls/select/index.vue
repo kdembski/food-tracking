@@ -11,7 +11,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
-import { DropdownOption } from "@/types/components/dropdown";
+import { DropdownOption } from "@/types/components/utils/dropdown";
 import { isEqual } from "lodash";
 
 const { getFieldTemplateProps } = useFieldProps();

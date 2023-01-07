@@ -3,8 +3,8 @@ export default { name: "CSortingTrigger" };
 </script>
 
 <script setup lang="ts">
-import { ListSortFilters } from "@/types/components/list";
-import { TableColumn } from "@/types/components/table";
+import { ListSortFilters } from "@/types/components/data-display/list";
+import { TableColumn } from "@/types/components/data-display/table";
 
 const props = defineProps<{
   column: TableColumn;

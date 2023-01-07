@@ -1,5 +1,5 @@
 import flushPromises from "flush-promises";
-import { CalendarDay } from "@/types/calendar";
+import { CalendarDay } from "@/types/calendar/calendar";
 import { createStore } from "vuex";
 
 let mockAxiosGet = jest.fn();

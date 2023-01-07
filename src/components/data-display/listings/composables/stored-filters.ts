@@ -1,5 +1,5 @@
 import StorageService from "@/services/storage.service";
-import { ListFilters } from "@/types/components/list";
+import { ListFilters } from "@/types/components/data-display/list";
 import { isEmpty } from "lodash";
 import { Ref } from "vue";
 

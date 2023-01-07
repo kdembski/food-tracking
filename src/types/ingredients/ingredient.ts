@@ -1,4 +1,4 @@
-import { ListWithFilters } from "@/types/components/list";
+import { ListWithFilters } from "@/types/components/data-display/list";
 
 export interface IngredientState {
   single: Ingredient | null;

@@ -1,5 +1,5 @@
-import { ListWithFilters } from "@/types/components/list";
-import { Tag } from "../components/tags";
+import { ListWithFilters } from "@/types/components/data-display/list";
+import { Tag } from "../components/utils/tags";
 
 export interface RecipeState {
   recipe: Recipe | null;

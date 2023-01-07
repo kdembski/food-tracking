@@ -1,6 +1,6 @@
 import { onBeforeMount, ref, Ref, ComputedRef, watch, computed } from "vue";
 import { useStore } from "vuex";
-import { CalendarDay, CalendarItem } from "@/types/calendar";
+import { CalendarDay, CalendarItem } from "@/types/calendar/calendar";
 import { useToastNotification } from "@/composables/toast-notification";
 import { cloneDeep } from "lodash";
 

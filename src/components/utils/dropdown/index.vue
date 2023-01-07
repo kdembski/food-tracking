@@ -10,7 +10,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { DropdownOption } from "@/types/components/dropdown";
+import { DropdownOption } from "@/types/components/utils/dropdown";
 import { ref, Ref, computed } from "vue";
 import { useDropdownPosition } from "./composables/position";
 import { useWindowSize } from "../../../composables/window-size";

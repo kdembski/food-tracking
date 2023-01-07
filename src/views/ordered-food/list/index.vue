@@ -21,7 +21,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, Ref } from "vue";
-import { OrderedFood } from "@/types/ordered-food";
+import { OrderedFood } from "@/types/ordered-food/ordered-food";
 
 const orderedFoodListDefaultFilters = {
   currentPage: 1,

@@ -4,9 +4,12 @@ import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
-import { ListFilters, ListBaseFilters } from "@/types/components/list";
-import { DropdownOption } from "@/types/components/dropdown";
-import { Tag } from "@/types/components/tags";
+import {
+  ListFilters,
+  ListBaseFilters,
+} from "@/types/components/data-display/list";
+import { DropdownOption } from "@/types/components/utils/dropdown";
+import { Tag } from "@/types/components/utils/tags";
 import {
   getErrorMessage,
   showDefualtErrorNotification,

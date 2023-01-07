@@ -1,4 +1,4 @@
-import { ListFilters } from "@/types/components/list";
+import { ListFilters } from "@/types/components/data-display/list";
 import { Ref } from "vue";
 
 export function useTagsFilter(

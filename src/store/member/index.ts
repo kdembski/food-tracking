@@ -1,5 +1,5 @@
 import ApiService from "@/services/api.service";
-import { MemberState, Member } from "@/types/member";
+import { MemberState, Member } from "@/types/members/member";
 import { ApiError } from "@/types/api";
 import { MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";

@@ -1,6 +1,6 @@
 import ApiService from "@/services/api.service";
 import StorageService from "@/services/storage.service";
-import { UserState, LoginResponse } from "@/types/user";
+import { UserState, LoginResponse } from "@/types/users/user";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";

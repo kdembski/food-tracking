@@ -3,7 +3,7 @@ import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery } from "../helpers/list-query";
-import { ListFilters } from "@/types/components/list";
+import { ListFilters } from "@/types/components/data-display/list";
 import {
   getErrorMessage,
   showDefualtErrorNotification,
@@ -17,7 +17,7 @@ import {
 import unit from "./unit/index";
 import category from "./category/index";
 
-const state: IngredientState = {
+const state: () => IngredientState = () => ({
   single: null,
   isLoading: false,
   isSubmitting: false,
@@ -27,7 +27,7 @@ const state: IngredientState = {
 
   options: null,
   isLoadingOptions: false,
-};
+});
 
 const getters: GetterTree<IngredientState, any> = {
   list: (state): IngredientsList | null => state.list,

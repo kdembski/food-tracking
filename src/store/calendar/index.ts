@@ -1,5 +1,5 @@
 import ApiService from "@/services/api.service";
-import { CalendarDay, CalendarState } from "@/types/calendar";
+import { CalendarDay, CalendarState } from "@/types/calendar/calendar";
 import { ApiError } from "@/types/api";
 import { ActionTree, MutationTree, GetterTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";

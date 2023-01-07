@@ -2,7 +2,7 @@
 import WeeklyCalendarDay from "./day/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 import EditItemModal from "./edit-item-modal/index.vue";
-import { CalendarItem } from "@/types/calendar";
+import { CalendarItem } from "@/types/calendar/calendar";
 
 export default {
   name: "WeeklyCalendar",

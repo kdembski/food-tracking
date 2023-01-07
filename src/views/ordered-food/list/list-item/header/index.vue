@@ -16,7 +16,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { OrderedFood } from "@/types/ordered-food";
+import { OrderedFood } from "@/types/ordered-food/ordered-food";
 import { useWindowSize } from "@/composables/window-size";
 
 const { isMobile } = useWindowSize();

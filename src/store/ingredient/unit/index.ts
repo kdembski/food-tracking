@@ -2,7 +2,7 @@ import ApiService from "@/services/api.service";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { ListFilters } from "@/types/components/list";
+import { ListFilters } from "@/types/components/data-display/list";
 import {
   IngredientUnit,
   IngredientUnitOption,

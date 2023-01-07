@@ -11,7 +11,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { CalendarItem } from "@/types/calendar";
+import { CalendarItem } from "@/types/calendar/calendar";
 import { RouterLink } from "vue-router";
 import { useStore } from "vuex";
 

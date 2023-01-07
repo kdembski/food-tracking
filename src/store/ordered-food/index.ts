@@ -3,12 +3,15 @@ import {
   OrderedFoodState,
   OrderedFoodList,
   OrderedFood,
-} from "@/types/ordered-food";
+} from "@/types/ordered-food/ordered-food";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
-import { ListFilters, ListBaseFilters } from "@/types/components/list";
+import {
+  ListFilters,
+  ListBaseFilters,
+} from "@/types/components/data-display/list";
 import {
   getErrorMessage,
   showDefualtErrorNotification,

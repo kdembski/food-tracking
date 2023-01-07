@@ -2,7 +2,7 @@ import { useToastNotification } from "@/composables/toast-notification";
 import { useStore } from "vuex";
 import { ref, Ref, ComputedRef } from "vue";
 import { Recipe } from "@/types/recipes/recipe";
-import { OrderedFood } from "@/types/ordered-food";
+import { OrderedFood } from "@/types/ordered-food/ordered-food";
 import { isAfter } from "date-fns";
 import { useRouter } from "vue-router";
 

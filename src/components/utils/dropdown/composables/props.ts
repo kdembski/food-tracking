@@ -1,4 +1,4 @@
-import { DropdownOption } from "@/types/components/dropdown";
+import { DropdownOption } from "@/types/components/utils/dropdown";
 
 interface DropdownProps {
   isOpen: boolean;

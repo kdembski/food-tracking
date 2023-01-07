@@ -1,6 +1,9 @@
 import flushPromises from "flush-promises";
 import { createStore } from "vuex";
-import { OrderedFoodList, OrderedFood } from "@/types/ordered-food";
+import {
+  OrderedFoodList,
+  OrderedFood,
+} from "@/types/ordered-food/ordered-food";
 
 let mockAxiosGet = jest.fn();
 let mockAxiosPost = jest.fn();

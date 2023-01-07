@@ -1,7 +1,10 @@
 import { isEqual } from "lodash";
-import { DropdownOption } from "@/types/components/dropdown";
+import { DropdownOption } from "@/types/components/utils/dropdown";
 import { computed } from "vue";
-import { ListFilters, ListSortFilters } from "@/types/components/list";
+import {
+  ListFilters,
+  ListSortFilters,
+} from "@/types/components/data-display/list";
 import { Ref } from "vue";
 
 export function useSortFilter(
