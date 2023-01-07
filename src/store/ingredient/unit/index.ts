@@ -4,9 +4,9 @@ import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { ListFilters } from "@/types/components/list";
 import {
-  IngredientUnitsList,
   IngredientUnit,
   IngredientUnitOption,
+  IngredientUnitsList,
   IngredientUnitState,
 } from "@/types/ingredients/unit";
 import {
@@ -16,132 +16,143 @@ import {
 import { getListQuery } from "@/store/helpers/list-query";
 
 const state: IngredientUnitState = {
-  ingredientUnit: null,
-  isLoadingIngredientUnit: false,
-  isSubmittingIngredientUnit: false,
+  single: null,
+  isLoading: false,
+  isSubmitting: false,
 
-  ingredientUnitsList: null,
-  isLoadingIngredientUnitsList: false,
+  list: null,
+  isLoadingList: false,
 
-  ingredientUnitOptions: null,
-  isLoadingIngredientUnitOptions: false,
+  options: null,
+  isLoadingOptions: false,
 };
 
 const getters: GetterTree<IngredientUnitState, any> = {
-  ingredientUnitsList: (state): IngredientUnitsList | null =>
-    state.ingredientUnitsList,
-  isLoadingIngredientUnitsList: (state) => state.isLoadingIngredientUnitsList,
+  list: (state): IngredientUnitsList | null => state.list,
+  isLoadingList: (state) => state.isLoadingList,
 
-  ingredientUnitOptions: (state) =>
-    state.ingredientUnitOptions?.map((option) => ({
+  options: (state) =>
+    state.options?.map((option) => ({
       value: option.id,
       label: option.name,
     })),
 };
 
 const actions: ActionTree<IngredientUnitState, any> = {
-  loadIngredientUnitsList({ commit, rootState }, filters: ListFilters) {
+  loadList({ commit, rootState }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingIngredientUnitsList", true);
+      commit("setIsLoadingList", true);
 
       ApiService.get(
-        process.env.VUE_APP_SERVICE_URL +
-          "/ingredients/categories" +
-          getListQuery(filters)
+        process.env.VUE_APP_SERVICE_URL + "/ingredients" + getListQuery(filters)
       )
         .then((response: AxiosResponse<IngredientUnitsList>) => {
-          commit("setIsLoadingIngredientUnitsList", false);
-          commit("setIngredientUnitsList", response.data);
+          commit("setIsLoadingList", false);
+          commit("setList", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingIngredientUnitsList", false);
+          commit("setIsLoadingList", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  loadIngredientUnitOptions({ commit, rootState }) {
+  loadOptions({ commit, rootState }) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingIngredientUnitOptions", true);
+      commit("setIsLoadingOptions", true);
 
-      ApiService.get(
-        process.env.VUE_APP_SERVICE_URL + "/ingredients/categories/options"
-      )
+      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ingredients/options")
         .then((response: AxiosResponse<IngredientUnitOption[]>) => {
-          commit("setIsLoadingIngredientUnitOptions", false);
-          commit("setIngredientUnitOptions", response.data);
+          commit("setIsLoadingOptions", false);
+          commit("setOptions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingIngredientUnitOptions", false);
+          commit("setIsLoadingOptions", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  loadIngredientUnit({ commit, rootState }, ingredientUnitId) {
+  load({ commit, rootState }, ingredientId) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsLoadingIngredientUnit", true);
+      commit("setIsLoading", true);
 
       ApiService.get(
-        process.env.VUE_APP_SERVICE_URL +
-          "/ingredients/categories/" +
-          ingredientUnitId
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/" + ingredientId
       )
         .then((response: AxiosResponse<IngredientUnit>) => {
-          commit("setIsLoadingIngredientUnit", false);
-          commit("setIngredientUnit", response.data);
+          commit("setIsLoading", false);
+          commit("setSingle", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingIngredientUnit", false);
+          commit("setIsLoading", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  createIngredientUnit({ commit, rootState }, ingredientUnit: IngredientUnit) {
+  create({ commit, rootState }, ingredient: IngredientUnit) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsSubmittingIngredientUnit", true);
+      commit("setIsSubmitting", true);
 
       ApiService.post(
-        process.env.VUE_APP_SERVICE_URL + "/ingredients/categories",
-        ingredientUnit
+        process.env.VUE_APP_SERVICE_URL + "/ingredients",
+        ingredient
       )
         .then(() => {
-          rootState.toastNotification.success("Dodano jednostkę.");
-          commit("setIsSubmittingIngredientUnit", false);
+          rootState.toastNotification.success("Dodano składnik.");
+          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingIngredientUnit", false);
+          commit("setIsSubmitting", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
     });
   },
 
-  updateIngredientUnit({ commit, rootState }, ingredientUnit: IngredientUnit) {
+  update({ commit, rootState }, ingredient: IngredientUnit) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsSubmittingIngredientUnit", true);
+      commit("setIsSubmitting", true);
 
       ApiService.put(
-        process.env.VUE_APP_SERVICE_URL +
-          "/ingredients/categories/" +
-          ingredientUnit.id,
-        ingredientUnit
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/" + ingredient.id,
+        ingredient
       )
         .then(() => {
-          rootState.toastNotification.success("Zapisano jednostkę.");
-          commit("setIsSubmittingIngredientUnit", false);
+          rootState.toastNotification.success("Zapisano składnik.");
+          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingIngredientUnit", false);
+          commit("setIsSubmitting", false);
+          showDefualtErrorNotification(error, rootState);
+          reject(getErrorMessage(error));
+        });
+    });
+  },
+
+  delete({ commit, rootState }, ingredientId: number) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsSubmitting", true);
+
+      ApiService.delete(
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/" + ingredientId
+      )
+        .then(() => {
+          rootState.toastNotification.success("Usunięto składnik.");
+          commit("setIsSubmitting", false);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsSubmitting", false);
           showDefualtErrorNotification(error, rootState);
           reject(getErrorMessage(error));
         });
@@ -150,32 +161,32 @@ const actions: ActionTree<IngredientUnitState, any> = {
 };
 
 const mutations: MutationTree<IngredientUnitState> = {
-  setIngredientUnitsList(state, list: IngredientUnitsList) {
-    state.ingredientUnitsList = list;
+  setList(state, list: IngredientUnitsList) {
+    state.list = list;
   },
 
-  setIsLoadingIngredientUnitsList(state, value) {
-    state.isLoadingIngredientUnitsList = value;
+  setIsLoadingList(state, value) {
+    state.isLoadingList = value;
   },
 
-  setIngredientUnitOptions(state, list: IngredientUnitOption[]) {
-    state.ingredientUnitOptions = list;
+  setOptions(state, list: IngredientUnitOption[]) {
+    state.options = list;
   },
 
-  setIsLoadingIngredientUnitOptions(state, value) {
-    state.isLoadingIngredientUnitOptions = value;
+  setIsLoadingOptions(state, value) {
+    state.isLoadingOptions = value;
   },
 
-  setIsSubmittingIngredientUnit(state, value) {
-    state.isSubmittingIngredientUnit = value;
+  setIsSubmitting(state, value) {
+    state.isSubmitting = value;
   },
 
-  setIngredientUnit(state, ingredientUnit: IngredientUnit) {
-    state.ingredientUnit = ingredientUnit;
+  setSingle(state, ingredient: IngredientUnit) {
+    state.single = ingredient;
   },
 
-  setIsLoadingIngredientUnit(state, value) {
-    state.isLoadingIngredientUnit = value;
+  setIsLoading(state, value) {
+    state.isLoading = value;
   },
 };
 

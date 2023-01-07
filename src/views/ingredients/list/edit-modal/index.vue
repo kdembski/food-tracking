@@ -69,16 +69,16 @@ watch(_isOpen, (value) => {
 });
 
 const setIngredient = async () => {
-  await store.dispatch("ingredient/loadIngredient", props.ingredientId);
-  ingredient.value = store.state.ingredient.ingredient;
+  await store.dispatch("ingredient/load", props.ingredientId);
+  ingredient.value = store.state.ingredient.single;
 };
 
 const updateIngredient = () => {
-  return store.dispatch("ingredient/updateIngredient", ingredient.value);
+  return store.dispatch("ingredient/update", ingredient.value);
 };
 
 const createIngredient = () => {
-  return store.dispatch("ingredient/createIngredient", ingredient.value);
+  return store.dispatch("ingredient/create", ingredient.value);
 };
 
 const submit = async () => {

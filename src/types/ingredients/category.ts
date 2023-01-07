@@ -1,15 +1,15 @@
 import { ListWithFilters } from "@/types/components/list";
 
 export interface IngredientCategoryState {
-  ingredientCategory: IngredientCategory | null;
-  isLoadingIngredientCategory: boolean;
+  single: IngredientCategory | null;
+  isLoading: boolean;
 
-  ingredientCategoriesList: IngredientCategoriesList | null;
-  isLoadingIngredientCategoriesList: boolean;
-  isSubmittingIngredientCategory: boolean;
+  list: IngredientCategoriesList | null;
+  isLoadingList: boolean;
+  isSubmitting: boolean;
 
-  ingredientCategoryOptions: IngredientCategoryOption[] | null;
-  isLoadingIngredientCategoryOptions: boolean;
+  options: IngredientCategoryOption[] | null;
+  isLoadingOptions: boolean;
 }
 
 export interface IngredientCategory {

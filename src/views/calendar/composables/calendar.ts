@@ -70,7 +70,6 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   const updateCalendarDay = (calendarDay: CalendarDay) => {
     const date = calendarDay.date;
     const items = calendarDay.items;
-    console.log(date);
 
     updateDayItemsSortOrder(items);
 

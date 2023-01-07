@@ -7,10 +7,10 @@ let mockAxiosPut = jest.fn();
 let mockAxiosDelete = jest.fn();
 let mockAxiosPatch = jest.fn();
 
-import ingredientCategory from "@/store/ingredient/category/index";
+import module from "@/store/ingredient/category/index";
 import {
-  IngredientCategoriesList,
   IngredientCategoryOption,
+  IngredientCategoriesList,
 } from "@/types/ingredients/category";
 jest.mock("@/services/api.service", () => ({
   get: mockAxiosGet,
@@ -20,11 +20,11 @@ jest.mock("@/services/api.service", () => ({
   patch: mockAxiosPatch,
 }));
 
-describe("Ingredient Category Store Module", () => {
+describe("IngredientCategory Category Store Module", () => {
   let store: any;
   let toastNotification: any;
-  let ingredientCategoriesList: IngredientCategoriesList;
-  let ingredientCategoryOptions: IngredientCategoryOption[];
+  let list: IngredientCategoriesList;
+  let options: IngredientCategoryOption[];
   const listFilters = {
     currentPage: 1,
     pageSize: 10,
@@ -40,7 +40,7 @@ describe("Ingredient Category Store Module", () => {
       error: jest.fn(),
     };
 
-    ingredientCategoriesList = {
+    list = {
       data: [
         {
           id: 1,
@@ -60,7 +60,7 @@ describe("Ingredient Category Store Module", () => {
       },
     };
 
-    ingredientCategoryOptions = [
+    options = [
       {
         id: 1,
         name: "name 1",
@@ -76,69 +76,43 @@ describe("Ingredient Category Store Module", () => {
         toastNotification,
       },
       modules: {
-        ingredientCategory,
+        module,
       },
     });
   });
 
-  it("Should set ingredientCategories list to state on successful loadIngredientCategoriesList action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() =>
-      Promise.resolve({ data: ingredientCategoriesList })
-    );
-    store.dispatch(
-      "ingredientCategory/loadIngredientCategoriesList",
-      listFilters
-    );
-    expect(
-      store.getters["ingredientCategory/isLoadingIngredientCategoriesList"]
-    ).toBe(true);
+  it("Should set list to state on successful loadList action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: list }));
+    store.dispatch("module/loadList", listFilters);
+    expect(store.getters["module/isLoadingList"]).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/ingredients/categories?page=1&size=10&searchPhrase=test&sortAttribute=attr&sortDirection=dir&tags=tag"
+      "service/ingredients?page=1&size=10&searchPhrase=test&sortAttribute=attr&sortDirection=dir&tags=tag"
     );
-    expect(
-      store.getters["ingredientCategory/ingredientCategoriesList"]
-    ).toEqual(ingredientCategoriesList);
-    expect(
-      store.getters["ingredientCategory/isLoadingIngredientCategoriesList"]
-    ).toBe(false);
+    expect(store.getters["module/list"]).toEqual(list);
+    expect(store.getters["module/isLoadingList"]).toBe(false);
   });
 
-  it("Should show error notification on failed loadIngredientCategoriesList action dispatch", async () => {
+  it("Should show error notification on failed loadList action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
     await expect(
-      store.dispatch(
-        "ingredientCategory/loadIngredientCategoriesList",
-        listFilters
-      )
+      store.dispatch("module/loadList", listFilters)
     ).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should set ingredientCategoryOptions to state on successful loadIngredientCategoryOptions action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() =>
-      Promise.resolve({ data: ingredientCategoryOptions })
-    );
-    store.dispatch("ingredientCategory/loadIngredientCategoryOptions");
-    expect(
-      store.state.ingredientCategory.isLoadingIngredientCategoryOptions
-    ).toBe(true);
+  it("Should set options to state on successful loadOptions action dispatch", async () => {
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: options }));
+    store.dispatch("module/loadOptions");
+    expect(store.state.module.isLoadingOptions).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/ingredients/categories/options"
-    );
-    expect(store.state.ingredientCategory.ingredientCategoryOptions).toEqual(
-      ingredientCategoryOptions
-    );
-    expect(
-      store.state.ingredientCategory.isLoadingIngredientCategoryOptions
-    ).toBe(false);
-    expect(
-      store.getters["ingredientCategory/ingredientCategoryOptions"]
-    ).toEqual([
+    expect(mockAxiosGet).toHaveBeenCalledWith("service/ingredients/options");
+    expect(store.state.module.options).toEqual(options);
+    expect(store.state.module.isLoadingOptions).toBe(false);
+    expect(store.getters["module/options"]).toEqual([
       {
         value: 1,
         label: "name 1",
@@ -150,107 +124,89 @@ describe("Ingredient Category Store Module", () => {
     ]);
   });
 
-  it("Should show error notification on failed loadIngredientCategoryOptions action dispatch", async () => {
+  it("Should show error notification on failed loadOptions action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(
-      store.dispatch("ingredientCategory/loadIngredientCategoryOptions")
-    ).rejects.toEqual("error");
+    await expect(store.dispatch("module/loadOptions")).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should set ingredientCategory to state on successful loadIngredientCategory action dispatch", async () => {
+  it("Should set single to state on successful load action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: "test" }));
-    store.dispatch("ingredientCategory/loadIngredientCategory", 1);
-    expect(store.state.ingredientCategory.isLoadingIngredientCategory).toBe(
-      true
-    );
+    store.dispatch("module/load", 1);
+    expect(store.state.module.isLoading).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/ingredients/categories/1"
-    );
-    expect(store.state.ingredientCategory.ingredientCategory).toEqual("test");
-    expect(store.state.ingredientCategory.isLoadingIngredientCategory).toBe(
-      false
-    );
+    expect(mockAxiosGet).toHaveBeenCalledWith("service/ingredients/1");
+    expect(store.state.module.single).toEqual("test");
+    expect(store.state.module.isLoading).toBe(false);
   });
 
-  it("Should show error notification on failed loadIngredientCategory action dispatch", async () => {
+  it("Should show error notification on failed load action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(
-      store.dispatch("ingredientCategory/loadIngredientCategory", 1)
-    ).rejects.toEqual("error");
+    await expect(store.dispatch("module/load", 1)).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should show success notification on successful createIngredientCategory action dispatch", async () => {
-    const ingredientCategory = { id: 1 };
+  it("Should show success notification on successful create action dispatch", async () => {
+    const item = { id: 1 };
     mockAxiosPost.mockImplementation(() => Promise.resolve());
-    store.dispatch(
-      "ingredientCategory/createIngredientCategory",
-      ingredientCategory
-    );
-    expect(store.state.ingredientCategory.isSubmittingIngredientCategory).toBe(
-      true
-    );
+    store.dispatch("module/create", item);
+    expect(store.state.module.isSubmitting).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosPost).toHaveBeenCalledWith(
-      "service/ingredients/categories",
-      ingredientCategory
-    );
+    expect(mockAxiosPost).toHaveBeenCalledWith("service/ingredients", item);
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
-    expect(store.state.ingredientCategory.isSubmittingIngredientCategory).toBe(
-      false
-    );
+    expect(store.state.module.isSubmitting).toBe(false);
   });
 
-  it("Should show error notification on failed createIngredientCategory action dispatch", async () => {
-    const ingredientCategory = { id: 1 };
+  it("Should show error notification on failed create action dispatch", async () => {
+    const item = { id: 1 };
     mockAxiosPost.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(
-      store.dispatch(
-        "ingredientCategory/createIngredientCategory",
-        ingredientCategory
-      )
-    ).rejects.toEqual("error");
+    await expect(store.dispatch("module/create", item)).rejects.toEqual(
+      "error"
+    );
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
 
-  it("Should show success notification on successful updateIngredientCategory action dispatch", async () => {
-    const ingredientCategory = { id: 1 };
+  it("Should show success notification on successful update action dispatch", async () => {
+    const item = { id: 1 };
     mockAxiosPut.mockImplementation(() => Promise.resolve());
-    store.dispatch(
-      "ingredientCategory/updateIngredientCategory",
-      ingredientCategory
-    );
-    expect(store.state.ingredientCategory.isSubmittingIngredientCategory).toBe(
-      true
-    );
+    store.dispatch("module/update", item);
+    expect(store.state.module.isSubmitting).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosPut).toHaveBeenCalledWith(
-      "service/ingredients/categories/1",
-      ingredientCategory
-    );
+    expect(mockAxiosPut).toHaveBeenCalledWith("service/ingredients/1", item);
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
-    expect(store.state.ingredientCategory.isSubmittingIngredientCategory).toBe(
-      false
-    );
+    expect(store.state.module.isSubmitting).toBe(false);
   });
 
-  it("Should show error notification on failed updateIngredientCategory action dispatch", async () => {
-    const ingredientCategory = { id: 1 };
+  it("Should show error notification on failed update action dispatch", async () => {
+    const item = { id: 1 };
     mockAxiosPut.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(
-      store.dispatch(
-        "ingredientCategory/updateIngredientCategory",
-        ingredientCategory
-      )
-    ).rejects.toEqual("error");
+    await expect(store.dispatch("module/update", item)).rejects.toEqual(
+      "error"
+    );
+    await flushPromises();
+    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should show success notification on successful delete action dispatch", async () => {
+    mockAxiosDelete.mockImplementation(() => Promise.resolve());
+    store.dispatch("module/delete", 1);
+    expect(store.state.module.isSubmitting).toBe(true);
+    await flushPromises();
+
+    expect(mockAxiosDelete).toHaveBeenCalledWith("service/ingredients/1");
+    expect(toastNotification.success).toHaveBeenCalledTimes(1);
+    expect(store.state.module.isSubmitting).toBe(false);
+  });
+
+  it("Should show error notification on failed delete action dispatch", async () => {
+    mockAxiosDelete.mockImplementation(() => Promise.reject({ code: "error" }));
+    await expect(store.dispatch("module/delete", 1)).rejects.toEqual("error");
     await flushPromises();
     expect(toastNotification.error).toHaveBeenCalledTimes(1);
   });
