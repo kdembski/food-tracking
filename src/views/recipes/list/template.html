@@ -17,15 +17,7 @@
     <CListWithFilters
       :defaultFilters="recipesListDefaultFilters"
       listName="recipesList"
-      listGetterName="recipe/list"
-      listLoadActionName="recipe/loadList"
-      listLoadingGetterName="recipe/isLoadingList"
-      tagsGetterName="recipe/tags"
-      tagsLoadActionName="recipe/loadTags"
-      tagsLoadingGetterName="recipe/isLoadingTags"
-      suggestionsGetterName="recipe/searchSuggestions"
-      suggestionsLoadActionName="recipe/loadSearchSuggestions"
-      suggestionsLoadingGetterName="recipe/isLoadingSearchSuggestions"
+      storeModuleName="recipe"
       :sortOptions="recipeListSortOptions"
     >
       <template #header="{ item }">

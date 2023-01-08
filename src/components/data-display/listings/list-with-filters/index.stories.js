@@ -9,8 +9,19 @@ const Template = (args) => ({
     return { args };
   },
   components: { CListWithFilters },
-  template:
-    '<CListWithFilters v-bind="args" style="height: 90vh"><template v-slot:header="{ item }"><div style="padding: 20px">{{ item.name }}</div></template></CListWithFilters>',
+  template: `
+    <CListWithFilters v-bind="args" style="height: 90vh">
+      <template v-slot:header="{ item }">
+        <div style="padding: 10px">
+          {{ item.name + ' header' }}
+        </div>
+      </template>
+      <template v-slot:body="{ item }">
+      <div style="padding: 10px">
+        {{ item.name + ' body' }}
+      </div>
+    </template>
+    </CListWithFilters>`,
 });
 
 export const Default = Template.bind({});
@@ -24,12 +35,7 @@ Default.args = {
     tags: "",
   },
   listName: "list",
-  listGetterName: "list/getList",
-  listLoadingGetterName: "list/isLoadingList",
-  listLoadActionName: "list/loadList",
-  tagsGetterName: "list/getTags",
-  tagsLoadingGetterName: "list/isLoadingTags",
-  tagsLoadActionName: "list/loadTags",
+  storeModuleName: "list",
 };
 
 export const isLoading = Template.bind({});

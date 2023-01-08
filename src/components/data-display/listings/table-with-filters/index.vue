@@ -25,25 +25,23 @@ const { windowHeight, isMobile } = useWindowSize();
 const props = withDefaults(
   defineProps<{
     listName: string;
-    listGetterName: string;
-    listLoadActionName: string;
-    listLoadingGetterName: string;
+    storeModuleName: string;
     isLoading?: boolean;
-
     defaultFilters: ListFilters;
     columns: TableColumn[];
   }>(),
   { isLoading: false }
 );
 
-const list = computed(() => store.getters[props.listGetterName]);
+const list = computed(() => store.getters[props.storeModuleName + "/list"]);
 const isLoadingList = computed(
-  () => store.getters[props.listLoadingGetterName]
+  () => store.getters[props.storeModuleName + "/isLoadingList"]
 );
+
 const _isLoading = computed(() => isLoadingList.value || props.isLoading);
 
 const loadList = (filters: ListFilters) => {
-  store.dispatch(props.listLoadActionName, filters);
+  store.dispatch(props.storeModuleName + "/loadList", filters);
 };
 
 const handleListLoadingProccess = () => {
@@ -68,7 +66,11 @@ const {
   selectedSort,
   sort,
   changeCurrentPage,
-} = useFilters(props.defaultFilters, handleListLoadingProccess);
+} = useFilters(
+  props.defaultFilters,
+  handleListLoadingProccess,
+  props.storeModuleName
+);
 
 const { setFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName

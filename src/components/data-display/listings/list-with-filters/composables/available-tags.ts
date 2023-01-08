@@ -2,11 +2,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { ListFilters } from "@/types/components/data-display/list";
 
-export function useAvailableTags(
-  tagsLoadActionName: string,
-  tagsGetterName: string,
-  tagsLoadingGetterName: string
-) {
+export function useAvailableTags(storeModuleName: string) {
   const store = useStore();
 
   const loadAvailableTags = (filters: ListFilters) => {
@@ -15,12 +11,14 @@ export function useAvailableTags(
       tags: filters.tags,
     };
 
-    store.dispatch(tagsLoadActionName, filtersForAvailableTags);
+    store.dispatch(storeModuleName + "/loadTags", filtersForAvailableTags);
   };
 
-  const availableTags = computed(() => store.getters[tagsGetterName]);
+  const availableTags = computed(
+    () => store.getters[storeModuleName + "/tags"]
+  );
   const isLoadingAvailableTags = computed(
-    () => store.getters[tagsLoadingGetterName]
+    () => store.getters[storeModuleName + "/isLoadingTags"]
   );
 
   return {

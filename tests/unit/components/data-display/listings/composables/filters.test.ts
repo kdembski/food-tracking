@@ -2,8 +2,8 @@ import { useFilters } from "@/components/data-display/listings/composables/filte
 
 const store = {
   getters: {
-    getSuggestions: "suggestions",
-    isLoadingSuggestions: false,
+    "module/searchSuggestions": "suggestions",
+    "module/isLoadingSearchSuggestions": false,
   },
   dispatch: jest.fn(),
 };
@@ -27,9 +27,7 @@ describe("List With Filters - Filters", () => {
     composable = useFilters(
       defaultFilters,
       handleListLoadingProccess,
-      "getSuggestions",
-      "loadSuggestions",
-      "isLoadingSuggestions"
+      "module"
     );
 
     jest.useFakeTimers();
@@ -84,10 +82,13 @@ describe("List With Filters - Filters", () => {
   it("loadSearchSuggestions should load suggestions with prepared filters", async () => {
     composable.filters.value.tags = "test1";
     composable.loadSearchSuggestions();
-    expect(store.dispatch).toHaveBeenCalledWith("loadSuggestions", {
-      searchPhrase: "",
-      tags: "test1",
-    });
+    expect(store.dispatch).toHaveBeenCalledWith(
+      "module/loadSearchSuggestions",
+      {
+        searchPhrase: "",
+        tags: "test1",
+      }
+    );
   });
 
   it("Should set searchSuggestions based on store getter", async () => {

@@ -43,33 +43,15 @@ const store = useStore();
 
 const props = withDefaults(
   defineProps<{
-    listGetterName: string;
-    listLoadActionName: string;
-    listLoadingGetterName: string;
-
-    tagsGetterName?: string;
-    tagsLoadActionName?: string;
-    tagsLoadingGetterName?: string;
-
-    suggestionsGetterName?: string;
-    suggestionsLoadActionName?: string;
-    suggestionsLoadingGetterName?: string;
-
+    storeModuleName: string;
     listName: string;
     defaultFilters: ListFilters;
     isLoading?: boolean;
     enableTags?: boolean;
     enableRandomButton?: boolean;
-
     sortOptions: DropdownOption<ListSortFilters>[];
   }>(),
   {
-    tagsGetterName: "",
-    tagsLoadActionName: "",
-    tagsLoadingGetterName: "",
-    suggestionsGetterName: "",
-    suggestionsLoadActionName: "",
-    suggestionsLoadingGetterName: "",
     isLoading: false,
     enableTags: true,
     enableRandomButton: true,
@@ -77,10 +59,9 @@ const props = withDefaults(
 );
 
 const selectedTagsRef = ref();
-const list = computed(() => store.getters[props.listGetterName]);
-
+const list = computed(() => store.getters[props.storeModuleName + "/list"]);
 const isLoadingList = computed(
-  () => store.getters[props.listLoadingGetterName]
+  () => store.getters[props.storeModuleName + "/isLoadingList"]
 );
 
 const _isLoading = computed(() => {
@@ -93,7 +74,7 @@ const _isLoading = computed(() => {
 });
 
 const loadList = (filters: ListFilters) => {
-  store.dispatch(props.listLoadActionName, filters);
+  store.dispatch(props.storeModuleName + "/loadList", filters);
 };
 
 const handleListLoadingProccess = () => {
@@ -132,9 +113,7 @@ const {
 } = useFilters(
   props.defaultFilters,
   handleListLoadingProccess,
-  props.suggestionsGetterName,
-  props.suggestionsLoadActionName,
-  props.suggestionsLoadingGetterName
+  props.storeModuleName
 );
 
 const { setFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
@@ -142,11 +121,7 @@ const { setFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
 );
 
 const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
-  useAvailableTags(
-    props.tagsLoadActionName,
-    props.tagsGetterName,
-    props.tagsLoadingGetterName
-  );
+  useAvailableTags(props.storeModuleName);
 
 const { isMobile, windowHeight } = useWindowSize();
 

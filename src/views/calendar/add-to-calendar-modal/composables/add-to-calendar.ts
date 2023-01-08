@@ -24,7 +24,7 @@ export function useAddToCalendar(
     orderedFoodId: number | undefined,
     members: number[]
   ) => {
-    return store.dispatch("calendar/addItem", {
+    return store.dispatch("calendar/createItem", {
       date,
       recipeId,
       orderedFoodId,

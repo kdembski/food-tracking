@@ -4,7 +4,7 @@ const list = {
   namespaced: true,
   state: {},
   getters: {
-    getList: () => {
+    list: () => {
       return {
         data: [
           {
@@ -47,7 +47,7 @@ const list = {
     },
     isLoadingList: () => false,
 
-    getTags: () => [
+    tags: () => [
       { name: "default" },
       { name: "vege" },
       { name: "ostre" },

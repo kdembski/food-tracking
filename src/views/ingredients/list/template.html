@@ -10,9 +10,7 @@
   </div>
   <CTableWithFilters
     listName="ingredientsList"
-    listGetterName="ingredient/list"
-    listLoadActionName="ingredient/loadList"
-    listLoadingGetterName="ingredient/isLoadingList"
+    storeModuleName="ingredient"
     :defaultFilters="ingredientsListDefaultFilters"
     :columns="ingredientsListColumns"
   >

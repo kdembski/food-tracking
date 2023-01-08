@@ -8,9 +8,7 @@ import { useTagsFilter } from "./tags";
 export function useFilters(
   defaultFilters: ListFilters,
   handleListLoadingProccess: () => void,
-  suggestionsGetterName?: string,
-  suggestionsLoadActionName?: string,
-  suggestionsLoadingGetterName?: string
+  storeModuleName: string
 ) {
   const filters: Ref<ListFilters> = ref(clone(defaultFilters));
 
@@ -49,9 +47,7 @@ export function useFilters(
   } = useSearchPhraseFilter(
     filters,
     handleListLoadingProccess,
-    suggestionsGetterName,
-    suggestionsLoadActionName,
-    suggestionsLoadingGetterName
+    storeModuleName
   );
 
   return {

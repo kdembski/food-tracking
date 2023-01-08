@@ -26,10 +26,10 @@ const store = useStore();
 const router = useRouter();
 
 const isLoadingRecipesTags = computed(
-  () => store.getters["recipe/isLoadingRecipesTags"]
+  () => store.getters["recipe/isLoadingTags"]
 );
 
-const isCreatingRecipe = computed(() => store.state.recipe.isSubmittingRecipe);
+const isCreatingRecipe = computed(() => store.state.recipe.isSubmitting);
 
 const recipesTags = ref();
 const newRecipe = reactive({
@@ -40,12 +40,12 @@ const newRecipe = reactive({
 });
 
 onBeforeMount(async () => {
-  await store.dispatch("recipe/loadRecipesTags");
-  recipesTags.value = store.getters["recipe/recipesTags"];
+  await store.dispatch("recipe/loadTags");
+  recipesTags.value = store.getters["recipe/tags"];
 });
 
 const createRecipe = async () => {
-  await store.dispatch("recipe/createRecipe", newRecipe);
+  await store.dispatch("recipe/create", newRecipe);
   router.push("/recipes");
 };
 </script>

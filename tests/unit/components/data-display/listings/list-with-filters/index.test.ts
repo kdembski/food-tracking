@@ -43,9 +43,9 @@ describe("List With Filters Component", () => {
     };
 
     getters = {
-      getList: () => list,
+      list: () => list,
       isListLoading: () => false,
-      getTags: () => tags,
+      tags: () => tags,
       isTagsLoading: () => false,
       getSuggestions: () => suggestions,
       isSuggestionsLoading: () => false,
@@ -71,17 +71,7 @@ describe("List With Filters Component", () => {
     wrapper = mount(CListWithFilters, {
       props: {
         listName: "testList",
-        listGetterName: "test/getList",
-        listLoadActionName: "test/loadList",
-        listLoadingGetterName: "test/isListLoading",
-
-        tagsGetterName: "test/getTags",
-        tagsLoadActionName: "test/loadTags",
-        tagsLoadingGetterName: "test/isTagsLoading",
-
-        suggestionsGetterName: "test/getSuggestions",
-        suggestionsLoadActionName: "test/loadSuggestions",
-        suggestionsLoadingGetterName: "test/isSuggestionsLoading",
+        storeModuleName: "test",
 
         defaultFilters,
         sortOptions: [

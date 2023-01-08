@@ -8,9 +8,7 @@ let temporarySearchPhrase = "";
 export function useSearchPhraseFilter(
   filters: Ref<ListFilters>,
   handleListLoadingProccess: () => void,
-  suggestionsGetterName?: string,
-  suggestionsLoadActionName?: string,
-  suggestionsLoadingGetterName?: string
+  storeModuleName: string
 ) {
   const store = useStore();
 
@@ -34,30 +32,23 @@ export function useSearchPhraseFilter(
   };
 
   const loadSearchSuggestions = () => {
-    if (!suggestionsLoadActionName) {
-      return;
-    }
-
     const filtersForSearchSuggestions = {
       searchPhrase: "",
       tags: filters.value.tags,
     };
 
-    store.dispatch(suggestionsLoadActionName, filtersForSearchSuggestions);
+    store.dispatch(
+      storeModuleName + "/loadSearchSuggestions",
+      filtersForSearchSuggestions
+    );
   };
 
   const searchSuggestions = computed(() => {
-    if (!suggestionsGetterName) {
-      return;
-    }
-    return store.getters[suggestionsGetterName];
+    return store.getters[storeModuleName + "/searchSuggestions"];
   });
 
   const isLoadingSearchSuggestions = computed(() => {
-    if (!suggestionsLoadingGetterName) {
-      return;
-    }
-    return store.getters[suggestionsLoadingGetterName];
+    return store.getters[storeModuleName + "/isLoadingSearchSuggestions"];
   });
 
   return {

@@ -28,7 +28,7 @@ describe("Add To Calendar Modal Component", () => {
 
   beforeEach(async () => {
     calendarActions = {
-      addItem: jest.fn(),
+      createItem: jest.fn(),
     };
 
     addedRecipe = {
@@ -106,7 +106,7 @@ describe("Add To Calendar Modal Component", () => {
     expect(wrapper.vm.members).toEqual([[1, 2]]);
   });
 
-  it("Should trigger addItem with provided recipe and NOT change cooked date", async () => {
+  it("Should trigger createItem with provided recipe and NOT change cooked date", async () => {
     await wrapper.setProps({
       addedRecipe,
     });
@@ -118,7 +118,7 @@ describe("Add To Calendar Modal Component", () => {
     await flushPromises();
     expect(wrapper.vm.isAddingToCalendar).toBe(false);
     expect(wrapper.emitted()["update:isOpen"][0][0]).toBe(false);
-    expect(calendarActions.addItem).toHaveBeenLastCalledWith(
+    expect(calendarActions.createItem).toHaveBeenLastCalledWith(
       expect.any(Object),
       {
         date: new Date(2000, 0, 1),
@@ -130,7 +130,7 @@ describe("Add To Calendar Modal Component", () => {
     expect(addedRecipe.cookedDate).toEqual(new Date(2000, 1, 1));
   });
 
-  it("Should trigger addItem with provided recipe and change cooked date", async () => {
+  it("Should trigger createItem with provided recipe and change cooked date", async () => {
     await wrapper.setProps({
       addedRecipe,
     });
@@ -139,7 +139,7 @@ describe("Add To Calendar Modal Component", () => {
     wrapper.vm.addSelectedDatesToCalendar();
 
     await flushPromises();
-    expect(calendarActions.addItem).toHaveBeenLastCalledWith(
+    expect(calendarActions.createItem).toHaveBeenLastCalledWith(
       expect.any(Object),
       {
         date: new Date(2000, 1, 2),
@@ -151,7 +151,7 @@ describe("Add To Calendar Modal Component", () => {
     expect(addedRecipe.cookedDate).toEqual(new Date(2000, 1, 3));
   });
 
-  it("Should trigger addItem with provided ordered food and change order date", async () => {
+  it("Should trigger createItem with provided ordered food and change order date", async () => {
     await wrapper.setProps({
       addedOrderedFood,
     });
@@ -160,7 +160,7 @@ describe("Add To Calendar Modal Component", () => {
     wrapper.vm.addSelectedDatesToCalendar();
 
     await flushPromises();
-    expect(calendarActions.addItem).toHaveBeenLastCalledWith(
+    expect(calendarActions.createItem).toHaveBeenLastCalledWith(
       expect.any(Object),
       {
         date: new Date(2000, 1, 2),
@@ -177,8 +177,8 @@ describe("Add To Calendar Modal Component", () => {
     );
   });
 
-  it("Should show error notification if addItem actions fails", async () => {
-    calendarActions.addItem.mockImplementation(() => Promise.reject());
+  it("Should show error notification if createItem actions fails", async () => {
+    calendarActions.createItem.mockImplementation(() => Promise.reject());
     wrapper.vm.selectedDates = [new Date(2000, 1, 2)];
     wrapper.vm.addSelectedDatesToCalendar();
     await flushPromises();

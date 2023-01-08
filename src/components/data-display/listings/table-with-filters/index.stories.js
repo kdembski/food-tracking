@@ -24,9 +24,7 @@ Default.args = {
     tags: "",
   },
   listName: "list",
-  listGetterName: "list/getList",
-  listLoadingGetterName: "list/isLoadingList",
-  listLoadActionName: "list/loadList",
+  storeModuleName: "list",
   columns: [
     {
       label: "label-1",
