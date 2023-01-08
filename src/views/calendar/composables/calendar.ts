@@ -7,10 +7,7 @@ import { cloneDeep } from "lodash";
 export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   const store = useStore();
   const toastNotification = useToastNotification();
-  const calendar = computed(() => store.state.calendar.calendar);
-  const isLoadingCalendar = computed(
-    () => store.state.calendar.isLoadingCalendar
-  );
+  const isLoadingCalendar = computed(() => store.state.calendar.isLoadingDays);
   const updatePromises: Ref<any[]> = ref([]);
 
   onBeforeMount(() => {

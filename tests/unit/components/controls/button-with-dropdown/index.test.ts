@@ -38,24 +38,12 @@ describe("Button Component", () => {
     expect(wrapper.find("div.dropdown").exists()).toBe(true);
   });
 
-  it("Should close dropdown on option click", async () => {
+  it("Should close dropdown on button blur", async () => {
     await button.trigger("click");
     await jest.runAllTimers();
     expect(wrapper.vm.isDropdownOpen).toBe(true);
 
-    await wrapper.findAll("li")[1].trigger("click");
+    await button.trigger("blur");
     expect(wrapper.vm.isDropdownOpen).toBe(false);
-  });
-
-  it("Should close dropdown when clicked away from component", async () => {
-    wrapper.vm.isDropdownOpen = true;
-    await wrapper.vm.onClickAway({ path: [] });
-    expect(wrapper.vm.isDropdownOpen).toBe(false);
-  });
-
-  it("Should NOT close dropdown when clicked away from component if button was clicked", async () => {
-    wrapper.vm.isDropdownOpen = true;
-    await wrapper.vm.onClickAway({ path: [wrapper.vm.buttonRef.button] });
-    expect(wrapper.vm.isDropdownOpen).toBe(true);
   });
 });

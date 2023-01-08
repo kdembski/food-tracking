@@ -23,24 +23,12 @@ const props = defineProps({
 const isDropdownOpen = ref(false);
 const buttonRef: Ref<{ button: HTMLButtonElement } | undefined> = ref();
 
-const toggleIsOpen = () => {
+const setOpen = (value: boolean) => {
+  isDropdownOpen.value = value;
+};
+
+const toggleOpen = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
-};
-
-const closeDropdown = () => {
-  isDropdownOpen.value = false;
-};
-
-const onClickAway = (e: any) => {
-  const isButtonClicked = e.path.some(
-    (element: HTMLElement) => element === buttonRef.value?.button
-  );
-
-  if (isButtonClicked) {
-    return;
-  }
-
-  closeDropdown();
 };
 </script>
 

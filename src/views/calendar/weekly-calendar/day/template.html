@@ -1,5 +1,5 @@
 <div class="calendar-day" :class="getContainerClasses()">
-  <p class="calendar-day__header">{{ getFormattedDate(date, 'EEEE dd.M') }}</p>
+  <p class="calendar-day__header">{{ getFormattedDate(date, 'EEEE dd.MM') }}</p>
   <Draggable
     v-if="!isLoadingCalendar"
     :list="calendarDay?.items"

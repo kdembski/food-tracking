@@ -34,7 +34,7 @@ const monthlyCalendar = ref();
 const weeklyCalendar = ref();
 const calendarMode = ref(calendarModes.WEEKLY);
 const selectedMembers = ref([]);
-const isLoading = computed(() => store.state.calendar.isLoadingCalendar);
+const isLoading = computed(() => store.state.calendar.isLoadingDays);
 
 const onArrowLeftClick = async () => {
   decrementDate();
