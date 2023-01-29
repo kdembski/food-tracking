@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CSelectMembers from "@/components/controls/select-members/index.vue";
+import CSelectMembers from "@/components/controls/custom/select-members/index.vue";
 import { createStore } from "vuex";
 import * as vue from "vue";
 

@@ -3,7 +3,7 @@ import { formatWithOptions, formatDistanceWithOptions } from "date-fns/esm/fp";
 import { pl } from "date-fns/locale";
 import { useMonthHelpers } from "./month-helpers";
 import { useWeekHelpers } from "./week-helpers";
-import { useCalendarModes } from "@/components/controls/calendar-mode/composables/calendar-modes";
+import { useCalendarModes } from "@/components/controls/custom/calendar-mode/composables/calendar-modes";
 
 export function useDateHelpers(calendarMode?: Ref<string>) {
   const { isMonthlyMode } = useCalendarModes();

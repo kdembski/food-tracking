@@ -2,7 +2,7 @@
 import CButton from "@/components/controls/button/index.vue";
 import MonthlyDatePicker from "./monthly-date-picker/index.vue";
 import WeeklyDatePicker from "./weekly-date-picker/index.vue";
-import CCalendarMode from "@/components/controls/calendar-mode/index.vue";
+import CCalendarMode from "@/components/controls/custom/calendar-mode/index.vue";
 
 export default {
   name: "CDatePicker",
@@ -13,7 +13,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
-import { useCalendarModes } from "../calendar-mode/composables/calendar-modes";
+import { useCalendarModes } from "../custom/calendar-mode/composables/calendar-modes";
 
 const props = defineProps({
   modelValue: {

@@ -1,9 +1,9 @@
 <script lang="ts">
-import CCalendarMode from "@/components/controls/calendar-mode/index.vue";
+import CCalendarMode from "@/components/controls/custom/calendar-mode/index.vue";
 import MonthlyCalendar from "./monthly-calendar/index.vue";
 import WeeklyCalendar from "./weekly-calendar/index.vue";
 import CButton from "@/components/controls/button/index.vue";
-import CSelectMembers from "@/components/controls/select-members/index.vue";
+import CSelectMembers from "@/components/controls/custom/select-members/index.vue";
 import CInput from "@/components/controls/input/index.vue";
 
 export default {
@@ -24,7 +24,7 @@ import { useStore } from "vuex";
 import { ref, provide, nextTick, computed } from "vue";
 import { useDateHelpers } from "@/composables/date-helpers/index";
 import { useWindowSize } from "@/composables/window-size";
-import { useCalendarModes } from "@/components/controls/calendar-mode/composables/calendar-modes";
+import { useCalendarModes } from "@/components/controls/custom/calendar-mode/composables/calendar-modes";
 
 const { calendarModes, isMonthlyMode, isWeeklyMode } = useCalendarModes();
 const { isMobile } = useWindowSize();

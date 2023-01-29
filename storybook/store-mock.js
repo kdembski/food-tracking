@@ -67,7 +67,7 @@ const list = {
 
 const member = {
   state: {
-    members: [
+    all: [
       { id: 1, name: "Karol" },
       { id: 2, name: "Roksana" },
     ],

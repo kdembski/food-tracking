@@ -2,7 +2,7 @@
 import CButton from "@/components/controls/button/index.vue";
 import CInput from "@/components/controls/input/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
-import CSelectTags from "@/components/controls/select-tags/index.vue";
+import CSelectTags from "@/components/controls/custom/select-tags/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 import { useRouter } from "vue-router";
 

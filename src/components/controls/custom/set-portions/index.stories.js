@@ -1,4 +1,4 @@
-import CSetPortions from "./index.vue";
+import CSetPortions from "../../set-portions/index.vue";
 
 export default {
   title: "Controls/Set Portions",

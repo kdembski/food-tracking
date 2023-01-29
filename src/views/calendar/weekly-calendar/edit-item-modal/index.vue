@@ -1,6 +1,6 @@
 <script lang="ts">
 import CModal from "@/components/surfaces/modal/index.vue";
-import CSelectMembers from "@/components/controls/select-members/index.vue";
+import CSelectMembers from "@/components/controls/custom/select-members/index.vue";
 
 export default {
   name: "WeeklyCalendarDay",

@@ -3,7 +3,7 @@ import flushPromises from "flush-promises";
 import { shallowMount } from "@vue/test-utils";
 import CalendarView from "@/views/calendar/index.vue";
 import { createStore } from "vuex";
-import { useCalendarModes } from "@/components/controls/calendar-mode/composables/calendar-modes";
+import { useCalendarModes } from "@/components/controls/custom/calendar-mode/composables/calendar-modes";
 
 let incrementDate: any;
 let decrementDate: any;

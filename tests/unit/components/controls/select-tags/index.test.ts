@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CSelectTags from "@/components/controls/select-tags/index.vue";
+import CSelectTags from "@/components/controls/custom/select-tags/index.vue";
 
 describe("Select Tags Component", () => {
   let wrapper: any;

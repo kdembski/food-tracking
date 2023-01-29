@@ -1,5 +1,5 @@
 import { mount, DOMWrapper } from "@vue/test-utils";
-import CSetPortions from "@/components/controls/set-portions/index.vue";
+import CSetPortions from "@/components/controls/custom/set-portions/index.vue";
 
 describe("Set Portions Component", () => {
   let wrapper: any;
