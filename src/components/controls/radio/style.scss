@@ -1,0 +1,35 @@
+.radio {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+  cursor: pointer;
+  position: relative;
+
+  &.radio--disabled {
+    opacity: 0.5;
+
+    input:checked {
+      background-color: var(--border-color);
+      outline-color: var(--border-color);
+    }
+  }
+
+  input {
+    width: 11px;
+    height: 11px;
+    appearance: none;
+    border-radius: 100%;
+    outline: 1px solid var(--border-color);
+    outline-offset: 3px;
+
+    &:checked {
+      background-color: var(--primary);
+      outline-color: var(--primary);
+    }
+  }
+
+  p {
+    font-size: $font-sm;
+    user-select: none;
+  }
+}

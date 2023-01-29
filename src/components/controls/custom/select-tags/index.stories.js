@@ -1,4 +1,4 @@
-import CSelectTags from "../../select-tags/index.vue";
+import CSelectTags from "./index.vue";
 
 export default {
   title: "Controls/Select Tags",

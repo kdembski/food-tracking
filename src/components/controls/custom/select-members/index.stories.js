@@ -1,4 +1,4 @@
-import CSelectMembers from "../../select-members/index.vue";
+import CSelectMembers from "./index.vue";
 
 export default {
   title: "Controls/Select Members",

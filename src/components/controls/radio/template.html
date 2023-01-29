@@ -1,0 +1,15 @@
+<label
+  class="radio"
+  :class="{ 'radio--disabled': isDisabled }"
+  :for="$attrs.id && $attrs.id + '-field'"
+>
+  <input
+    :id="$attrs.id && $attrs.id + '-field'"
+    :name="$attrs.name"
+    :value="$attrs.value"
+    v-model="value"
+    type="radio"
+    :disabled="isDisabled"
+  />
+  <p v-if="label">{{ label }}</p>
+</label>
