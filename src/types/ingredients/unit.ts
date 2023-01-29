@@ -18,6 +18,12 @@ export interface IngredientUnit {
   shortcut: string;
 }
 
+export interface IngredientUnit {
+  id: number;
+  name: string;
+  shortcut: string;
+}
+
 export interface IngredientUnitOption {
   id: number;
   name: string;

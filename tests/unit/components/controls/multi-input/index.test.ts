@@ -9,7 +9,7 @@ describe("Multi Input Component", () => {
 
   beforeEach(async () => {
     wrapper = mount(CMultiInput, {
-      props: { modelValue: [1], label: "label" },
+      props: { modelValue: [1, 2], label: "label" },
       global: global.settings,
     });
 
@@ -18,25 +18,26 @@ describe("Multi Input Component", () => {
   });
 
   it("Should set values based on modelValue prop", async () => {
-    expect(wrapper.vm.values).toEqual([1]);
+    expect(wrapper.vm.values).toEqual([1, 2]);
   });
 
   it("Should emit update:modelValue on values change", async () => {
     await addButton.trigger("click");
     expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual([
       1,
+      2,
       undefined,
     ]);
   });
 
   it("Should render corrent amount of items", async () => {
     const items = wrapper.findAll(".multi-input__item");
-    expect(items.length).toEqual(1);
+    expect(items.length).toEqual(2);
   });
 
   it("Should remove item on remove btn click", async () => {
-    removeButtons[0].trigger("click");
-    expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual([]);
+    await removeButtons[1].trigger("click");
+    expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual([1]);
   });
 
   it("Should add object if type prop is set to 'object'", async () => {
@@ -51,6 +52,7 @@ describe("Multi Input Component", () => {
     await addButton.trigger("click");
     expect(wrapper.emitted<any>()["update:modelValue"][0][0]).toEqual([
       1,
+      2,
       testObject,
     ]);
   });

@@ -16,6 +16,21 @@ export interface Ingredient {
   id: number;
   name: string;
   categoryId: number;
+  units: IngredientUnitDetails[];
+}
+
+export interface IngredientUnitDetails {
+  ingredientId: number;
+  unitId: number;
+  kcalPerUnit: number;
+  isPrimary: boolean;
+  converterToPrimary: number;
+}
+
+export interface IngredientListItem {
+  id: number;
+  name: string;
+  categoryId: number;
   categoryName: string;
   unitNames: string[];
 }
@@ -25,7 +40,7 @@ export interface IngredientOption {
   name: string;
 }
 
-export type IngredientsList = ListWithFilters<Ingredient>;
+export type IngredientsList = ListWithFilters<IngredientListItem>;
 
 export enum IngredientsNavItems {
   LIST = "LIST",

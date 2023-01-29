@@ -142,13 +142,13 @@ describe("Ingredient Store Module", () => {
   });
 
   it("Should set single to state on successful load action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: "test" }));
+    mockAxiosGet.mockImplementation(() => Promise.resolve({ data: {} }));
     store.dispatch("module/load", 1);
     expect(store.state.module.isLoading).toBe(true);
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith("service/ingredients/1");
-    expect(store.state.module.single).toEqual("test");
+    expect(store.state.module.single).toEqual({ units: [] });
     expect(store.state.module.isLoading).toBe(false);
   });
 

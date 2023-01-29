@@ -8,10 +8,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref } from "vue";
+import { computed, ref, Ref, useAttrs } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
 
 const { getFieldTemplateProps } = useFieldProps();
+const attrs = useAttrs();
 
 const props = defineProps({
   ...useFieldProps().fieldProps,
@@ -22,17 +23,21 @@ const props = defineProps({
 });
 
 const emits = defineEmits<{
-  (event: "update:modelValue", value: string | number): void;
+  (event: "update:modelValue", value: string | number | null): void;
 }>();
 
 const input: Ref<HTMLInputElement | undefined> = ref();
 defineExpose({ input });
 
 const value = computed({
-  get(): string | number {
+  get(): string | number | null {
     return props.modelValue;
   },
-  set(value: string | number) {
+  set(value: string | number | null) {
+    if (isTypeNumber() && value === "") {
+      value = null;
+    }
+
     emits("update:modelValue", value);
   },
 });
@@ -42,6 +47,10 @@ const onInput = (e: KeyboardEvent) => {
     return;
   }
   e.preventDefault();
+};
+
+const isTypeNumber = () => {
+  return attrs.type === "number";
 };
 </script>
 

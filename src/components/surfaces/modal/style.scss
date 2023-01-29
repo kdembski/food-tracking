@@ -22,9 +22,12 @@ $mobileSectionPadding: $spacing-lg $spacing-xl;
     box-shadow: $shadow-md var(--shadow-color);
     margin: $spacing-4xl $spacing-lg 0;
     transition: 0.2s ease-in-out;
-    overflow: hidden;
     min-width: 450px;
     max-width: 450px;
+  }
+
+  &__loader {
+    border-radius: $radius-md;
   }
 
   &__header {

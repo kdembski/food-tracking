@@ -1,9 +1,10 @@
 <Teleport to="body">
   <transition name="modal__transition">
     <div v-if="_isOpen" class="modal modal__overlay">
-      <div class="modal__container" v-click-away="closeModal">
+      <div class="modal__container">
         <CLoader
           v-if="isSubmitting"
+          class="modal__loader"
           :circleHeight="40"
           :circleWidth="40"
           withOverlay

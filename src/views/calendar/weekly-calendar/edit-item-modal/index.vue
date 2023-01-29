@@ -54,7 +54,7 @@ const isUpdating = ref(false);
 const updateCalendarItemMembers = () => {
   isUpdating.value = true;
   store
-    .dispatch("calendar/updateCalendarItemMembers", props.calendarItem)
+    .dispatch("calendar/updateItemMembers", props.calendarItem)
     .then(() => {
       toastNotification.success("Kalendarz zaktualizowany pomyślnie!");
     })

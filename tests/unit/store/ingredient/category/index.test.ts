@@ -88,7 +88,7 @@ describe("Ingredient Category Store Module", () => {
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/ingredients?page=1&size=10&searchPhrase=test&sortAttribute=attr&sortDirection=dir&tags=tag"
+      "service/ingredients/categories?page=1&size=10&searchPhrase=test&sortAttribute=attr&sortDirection=dir&tags=tag"
     );
     expect(store.getters["module/list"]).toEqual(list);
     expect(store.getters["module/isLoadingList"]).toBe(false);
@@ -109,7 +109,9 @@ describe("Ingredient Category Store Module", () => {
     expect(store.state.module.isLoadingOptions).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosGet).toHaveBeenCalledWith("service/ingredients/options");
+    expect(mockAxiosGet).toHaveBeenCalledWith(
+      "service/ingredients/categories/options"
+    );
     expect(store.state.module.options).toEqual(options);
     expect(store.state.module.isLoadingOptions).toBe(false);
     expect(store.getters["module/options"]).toEqual([
@@ -137,7 +139,9 @@ describe("Ingredient Category Store Module", () => {
     expect(store.state.module.isLoading).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosGet).toHaveBeenCalledWith("service/ingredients/1");
+    expect(mockAxiosGet).toHaveBeenCalledWith(
+      "service/ingredients/categories/1"
+    );
     expect(store.state.module.single).toEqual("test");
     expect(store.state.module.isLoading).toBe(false);
   });
@@ -156,7 +160,10 @@ describe("Ingredient Category Store Module", () => {
     expect(store.state.module.isSubmitting).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosPost).toHaveBeenCalledWith("service/ingredients", item);
+    expect(mockAxiosPost).toHaveBeenCalledWith(
+      "service/ingredients/categories",
+      item
+    );
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
     expect(store.state.module.isSubmitting).toBe(false);
   });
@@ -178,7 +185,10 @@ describe("Ingredient Category Store Module", () => {
     expect(store.state.module.isSubmitting).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosPut).toHaveBeenCalledWith("service/ingredients/1", item);
+    expect(mockAxiosPut).toHaveBeenCalledWith(
+      "service/ingredients/categories/1",
+      item
+    );
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
     expect(store.state.module.isSubmitting).toBe(false);
   });
@@ -199,7 +209,9 @@ describe("Ingredient Category Store Module", () => {
     expect(store.state.module.isSubmitting).toBe(true);
     await flushPromises();
 
-    expect(mockAxiosDelete).toHaveBeenCalledWith("service/ingredients/1");
+    expect(mockAxiosDelete).toHaveBeenCalledWith(
+      "service/ingredients/categories/1"
+    );
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
     expect(store.state.module.isSubmitting).toBe(false);
   });

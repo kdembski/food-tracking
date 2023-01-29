@@ -9,7 +9,25 @@
     <CInput
       v-model="ingredient.name"
       label="Nazwa składnika"
-      :isLoading="isLoadingIngredient"
+      :isLoading="isLoading"
     />
+    <CAutocomplete
+      v-model="ingredient.categoryId"
+      :options="categoryOptions"
+      :isLoading="isLoading"
+      label="Kategoria"
+    />
+    <CMultiInput
+      v-model="ingredient.units"
+      :isLoading="isLoading"
+      label="Jednostki"
+      :type="MultiInputValuesTypes.OBJECT"
+    >
+      <template #default="{ values, index }">
+        <CAutocomplete v-model="values[index].unitId" :options="unitOptions" />
+        <CInput v-model="values[index].kcalPerUnit" type="number" />
+        <CInput v-model="values[index].converterToPrimary" type="number" />
+      </template>
+    </CMultiInput>
   </div>
 </CModal>

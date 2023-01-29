@@ -1,9 +1,9 @@
 .autocomplete {
   position: relative;
 
-  &__input {
+  input.autocomplete__input {
     font-style: italic;
-    color: var(--text-tetriary);
+    color: var(--text-secondary);
     scroll-margin: 25px;
 
     &--option-selected {

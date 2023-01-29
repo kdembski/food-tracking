@@ -8,10 +8,6 @@
     <div class="skeleton-loader__item"></div>
     <div class="skeleton-loader__item"></div>
   </div>
-  <div class="loader__item">
-    <div class="skeleton-loader__item"></div>
-    <div class="skeleton-loader__item"></div>
-  </div>
   <div class="skeleton-loader__item"></div>
 </CSkeletonLoader>
 <div v-else class="multi-input">
@@ -26,6 +22,8 @@
         size="large"
         icon="times"
         @click="removeItem(index)"
+        :isDisabled="values.length === 1"
+        tabindex="-1"
       />
     </div>
   </div>

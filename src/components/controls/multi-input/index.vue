@@ -37,8 +37,10 @@ const values = computed({
 });
 
 const addItem = () => {
+  const emptyObject = props.emptyObject || {};
+
   if (props.type === MultiInputValuesTypes.OBJECT) {
-    values.value = values.value.concat(props.emptyObject);
+    values.value = values.value.concat(...[emptyObject]);
     return;
   }
   values.value = values.value.concat(undefined);

@@ -26,7 +26,7 @@ export function useCalendar(allDatesInRange: ComputedRef<Date[]>) {
   };
 
   const addCalendarItem = (item: CalendarItem, date: Date) => {
-    return store.dispatch("calendar/addItem", { date, ...item });
+    return store.dispatch("calendar/createItem", { date, ...item });
   };
 
   const cloneCalendarItem = (item: CalendarItem, date: Date) => {

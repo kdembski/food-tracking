@@ -179,6 +179,7 @@ const mutations: MutationTree<IngredientState> = {
   },
 
   setSingle(state, ingredient: Ingredient) {
+    ingredient.units = ingredient.units || [];
     state.single = ingredient;
   },
 

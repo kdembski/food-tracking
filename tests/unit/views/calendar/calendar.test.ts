@@ -70,7 +70,7 @@ describe("Calendar View", () => {
     };
     actions = {
       loadDays: jest.fn(),
-      addItem: jest.fn(),
+      createItem: jest.fn(),
       deleteItem: jest.fn(),
       updateItem: jest.fn(),
     };
@@ -109,17 +109,17 @@ describe("Calendar View", () => {
     );
   });
 
-  it("Should dispatch addItem action on addCalendarItem method call", async () => {
+  it("Should dispatch createItem action on addCalendarItem method call", async () => {
     await calendarComposable.addCalendarItem({ item: "test" }, "test");
-    expect(actions.addItem).toHaveBeenCalledTimes(1);
-    expect(actions.addItem).toHaveBeenCalledWith(expect.any(Object), {
+    expect(actions.createItem).toHaveBeenCalledTimes(1);
+    expect(actions.createItem).toHaveBeenCalledWith(expect.any(Object), {
       item: "test",
       date: "test",
     });
   });
 
   it("Should push cloned element to calendarDay items on cloneCalendarItem method call", async () => {
-    actions.addItem.mockImplementation(() =>
+    actions.createItem.mockImplementation(() =>
       Promise.resolve({ data: { insertId: 1 } })
     );
     await calendarComposable.cloneCalendarItem({});
@@ -129,8 +129,8 @@ describe("Calendar View", () => {
     expect(toastSuccess).toHaveBeenCalledWith("Zduplikowano.");
   });
 
-  it("Should show error toast notification if addItem is rejected", async () => {
-    actions.addItem.mockImplementation(() => Promise.reject());
+  it("Should show error toast notification if createItem is rejected", async () => {
+    actions.createItem.mockImplementation(() => Promise.reject());
     await calendarComposable.cloneCalendarItem({});
     await flushPromises();
     expect(toastError).toHaveBeenCalledTimes(1);

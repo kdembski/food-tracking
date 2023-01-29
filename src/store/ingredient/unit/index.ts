@@ -44,7 +44,9 @@ const actions: ActionTree<IngredientUnitState, any> = {
       commit("setIsLoadingList", true);
 
       ApiService.get(
-        process.env.VUE_APP_SERVICE_URL + "/ingredients" + getListQuery(filters)
+        process.env.VUE_APP_SERVICE_URL +
+          "/ingredients/units" +
+          getListQuery(filters)
       )
         .then((response: AxiosResponse<IngredientUnitsList>) => {
           commit("setIsLoadingList", false);
@@ -63,7 +65,9 @@ const actions: ActionTree<IngredientUnitState, any> = {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingOptions", true);
 
-      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ingredients/options")
+      ApiService.get(
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/units/options"
+      )
         .then((response: AxiosResponse<IngredientUnitOption[]>) => {
           commit("setIsLoadingOptions", false);
           commit("setOptions", response.data);
@@ -81,7 +85,9 @@ const actions: ActionTree<IngredientUnitState, any> = {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoading", true);
 
-      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ingredients/" + itemId)
+      ApiService.get(
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/units/" + itemId
+      )
         .then((response: AxiosResponse<IngredientUnit>) => {
           commit("setIsLoading", false);
           commit("setSingle", response.data);
@@ -99,7 +105,10 @@ const actions: ActionTree<IngredientUnitState, any> = {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
-      ApiService.post(process.env.VUE_APP_SERVICE_URL + "/ingredients", item)
+      ApiService.post(
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/units",
+        item
+      )
         .then(() => {
           rootState.toastNotification.success("Dodano składnik.");
           commit("setIsSubmitting", false);
@@ -118,7 +127,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
       commit("setIsSubmitting", true);
 
       ApiService.put(
-        process.env.VUE_APP_SERVICE_URL + "/ingredients/" + item.id,
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/units/" + item.id,
         item
       )
         .then(() => {
@@ -139,7 +148,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
       commit("setIsSubmitting", true);
 
       ApiService.delete(
-        process.env.VUE_APP_SERVICE_URL + "/ingredients/" + itemId
+        process.env.VUE_APP_SERVICE_URL + "/ingredients/units/" + itemId
       )
         .then(() => {
           rootState.toastNotification.success("Usunięto składnik.");
