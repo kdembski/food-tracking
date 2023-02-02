@@ -12,7 +12,7 @@ $mobileSectionPadding: $spacing-lg $spacing-xl;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    z-index: $layer-4;
+    z-index: $layer-3;
   }
 
   &__container {
@@ -20,7 +20,7 @@ $mobileSectionPadding: $spacing-lg $spacing-xl;
     border-radius: $radius-md;
     position: relative;
     box-shadow: $shadow-md var(--shadow-color);
-    margin: $spacing-4xl $spacing-lg 0;
+    margin: 75px $spacing-lg 0;
     transition: 0.2s ease-in-out;
     min-width: 450px;
     max-width: 450px;

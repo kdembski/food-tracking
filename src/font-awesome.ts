@@ -54,6 +54,7 @@ import {
   faChartPie,
   faClone,
   faPenToSquare,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -116,7 +117,8 @@ library.add(
   faMinus,
   faChartPie,
   faClone,
-  faPenToSquare
+  faPenToSquare,
+  faTrashCan
 );
 
 export default FontAwesomeIcon;

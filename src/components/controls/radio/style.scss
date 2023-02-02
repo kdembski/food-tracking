@@ -1,9 +1,10 @@
 .radio {
   display: flex;
   align-items: center;
-  gap: $spacing-xl;
+  gap: $spacing-lg;
   cursor: pointer;
   position: relative;
+  padding: 5px;
 
   &.radio--disabled {
     opacity: 0.5;
@@ -15,16 +16,18 @@
   }
 
   input {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
     appearance: none;
     border-radius: 100%;
     outline: 1px solid var(--border-color);
     outline-offset: 3px;
+    cursor: pointer;
 
     &:checked {
       background-color: var(--primary);
       outline-color: var(--primary);
+      outline-width: 2px;
     }
   }
 

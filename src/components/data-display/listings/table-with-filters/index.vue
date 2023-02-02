@@ -75,6 +75,10 @@ const {
 const { setFiltersFromStorage, saveFiltersToStorage } = useStoredFilters(
   props.listName
 );
+
+defineExpose({
+  handleListLoadingProccess,
+});
 </script>
 
 <template src="./template.html"></template>

@@ -3,26 +3,31 @@ import CButton from "@/components/controls/button/index.vue";
 import CInput from "@/components/controls/input/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 import CMultiInput from "@/components/controls/multi-input/index.vue";
+import CRadio from "@/components/controls/radio/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
+import EditIngredientModalLoader from "./loader/index.vue";
 
 export default {
   name: "EditIngredientModal",
-  components: { CButton, CInput, CModal, CAutocomplete, CMultiInput },
+  components: {
+    CButton,
+    CInput,
+    CModal,
+    CAutocomplete,
+    CMultiInput,
+    CRadio,
+    EditIngredientModalLoader,
+  },
 };
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
-import { useStore } from "vuex";
+import { computed, watch } from "vue";
 import { cloneDeep } from "lodash";
+import { useIngredient } from "./composables/ingredient";
+import { useUnits } from "./composables/units";
+import { useCategories } from "./composables/categories";
 import { MultiInputValuesTypes } from "@/types/components/multi-input";
-import {
-  Ingredient,
-  IngredientUnitDetails,
-} from "@/types/ingredients/ingredient";
-import { DeepPartial } from "@/types/common";
-
-const store = useStore();
 
 const props = defineProps({
   isOpen: {
@@ -37,6 +42,7 @@ const props = defineProps({
 
 const emits = defineEmits<{
   (event: "update:isOpen", value: boolean): void;
+  (event: "success"): void;
 }>();
 
 const _isOpen = computed({
@@ -68,67 +74,14 @@ const isLoading = computed(
     isLoadingCategoryOptions.value
 );
 
-// ingredient
-const emptyIngredient: DeepPartial<Ingredient> = {
-  name: "",
-  units: [{}],
-};
-
-const ingredient = ref(cloneDeep(emptyIngredient));
-const isAddingNewIngredient = computed(() => !props.ingredientId);
-const isSubmitting = computed(() => {
-  return store.state.ingredient.isSubmitting;
-});
-const isLoadingIngredient = computed(() => store.state.ingredient.isLoading);
-
-const setIngredient = async () => {
-  await store.dispatch("ingredient/load", props.ingredientId);
-  ingredient.value = store.state.ingredient.single;
-
-  if (ingredient.value.units?.length === 0) {
-    ingredient.value.units.push({});
-  }
-};
-
-const updateIngredient = () => {
-  return store.dispatch("ingredient/update", ingredient.value);
-};
-
-const createIngredient = () => {
-  return store.dispatch("ingredient/create", ingredient.value);
-};
-
-// unit
-const unitOptions = ref([]);
-const isLoadingUnitOptions = computed(
-  () => store.state.ingredient.unit.isLoadingOptions
-);
-
-const setUnitOptions = async () => {
-  await store.dispatch("ingredient/unit/loadOptions");
-  unitOptions.value = store.getters["ingredient/unit/options"];
-};
-
-// category
-const categoryOptions = ref([]);
-const isLoadingCategoryOptions = computed(
-  () => store.state.ingredient.category.isLoadingOptions
-);
-
-const setCategoryOptions = async () => {
-  await store.dispatch("ingredient/category/loadOptions");
-  categoryOptions.value = store.getters["ingredient/category/options"];
-};
-
-// others
 const submit = async () => {
   if (isAddingNewIngredient.value) {
-    await createIngredient();
+    await createIngredient().then(() => emits("success"));
     _isOpen.value = false;
     return;
   }
 
-  await updateIngredient();
+  await updateIngredient().then(() => emits("success"));
   _isOpen.value = false;
 };
 
@@ -145,6 +98,23 @@ const getSubmitButtonLabel = () => {
   }
   return "Zapisz";
 };
+
+const {
+  selectedPrimaryIndex,
+  emptyIngredient,
+  ingredient,
+  isAddingNewIngredient,
+  isLoadingIngredient,
+  isSubmitting,
+  setIngredient,
+  updateIngredient,
+  createIngredient,
+  onUnitRemove,
+} = useIngredient(props);
+
+const { unitOptions, isLoadingUnitOptions, setUnitOptions } = useUnits();
+const { categoryOptions, isLoadingCategoryOptions, setCategoryOptions } =
+  useCategories();
 </script>
 
 <template src="./template.html"></template>

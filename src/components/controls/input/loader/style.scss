@@ -1,0 +1,13 @@
+.input-loader {
+  .skeleton-loader__item {
+    &.label {
+      height: 12px;
+      width: 25%;
+      margin-bottom: 4px;
+    }
+
+    &.input {
+      height: 45px;
+    }
+  }
+}

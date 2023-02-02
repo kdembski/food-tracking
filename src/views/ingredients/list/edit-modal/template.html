@@ -5,29 +5,50 @@
   :isSubmitting="isSubmitting"
   @submit="submit"
 >
-  <div class="edit-ingredient-modal">
-    <CInput
-      v-model="ingredient.name"
-      label="Nazwa składnika"
-      :isLoading="isLoading"
-    />
+  <EditIngredientModalLoader v-if="isLoading" />
+  <div v-else class="edit-ingredient-modal">
+    <CInput v-model="ingredient.name" label="Nazwa składnika" />
     <CAutocomplete
       v-model="ingredient.categoryId"
       :options="categoryOptions"
-      :isLoading="isLoading"
       label="Kategoria"
     />
-    <CMultiInput
-      v-model="ingredient.units"
-      :isLoading="isLoading"
-      label="Jednostki"
-      :type="MultiInputValuesTypes.OBJECT"
-    >
-      <template #default="{ values, index }">
-        <CAutocomplete v-model="values[index].unitId" :options="unitOptions" />
-        <CInput v-model="values[index].kcalPerUnit" type="number" />
-        <CInput v-model="values[index].converterToPrimary" type="number" />
-      </template>
-    </CMultiInput>
+    <div class="units">
+      <div class="units__header">Jednostki</div>
+      <div class="units__headings">
+        <p>Nazwa</p>
+        <p>Kalorie</p>
+        <p>Konwerter</p>
+      </div>
+      <div class="units__wrapper">
+        <CMultiInput
+          v-model="ingredient.units"
+          :type="MultiInputValuesTypes.OBJECT"
+          @itemRemove="onUnitRemove"
+        >
+          <template #default="{ values, index }">
+            <div class="units__item" :key="values[index].id">
+              <div class="primary-unit-radio-set">
+                <CRadio
+                  v-model="selectedPrimaryIndex"
+                  name="primary-unit-radio-set"
+                  :value="index"
+                />
+              </div>
+              <CAutocomplete
+                v-model="values[index].unitId"
+                :options="unitOptions"
+              />
+              <CInput v-model="values[index].kcalPerUnit" type="number" />
+              <CInput
+                v-model="values[index].converterToPrimary"
+                type="number"
+                :isDisabled="selectedPrimaryIndex == index"
+              />
+            </div>
+          </template>
+        </CMultiInput>
+      </div>
+    </div>
   </div>
 </CModal>

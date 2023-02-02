@@ -2,7 +2,7 @@
   width: 100%;
   flex-grow: 1;
 
-  &__buttons {
+  &__add-button {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -10,8 +10,10 @@
     height: 45px;
   }
 
-  &__edit-button {
-    margin: -$spacing-sm 0;
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
   }
 }
 

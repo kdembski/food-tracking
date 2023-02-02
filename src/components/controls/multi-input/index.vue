@@ -1,10 +1,11 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
+import MultiInputLoader from "./loader/index.vue";
 
 export default {
   name: "CMultiInput",
-  components: { CButton, CSkeletonLoader },
+  components: { CButton, CSkeletonLoader, MultiInputLoader },
 };
 </script>
 
@@ -15,7 +16,7 @@ import { MultiInputValuesTypes } from "@/types/components/multi-input";
 const props = withDefaults(
   defineProps<{
     modelValue: unknown[];
-    label: string;
+    label?: string;
     type?: MultiInputValuesTypes;
     emptyObject?: unknown;
     isLoading?: boolean;
@@ -25,6 +26,7 @@ const props = withDefaults(
 
 const emits = defineEmits<{
   (event: "update:modelValue", value: unknown[]): void;
+  (event: "itemRemove", index: number): void;
 }>();
 
 const values = computed({
@@ -50,6 +52,7 @@ const removeItem = (index: number) => {
   const array = [...values.value];
   array.splice(index, 1);
   values.value = array;
+  emits("itemRemove", index);
 };
 </script>
 

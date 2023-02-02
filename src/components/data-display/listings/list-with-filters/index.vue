@@ -135,6 +135,10 @@ const {
 
 const paginationRef: Ref<HTMLElement | undefined> = ref();
 const { paginationStickyClass } = useStickyPagination(paginationRef);
+
+defineExpose({
+  handleListLoadingProccess,
+});
 </script>
 
 <template src="./template.html"></template>

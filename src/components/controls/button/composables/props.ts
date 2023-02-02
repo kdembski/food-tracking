@@ -7,6 +7,7 @@ interface ButtonProps {
   size: string;
   icon: string;
   fullWidth: boolean;
+  enableMobileResize: boolean;
 }
 
 export function useButtonProps() {
@@ -52,6 +53,10 @@ export function useButtonProps() {
       type: Boolean,
       default: false,
     },
+    enableMobileResize: {
+      type: Boolean,
+      default: true,
+    },
   };
 
   const getButtonProps = (props: ButtonProps): ButtonProps => {
@@ -64,6 +69,7 @@ export function useButtonProps() {
       size: props.size,
       icon: props.icon,
       fullWidth: props.fullWidth,
+      enableMobileResize: props.enableMobileResize,
     };
   };
 

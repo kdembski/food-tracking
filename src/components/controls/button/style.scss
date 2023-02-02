@@ -31,7 +31,7 @@
     background-color: transparent;
     padding: $spacing-md;
     border-radius: $radius-md;
-    box-shadow: none;
+    box-shadow: none !important;
 
     .button__content {
       gap: $spacing-md;
@@ -134,12 +134,14 @@
       width: 28px;
       min-width: 28px;
       height: 28px;
+      box-shadow: $shadow-xs var(--shadow-color);
     }
 
     &.button--large {
       width: 32px;
       min-width: 32px;
       height: 32px;
+      box-shadow: $shadow-sm var(--shadow-color);
     }
   }
 }

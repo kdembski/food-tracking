@@ -1,0 +1,39 @@
+.multi-input-loader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  > .skeleton-loader__item {
+    &:first-child {
+      height: 12px;
+      width: 25%;
+      margin-bottom: -8px;
+    }
+
+    &:last-child {
+      height: 32px;
+      width: 32px;
+      border-radius: 100%;
+      position: relative;
+      left: 50%;
+      transform: translate(-50%);
+    }
+  }
+
+  .loader__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    > .skeleton-loader__item {
+      &:first-child {
+        height: 45px;
+      }
+
+      &:last-child {
+        height: 30px;
+        width: 32px;
+      }
+    }
+  }
+}

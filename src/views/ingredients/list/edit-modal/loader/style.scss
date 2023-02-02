@@ -1,0 +1,13 @@
+.edit-ingredient-modal-loader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  .multi-input-loader {
+    margin-top: $spacing-md;
+
+    :deep(> .skeleton-loader__item:first-child) {
+      margin-bottom: $spacing-sm;
+    }
+  }
+}
