@@ -58,10 +58,12 @@
       <CDisplayMembers :memberIds="item.members" />
     </div>
   </div>
-  <Teleport v-if="isTagsTooltipContentVisible(item.id)" to="#tooltip-content">
-    <div class="day-item__tags-tooltip">
-      <p>Tagi</p>
-      <CDisplayTags :tags="item.tags" />
-    </div>
-  </Teleport>
+  <div
+    :id="getTagsTooltipId(item.id)"
+    class="day-item__tags-tooltip"
+    style="display: none"
+  >
+    <p>Tagi</p>
+    <CDisplayTags :tags="item.tags" />
+  </div>
 </div>

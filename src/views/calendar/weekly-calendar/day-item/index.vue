@@ -37,11 +37,6 @@ const membersLength = computed(() => {
 const getTagsTooltipId = (id: number) => {
   return "calendar-tags-" + id;
 };
-
-const isTagsTooltipContentVisible = (id: number) => {
-  const activeCustomContent = store.state.tooltipConfig.activeCustomContent;
-  return activeCustomContent === getTagsTooltipId(id);
-};
 </script>
 
 <template src="./template.html"></template>

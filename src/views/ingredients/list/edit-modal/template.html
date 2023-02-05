@@ -38,6 +38,10 @@
                   v-model="selectedPrimaryIndex"
                   name="primary-unit-radio-set"
                   :value="index"
+                  v-tooltip="{ 
+                    withCustomContent: true,
+                    activeCustomContent: 'primary-unit-radio-set-tooltip',
+                  }"
                 />
               </div>
               <CAutocomplete
@@ -72,3 +76,11 @@
     </div>
   </div>
 </CModal>
+<div
+  id="primary-unit-radio-set-tooltip"
+  class="primary-unit-radio-set__tooltip"
+>
+  <p>Wybierz jednotkę główną.</p>
+  <p>Pozostałe jednostki bedą przeliczane na główną</p>
+  <p>przy użyciu wartości konwertera.</p>
+</div>

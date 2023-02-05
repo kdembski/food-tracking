@@ -47,3 +47,15 @@
     }
   }
 }
+
+.primary-unit-radio-set__tooltip {
+  p:nth-child(1) {
+    margin-bottom: $spacing-sm;
+  }
+
+  p:nth-child(2),
+  p:nth-child(3) {
+    color: var(--text-tetriary);
+    font-size: $font-xs;
+  }
+}

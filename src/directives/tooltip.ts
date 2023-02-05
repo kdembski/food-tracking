@@ -1,4 +1,4 @@
-import { State } from "./../types/store";
+import { State } from "@/types/store";
 import { Store } from "vuex";
 
 export function useTooltipDirective(store: Store<State>) {
@@ -18,12 +18,15 @@ export function useTooltipDirective(store: Store<State>) {
     clearTimeout(openTimeout);
     openTimeout = setTimeout(
       () => {
+        removeActiveCustomContent();
         store.commit("setTooltipConfig", {
           parent,
           text,
           withCustomContent,
           activeCustomContent,
         });
+        appendActiveCustomContent();
+
         store.commit("setIsTooltipOpen", true);
       },
       isOpen ? 0 : delay
@@ -35,6 +38,43 @@ export function useTooltipDirective(store: Store<State>) {
     closeTimeout = setTimeout(() => {
       store.commit("setIsTooltipOpen", false);
     }, delay);
+  };
+
+  const appendActiveCustomContent = () => {
+    const activeCustomContent = store.state.tooltipConfig.activeCustomContent;
+    if (!activeCustomContent) {
+      return;
+    }
+
+    const customContent = document
+      .getElementById(activeCustomContent)
+      ?.cloneNode(true) as HTMLElement;
+
+    if (!customContent) {
+      return;
+    }
+
+    customContent.style.display = "block";
+    customContent.id = activeCustomContent + "-clone";
+
+    const tooltipContent = document.getElementById("tooltip-content");
+    tooltipContent?.append(customContent);
+  };
+
+  const removeActiveCustomContent = () => {
+    const activeCustomContent = store.state.tooltipConfig.activeCustomContent;
+    if (!activeCustomContent) {
+      return;
+    }
+
+    const customContent = document.getElementById(
+      activeCustomContent + "-clone"
+    );
+    if (!customContent) {
+      return;
+    }
+
+    customContent.remove();
   };
 
   const onMouseLeave = (e: MouseEvent) => {
