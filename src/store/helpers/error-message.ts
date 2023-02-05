@@ -1,4 +1,5 @@
 import { ApiError } from "@/types/api";
+import { State } from "@/types/store";
 import { AxiosError } from "axios";
 
 export const getErrorMessage = (error: AxiosError<ApiError>) => {
@@ -10,9 +11,9 @@ export const getErrorMessage = (error: AxiosError<ApiError>) => {
 
 export const showDefualtErrorNotification = (
   error: AxiosError<ApiError>,
-  rootState: any
+  rootState: State
 ) => {
-  rootState.toastNotification.error(
+  rootState.toastNotification?.error(
     "Wystąpił błąd: " + getErrorMessage(error) + ". Spróbuj ponownie poźniej."
   );
 };

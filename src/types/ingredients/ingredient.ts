@@ -1,3 +1,4 @@
+import { ApiError } from "@/types/api";
 import { ListWithFilters } from "@/types/components/data-display/list";
 
 export interface IngredientState {
@@ -10,6 +11,8 @@ export interface IngredientState {
 
   options: IngredientOption[] | null;
   isLoadingOptions: boolean;
+
+  errors: IngredientErrors | null;
 }
 
 export interface Ingredient {
@@ -46,4 +49,14 @@ export enum IngredientsNavItems {
   LIST = "LIST",
   UNITS = "UNITS",
   CATEGORIES = "CATEGORIES",
+}
+
+export interface IngredientErrors {
+  name: ApiError;
+  categoryId: ApiError;
+  units: {
+    unitId: ApiError;
+    kcalPerUnit: ApiError;
+    converterToPrimary: ApiError;
+  }[];
 }

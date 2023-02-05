@@ -1,15 +1,12 @@
 import ApiService from "@/services/api.service";
-import { ApiError } from "@/types/api";
+import { ApiError, ErrorCodes } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery } from "../helpers/list-query";
 import { ListFilters } from "@/types/components/data-display/list";
 import {
-  getErrorMessage,
-  showDefualtErrorNotification,
-} from "../helpers/error-message";
-import {
   Ingredient,
+  IngredientErrors,
   IngredientOption,
   IngredientsList,
   IngredientState,
@@ -27,6 +24,8 @@ const state: () => IngredientState = () => ({
 
   options: null,
   isLoadingOptions: false,
+
+  errors: null,
 });
 
 const getters: GetterTree<IngredientState, any> = {
@@ -38,10 +37,12 @@ const getters: GetterTree<IngredientState, any> = {
       value: option.id,
       label: option.name,
     })),
+
+  errors: (state) => state.errors,
 };
 
 const actions: ActionTree<IngredientState, any> = {
-  loadList({ commit, rootState }, filters: ListFilters) {
+  loadList({ commit, dispatch }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 
@@ -55,13 +56,13 @@ const actions: ActionTree<IngredientState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingList", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  loadOptions({ commit, rootState }) {
+  loadOptions({ commit, dispatch }) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingOptions", true);
 
@@ -73,13 +74,13 @@ const actions: ActionTree<IngredientState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingOptions", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  load({ commit, rootState }, itemId) {
+  load({ commit, dispatch }, itemId) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoading", true);
 
@@ -91,13 +92,13 @@ const actions: ActionTree<IngredientState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoading", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  create({ commit, rootState }, item: Ingredient) {
+  create({ commit, dispatch, rootState }, item: Ingredient) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -109,13 +110,17 @@ const actions: ActionTree<IngredientState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch(
+            "handleComplexError",
+            { error, module: "ingredient" },
+            { root: true }
+          );
+          reject(error);
         });
     });
   },
 
-  update({ commit, rootState }, item: Ingredient) {
+  update({ commit, dispatch, rootState }, item: Ingredient) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -128,15 +133,19 @@ const actions: ActionTree<IngredientState, any> = {
           commit("setIsSubmitting", false);
           resolve();
         })
-        .catch((error: AxiosError<ApiError>) => {
+        .catch((error: AxiosError<ApiError<IngredientErrors | string>>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch(
+            "handleComplexError",
+            { error, module: "ingredient" },
+            { root: true }
+          );
+          reject(error);
         });
     });
   },
 
-  delete({ commit, rootState }, itemId: number) {
+  delete({ commit, dispatch, rootState }, itemId: number) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -150,8 +159,8 @@ const actions: ActionTree<IngredientState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
@@ -185,6 +194,10 @@ const mutations: MutationTree<IngredientState> = {
 
   setIsLoading(state, value) {
     state.isLoading = value;
+  },
+
+  setErrors(state, value: IngredientErrors) {
+    state.errors = value;
   },
 };
 

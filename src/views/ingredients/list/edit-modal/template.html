@@ -7,11 +7,18 @@
 >
   <EditIngredientModalLoader v-if="isLoading" />
   <div v-else class="edit-ingredient-modal">
-    <CInput v-model="ingredient.name" label="Nazwa składnika" />
+    <CInput
+      v-model="ingredient.name"
+      label="Nazwa składnika"
+      :errorMessage="getErrorMessage(['name'])"
+      @input="clearError(['name'])"
+    />
     <CAutocomplete
       v-model="ingredient.categoryId"
       :options="categoryOptions"
       label="Kategoria"
+      :errorMessage="getErrorMessage(['categoryId'])"
+      @update:modelValue="clearError(['categoryId'])"
     />
     <div class="units">
       <div class="units__header">Jednostki</div>
@@ -38,12 +45,21 @@
               <CAutocomplete
                 v-model="values[index].unitId"
                 :options="unitOptions"
+                :errorMessage="getErrorMessage(['units', index, 'unitId'])"
+                @update:modelValue="clearError(['units', index, 'unitId'])"
               />
-              <CInput v-model="values[index].kcalPerUnit" type="number" />
+              <CInput
+                v-model="values[index].kcalPerUnit"
+                type="number"
+                :errorMessage="getErrorMessage(['units', index, 'kcalPerUnit'])"
+                @input="clearError(['units', index, 'kcalPerUnit'])"
+              />
               <CInput
                 v-model="values[index].converterToPrimary"
                 type="number"
                 :isDisabled="selectedPrimaryIndex == index"
+                :errorMessage="getErrorMessage(['units', index, 'converterToPrimary'])"
+                @input="clearError(['units', index, 'converterToPrimary'])"
               />
             </div>
           </template>

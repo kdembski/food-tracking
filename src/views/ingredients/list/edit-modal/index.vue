@@ -6,6 +6,7 @@ import CMultiInput from "@/components/controls/multi-input/index.vue";
 import CRadio from "@/components/controls/radio/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
 import EditIngredientModalLoader from "./loader/index.vue";
+import { useStoredErrors } from "@/composables/storedErrors";
 
 export default {
   name: "EditIngredientModal",
@@ -50,9 +51,14 @@ const _isOpen = computed({
     return props.isOpen;
   },
   set(value: boolean) {
+    clearAllErrors();
     emits("update:isOpen", value);
   },
 });
+
+const closeModal = () => {
+  _isOpen.value = false;
+};
 
 watch(_isOpen, (value) => {
   ingredient.value = cloneDeep(emptyIngredient);
@@ -76,13 +82,17 @@ const isLoading = computed(
 
 const submit = async () => {
   if (isAddingNewIngredient.value) {
-    await createIngredient().then(() => emits("success"));
-    _isOpen.value = false;
+    createIngredient().then(() => {
+      emits("success");
+      closeModal();
+    });
     return;
   }
 
-  await updateIngredient().then(() => emits("success"));
-  _isOpen.value = false;
+  await updateIngredient().then(() => {
+    emits("success");
+    closeModal();
+  });
 };
 
 const getTitle = () => {
@@ -111,6 +121,9 @@ const {
   createIngredient,
   onUnitRemove,
 } = useIngredient(props);
+
+const { errors, getErrorMessage, clearError, clearAllErrors } =
+  useStoredErrors("ingredient");
 
 const { unitOptions, isLoadingUnitOptions, setUnitOptions } = useUnits();
 const { categoryOptions, isLoadingCategoryOptions, setCategoryOptions } =

@@ -1,4 +1,5 @@
-import { createStore } from "vuex";
+import { ApiError, ErrorCodes } from "@/types/api";
+import { ActionContext, createStore } from "vuex";
 import StorageService from "@/services/storage.service";
 import user from "./user/index";
 import recipe from "./recipe/index";
@@ -7,6 +8,7 @@ import calendar from "./calendar/index";
 import member from "./member";
 import ingredient from "./ingredient";
 import { State } from "@/types/store";
+import { AxiosError } from "axios";
 
 export default createStore<State>({
   state: {
@@ -17,6 +19,7 @@ export default createStore<State>({
     isTooltipOpen: false,
     tooltipConfig: {},
     isMobileDropdownOpen: false,
+    toastNotification: null,
   },
 
   getters: {
@@ -62,6 +65,35 @@ export default createStore<State>({
 
     setIsMobileDropdownOpen(state, value) {
       state.isMobileDropdownOpen = value;
+    },
+  },
+
+  actions: {
+    handleDefaultError({ state }, error: AxiosError<ApiError>) {
+      const errorMessage: string | undefined =
+        error.response?.data?.message || error.code;
+
+      state.toastNotification?.error(
+        "Wystąpił błąd: " + errorMessage + ". Spróbuj ponownie poźniej."
+      );
+    },
+
+    handleComplexError(
+      { commit, dispatch }: ActionContext<State, State>,
+      {
+        error,
+        module,
+      }: { error: AxiosError<ApiError<unknown | string>>; module: string }
+    ) {
+      const code = error.response?.data?.code;
+      const message = error.response?.data?.message;
+
+      if (code !== ErrorCodes.COMPLEX_ERROR) {
+        dispatch("handleDefaultError", error);
+        return;
+      }
+
+      commit(module + "/setErrors", message);
     },
   },
 
