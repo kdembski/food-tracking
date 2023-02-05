@@ -4,6 +4,7 @@
   :submitButtonLabel="getSubmitButtonLabel()"
   :isSubmitting="isSubmitting"
   @submit="submit"
+  containerElement="form"
 >
   <EditIngredientModalLoader v-if="isLoading" />
   <div v-else class="edit-ingredient-modal">
@@ -12,6 +13,7 @@
       label="Nazwa składnika"
       :errorMessage="getErrorMessage(['name'])"
       @input="clearError(['name'])"
+      isRequired
     />
     <CAutocomplete
       v-model="ingredient.categoryId"
@@ -19,14 +21,10 @@
       label="Kategoria"
       :errorMessage="getErrorMessage(['categoryId'])"
       @update:modelValue="clearError(['categoryId'])"
+      isRequired
     />
     <div class="units">
       <div class="units__header">Jednostki</div>
-      <div class="units__headings">
-        <p>Nazwa</p>
-        <p>Kalorie</p>
-        <p>Konwerter</p>
-      </div>
       <div class="units__wrapper">
         <CMultiInput
           v-model="ingredient.units"
@@ -47,19 +45,25 @@
                 :options="unitOptions"
                 :errorMessage="getErrorMessage(['units', index, 'unitId'])"
                 @update:modelValue="clearError(['units', index, 'unitId'])"
+                :label="index === 0 ? 'Nazwa' : ''"
+                isRequired
               />
               <CInput
                 v-model="values[index].kcalPerUnit"
                 type="number"
                 :errorMessage="getErrorMessage(['units', index, 'kcalPerUnit'])"
                 @input="clearError(['units', index, 'kcalPerUnit'])"
+                :label="index === 0 ? 'Kalorie' : ''"
+                isRequired
               />
               <CInput
                 v-model="values[index].converterToPrimary"
                 type="number"
-                :isDisabled="selectedPrimaryIndex == index"
+                :isDisabled="selectedPrimaryIndex === index"
                 :errorMessage="getErrorMessage(['units', index, 'converterToPrimary'])"
                 @input="clearError(['units', index, 'converterToPrimary'])"
+                :label="index === 0 ? 'Konwerter' : ''"
+                isRequired
               />
             </div>
           </template>

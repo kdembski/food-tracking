@@ -5,6 +5,7 @@ interface FieldTemplateProps {
   icon: string;
   isLoading: boolean;
   isSuccessful: boolean;
+  isRequired: boolean;
 }
 
 export function useFieldProps() {
@@ -37,6 +38,10 @@ export function useFieldProps() {
       type: Boolean,
       default: false,
     },
+    isRequired: {
+      type: Boolean,
+      default: false,
+    },
   };
 
   const getFieldTemplateProps = (
@@ -49,6 +54,7 @@ export function useFieldProps() {
       icon: props.icon,
       isLoading: props.isLoading,
       isSuccessful: props.isSuccessful,
+      isRequired: props.isRequired,
     };
   };
 

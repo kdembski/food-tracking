@@ -1,7 +1,11 @@
 <Teleport to="body">
   <transition name="modal__transition">
     <div v-if="_isOpen" class="modal modal__overlay">
-      <div class="modal__container">
+      <component
+        :is="containerElement"
+        class="modal__container"
+        @submit.prevent="onSubmit"
+      >
         <CLoader
           v-if="isSubmitting"
           class="modal__loader"
@@ -12,6 +16,7 @@
         <div class="modal__header">
           <p>{{ title }}</p>
           <CButton
+            type="button"
             color="secondary"
             variant="text"
             icon="times"
@@ -26,11 +31,11 @@
         <div class="modal__footer">
           <CButton
             :label="submitButtonLabel"
-            @click="onSubmit"
+            v-on="!isContainerForm() ? { click: onSubmit } : {}"
             :isDisabled="isSubmitButtonDisabled"
           />
         </div>
-      </div>
+      </component>
     </div>
   </transition>
 </Teleport>

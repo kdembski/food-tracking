@@ -92,6 +92,12 @@ $labelPosition: 16px;
     top: -$labelPosition;
     left: 0;
     @include uppercasedSecondaryText;
+    display: flex;
+    gap: 2px;
+  }
+
+  &__asterisk {
+    color: var(--primary);
   }
 
   &__error-message {

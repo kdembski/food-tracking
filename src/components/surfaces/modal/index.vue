@@ -32,6 +32,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  containerElement: {
+    type: String,
+    default: "div",
+  },
 });
 
 const emits = defineEmits<{
@@ -54,6 +58,10 @@ const closeModal = () => {
 
 const onSubmit = () => {
   emits("submit");
+};
+
+const isContainerForm = () => {
+  return props.containerElement === "form";
 };
 </script>
 
