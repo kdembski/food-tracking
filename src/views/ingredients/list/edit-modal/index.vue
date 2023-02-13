@@ -6,7 +6,7 @@ import CMultiInput from "@/components/controls/multi-input/index.vue";
 import CRadio from "@/components/controls/radio/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
 import EditIngredientModalLoader from "./loader/index.vue";
-import { useStoredErrors } from "@/composables/storedErrors";
+import { useStoredErrors } from "@/composables/stored-errors";
 
 export default {
   name: "EditIngredientModal",
@@ -56,10 +56,6 @@ const _isOpen = computed({
   },
 });
 
-const closeModal = () => {
-  _isOpen.value = false;
-};
-
 watch(_isOpen, (value) => {
   ingredient.value = cloneDeep(emptyIngredient);
   if (!value) {
@@ -72,6 +68,10 @@ watch(_isOpen, (value) => {
     setIngredient();
   }
 });
+
+const closeModal = () => {
+  _isOpen.value = false;
+};
 
 const isLoading = computed(
   () =>
@@ -89,7 +89,7 @@ const submit = async () => {
     return;
   }
 
-  await updateIngredient().then(() => {
+  updateIngredient().then(() => {
     emits("success");
     closeModal();
   });

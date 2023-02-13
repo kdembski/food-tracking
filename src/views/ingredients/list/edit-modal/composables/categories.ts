@@ -1,5 +1,6 @@
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+
 export function useCategories() {
   const store = useStore();
 

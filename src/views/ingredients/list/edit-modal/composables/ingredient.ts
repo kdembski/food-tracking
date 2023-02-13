@@ -15,19 +15,21 @@ export function useIngredient(props: any) {
 
   const ingredient = ref(cloneDeep(emptyIngredient));
   const isAddingNewIngredient = computed(() => !props.ingredientId);
-  const isSubmitting = computed(() => {
-    return store.state.ingredient.isSubmitting;
-  });
   const isLoadingIngredient = computed(() => store.state.ingredient.isLoading);
+  const isSubmitting = computed(() => store.state.ingredient.isSubmitting);
 
   const setIngredient = async () => {
     await store.dispatch("ingredient/load", props.ingredientId);
     ingredient.value = store.state.ingredient.single;
 
-    if (ingredient.value.units?.length === 0) {
-      ingredient.value.units.push({});
+    if (getUnitsLength() === 0) {
+      ingredient.value.units = [{}];
     }
     selectedPrimaryIndex.value = getIndexOfPrimaryUnit();
+  };
+
+  const getUnitsLength = () => {
+    return ingredient.value.units?.length || 0;
   };
 
   const getIndexOfPrimaryUnit = () => {
@@ -45,12 +47,11 @@ export function useIngredient(props: any) {
   };
 
   const onUnitRemove = () => {
-    if ((ingredient.value.units?.length || 0) > selectedPrimaryIndex.value) {
+    if (getUnitsLength() > selectedPrimaryIndex.value) {
       return;
     }
 
     selectedPrimaryIndex.value = 0;
-
     updatePrimaryUnit();
   };
 
@@ -75,5 +76,6 @@ export function useIngredient(props: any) {
     updateIngredient,
     createIngredient,
     onUnitRemove,
+    updatePrimaryUnit,
   };
 }
