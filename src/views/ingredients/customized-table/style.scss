@@ -1,0 +1,30 @@
+.customized-table {
+  width: 100%;
+  flex-grow: 1;
+
+  &__add-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: -45px;
+    height: 45px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .customized-table {
+    &__buttons {
+      padding: 0 $spacing-lg;
+    }
+
+    &__edit-button {
+      margin: 0;
+    }
+  }
+}

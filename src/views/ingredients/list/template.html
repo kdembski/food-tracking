@@ -1,51 +1,20 @@
 <div class="ingredients-list">
-  <div class="ingredients-list__add-button">
-    <CButton
-      :label="isMobile ? '' : 'Dodaj składnik'"
-      icon="plus"
-      variant="text"
-      :size="isMobile ? 'large' : 'small'"
-      @click="onAddButtonClick"
-    />
-  </div>
-  <CTableWithFilters
+  <CustomizedTable
     listName="ingredientsList"
     storeModuleName="ingredient"
     :defaultFilters="ingredientsListDefaultFilters"
     :columns="ingredientsListColumns"
-    ref="table"
+    :deleteItem="deleteIngredient"
+    :isSubmittingItem="isSubmittingIngredient"
+    addButtonLabel="Dodaj składnik"
+    @editItem="isEditModalOpen = true"
   >
-    <template #editButton="{ item }">
-      <div class="ingredients-list__buttons">
-        <CButton
-          color="secondary"
-          variant="text"
-          icon="pen-to-square"
-          v-tooltip="{ text: 'Edytuj ' + item.name }"
-          @click="editIngredient(item.id)"
-        />
-        <CButton
-          color="secondary"
-          variant="text"
-          icon="trash-can"
-          v-tooltip="{ text: 'Usuń ' + item.name }"
-          @click="openDeleteModal(item.id)"
-        />
-      </div>
+    <template #editModal="{ editedItemId, handleListLoadingProccess }">
+      <EditIngedientModal
+        v-model:isOpen="isEditModalOpen"
+        :ingredientId="editedItemId"
+        @success="handleListLoadingProccess"
+      />
     </template>
-  </CTableWithFilters>
+  </CustomizedTable>
 </div>
-<EditIngedientModal
-  v-model:isOpen="isEditModalOpen"
-  :ingredientId="editedIngredientId"
-  @success="table?.handleListLoadingProccess"
-/>
-<CModal
-  v-model:isOpen="isDeleteModalOpen"
-  title="Na pewno?"
-  submitButtonLabel="Usuń"
-  :isSubmitting="isSubmittingIngredient"
-  @submit="deleteIngredient"
->
-  <p>Na pewno chcesz usunać?</p>
-</CModal>

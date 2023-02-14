@@ -1,0 +1,52 @@
+<div class="customized-table">
+  <div class="customized-table__add-button">
+    <CButton
+      :label="isMobile ? '' : addButtonLabel"
+      icon="plus"
+      variant="text"
+      :size="isMobile ? 'large' : 'small'"
+      @click="onAddButtonClick"
+    />
+  </div>
+  <CTableWithFilters
+    :listName="listName"
+    :storeModuleName="storeModuleName"
+    :defaultFilters="defaultFilters"
+    :columns="columns"
+    ref="table"
+  >
+    <template #buttons="{ item }">
+      <div class="customized-table__buttons">
+        <CButton
+          color="secondary"
+          variant="text"
+          icon="pen-to-square"
+          v-tooltip="{ text: 'Edytuj ' + item.name }"
+          @click="editItem(item.id)"
+        />
+        <CButton
+          color="secondary"
+          variant="text"
+          icon="trash-can"
+          v-tooltip="{ text: 'Usuń ' + item.name }"
+          @click="openDeleteModal(item.id)"
+        />
+      </div>
+    </template>
+  </CTableWithFilters>
+</div>
+<slot
+  name="editModal"
+  :editedItemId="editedItemId"
+  :handleListLoadingProccess="table?.handleListLoadingProccess"
+>
+</slot>
+<CModal
+  v-model:isOpen="isDeleteModalOpen"
+  title="Na pewno?"
+  submitButtonLabel="Usuń"
+  :isSubmitting="isSubmittingItem"
+  @submit="deleteItem"
+>
+  <p>Na pewno chcesz usunać?</p>
+</CModal>

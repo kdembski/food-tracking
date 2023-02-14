@@ -1,22 +1,19 @@
 <script lang="ts">
-import CTableWithFilters from "@/components/data-display/listings/table-with-filters/index.vue";
-import CButton from "@/components/controls/button/index.vue";
 import EditIngedientModal from "./edit-modal/index.vue";
-import CModal from "@/components/surfaces/modal/index.vue";
+import CustomizedTable from "../customized-table/index.vue";
 
 export default {
   name: "IngredientsList",
-  components: { CTableWithFilters, CButton, EditIngedientModal, CModal },
+  components: { CustomizedTable, EditIngedientModal },
 };
 </script>
 
 <script setup lang="ts">
-import { computed, ref, Ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import { useWindowSize } from "@/composables/window-size";
 
-const { isMobile } = useWindowSize();
 const store = useStore();
+const isEditModalOpen = ref(false);
 
 const ingredientsListDefaultFilters = {
   currentPage: 1,
@@ -36,43 +33,16 @@ const ingredientsListColumns = [
     getItemColumnValue: (value: string[]) => value.join("\xa0\xa0|\xa0\xa0"),
   },
   {
-    value: "editButton",
+    value: "buttons",
   },
 ];
-
-const table: Ref<{ handleListLoadingProccess: () => void } | undefined> = ref();
-
-const isEditModalOpen = ref(false);
-const editedIngredientId: Ref<number | undefined> = ref();
-
-const onAddButtonClick = () => {
-  editIngredient();
-};
-
-const editIngredient = (id?: number) => {
-  editedIngredientId.value = id;
-  isEditModalOpen.value = true;
-};
-
-const isDeleteModalOpen = ref(false);
-const deletedIngredientId: Ref<number | undefined> = ref();
 
 const isSubmittingIngredient = computed(() => {
   return store.state.ingredient.isSubmitting;
 });
 
-const openDeleteModal = (id: number) => {
-  isDeleteModalOpen.value = true;
-  deletedIngredientId.value = id;
-};
-
-const deleteIngredient = () => {
-  store
-    .dispatch("ingredient/delete", deletedIngredientId.value)
-    .then(() => table.value?.handleListLoadingProccess())
-    .finally(() => {
-      isDeleteModalOpen.value = false;
-    });
+const deleteIngredient = (id: number) => {
+  return store.dispatch("ingredient/delete", id);
 };
 </script>
 

@@ -1,30 +1,4 @@
 .ingredients-list {
-  width: 100%;
-  flex-grow: 1;
-
-  &__add-button {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: -45px;
-    height: 45px;
-  }
-
-  &__buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: $spacing-sm;
-  }
-}
-
-@media screen and (max-width: $screen-md) {
-  .ingredients-list {
-    &__buttons {
-      padding: 0 $spacing-lg;
-    }
-
-    &__edit-button {
-      margin: 0;
-    }
-  }
+  display: flex;
+  height: 100%;
 }
