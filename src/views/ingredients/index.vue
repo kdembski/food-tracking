@@ -1,10 +1,11 @@
 <script lang="ts">
 import IngredientsList from "./list/index.vue";
+import UnitsList from "./units/index.vue";
 import CHorizontalTabs from "@/components/navigation/horizontal-tabs/index.vue";
 
 export default {
   name: "IngredientsView",
-  components: { IngredientsList, CHorizontalTabs },
+  components: { IngredientsList, CHorizontalTabs, UnitsList },
 };
 </script>
 

@@ -1,0 +1,27 @@
+<CModal
+  v-model:isOpen="_isOpen"
+  :title="getTitle()"
+  :submitButtonLabel="getSubmitButtonLabel()"
+  :isSubmitting="isSubmitting"
+  @submit="submit"
+  containerElement="form"
+>
+  <div class="edit-unit-modal">
+    <CInput
+      v-model="unit.name"
+      label="Nazwa"
+      :isLoading="isLoading"
+      :errorMessage="getErrorMessage(['name'])"
+      @input="clearError(['name'])"
+      isRequired
+    />
+    <CInput
+      v-model="unit.shortcut"
+      label="Skrót"
+      :isLoading="isLoading"
+      :errorMessage="getErrorMessage(['shortcut'])"
+      @update:modelValue="clearError(['shortcut'])"
+      isRequired
+    />
+  </div>
+</CModal>

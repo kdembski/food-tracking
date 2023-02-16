@@ -1,0 +1,20 @@
+<div class="units-list">
+  <CustomizedTable
+    listName="unitsList"
+    storeModuleName="ingredient/unit"
+    :defaultFilters="unitsListDefaultFilters"
+    :columns="unitsListColumns"
+    :deleteItem="deleteUnit"
+    :isSubmittingItem="isSubmittingUnit"
+    addButtonLabel="Dodaj jednostkę"
+    @editItem="isEditModalOpen = true"
+  >
+    <template #editModal="{ editedItemId, handleListLoadingProccess }">
+      <EditUnitModal
+        v-model:isOpen="isEditModalOpen"
+        :unitId="editedItemId"
+        @success="handleListLoadingProccess"
+      />
+    </template>
+  </CustomizedTable>
+</div>
