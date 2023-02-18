@@ -114,7 +114,7 @@ const getSubmitButtonLabel = () => {
 };
 
 const { errors, getErrorMessage, clearError, clearAllErrors } =
-  useStoredErrors("unit");
+  useStoredErrors("ingredient/unit");
 </script>
 
 <template src="./template.html"></template>

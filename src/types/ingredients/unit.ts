@@ -1,4 +1,5 @@
 import { ListWithFilters } from "@/types/components/data-display/list";
+import { ApiError } from "../api";
 
 export interface IngredientUnitState {
   single: IngredientUnit | null;
@@ -10,6 +11,8 @@ export interface IngredientUnitState {
 
   options: IngredientUnitOption[] | null;
   isLoadingOptions: boolean;
+
+  errors: IngredientUnitErrors | null;
 }
 
 export interface IngredientUnit {
@@ -30,3 +33,8 @@ export interface IngredientUnitOption {
 }
 
 export type IngredientUnitsList = ListWithFilters<IngredientUnit>;
+
+export interface IngredientUnitErrors {
+  name: ApiError;
+  shortcut: ApiError;
+}

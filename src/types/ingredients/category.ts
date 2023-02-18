@@ -1,4 +1,5 @@
 import { ListWithFilters } from "@/types/components/data-display/list";
+import { ApiError } from "../api";
 
 export interface IngredientCategoryState {
   single: IngredientCategory | null;
@@ -10,6 +11,8 @@ export interface IngredientCategoryState {
 
   options: IngredientCategoryOption[] | null;
   isLoadingOptions: boolean;
+
+  errors: IngredientCategoryErrors | null;
 }
 
 export interface IngredientCategory {
@@ -23,3 +26,7 @@ export interface IngredientCategoryOption {
 }
 
 export type IngredientCategoriesList = ListWithFilters<IngredientCategory>;
+
+export interface IngredientCategoryErrors {
+  name: ApiError;
+}

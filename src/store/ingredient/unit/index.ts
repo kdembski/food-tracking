@@ -5,14 +5,11 @@ import { AxiosResponse, AxiosError } from "axios";
 import { ListFilters } from "@/types/components/data-display/list";
 import {
   IngredientUnit,
+  IngredientUnitErrors,
   IngredientUnitOption,
   IngredientUnitsList,
   IngredientUnitState,
 } from "@/types/ingredients/unit";
-import {
-  getErrorMessage,
-  showDefualtErrorNotification,
-} from "@/store/helpers/error-message";
 import { getListQuery } from "@/store/helpers/list-query";
 
 const state: IngredientUnitState = {
@@ -25,6 +22,8 @@ const state: IngredientUnitState = {
 
   options: null,
   isLoadingOptions: false,
+
+  errors: null,
 };
 
 const getters: GetterTree<IngredientUnitState, any> = {
@@ -36,10 +35,12 @@ const getters: GetterTree<IngredientUnitState, any> = {
       value: option.id,
       label: option.name,
     })),
+
+  errors: (state) => state.errors,
 };
 
 const actions: ActionTree<IngredientUnitState, any> = {
-  loadList({ commit, rootState }, filters: ListFilters) {
+  loadList({ commit, dispatch }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 
@@ -55,13 +56,13 @@ const actions: ActionTree<IngredientUnitState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingList", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject();
         });
     });
   },
 
-  loadOptions({ commit, rootState }) {
+  loadOptions({ commit, dispatch }) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingOptions", true);
 
@@ -75,13 +76,13 @@ const actions: ActionTree<IngredientUnitState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingOptions", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject();
         });
     });
   },
 
-  load({ commit, rootState }, itemId) {
+  load({ commit, dispatch }, itemId) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoading", true);
 
@@ -95,13 +96,13 @@ const actions: ActionTree<IngredientUnitState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoading", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject();
         });
     });
   },
 
-  create({ commit, rootState }, item: IngredientUnit) {
+  create({ commit, dispatch, rootState }, item: IngredientUnit) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -116,13 +117,17 @@ const actions: ActionTree<IngredientUnitState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch(
+            "handleComplexError",
+            { error, module: "ingredient/unit" },
+            { root: true }
+          );
+          reject();
         });
     });
   },
 
-  update({ commit, rootState }, item: IngredientUnit) {
+  update({ commit, dispatch, rootState }, item: IngredientUnit) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -137,13 +142,17 @@ const actions: ActionTree<IngredientUnitState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch(
+            "handleComplexError",
+            { error, module: "ingredient/unit" },
+            { root: true }
+          );
+          reject();
         });
     });
   },
 
-  delete({ commit, rootState }, itemId: number) {
+  delete({ commit, dispatch, rootState }, itemId: number) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -157,8 +166,8 @@ const actions: ActionTree<IngredientUnitState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject();
         });
     });
   },
@@ -191,6 +200,10 @@ const mutations: MutationTree<IngredientUnitState> = {
 
   setIsLoading(state, value) {
     state.isLoading = value;
+  },
+
+  setErrors(state, value: IngredientUnitErrors) {
+    state.errors = value;
   },
 };
 
