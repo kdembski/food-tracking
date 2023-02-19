@@ -57,7 +57,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingList", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject();
+          reject(error);
         });
     });
   },
@@ -77,7 +77,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingOptions", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject();
+          reject(error);
         });
     });
   },
@@ -97,7 +97,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoading", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject();
+          reject(error);
         });
     });
   },
@@ -122,7 +122,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
             { error, module: "ingredient/unit" },
             { root: true }
           );
-          reject();
+          reject(error);
         });
     });
   },
@@ -147,7 +147,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
             { error, module: "ingredient/unit" },
             { root: true }
           );
-          reject();
+          reject(error);
         });
     });
   },
@@ -167,7 +167,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject();
+          reject(error);
         });
     });
   },

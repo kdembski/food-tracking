@@ -1,0 +1,19 @@
+<CModal
+  v-model:isOpen="_isOpen"
+  :title="getTitle()"
+  :submitButtonLabel="getSubmitButtonLabel()"
+  :isSubmitting="isSubmitting"
+  @submit="submit"
+  containerElement="form"
+>
+  <div class="edit-category-modal">
+    <CInput
+      v-model="category.name"
+      label="Nazwa"
+      :isLoading="isLoading"
+      :errorMessage="getErrorMessage(['name'])"
+      @input="clearError(['name'])"
+      isRequired
+    />
+  </div>
+</CModal>

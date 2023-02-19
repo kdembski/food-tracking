@@ -1,0 +1,20 @@
+<div class="categories-list">
+  <CustomizedTable
+    listName="categoriesList"
+    storeModuleName="ingredient/category"
+    :defaultFilters="categoriesListDefaultFilters"
+    :columns="categoriesListColumns"
+    :deleteItem="deleteCategory"
+    :isSubmittingItem="isSubmittingCategory"
+    addButtonLabel="Dodaj kategorię"
+    @editItem="isEditModalOpen = true"
+  >
+    <template #editModal="{ editedItemId, handleListLoadingProccess }">
+      <EditCategoryModal
+        v-model:isOpen="isEditModalOpen"
+        :categoryId="editedItemId"
+        @success="handleListLoadingProccess"
+      />
+    </template>
+  </CustomizedTable>
+</div>
