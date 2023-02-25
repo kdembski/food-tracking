@@ -17,7 +17,10 @@ const props = defineProps<{ container?: HTMLElement }>();
 const getLoaderMaxHeight = () => {
   const containerOffsetTop = props.container?.offsetTop;
   const containerHeight =
-    windowHeight.value - (containerOffsetTop || 0) - (isMobile.value ? 64 : 0);
+    windowHeight.value -
+    (containerOffsetTop || 0) -
+    (isMobile.value ? 64 : 0) -
+    1;
   return { maxHeight: containerHeight + "px" };
 };
 </script>

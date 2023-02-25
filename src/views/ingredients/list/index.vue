@@ -17,7 +17,7 @@ const isEditModalOpen = ref(false);
 
 const ingredientsListDefaultFilters = {
   currentPage: 1,
-  pageSize: 50,
+  pageSize: 20,
   searchPhrase: "",
   sortAttribute: "id",
   sortDirection: "asc",
