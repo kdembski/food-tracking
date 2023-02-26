@@ -14,6 +14,7 @@ import {
   getErrorMessage,
   showDefualtErrorNotification,
 } from "../helpers/error-message";
+import ingredient from "./ingredient";
 
 const state: RecipeState = {
   single: null,
@@ -268,4 +269,7 @@ export default {
   getters,
   actions,
   mutations,
+  modules: {
+    ingredient,
+  },
 };

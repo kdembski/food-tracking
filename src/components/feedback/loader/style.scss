@@ -10,7 +10,7 @@
   z-index: $layer-1;
 
   &--with-overlay {
-    background-color: $overlay-color;
+    background-color: rgba(var(--surface-primary-rgb), 0.75);
   }
 
   svg {

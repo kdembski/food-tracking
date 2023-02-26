@@ -10,7 +10,7 @@ import { h } from "vue";
 import LoginView from "../views/login/index.vue";
 import RecipesListView from "../views/recipes/list/index.vue";
 import NewRecipeView from "../views/recipes/new/index.vue";
-import EditRecipeView from "../views/recipes/edit/index.vue";
+import RecipeDetailsView from "../views/recipes/details/index.vue";
 import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 import SettingsView from "../views/settings/index.vue";
 import CalendarView from "../views/calendar/index.vue";
@@ -58,10 +58,10 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: ":id",
-        name: "EditRecipe",
-        component: EditRecipeView,
+        name: "RecipeDetails",
+        component: RecipeDetailsView,
         meta: {
-          maxWidth: 600,
+          maxWidth: 1000,
         },
       },
     ],

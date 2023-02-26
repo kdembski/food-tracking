@@ -1,0 +1,95 @@
+<div v-if="!isEditing" class="recipe">
+  <RecipeLoader v-if="isLoadingRecipe" />
+  <template v-else>
+    <header class="recipe__header">
+      <h1>
+        {{ recipe.recipeName }}
+        <CButton
+          v-if="recipe.cookidooLink"
+          color="secondary"
+          variant="text"
+          @click="openCookidooLink"
+          class="recipe__cookidoo-link"
+          v-tooltip="{ text: 'Otwórz w Cookidoo' }"
+        >
+          <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+        </CButton>
+      </h1>
+      <CDisplayTags :tags="recipe.tags" :size="isMobile ? 'small' : 'medium'" />
+    </header>
+    <div class="recipe__attributes">
+      <div class="recipe__attribute">
+        <div><FontAwesomeIcon :icon="['far', 'clock']" /></div>
+        <div>
+          <p>Czas przygotowania</p>
+          <p>{{ getPreparationTime(recipe.preparationTime) }}</p>
+        </div>
+      </div>
+      <div class="recipe__attribute">
+        <div><FontAwesomeIcon :icon="['far', 'calendar']" /></div>
+        <div>
+          <p>Ostatnio gotowane</p>
+          <p>{{ getFormattedCookedDate(recipe.cookedDate) }}</p>
+        </div>
+      </div>
+    </div>
+  </template>
+  <div class="recipe__buttons">
+    <CButton
+      color="secondary"
+      size="small"
+      icon="pen-to-square"
+      label="Edytuj"
+      :isLoading="isLoadingRecipe"
+      @click="startEditing"
+    />
+    <CButton
+      color="secondary"
+      size="small"
+      icon="trash-can"
+      label="Usuń"
+      :isLoading="isLoadingRecipe"
+    />
+    <CButton
+      color="secondary"
+      size="small"
+      :icon="['far', 'calendar']"
+      label="Dodaj do kalendarza"
+      :isLoading="isLoadingRecipe"
+    />
+    <CButton
+      color="secondary"
+      size="small"
+      icon="cart-shopping"
+      label="Dodaj do zakupów"
+      :isLoading="isLoadingRecipe"
+    />
+  </div>
+</div>
+<div v-else class="edit-recipe">
+  <RecipeFields :recipe="recipe" />
+  <div class="edit-recipe__buttons">
+    <CButton
+      color="secondary"
+      size="small"
+      icon="check"
+      label="Zapisz"
+      :isLoading="isUpdatingRecipe"
+      @click="updateRecipe"
+    />
+    <CButton
+      color="secondary"
+      size="small"
+      icon="times"
+      label="Anuluj"
+      :isLoading="isUpdatingRecipe"
+      @click="cancelEditing"
+    />
+  </div>
+  <CLoader
+    v-if="isUpdatingRecipe"
+    :circleHeight="40"
+    :circleWidth="40"
+    withOverlay
+  />
+</div>

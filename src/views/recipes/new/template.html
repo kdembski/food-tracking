@@ -3,20 +3,7 @@
     <h1>Dodaj przepis</h1>
   </header>
   <div class="new-recipe__body">
-    <CInput v-model="newRecipe.recipeName" label="Nazwa" />
-    <CInput
-      v-model="newRecipe.preparationTime"
-      label="Czas przygotowania"
-      type="number"
-    />
-    <CInput v-model="newRecipe.cookidooLink" label="Link do cookidoo" />
-    <CSelectTags
-      v-model:selectedTags="newRecipe.tags"
-      v-model:tags="recipesTags"
-      :isLoading="isLoadingRecipesTags"
-      inputIcon=""
-      enableAddingTags
-    />
+    <RecipeFields :recipe="newRecipe" />
   </div>
   <div class="new-recipe__buttons">
     <CButton label="Dodaj" icon="plus" @click="createRecipe" />

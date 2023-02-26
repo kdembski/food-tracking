@@ -1,0 +1,59 @@
+.recipe-loader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+
+  .title {
+    height: 26px;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    height: 14px;
+  }
+
+  .attributes {
+    display: flex;
+    gap: $spacing-3xl;
+  }
+
+  .attribute {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+
+    > div:first-child {
+      height: 45px;
+      width: 45px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    > div:last-child {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      > div:first-child {
+        width: 150px;
+        height: 14px;
+      }
+
+      > div:last-child {
+        width: 120px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .recipe-loader {
+    .attributes {
+      flex-direction: column;
+      gap: $spacing-xl;
+    }
+  }
+}

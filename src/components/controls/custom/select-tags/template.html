@@ -2,7 +2,7 @@
   class="select-tags__input"
   v-model="searchPhrase"
   :icon="inputIcon"
-  placeholder="Wyszukaj tag"
+  :placeholder="'Wyszukaj tag' + (enableAddingTags ? ' albo dodaj nowy' : '')"
   :isLoading="isLoading"
   label="Tagi"
   ref="inputRef"

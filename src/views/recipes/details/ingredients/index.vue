@@ -5,7 +5,7 @@ import CSelectTags from "@/components/controls/custom/select-tags/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 
 export default {
-  name: "EditRecipeView",
+  name: "RecipeDetailsIngredients",
   components: {
     CButton,
     CInput,
@@ -16,36 +16,35 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
 const store = useStore();
 const route = useRoute();
 
-const isLoadingRecipe = computed(() => store.state.recipe.isLoading);
-const isUpdatingRecipe = computed(() => store.state.recipe.isSubmitting);
-const isLoadingRecipesTags = computed(() => store.state.recipe.isLoadingTags);
+const isLoadingIngredients = computed(
+  () => store.state.recipe.ingredient.isLoadingCollection
+);
+const isUpdatingIngredients = computed(
+  () => store.state.recipe.ingredient.isSubmittingCollection
+);
 const recipeId = computed(() => route.params.id);
-const recipe = computed(() => store.state.recipe.single);
-const recipesTags = ref();
+const ingredients = computed(() => store.state.recipe.ingredient.collection);
 
 onBeforeMount(() => {
-  loadRecipe();
-  setRecipesTags();
+  loadIngredients();
 });
 
-const loadRecipe = () => {
-  return store.dispatch("recipe/load", recipeId.value);
+const loadIngredients = () => {
+  return store.dispatch("recipe/ingredient/loadCollection", recipeId.value);
 };
 
-const setRecipesTags = async () => {
-  await store.dispatch("recipe/loadTags");
-  recipesTags.value = store.getters["recipe/tags"];
-};
-
-const updateRecipe = async () => {
-  await store.dispatch("recipe/update", recipe.value);
+const updateIngredients = async () => {
+  await store.dispatch("recipe/ingredient/updateCollection", {
+    collection: ingredients,
+    recipeId: recipeId.value,
+  });
 };
 </script>
 
