@@ -100,6 +100,11 @@ describe("Button Component", () => {
     });
 
     const loaderStub = wrapper.findComponent("c-loader-stub");
+    expect(loaderStub.props().circleWidth).toEqual(20);
+
+    await wrapper.setProps({
+      label: "test",
+    });
     expect(loaderStub.props().circleWidth).toEqual(24);
 
     await wrapper.setProps({
