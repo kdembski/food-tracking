@@ -11,6 +11,7 @@ $surface-lightest: $white;
 $surface-lighter: lighten($secondary, 60);
 $surface-light: lighten($secondary, 56);
 $border-light: lighten($secondary, 52);
+$border-lighter: lighten($secondary, 58);
 
 $text-darkest: darken($secondary, 30);
 $text-darker: $secondary;
@@ -20,6 +21,7 @@ $surface-darkest: darken($secondary, 26);
 $surface-darker: darken($secondary, 22);
 $surface-dark: darken($secondary, 18);
 $border-dark: darken($secondary, 14);
+$border-darker: darken($secondary, 20);
 
 $text-lightest: lighten($secondary, 55);
 $text-lighter: lighten($secondary, 32);

@@ -6,10 +6,12 @@
   .title {
     height: 26px;
     margin-bottom: 10px;
+    width: 70%;
   }
 
   .subtitle {
     height: 14px;
+    width: 50%;
   }
 
   .attributes {
@@ -51,6 +53,14 @@
 
 @media screen and (max-width: $screen-md) {
   .recipe-loader {
+    .title {
+      width: 100%;
+    }
+
+    .subtitle {
+      width: 100%;
+    }
+
     .attributes {
       flex-direction: column;
       gap: $spacing-xl;

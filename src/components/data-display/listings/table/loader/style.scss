@@ -15,7 +15,7 @@
     display: flex;
     height: 78px;
     gap: $spacing-2xl;
-    box-shadow: 0 1px var(--border-color);
+    box-shadow: 0 1px var(--border-secondary);
     padding: 0 $spacing-sm;
 
     .skeleton-loader__item {
@@ -36,7 +36,7 @@
     display: flex;
     gap: $spacing-2xl;
     padding: $spacing-sm;
-    box-shadow: 0 1px var(--border-color);
+    box-shadow: 0 1px var(--border-secondary);
 
     .skeleton-loader__item {
       margin-right: 45%;
