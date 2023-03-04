@@ -28,7 +28,7 @@
     }
 
     &:deep(.skeleton-loader__item) {
-      background-color: rgba(var(--surface-secondary-rgb), 0.8);
+      background-color: var(--surface-secondary);
     }
   }
 
@@ -45,7 +45,7 @@
     }
 
     &:deep(.skeleton-loader__item) {
-      background-color: rgba(var(--surface-tetriary-rgb), 1);
+      background-color: var(--surface-tetriary);
     }
   }
 
