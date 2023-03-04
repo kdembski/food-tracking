@@ -65,6 +65,10 @@ const handleSizeOnMobile = (size: string): string => {
 };
 
 const getLoaderSize = (): number => {
+  if (!props.label) {
+    return 20;
+  }
+
   switch (handleSizeOnMobile(props.size)) {
     case "small":
       return 20;

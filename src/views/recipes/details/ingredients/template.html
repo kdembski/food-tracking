@@ -30,21 +30,24 @@
     />
     <CSetPortions v-model="portions" />
   </div>
-  <template v-if="!isEditing">
-    <div class="recipe-ingredients__content">
-      <div class="recipe-ingredients__item" v-for="ingredient in ingredients">
-        <p>{{ ingredient.ingredientName }}</p>
-        <p>{{ ingredient.amount * portions }} {{ingredient.unitShortcut}}</p>
+  <template v-if="!isLoadingIngredients">
+    <template v-if="!isEditing">
+      <div class="recipe-ingredients__content">
+        <div class="recipe-ingredients__item" v-for="ingredient in ingredients">
+          <p>{{ ingredient.ingredientName }}</p>
+          <p>{{ ingredient.amount * portions }} {{ingredient.unitShortcut}}</p>
+        </div>
       </div>
+    </template>
+    <div v-else class="edit-recipe-ingredients">
+      <RecipeIngredientsFields v-model="ingredients" />
+      <CLoader
+        v-if="isUpdatingIngredients"
+        :circleHeight="32"
+        :circleWidth="32"
+        withOverlay
+      />
     </div>
   </template>
-  <div v-else class="edit-recipe-ingredients">
-    <RecipeIngredientsFields v-model="ingredients" />
-    <CLoader
-      v-if="isUpdatingIngredients"
-      :circleHeight="32"
-      :circleWidth="32"
-      withOverlay
-    />
-  </div>
+  <RecipeIngredientsLoader v-else />
 </div>
