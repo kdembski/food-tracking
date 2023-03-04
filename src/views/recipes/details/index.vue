@@ -1,10 +1,11 @@
 <script lang="ts">
 import Recipe from "./recipe/index.vue";
 import RecipeIngredients from "./ingredients/index.vue";
+import RecipeSteps from "./steps/index.vue";
 
 export default {
   name: "RecipeDetailsView",
-  components: { Recipe, RecipeIngredients },
+  components: { Recipe, RecipeIngredients, RecipeSteps },
 };
 </script>
 

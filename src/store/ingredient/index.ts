@@ -81,14 +81,14 @@ const actions: ActionTree<IngredientState, any> = {
   },
 
   load({ commit, dispatch }, itemId) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<Ingredient>((resolve, reject) => {
       commit("setIsLoading", true);
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ingredients/" + itemId)
         .then((response: AxiosResponse<Ingredient>) => {
           commit("setIsLoading", false);
           commit("setSingle", response.data);
-          resolve();
+          resolve(response.data);
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoading", false);

@@ -16,6 +16,10 @@ const props = defineProps({
     type: Number,
     default: 2,
   },
+  enableInput: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits<{

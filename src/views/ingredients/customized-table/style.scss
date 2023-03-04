@@ -26,5 +26,9 @@
     &__edit-button {
       margin: 0;
     }
+
+    &__add-button {
+      padding-right: $spacing-xl;
+    }
   }
 }

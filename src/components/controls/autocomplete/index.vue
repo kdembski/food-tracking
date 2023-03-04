@@ -155,6 +155,10 @@ const {
   hasFocus,
   emits
 );
+
+defineExpose({
+  inputValue: _inputValue,
+});
 </script>
 
 <template src="./template.html"></template>

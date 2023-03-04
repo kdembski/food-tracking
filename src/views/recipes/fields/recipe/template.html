@@ -1,16 +1,20 @@
 <div class="recipe-fields">
-  <CInput v-model="recipe.recipeName" label="Nazwa" />
-  <CInput
-    v-model="recipe.preparationTime"
-    label="Czas przygotowania"
-    type="number"
-  />
-  <CInput v-model="recipe.cookidooLink" label="Link do cookidoo" />
-  <CSelectTags
-    v-model:selectedTags="recipe.tags"
-    v-model:tags="recipesTags"
-    :isLoading="isLoadingRecipesTags"
-    inputIcon=""
-    enableAddingTags
-  />
+  <div class="recipe-fields__column">
+    <CInput v-model="recipe.recipeName" label="Nazwa" />
+    <CInput
+      v-model="recipe.preparationTime"
+      label="Czas przygotowania"
+      type="number"
+    />
+    <CInput v-model="recipe.cookidooLink" label="Link do cookidoo" />
+  </div>
+  <div class="recipe-fields__column">
+    <CSelectTags
+      v-model:selectedTags="recipe.tags"
+      v-model:tags="recipesTags"
+      :isLoading="isLoadingRecipesTags"
+      inputIcon=""
+      enableAddingTags
+    />
+  </div>
 </div>

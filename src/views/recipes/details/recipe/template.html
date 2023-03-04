@@ -1,4 +1,4 @@
-<div v-if="!isEditing" class="recipe">
+<CCard v-if="!isEditing" class="recipe" variant="contained">
   <RecipeLoader v-if="isLoadingRecipe" />
   <template v-else>
     <header class="recipe__header">
@@ -40,22 +40,27 @@
       size="small"
       icon="pen-to-square"
       label="Edytuj"
+      variant="text"
       :isLoading="isLoadingRecipe"
       @click="startEditing"
+      :fullWidth="isMobile"
     />
     <CButton
       color="secondary"
       size="small"
       icon="trash-can"
       label="Usuń"
+      variant="text"
       :isLoading="isLoadingRecipe"
+      :fullWidth="isMobile"
     />
     <CButton
-      color="secondary"
+      color="primary"
       size="small"
       :icon="['far', 'calendar']"
       label="Dodaj do kalendarza"
       :isLoading="isLoadingRecipe"
+      :fullWidth="isMobile"
     />
     <CButton
       color="secondary"
@@ -63,9 +68,10 @@
       icon="cart-shopping"
       label="Dodaj do zakupów"
       :isLoading="isLoadingRecipe"
+      :fullWidth="isMobile"
     />
   </div>
-</div>
+</CCard>
 <div v-else class="edit-recipe">
   <RecipeFields :recipe="recipe" />
   <div class="edit-recipe__buttons">
@@ -76,6 +82,7 @@
       label="Zapisz"
       :isLoading="isUpdatingRecipe"
       @click="updateRecipe"
+      :fullWidth="isMobile"
     />
     <CButton
       color="secondary"
@@ -84,6 +91,7 @@
       label="Anuluj"
       :isLoading="isUpdatingRecipe"
       @click="cancelEditing"
+      :fullWidth="isMobile"
     />
   </div>
   <CLoader

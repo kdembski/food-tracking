@@ -1,0 +1,36 @@
+<div class="ingredients-fields">
+  <CMultiInput
+    v-model="recipeIngredients"
+    :type="MultiInputValuesTypes.OBJECT"
+    :isLoading="isLoading"
+    @itemRemove="onIngredientRemove"
+  >
+    <template #default="{ values, index }">
+      <div class="ingredients-fields__item" :key="values[index].id">
+        <CAutocomplete
+          v-model="values[index].ingredientId"
+          :options="ingredientsOptions"
+          :label="index === 0 ? 'Składnik' : ''"
+          @update:modelValue="setIngredient(values[index].ingredientId, index)"
+          isRequired
+          :isLoading="isLoadingIngredients"
+        />
+        <CAutocomplete
+          v-model="values[index].unitId"
+          :options="getIngredientUnitOptions(index)"
+          :label="index === 0 ? 'Jednostka' : ''"
+          isRequired
+          :ref="el => unitInputs.push(el)"
+          :isLoading="isLoadingUnits[index] || isLoadingIngredients"
+        />
+        <CInput
+          v-model="values[index].amount"
+          type="number"
+          :label="index === 0 ? 'Ilość' : ''"
+          isRequired
+          :isLoading="isLoadingIngredients"
+        />
+      </div>
+    </template>
+  </CMultiInput>
+</div>

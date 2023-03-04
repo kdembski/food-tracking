@@ -1,5 +1,62 @@
 .recipe-ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+  padding: 0 $spacing-xs;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    > h2 {
+      @include heading-2;
+    }
+
+    *:last-child {
+      margin-left: auto;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p:first-child {
+      color: var(--text-secondary);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: $spacing-2xs;
+  }
+}
+
+.edit-recipe-ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+  position: relative;
+  padding-top: 1px;
 }
 
 @media screen and (max-width: $screen-md) {
+  .recipe-ingredients {
+    padding: 0;
+    gap: $spacing-lg;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
 }

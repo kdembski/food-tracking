@@ -6,7 +6,13 @@
     icon="minus"
     @click="portions--"
   />
-  <CInput v-model="portions" type="number" class="set-portions__input" />
+  <CInput
+    v-if="enableInput"
+    v-model="portions"
+    type="number"
+    class="set-portions__input"
+  />
+  <p v-else class="set-portions__label">{{ portions }}</p>
   <CButton
     color="secondary"
     variant="text"

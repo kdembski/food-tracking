@@ -67,7 +67,7 @@ export function useValues(
   );
 
   const setSelectedIfInputValueIsMatchingAnyOption = (value: string) => {
-    if (isLoading.value) {
+    if (isLoading.value || !_inputValue.value) {
       return;
     }
 

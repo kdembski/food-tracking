@@ -16,7 +16,7 @@ import {
 } from "../helpers/error-message";
 import ingredient from "./ingredient";
 
-const state: RecipeState = {
+const state: () => RecipeState = () => ({
   single: null,
   isLoading: false,
   isSubmitting: false,
@@ -29,7 +29,7 @@ const state: RecipeState = {
 
   searchSuggestions: null,
   isLoadingSearchSuggestions: false,
-};
+});
 
 const getters: GetterTree<RecipeState, any> = {
   list: (state): RecipesList | null => state.list,
@@ -140,7 +140,12 @@ const actions: ActionTree<RecipeState, any> = {
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
         .then((response: AxiosResponse<Recipe>) => {
           commit("setIsLoading", false);
-          commit("setSingle", response.data);
+          const recipe = response.data;
+          if (recipe.cookedDate) {
+            recipe.cookedDate = new Date(recipe.cookedDate);
+          }
+
+          commit("setSingle", recipe);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

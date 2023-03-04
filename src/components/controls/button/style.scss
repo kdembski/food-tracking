@@ -14,9 +14,10 @@
 
   &--full-width {
     width: 100%;
+    display: inline-flex;
+    justify-content: center;
 
     .button__label {
-      width: 100%;
       text-align: center;
     }
   }
@@ -112,6 +113,7 @@
 
   &--only-icon {
     padding: 0 !important;
+    border-radius: 100% !important;
 
     .button__icon {
       margin-top: 0;
@@ -125,22 +127,22 @@
     }
 
     &.button--small {
-      width: 24px;
-      min-width: 24px;
-      height: 24px;
+      width: 26px;
+      min-width: 26px;
+      height: 26px;
     }
 
     &.button--medium {
-      width: 28px;
-      min-width: 28px;
-      height: 28px;
+      width: 30px;
+      min-width: 30px;
+      height: 30px;
       box-shadow: $shadow-xs var(--shadow-color);
     }
 
     &.button--large {
-      width: 32px;
-      min-width: 32px;
-      height: 32px;
+      width: 34px;
+      min-width: 34px;
+      height: 34px;
       box-shadow: $shadow-sm var(--shadow-color);
     }
   }

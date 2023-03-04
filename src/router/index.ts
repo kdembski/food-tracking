@@ -61,7 +61,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "RecipeDetails",
         component: RecipeDetailsView,
         meta: {
-          maxWidth: 1000,
+          maxWidth: 1200,
         },
       },
     ],

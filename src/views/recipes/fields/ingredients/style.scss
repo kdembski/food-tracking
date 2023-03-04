@@ -1,0 +1,20 @@
+.ingredients-fields {
+  &__item {
+    display: flex;
+    gap: $spacing-md;
+
+    *:nth-child(2) {
+      width: 30%;
+    }
+
+    *:nth-child(3) {
+      width: 30%;
+    }
+  }
+
+  &:deep(.multi-input__item:first-child) {
+    .multi-input__remove-button {
+      top: 24px;
+    }
+  }
+}

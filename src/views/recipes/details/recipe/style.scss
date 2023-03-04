@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-3xl;
+  min-height: 250px;
 
   .recipe__header {
     margin: 0;
@@ -32,7 +33,7 @@
     gap: $spacing-lg;
 
     > div:first-child {
-      background-color: var(--surface-secondary);
+      background-color: var(--surface-primary);
       height: 45px;
       width: 45px;
       border-radius: 100%;
@@ -40,7 +41,7 @@
       align-items: center;
       justify-content: center;
       font-size: 18px;
-      box-shadow: $shadow-sm var(--shadow-color);
+      box-shadow: $shadow-xs var(--shadow-color);
     }
 
     > div:last-child {
@@ -57,13 +58,14 @@
   &__buttons {
     display: flex;
     gap: $spacing-lg;
+    margin-top: auto;
   }
 }
 
 .edit-recipe {
   display: flex;
   flex-direction: column;
-  gap: $spacing-3xl;
+  gap: $spacing-xl;
   position: relative;
 
   &__buttons {
@@ -81,20 +83,18 @@
 
     &__buttons {
       display: grid;
-      grid-template-columns: repeat(1fr, 2);
+      grid-template-columns: repeat(2, 1fr);
 
       > button {
-        width: 100%;
-
         &:nth-child(3),
         &:nth-child(4) {
           grid-column: span 2;
         }
       }
-
-      :deep(.button__content) {
-        justify-content: center;
-      }
     }
+  }
+
+  .edit-recipe {
+    gap: $spacing-2xl;
   }
 }

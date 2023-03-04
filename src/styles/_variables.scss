@@ -1,4 +1,4 @@
-$primary: #eb8500;
+$primary: rgb(225, 120, 0);
 $primary-light: #ffe675;
 $primary-dark: #ff5e00;
 
@@ -9,7 +9,7 @@ $black: black;
 
 $surface-lightest: $white;
 $surface-lighter: lighten($secondary, 60);
-$surface-light: lighten($secondary, 57);
+$surface-light: lighten($secondary, 56);
 $border-light: lighten($secondary, 52);
 
 $text-darkest: darken($secondary, 30);
@@ -22,7 +22,7 @@ $surface-dark: darken($secondary, 18);
 $border-dark: darken($secondary, 14);
 
 $text-lightest: lighten($secondary, 55);
-$text-lighter: lighten($secondary, 35);
+$text-lighter: lighten($secondary, 32);
 $text-light: $secondary;
 
 $info: #003780;

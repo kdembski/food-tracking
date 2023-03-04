@@ -89,6 +89,7 @@ const actions: ActionTree<RecipeIngredientState, any> = {
       )
         .then(() => {
           commit("setIsSubmittingCollection", false);
+          rootState.toastNotification.success("Zapisano składniki.");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

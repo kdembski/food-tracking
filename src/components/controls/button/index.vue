@@ -49,7 +49,7 @@ const getButtonClasses = (): Array<string> => {
 };
 
 const handleSizeOnMobile = (size: string): string => {
-  if (windowWidth.value > 1024 || !props.enableMobileResize) {
+  if (windowWidth.value > 1024 || !props.enableMobileResize || !props.label) {
     return size;
   }
 

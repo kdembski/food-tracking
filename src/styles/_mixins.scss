@@ -11,3 +11,17 @@
   border-bottom: 1px solid var(--border-color);
   padding-bottom: $spacing-2xs;
 }
+
+@mixin heading-1 {
+  font-size: $font-2xl;
+  color: var(--text-primary);
+  letter-spacing: 1px;
+  font-weight: $font-medium;
+}
+
+@mixin heading-2 {
+  font-size: $font-xl;
+  color: var(--text-primary);
+  letter-spacing: 1px;
+  font-weight: $font-medium;
+}

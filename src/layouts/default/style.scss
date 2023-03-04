@@ -35,10 +35,7 @@
     margin-bottom: $spacing-4xl;
 
     & > h1 {
-      font-size: $font-2xl;
-      color: var(--text-primary);
-      letter-spacing: 1px;
-      font-weight: $font-medium;
+      @include heading-1;
     }
   }
 }

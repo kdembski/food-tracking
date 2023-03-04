@@ -1,0 +1,9 @@
+.recipe-steps {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+
+  &__header {
+    @include heading-2;
+  }
+}

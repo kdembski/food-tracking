@@ -23,11 +23,13 @@ export interface Ingredient {
 }
 
 export interface IngredientUnitDetails {
+  id: number;
   ingredientId: number;
   unitId: number;
   kcalPerUnit: number;
   isPrimary: boolean;
   converterToPrimary: number;
+  unitName: string;
 }
 
 export interface IngredientListItem {

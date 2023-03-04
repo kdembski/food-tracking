@@ -5,7 +5,7 @@ import RecipeLoader from "./loader/index.vue";
 import InlineSvg from "vue-inline-svg";
 import RecipeFields from "../../fields/recipe/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
-import { clone } from "lodash";
+import CCard from "@/components/surfaces/card/index.vue";
 
 export default {
   name: "RecipeDetails",
@@ -16,6 +16,7 @@ export default {
     InlineSvg,
     RecipeFields,
     CLoader,
+    CCard,
   },
 };
 </script>
@@ -27,6 +28,7 @@ import { useRoute } from "vue-router";
 import { useRecipeHelpers } from "@/views/recipes/composables/helpers";
 import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipes/recipe";
+import { clone } from "lodash";
 
 const { isPlanned, getFormattedCookedDate, getPreparationTime } =
   useRecipeHelpers();
