@@ -11,8 +11,10 @@ export default {
 
 <script setup lang="ts">
 import { useStore } from "vuex";
+import { ref } from "vue";
 
 const store = useStore();
+const recipe = ref<{ loadRecipe: () => void }>();
 </script>
 
 <template src="./template.html"></template>

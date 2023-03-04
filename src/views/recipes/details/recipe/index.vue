@@ -80,6 +80,10 @@ const cancelEditing = () => {
   }
   recipe.value = clone(tempRecipe.value);
 };
+
+defineExpose({
+  loadRecipe,
+});
 </script>
 
 <template src="./template.html"></template>

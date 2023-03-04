@@ -1,7 +1,7 @@
 <div class="recipe-details">
-  <Recipe />
+  <Recipe ref="recipe" />
   <div class="recipe-details__section">
-    <RecipeIngredients />
+    <RecipeIngredients @success="recipe?.loadRecipe" />
     <RecipeSteps />
   </div>
 </div>

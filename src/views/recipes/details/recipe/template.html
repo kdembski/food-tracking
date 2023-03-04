@@ -18,18 +18,31 @@
       <CDisplayTags :tags="recipe.tags" :size="isMobile ? 'small' : 'medium'" />
     </header>
     <div class="recipe__attributes">
-      <div class="recipe__attribute">
-        <div><FontAwesomeIcon :icon="['far', 'clock']" /></div>
-        <div>
+      <div class="recipe__attribute attribute preparation-time">
+        <div class="attribute__icon">
+          <FontAwesomeIcon :icon="['far', 'clock']" />
+        </div>
+        <div class="attribute__label">
           <p>Czas przygotowania</p>
           <p>{{ getPreparationTime(recipe.preparationTime) }}</p>
         </div>
       </div>
-      <div class="recipe__attribute">
-        <div><FontAwesomeIcon :icon="['far', 'calendar']" /></div>
-        <div>
+      <div class="recipe__attribute attribute cooked-date">
+        <div class="attribute__icon">
+          <FontAwesomeIcon :icon="['far', 'calendar']" />
+        </div>
+        <div class="attribute__label">
           <p>Ostatnio gotowane</p>
           <p>{{ getFormattedCookedDate(recipe.cookedDate) }}</p>
+        </div>
+      </div>
+      <div class="recipe__attribute attribute kcal">
+        <div class="attribute__icon">
+          <FontAwesomeIcon icon="fire-flame-simple" />
+        </div>
+        <div class="attribute__label">
+          <p>Wartość energetyczna</p>
+          <p>{{ recipe.kcal + ' kcal' }}</p>
         </div>
       </div>
     </div>

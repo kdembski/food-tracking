@@ -27,6 +27,10 @@ import { cloneDeep } from "lodash";
 const store = useStore();
 const route = useRoute();
 
+const emits = defineEmits<{
+  (e: "success"): void;
+}>();
+
 const isLoadingIngredients = computed(
   () => store.state.recipe.ingredient.isLoadingCollection
 );
@@ -60,6 +64,7 @@ const updateIngredients = async () => {
     recipeId: recipeId.value,
   });
   isEditing.value = false;
+  emits("success");
   await loadIngredients();
 };
 
