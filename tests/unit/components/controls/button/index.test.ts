@@ -27,6 +27,9 @@ describe("Button Component", () => {
   });
 
   it("Should add size class based on size prop provided", async () => {
+    await wrapper.setProps({
+      label: "test",
+    });
     expect(wrapper.classes()).toContain("button--small");
 
     await wrapper.setProps({
@@ -40,7 +43,10 @@ describe("Button Component", () => {
     expect(wrapper.classes()).toContain("button--medium");
 
     window.innerWidth = 1025;
-    wrapper = shallowMount(CButton, { global: global.settings });
+    wrapper = shallowMount(CButton, {
+      props: { label: "test" },
+      global: global.settings,
+    });
 
     expect(wrapper.classes()).toContain("button--medium");
 
