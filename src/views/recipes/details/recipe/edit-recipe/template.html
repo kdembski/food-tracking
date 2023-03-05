@@ -1,0 +1,34 @@
+<div class="edit-recipe">
+  <header class="edit-recipe__header">
+    <h1>{{ 'Edytuj ' + recipe.recipeName?.toLowerCase() }}</h1>
+  </header>
+  <form class="edit-recipe__form" @submit.prevent="updateRecipe">
+    <RecipeFields :recipe="recipe" />
+    <div class="edit-recipe__buttons">
+      <CButton
+        color="secondary"
+        size="small"
+        icon="check"
+        label="Zapisz"
+        :isLoading="isUpdatingRecipe"
+        :fullWidth="isMobile"
+      />
+      <CButton
+        color="secondary"
+        size="small"
+        icon="times"
+        label="Anuluj"
+        type="button"
+        :isLoading="isUpdatingRecipe"
+        @click="emits('cancel')"
+        :fullWidth="isMobile"
+      />
+    </div>
+  </form>
+  <CLoader
+    v-if="isUpdatingRecipe"
+    :circleHeight="40"
+    :circleWidth="40"
+    withOverlay
+  />
+</div>

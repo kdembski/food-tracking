@@ -1,0 +1,20 @@
+.edit-recipe {
+  position: relative;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: $spacing-lg;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .edit-recipe {
+    gap: $spacing-2xl;
+  }
+}
