@@ -48,6 +48,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  enableSetSelectedWhenInputMatchAnyOption: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const emits = defineEmits<{

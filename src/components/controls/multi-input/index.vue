@@ -10,7 +10,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, nextTick, ref } from "vue";
 import { MultiInputValuesTypes } from "@/types/components/multi-input";
 
 const props = withDefaults(
@@ -38,6 +38,14 @@ const values = computed({
   },
 });
 
+const itemRefs = ref<HTMLElement>();
+
+const handleAddingItem = async () => {
+  addItem();
+  await nextTick();
+  focusFirstInputInNewItem();
+};
+
 const addItem = () => {
   const emptyObject = props.emptyObject || {};
 
@@ -46,6 +54,18 @@ const addItem = () => {
     return;
   }
   values.value = values.value.concat(undefined);
+};
+
+const focusFirstInputInNewItem = () => {
+  const lastItemIndex = values.value.length - 1;
+  const lastItemRef: HTMLElement = itemRefs.value?.[lastItemIndex];
+
+  if (!lastItemRef) {
+    return;
+  }
+
+  const firtInputOfLastItem = lastItemRef.getElementsByTagName("input")[0];
+  firtInputOfLastItem?.focus();
 };
 
 const removeItem = (index: number) => {

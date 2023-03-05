@@ -5,30 +5,38 @@
     :isLoading="isLoading"
     @itemRemove="onIngredientRemove"
   >
-    <template #default="{ values, index }">
-      <div class="ingredients-fields__item" :key="values[index].id">
+    <template #default="{ values, index, handleAddingItem }">
+      <div class="ingredients-fields__item item" :key="values[index].id">
         <CAutocomplete
           v-model="values[index].ingredientId"
           :options="ingredientsOptions"
           :label="index === 0 ? 'Składnik' : ''"
-          @update:modelValue="setIngredient(values[index].ingredientId, index)"
-          isRequired
           :isLoading="isLoadingIngredients"
+          class="item__ingredient-autocomplete"
+          @update:modelValue="setIngredient(values[index].ingredientId, index)"
+          :enableSetSelectedWhenInputMatchAnyOption="false"
+          isRequired
         />
         <CAutocomplete
           v-model="values[index].unitId"
           :options="getIngredientUnitOptions(index)"
           :label="index === 0 ? 'Jednostka' : ''"
-          isRequired
-          :ref="el => unitInputs.push(el)"
           :isLoading="isLoadingUnits[index] || isLoadingIngredients"
+          class="item__units-autocomplete"
+          @update:modelValue="onUnitValueUpdate(index, values[index].unitId)"
+          :enableSetSelectedWhenInputMatchAnyOption="false"
+          :isDisabled="getIngredientUnitOptions(index).length === 1"
+          :key="unitAutocompleteKey"
+          isRequired
         />
         <CInput
           v-model="values[index].amount"
           type="number"
           :label="index === 0 ? 'Ilość' : ''"
-          isRequired
           :isLoading="isLoadingIngredients"
+          class="item__amount-input"
+          @enter="handleAddingItem"
+          isRequired
         />
       </div>
     </template>

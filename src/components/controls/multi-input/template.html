@@ -2,8 +2,16 @@
 <div v-else class="multi-input">
   <p v-if="label" class="multi-input__label">{{ label }}</p>
   <div class="multi-input__items">
-    <div v-for="(value, index) in values" class="multi-input__item">
-      <slot :values="values" :index="index"></slot>
+    <div
+      v-for="(value, index) in values"
+      class="multi-input__item"
+      ref="itemRefs"
+    >
+      <slot
+        :values="values"
+        :index="index"
+        :handleAddingItem="handleAddingItem"
+      ></slot>
       <CButton
         class="multi-input__remove-button"
         color="secondary"
@@ -21,7 +29,7 @@
       color="secondary"
       size="large"
       icon="plus"
-      @click="addItem()"
+      @click="handleAddingItem()"
     />
   </div>
 </div>

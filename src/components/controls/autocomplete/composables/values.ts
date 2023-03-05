@@ -73,6 +73,9 @@ export function useValues(
 
     const matchingOption = getOptionMatchingInputValue(value);
     if (matchingOption) {
+      if (!props.enableSetSelectedWhenInputMatchAnyOption) {
+        return;
+      }
       selectOption(matchingOption);
 
       if (isMobile.value) {

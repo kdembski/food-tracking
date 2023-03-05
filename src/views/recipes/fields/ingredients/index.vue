@@ -17,103 +17,49 @@ export default {
 
 <script setup lang="ts">
 import { computed, nextTick, onBeforeMount, ref } from "vue";
-import { useStore } from "vuex";
-import {
-  Ingredient,
-  IngredientUnitDetails,
-} from "@/types/ingredients/ingredient";
 import { MultiInputValuesTypes } from "@/types/components/multi-input";
+import { RecipeIngredient } from "@/types/recipes/recipeIngredient";
+import { useIngredients } from "./composables/ingredients";
 
-const store = useStore();
 const props = defineProps<{
-  modelValue: Partial<IngredientUnitDetails>[];
+  modelValue: Partial<RecipeIngredient>[];
 }>();
+
 const emits = defineEmits<{
-  (e: "update:modelValue", value: Partial<IngredientUnitDetails>[]): void;
+  (e: "update:modelValue", value: Partial<RecipeIngredient>[]): void;
 }>();
 
 const recipeIngredients = computed({
-  get(): Partial<IngredientUnitDetails>[] {
+  get(): Partial<RecipeIngredient>[] {
     return props.modelValue;
   },
-  set(value: Partial<IngredientUnitDetails>[]) {
+  set(value: Partial<RecipeIngredient>[]) {
     emits("update:modelValue", value);
   },
 });
 
 const isLoading = ref(false);
-const ingredients = ref<Record<number, Ingredient>>({});
-const unitInputs = ref<{ inputValue: string }[]>([]);
-const isLoadingUnits = ref<Record<number, boolean>>({});
-const isLoadingIngredients = ref(false);
 
-const setIngredient = async (id: number, index: number) => {
-  if (!id) {
-    return;
-  }
-
-  isLoadingUnits.value[index] = true;
-  await store.dispatch("ingredient/load", id);
-  const ingredient = store.state.ingredient.single;
-  ingredients.value[index] = ingredient;
-  const units = ingredient.units;
-
-  if (units.length === 1) {
-    recipeIngredients.value[index].unitId = units[0].unitId;
-    isLoadingUnits.value[index] = false;
-    return;
-  }
-
-  recipeIngredients.value[index].unitId = undefined;
-  unitInputs.value[index].inputValue = "";
-  isLoadingUnits.value[index] = false;
+const getComponentInput = (component: string, index: number) => {
+  return document
+    .getElementsByClassName("ingredients-fields")[0]
+    .getElementsByClassName("ingredients-fields__item")
+    [index].getElementsByClassName("item__" + component)[0]
+    .getElementsByTagName("input")[0];
 };
 
-const getIngredientUnitOptions = (index: number) => {
-  if (!ingredients.value[index]) {
-    return [];
-  }
-
-  const units = ingredients.value[index].units;
-  return units.map((unit) => {
-    return {
-      value: unit.unitId,
-      label: unit.unitName,
-    };
-  });
-};
-
-const fillIngredients = async () => {
-  isLoadingIngredients.value = true;
-  let temp = recipeIngredients.value.map((item) => {
-    if (!item.ingredientId) {
-      return;
-    }
-    return store.dispatch("ingredient/load", item.ingredientId);
-  });
-
-  ingredients.value = {};
-  await Promise.all(temp)
-    .then((items) => {
-      items.forEach((item, index) => {
-        ingredients.value[index] = item;
-      });
-    })
-    .finally(() => {
-      isLoadingIngredients.value = false;
-    });
-};
-
-const ingredientsOptions = ref([]);
-const setIngredientsOptions = async () => {
-  await store.dispatch("ingredient/loadOptions");
-  ingredientsOptions.value = store.getters["ingredient/options"];
-};
-
-const onIngredientRemove = async () => {
-  await nextTick();
-  fillIngredients();
-};
+const {
+  ingredients,
+  ingredientsOptions,
+  isLoadingIngredients,
+  isLoadingUnits,
+  unitAutocompleteKey,
+  setIngredient,
+  setIngredientsOptions,
+  onIngredientRemove,
+  fillIngredients,
+  getIngredientUnitOptions,
+} = useIngredients(recipeIngredients, getComponentInput);
 
 onBeforeMount(async () => {
   isLoading.value = true;
