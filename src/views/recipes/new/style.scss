@@ -3,24 +3,49 @@
   flex-direction: column;
   width: 100%;
 
-  &__body {
-    margin-bottom: $spacing-4xl;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4xl;
   }
 
   &__buttons {
     display: flex;
   }
+
+  &__section {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    gap: $spacing-4xl;
+  }
+
+  &__ingredients,
+  &__steps {
+    > h2 {
+      @include heading-2;
+      margin-bottom: $spacing-2xl;
+    }
+  }
 }
 
 @media screen and (max-width: $screen-md) {
   .new-recipe {
-    &__body {
+    &__form {
       padding: 0 $spacing-lg;
-      margin-bottom: $spacing-2xl;
+      gap: $spacing-3xl;
     }
 
-    &__buttons {
-      padding: 0 $spacing-lg;
+    &__section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $spacing-3xl;
+    }
+
+    &__ingredients,
+    &__steps {
+      > h2 {
+        margin-bottom: $spacing-xl;
+      }
     }
   }
 }

@@ -93,6 +93,13 @@ export function useIngredients(
     });
   };
 
+  const onUnitUpdate = (index: number, value?: unknown) => {
+    if (!value) {
+      return;
+    }
+    getComponentInput("amount-input", index).focus();
+  };
+
   return {
     ingredients,
     ingredientsOptions,
@@ -104,5 +111,6 @@ export function useIngredients(
     onIngredientRemove,
     fillIngredients,
     getIngredientUnitOptions,
+    onUnitUpdate,
   };
 }

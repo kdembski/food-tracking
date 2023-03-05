@@ -2,11 +2,20 @@
   <header class="new-recipe__header">
     <h1>Dodaj przepis</h1>
   </header>
-  <div class="new-recipe__body">
+  <form class="new-recipe__form">
     <RecipeFields :recipe="newRecipe" />
-  </div>
-  <div class="new-recipe__buttons">
-    <CButton label="Dodaj" icon="plus" @click="createRecipe" />
-  </div>
+    <div class="new-recipe__section">
+      <div class="new-recipe__ingredients">
+        <h2>Składniki</h2>
+        <RecipeIngredientsFields v-model="newIngredients" />
+      </div>
+      <div class="new-recipe__steps">
+        <h2>Kroki</h2>
+      </div>
+    </div>
+    <div>
+      <CButton label="Dodaj" icon="plus" @click="createRecipe" />
+    </div>
+  </form>
   <CLoader v-if="isCreatingRecipe" withOverlay />
 </div>

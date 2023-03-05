@@ -59,6 +59,7 @@ const {
   onIngredientRemove,
   fillIngredients,
   getIngredientUnitOptions,
+  onUnitUpdate,
 } = useIngredients(recipeIngredients, getComponentInput);
 
 onBeforeMount(async () => {

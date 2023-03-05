@@ -10,3 +10,13 @@ export enum ErrorCodes {
   FIELD_INVALID = "FIELD_INVALID",
   COMPLEX_ERROR = "COMPLEX_ERROR",
 }
+
+export interface DbResults {
+  fieldCount: number;
+  affectedRows: number;
+  changedRows: number;
+  insertId: number;
+  serverStatus: number;
+  warningCount: number;
+  message: string;
+}

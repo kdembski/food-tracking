@@ -23,7 +23,7 @@
           :label="index === 0 ? 'Jednostka' : ''"
           :isLoading="isLoadingUnits[index] || isLoadingIngredients"
           class="item__units-autocomplete"
-          @update:modelValue="onUnitValueUpdate(index, values[index].unitId)"
+          @update:modelValue="onUnitUpdate(index, values[index].unitId)"
           :enableSetSelectedWhenInputMatchAnyOption="false"
           :isDisabled="getIngredientUnitOptions(index).length === 1"
           :key="unitAutocompleteKey"

@@ -75,10 +75,13 @@
 }
 
 .edit-recipe {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xl;
   position: relative;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
 
   &__buttons {
     display: flex;

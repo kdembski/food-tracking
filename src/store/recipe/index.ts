@@ -1,6 +1,6 @@
 import ApiService from "@/services/api.service";
 import { RecipeState, RecipesList, Recipe } from "@/types/recipes/recipe";
-import { ApiError } from "@/types/api";
+import { ApiError, DbResults } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery, getListBaseQuery } from "../helpers/list-query";
@@ -157,14 +157,14 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   create({ commit, rootState }, item: Recipe) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<number>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", item)
-        .then(() => {
+        .then((response: AxiosResponse<DbResults>) => {
           rootState.toastNotification.success("Dodano przepis.");
           commit("setIsSubmitting", false);
-          resolve();
+          resolve(response.data.insertId);
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
