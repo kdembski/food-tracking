@@ -17,5 +17,13 @@
       <CButton label="Dodaj" icon="plus" @click="createRecipe" />
     </div>
   </form>
-  <CLoader v-if="isCreatingRecipe" withOverlay />
+  <CLoader v-if="isCreatingRecipe || isCreatingIngredients" withOverlay />
 </div>
+<CModal
+  v-model:isOpen="isRestoreModalOpen"
+  title="Przywracanie danych"
+  submitButtonLabel="Przywróć"
+  @submit="restoreDataFromStorage"
+>
+  <p>Masz niezapisany przepis, chcesz go przywrócić?</p>
+</CModal>

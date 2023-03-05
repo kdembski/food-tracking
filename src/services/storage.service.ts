@@ -30,6 +30,10 @@ const StorageService = {
   clear() {
     localStorage.clear();
   },
+
+  exists(key: string) {
+    return !!localStorage.getItem(key);
+  },
 };
 
 export default StorageService;

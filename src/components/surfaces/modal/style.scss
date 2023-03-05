@@ -1,5 +1,7 @@
-$sectionPadding: $spacing-xl $spacing-2xl;
-$mobileSectionPadding: $spacing-lg $spacing-xl;
+$sectionPadding: 0 $spacing-2xl;
+$mobileSectionPadding: 0 $spacing-xl;
+$sectionHeight: 70px;
+$mobileSectionHeight: 60px;
 
 .modal {
   &__overlay {
@@ -31,6 +33,7 @@ $mobileSectionPadding: $spacing-lg $spacing-xl;
   }
 
   &__header {
+    height: $sectionHeight;
     padding: $sectionPadding;
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -44,14 +47,16 @@ $mobileSectionPadding: $spacing-lg $spacing-xl;
   }
 
   &__body {
-    padding: $sectionPadding;
+    padding: $spacing-2xl;
   }
 
   &__footer {
+    height: $sectionHeight;
     padding: $sectionPadding;
     border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: flex-end;
+    align-items: center;
   }
 
   &__transition {
@@ -80,14 +85,16 @@ $mobileSectionPadding: $spacing-lg $spacing-xl;
 
     &__header {
       padding: $mobileSectionPadding;
+      height: $mobileSectionHeight;
     }
 
     &__body {
-      padding: $mobileSectionPadding;
+      padding: $spacing-xl;
     }
 
     &__footer {
       padding: $mobileSectionPadding;
+      height: $sectionHeight;
     }
   }
 }
