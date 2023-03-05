@@ -14,8 +14,8 @@
 
   &__buttons {
     display: flex;
-    gap: $spacing-xs;
-    margin-top: -$spacing-xs;
+    gap: $spacing-2xs;
+    margin-top: -$spacing-sm;
 
     & > a {
       display: flex;
@@ -36,7 +36,7 @@
     }
 
     &__buttons {
-      margin-top: -$spacing-xs;
+      margin-top: -7px;
     }
   }
 }

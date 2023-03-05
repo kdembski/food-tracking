@@ -41,7 +41,7 @@
 
     &__left-part {
       display: flex;
-      gap: $spacing-xs;
+      margin-bottom: -$spacing-2xs;
     }
 
     &__right-part {
