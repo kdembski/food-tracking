@@ -18,7 +18,7 @@ import { useWindowSize } from "@/composables/window-size";
 import { useRecipeHelpers } from "@/views/recipes/composables/helpers";
 
 const { isMobile } = useWindowSize();
-const { isPlanned, getFormattedCookedDate, getPreparationTime } =
+const { isPlanned, getFormattedCookedDate, getPreparationTime, getKcal } =
   useRecipeHelpers();
 
 const props = defineProps({

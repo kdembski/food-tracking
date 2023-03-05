@@ -6,6 +6,7 @@ import InlineSvg from "vue-inline-svg";
 import RecipeFields from "../../fields/recipe/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
+import AddToCalendarModal from "@/views/calendar/add-to-calendar-modal/index.vue";
 
 export default {
   name: "RecipeDetails",
@@ -17,6 +18,7 @@ export default {
     RecipeFields,
     CLoader,
     CCard,
+    AddToCalendarModal,
   },
 };
 </script>
@@ -30,7 +32,7 @@ import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipes/recipe";
 import { clone } from "lodash";
 
-const { isPlanned, getFormattedCookedDate, getPreparationTime } =
+const { isPlanned, getFormattedCookedDate, getPreparationTime, getKcal } =
   useRecipeHelpers();
 const { isMobile } = useWindowSize();
 const store = useStore();
@@ -41,6 +43,8 @@ const isUpdatingRecipe = computed(() => store.state.recipe.isSubmitting);
 const recipeId = computed(() => route.params.id);
 const tempRecipe: Ref<Recipe | undefined> = ref();
 const isEditing = ref(false);
+const isAddToCalendarModalOpen = ref(false);
+
 const recipe = computed({
   get(): Recipe {
     return store.state.recipe.single;

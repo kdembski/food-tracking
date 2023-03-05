@@ -61,9 +61,18 @@ export function useRecipeHelpers() {
     return distance + " temu";
   };
 
+  const getKcal = (kcal: number) => {
+    if (!kcal) {
+      return "Brak";
+    }
+
+    return kcal + " kcal";
+  };
+
   return {
     isPlanned,
     getFormattedCookedDate,
     getPreparationTime,
+    getKcal,
   };
 }

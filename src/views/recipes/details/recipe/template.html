@@ -42,7 +42,7 @@
         </div>
         <div class="attribute__label">
           <p>Wartość energetyczna</p>
-          <p>{{ recipe.kcal + ' kcal' }}</p>
+          <p>{{ getKcal(recipe.kcal) }}</p>
         </div>
       </div>
     </div>
@@ -74,6 +74,7 @@
       label="Dodaj do kalendarza"
       :isLoading="isLoadingRecipe"
       :fullWidth="isMobile"
+      @click="isAddToCalendarModalOpen = true"
     />
     <CButton
       color="secondary"
@@ -114,3 +115,7 @@
     withOverlay
   />
 </div>
+<AddToCalendarModal
+  v-model:isOpen="isAddToCalendarModalOpen"
+  :addedRecipe="recipe"
+/>

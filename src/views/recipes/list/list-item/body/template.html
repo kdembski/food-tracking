@@ -16,6 +16,10 @@
         <FontAwesomeIcon :icon="['far', 'calendar']" />
         <p>{{ getFormattedCookedDate(item.cookedDate) }}</p>
       </div>
+      <div class="item-body__kcal" v-tooltip="{ text: 'Wartość energetyczna' }">
+        <FontAwesomeIcon icon="fire-flame-simple" />
+        <p>{{ getKcal(item.kcal) }}</p>
+      </div>
     </div>
     <CDisplayTags
       :tags="item.tags"

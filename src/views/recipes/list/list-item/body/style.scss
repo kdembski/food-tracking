@@ -19,6 +19,7 @@ $mobileItemGap: $spacing-xs;
     gap: $itemGap + 8px;
   }
 
+  &__kcal,
   &__cooked-date,
   &__preparation-time {
     font-size: $font-sm;
@@ -58,6 +59,7 @@ $mobileItemGap: $spacing-xs;
       gap: $mobileItemGap + 6px;
     }
 
+    &__kcal,
     &__cooked-date,
     &__preparation-time {
       font-size: $font-xs;
