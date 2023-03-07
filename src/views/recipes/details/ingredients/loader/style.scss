@@ -1,14 +1,15 @@
 .recipe-ingredients-loader {
   display: flex;
   flex-direction: column;
-  gap: $spacing-2xl;
+  gap: $spacing-3xl;
+  margin-top: $spacing-lg;
 
   > div {
     display: flex;
     justify-content: space-between;
 
     .skeleton-loader__item {
-      height: 26px;
+      height: 22px;
 
       &:first-child {
         width: 55%;

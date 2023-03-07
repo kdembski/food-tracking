@@ -11,6 +11,7 @@ const props = defineProps<{
   modelValue: boolean | string | number | null;
   label?: string;
   isDisabled?: boolean;
+  tabindex?: string;
 }>();
 
 const emits = defineEmits<{

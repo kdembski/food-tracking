@@ -1,22 +1,61 @@
-<CCard v-if="!isEditing" class="recipe" variant="contained">
+<div v-if="!isEditing" class="recipe">
   <RecipeLoader v-if="isLoadingRecipe" />
   <template v-else>
-    <header class="recipe__header">
-      <h1>
-        {{ recipe.recipeName }}
+    <CCard class="recipe__card" variant="contained">
+      <header class="recipe__header">
+        <h1>
+          {{ recipe.recipeName }}
+          <CButton
+            v-if="recipe.cookidooLink"
+            color="secondary"
+            variant="text"
+            @click="openCookidooLink"
+            class="recipe__cookidoo-link"
+            v-tooltip="{ text: 'Otwórz w Cookidoo' }"
+          >
+            <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+          </CButton>
+        </h1>
+        <CDisplayTags
+          :tags="recipe.tags"
+          :size="isMobile ? 'small' : 'medium'"
+        />
+      </header>
+      <div class="recipe__buttons">
         <CButton
-          v-if="recipe.cookidooLink"
           color="secondary"
+          size="small"
+          icon="pen-to-square"
+          label="Edytuj"
           variant="text"
-          @click="openCookidooLink"
-          class="recipe__cookidoo-link"
-          v-tooltip="{ text: 'Otwórz w Cookidoo' }"
-        >
-          <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
-        </CButton>
-      </h1>
-      <CDisplayTags :tags="recipe.tags" :size="isMobile ? 'small' : 'medium'" />
-    </header>
+          @click="startEditing"
+          :fullWidth="isMobile"
+        />
+        <CButton
+          color="secondary"
+          size="small"
+          icon="trash-can"
+          label="Usuń"
+          variant="text"
+          :fullWidth="isMobile"
+        />
+        <CButton
+          color="primary"
+          size="small"
+          :icon="['far', 'calendar']"
+          label="Dodaj do kalendarza"
+          :fullWidth="isMobile"
+          @click="isAddToCalendarModalOpen = true"
+        />
+        <CButton
+          color="secondary"
+          size="small"
+          icon="cart-shopping"
+          label="Dodaj do zakupów"
+          :fullWidth="isMobile"
+        />
+      </div>
+    </CCard>
     <div class="recipe__attributes">
       <div class="recipe__attribute attribute preparation-time">
         <div class="attribute__icon">
@@ -38,7 +77,7 @@
       </div>
       <div class="recipe__attribute attribute kcal">
         <div class="attribute__icon">
-          <FontAwesomeIcon icon="fire-flame-simple" />
+          <FontAwesomeIcon icon="bolt" />
         </div>
         <div class="attribute__label">
           <p>Wartość energetyczna</p>
@@ -47,45 +86,7 @@
       </div>
     </div>
   </template>
-  <div class="recipe__buttons">
-    <CButton
-      color="secondary"
-      size="small"
-      icon="pen-to-square"
-      label="Edytuj"
-      variant="text"
-      :isLoading="isLoadingRecipe"
-      @click="startEditing"
-      :fullWidth="isMobile"
-    />
-    <CButton
-      color="secondary"
-      size="small"
-      icon="trash-can"
-      label="Usuń"
-      variant="text"
-      :isLoading="isLoadingRecipe"
-      :fullWidth="isMobile"
-    />
-    <CButton
-      color="primary"
-      size="small"
-      :icon="['far', 'calendar']"
-      label="Dodaj do kalendarza"
-      :isLoading="isLoadingRecipe"
-      :fullWidth="isMobile"
-      @click="isAddToCalendarModalOpen = true"
-    />
-    <CButton
-      color="secondary"
-      size="small"
-      icon="cart-shopping"
-      label="Dodaj do zakupów"
-      :isLoading="isLoadingRecipe"
-      :fullWidth="isMobile"
-    />
-  </div>
-</CCard>
+</div>
 <EditRecipe v-else :recipe="recipe" @cancel="cancelEditing" />
 <AddToCalendarModal
   v-model:isOpen="isAddToCalendarModalOpen"

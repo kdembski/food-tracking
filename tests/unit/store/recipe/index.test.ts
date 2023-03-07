@@ -196,7 +196,7 @@ describe("Recipe Store Module", () => {
 
   it("Should show success notification on successful create action dispatch", async () => {
     const item = { id: 1 };
-    mockAxiosPost.mockImplementation(() => Promise.resolve());
+    mockAxiosPost.mockImplementation(() => Promise.resolve({ data: {} }));
     store.dispatch("module/create", item);
     expect(store.state.module.isSubmitting).toBe(true);
     await flushPromises();

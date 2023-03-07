@@ -44,14 +44,14 @@ export function useIngredients(
   ) => {
     if (units.length === 1) {
       recipeIngredients.value[index].unitId = units[0].unitId;
-      getComponentInput("amount-input", index).focus();
+      getComponentInput("amount-input", index)?.focus();
       return;
     }
 
     recipeIngredients.value[index].unitId = undefined;
     unitAutocompleteKey.value++;
     await nextTick();
-    getComponentInput("units-autocomplete", index).focus();
+    getComponentInput("units-autocomplete", index)?.focus();
   };
 
   const onIngredientRemove = async () => {
@@ -97,7 +97,7 @@ export function useIngredients(
     if (!value) {
       return;
     }
-    getComponentInput("amount-input", index).focus();
+    getComponentInput("amount-input", index)?.focus();
   };
 
   return {

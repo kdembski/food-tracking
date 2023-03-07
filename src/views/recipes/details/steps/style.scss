@@ -1,10 +1,65 @@
 .recipe-steps {
   display: flex;
   flex-direction: column;
-  gap: $spacing-3xl;
-  margin-top: $spacing-sm;
+  gap: $spacing-2xl;
+  margin-top: $spacing-2xs;
 
   &__header {
-    @include heading-2;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    > h2 {
+      @include heading-2;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3xl;
+  }
+
+  .step {
+    display: flex;
+    gap: $spacing-3xl;
+
+    &__number {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: $font-medium;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background-color: var(--surface-secondary);
+    }
+
+    &__instructions {
+      color: var(--text-secondary);
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .recipe-steps {
+    gap: $spacing-lg;
+    margin-top: 0;
+
+    &__header {
+      padding: 0 $spacing-2xs;
+    }
+
+    &__content {
+      gap: $spacing-xl;
+    }
+
+    .step {
+      gap: $spacing-xl;
+
+      &__instructions {
+        font-size: $font-sm;
+      }
+    }
   }
 }

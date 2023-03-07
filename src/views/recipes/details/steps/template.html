@@ -1,3 +1,12 @@
 <div class="recipe-steps">
-  <h2 class="recipe-steps__header">Kroki</h2>
+  <div class="recipe-steps__header">
+    <h2>Kroki</h2>
+    <CButton color="secondary" icon="pen-to-square" variant="text" onlyIcon />
+  </div>
+  <div class="recipe-steps__content">
+    <div v-for="step in 0" class="recipe-steps__step step">
+      <div class="step__number">1</div>
+      <div class="step__instructions"></div>
+    </div>
+  </div>
 </div>

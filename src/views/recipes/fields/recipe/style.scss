@@ -1,43 +1,12 @@
 .recipe-fields {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  flex-direction: column;
   gap: $spacing-xl;
   width: 100%;
-
-  &__column {
-    display: flex;
-    flex-direction: column;
-
-    &:first-child {
-      gap: $spacing-xl;
-    }
-
-    &:last-child {
-      gap: $spacing-md;
-    }
-
-    &:deep(.select-tags) {
-      max-height: 146px;
-      overflow: auto;
-    }
-  }
 }
 
 @media screen and (max-width: $screen-md) {
   .recipe-fields {
     gap: $spacing-lg;
-    grid-template-columns: 1fr;
-
-    &__column {
-      gap: $spacing-lg;
-
-      &:last-child {
-        gap: $spacing-lg;
-      }
-
-      &:deep(.select-tags) {
-        max-height: unset;
-      }
-    }
   }
 }

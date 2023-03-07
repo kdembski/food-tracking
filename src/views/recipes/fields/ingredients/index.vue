@@ -43,9 +43,9 @@ const isLoading = ref(false);
 const getComponentInput = (component: string, index: number) => {
   return document
     .getElementsByClassName("ingredients-fields")[0]
-    .getElementsByClassName("ingredients-fields__item")
-    [index].getElementsByClassName("item__" + component)[0]
-    .getElementsByTagName("input")[0];
+    ?.getElementsByClassName("ingredients-fields__item")
+    [index]?.getElementsByClassName("item__" + component)[0]
+    ?.getElementsByTagName("input")[0];
 };
 
 const {

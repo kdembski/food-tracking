@@ -1,10 +1,6 @@
 <CSkeletonLoader class="multi-input-loader loader">
   <div v-if="withLabel" class="skeleton-loader__item"></div>
-  <div class="loader__item">
-    <div class="skeleton-loader__item"></div>
-    <div class="skeleton-loader__item"></div>
-  </div>
-  <div class="loader__item">
+  <div v-for="index in 3" class="loader__item">
     <div class="skeleton-loader__item"></div>
     <div class="skeleton-loader__item"></div>
   </div>

@@ -21,16 +21,30 @@
   &__content {
     display: flex;
     flex-direction: column;
-    gap: $spacing-xl;
   }
 
   &__item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: $spacing-2xl;
+    padding: $spacing-lg $spacing-lg;
+
+    &:nth-child(odd) {
+      background-color: var(--surface-secondary);
+      border-radius: $radius-sm;
+    }
+
+    &:nth-child(even) {
+      padding: $spacing-xl $spacing-lg;
+    }
 
     p:first-child {
       color: var(--text-secondary);
+    }
+
+    p:last-child {
+      white-space: nowrap;
     }
   }
 
@@ -53,10 +67,13 @@
     padding: 0;
     gap: $spacing-lg;
 
+    &__header {
+      padding: 0 $spacing-2xs;
+    }
+
     &__content {
       display: flex;
       flex-direction: column;
-      gap: $spacing-lg;
     }
   }
 }

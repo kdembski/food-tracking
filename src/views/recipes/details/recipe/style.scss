@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-3xl;
-  min-height: 280px;
 
   .recipe__header {
     margin: 0;
@@ -16,6 +15,13 @@
     }
   }
 
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3xl;
+    min-height: 180px;
+  }
+
   &__cookidoo-link {
     svg {
       width: 18px;
@@ -24,7 +30,9 @@
 
   &__attributes {
     display: flex;
-    gap: $spacing-3xl;
+    justify-content: space-evenly;
+    gap: $spacing-4xl;
+    padding: $spacing-4xl 0;
   }
 
   .attribute {
@@ -33,27 +41,25 @@
     gap: $spacing-lg;
 
     &.preparation-time .attribute__icon {
-      font-size: 19px;
+      font-size: 22px;
     }
 
     &.cooked-date .attribute__icon {
-      font-size: 18px;
-    }
-
-    &.kcal .attribute__icon {
       font-size: 20px;
     }
 
+    &.kcal .attribute__icon {
+      font-size: 23px;
+    }
+
     &__icon {
-      background-color: var(--surface-primary);
-      color: var(--text-secondary);
-      height: 48px;
-      width: 48px;
+      background-color: var(--surface-secondary);
+      height: 60px;
+      width: 60px;
       border-radius: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: $shadow-xs var(--shadow-color);
     }
 
     &__label {
@@ -77,8 +83,27 @@
 @media screen and (max-width: $screen-md) {
   .recipe {
     &__attributes {
+      gap: $spacing-2xl;
+      padding: 0;
+    }
+
+    .attribute {
       flex-direction: column;
-      gap: $spacing-xl;
+      align-items: center;
+
+      &__icon {
+        height: 50px;
+        width: 50px;
+      }
+
+      &__label {
+        > p:first-child {
+          display: none;
+        }
+        > p:last-child {
+          text-align: center;
+        }
+      }
     }
 
     &__buttons {

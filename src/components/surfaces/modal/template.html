@@ -5,6 +5,7 @@
         :is="containerElement"
         class="modal__container"
         @submit.prevent="onSubmit"
+        :novalidate="isContainerForm() ? true : null"
       >
         <CLoader
           v-if="isSubmitting"

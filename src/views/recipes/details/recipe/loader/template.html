@@ -1,10 +1,17 @@
-<CSkeletonLoader class="recipe-loader" backgroundColor="secondary">
-  <div>
-    <div class="skeleton-loader__item title"></div>
-    <div class="skeleton-loader__item subtitle"></div>
-  </div>
+<CCard class="recipe-loader-top" variant="contained">
+  <CSkeletonLoader backgroundColor="secondary">
+    <div>
+      <div class="skeleton-loader__item title"></div>
+      <div class="skeleton-loader__item subtitle"></div>
+    </div>
+    <div class="buttons">
+      <div v-for="index in 4" class="skeleton-loader__item button"></div>
+    </div>
+  </CSkeletonLoader>
+</CCard>
+<CSkeletonLoader class="recipe-loader-bottom">
   <div class="attributes">
-    <div v-for="index in 2" class="attribute">
+    <div v-for="index in 3" class="attribute">
       <div class="skeleton-loader__item"></div>
       <div>
         <div class="skeleton-loader__item"></div>
