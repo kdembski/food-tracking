@@ -28,13 +28,14 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (e: "cancel"): void;
+  (e: "success"): void;
 }>();
 
 const isUpdatingRecipe = computed(() => store.state.recipe.isSubmitting);
 
 const updateRecipe = async () => {
   await store.dispatch("recipe/update", props.recipe);
-  emits("cancel");
+  emits("success");
 };
 </script>
 

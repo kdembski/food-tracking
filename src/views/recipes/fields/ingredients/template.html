@@ -2,8 +2,8 @@
   <CMultiInput
     v-model="recipeIngredients"
     :type="MultiInputValuesTypes.OBJECT"
-    :isLoading="isLoading || isLoadingIngredients"
     @itemRemove="onIngredientRemove"
+    :isLoading="isLoadingIngredients || isLoading"
   >
     <template #default="{ values, index, handleAddingItem }">
       <div class="ingredients-fields__item item" :key="values[index].id">
@@ -25,7 +25,7 @@
           @update:modelValue="onUnitUpdate(index, values[index].unitId)"
           :enableSetSelectedWhenInputMatchAnyOption="false"
           :isDisabled="getIngredientUnitOptions(index).length === 1"
-          :key="unitAutocompleteKey"
+          :key="unitAutocompleteKeys[index]"
           isRequired
         />
         <CInput

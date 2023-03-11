@@ -1,7 +1,7 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
 import CInput from "@/components/controls/input/index.vue";
-import CSelectTags from "@/components/controls/custom/select-tags/index.vue";
+import CSelectTags from "@/components/controls/custom/select-tags/pills/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
 
 export default {

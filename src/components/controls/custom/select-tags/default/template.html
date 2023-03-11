@@ -1,0 +1,23 @@
+<div class="select-tags" ref="container">
+  <CAutocomplete
+    @update:modelValue="onModelValueUpdate"
+    v-model="selectedValue"
+    v-model:inputValue="inputValue"
+    :options="getTagOptions()"
+    :isLoading="isLoading"
+    :enableAddingOption="enableAddingTags"
+    @addOption="addNewTag"
+    :label="label"
+  />
+  <div v-if="!isLoading" class="select-tags__selected" ref="selectedRef">
+    <div
+      v-for="(tag, index) in _selectedTags"
+      class="select-tags__pill"
+      @click="removeTagFromSelected(tag)"
+      :key="selectedKey + tag"
+    >
+      {{ tag }}
+      <FontAwesomeIcon icon="times" />
+    </div>
+  </div>
+</div>

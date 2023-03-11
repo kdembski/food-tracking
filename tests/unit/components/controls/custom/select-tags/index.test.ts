@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CSelectTags from "@/components/controls/custom/select-tags/index.vue";
+import CSelectTags from "@/components/controls/custom/select-tags/pills/index.vue";
 
 describe("Select Tags Component", () => {
   let wrapper: any;
@@ -147,8 +147,7 @@ describe("Select Tags Component", () => {
     await input.setValue("tag3");
     expect(wrapper.vm.searchPhrase).toEqual("tag3");
 
-    const checkbox = wrapper.find("input#tag-tag3");
-    await checkbox.setChecked();
+    await newTag.trigger("click");
     expect(wrapper.vm.searchPhrase).toEqual("");
   });
 

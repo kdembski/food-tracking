@@ -2,7 +2,7 @@
 import CButton from "@/components/controls/button/index.vue";
 import CInput from "@/components/controls/input/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
-import CSelectTags from "@/components/controls/custom/select-tags/index.vue";
+import CSelectTags from "@/components/controls/custom/select-tags/default/index.vue";
 
 export default {
   name: "RecipeFields",

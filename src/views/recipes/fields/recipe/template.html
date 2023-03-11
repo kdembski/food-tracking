@@ -5,12 +5,11 @@
     label="Czas przygotowania"
     type="number"
   />
-  <CInput v-model="recipe.cookidooLink" label="Link do cookidoo" />
   <CSelectTags
     v-model:selectedTags="recipe.tags"
     v-model:tags="recipesTags"
     :isLoading="isLoadingRecipesTags"
-    inputIcon=""
     enableAddingTags
   />
+  <CInput v-model="recipe.cookidooLink" label="Link do cookidoo" />
 </div>

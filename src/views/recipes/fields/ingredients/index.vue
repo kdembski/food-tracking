@@ -53,7 +53,7 @@ const {
   ingredientsOptions,
   isLoadingIngredients,
   isLoadingUnits,
-  unitAutocompleteKey,
+  unitAutocompleteKeys,
   setIngredient,
   setIngredientsOptions,
   onIngredientRemove,
@@ -64,8 +64,8 @@ const {
 
 onBeforeMount(async () => {
   isLoading.value = true;
-  await fillIngredients();
   await setIngredientsOptions();
+  await fillIngredients();
   await nextTick();
   isLoading.value = false;
 });

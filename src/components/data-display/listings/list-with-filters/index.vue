@@ -1,6 +1,6 @@
 <script lang="ts">
 import CInput from "@/components/controls/input/index.vue";
-import CSelectTags from "@/components/controls/custom/select-tags/index.vue";
+import CSelectTags from "@/components/controls/custom/select-tags/pills/index.vue";
 import CButton from "@/components/controls/button/index.vue";
 import CList from "@/components/data-display/listings/list/index.vue";
 import CPagination from "@/components/utils/pagination/index.vue";

@@ -87,7 +87,12 @@
     </div>
   </template>
 </div>
-<EditRecipe v-else :recipe="recipe" @cancel="cancelEditing" />
+<EditRecipe
+  v-else
+  :recipe="recipe"
+  @cancel="cancelEditing"
+  @success="isEditing = false"
+/>
 <AddToCalendarModal
   v-model:isOpen="isAddToCalendarModalOpen"
   :addedRecipe="recipe"

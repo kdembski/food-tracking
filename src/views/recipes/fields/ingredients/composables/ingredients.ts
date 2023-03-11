@@ -16,7 +16,7 @@ export function useIngredients(
   const ingredients = ref<Record<number, Ingredient>>({});
   const isLoadingIngredients = ref(false);
   const isLoadingUnits = ref<Record<number, boolean>>({});
-  const unitAutocompleteKey = ref(0);
+  const unitAutocompleteKeys = ref<Record<number, number>>({});
 
   const setIngredientsOptions = async () => {
     await store.dispatch("ingredient/loadOptions");
@@ -49,7 +49,7 @@ export function useIngredients(
     }
 
     recipeIngredients.value[index].unitId = undefined;
-    unitAutocompleteKey.value++;
+    unitAutocompleteKeys.value[index]++;
     await nextTick();
     getComponentInput("units-autocomplete", index)?.focus();
   };
@@ -70,10 +70,9 @@ export function useIngredients(
     });
 
     ingredients.value = {};
-    await Promise.all(promises).then((items) => {
-      items.forEach((item, index) => {
-        ingredients.value[index] = item;
-      });
+    const items = await Promise.all(promises);
+    items.forEach((item, index) => {
+      ingredients.value[index] = item;
     });
 
     isLoadingIngredients.value = false;
@@ -105,7 +104,7 @@ export function useIngredients(
     ingredientsOptions,
     isLoadingIngredients,
     isLoadingUnits,
-    unitAutocompleteKey,
+    unitAutocompleteKeys,
     setIngredient,
     setIngredientsOptions,
     onIngredientRemove,

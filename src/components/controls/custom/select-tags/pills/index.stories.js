@@ -1,7 +1,7 @@
 import CSelectTags from "./index.vue";
 
 export default {
-  title: "Controls/Select Tags",
+  title: "Controls/Select Tags/Pills",
 };
 
 const Template = (args) => ({
@@ -18,8 +18,8 @@ const Template = (args) => ({
     '<div style="display:flex; flex-direction:column; gap:10px"><CSelectTags v-bind="args" v-model:selectedTags="selected" ></CSelectTags></div>',
 });
 
-export const Default = Template.bind({});
-Default.args = {
+export const Common = Template.bind({});
+Common.args = {
   tags: [
     {
       name: "default",
@@ -48,7 +48,7 @@ Default.args = {
 };
 
 export const isLoading = Template.bind({});
-isLoading.args = Object.assign({ isLoading: true }, Default.args);
+isLoading.args = Object.assign({ isLoading: true }, Common.args);
 
 export const Empty = Template.bind({});
 Empty.args = {
@@ -56,4 +56,4 @@ Empty.args = {
 };
 
 export const withCounts = Template.bind({});
-withCounts.args = Object.assign({ withCounts: true }, Default.args);
+withCounts.args = Object.assign({ withCounts: true }, Common.args);
