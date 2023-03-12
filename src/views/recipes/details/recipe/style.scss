@@ -49,17 +49,20 @@
     }
 
     &.kcal .attribute__icon {
-      font-size: 23px;
+      font-size: 22px;
     }
 
     &__icon {
-      background-color: var(--surface-secondary);
+      color: var(--text-secondary);
+      background-color: var(--surface-tetriary);
       height: 60px;
       width: 60px;
       border-radius: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: $shadow-xs var(--shadow-color);
+      border: 1px solid var(--border-color);
     }
 
     &__label {

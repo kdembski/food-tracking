@@ -1,4 +1,7 @@
 .ingredients-fields {
+  position: relative;
+  padding-top: 1px;
+
   &__item {
     display: grid;
     gap: $spacing-md;
@@ -6,6 +9,10 @@
   }
 
   &:deep(.multi-input__item:first-child) {
+    .field.field--with-label .field__label {
+      opacity: 1;
+    }
+
     .multi-input__remove-button {
       top: 24px;
     }

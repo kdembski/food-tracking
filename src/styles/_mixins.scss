@@ -16,12 +16,12 @@
   font-size: $font-2xl;
   color: var(--text-primary);
   letter-spacing: 1px;
-  font-weight: $font-medium;
+  font-weight: $font-bold;
 }
 
 @mixin heading-2 {
   font-size: $font-xl;
   color: var(--text-primary);
   letter-spacing: 1px;
-  font-weight: $font-medium;
+  font-weight: $font-bold;
 }

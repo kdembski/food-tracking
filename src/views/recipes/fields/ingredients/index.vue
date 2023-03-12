@@ -3,6 +3,7 @@ import CButton from "@/components/controls/button/index.vue";
 import CInput from "@/components/controls/input/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 import CMultiInput from "@/components/controls/multi-input/index.vue";
+import CLoader from "@/components/feedback/loader/index.vue";
 
 export default {
   name: "RecipeIngredientsFields",
@@ -11,6 +12,7 @@ export default {
     CInput,
     CAutocomplete,
     CMultiInput,
+    CLoader,
   },
 };
 </script>
@@ -54,6 +56,7 @@ const {
   isLoadingIngredients,
   isLoadingUnits,
   unitAutocompleteKeys,
+  multiInputKey,
   setIngredient,
   setIngredientsOptions,
   onIngredientRemove,
@@ -68,6 +71,10 @@ onBeforeMount(async () => {
   await fillIngredients();
   await nextTick();
   isLoading.value = false;
+
+  if (recipeIngredients.value.length === 0) {
+    recipeIngredients.value = [{}];
+  }
 });
 </script>
 

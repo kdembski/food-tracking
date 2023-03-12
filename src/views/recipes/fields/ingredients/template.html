@@ -3,7 +3,7 @@
     v-model="recipeIngredients"
     :type="MultiInputValuesTypes.OBJECT"
     @itemRemove="onIngredientRemove"
-    :isLoading="isLoadingIngredients || isLoading"
+    :itemsKey="multiInputKey"
   >
     <template #default="{ values, index, handleAddingItem }">
       <div class="ingredients-fields__item item" :key="values[index].id">
@@ -39,4 +39,10 @@
       </div>
     </template>
   </CMultiInput>
+  <CLoader
+    v-if="isLoadingIngredients || isLoading"
+    :circleHeight="32"
+    :circleWidth="32"
+    withOverlay
+  />
 </div>

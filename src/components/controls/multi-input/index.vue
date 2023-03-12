@@ -20,8 +20,9 @@ const props = withDefaults(
     type?: MultiInputValuesTypes;
     emptyObject?: unknown;
     isLoading?: boolean;
+    itemsKey?: number;
   }>(),
-  { type: MultiInputValuesTypes.NUMBER, isLoading: false }
+  { type: MultiInputValuesTypes.NUMBER, isLoading: false, itemsKey: 0 }
 );
 
 const emits = defineEmits<{
