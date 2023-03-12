@@ -75,7 +75,6 @@ const actions: ActionTree<RecipeState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingList", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject(error);
         });
     });
   },
@@ -97,7 +96,6 @@ const actions: ActionTree<RecipeState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingTags", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject(error);
         });
     });
   },
@@ -119,7 +117,6 @@ const actions: ActionTree<RecipeState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingSearchSuggestions", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject(error);
         });
     });
   },
@@ -132,7 +129,6 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           dispatch("handleDefaultError", error, { root: true });
-          reject(error);
         });
     });
   },
@@ -155,7 +151,6 @@ const actions: ActionTree<RecipeState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoading", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject(error);
         });
     });
   },
@@ -177,7 +172,6 @@ const actions: ActionTree<RecipeState, any> = {
             { error, module: "recipe" },
             { root: true }
           );
-          reject(error);
         });
     });
   },
@@ -202,7 +196,6 @@ const actions: ActionTree<RecipeState, any> = {
             { error, module: "recipe" },
             { root: true }
           );
-          reject(error);
         });
     });
   },
@@ -220,7 +213,6 @@ const actions: ActionTree<RecipeState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject(error);
         });
     });
   },

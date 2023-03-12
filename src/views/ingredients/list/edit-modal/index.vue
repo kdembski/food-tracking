@@ -82,17 +82,15 @@ const isLoading = computed(
 
 const submit = async () => {
   if (isAddingNewIngredient.value) {
-    createIngredient().then(() => {
-      emits("success");
-      closeModal();
-    });
+    await createIngredient();
+    emits("success");
+    closeModal();
     return;
   }
 
-  updateIngredient().then(() => {
-    emits("success");
-    closeModal();
-  });
+  await updateIngredient();
+  emits("success");
+  closeModal();
 };
 
 const getTitle = () => {

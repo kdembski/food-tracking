@@ -87,17 +87,15 @@ const closeModal = () => {
 
 const submit = async () => {
   if (isAddingNewCategory.value) {
-    createCategory().then(() => {
-      emits("success");
-      closeModal();
-    });
+    await createCategory();
+    emits("success");
+    closeModal();
     return;
   }
 
-  updateCategory().then(() => {
-    emits("success");
-    closeModal();
-  });
+  await updateCategory();
+  emits("success");
+  closeModal();
 };
 
 const getTitle = () => {

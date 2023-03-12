@@ -86,17 +86,15 @@ const closeModal = () => {
 
 const submit = async () => {
   if (isAddingNewUnit.value) {
-    createUnit().then(() => {
-      emits("success");
-      closeModal();
-    });
+    await createUnit();
+    emits("success");
+    closeModal();
     return;
   }
 
-  updateUnit().then(() => {
-    emits("success");
-    closeModal();
-  });
+  await updateUnit();
+  emits("success");
+  closeModal();
 };
 
 const getTitle = () => {

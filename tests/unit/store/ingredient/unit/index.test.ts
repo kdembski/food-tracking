@@ -105,9 +105,7 @@ describe("Ingredient Unit Store Module", () => {
 
   it("Should show error notification on failed loadList action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject("error"));
-    await expect(
-      store.dispatch("module/loadList", listFilters)
-    ).rejects.toEqual("error");
+    store.dispatch("module/loadList", listFilters);
     await flushPromises();
     expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
@@ -137,7 +135,7 @@ describe("Ingredient Unit Store Module", () => {
 
   it("Should show error notification on failed loadOptions action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject("error"));
-    await expect(store.dispatch("module/loadOptions")).rejects.toEqual("error");
+    store.dispatch("module/loadOptions");
     await flushPromises();
     expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
@@ -155,7 +153,7 @@ describe("Ingredient Unit Store Module", () => {
 
   it("Should show error notification on failed load action dispatch", async () => {
     mockAxiosGet.mockImplementation(() => Promise.reject("error"));
-    await expect(store.dispatch("module/load", 1)).rejects.toEqual("error");
+    store.dispatch("module/load", 1);
     await flushPromises();
     expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
@@ -178,9 +176,7 @@ describe("Ingredient Unit Store Module", () => {
   it("Should show error notification on failed create action dispatch", async () => {
     const item = { id: 1 };
     mockAxiosPost.mockImplementation(() => Promise.reject("error"));
-    await expect(store.dispatch("module/create", item)).rejects.toEqual(
-      "error"
-    );
+    store.dispatch("module/create", item);
     await flushPromises();
     expect(actions.handleComplexError).toHaveBeenCalledTimes(1);
   });
@@ -203,9 +199,7 @@ describe("Ingredient Unit Store Module", () => {
   it("Should show error notification on failed update action dispatch", async () => {
     const item = { id: 1 };
     mockAxiosPut.mockImplementation(() => Promise.reject("error"));
-    await expect(store.dispatch("module/update", item)).rejects.toEqual(
-      "error"
-    );
+    store.dispatch("module/update", item);
     await flushPromises();
     expect(actions.handleComplexError).toHaveBeenCalledTimes(1);
   });
@@ -223,7 +217,7 @@ describe("Ingredient Unit Store Module", () => {
 
   it("Should show error notification on failed delete action dispatch", async () => {
     mockAxiosDelete.mockImplementation(() => Promise.reject("error"));
-    await expect(store.dispatch("module/delete", 1)).rejects.toEqual("error");
+    store.dispatch("module/delete", 1);
     await flushPromises();
     expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });

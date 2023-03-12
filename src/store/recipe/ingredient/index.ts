@@ -32,7 +32,6 @@ const actions: ActionTree<RecipeIngredientState, any> = {
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingCollection", false);
           dispatch("handleDefaultError", error, { root: true });
-          reject(error);
         });
     });
   },
@@ -65,7 +64,6 @@ const actions: ActionTree<RecipeIngredientState, any> = {
             { error, module: "recipe/ingredient" },
             { root: true }
           );
-          reject(error);
         });
     });
   },
@@ -99,7 +97,6 @@ const actions: ActionTree<RecipeIngredientState, any> = {
             { error, module: "recipe/ingredient" },
             { root: true }
           );
-          reject(error);
         });
     });
   },
