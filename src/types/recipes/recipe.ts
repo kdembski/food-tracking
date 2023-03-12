@@ -1,3 +1,4 @@
+import { ApiError } from "./../api";
 import { ListWithFilters } from "@/types/components/data-display/list";
 import { Tag } from "../components/utils/tags";
 
@@ -11,6 +12,7 @@ export interface RecipeState {
   searchSuggestions: string[] | null;
   isLoadingSearchSuggestions: boolean;
   isSubmitting: boolean;
+  errors: RecipeErrors | null;
 }
 
 export interface Recipe {
@@ -24,3 +26,8 @@ export interface Recipe {
 }
 
 export type RecipesList = ListWithFilters<Recipe>;
+
+export type RecipeErrors = {
+  recipeName: ApiError;
+  preparationTime: ApiError;
+};

@@ -11,7 +11,7 @@ const props = withDefaults(
     circleWidth?: number;
     withOverlay?: boolean;
   }>(),
-  { circleHeight: 55, circleWidth: 55, withOverlay: false }
+  { circleHeight: 50, circleWidth: 50, withOverlay: false }
 );
 
 const calculateStrokeWidth = () => {

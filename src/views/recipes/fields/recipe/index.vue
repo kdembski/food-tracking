@@ -16,23 +16,31 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, onBeforeMount, ref, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { Recipe } from "@/types/recipes/recipe";
+import { useStoredErrors } from "@/composables/stored-errors";
 
 const store = useStore();
 const props = defineProps<{
   recipe: Recipe;
 }>();
 
+const recipesTags = ref();
 const isLoadingRecipesTags = computed(
   () => store.getters["recipe/isLoadingTags"]
 );
 
-const recipesTags = ref();
+const { errors, getErrorMessage, clearError, clearAllErrors } =
+  useStoredErrors("recipe");
+
 onBeforeMount(async () => {
   await store.dispatch("recipe/loadTags");
   recipesTags.value = store.getters["recipe/tags"];
+});
+
+onBeforeUnmount(() => {
+  clearAllErrors();
 });
 </script>
 

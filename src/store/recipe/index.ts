@@ -1,5 +1,10 @@
 import ApiService from "@/services/api.service";
-import { RecipeState, RecipesList, Recipe } from "@/types/recipes/recipe";
+import {
+  RecipeState,
+  RecipesList,
+  Recipe,
+  RecipeErrors,
+} from "@/types/recipes/recipe";
 import { ApiError, DbResults } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
@@ -10,10 +15,6 @@ import {
 } from "@/types/components/data-display/list";
 import { DropdownOption } from "@/types/components/utils/dropdown";
 import { Tag } from "@/types/components/utils/tags";
-import {
-  getErrorMessage,
-  showDefualtErrorNotification,
-} from "../helpers/error-message";
 import ingredient from "./ingredient";
 
 const state: () => RecipeState = () => ({
@@ -29,6 +30,8 @@ const state: () => RecipeState = () => ({
 
   searchSuggestions: null,
   isLoadingSearchSuggestions: false,
+
+  errors: null,
 });
 
 const getters: GetterTree<RecipeState, any> = {
@@ -52,10 +55,11 @@ const getters: GetterTree<RecipeState, any> = {
   },
 
   isLoadingSearchSuggestions: (state) => state.isLoadingSearchSuggestions,
+  errors: (state) => state.errors,
 };
 
 const actions: ActionTree<RecipeState, any> = {
-  loadList({ commit, rootState }, filters: ListFilters) {
+  loadList({ commit, dispatch }, filters: ListFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 
@@ -70,13 +74,13 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingList", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  loadTags({ commit, rootState }, filters: ListBaseFilters) {
+  loadTags({ commit, dispatch }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingTags", true);
 
@@ -92,13 +96,13 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingTags", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  loadSearchSuggestions({ commit, rootState }, filters: ListBaseFilters) {
+  loadSearchSuggestions({ commit, dispatch }, filters: ListBaseFilters) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingSearchSuggestions", true);
 
@@ -114,26 +118,26 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingSearchSuggestions", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  getCount({ rootState }) {
+  getCount({ dispatch }) {
     return new Promise<number>((resolve, reject) => {
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/count")
         .then((response: AxiosResponse<number>) => {
           resolve(response.data);
         })
         .catch((error: AxiosError<ApiError>) => {
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  load({ commit, rootState }, itemId) {
+  load({ commit, dispatch }, itemId) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoading", true);
 
@@ -150,13 +154,13 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoading", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
 
-  create({ commit, rootState }, item: Recipe) {
+  create({ commit, dispatch, rootState }, item: Recipe) {
     return new Promise<number>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -168,13 +172,17 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch(
+            "handleComplexError",
+            { error, module: "recipe" },
+            { root: true }
+          );
+          reject(error);
         });
     });
   },
 
-  update({ commit, rootState }, item: Recipe) {
+  update({ commit, dispatch, rootState }, item: Recipe) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -189,13 +197,17 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch(
+            "handleComplexError",
+            { error, module: "recipe" },
+            { root: true }
+          );
+          reject(error);
         });
     });
   },
 
-  delete({ commit, rootState }, itemId: number) {
+  delete({ commit, dispatch, rootState }, itemId: number) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsSubmitting", true);
 
@@ -207,8 +219,8 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
+          reject(error);
         });
     });
   },
@@ -249,6 +261,10 @@ const mutations: MutationTree<RecipeState> = {
 
   setIsLoading(state, value) {
     state.isLoading = value;
+  },
+
+  setErrors(state, value: RecipeErrors) {
+    state.errors = value;
   },
 };
 

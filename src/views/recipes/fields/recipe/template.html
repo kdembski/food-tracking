@@ -1,9 +1,16 @@
 <div class="recipe-fields">
-  <CInput v-model="recipe.recipeName" label="Nazwa" />
+  <CInput
+    v-model="recipe.recipeName"
+    label="Nazwa"
+    :errorMessage="getErrorMessage(['recipeName'])"
+    @update:modelValue="clearError(['recipeName'])"
+  />
   <CInput
     v-model="recipe.preparationTime"
     label="Czas przygotowania"
     type="number"
+    :errorMessage="getErrorMessage(['preparationTime'])"
+    @update:modelValue="clearError(['preparationTime'])"
   />
   <CSelectTags
     v-model:selectedTags="recipe.tags"
