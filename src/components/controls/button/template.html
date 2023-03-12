@@ -3,6 +3,7 @@
   :class="getButtonClasses()"
   :disabled="isDisabled"
   ref="button"
+  @mousedown="triggerAnimation"
 >
   <CLoader
     v-if="isLoading"

@@ -1,10 +1,13 @@
 .button {
   border: 0;
-  display: inline;
+  display: inline-flex;
   font-weight: $font-bold;
   cursor: pointer;
   position: relative;
   white-space: nowrap;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
 
   &--disabled {
     opacity: 0.4;
@@ -14,7 +17,6 @@
 
   &--full-width {
     width: 100%;
-    display: inline-flex;
     justify-content: center;
 
     .button__label {
@@ -52,6 +54,10 @@
       color: $white;
       background-color: var(--primary);
     }
+
+    &:after {
+      background-color: rgba(var(--text-primary-rgb), 0.4);
+    }
   }
 
   &--secondary {
@@ -62,6 +68,10 @@
     &.button--contained {
       color: $white;
       background-color: $secondary;
+    }
+
+    &:after {
+      background-color: rgba(var(--text-primary-rgb), 0.25);
     }
   }
 
@@ -145,6 +155,19 @@
       height: 36px;
       box-shadow: $shadow-sm var(--shadow-color);
     }
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.2s linear;
+    opacity: 0;
+  }
+
+  &__click-animation:after {
+    transition: opacity 0.05s linear;
+    opacity: 1;
   }
 }
 
