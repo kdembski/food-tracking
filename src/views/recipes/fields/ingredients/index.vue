@@ -4,6 +4,7 @@ import CInput from "@/components/controls/input/index.vue";
 import CAutocomplete from "@/components/controls/autocomplete/index.vue";
 import CMultiInput from "@/components/controls/multi-input/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
+import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 
 export default {
   name: "RecipeIngredientsFields",
@@ -13,15 +14,17 @@ export default {
     CAutocomplete,
     CMultiInput,
     CLoader,
+    CSkeletonLoader,
   },
 };
 </script>
 
 <script setup lang="ts">
-import { computed, nextTick, onBeforeMount, ref } from "vue";
+import { computed, nextTick, onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { MultiInputValuesTypes } from "@/types/components/multi-input";
 import { RecipeIngredient } from "@/types/recipes/recipeIngredient";
 import { useIngredients } from "./composables/ingredients";
+import { useStoredErrors } from "@/composables/stored-errors";
 
 const props = defineProps<{
   modelValue: Partial<RecipeIngredient>[];
@@ -56,7 +59,6 @@ const {
   isLoadingIngredients,
   isLoadingUnits,
   unitAutocompleteKeys,
-  multiInputKey,
   setIngredient,
   setIngredientsOptions,
   onIngredientRemove,
@@ -75,6 +77,13 @@ onBeforeMount(async () => {
   if (recipeIngredients.value.length === 0) {
     recipeIngredients.value = [{}];
   }
+});
+
+const { errors, getErrorMessage, clearError, clearAllErrors } =
+  useStoredErrors("recipe/ingredient");
+
+onBeforeUnmount(() => {
+  clearAllErrors();
 });
 </script>
 

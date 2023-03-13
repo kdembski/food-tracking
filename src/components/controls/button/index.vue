@@ -89,7 +89,7 @@ const triggerAnimation = (e: any) => {
   targetClasses.add("button__click-animation");
   animationTimeout.value = setTimeout(() => {
     targetClasses.remove("button__click-animation");
-  }, 100);
+  }, 50);
 };
 </script>
 

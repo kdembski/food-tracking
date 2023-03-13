@@ -11,13 +11,11 @@ export function useIngredients(
   getComponentInput: (component: string, index: number) => HTMLInputElement
 ) {
   const store = useStore();
-
   const ingredientsOptions = ref([]);
-  const ingredients = ref<Record<number, Ingredient>>({});
+  const ingredients = ref<Record<number, Ingredient | undefined>>({});
   const isLoadingIngredients = ref(false);
   const isLoadingUnits = ref<Record<number, boolean>>({});
   const unitAutocompleteKeys = ref<Record<number, number>>({});
-  const multiInputKey = ref(0);
 
   const setIngredientsOptions = async () => {
     await store.dispatch("ingredient/loadOptions");
@@ -26,6 +24,9 @@ export function useIngredients(
 
   const setIngredient = async (id: number, index: number) => {
     if (!id) {
+      ingredients.value[index] = undefined;
+      recipeIngredients.value[index].unitId = undefined;
+      incrementUnitAutocompleteKey(index);
       return;
     }
 
@@ -50,12 +51,15 @@ export function useIngredients(
     }
 
     recipeIngredients.value[index].unitId = undefined;
-    unitAutocompleteKeys.value[index]
-      ? unitAutocompleteKeys.value[index]++
-      : (unitAutocompleteKeys.value[index] = 0);
-
+    incrementUnitAutocompleteKey(index);
     await nextTick();
     getComponentInput("units-autocomplete", index)?.focus();
+  };
+
+  const incrementUnitAutocompleteKey = (index: number) => {
+    unitAutocompleteKeys.value[index]
+      ? unitAutocompleteKeys.value[index]++
+      : (unitAutocompleteKeys.value[index] = 1);
   };
 
   const onIngredientRemove = async () => {
@@ -80,15 +84,15 @@ export function useIngredients(
     });
 
     isLoadingIngredients.value = false;
-    multiInputKey.value++;
   };
 
   const getIngredientUnitOptions = (index: number) => {
-    if (!ingredients.value[index]) {
+    const ingredient = ingredients.value[index];
+    if (!ingredient) {
       return [];
     }
 
-    const units = ingredients.value[index].units;
+    const units = ingredient.units;
     return units.map((unit) => {
       return {
         value: unit.unitId,
@@ -110,7 +114,6 @@ export function useIngredients(
     isLoadingIngredients,
     isLoadingUnits,
     unitAutocompleteKeys,
-    multiInputKey,
     setIngredient,
     setIngredientsOptions,
     onIngredientRemove,

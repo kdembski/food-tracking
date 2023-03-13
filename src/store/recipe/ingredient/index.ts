@@ -1,4 +1,7 @@
-import { RecipeIngredient } from "./../../../types/recipes/recipeIngredient";
+import {
+  RecipeIngredient,
+  RecipeIngredientsErrors,
+} from "./../../../types/recipes/recipeIngredient";
 import ApiService from "@/services/api.service";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
@@ -9,9 +12,12 @@ const state: RecipeIngredientState = {
   collection: null,
   isLoadingCollection: false,
   isSubmittingCollection: false,
+  errors: null,
 };
 
-const getters: GetterTree<RecipeIngredientState, any> = {};
+const getters: GetterTree<RecipeIngredientState, any> = {
+  errors: (state) => state.errors,
+};
 
 const actions: ActionTree<RecipeIngredientState, any> = {
   loadCollection({ commit, dispatch }, recipeId) {
@@ -113,6 +119,10 @@ const mutations: MutationTree<RecipeIngredientState> = {
 
   setIsLoadingCollection(state, value) {
     state.isLoadingCollection = value;
+  },
+
+  setErrors(state, value: { items: RecipeIngredientsErrors[] } | null) {
+    state.errors = value?.items || null;
   },
 };
 

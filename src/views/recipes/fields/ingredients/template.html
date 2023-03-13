@@ -1,9 +1,15 @@
 <div class="ingredients-fields">
+  <CSkeletonLoader
+    v-if="isLoadingIngredients || isLoading"
+    class="ingredients-fields__loader"
+  >
+    <div v-for="index in 3" class="skeleton-loader__item"></div>
+  </CSkeletonLoader>
   <CMultiInput
     v-model="recipeIngredients"
     :type="MultiInputValuesTypes.OBJECT"
     @itemRemove="onIngredientRemove"
-    :itemsKey="multiInputKey"
+    :isLoading="isLoadingIngredients || isLoading"
   >
     <template #default="{ values, index, handleAddingItem }">
       <div class="ingredients-fields__item item" :key="values[index].id">
@@ -12,8 +18,12 @@
           :options="ingredientsOptions"
           :label="index === 0 ? 'Składnik' : ''"
           class="item__ingredient-autocomplete"
-          @update:modelValue="setIngredient(values[index].ingredientId, index)"
+          @update:modelValue="
+            setIngredient(values[index].ingredientId, index);
+            clearError([index, 'ingredientId']);
+          "
           :enableSetSelectedWhenInputMatchAnyOption="false"
+          :errorMessage="getErrorMessage([index, 'ingredientId'])"
           isRequired
         />
         <CAutocomplete
@@ -22,10 +32,14 @@
           :label="index === 0 ? 'Jednostka' : ''"
           :isLoading="isLoadingUnits[index]"
           class="item__units-autocomplete"
-          @update:modelValue="onUnitUpdate(index, values[index].unitId)"
+          @update:modelValue="
+            onUnitUpdate(index, values[index].unitId);
+            clearError([index, 'unitId']);
+          "
           :enableSetSelectedWhenInputMatchAnyOption="false"
           :isDisabled="getIngredientUnitOptions(index).length === 1"
           :key="unitAutocompleteKeys[index]"
+          :errorMessage="getErrorMessage([index, 'unitId'])"
           isRequired
         />
         <CInput
@@ -34,15 +48,11 @@
           :label="index === 0 ? 'Ilość' : ''"
           class="item__amount-input"
           @enter="handleAddingItem"
+          @update:modelValue="clearError([index, 'amount']);"
+          :errorMessage="getErrorMessage([index, 'amount'])"
           isRequired
         />
       </div>
     </template>
   </CMultiInput>
-  <CLoader
-    v-if="isLoadingIngredients || isLoading"
-    :circleHeight="32"
-    :circleWidth="32"
-    withOverlay
-  />
 </div>

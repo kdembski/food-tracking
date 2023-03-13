@@ -1,3 +1,4 @@
+import { ApiError } from "./../api";
 export interface RecipeIngredient {
   id: number;
   recipeId: number;
@@ -15,4 +16,11 @@ export interface RecipeIngredientState {
   collection: RecipeIngredient[] | null;
   isLoadingCollection: boolean;
   isSubmittingCollection: boolean;
+  errors: RecipeIngredientsErrors[] | null;
+}
+
+export interface RecipeIngredientsErrors {
+  ingredientId: ApiError;
+  unitId: ApiError;
+  amount: ApiError;
 }

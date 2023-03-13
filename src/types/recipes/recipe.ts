@@ -27,7 +27,7 @@ export interface Recipe {
 
 export type RecipesList = ListWithFilters<Recipe>;
 
-export type RecipeErrors = {
+export interface RecipeErrors {
   recipeName: ApiError;
   preparationTime: ApiError;
-};
+}

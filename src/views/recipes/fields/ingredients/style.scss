@@ -17,4 +17,18 @@
       top: 24px;
     }
   }
+
+  &__loader {
+    display: grid;
+    gap: $spacing-md;
+    grid-template-columns: 45% 1fr 1fr;
+    margin-bottom: $spacing-sm;
+    height: unset;
+    margin-right: 42px;
+
+    .skeleton-loader__item {
+      height: 14px;
+      width: 80%;
+    }
+  }
 }
