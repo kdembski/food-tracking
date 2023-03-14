@@ -20,7 +20,7 @@ const getLoaderMaxHeight = () => {
     windowHeight.value -
     (containerOffsetTop || 0) -
     (isMobile.value ? 64 : 0) -
-    1;
+    4;
   return { maxHeight: containerHeight + "px" };
 };
 </script>

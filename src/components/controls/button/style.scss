@@ -71,7 +71,7 @@
     }
 
     &:after {
-      background-color: rgba(var(--text-primary-rgb), 0.25);
+      background-color: rgba(var(--text-primary-rgb), 0.2);
     }
   }
 
@@ -161,12 +161,11 @@
     content: "";
     position: absolute;
     inset: 0;
-    transition: opacity 0.15s linear;
+    transition: opacity 0.05s ease-out;
     opacity: 0;
   }
 
-  &__click-animation:after {
-    transition: opacity 0.05s linear;
+  &:active::after {
     opacity: 1;
   }
 }

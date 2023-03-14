@@ -80,17 +80,6 @@ const getLoaderSize = (): number => {
       return 24;
   }
 };
-
-const animationTimeout = ref<number>();
-const triggerAnimation = (e: any) => {
-  animationTimeout.value = undefined;
-  const targetClasses = e?.currentTarget?.classList;
-
-  targetClasses.add("button__click-animation");
-  animationTimeout.value = setTimeout(() => {
-    targetClasses.remove("button__click-animation");
-  }, 50);
-};
 </script>
 
 <template src="./template.html"></template>
