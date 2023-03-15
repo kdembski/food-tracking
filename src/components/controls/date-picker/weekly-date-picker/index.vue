@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { isToday } from "date-fns";
 
 const props = defineProps({
   modelValue: {

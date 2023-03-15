@@ -33,6 +33,7 @@
   --success-secondary: #{$success-light};
 
   --text-button-hover-background: #{$text-button-hover-background-light};
+  --text-button-active-background: #{$text-button-active-background-light};
 }
 
 [data-theme="dark"] {
@@ -62,5 +63,6 @@
     --success-secondary: #{$success};
 
     --text-button-hover-background: #{$text-button-hover-background-dark};
+    --text-button-active-background: #{$text-button-active-background-dark};
   }
 }

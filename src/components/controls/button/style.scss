@@ -9,10 +9,14 @@
   align-items: center;
   justify-content: center;
 
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
   &--disabled {
     opacity: 0.4;
     cursor: default;
-    box-shadow: none !important;
   }
 
   &--full-width {
@@ -30,11 +34,15 @@
     }
   }
 
+  .button__content {
+    position: relative;
+    z-index: 2;
+  }
+
   &.button--text {
     background-color: transparent;
     padding: $spacing-md;
     border-radius: $radius-md;
-    box-shadow: none !important;
 
     .button__content {
       gap: $spacing-md;
@@ -42,6 +50,18 @@
 
     &:hover:not(.button--disabled) {
       background-color: var(--text-button-hover-background);
+    }
+
+    &:active:not(.button--disabled) {
+      background-color: var(--text-button-active-background);
+    }
+
+    &:focus-visible {
+      outline-offset: -1px;
+    }
+
+    &::before {
+      display: none;
     }
   }
 
@@ -55,8 +75,8 @@
       background-color: var(--primary);
     }
 
-    &:after {
-      background-color: rgba(var(--text-primary-rgb), 0.4);
+    &:active::before {
+      opacity: 0.2;
     }
   }
 
@@ -70,8 +90,8 @@
       background-color: $secondary;
     }
 
-    &:after {
-      background-color: rgba(var(--text-primary-rgb), 0.2);
+    &:active::before {
+      opacity: 0.12;
     }
   }
 
@@ -79,7 +99,6 @@
     font-size: $font-sm;
     padding: $spacing-md $spacing-lg;
     border-radius: $radius-sm;
-    box-shadow: $shadow-xs var(--shadow-color);
 
     .button__content {
       gap: $spacing-md;
@@ -90,7 +109,6 @@
     font-size: $font-base;
     padding: $spacing-lg - 1 $spacing-xl;
     border-radius: $radius-md;
-    box-shadow: $shadow-sm var(--shadow-color);
 
     .button__content {
       gap: $spacing-lg;
@@ -101,7 +119,6 @@
     font-size: $font-lg;
     padding: $spacing-xl - 1 $spacing-2xl;
     border-radius: $radius-lg;
-    box-shadow: $shadow-md var(--shadow-color);
 
     .button__content {
       gap: $spacing-xl;
@@ -146,27 +163,22 @@
       width: 32px;
       min-width: 32px;
       height: 32px;
-      box-shadow: $shadow-xs var(--shadow-color);
     }
 
     &.button--large {
       width: 36px;
       min-width: 36px;
       height: 36px;
-      box-shadow: $shadow-sm var(--shadow-color);
     }
   }
 
-  &:after {
+  &:before {
     content: "";
     position: absolute;
     inset: 0;
-    transition: opacity 0.05s ease-out;
     opacity: 0;
-  }
-
-  &:active::after {
-    opacity: 1;
+    z-index: 1;
+    background-color: $white;
   }
 }
 

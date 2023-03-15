@@ -1,5 +1,9 @@
 <div class="weekly-date-picker">
-  <div v-for="(date, index) in allDatesInWeek" class="weekly-date-picker__item">
+  <div
+    v-for="(date, index) in allDatesInWeek"
+    class="weekly-date-picker__item"
+    :class="{ 'weekly-date-picker__item--today': isToday(date) }"
+  >
     <input
       :id="'date-' + index"
       v-model="selected"

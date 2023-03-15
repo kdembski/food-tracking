@@ -37,9 +37,16 @@
       background-color: var(--primary);
       color: $white;
       box-shadow: $shadow-sm var(--shadow-color);
+      border-color: var(--primary);
 
       & > p:last-child {
         color: $white;
+      }
+    }
+
+    &--today {
+      > label {
+        border-color: var(--primary);
       }
     }
   }
