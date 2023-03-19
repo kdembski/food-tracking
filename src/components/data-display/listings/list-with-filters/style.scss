@@ -46,7 +46,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
   &__pagination {
     &-top {
       position: sticky;
-      z-index: 1;
+      z-index: $layer-1;
       top: -($spacing-2xl + $spacing-md);
       overflow: hidden;
       padding: $spacing-md 0;
