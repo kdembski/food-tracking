@@ -9,7 +9,7 @@
             v-if="recipe.cookidooLink"
             color="secondary"
             variant="text"
-            @click="openCookidooLink"
+            @click="openCookidooLink(recipe)"
             class="recipe__cookidoo-link"
             v-tooltip="{ text: 'Otwórz w Cookidoo' }"
           >

@@ -30,8 +30,13 @@ import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipes/recipe";
 import { clone } from "lodash";
 
-const { isPlanned, getFormattedCookedDate, getPreparationTime, getKcal } =
-  useRecipeHelpers();
+const {
+  isPlanned,
+  getFormattedCookedDate,
+  getPreparationTime,
+  getKcal,
+  openCookidooLink,
+} = useRecipeHelpers();
 const { isMobile } = useWindowSize();
 const store = useStore();
 const route = useRoute();
@@ -57,10 +62,6 @@ onBeforeMount(() => {
 
 const loadRecipe = () => {
   return store.dispatch("recipe/load", recipeId.value);
-};
-
-const openCookidooLink = () => {
-  window.open(recipe.value.cookidooLink, "_blank");
 };
 
 const startEditing = () => {

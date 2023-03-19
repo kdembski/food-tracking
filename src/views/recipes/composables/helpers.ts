@@ -1,3 +1,4 @@
+import { Recipe } from "@/types/recipes/recipe";
 import {
   isEqual,
   isFuture,
@@ -69,10 +70,15 @@ export function useRecipeHelpers() {
     return kcal + " kcal";
   };
 
+  const openCookidooLink = (recipe: Recipe) => {
+    window.open(recipe.cookidooLink, "_blank");
+  };
+
   return {
     isPlanned,
     getFormattedCookedDate,
     getPreparationTime,
     getKcal,
+    openCookidooLink,
   };
 }
