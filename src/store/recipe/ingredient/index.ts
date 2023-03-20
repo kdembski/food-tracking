@@ -121,8 +121,8 @@ const mutations: MutationTree<RecipeIngredientState> = {
     state.isLoadingCollection = value;
   },
 
-  setErrors(state, value: { items: RecipeIngredientsErrors[] } | null) {
-    state.errors = value?.items || null;
+  setErrors(state, value: { _items: RecipeIngredientsErrors[] } | null) {
+    state.errors = value?._items || null;
   },
 };
 

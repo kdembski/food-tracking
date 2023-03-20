@@ -12,6 +12,7 @@
         background-color: var(--surface-primary);
         position: sticky;
         top: -$spacing-2xl;
+        z-index: $layer-1;
       }
     }
 

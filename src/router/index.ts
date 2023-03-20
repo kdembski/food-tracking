@@ -84,7 +84,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "Calendar",
     component: CalendarView,
     meta: {
-      maxWidth: "unset",
+      maxWidth: 1900,
     },
   },
   {

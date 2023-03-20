@@ -17,6 +17,10 @@
   &--disabled {
     opacity: 0.4;
     cursor: default;
+
+    &:before {
+      display: none;
+    }
   }
 
   &--full-width {
