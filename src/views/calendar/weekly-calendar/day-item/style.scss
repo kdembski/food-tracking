@@ -1,7 +1,7 @@
 .day-item {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xl;
+  gap: $spacing-2xl;
   padding: $spacing-sm;
   cursor: grab;
   box-shadow: $shadow-xs var(--shadow-color);
@@ -68,5 +68,11 @@
       @include uppercasedSecondaryTextWithBorder;
       margin-bottom: $spacing-md;
     }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .day-item {
+    gap: $spacing-xl;
   }
 }
