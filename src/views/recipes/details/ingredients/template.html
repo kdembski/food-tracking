@@ -35,7 +35,10 @@
       <div class="recipe-ingredients__content">
         <div class="recipe-ingredients__item" v-for="ingredient in ingredients">
           <p>{{ ingredient.ingredientName }}</p>
-          <p>{{ ingredient.amount * portions }} {{ingredient.unitShortcut}}</p>
+          <p>
+            {{ Math.round((ingredient.amount * portions) * 100) / 100 }}
+            {{ingredient.unitShortcut}}
+          </p>
         </div>
       </div>
     </template>

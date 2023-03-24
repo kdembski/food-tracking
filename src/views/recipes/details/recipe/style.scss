@@ -18,7 +18,7 @@
   &__card {
     display: flex;
     flex-direction: column;
-    gap: $spacing-3xl;
+    gap: $spacing-4xl;
     min-height: 180px;
   }
 
@@ -114,8 +114,8 @@
       grid-template-columns: repeat(2, 1fr);
 
       > button {
-        &:nth-child(3),
-        &:nth-child(4) {
+        &:nth-child(1),
+        &:nth-child(2) {
           grid-column: span 2;
         }
       }

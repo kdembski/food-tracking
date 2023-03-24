@@ -28,7 +28,7 @@
           variant="text"
           icon="trash-can"
           v-tooltip="{ text: 'Usuń ' + item.name }"
-          @click="openDeleteModal(item.id)"
+          @click="openDeleteModal(item)"
         />
       </div>
     </template>
@@ -44,8 +44,9 @@
   v-model:isOpen="isDeleteModalOpen"
   title="Na pewno?"
   submitButtonLabel="Usuń"
+  submitButtonColor="error"
   :isSubmitting="isSubmittingItem"
   @submit="deleteItem"
 >
-  <p>Na pewno chcesz usunać?</p>
+  <p>Na pewno chcesz usunać <strong>{{ deletedItemName }}</strong>?</p>
 </CModal>

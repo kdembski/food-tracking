@@ -84,6 +84,21 @@
     }
   }
 
+  &--error {
+    &.button--text {
+      color: $error;
+    }
+
+    &.button--contained {
+      color: $white;
+      background-color: $error;
+    }
+
+    &:active::before {
+      opacity: 0.2;
+    }
+  }
+
   &--secondary {
     &.button--text {
       color: var(--text-secondary);

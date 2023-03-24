@@ -24,6 +24,13 @@ const props = defineProps({
     type: String,
     default: "Submit",
   },
+  submitButtonColor: {
+    type: String,
+    default: "primary",
+    validator: (value: string) => {
+      return ["primary", "secondary", "error"].indexOf(value) !== -1;
+    },
+  },
   isSubmitButtonDisabled: {
     type: Boolean,
     default: false,

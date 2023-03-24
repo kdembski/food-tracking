@@ -23,23 +23,6 @@
       </header>
       <div class="recipe__buttons">
         <CButton
-          color="secondary"
-          size="small"
-          icon="pen-to-square"
-          label="Edytuj"
-          variant="text"
-          @click="startEditing"
-          :fullWidth="isMobile"
-        />
-        <CButton
-          color="secondary"
-          size="small"
-          icon="trash-can"
-          label="Usuń"
-          variant="text"
-          :fullWidth="isMobile"
-        />
-        <CButton
           color="primary"
           size="small"
           :icon="['far', 'calendar']"
@@ -52,6 +35,23 @@
           size="small"
           icon="cart-shopping"
           label="Dodaj do zakupów"
+          :fullWidth="isMobile"
+        />
+        <CButton
+          color="secondary"
+          size="small"
+          icon="pen-to-square"
+          label="Edytuj"
+          variant="text"
+          @click="startEditing"
+          :fullWidth="isMobile"
+        />
+        <CButton
+          color="error"
+          size="small"
+          icon="trash-can"
+          label="Usuń"
+          variant="text"
           :fullWidth="isMobile"
         />
       </div>

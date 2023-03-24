@@ -35,7 +35,7 @@ export function useButtonProps() {
       type: String,
       default: "primary",
       validator: (value: string) => {
-        return ["primary", "secondary"].indexOf(value) !== -1;
+        return ["primary", "secondary", "error"].indexOf(value) !== -1;
       },
     },
     size: {

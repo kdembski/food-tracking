@@ -33,6 +33,7 @@
             :label="submitButtonLabel"
             v-on="!isContainerForm() ? { click: onSubmit } : {}"
             :isDisabled="isSubmitButtonDisabled"
+            :color="submitButtonColor"
           />
         </div>
       </component>

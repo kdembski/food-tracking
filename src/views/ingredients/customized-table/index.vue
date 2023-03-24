@@ -45,10 +45,12 @@ const editItem = (id?: number) => {
 
 const isDeleteModalOpen = ref(false);
 const deletedItemId: Ref<number | undefined> = ref();
+const deletedItemName: Ref<string | undefined> = ref();
 
-const openDeleteModal = (id: number) => {
+const openDeleteModal = (item: { id: number; name: string }) => {
   isDeleteModalOpen.value = true;
-  deletedItemId.value = id;
+  deletedItemId.value = item.id;
+  deletedItemName.value = item.name;
 };
 
 const deleteItem = () => {

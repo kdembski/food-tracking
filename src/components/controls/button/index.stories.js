@@ -56,3 +56,11 @@ Secondary.args = {
 
 export const SecondaryText = Template.bind({});
 SecondaryText.args = Object.assign({ variant: "text" }, Secondary.args);
+
+export const Error = Template.bind({});
+Error.args = {
+  color: "error",
+};
+
+export const ErrorText = Template.bind({});
+ErrorText.args = Object.assign({ variant: "text" }, Error.args);
