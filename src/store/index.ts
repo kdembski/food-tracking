@@ -7,6 +7,7 @@ import orderedFood from "./ordered-food/index";
 import calendar from "./calendar/index";
 import member from "./member";
 import ingredient from "./ingredient";
+import shopping from "./shopping";
 import { State } from "@/types/store";
 import { AxiosError } from "axios";
 
@@ -73,9 +74,7 @@ export default createStore<State>({
       const errorMessage: string | undefined =
         error.response?.data?.message || error.code;
 
-      state.toastNotification?.error(
-        "Wystąpił błąd: " + errorMessage + ". Spróbuj ponownie poźniej."
-      );
+      state.toastNotification?.error("Wystąpił błąd: " + errorMessage + ".");
     },
 
     handleComplexError(
@@ -97,5 +96,13 @@ export default createStore<State>({
     },
   },
 
-  modules: { user, recipe, orderedFood, calendar, member, ingredient },
+  modules: {
+    user,
+    recipe,
+    orderedFood,
+    calendar,
+    member,
+    ingredient,
+    shopping,
+  },
 });
