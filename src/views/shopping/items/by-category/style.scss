@@ -1,0 +1,10 @@
+.shopping-items-by-category {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4xl;
+
+  p {
+    margin-bottom: $spacing-3xl;
+    @include uppercasedSecondaryText;
+  }
+}

@@ -19,8 +19,8 @@ const navItems = ref([
   { route: "/calendar", label: "Kalendarz", icon: ["far", "calendar"] },
   { route: "/recipes", label: "Przepisy", icon: "utensils" },
   { route: "/ordered", label: "Zamawiane", icon: "box-open" },
+  { route: "/shopping", label: "Zakupy", icon: "cart-shopping" },
   { route: "/ingredients", label: "Składniki", icon: "cheese" },
-  { route: "/", label: "Zakupy", icon: "cart-shopping" },
   { route: "/", label: "Statystyki", icon: "chart-line" },
 ]);
 

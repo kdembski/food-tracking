@@ -1,0 +1,19 @@
+<div class="shopping-items-by-category">
+  <div
+    v-for="recipeItem in itemsGroupedByRecipeId"
+    class="shopping-items-by-category__item item"
+  >
+    <div class="item__header-wrapper">
+      <div v-if="recipeItem.recipeId" class="item__header">
+        <RouterLink :to="'/recipes/' + recipeItem.recipeId">
+          <p>{{ getRecipeName(recipeItem.recipeId) }}</p>
+        </RouterLink>
+        <CButton color="error" variant="text" icon="trash-can" @click="" />
+      </div>
+      <p v-else>Pozostałe</p>
+    </div>
+    <div class="shopping-list__items">
+      <CShoppingItem v-for="item in recipeItem.items" :item="item" />
+    </div>
+  </div>
+</div>

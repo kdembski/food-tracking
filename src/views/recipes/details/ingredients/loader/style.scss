@@ -1,20 +1,22 @@
 .recipe-ingredients-loader {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: $spacing-2xl;
+  margin-top: $spacing-md;
 
   > div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     .skeleton-loader__item {
-      height: 41px;
-
       &:first-child {
-        width: 65%;
+        height: 20px;
+        width: 60%;
       }
 
       &:last-child {
+        height: 25px;
         width: 20%;
       }
     }

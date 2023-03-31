@@ -1,0 +1,26 @@
+.shopping-items-by-category {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4xl;
+
+  .item {
+    &__header-wrapper {
+      margin-bottom: $spacing-3xl;
+
+      p {
+        @include uppercasedSecondaryText;
+      }
+
+      a {
+        cursor: pointer;
+      }
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-height: 14px;
+    }
+  }
+}

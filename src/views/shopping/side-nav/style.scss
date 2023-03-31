@@ -1,0 +1,11 @@
+.shopping-side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 40%;
+
+  &__item {
+    padding: $spacing-3xl;
+    border-bottom: 1px solid var(--border-color);
+  }
+}

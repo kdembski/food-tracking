@@ -4,6 +4,7 @@ import {
   RecipesList,
   Recipe,
   RecipeErrors,
+  RecipeOption,
 } from "@/types/recipes/recipe";
 import { ApiError, DbResults } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
@@ -31,6 +32,9 @@ const state: () => RecipeState = () => ({
   searchSuggestions: null,
   isLoadingSearchSuggestions: false,
 
+  options: null,
+  isLoadingOptions: false,
+
   errors: null,
 });
 
@@ -56,6 +60,9 @@ const getters: GetterTree<RecipeState, any> = {
 
   isLoadingSearchSuggestions: (state) => state.isLoadingSearchSuggestions,
   errors: (state) => state.errors,
+
+  getNameById: (state) => (id: number) =>
+    state.options?.find((options) => options.id === id)?.recipeName,
 };
 
 const actions: ActionTree<RecipeState, any> = {
@@ -116,6 +123,23 @@ const actions: ActionTree<RecipeState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingSearchSuggestions", false);
+          dispatch("handleDefaultError", error, { root: true });
+        });
+    });
+  },
+
+  loadOptions({ commit, dispatch }) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsLoadingOptions", true);
+
+      ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/options")
+        .then((response: AxiosResponse<RecipeOption[]>) => {
+          commit("setIsLoadingOptions", false);
+          commit("setOptions", response.data);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsLoadingOptions", false);
           dispatch("handleDefaultError", error, { root: true });
         });
     });
@@ -241,6 +265,14 @@ const mutations: MutationTree<RecipeState> = {
 
   setIsLoadingSearchSuggestions(state, value) {
     state.isLoadingSearchSuggestions = value;
+  },
+
+  setOptions(state, options: RecipeOption[]) {
+    state.options = options;
+  },
+
+  setIsLoadingOptions(state, value) {
+    state.isLoadingOptions = value;
   },
 
   setIsSubmitting(state, value) {

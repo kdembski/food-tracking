@@ -2,25 +2,44 @@
   <RecipeLoader v-if="isLoadingRecipe" />
   <template v-else>
     <CCard class="recipe__card" variant="contained">
-      <header class="recipe__header">
-        <h1>
-          {{ recipe.recipeName }}
+      <div class="recipe__header-container">
+        <header class="recipe__header">
+          <h1>
+            {{ recipe.recipeName }}
+            <CButton
+              v-if="recipe.cookidooLink"
+              color="secondary"
+              variant="text"
+              @click="openCookidooLink(recipe)"
+              class="recipe__cookidoo-link"
+              v-tooltip="{ text: 'Otwórz w Cookidoo' }"
+            >
+              <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
+            </CButton>
+          </h1>
+          <CDisplayTags
+            :tags="recipe.tags"
+            :size="isMobile ? 'small' : 'medium'"
+          />
+        </header>
+        <div class="recipe__header-buttons">
           <CButton
-            v-if="recipe.cookidooLink"
             color="secondary"
+            :size="!isMobile ? 'small' : 'medium'"
+            :label="!isMobile ? 'Edytuj' : ''"
+            icon="pen-to-square"
             variant="text"
-            @click="openCookidooLink(recipe)"
-            class="recipe__cookidoo-link"
-            v-tooltip="{ text: 'Otwórz w Cookidoo' }"
-          >
-            <InlineSvg :src="require('@/assets/icons/thermomix.svg')" />
-          </CButton>
-        </h1>
-        <CDisplayTags
-          :tags="recipe.tags"
-          :size="isMobile ? 'small' : 'medium'"
-        />
-      </header>
+            @click="startEditing"
+          />
+          <CButton
+            color="error"
+            :size="!isMobile ? 'small' : 'medium'"
+            :label="!isMobile ? 'Usuń' : ''"
+            icon="trash-can"
+            variant="text"
+          />
+        </div>
+      </div>
       <div class="recipe__buttons">
         <CButton
           color="primary"
@@ -35,23 +54,6 @@
           size="small"
           icon="cart-shopping"
           label="Dodaj do zakupów"
-          :fullWidth="isMobile"
-        />
-        <CButton
-          color="secondary"
-          size="small"
-          icon="pen-to-square"
-          label="Edytuj"
-          variant="text"
-          @click="startEditing"
-          :fullWidth="isMobile"
-        />
-        <CButton
-          color="error"
-          size="small"
-          icon="trash-can"
-          label="Usuń"
-          variant="text"
           :fullWidth="isMobile"
         />
       </div>

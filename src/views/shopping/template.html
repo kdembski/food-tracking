@@ -1,0 +1,10 @@
+<div class="shopping">
+  <header class="shopping__header">
+    <h1>Zakupy</h1>
+  </header>
+  <div v-if="!isLoadingShoppingLists" class="shopping__body">
+    <CShoppingList :list="activeList" />
+    <SideNav :items="listsWithoutActive" />
+  </div>
+  <div v-else>loading</div>
+</div>

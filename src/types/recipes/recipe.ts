@@ -12,6 +12,8 @@ export interface RecipeState {
   searchSuggestions: string[] | null;
   isLoadingSearchSuggestions: boolean;
   isSubmitting: boolean;
+  options: RecipeOption[] | null;
+  isLoadingOptions: boolean;
   errors: RecipeErrors | null;
 }
 
@@ -30,4 +32,9 @@ export type RecipesList = ListWithFilters<Recipe>;
 export interface RecipeErrors {
   recipeName: ApiError;
   preparationTime: ApiError;
+}
+
+export interface RecipeOption {
+  id: number;
+  recipeName: string;
 }

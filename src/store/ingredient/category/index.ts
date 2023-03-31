@@ -37,6 +37,9 @@ const getters: GetterTree<IngredientCategoryState, any> = {
     })),
 
   errors: (state) => state.errors,
+
+  getNameById: (state) => (id: number) =>
+    state.options?.find((options) => options.id === id)?.name,
 };
 
 const actions: ActionTree<IngredientCategoryState, any> = {

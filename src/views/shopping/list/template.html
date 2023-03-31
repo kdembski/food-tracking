@@ -1,0 +1,46 @@
+<div class="shopping-list">
+  <div class="shopping-list__header">
+    <div class="shopping-list__name">
+      <p>{{ list.name }}</p>
+    </div>
+    <div class="shopping-list__buttons">
+      <CButton
+        color="secondary"
+        variant="text"
+        icon="sitemap"
+        size="small"
+        :label="isSummedUpMode ? 'Rozdziel' : 'Połącz'"
+        @click="isSummedUpMode = !isSummedUpMode"
+        class="shopping-list__summed-up-mode-btn"
+        :class="{ 'shopping-list__summed-up-mode-btn--active': !isSummedUpMode }"
+      />
+      <CButton
+        color="error"
+        variant="text"
+        icon="ban"
+        label="Wyczyść"
+        size="small"
+        @click=""
+      />
+    </div>
+  </div>
+  <CCard variant="contained">
+    <CHorizontalTabs v-model="selectedTab" :items="tabs" />
+    <template v-if="items?.length > 0">
+      <ShoppingItems v-if="isDefaultSelected()" :items="items" />
+      <ShoppingItemsByRecipe v-if="isByRecipeSelected()" :items="items" />
+      <ShoppingItemsByCategory v-if="isByCategorySelected()" :items="items" />
+    </template>
+    <p v-else class="shopping-list__empty">Brak produktów</p>
+  </CCard>
+  <div class="shopping-list__add-item">
+    <CAutocomplete placeholder="Dodaj produkty" />
+    <CButton color="primary" icon="plus" size="large" @click="" />
+  </div>
+  <CCard v-if="ownedItems?.length > 0" variant="contained">
+    <p class="shopping-list__owned-title">To już masz</p>
+    <div class="shopping-list__owned-items">
+      <CShoppingItem v-for="item in ownedItems" :item="item" />
+    </div>
+  </CCard>
+</div>

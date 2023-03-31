@@ -15,6 +15,7 @@ import OrderedFoodListView from "../views/ordered-food/list/index.vue";
 import SettingsView from "../views/settings/index.vue";
 import CalendarView from "../views/calendar/index.vue";
 import IngredientsView from "../views/ingredients/index.vue";
+import ShoppingView from "../views/shopping/index.vue";
 
 const Recipes = {
   name: "Recipes",
@@ -85,6 +86,14 @@ const routes: Array<RouteRecordRaw> = [
     component: CalendarView,
     meta: {
       maxWidth: 1900,
+    },
+  },
+  {
+    path: "/shopping",
+    name: "Shopping",
+    component: ShoppingView,
+    meta: {
+      maxWidth: 1100,
     },
   },
   {

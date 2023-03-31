@@ -27,7 +27,7 @@ describe("Customized Table Component", () => {
   });
 
   it("Should open delete modal and set deletedIngredientId on openDeleteModal call", async () => {
-    await wrapper.vm.openDeleteModal(1);
+    await wrapper.vm.openDeleteModal({ id: 1 });
     expect(wrapper.vm.isDeleteModalOpen).toBe(true);
     expect(wrapper.vm.deletedItemId).toEqual(1);
   });

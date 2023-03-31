@@ -1,0 +1,11 @@
+<div class="shopping-items-by-category">
+  <div v-for="categoryItem in itemsGroupedByCategoryId">
+    <p v-if="categoryItem.categoryId">
+      {{ getIngredientCategoryName(categoryItem.categoryId) }}
+    </p>
+    <p v-else>Pozostałe</p>
+    <div class="shopping-list__items">
+      <CShoppingItem v-for="item in categoryItem.items" :item="item" />
+    </div>
+  </div>
+</div>

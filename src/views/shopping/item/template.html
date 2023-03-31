@@ -1,0 +1,10 @@
+<div class="shopping-item" :key="getItemKey(item)">
+  <CCheckbox
+    :label="getItemName(item)"
+    v-model="item.isChecked"
+    @update:modelValue="handleCheckingSummedItem"
+  />
+  <div v-if="item.amount">
+    <p>{{ item.amount }} {{ item.unitShortcut}}</p>
+  </div>
+</div>

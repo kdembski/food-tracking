@@ -3,6 +3,18 @@
   flex-direction: column;
   gap: $spacing-3xl;
 
+  &__header-container {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-xs;
+  }
+
+  &__header-buttons {
+    display: flex;
+    gap: $spacing-md;
+    align-items: flex-start;
+  }
+
   .recipe__header {
     margin: 0;
     display: flex;
@@ -109,16 +121,12 @@
       }
     }
 
-    &__buttons {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    &__header-buttons {
+      gap: $spacing-2xs;
+    }
 
-      > button {
-        &:nth-child(1),
-        &:nth-child(2) {
-          grid-column: span 2;
-        }
-      }
+    &__buttons {
+      flex-direction: column;
     }
   }
 }

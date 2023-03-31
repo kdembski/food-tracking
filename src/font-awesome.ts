@@ -56,6 +56,8 @@ import {
   faPenToSquare,
   faTrashCan,
   faBolt,
+  faSitemap,
+  faBan,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -120,7 +122,9 @@ library.add(
   faClone,
   faPenToSquare,
   faTrashCan,
-  faBolt
+  faBolt,
+  faSitemap,
+  faBan
 );
 
 export default FontAwesomeIcon;

@@ -24,6 +24,10 @@
     &:checked {
       background-color: var(--primary);
       border-color: var(--primary);
+
+      & ~ .checkbox__icon {
+        opacity: 1;
+      }
     }
   }
 
@@ -38,10 +42,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
   }
 
   p {
-    font-size: $font-sm;
     user-select: none;
   }
 }

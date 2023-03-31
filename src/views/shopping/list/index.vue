@@ -1,0 +1,90 @@
+<script lang="ts">
+import CHorizontalTabs from "@/components/navigation/horizontal-tabs/index.vue";
+import CCard from "@/components/surfaces/card/index.vue";
+import CButton from "@/components/controls/button/index.vue";
+import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import ShoppingItems from "../items/default/index.vue";
+import ShoppingItemsByRecipe from "../items/by-recipe/index.vue";
+import ShoppingItemsByCategory from "../items/by-category/index.vue";
+import CShoppingItem from "../item/index.vue";
+
+export default {
+  name: "ShoppingList",
+  components: {
+    CHorizontalTabs,
+    CCard,
+    CButton,
+    CAutocomplete,
+    ShoppingItems,
+    ShoppingItemsByRecipe,
+    ShoppingItemsByCategory,
+    CShoppingItem,
+  },
+};
+</script>
+
+<script setup lang="ts">
+import { ShoppingList, ShoppingListNavItems } from "@/types/shopping/list";
+import { computed, ComputedRef, onBeforeMount, ref, provide } from "vue";
+import { useStore } from "vuex";
+import { ShoppingItem } from "@/types/shopping/item";
+import { useShoppingHelpers } from "../composables/helpers";
+
+const store = useStore();
+const props = defineProps<{
+  list: ShoppingList;
+}>();
+
+const tabs = [
+  { code: ShoppingListNavItems.DEFAULT, label: "Domyślny" },
+  { code: ShoppingListNavItems.BY_RECIPE, label: "Według przepisów" },
+  { code: ShoppingListNavItems.BY_CATEGORY, label: "Według kategorii" },
+];
+const selectedTab = ref(ShoppingListNavItems.DEFAULT);
+const isSummedUpMode = ref(true);
+provide("isSummedUpMode", isSummedUpMode);
+const { sumUpItemsWithSameIngredient } = useShoppingHelpers();
+
+const isDefaultSelected = () =>
+  selectedTab.value === ShoppingListNavItems.DEFAULT;
+const isByRecipeSelected = () =>
+  selectedTab.value === ShoppingListNavItems.BY_RECIPE;
+const isByCategorySelected = () =>
+  selectedTab.value === ShoppingListNavItems.BY_CATEGORY;
+
+const items: ComputedRef<ShoppingItem[]> = computed(() => {
+  const items = store.state.shopping.item.collection;
+  return items?.filter((item: ShoppingItem) => !item.isChecked);
+});
+
+const ownedItems: ComputedRef<ShoppingItem[]> = computed(() => {
+  const items = store.state.shopping.item.collection;
+  const ownedItems = items?.filter((item: ShoppingItem) => item.isChecked);
+
+  if (isSummedUpMode.value) {
+    return sumUpItemsWithSameIngredient(ownedItems);
+  }
+  return ownedItems;
+});
+
+const loadShoppingItems = () => {
+  store.dispatch("shopping/item/loadCollection", props.list.id);
+};
+
+const loadRecipeOptions = () => {
+  store.dispatch("recipe/loadOptions");
+};
+
+const loadIngredientCategoryOptions = () => {
+  store.dispatch("ingredient/category/loadOptions");
+};
+
+onBeforeMount(() => {
+  loadShoppingItems();
+  loadRecipeOptions();
+  loadIngredientCategoryOptions();
+});
+</script>
+
+<template src="./template.html"></template>
+<style src="./style.scss" lang="scss" scoped></style>
