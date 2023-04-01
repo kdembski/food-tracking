@@ -3,6 +3,7 @@ import { ShoppingItem } from "./item";
 export interface ShoppingList {
   id: number;
   name: string;
+  count: number;
 }
 
 export interface ShoppingListState {

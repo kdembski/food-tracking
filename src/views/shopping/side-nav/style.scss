@@ -26,7 +26,7 @@
     flex-direction: column;
     justify-content: center;
     gap: $spacing-sm;
-    padding: $spacing-lg $spacing-xl $spacing-xl $spacing-2xl;
+    padding: $spacing-lg $spacing-lg $spacing-xl $spacing-2xl;
     border: 1px solid var(--border-color);
     border-radius: $radius-sm;
     cursor: pointer;
@@ -69,7 +69,7 @@
     width: 100%;
 
     .item {
-      padding: $spacing-lg $spacing-lg $spacing-xl $spacing-xl;
+      padding: $spacing-lg $spacing-md $spacing-xl $spacing-xl;
     }
   }
 }

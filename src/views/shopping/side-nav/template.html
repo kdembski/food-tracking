@@ -36,7 +36,8 @@
           />
         </div>
       </div>
-      <p class="item__amount">Produktów na liście: 10</p>
+      <p v-if="item.count === 0" class="item__amount">pusto!</p>
+      <p v-else class="item__amount">ilość produktów: {{ item.count }}</p>
     </div>
   </div>
 </div>

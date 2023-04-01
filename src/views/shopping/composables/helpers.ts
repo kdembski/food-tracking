@@ -8,7 +8,7 @@ import {
 export function useShoppingHelpers() {
   const sumUpItemsWithSameIngredient = (items?: ShoppingItem[]) => {
     return items?.reduce((accum: SummedUpShoppingItem[], item) => {
-      if (!item.ingredientUnitId) {
+      if (!item.ingredientId) {
         accum.push({
           customItemName: item.customItemName,
           amount: item.amount,
@@ -21,12 +21,12 @@ export function useShoppingHelpers() {
 
       const summedUpItem = accum.find(
         (summedUpItem: SummedUpShoppingItem) =>
-          summedUpItem.ingredientUnitId === item.ingredientUnitId
+          summedUpItem.ingredientId === item.ingredientId
       );
 
       if (summedUpItem) {
         if (summedUpItem.amount) {
-          summedUpItem.amount += item.amount || 0;
+          summedUpItem.amount += getItemAmountToAdd(item) || 0;
         }
         summedUpItem.itemIds.push(item.id);
         summedUpItem.items.push(item);
@@ -34,7 +34,7 @@ export function useShoppingHelpers() {
       }
 
       accum.push({
-        ingredientUnitId: item.ingredientUnitId,
+        ingredientId: item.ingredientId,
         ingredientName: item.ingredientName,
         unitShortcut: item.unitShortcut,
         amount: item.amount,
@@ -44,6 +44,13 @@ export function useShoppingHelpers() {
       });
       return accum;
     }, []);
+  };
+
+  const getItemAmountToAdd = (item?: ShoppingItem) => {
+    if (item?.isPrimary) {
+      return item.amount;
+    }
+    return (item?.amount || 0) * (item?.converterToPrimary || 1);
   };
 
   const isSummedUpItems = (

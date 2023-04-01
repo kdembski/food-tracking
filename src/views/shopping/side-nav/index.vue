@@ -8,7 +8,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
 import { ShoppingList } from "@/types/shopping/list";
 import { useStore } from "vuex";
 import { useWindowSize } from "@/composables/window-size";
@@ -24,10 +23,6 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: "update:activeListId", id: number): void;
 }>();
-
-const isLoadingShoppingLists = computed(
-  () => store.state.shopping.list.isLoading
-);
 
 const isListActive = (id: number) => props.activeListId === id;
 </script>

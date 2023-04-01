@@ -4,6 +4,7 @@ export interface ShoppingItem {
   recipeId?: number;
   ingredientCategoryId?: number;
   ingredientUnitId?: number;
+  ingredientId?: number;
   customItemId?: number;
   amount?: number;
   isChecked: boolean;
@@ -12,6 +13,8 @@ export interface ShoppingItem {
   ingredientName?: string;
   unitShortcut?: string;
   customItemName?: string;
+  isPrimary: boolean;
+  converterToPrimary?: number;
 }
 
 export interface ShoppingItemState {
@@ -31,7 +34,7 @@ export interface CategoryShoppingItems {
 }
 
 export interface SummedUpShoppingItem {
-  ingredientUnitId?: number;
+  ingredientId?: number;
   ingredientName?: string;
   unitShortcut?: string;
   customItemName?: string;
