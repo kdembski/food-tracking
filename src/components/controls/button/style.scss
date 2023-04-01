@@ -212,7 +212,7 @@
     &--secondary {
       &.button--contained {
         color: $text-lightest;
-        background-color: darken($secondary, 10);
+        background-color: darken($secondary, 5);
       }
     }
   }

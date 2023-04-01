@@ -1,7 +1,7 @@
 .shopping-list {
   display: flex;
   flex-direction: column;
-  gap: $spacing-3xl;
+  gap: $spacing-2xl;
   width: 100%;
 
   &__header {
@@ -13,7 +13,7 @@
 
   &__buttons {
     display: flex;
-    gap: $spacing-sm;
+    gap: $spacing-xs;
   }
 
   &__summed-up-mode-btn--active:deep(.button__icon) {
@@ -28,7 +28,7 @@
   &:deep(.shopping-list__items) {
     display: flex;
     flex-direction: column;
-    gap: $spacing-2xl;
+    gap: $spacing-xl;
   }
 
   .card {
@@ -53,19 +53,28 @@
     @include uppercasedSecondaryTextWithBorder;
   }
 
-  &__owned-items {
-    &:deep(.shopping-item) {
-      opacity: 0.5;
-
-      > * {
-        text-decoration: line-through;
-      }
-    }
-  }
-
   &__empty {
     text-align: center;
     font-size: $font-sm;
     height: 20px;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .shopping-list {
+    gap: $spacing-sm;
+
+    &:deep(.horizontal-tabs) {
+      margin: 0 (-$spacing-lg);
+    }
+
+    .card {
+      gap: $spacing-xl;
+    }
+
+    &__owned-items,
+    &:deep(.shopping-list__items) {
+      gap: $spacing-lg;
+    }
   }
 }

@@ -13,21 +13,25 @@ $black: black;
 $surface-lightest: $white;
 $surface-lighter: lighten($secondary, 60);
 $surface-light: lighten($secondary, 56);
-$border-light: lighten($secondary, 52);
-$border-lighter: lighten($secondary, 58);
+
+$border-light: lighten($secondary, 45);
+$border-lighter: lighten($secondary, 52);
+$border-lightest: lighten($secondary, 58);
 
 $text-darkest: darken($secondary, 30);
-$text-darker: $secondary;
+$text-darker: lighten($secondary, 5);
 $text-dark: lighten($secondary, 40);
 
 $surface-darkest: darken($secondary, 26);
 $surface-darker: darken($secondary, 22);
 $surface-dark: darken($secondary, 18);
-$border-dark: darken($secondary, 14);
-$border-darker: darken($secondary, 20);
+
+$border-dark: darken($secondary, 5);
+$border-darker: darken($secondary, 14);
+$border-darkest: darken($secondary, 20);
 
 $text-lightest: lighten($secondary, 55);
-$text-lighter: lighten($secondary, 32);
+$text-lighter: lighten($secondary, 25);
 $text-light: $secondary;
 
 $info: #003780;

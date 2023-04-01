@@ -18,7 +18,8 @@ const props = defineProps<{
   items?: ShoppingItem[];
 }>();
 
-const { sumUpItemsWithSameIngredient, isSummedUpItems } = useShoppingHelpers();
+const { sumUpItemsWithSameIngredient, isSummedUpItems, sortNullIdsToTheEnd } =
+  useShoppingHelpers();
 const isSummedUpMode = inject<Ref<boolean>>("isSummedUpMode");
 
 const getIngredientCategoryName = (categoryId: number) => {
@@ -26,7 +27,7 @@ const getIngredientCategoryName = (categoryId: number) => {
 };
 
 const itemsGroupedByCategoryId = computed(() => {
-  const groupedItems = groupItemsByCategoryId(props.items);
+  const groupedItems = sortNullIdsToTheEnd(groupItemsByCategoryId(props.items));
 
   if (isSummedUpMode?.value) {
     return sumUpItemGroupedByCategoryId(groupedItems);

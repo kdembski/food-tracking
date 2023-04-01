@@ -1,5 +1,42 @@
 <div class="shopping-side-nav">
-  <div v-for="item in items" class="shopping-side-nav__item">
-    {{ item.name }}
+  <div class="shopping-side-nav__heading">
+    <p>Listy</p>
+    <CButton
+      color="secondary"
+      variant="text"
+      icon="plus"
+      :label="!isMobile ? 'Dodaj' : ''"
+      :size="isMobile ? 'large' : 'small'"
+      @click=""
+    />
+  </div>
+  <div class="shopping-side-nav__items">
+    <div
+      v-for="item in items"
+      class="shopping-side-nav__item item"
+      :class="{ 'item--active': isListActive(item.id) }"
+      @click="emits('update:activeListId', item.id)"
+    >
+      <div class="item__header">
+        <p>{{ item.name }}</p>
+        <div v-if="!isListActive(item.id) ">
+          <CButton
+            color="secondary"
+            variant="text"
+            :size="isMobile ? 'medium' : 'small'"
+            icon="edit"
+            @click.stop=""
+          />
+          <CButton
+            color="error"
+            variant="text"
+            :size="isMobile ? 'medium' : 'small'"
+            icon="ban"
+            @click.stop=""
+          />
+        </div>
+      </div>
+      <p class="item__amount">Produktów na liście: 10</p>
+    </div>
   </div>
 </div>

@@ -1,4 +1,9 @@
-import { ShoppingItem, SummedUpShoppingItem } from "@/types/shopping/item";
+import {
+  CategoryShoppingItems,
+  RecipeShoppingItems,
+  ShoppingItem,
+  SummedUpShoppingItem,
+} from "@/types/shopping/item";
 
 export function useShoppingHelpers() {
   const sumUpItemsWithSameIngredient = (items?: ShoppingItem[]) => {
@@ -53,9 +58,30 @@ export function useShoppingHelpers() {
     return (item as SummedUpShoppingItem).itemIds !== undefined;
   };
 
+  const sortNullIdsToTheEnd = (
+    items?: CategoryShoppingItems[] | RecipeShoppingItems[]
+  ) => {
+    if (!items) {
+      return [];
+    }
+
+    return [...items].sort((a, b) => {
+      if (a["categoryId"] === null || a["recipeId"] === null) {
+        return 1;
+      }
+
+      if (b["categoryId"] === null || b["recipeId"] === null) {
+        return -1;
+      }
+
+      return 0;
+    });
+  };
+
   return {
     sumUpItemsWithSameIngredient,
     isSummedUpItems,
     isSummedUpItem,
+    sortNullIdsToTheEnd,
   };
 }

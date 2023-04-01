@@ -16,8 +16,9 @@
   --surface-secondary-rgb: #{toRGB($surface-lighter)};
   --surface-tetriary: #{$surface-light};
 
-  --border-color: #{$border-light};
-  --border-secondary: #{$border-lighter};
+  --border-color: #{$border-lighter};
+  --border-secondary: #{$border-lightest};
+  --border-active: #{$border-light};
 
   --text-primary: #{$text-darkest};
   --text-primary-rgb: #{toRGB($text-darkest)};
@@ -46,8 +47,9 @@
     --surface-secondary-rgb: #{toRGB($surface-darker)};
     --surface-tetriary: #{$surface-dark};
 
-    --border-color: #{$border-dark};
-    --border-secondary: #{$border-darker};
+    --border-color: #{$border-darker};
+    --border-secondary: #{$border-darkest};
+    --border-active: #{$border-dark};
 
     --text-primary: #{$text-lightest};
     --text-primary-rgb: #{toRGB($text-lightest)};

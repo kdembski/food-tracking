@@ -25,18 +25,20 @@ export default {
 
 <script setup lang="ts">
 import { ShoppingList, ShoppingListNavItems } from "@/types/shopping/list";
-import { computed, ComputedRef, onBeforeMount, ref, provide } from "vue";
+import { computed, ComputedRef, onBeforeMount, ref, provide, watch } from "vue";
 import { useStore } from "vuex";
 import { ShoppingItem } from "@/types/shopping/item";
 import { useShoppingHelpers } from "../composables/helpers";
+import { useWindowSize } from "@/composables/window-size";
 
+const { isMobile } = useWindowSize();
 const store = useStore();
 const props = defineProps<{
   list: ShoppingList;
 }>();
 
 const tabs = [
-  { code: ShoppingListNavItems.DEFAULT, label: "Domyślny" },
+  { code: ShoppingListNavItems.DEFAULT, label: "Bez podziału" },
   { code: ShoppingListNavItems.BY_RECIPE, label: "Według przepisów" },
   { code: ShoppingListNavItems.BY_CATEGORY, label: "Według kategorii" },
 ];
@@ -84,6 +86,23 @@ onBeforeMount(() => {
   loadRecipeOptions();
   loadIngredientCategoryOptions();
 });
+
+watch(
+  () => props.list.id,
+  () => {
+    loadShoppingItems();
+  }
+);
+
+const getSummedUpModeButtonLabel = () => {
+  if (isMobile.value) {
+    return "";
+  }
+  if (isSummedUpMode.value) {
+    return "Rozłącz";
+  }
+  return "Połącz";
+};
 </script>
 
 <template src="./template.html"></template>

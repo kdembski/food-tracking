@@ -8,18 +8,26 @@
         color="secondary"
         variant="text"
         icon="sitemap"
-        size="small"
-        :label="isSummedUpMode ? 'Rozdziel' : 'Połącz'"
+        :size="isMobile ? 'large' : 'small'"
+        :label="getSummedUpModeButtonLabel()"
         @click="isSummedUpMode = !isSummedUpMode"
         class="shopping-list__summed-up-mode-btn"
         :class="{ 'shopping-list__summed-up-mode-btn--active': !isSummedUpMode }"
       />
       <CButton
+        color="secondary"
+        variant="text"
+        icon="edit"
+        :label="!isMobile ? 'Edytuj' : ''"
+        :size="isMobile ? 'large' : 'small'"
+        @click=""
+      />
+      <CButton
         color="error"
         variant="text"
         icon="ban"
-        label="Wyczyść"
-        size="small"
+        :label="!isMobile ? 'Wyczyść' : ''"
+        :size="isMobile ? 'large' : 'small'"
         @click=""
       />
     </div>
@@ -40,7 +48,12 @@
   <CCard v-if="ownedItems?.length > 0" variant="contained">
     <p class="shopping-list__owned-title">To już masz</p>
     <div class="shopping-list__owned-items">
-      <CShoppingItem v-for="item in ownedItems" :item="item" />
+      <CShoppingItem
+        v-for="item in ownedItems"
+        :item="item"
+        grayedOut
+        disableActions
+      />
     </div>
   </CCard>
 </div>

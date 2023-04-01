@@ -1,18 +1,25 @@
-.shopping-items-by-category {
+.shopping-items-by-recipe {
   display: flex;
   flex-direction: column;
-  gap: $spacing-4xl;
+  gap: $spacing-3xl;
 
   .item {
     &__header-wrapper {
-      margin-bottom: $spacing-3xl;
-
-      p {
-        @include uppercasedSecondaryText;
-      }
+      font-size: $font-sm;
+      font-weight: $font-medium;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      margin-bottom: $spacing-2xl;
+      padding-right: 40px;
+      position: relative;
 
       a {
         cursor: pointer;
+      }
+
+      button {
+        position: absolute;
+        right: 0;
       }
     }
 
@@ -20,7 +27,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-height: 14px;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .shopping-items-by-recipe {
+    gap: $spacing-2xl;
+
+    .item {
+      &__header-wrapper {
+        margin-bottom: $spacing-xl;
+      }
     }
   }
 }

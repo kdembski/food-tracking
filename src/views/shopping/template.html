@@ -4,7 +4,7 @@
   </header>
   <div v-if="!isLoadingShoppingLists" class="shopping__body">
     <CShoppingList :list="activeList" />
-    <SideNav :items="listsWithoutActive" />
+    <SideNav :items="shoppingLists" v-model:activeListId="activeListId" />
   </div>
   <div v-else>loading</div>
 </div>

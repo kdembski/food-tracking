@@ -10,7 +10,7 @@ export default {
 
 <script setup lang="ts">
 import { ShoppingList } from "@/types/shopping/list";
-import { computed, ComputedRef, onBeforeMount, ref, nextTick } from "vue";
+import { computed, ComputedRef, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -27,17 +27,13 @@ const loadShoppingLists = () => {
 
 onBeforeMount(async () => {
   await loadShoppingLists();
-  acitveListId.value = shoppingLists.value?.[0].id;
+  activeListId.value = shoppingLists.value?.[0].id;
 });
 
-const acitveListId = ref<number>();
+const activeListId = ref<number>();
 
 const activeList = computed(() =>
-  shoppingLists.value?.find((list) => list.id === acitveListId.value)
-);
-
-const listsWithoutActive = computed(() =>
-  shoppingLists.value?.filter((list) => list.id !== acitveListId.value)
+  shoppingLists.value?.find((list) => list.id === activeListId.value)
 );
 </script>
 

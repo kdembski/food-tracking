@@ -1,11 +1,75 @@
 .shopping-side-nav {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: $spacing-2xl;
   width: 40%;
 
-  &__item {
-    padding: $spacing-3xl;
-    border-bottom: 1px solid var(--border-color);
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-md;
+
+    > p {
+      @include heading-2;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-lg $spacing-xl $spacing-xl $spacing-2xl;
+    border: 1px solid var(--border-color);
+    border-radius: $radius-sm;
+    cursor: pointer;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 25px;
+
+      > p {
+        font-size: $font-lg;
+        font-weight: $font-medium;
+      }
+
+      > div {
+        display: flex;
+        gap: $spacing-2xs;
+      }
+    }
+
+    &__amount {
+      font-size: $font-sm;
+      color: var(--text-secondary);
+    }
+
+    &:hover:not(.item--active) {
+      border-color: var(--border-active);
+    }
+
+    &--active {
+      border-color: var(--primary);
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .shopping-side-nav {
+    gap: $spacing-sm;
+    width: 100%;
+
+    .item {
+      padding: $spacing-lg $spacing-lg $spacing-xl $spacing-xl;
+    }
   }
 }

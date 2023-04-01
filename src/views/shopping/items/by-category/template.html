@@ -3,7 +3,7 @@
     <p v-if="categoryItem.categoryId">
       {{ getIngredientCategoryName(categoryItem.categoryId) }}
     </p>
-    <p v-else>Pozostałe</p>
+    <p v-else>bez kategorii</p>
     <div class="shopping-list__items">
       <CShoppingItem v-for="item in categoryItem.items" :item="item" />
     </div>

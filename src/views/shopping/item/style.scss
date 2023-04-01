@@ -1,4 +1,39 @@
 .shopping-item {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  &:deep(.checkbox) {
+    width: 100%;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+    width: 100%;
+
+    *:last-child {
+      margin-left: auto;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: $spacing-2xs;
+  }
+
+  &:hover {
+    .shopping-item__buttons {
+      opacity: 1;
+    }
+  }
+
+  &--grayed-out {
+    opacity: 0.5;
+
+    > * {
+      text-decoration: line-through;
+    }
+  }
 }

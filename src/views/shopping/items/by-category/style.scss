@@ -1,10 +1,23 @@
 .shopping-items-by-category {
   display: flex;
   flex-direction: column;
-  gap: $spacing-4xl;
+  gap: $spacing-3xl;
 
   p {
-    margin-bottom: $spacing-3xl;
-    @include uppercasedSecondaryText;
+    font-size: $font-sm;
+    font-weight: $font-medium;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .shopping-items-by-category {
+    gap: $spacing-2xl;
+
+    p {
+      margin-bottom: $spacing-xl;
+    }
   }
 }

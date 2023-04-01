@@ -12,14 +12,17 @@ export default {
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { RecipeShoppingItems, ShoppingItem } from "@/types/shopping/item";
+import { useShoppingHelpers } from "../../composables/helpers";
 
 const store = useStore();
 const props = defineProps<{
   items?: ShoppingItem[];
 }>();
 
+const { sortNullIdsToTheEnd } = useShoppingHelpers();
+
 const itemsGroupedByRecipeId = computed(() => {
-  return groupItemsByRecipeId(props.items);
+  return sortNullIdsToTheEnd(groupItemsByRecipeId(props.items));
 });
 
 const getRecipeName = (recipeId: number) => {
