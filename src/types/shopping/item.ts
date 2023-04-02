@@ -43,3 +43,8 @@ export interface SummedUpShoppingItem {
   itemIds: number[];
   items: ShoppingItem[];
 }
+
+export enum AddedItemOptionType {
+  INGREDIENT = "ingredient",
+  CUSTOM = "custom",
+}

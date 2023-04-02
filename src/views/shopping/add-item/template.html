@@ -1,0 +1,28 @@
+<form
+  class="shopping-list-add-item"
+  :class="{ 'shopping-list-add-item--mobile-active': isOpenOnMobile }"
+  novalidate
+  @submit.prevent="onSubmit"
+  v-click-away="onClickAway"
+>
+  <CAutocomplete
+    v-model="selectedItem"
+    :options="options"
+    placeholder="Dodaj produkty"
+    @update:modelValue="onItemSelect"
+  />
+  <CInput
+    v-model="amount"
+    :placeholder="getAmountPlaceholder()"
+    type="number"
+  />
+  <CButton color="primary" icon="plus" size="large" />
+</form>
+<CDraggableButton
+  ref="mobileButton"
+  id="shopping-list-add-item-mobile-btn"
+  icon="plus"
+  class="shopping-list-add-item__mobile-btn"
+  :class="{ 'shopping-list-add-item__mobile-btn--active': isOpenOnMobile }"
+  @click="onMobileButtonClick"
+/>

@@ -25,7 +25,7 @@
       display: flex;
       align-items: center;
       color: var(--text-tetriary);
-      padding: 0 $spacing-2xs $spacing-lg;
+      padding: $spacing-2xs $spacing-2xs $spacing-lg;
       cursor: pointer;
 
       &:hover {

@@ -39,6 +39,8 @@ const getters: GetterTree<IngredientState, any> = {
     })),
 
   errors: (state) => state.errors,
+
+  primaryUnit: (state) => state.single?.units.find((unit) => unit.isPrimary),
 };
 
 const actions: ActionTree<IngredientState, any> = {
@@ -181,7 +183,12 @@ const mutations: MutationTree<IngredientState> = {
     state.isSubmitting = value;
   },
 
-  setSingle(state, ingredient: Ingredient) {
+  setSingle(state, ingredient: Ingredient | null) {
+    if (!ingredient) {
+      state.single = ingredient;
+      return;
+    }
+
     ingredient.units = ingredient.units || [];
     state.single = ingredient;
   },

@@ -1,0 +1,10 @@
+<button
+  v-if="isMobile"
+  class="draggable-button"
+  :style="style"
+  @touchmove.prevent="onTouchMove"
+  @touchstart="onTouchStart"
+  ref="button"
+>
+  <FontAwesomeIcon :icon="icon" />
+</button>

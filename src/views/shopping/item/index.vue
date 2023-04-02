@@ -33,7 +33,7 @@ const getItemName = (item: ShoppingItem | SummedUpShoppingItem) => {
 
 const getItemKey = (item: ShoppingItem | SummedUpShoppingItem) => {
   if (isSummedUpItem(item)) {
-    return item.ingredientUnitId;
+    return item.ingredientId;
   }
 
   return item.id || item.customItemId;

@@ -13,7 +13,7 @@
 
   &__buttons {
     display: flex;
-    gap: $spacing-xs;
+    gap: $spacing-sm;
   }
 
   &__summed-up-mode-btn--active:deep(.button__icon) {
@@ -24,11 +24,16 @@
     @include heading-2;
   }
 
-  &__owned-items,
   &:deep(.shopping-list__items) {
     display: flex;
     flex-direction: column;
     gap: $spacing-xl;
+  }
+
+  &__owned-items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2xl;
   }
 
   .card {
@@ -38,19 +43,12 @@
     width: 100%;
   }
 
-  &__add-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: $spacing-4xl;
-    gap: $spacing-lg;
-
-    &:deep(.autocomplete) {
-      width: 100%;
-    }
-  }
-
   &__owned-title {
     @include uppercasedSecondaryTextWithBorder;
+  }
+
+  &__owned-card {
+    margin-top: $spacing-xl;
   }
 
   &__empty {
@@ -69,12 +67,23 @@
     }
 
     .card {
+      gap: $spacing-lg;
+    }
+
+    &:deep(.shopping-list__items) {
+      gap: $spacing-lg;
+    }
+
+    &__owned-items {
       gap: $spacing-xl;
     }
 
-    &__owned-items,
-    &:deep(.shopping-list__items) {
-      gap: $spacing-lg;
+    &__owned-card {
+      margin-top: $spacing-lg;
+    }
+
+    &__buttons {
+      gap: $spacing-2xs;
     }
   }
 }

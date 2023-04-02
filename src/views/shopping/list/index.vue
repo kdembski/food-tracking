@@ -7,6 +7,7 @@ import ShoppingItems from "../items/default/index.vue";
 import ShoppingItemsByRecipe from "../items/by-recipe/index.vue";
 import ShoppingItemsByCategory from "../items/by-category/index.vue";
 import CShoppingItem from "../item/index.vue";
+import AddItem from "../add-item/index.vue";
 
 export default {
   name: "ShoppingList",
@@ -19,6 +20,7 @@ export default {
     ShoppingItemsByRecipe,
     ShoppingItemsByCategory,
     CShoppingItem,
+    AddItem,
   },
 };
 </script>

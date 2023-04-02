@@ -68,6 +68,10 @@
     gap: $spacing-sm;
     width: 100%;
 
+    &__heading {
+      padding-left: 1px;
+    }
+
     .item {
       padding: $spacing-lg $spacing-md $spacing-xl $spacing-xl;
     }

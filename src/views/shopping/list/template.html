@@ -41,11 +41,12 @@
     </template>
     <p v-else class="shopping-list__empty">Brak produktów</p>
   </CCard>
-  <div class="shopping-list__add-item">
-    <CAutocomplete placeholder="Dodaj produkty" />
-    <CButton color="primary" icon="plus" size="large" @click="" />
-  </div>
-  <CCard v-if="ownedItems?.length > 0" variant="contained">
+  <AddItem :listId="list.id" />
+  <CCard
+    v-if="ownedItems?.length > 0"
+    variant="contained"
+    class="shopping-list__owned-card"
+  >
     <p class="shopping-list__owned-title">To już masz</p>
     <div class="shopping-list__owned-items">
       <CShoppingItem
