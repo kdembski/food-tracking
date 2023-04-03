@@ -1,12 +1,11 @@
 import { ref, watch, Ref, ComputedRef, nextTick } from "vue";
 import { DropdownOption } from "@/types/components/utils/dropdown";
 import { useWindowSize } from "@/composables/window-size";
+import { useAutocompleteOptions } from "./options";
 
-export function useValues(
+export function useAutocompleteValues(
   props: any,
   emits: any,
-  filteredOptions: ComputedRef<Array<DropdownOption>>,
-  selectOption: (option: DropdownOption) => void,
   input: Ref<HTMLInputElement | undefined>,
   isLoading: ComputedRef<boolean>
 ) {
@@ -24,6 +23,36 @@ export function useValues(
     _inputValue.value = getOptionLabelByValue(value) || "";
   };
 
+  const setSelectedIfInputValueIsMatchingAnyOption = (value: string) => {
+    if (isLoading.value) {
+      return;
+    }
+
+    const matchingOption = getOptionMatchingInputValue(value);
+    if (!matchingOption) {
+      selectedValue.value = null;
+      return;
+    }
+
+    if (!props.enableSetSelectedWhenInputMatchAnyOption) {
+      return;
+    }
+
+    if (isMobile.value) {
+      input.value?.blur();
+    }
+
+    selectOption(matchingOption);
+  };
+
+  const getOptionMatchingInputValue = (value: string) => {
+    const matchingOption = filteredOptions.value.find(
+      (option: DropdownOption) => option.label.simplify() === value.simplify()
+    );
+    return matchingOption;
+  };
+
+  //watchers
   watch(
     () => props.modelValue,
     async (value) => {
@@ -66,36 +95,15 @@ export function useValues(
     }
   );
 
-  const setSelectedIfInputValueIsMatchingAnyOption = (value: string) => {
-    if (isLoading.value) {
-      return;
-    }
-
-    const matchingOption = getOptionMatchingInputValue(value);
-    if (matchingOption) {
-      if (!props.enableSetSelectedWhenInputMatchAnyOption) {
-        return;
-      }
-      selectOption(matchingOption);
-
-      if (isMobile.value) {
-        input.value?.blur();
-      }
-      return;
-    }
-
-    selectedValue.value = null;
-  };
-
-  const getOptionMatchingInputValue = (value: string) => {
-    const matchingOption = filteredOptions.value.find(
-      (option: DropdownOption) => option.label.simplify() === value.simplify()
-    );
-    return matchingOption;
-  };
+  //options
+  const { filteredOptions, selectOption, getDropdownOptions } =
+    useAutocompleteOptions(props, emits, selectedValue, _inputValue);
 
   return {
     selectedValue,
     _inputValue,
+    filteredOptions,
+    selectOption,
+    getDropdownOptions,
   };
 }

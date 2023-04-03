@@ -1,7 +1,9 @@
 import { ref, ComputedRef, watch } from "vue";
 import { DropdownOption } from "@/types/components/utils/dropdown";
 
-export function useOptionHover(options: ComputedRef<DropdownOption[]>) {
+export function useAutocompleteOptionHover(
+  options: ComputedRef<DropdownOption[]>
+) {
   const hoveredOptionIndex = ref<number | null>(null);
 
   const isOptionHovered = (index: number) => {

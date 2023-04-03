@@ -2,7 +2,7 @@ import { DropdownOption } from "@/types/components/utils/dropdown";
 import { ComputedRef, Ref } from "vue";
 import { useWindowSize } from "@/composables/window-size";
 
-export function useEvents(
+export function useAutocompleteEvents(
   getHoveredOptionIndex: () => number | null,
   setHoveredOptionIndex: (index: number | null) => void,
   decrementHoveredOptionIndex: () => void,

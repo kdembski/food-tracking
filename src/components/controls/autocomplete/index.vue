@@ -12,9 +12,9 @@ export default {
 import { DropdownOption } from "@/types/components/utils/dropdown";
 import { computed, ref, watch } from "vue";
 import { useFieldProps } from "@/components/utils/field-template/composables/field-props";
-import { useOptionHover } from "./composables/option-hover";
-import { useEvents } from "./composables/events";
-import { useValues } from "./composables/values";
+import { useAutocompleteOptionHover } from "./composables/option-hover";
+import { useAutocompleteEvents } from "./composables/events";
+import { useAutocompleteValues } from "./composables/values";
 
 const { getFieldTemplateProps } = useFieldProps();
 
@@ -67,57 +67,9 @@ const emits = defineEmits<{
 const hasFocus = ref(false);
 const input = ref<HTMLInputElement>();
 
-const filteredOptions = computed(() => {
-  return props.options?.filter((option: DropdownOption) => {
-    return option.label?.simplify().includes(_inputValue.value?.simplify());
-  });
-});
-
 const _isLoading = computed(() => {
   return props.isLoading;
 });
-
-const isOptionExisting = (value: string | number) => {
-  return props.options.some((option) => option.value === value);
-};
-
-const selectOption = (option: DropdownOption) => {
-  if (!isOptionExisting(option.value)) {
-    option.label = option.value.toString();
-    emits("addOption", option);
-  }
-
-  selectedValue.value = option.value;
-  _inputValue.value = option.label;
-};
-
-const getDropdownOptions = (): DropdownOption<string | number>[] => {
-  if (filteredOptions.value.length > 0 || !props.enableAddingOption) {
-    return filteredOptions.value;
-  }
-
-  const newOption = {
-    value: _inputValue.value,
-    label: "Dodaj " + _inputValue.value + "...",
-  };
-  return [newOption];
-};
-
-const { selectedValue, _inputValue } = useValues(
-  props,
-  emits,
-  filteredOptions,
-  selectOption,
-  input,
-  _isLoading
-);
-
-const getSelectedClass = () => {
-  if (selectedValue.value || props.onlyInputValue) {
-    return "autocomplete__input--option-selected";
-  }
-  return "";
-};
 
 const isDropdownOpen = computed(() => {
   return hasFocus.value;
@@ -130,13 +82,28 @@ watch(isDropdownOpen, (value) => {
   emits("dropdownOpen");
 });
 
+const getSelectedClass = () => {
+  if (selectedValue.value || props.onlyInputValue) {
+    return "autocomplete__input--option-selected";
+  }
+  return "";
+};
+
+const {
+  selectedValue,
+  _inputValue,
+  filteredOptions,
+  selectOption,
+  getDropdownOptions,
+} = useAutocompleteValues(props, emits, input, _isLoading);
+
 const {
   getHoveredOptionClass,
   setHoveredOptionIndex,
   getHoveredOptionIndex,
   incrementHoveredOptionIndex,
   decrementHoveredOptionIndex,
-} = useOptionHover(filteredOptions);
+} = useAutocompleteOptionHover(filteredOptions);
 
 const {
   onEnter,
@@ -146,7 +113,7 @@ const {
   onInputClick,
   onBlur,
   onFocus,
-} = useEvents(
+} = useAutocompleteEvents(
   getHoveredOptionIndex,
   setHoveredOptionIndex,
   decrementHoveredOptionIndex,
