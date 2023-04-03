@@ -34,6 +34,7 @@ export interface CategoryShoppingItems {
 }
 
 export interface SummedUpShoppingItem {
+  id?: number;
   ingredientId?: number;
   ingredientName?: string;
   unitShortcut?: string;

@@ -32,11 +32,7 @@ const getItemName = (item: ShoppingItem | SummedUpShoppingItem) => {
 };
 
 const getItemKey = (item: ShoppingItem | SummedUpShoppingItem) => {
-  if (isSummedUpItem(item)) {
-    return item.ingredientId;
-  }
-
-  return item.id || item.customItemId;
+  return item.id || item.ingredientId;
 };
 
 const isCustomItem = () => {

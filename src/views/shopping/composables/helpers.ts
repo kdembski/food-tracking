@@ -10,6 +10,7 @@ export function useShoppingHelpers() {
     return items?.reduce((accum: SummedUpShoppingItem[], item) => {
       if (!item.ingredientId) {
         accum.push({
+          id: item.id,
           customItemName: item.customItemName,
           amount: item.amount,
           isChecked: item.isChecked,
