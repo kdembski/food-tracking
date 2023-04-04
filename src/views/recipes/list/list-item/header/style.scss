@@ -4,11 +4,15 @@
     font-weight: $font-medium;
     line-height: 100%;
     cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__cookidoo-link {
     svg {
-      width: 17px;
+      width: 16px;
     }
   }
 

@@ -103,9 +103,9 @@ $spacing-5xl: 40px;
 
 //buttons
 $text-button-hover-background-light: rgba(var(--text-primary-rgb), 0.06);
-$text-button-hover-background-dark: rgba(var(--text-primary-rgb), 0.09);
-$text-button-active-background-light: rgba(var(--text-primary-rgb), 0.12);
-$text-button-active-background-dark: rgba(var(--text-primary-rgb), 0.18);
+$text-button-hover-background-dark: rgba(var(--text-primary-rgb), 0.1);
+$text-button-active-background-light: rgba(var(--text-primary-rgb), 0.15);
+$text-button-active-background-dark: rgba(var(--text-primary-rgb), 0.22);
 
 $tag-radius: $radius-2xl;
 $tag-height: 32px;

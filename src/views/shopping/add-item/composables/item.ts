@@ -1,18 +1,22 @@
+import { ShoppingCustomItem } from "@/types/shopping/custom-item";
 import { IngredientUnitDetails } from "@/types/ingredients/ingredient";
 import { AddedItemOptionType, ShoppingItem } from "@/types/shopping/item";
-import { ComputedRef, ref, Ref } from "vue";
+import { computed, ComputedRef, ref, Ref } from "vue";
 import { useStore } from "vuex";
+import { DropdownOption } from "@/types/components/utils/dropdown";
+import { useBuildNewShoppingItem } from "./build-new-item";
+import { useCustomShoppingItem } from "./custom-item";
 
-export function useShoppingAddItem(
+export function useAddShoppingItem(
   amount: Ref<number | undefined>,
   primaryUnit: ComputedRef<IngredientUnitDetails | undefined>,
+  options: ComputedRef<DropdownOption[] | undefined>,
   listId: number
 ) {
   const store = useStore();
   const selectedItem = ref<string>();
-
-  const convertSelectedItemToObject = (item?: string) => {
-    const splittedItem = item?.split("-");
+  const selectedItemObject = computed(() => {
+    const splittedItem = selectedItem.value?.split("-");
     if (!splittedItem) {
       return;
     }
@@ -21,38 +25,21 @@ export function useShoppingAddItem(
       id: parseInt(splittedItem[0]),
       type: splittedItem[1] as AddedItemOptionType,
     };
-  };
+  });
 
   const isCustomItem = () => {
-    return (
-      convertSelectedItemToObject(selectedItem.value)?.type ===
-      AddedItemOptionType.CUSTOM
-    );
+    return selectedItemObject.value?.type === AddedItemOptionType.CUSTOM;
   };
 
-  const addItem = (item: Partial<ShoppingItem>) => {
-    return store.dispatch("shopping/item/create", item);
-  };
-
-  const buildItem = (): Partial<ShoppingItem> | undefined => {
-    if (!selectedItem.value) {
-      return;
-    }
-    const selectedItemObject = convertSelectedItemToObject(selectedItem.value);
-
-    if (isCustomItem()) {
-      return {
-        shoppingListId: listId,
-        customItemId: selectedItemObject?.id,
-        amount: amount.value,
-      };
-    }
-
-    return {
-      shoppingListId: listId,
-      ingredientUnitId: primaryUnit.value?.id,
-      amount: amount.value,
-    };
+  const addItem = async () => {
+    const item = buildNewItem();
+    await store.dispatch("shopping/item/create", {
+      shoppingListId: item?.shoppingListId,
+      ingredientUnitId: item?.ingredientUnitId,
+      customItemId: item?.customItemId,
+      amount: item?.amount,
+    });
+    return item;
   };
 
   const onItemSelect = (value?: string) => {
@@ -63,17 +50,27 @@ export function useShoppingAddItem(
       return;
     }
 
-    const convetedItem = convertSelectedItemToObject(value);
-    if (convetedItem?.type !== AddedItemOptionType.INGREDIENT) {
+    if (selectedItemObject.value?.type !== AddedItemOptionType.INGREDIENT) {
       return;
     }
 
-    loadIngredient(convetedItem.id);
+    loadIngredient(selectedItemObject.value.id);
   };
 
   const loadIngredient = (id: number) => {
     return store.dispatch("ingredient/load", id);
   };
 
-  return { selectedItem, buildItem, addItem, onItemSelect };
+  const { buildNewItem } = useBuildNewShoppingItem(
+    isCustomItem,
+    selectedItemObject,
+    primaryUnit,
+    options,
+    listId,
+    amount
+  );
+
+  const { onAddCustomItem } = useCustomShoppingItem(selectedItem, options);
+
+  return { selectedItem, addItem, onAddCustomItem, onItemSelect };
 }

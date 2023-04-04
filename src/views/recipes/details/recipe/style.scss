@@ -6,7 +6,7 @@
   &__header-container {
     display: flex;
     justify-content: space-between;
-    gap: $spacing-xs;
+    gap: $spacing-2xs;
   }
 
   &__header-buttons {
@@ -36,7 +36,7 @@
 
   &__cookidoo-link {
     svg {
-      width: 18px;
+      width: 16px;
     }
   }
 

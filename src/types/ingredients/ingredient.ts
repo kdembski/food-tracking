@@ -30,6 +30,7 @@ export interface IngredientUnitDetails {
   isPrimary: boolean;
   converterToPrimary: number;
   unitName: string;
+  unitShortcut: string;
 }
 
 export interface IngredientListItem {

@@ -3,6 +3,10 @@
     font-size: $font-xl;
     font-weight: $font-medium;
     line-height: 100%;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__buttons {

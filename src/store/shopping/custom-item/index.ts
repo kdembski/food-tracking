@@ -39,15 +39,15 @@ const actions: ActionTree<ShoppingCustomItemState, any> = {
   },
 
   create({ commit, dispatch, rootState }, item: ShoppingCustomItem) {
-    return new Promise<void>((resolve) => {
+    return new Promise<number>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.post(
         process.env.VUE_APP_SERVICE_URL + "/shopping/custom-items",
         item
       )
-        .then(() => {
-          resolve();
+        .then((response: AxiosResponse<{ insertId: number }>) => {
+          resolve(response.data.insertId);
         })
         .catch((error: AxiosError<ApiError>) => {
           dispatch("handleDefaultError", error, { root: true });

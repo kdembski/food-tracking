@@ -27,7 +27,15 @@ export default {
 
 <script setup lang="ts">
 import { ShoppingList, ShoppingListNavItems } from "@/types/shopping/list";
-import { computed, ComputedRef, onBeforeMount, ref, provide, watch } from "vue";
+import {
+  computed,
+  ComputedRef,
+  onBeforeMount,
+  ref,
+  provide,
+  watch,
+  WritableComputedRef,
+} from "vue";
 import { useStore } from "vuex";
 import { ShoppingItem } from "@/types/shopping/item";
 import { useShoppingHelpers } from "../composables/helpers";
@@ -56,9 +64,14 @@ const isByRecipeSelected = () =>
 const isByCategorySelected = () =>
   selectedTab.value === ShoppingListNavItems.BY_CATEGORY;
 
-const items: ComputedRef<ShoppingItem[]> = computed(() => {
-  const items = store.state.shopping.item.collection;
-  return items?.filter((item: ShoppingItem) => !item.isChecked);
+const items: WritableComputedRef<ShoppingItem[]> = computed({
+  get(): ShoppingItem[] {
+    const items = store.state.shopping.item.collection;
+    return items?.filter((item: ShoppingItem) => !item.isChecked);
+  },
+  set(value: ShoppingItem[]) {
+    store.commit("shopping/item/setCollection", value);
+  },
 });
 
 const ownedItems: ComputedRef<ShoppingItem[]> = computed(() => {
@@ -70,6 +83,10 @@ const ownedItems: ComputedRef<ShoppingItem[]> = computed(() => {
   }
   return ownedItems;
 });
+
+const addItemToList = (item: ShoppingItem) => {
+  items.value = items.value.concat(item);
+};
 
 const loadShoppingItems = () => {
   store.dispatch("shopping/item/loadCollection", props.list.id);

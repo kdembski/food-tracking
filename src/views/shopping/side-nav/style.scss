@@ -55,10 +55,12 @@
 
     &:hover:not(.item--active) {
       border-color: var(--border-active);
+      background-color: var(--surface-secondary);
     }
 
     &--active {
       border-color: var(--primary);
+      background-color: rgba(var(--primary-rgb), 0.12);
     }
   }
 }

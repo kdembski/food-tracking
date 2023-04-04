@@ -6,6 +6,10 @@
   &:deep(.autocomplete) {
     width: 100%;
   }
+
+  &__amount {
+    width: 30%;
+  }
 }
 
 @media screen and (max-width: $screen-md) {
@@ -36,6 +40,10 @@
           transform: rotateZ(135deg) scale(1.2);
         }
       }
+    }
+
+    &__amount {
+      width: 50%;
     }
   }
 }

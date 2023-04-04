@@ -1,10 +1,11 @@
-import { ShoppingCustomItemOption } from "./../../../../types/shopping/custom-item";
+import { ShoppingCustomItemOption } from "@/types/shopping/custom-item";
 import { computed, onBeforeMount, Ref } from "vue";
 import { useStore } from "vuex";
 import { IngredientOption } from "@/types/ingredients/ingredient";
 import { AddedItemOptionType } from "@/types/shopping/item";
+import { DropdownOption } from "@/types/components/utils/dropdown";
 
-export function useShoppingAddItemOptions() {
+export function useAddShoppingItemOptions() {
   const store = useStore();
 
   const ingredientOptions: Ref<IngredientOption[] | null> = computed(
@@ -17,17 +18,19 @@ export function useShoppingAddItemOptions() {
 
   const options = computed(() => {
     const preparedIngredientOptions = ingredientOptions.value?.map(
-      (option) => ({
-        value: option.id + "-" + AddedItemOptionType.INGREDIENT,
-        label: option.name,
-      })
+      (option) =>
+        ({
+          value: option.id + "-" + AddedItemOptionType.INGREDIENT,
+          label: option.name,
+        } as DropdownOption)
     );
 
     const preparedCustomItemOptions = customItemOptions.value?.map(
-      (option) => ({
-        value: option.id + "-" + AddedItemOptionType.CUSTOM,
-        label: option.name,
-      })
+      (option) =>
+        ({
+          value: option.id + "-" + AddedItemOptionType.CUSTOM,
+          label: option.name,
+        } as DropdownOption)
     );
 
     if (!preparedCustomItemOptions || !preparedIngredientOptions) {

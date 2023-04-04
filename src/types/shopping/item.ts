@@ -1,8 +1,8 @@
 export interface ShoppingItem {
   id: number;
   shoppingListId?: number;
-  recipeId?: number;
-  ingredientCategoryId?: number;
+  recipeId?: number | null;
+  ingredientCategoryId?: number | null;
   ingredientUnitId?: number;
   ingredientId?: number;
   customItemId?: number;
@@ -24,12 +24,12 @@ export interface ShoppingItemState {
 }
 
 export interface RecipeShoppingItems {
-  recipeId?: number;
+  recipeId?: number | null;
   items: ShoppingItem[];
 }
 
 export interface CategoryShoppingItems {
-  categoryId?: number;
+  categoryId?: number | null;
   items: ShoppingItem[] | SummedUpShoppingItem[];
 }
 
@@ -48,4 +48,9 @@ export interface SummedUpShoppingItem {
 export enum AddedItemOptionType {
   INGREDIENT = "ingredient",
   CUSTOM = "custom",
+}
+
+export interface SelectedShoppingItem {
+  id: number;
+  type: AddedItemOptionType;
 }

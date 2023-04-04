@@ -20,8 +20,10 @@ import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useWindowSize } from "@/composables/window-size";
 import { IngredientUnitDetails } from "@/types/ingredients/ingredient";
-import { useShoppingAddItem } from "./composables/item";
-import { useShoppingAddItemOptions } from "./composables/options";
+import { useAddShoppingItem } from "./composables/item";
+import { useAddShoppingItemOptions } from "./composables/options";
+import { ShoppingItem } from "@/types/shopping/item";
+import { useMobileAddShoppingItemPanel } from "./composables/mobile-panel";
 
 const { isMobile } = useWindowSize();
 const store = useStore();
@@ -31,15 +33,21 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits<{
-  (e: "success"): void;
+  (e: "itemAdded", item: Partial<ShoppingItem>): void;
 }>();
 
+const autocompleteKey = ref(0);
 const amount = ref<number>();
+const isSubmittingItem = computed(() => store.state.shopping.item.isSubmitting);
+const isSubmittingCustomItem = computed(
+  () => store.state.shopping.customItem.isSubmitting
+);
+const isSubmitting = computed(
+  () => isSubmittingItem.value || isSubmittingCustomItem.value
+);
 const primaryUnit = computed<IngredientUnitDetails | undefined>(
   () => store.getters["ingredient/primaryUnit"]
 );
-const isOpenOnMobile = ref(false);
-const mobileButton = ref<{ button: HTMLButtonElement }>();
 
 const getAmountPlaceholder = () => {
   if (!primaryUnit.value) {
@@ -48,44 +56,29 @@ const getAmountPlaceholder = () => {
   return `Ilość (${primaryUnit.value.unitName})`;
 };
 
-const onSubmit = () => {
-  const item = buildItem();
-  if (!item) {
-    return;
-  }
+const onSubmit = async () => {
+  await addItem().then((item) => {
+    clearInputValues();
 
-  addItem(item).then(() => {
-    emits("success");
+    if (item) {
+      emits("itemAdded", item);
+    }
   });
 };
 
-const onClickAway = (e: any) => {
-  if (!isOpenOnMobile.value) {
-    return;
-  }
-
-  let target = e.target;
-  while (target.parentElement) {
-    if (target === mobileButton.value?.button) {
-      return;
-    }
-    target = target.parentElement;
-  }
-
-  isOpenOnMobile.value = false;
+const clearInputValues = () => {
+  selectedItem.value = undefined;
+  amount.value = undefined;
+  autocompleteKey.value++;
 };
 
-const onMobileButtonClick = () => {
-  isOpenOnMobile.value = !isOpenOnMobile.value;
-};
+const { options } = useAddShoppingItemOptions();
 
-const { selectedItem, buildItem, addItem, onItemSelect } = useShoppingAddItem(
-  amount,
-  primaryUnit,
-  props.listId
-);
+const { selectedItem, onAddCustomItem, addItem, onItemSelect } =
+  useAddShoppingItem(amount, primaryUnit, options, props.listId);
 
-const { options } = useShoppingAddItemOptions();
+const { isMobilePanelOpen, onMobileButtonClick } =
+  useMobileAddShoppingItemPanel();
 </script>
 
 <template src="./template.html"></template>

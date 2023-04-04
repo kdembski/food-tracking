@@ -30,11 +30,12 @@
 
       &:hover {
         background-color: var(--surface-secondary);
+        border-color: var(--border-active);
       }
     }
 
     > input:checked + label {
-      background-color: var(--primary);
+      background-color: rgba(var(--primary-rgb), 0.15);
       color: $white;
       box-shadow: $shadow-sm var(--shadow-color);
       border-color: var(--primary);
@@ -46,7 +47,7 @@
 
     &--today {
       > label {
-        border-color: var(--primary);
+        border-color: var(--primary) !important;
       }
     }
   }

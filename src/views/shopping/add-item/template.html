@@ -1,9 +1,8 @@
 <form
   class="shopping-list-add-item"
-  :class="{ 'shopping-list-add-item--mobile-active': isOpenOnMobile }"
+  :class="{ 'shopping-list-add-item--mobile-active': isMobilePanelOpen }"
   novalidate
   @submit.prevent="onSubmit"
-  v-click-away="onClickAway"
 >
   <CAutocomplete
     v-model="selectedItem"
@@ -11,11 +10,16 @@
     placeholder="Dodaj produkty"
     @update:modelValue="onItemSelect"
     enableAddingOption
+    @addOption="onAddCustomItem"
+    :isLoading="isSubmitting"
+    :key="autocompleteKey"
   />
   <CInput
     v-model="amount"
+    class="shopping-list-add-item__amount"
     :placeholder="getAmountPlaceholder()"
     type="number"
+    :isLoading="isSubmitting"
   />
   <CButton color="primary" icon="plus" size="large" />
 </form>
@@ -24,6 +28,6 @@
   id="shopping-list-add-item-mobile-btn"
   icon="plus"
   class="shopping-list-add-item__mobile-btn"
-  :class="{ 'shopping-list-add-item__mobile-btn--active': isOpenOnMobile }"
+  :class="{ 'shopping-list-add-item__mobile-btn--active': isMobilePanelOpen }"
   @click="onMobileButtonClick"
 />
