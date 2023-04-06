@@ -129,6 +129,7 @@ const {
 
 defineExpose({
   inputValue: _inputValue,
+  input,
 });
 </script>
 

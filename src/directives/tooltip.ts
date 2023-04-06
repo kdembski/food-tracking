@@ -16,7 +16,7 @@ export function useTooltipDirective(store: Store<State>) {
 
     clearTimeout(closeTimeout);
     clearTimeout(openTimeout);
-    openTimeout = setTimeout(
+    openTimeout = window.setTimeout(
       () => {
         removeActiveCustomContent();
         store.commit("setTooltipConfig", {
@@ -35,7 +35,7 @@ export function useTooltipDirective(store: Store<State>) {
 
   const closeTooltip = (delay = 150) => {
     clearTimeout(openTimeout);
-    closeTimeout = setTimeout(() => {
+    closeTimeout = window.setTimeout(() => {
       store.commit("setIsTooltipOpen", false);
     }, delay);
   };

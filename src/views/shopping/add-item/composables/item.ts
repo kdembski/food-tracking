@@ -11,7 +11,8 @@ export function useAddShoppingItem(
   amount: Ref<number | undefined>,
   primaryUnit: ComputedRef<IngredientUnitDetails | undefined>,
   options: ComputedRef<DropdownOption[] | undefined>,
-  listId: number
+  listId: number,
+  amountInput: Ref<{ input: HTMLInputElement } | undefined>
 ) {
   const store = useStore();
   const selectedItem = ref<string>();
@@ -42,7 +43,7 @@ export function useAddShoppingItem(
     return item;
   };
 
-  const onItemSelect = (value?: string) => {
+  const onItemSelect = async (value?: string) => {
     amount.value = undefined;
     store.commit("ingredient/setSingle", null);
 
@@ -54,7 +55,8 @@ export function useAddShoppingItem(
       return;
     }
 
-    loadIngredient(selectedItemObject.value.id);
+    await loadIngredient(selectedItemObject.value.id);
+    amountInput.value?.input.focus();
   };
 
   const loadIngredient = (id: number) => {

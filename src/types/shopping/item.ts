@@ -19,8 +19,11 @@ export interface ShoppingItem {
 
 export interface ShoppingItemState {
   collection: ShoppingItem[] | null;
+  shoppingListId: number | null;
   isLoadingCollection: boolean;
   isSubmitting: boolean;
+  isDeleting: boolean;
+  webSocket: WebSocket | null;
 }
 
 export interface RecipeShoppingItems {

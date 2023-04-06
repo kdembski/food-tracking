@@ -16,7 +16,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import { useStore } from "vuex";
 import { useWindowSize } from "@/composables/window-size";
 import { IngredientUnitDetails } from "@/types/ingredients/ingredient";
@@ -38,6 +38,8 @@ const emits = defineEmits<{
 
 const autocompleteKey = ref(0);
 const amount = ref<number>();
+const amountInput = ref<{ input: HTMLInputElement }>();
+const ingredientAutocomplete = ref<{ input: HTMLInputElement }>();
 const isSubmittingItem = computed(() => store.state.shopping.item.isSubmitting);
 const isSubmittingCustomItem = computed(
   () => store.state.shopping.customItem.isSubmitting
@@ -57,12 +59,15 @@ const getAmountPlaceholder = () => {
 };
 
 const onSubmit = async () => {
-  await addItem().then((item) => {
+  await addItem().then(async (item) => {
     clearInputValues();
 
     if (item) {
       emits("itemAdded", item);
     }
+
+    await nextTick();
+    ingredientAutocomplete.value?.input.focus();
   });
 };
 
@@ -75,7 +80,7 @@ const clearInputValues = () => {
 const { options } = useAddShoppingItemOptions();
 
 const { selectedItem, onAddCustomItem, addItem, onItemSelect } =
-  useAddShoppingItem(amount, primaryUnit, options, props.listId);
+  useAddShoppingItem(amount, primaryUnit, options, props.listId, amountInput);
 
 const { isMobilePanelOpen, onMobileButtonClick } =
   useMobileAddShoppingItemPanel();

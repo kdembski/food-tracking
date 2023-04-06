@@ -22,7 +22,7 @@ export function useMobileFilters(
     container?.classList.add("list-with-filters--child-transition");
 
     clearTimeout(childTransitionClassTimeout);
-    childTransitionClassTimeout = setTimeout(() => {
+    childTransitionClassTimeout = window.setTimeout(() => {
       container?.classList.remove("list-with-filters--child-transition");
     }, 400);
   };

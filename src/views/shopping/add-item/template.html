@@ -13,6 +13,8 @@
     @addOption="onAddCustomItem"
     :isLoading="isSubmitting"
     :key="autocompleteKey"
+    ref="ingredientAutocomplete"
+    :enableSetSelectedWhenInputMatchAnyOption="false"
   />
   <CInput
     v-model="amount"
@@ -20,6 +22,7 @@
     :placeholder="getAmountPlaceholder()"
     type="number"
     :isLoading="isSubmitting"
+    ref="amountInput"
   />
   <CButton color="primary" icon="plus" size="large" />
 </form>

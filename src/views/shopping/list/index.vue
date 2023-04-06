@@ -100,10 +100,15 @@ const loadIngredientCategoryOptions = () => {
   store.dispatch("ingredient/category/loadOptions");
 };
 
+const initShoppingItemsWebSocket = () => {
+  store.dispatch("shopping/item/initWebSocket");
+};
+
 onBeforeMount(() => {
   loadShoppingItems();
   loadRecipeOptions();
   loadIngredientCategoryOptions();
+  initShoppingItemsWebSocket();
 });
 
 watch(

@@ -3,10 +3,7 @@
   :key="getItemKey(item)"
   :class="{ 'shopping-item--grayed-out': grayedOut }"
 >
-  <CCheckbox
-    v-model="item.isChecked"
-    @update:modelValue="handleCheckingSummedItem"
-  >
+  <CCheckbox v-model="item.isChecked" @update:modelValue="handleChecking">
     <template #label>
       <div class="shopping-item__label">
         <p>{{ getItemName(item) }}</p>
@@ -25,11 +22,12 @@
             variant="text"
             icon="trash-can"
             :size="isMobile ? 'medium' : 'small'"
-            @click.stop=""
+            @click.stop="handleDeleting"
+            :isLoading="isDeletingItem"
           />
         </div>
         <div>
-          <p>{{ item.amount }} {{ item.unitShortcut}}</p>
+          <p v-if="item.amount">{{ item.amount }} {{ item.unitShortcut}}</p>
         </div>
       </div>
     </template>

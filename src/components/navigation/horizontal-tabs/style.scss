@@ -9,6 +9,7 @@
   &__item {
     position: relative;
     z-index: 1;
+    margin-top: -$spacing-sm;
 
     & > input {
       display: none;
@@ -25,7 +26,7 @@
       display: flex;
       align-items: center;
       color: var(--text-tetriary);
-      padding: $spacing-2xs $spacing-2xs $spacing-lg;
+      padding: $spacing-sm $spacing-2xs $spacing-lg;
       cursor: pointer;
 
       &:hover {

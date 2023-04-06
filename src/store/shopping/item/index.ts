@@ -6,8 +6,11 @@ import { ShoppingItem, ShoppingItemState } from "@/types/shopping/item";
 
 const state: () => ShoppingItemState = () => ({
   collection: null,
+  shoppingListId: null,
   isLoadingCollection: false,
   isSubmitting: false,
+  isDeleting: false,
+  webSocket: null,
 });
 
 const getters: GetterTree<ShoppingItemState, any> = {};
@@ -25,6 +28,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
       )
         .then((response: AxiosResponse<ShoppingItem[]>) => {
           commit("setCollection", response.data);
+          commit("setShoppingListId", shoppingListId);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -43,6 +47,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/shopping/items", item)
         .then(() => {
           rootState.toastNotification.success("Dodano do listy zakupów.");
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -64,6 +69,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Zedytowano listę zakupów.");
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -85,6 +91,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
         { isChecked: item.isChecked }
       )
         .then(() => {
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -103,6 +110,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
         { isRemoved: item.isRemoved }
       )
         .then(() => {
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -113,22 +121,47 @@ const actions: ActionTree<ShoppingItemState, any> = {
 
   delete({ commit, dispatch, rootState }, itemId: number) {
     return new Promise<void>((resolve) => {
-      commit("setIsSubmitting", true);
+      commit("setIsDeleting", true);
 
       ApiService.delete(
         process.env.VUE_APP_SERVICE_URL + "/shopping/items/" + itemId
       )
         .then(() => {
-          rootState.toastNotification.success("Usunięto z listy zakupów.");
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
           dispatch("handleDefaultError", error, { root: true });
         })
         .finally(() => {
-          commit("setIsSubmitting", false);
+          commit("setIsDeleting", false);
         });
     });
+  },
+
+  initWebSocket({ commit, state }) {
+    const url =
+      process.env.VUE_APP_SERVICE_URL?.replace("http", "ws") +
+      "/shopping/items";
+    const ws = new WebSocket(url);
+    commit("setWebSocket", ws);
+
+    ws.addEventListener("message", (event) => {
+      const { listId, items }: { listId: string; items: ShoppingItem[] } =
+        JSON.parse(event.data.toString());
+
+      if (parseInt(listId) !== state.shoppingListId) {
+        return;
+      }
+      commit("setCollection", items);
+    });
+  },
+
+  sendWebSocketMessage({ state }) {
+    if (!state.shoppingListId) {
+      return;
+    }
+    state.webSocket?.send(state.shoppingListId.toString());
   },
 };
 
@@ -137,12 +170,24 @@ const mutations: MutationTree<ShoppingItemState> = {
     state.collection = collection;
   },
 
+  setShoppingListId(state, id: number) {
+    state.shoppingListId = id;
+  },
+
   setIsLoadingCollection(state, value) {
     state.isLoadingCollection = value;
   },
 
   setIsSubmitting(state, value) {
     state.isSubmitting = value;
+  },
+
+  setIsDeleting(state, value) {
+    state.isDeleting = value;
+  },
+
+  setWebSocket(state, webSocket: WebSocket) {
+    state.webSocket = webSocket;
   },
 };
 
