@@ -20,7 +20,7 @@
         icon="edit"
         :label="!isMobile ? 'Edytuj' : ''"
         :size="isMobile ? 'large' : 'small'"
-        @click=""
+        @click="emits('editList', list.id)"
       />
       <CButton
         color="error"
@@ -28,7 +28,8 @@
         icon="ban"
         :label="!isMobile ? 'Wyczyść' : ''"
         :size="isMobile ? 'large' : 'small'"
-        @click=""
+        @click="clearList"
+        :isLoading="isClearingList"
       />
     </div>
   </div>

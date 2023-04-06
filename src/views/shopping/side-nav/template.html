@@ -7,7 +7,7 @@
       icon="plus"
       :label="!isMobile ? 'Dodaj' : ''"
       :size="isMobile ? 'large' : 'small'"
-      @click=""
+      @click="emits('addList')"
     />
   </div>
   <div class="shopping-side-nav__items">
@@ -25,7 +25,7 @@
             variant="text"
             :size="isMobile ? 'medium' : 'small'"
             icon="edit"
-            @click.stop=""
+            @click.stop="emits('editList', item.id)"
           />
           <CButton
             color="error"

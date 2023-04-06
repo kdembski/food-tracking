@@ -43,10 +43,18 @@ import { useWindowSize } from "@/composables/window-size";
 
 const { isMobile } = useWindowSize();
 const store = useStore();
+
 const props = defineProps<{
   list: ShoppingList;
 }>();
 
+const emits = defineEmits<{
+  (e: "editList", id: number): void;
+}>();
+
+const isClearingList = computed(
+  () => store.state.shopping.list.isDeletingItems
+);
 const tabs = [
   { code: ShoppingListNavItems.DEFAULT, label: "Bez podziału" },
   { code: ShoppingListNavItems.BY_RECIPE, label: "Według przepisów" },
@@ -86,6 +94,12 @@ const ownedItems: ComputedRef<ShoppingItem[]> = computed(() => {
 
 const addItemToList = (item: ShoppingItem) => {
   items.value = items.value.concat(item);
+};
+
+const clearList = () => {
+  store.dispatch("shopping/list/removeItems", props.list.id).then(() => {
+    store.commit("shopping/item/setCollection", []);
+  });
 };
 
 const loadShoppingItems = () => {

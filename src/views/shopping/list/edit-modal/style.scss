@@ -1,0 +1,27 @@
+.edit-shopping-list-modal {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4xl;
+
+  &__delete-wrapper {
+    padding: $spacing-2xl $spacing-lg;
+    border: 1px solid $error;
+    border-radius: $radius-md;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-lg;
+  }
+
+  &__delete-notice {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    p:last-child {
+      color: var(--text-secondary);
+      font-size: $font-xs;
+    }
+  }
+}

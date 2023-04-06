@@ -22,6 +22,8 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (e: "update:activeListId", id: number): void;
+  (e: "editList", id: number): void;
+  (e: "addList"): void;
 }>();
 
 const isListActive = (id: number) => props.activeListId === id;

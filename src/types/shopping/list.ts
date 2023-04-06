@@ -7,9 +7,12 @@ export interface ShoppingList {
 }
 
 export interface ShoppingListState {
+  single: ShoppingList | null;
   all: ShoppingList[] | null;
   isLoading: boolean;
+  isLoadingAll: boolean;
   isSubmitting: boolean;
+  isDeletingItems: boolean;
 }
 
 export enum ShoppingListNavItems {

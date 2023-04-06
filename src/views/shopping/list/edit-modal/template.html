@@ -1,0 +1,38 @@
+<CModal
+  v-model:isOpen="_isOpen"
+  :title="getTitle()"
+  :submitButtonLabel="getSubmitButtonLabel()"
+  :isSubmitting="isSubmitting"
+  @submit="submit"
+  containerElement="form"
+>
+  <div class="edit-shopping-list-modal">
+    <CInput
+      v-model="list.name"
+      label="Nazwa"
+      :isLoading="isLoading"
+      isRequired
+    />
+    <div
+      v-if="!isAddingNewList && !isMainList()"
+      class="edit-shopping-list-modal__delete-wrapper"
+    >
+      <div class="edit-shopping-list-modal__delete-notice">
+        <p>Usuń listę</p>
+        <p>
+          Jeżeli usuniesz listę, wszystkie nie kupione przedmioty, zostaną
+          ununięte razem z nią.
+        </p>
+      </div>
+      <CButton
+        color="error"
+        variant="text"
+        icon="trash-can"
+        label="Usuń"
+        size="small"
+        type="button"
+        @click="deleteList"
+      />
+    </div>
+  </div>
+</CModal>

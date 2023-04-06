@@ -36,6 +36,14 @@
         v-tooltip="{ text: 'Edytuj' }"
         @click="emits('edit', item)"
       />
+      <CButton
+        color="secondary"
+        variant="text"
+        icon="shopping-cart"
+        size="small"
+        v-tooltip="{ text: 'Dodaj do zakupów' }"
+        @click=""
+      />
       <RouterLink v-if="item.recipeId" :to="'/recipes/' + item.recipeId">
         <CButton
           color="secondary"
