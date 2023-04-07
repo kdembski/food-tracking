@@ -1,14 +1,15 @@
 .button {
-  border: 0;
-  display: inline-flex;
   font-weight: $font-bold;
   cursor: pointer;
+  display: inline-flex;
   position: relative;
   white-space: nowrap;
   overflow: hidden;
   align-items: center;
   justify-content: center;
   flex: none;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
 
   &:focus-visible {
     outline: 2px solid var(--primary);
@@ -17,11 +18,7 @@
 
   &--disabled {
     opacity: 0.4;
-    cursor: default;
-
-    &:before {
-      display: none;
-    }
+    pointer-events: none;
   }
 
   &--full-width {
@@ -39,37 +36,6 @@
     }
   }
 
-  .button__content {
-    position: relative;
-    z-index: 2;
-  }
-
-  &.button--text {
-    background-color: transparent;
-    padding: $spacing-md;
-    border-radius: $radius-md;
-
-    .button__content {
-      gap: $spacing-md;
-    }
-
-    &:hover:not(.button--disabled) {
-      background-color: var(--text-button-hover-background);
-    }
-
-    &:active:not(.button--disabled) {
-      background-color: var(--text-button-active-background);
-    }
-
-    &:focus-visible {
-      outline-offset: -1px;
-    }
-
-    &::before {
-      display: none;
-    }
-  }
-
   &--primary {
     &.button--text {
       color: var(--primary);
@@ -78,10 +44,30 @@
     &.button--contained {
       color: $white;
       background-color: var(--primary);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--primary) 90%, $white);
+      }
+
+      &:active {
+        background-color: color-mix(in srgb, var(--primary) 70%, $white);
+      }
     }
 
-    &:active::before {
-      opacity: 0.2;
+    &.button--outlined {
+      color: var(--primary);
+      background-color: rgba(var(--primary-rgb), 0.08);
+      border-color: rgba(var(--primary-rgb), 0.3);
+
+      &:hover {
+        background-color: rgba(var(--primary-rgb), 0.15);
+        border-color: rgba(var(--primary-rgb), 0.4);
+      }
+
+      &:active {
+        background-color: rgba(var(--primary-rgb), 0.25);
+        border-color: rgba(var(--primary-rgb), 0.5);
+      }
     }
   }
 
@@ -93,10 +79,30 @@
     &.button--contained {
       color: $white;
       background-color: $error;
+
+      &:hover {
+        background-color: lighten($error, 7);
+      }
+
+      &:active {
+        background-color: lighten($error, 20);
+      }
     }
 
-    &:active::before {
-      opacity: 0.2;
+    &.button--outlined {
+      color: $error;
+      background-color: transparentize($error, 0.92);
+      border-color: transparentize($error, 0.75);
+
+      &:hover {
+        background-color: transparentize($error, 0.85);
+        border-color: transparentize($error, 0.65);
+      }
+
+      &:active {
+        background-color: transparentize($error, 0.75);
+        border-color: transparentize($error, 0.55);
+      }
     }
   }
 
@@ -107,17 +113,37 @@
 
     &.button--contained {
       color: $white;
-      background-color: $secondary;
+      background-color: darken($secondary, 5);
+
+      &:hover {
+        background-color: lighten($secondary, 2);
+      }
+
+      &:active {
+        background-color: lighten($secondary, 15);
+      }
     }
 
-    &:active::before {
-      opacity: 0.12;
+    &.button--outlined {
+      color: var(--text-primary);
+      background-color: rgba(var(--text-primary-rgb), 0.05);
+      border-color: rgba(var(--text-primary-rgb), 0.08);
+
+      &:hover {
+        background-color: rgba(var(--text-primary-rgb), 0.1);
+        border-color: rgba(var(--text-primary-rgb), 0.15);
+      }
+
+      &:active {
+        background-color: rgba(var(--text-primary-rgb), 0.2);
+        border-color: rgba(var(--text-primary-rgb), 0.25);
+      }
     }
   }
 
   &--small {
     font-size: $font-sm;
-    padding: $spacing-md $spacing-lg;
+    padding: $spacing-md - 1 $spacing-lg;
     border-radius: $radius-sm;
 
     .button__content {
@@ -145,17 +171,26 @@
     }
   }
 
-  &__label {
-    display: inline;
-    letter-spacing: 1px;
-  }
+  &.button--text {
+    background-color: transparent;
+    padding: $spacing-md - 1 $spacing-md;
+    border-radius: $radius-md;
 
-  &__content {
-    display: flex;
-  }
+    .button__content {
+      gap: $spacing-md;
+    }
 
-  &__icon {
-    margin-top: 1px;
+    &:hover {
+      background-color: var(--text-button-hover-background);
+    }
+
+    &:active {
+      background-color: var(--text-button-active-background);
+    }
+
+    &:focus-visible {
+      outline-offset: -1px;
+    }
   }
 
   &--only-icon {
@@ -192,29 +227,16 @@
     }
   }
 
-  &:before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    z-index: 1;
-    background-color: $white;
+  &__label {
+    display: inline;
+    letter-spacing: 1px;
   }
-}
 
-[data-theme="dark"] {
-  .button {
-    &--primary {
-      &.button--contained {
-        color: $white;
-      }
-    }
+  &__content {
+    display: flex;
+  }
 
-    &--secondary {
-      &.button--contained {
-        color: $text-lightest;
-        background-color: darken($secondary, 5);
-      }
-    }
+  &__icon {
+    margin-top: 1px;
   }
 }

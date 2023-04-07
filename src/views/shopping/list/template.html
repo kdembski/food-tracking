@@ -6,7 +6,7 @@
     <div class="shopping-list__buttons">
       <CButton
         color="secondary"
-        variant="text"
+        variant="outlined"
         icon="sitemap"
         :size="isMobile ? 'large' : 'small'"
         :label="getSummedUpModeButtonLabel()"
@@ -16,7 +16,7 @@
       />
       <CButton
         color="secondary"
-        variant="text"
+        variant="outlined"
         icon="edit"
         :label="!isMobile ? 'Edytuj' : ''"
         :size="isMobile ? 'large' : 'small'"
@@ -24,7 +24,7 @@
       />
       <CButton
         color="error"
-        variant="text"
+        variant="outlined"
         icon="ban"
         :label="!isMobile ? 'Wyczyść' : ''"
         :size="isMobile ? 'large' : 'small'"

@@ -7,8 +7,6 @@
 *:before {
   --primary: #{$primary};
   --primary-rgb: #{toRGB($primary)};
-  --primary-light: #{$primary-light};
-  --primary-dark: #{$primary-dark};
 
   --surface-primary: #{$surface-lightest};
   --surface-primary-rgb: #{toRGB($surface-lightest)};
@@ -28,6 +26,7 @@
   --shadow-color: #{$shadow-light};
 
   --error-primary: #{$error};
+  --error-primary-rgb: #{toRGB($error)};
   --error-secondary: #{$error-light};
 
   --success-primary: #{$success};
@@ -59,6 +58,7 @@
     --shadow-color: #{$shadow-dark};
 
     --error-primary: #{$error-light};
+    --error-primary-rgb: #{toRGB($error-light)};
     --error-secondary: #{$error};
 
     --success-primary: #{$success-light};

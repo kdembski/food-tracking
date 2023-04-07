@@ -13,7 +13,7 @@
 
   &__buttons {
     display: flex;
-    gap: $spacing-md;
+    gap: $spacing-lg;
   }
 
   &__summed-up-mode-btn--active:deep(.button__icon) {
@@ -83,7 +83,7 @@
     }
 
     &__buttons {
-      gap: $spacing-2xs;
+      gap: $spacing-sm;
     }
   }
 }

@@ -30,37 +30,44 @@ const Template = (args) => ({
         { size: "small", label: "Button" },
         { size: "medium", label: "Button" },
         { size: "large", label: "Button" },
+        { size: "small", icon: "plus", label: "" },
+        { size: "medium", icon: "plus", label: "" },
+        { size: "large", icon: "plus", label: "" },
         { isDisabled: true, label: "Button" },
         { icon: "plus", label: "Button" },
-        { icon: "plus", label: "" },
         { isLoading: true, label: "Button" },
       ],
     };
   },
   template: `
-    <div v-for="prop in props" style="margin-bottom: 20px">
-      <CButton v-bind="Object.assign(prop, args)" />
+    <div style="display: flex; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div v-for="prop in props">
+          <CButton v-bind="{...prop, ...args,}" />
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div v-for="prop in props">
+          <CButton v-bind="{...prop, ...args, variant: 'outlined'}" />
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div v-for="prop in props">
+          <CButton v-bind="{...prop, ...args, variant: 'text'}" />
+        </div>
+      </div>
     </div>
     `,
 });
 
 export const Primary = Template.bind({});
 
-export const PrimaryText = Template.bind({});
-PrimaryText.args = Object.assign({ variant: "text" }, Primary.args);
-
 export const Secondary = Template.bind({});
 Secondary.args = {
   color: "secondary",
 };
 
-export const SecondaryText = Template.bind({});
-SecondaryText.args = Object.assign({ variant: "text" }, Secondary.args);
-
 export const Error = Template.bind({});
 Error.args = {
   color: "error",
 };
-
-export const ErrorText = Template.bind({});
-ErrorText.args = Object.assign({ variant: "text" }, Error.args);

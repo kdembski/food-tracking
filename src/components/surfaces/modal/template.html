@@ -30,6 +30,12 @@
         </div>
         <div class="modal__footer">
           <CButton
+            label="Anuluj"
+            variant="outlined"
+            type="button"
+            @click="closeModal"
+          />
+          <CButton
             :label="submitButtonLabel"
             v-on="!isContainerForm() ? { click: onSubmit } : {}"
             :isDisabled="isSubmitButtonDisabled"
