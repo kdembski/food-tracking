@@ -66,10 +66,10 @@ onBeforeMount(() => {
 
 body {
   color: var(--text-primary);
+}
 
-  &.grabbing * {
-    cursor: grab;
-  }
+.grabbing * {
+  cursor: grab;
 }
 
 a {

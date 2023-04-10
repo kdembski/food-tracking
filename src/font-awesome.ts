@@ -58,6 +58,8 @@ import {
   faBolt,
   faSitemap,
   faBan,
+  faCircleDown,
+  faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -124,7 +126,9 @@ library.add(
   faTrashCan,
   faBolt,
   faSitemap,
-  faBan
+  faBan,
+  faCircleDown,
+  faCircleXmark
 );
 
 export default FontAwesomeIcon;

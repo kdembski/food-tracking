@@ -1,9 +1,10 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
+import Draggable from "vuedraggable";
 
 export default {
   name: "ShoppingSideNav",
-  components: { CButton },
+  components: { CButton, Draggable },
 };
 </script>
 
@@ -11,8 +12,10 @@ export default {
 import { ShoppingList } from "@/types/shopping/list";
 import { useStore } from "vuex";
 import { useWindowSize } from "@/composables/window-size";
+import { useShoppingItemDraggableConfig } from "../composables/draggable-config";
 
 const { isMobile } = useWindowSize();
+const { isDragging, onDrop } = useShoppingItemDraggableConfig();
 const store = useStore();
 
 const props = defineProps<{

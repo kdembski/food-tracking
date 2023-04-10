@@ -13,7 +13,11 @@ const state: () => ShoppingListState = () => ({
   isDeletingItems: false,
 });
 
-const getters: GetterTree<ShoppingListState, any> = {};
+const getters: GetterTree<ShoppingListState, any> = {
+  getById: (state) => (id: number) => {
+    return state.all?.find((list) => list.id === id);
+  },
+};
 
 const actions: ActionTree<ShoppingListState, any> = {
   loadAll({ commit, dispatch }) {

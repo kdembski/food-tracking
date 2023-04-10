@@ -56,6 +56,31 @@
     font-size: $font-sm;
     height: 20px;
   }
+
+  &:deep(.shopping-list__ghost) {
+    opacity: 0;
+  }
+
+  &:deep(.shopping-list__drag-clone) {
+    pointer-events: none;
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    z-index: $layer-5;
+    box-shadow: $shadow-xs var(--shadow-color);
+    background-color: var(--surface-tetriary);
+    padding: $spacing-lg;
+    border-radius: $spacing-sm;
+
+    .shopping-item__buttons {
+      display: none;
+    }
+
+    .checkbox__input-wrapper {
+      display: none;
+    }
+  }
 }
 
 @media screen and (max-width: $screen-md) {

@@ -11,6 +11,7 @@ const state: () => ShoppingItemState = () => ({
   isSubmitting: false,
   isDeleting: false,
   webSocket: null,
+  isDragging: false,
 });
 
 const getters: GetterTree<ShoppingItemState, any> = {};
@@ -68,7 +69,6 @@ const actions: ActionTree<ShoppingItemState, any> = {
         item
       )
         .then(() => {
-          rootState.toastNotification.success("Zedytowano listę zakupów.");
           dispatch("sendWebSocketMessage");
           resolve();
         })
@@ -188,6 +188,10 @@ const mutations: MutationTree<ShoppingItemState> = {
 
   setWebSocket(state, webSocket: WebSocket) {
     state.webSocket = webSocket;
+  },
+
+  setIsDragging(state, isDragging: boolean) {
+    state.isDragging = isDragging;
   },
 };
 

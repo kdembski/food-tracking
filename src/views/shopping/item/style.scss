@@ -13,7 +13,7 @@
     gap: $spacing-xl;
     width: 100%;
 
-    *:last-child {
+    *:last-child:not(.shopping-item__buttons) {
       margin-left: auto;
     }
   }

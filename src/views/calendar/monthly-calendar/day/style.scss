@@ -70,10 +70,7 @@
     &:after {
       content: "";
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       background-color: color-mix(in srgb, var(--primary) 60%, $white);
       z-index: $layer-1;
     }

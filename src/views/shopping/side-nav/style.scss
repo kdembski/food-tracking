@@ -22,6 +22,7 @@
   }
 
   .item {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,8 +60,34 @@
     }
 
     &--active {
-      border-color: var(--primary);
+      border-color: rgba(var(--primary-rgb), 0.5);
       background-color: rgba(var(--primary-rgb), 0.12);
+
+      &.item--with-drop-overlay {
+        opacity: 0.4;
+      }
+
+      .item__drop-overlay {
+        background-color: transparentize($error, 0.5);
+        color: transparentize($error, 0.1);
+      }
+    }
+
+    &__drop-overlay {
+      position: absolute;
+      inset: -1px;
+      background-color: transparentize($success, 0.7);
+      color: transparentize($success, 0.3);
+      font-size: 34px;
+      border-radius: $radius-sm;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__dropzone {
+      position: absolute;
+      inset: -1px;
     }
   }
 }

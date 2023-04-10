@@ -1,9 +1,10 @@
 <script lang="ts">
 import CShoppingItem from "../../item/index.vue";
+import Draggable from "vuedraggable";
 
 export default {
   name: "ShoppingItems",
-  components: { CShoppingItem },
+  components: { CShoppingItem, Draggable },
 };
 </script>
 
@@ -12,6 +13,7 @@ import { computed, inject, Ref } from "vue";
 import { useStore } from "vuex";
 import { ShoppingItem } from "@/types/shopping/item";
 import { useShoppingHelpers } from "../../composables/helpers";
+import { useShoppingItemDraggableConfig } from "../../composables/draggable-config";
 
 const store = useStore();
 const props = defineProps<{
@@ -19,6 +21,8 @@ const props = defineProps<{
 }>();
 
 const { sumUpItemsWithSameIngredient } = useShoppingHelpers();
+const { config } = useShoppingItemDraggableConfig();
+
 const isSummedUpMode = inject<Ref<boolean>>("isSummedUpMode");
 
 const items = computed(() => {

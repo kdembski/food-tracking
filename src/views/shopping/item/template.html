@@ -26,8 +26,8 @@
             :isLoading="isDeletingItem"
           />
         </div>
-        <div>
-          <p v-if="item.amount">{{ item.amount }} {{ item.unitShortcut}}</p>
+        <div v-if="item.amount">
+          <p>{{ item.amount }} {{ item.unitShortcut}}</p>
         </div>
       </div>
     </template>

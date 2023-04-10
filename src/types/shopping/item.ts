@@ -24,6 +24,7 @@ export interface ShoppingItemState {
   isSubmitting: boolean;
   isDeleting: boolean;
   webSocket: WebSocket | null;
+  isDragging: boolean;
 }
 
 export interface RecipeShoppingItems {

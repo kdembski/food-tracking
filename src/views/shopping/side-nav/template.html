@@ -14,12 +14,15 @@
     <div
       v-for="item in items"
       class="shopping-side-nav__item item"
-      :class="{ 'item--active': isListActive(item.id) }"
+      :class="{ 'item--active': isListActive(item.id), 'item--with-drop-overlay': isDragging }"
       @click="emits('update:activeListId', item.id)"
+      @drop.prevent="onDrop($event, item, isListActive(item.id))"
+      @dragenter.prevent
+      @dragover.prevent
     >
       <div class="item__header">
         <p>{{ item.name }}</p>
-        <div v-if="!isListActive(item.id) ">
+        <div v-if="!isListActive(item.id)">
           <CButton
             color="secondary"
             variant="text"
@@ -38,6 +41,10 @@
       </div>
       <p v-if="item.count === 0" class="item__amount">pusto!</p>
       <p v-else class="item__amount">ilość produktów: {{ item.count }}</p>
+      <div v-if="isDragging" class="item__drop-overlay">
+        <FontAwesomeIcon v-if="isListActive(item.id)" icon="circle-xmark" />
+        <FontAwesomeIcon v-else icon="circle-down" />
+      </div>
     </div>
   </div>
 </div>
