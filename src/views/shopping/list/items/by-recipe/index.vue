@@ -12,7 +12,7 @@ export default {
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { RecipeShoppingItems, ShoppingItem } from "@/types/shopping/item";
-import { useShoppingHelpers } from "../../composables/helpers";
+import { useShoppingHelpers } from "../../../composables/helpers";
 
 const store = useStore();
 const props = defineProps<{

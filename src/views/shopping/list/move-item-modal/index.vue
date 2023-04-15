@@ -2,7 +2,7 @@
 import CInput from "@/components/controls/input/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
 import CButton from "@/components/controls/button/index.vue";
-import SelectShoppingList from "../select-list/index.vue";
+import SelectShoppingList from "../../select-list/index.vue";
 
 export default {
   name: "MoveShoppingItemModal",
@@ -20,7 +20,7 @@ import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { ShoppingItem, SummedUpShoppingItem } from "@/types/shopping/item";
 import { useToastNotification } from "@/composables/toast-notification";
-import { useShoppingHelpers } from "../composables/helpers";
+import { useShoppingHelpers } from "../../composables/helpers";
 import { ShoppingList } from "@/types/shopping/list";
 
 const { isSummedUpItem } = useShoppingHelpers();

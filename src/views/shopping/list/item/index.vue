@@ -12,7 +12,7 @@ export default {
 <script setup lang="ts">
 import { useStore } from "vuex";
 import { computed, inject, ref, Ref } from "vue";
-import { useShoppingHelpers } from "../composables/helpers";
+import { useShoppingHelpers } from "../../composables/helpers";
 import { ShoppingItem, SummedUpShoppingItem } from "@/types/shopping/item";
 import { useWindowSize } from "@/composables/window-size";
 import { DropdownOption } from "@/types/components/utils/dropdown";
