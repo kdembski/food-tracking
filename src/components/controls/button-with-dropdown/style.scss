@@ -1,4 +1,8 @@
 .button-with-dropdown {
   position: relative;
   display: inline-block;
+
+  &:deep(.dropdown) {
+    left: unset;
+  }
 }

@@ -28,7 +28,7 @@ const setOpen = (value: boolean) => {
 };
 
 const toggleOpen = () => {
-  isDropdownOpen.value = !isDropdownOpen.value;
+  setOpen(!isDropdownOpen.value);
 };
 </script>
 

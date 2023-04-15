@@ -3,7 +3,7 @@
     <div
       v-if="_isOpen"
       class="dropdown"
-      :class="getDropdownDirectionClass()"
+      :class="getDropdownClasses()"
       @mouseout="emitListMouseout()"
       ref="dropdown"
       v-click-away="onClickAway"
@@ -18,7 +18,7 @@
           v-for="(option, index) in options"
           class="dropdown__option option"
           @mouseover="emitOptionMouseover(index)"
-          @click="onOptionClick(option)"
+          @click.prevent="onOptionClick(option)"
           :class="getOptionClass(index)"
         >
           <div v-if="option.icon" class="option__icon">

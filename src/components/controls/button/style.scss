@@ -10,10 +10,11 @@
   flex: none;
   border: 1px solid transparent;
   transition: all 0.1s ease-in-out;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 
   &:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+    outline-color: var(--primary);
   }
 
   &--disabled {
@@ -49,7 +50,8 @@
         background-color: color-mix(in srgb, var(--primary) 90%, $white);
       }
 
-      &:active {
+      &:active,
+      &.button-active {
         background-color: color-mix(in srgb, var(--primary) 70%, $white);
       }
     }
@@ -64,7 +66,8 @@
         border-color: rgba(var(--primary-rgb), 0.4);
       }
 
-      &:active {
+      &:active,
+      &.button--active {
         background-color: rgba(var(--primary-rgb), 0.25);
         border-color: rgba(var(--primary-rgb), 0.5);
       }
@@ -84,7 +87,8 @@
         background-color: lighten($error, 7);
       }
 
-      &:active {
+      &:active,
+      &.button--active {
         background-color: lighten($error, 20);
       }
     }
@@ -99,7 +103,8 @@
         border-color: transparentize($error, 0.65);
       }
 
-      &:active {
+      &:active,
+      &.button--active {
         background-color: transparentize($error, 0.75);
         border-color: transparentize($error, 0.55);
       }
@@ -119,7 +124,8 @@
         background-color: lighten($secondary, 2);
       }
 
-      &:active {
+      &:active,
+      &.button--active {
         background-color: lighten($secondary, 15);
       }
     }
@@ -134,7 +140,8 @@
         border-color: rgba(var(--text-primary-rgb), 0.15);
       }
 
-      &:active {
+      &:active,
+      &.button--active {
         background-color: rgba(var(--text-primary-rgb), 0.2);
         border-color: rgba(var(--text-primary-rgb), 0.25);
       }
@@ -175,6 +182,7 @@
     background-color: transparent;
     padding: $spacing-md - 1 $spacing-md;
     border-radius: $radius-md;
+    outline-offset: -1px;
 
     .button__content {
       gap: $spacing-md;
@@ -184,12 +192,10 @@
       background-color: var(--text-button-hover-background);
     }
 
-    &:active {
+    &:active,
+    &.button--active {
       background-color: var(--text-button-active-background);
-    }
-
-    &:focus-visible {
-      outline-offset: -1px;
+      border-color: rgba(var(--text-primary-rgb), 0.15);
     }
   }
 

@@ -64,6 +64,12 @@ const { dropdownDirection } = useDropdownPosition(
   computed(() => props.isOpen)
 );
 
+const getDropdownClasses = () => {
+  const sizeClass = "dropdown--" + props.size;
+
+  return [sizeClass, getDropdownDirectionClass()];
+};
+
 const getDropdownDirectionClass = () => {
   if (!isMobile.value) {
     return "dropdown--" + dropdownDirection.value;

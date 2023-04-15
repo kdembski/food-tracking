@@ -60,6 +60,7 @@ import {
   faBan,
   faCircleDown,
   faCircleXmark,
+  faShuffle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -128,7 +129,8 @@ library.add(
   faSitemap,
   faBan,
   faCircleDown,
-  faCircleXmark
+  faCircleXmark,
+  faShuffle
 );
 
 export default FontAwesomeIcon;

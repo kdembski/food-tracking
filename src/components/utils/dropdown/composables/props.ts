@@ -7,6 +7,7 @@ interface DropdownProps {
   getOptionClass: () => string;
   searchPhrase: string;
   isLoading: boolean;
+  size: string;
 }
 
 export function useDropdownProps() {
@@ -39,6 +40,13 @@ export function useDropdownProps() {
       type: Function,
       default: null,
     },
+    size: {
+      type: String,
+      default: "large",
+      validator: (value: string) => {
+        return ["small", "medium", "large"].indexOf(value) !== -1;
+      },
+    },
   };
 
   const getDropdownProps = (props: DropdownProps): DropdownProps => {
@@ -49,6 +57,7 @@ export function useDropdownProps() {
       getOptionClass: props.getOptionClass,
       searchPhrase: props.searchPhrase,
       isLoading: props.isLoading,
+      size: props.size,
     };
   };
 
