@@ -1,0 +1,34 @@
+<div
+  v-if="!isLoadingLists"
+  class="select-shopping-list"
+  :style="`grid-template-columns: repeat(${columns}, 1fr)`"
+>
+  <div
+    v-for="list in lists"
+    class="select-shopping-list__item item"
+    :class="{ 'item--active': isListActive(list.id) }"
+    @click="activeListId = list.id"
+  >
+    <div class="item__header">
+      <p>{{ list.name }}</p>
+      <div v-if="!disableActions">
+        <CButton
+          color="secondary"
+          variant="text"
+          :size="isMobile ? 'medium' : 'small'"
+          icon="edit"
+          @click.stop="emits('editList', list.id)"
+        />
+        <CButton
+          color="error"
+          variant="text"
+          :size="isMobile ? 'medium' : 'small'"
+          icon="ban"
+        />
+      </div>
+    </div>
+    <p v-if="list.count === 0" class="item__amount">pusto!</p>
+    <p v-else class="item__amount">ilość produktów: {{ list.count }}</p>
+  </div>
+</div>
+<SelectShoppingListLoader v-else :columns="columns" />

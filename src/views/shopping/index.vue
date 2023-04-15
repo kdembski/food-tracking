@@ -11,7 +11,7 @@ export default {
 
 <script setup lang="ts">
 import { ShoppingList } from "@/types/shopping/list";
-import { computed, ComputedRef, onBeforeMount, ref } from "vue";
+import { computed, ComputedRef, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -26,11 +26,6 @@ const isLoadingShoppingLists = computed(
 const loadShoppingLists = () => {
   return store.dispatch("shopping/list/loadAll");
 };
-
-onBeforeMount(async () => {
-  await loadShoppingLists();
-  activeListId.value = shoppingLists.value?.[0].id;
-});
 
 const activeListId = ref<number>();
 const editedListId = ref<number>();

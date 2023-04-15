@@ -20,7 +20,11 @@ const getters: GetterTree<ShoppingListState, any> = {
 };
 
 const actions: ActionTree<ShoppingListState, any> = {
-  loadAll({ commit, dispatch }) {
+  loadAll({ commit, dispatch, state }) {
+    if (state.all) {
+      return;
+    }
+
     return new Promise<void>((resolve) => {
       commit("setIsLoadingAll", true);
 

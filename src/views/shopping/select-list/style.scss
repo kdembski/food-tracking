@@ -1,0 +1,49 @@
+.select-shopping-list {
+  display: grid;
+  gap: $spacing-lg;
+
+  .item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $spacing-lg;
+    padding: $spacing-xl $spacing-lg $spacing-xl $spacing-2xl;
+    border: 1px solid var(--border-color);
+    border-radius: $radius-sm;
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 25px;
+
+      > p {
+        font-size: $font-lg;
+        font-weight: $font-medium;
+      }
+
+      > div {
+        display: flex;
+        gap: $spacing-2xs;
+      }
+    }
+
+    &__amount {
+      font-size: $font-sm;
+      color: var(--text-secondary);
+    }
+
+    &:hover:not(.item--active) {
+      border-color: var(--border-active);
+      background-color: var(--surface-secondary);
+    }
+
+    &--active {
+      border-color: rgba(var(--primary-rgb), 0.15);
+      background-color: rgba(var(--primary-rgb), 0.12);
+    }
+  }
+}

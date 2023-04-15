@@ -24,13 +24,8 @@
     @include heading-2;
   }
 
+  &__owned-items,
   &:deep(.shopping-list__items) {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-xl;
-  }
-
-  &__owned-items {
     display: flex;
     flex-direction: column;
     gap: $spacing-2xl;
@@ -57,14 +52,9 @@
     height: 20px;
   }
 
-  &:deep(.shopping-list__ghost) {
-    opacity: 0;
-  }
-
-  &:deep(.shopping-list__drag-clone) {
+  &:deep(.shopping-list__dragged-item) {
     pointer-events: none;
     position: fixed;
-    opacity: 0;
     top: 0;
     left: 0;
     z-index: $layer-5;
@@ -95,12 +85,9 @@
       gap: $spacing-lg;
     }
 
+    &__owned-items,
     &:deep(.shopping-list__items) {
-      gap: $spacing-lg;
-    }
-
-    &__owned-items {
-      gap: $spacing-xl;
+      padding: $spacing-md 0;
     }
 
     &__owned-card {

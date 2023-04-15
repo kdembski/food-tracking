@@ -2,9 +2,7 @@
   @return red($color) + ", " + green($color) + ", " + blue($color);
 }
 
-:root,
-*:after,
-*:before {
+:root {
   --primary: #{$primary};
   --primary-rgb: #{toRGB($primary)};
 
@@ -35,34 +33,30 @@
   --text-button-active-background: #{$text-button-active-background-light};
 }
 
-[data-theme="dark"] {
-  &:root,
-  *:after,
-  *:before {
-    --surface-primary: #{$surface-darkest};
-    --surface-primary-rgb: #{toRGB($surface-darkest)};
-    --surface-secondary: #{$surface-darker};
-    --surface-secondary-rgb: #{toRGB($surface-darker)};
-    --surface-tetriary: #{$surface-dark};
+[data-theme="dark"]:root {
+  --surface-primary: #{$surface-darkest};
+  --surface-primary-rgb: #{toRGB($surface-darkest)};
+  --surface-secondary: #{$surface-darker};
+  --surface-secondary-rgb: #{toRGB($surface-darker)};
+  --surface-tetriary: #{$surface-dark};
 
-    --border-color: #{$border-darker};
-    --border-secondary: #{$border-darkest};
-    --border-active: #{$border-dark};
+  --border-color: #{$border-darker};
+  --border-secondary: #{$border-darkest};
+  --border-active: #{$border-dark};
 
-    --text-primary: #{$text-lightest};
-    --text-primary-rgb: #{toRGB($text-lightest)};
-    --text-secondary: #{$text-lighter};
-    --text-tetriary: #{$text-light};
+  --text-primary: #{$text-lightest};
+  --text-primary-rgb: #{toRGB($text-lightest)};
+  --text-secondary: #{$text-lighter};
+  --text-tetriary: #{$text-light};
 
-    --shadow-color: #{$shadow-dark};
+  --shadow-color: #{$shadow-dark};
 
-    --error-primary: #{$error-light};
-    --error-secondary: #{$error};
+  --error-primary: #{$error-light};
+  --error-secondary: #{$error};
 
-    --success-primary: #{$success-light};
-    --success-secondary: #{$success};
+  --success-primary: #{$success-light};
+  --success-secondary: #{$success};
 
-    --text-button-hover-background: #{$text-button-hover-background-dark};
-    --text-button-active-background: #{$text-button-active-background-dark};
-  }
+  --text-button-hover-background: #{$text-button-hover-background-dark};
+  --text-button-active-background: #{$text-button-active-background-dark};
 }

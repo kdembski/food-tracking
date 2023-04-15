@@ -1,35 +1,38 @@
 <script lang="ts">
 import CButton from "@/components/controls/button/index.vue";
-import Draggable from "vuedraggable";
+import SelectShoppingList from "../select-list/index.vue";
 
 export default {
   name: "ShoppingSideNav",
-  components: { CButton, Draggable },
+  components: { CButton, SelectShoppingList },
 };
 </script>
 
 <script setup lang="ts">
-import { ShoppingList } from "@/types/shopping/list";
 import { useStore } from "vuex";
+import { computed } from "vue";
 import { useWindowSize } from "@/composables/window-size";
-import { useShoppingItemDraggableConfig } from "../composables/draggable-config";
 
 const { isMobile } = useWindowSize();
-const { isDragging, onDrop } = useShoppingItemDraggableConfig();
 const store = useStore();
 
 const props = defineProps<{
-  items?: ShoppingList[];
   activeListId?: number;
 }>();
 
 const emits = defineEmits<{
-  (e: "update:activeListId", id: number): void;
-  (e: "editList", id: number): void;
+  (e: "update:activeListId", id?: number): void;
   (e: "addList"): void;
 }>();
 
-const isListActive = (id: number) => props.activeListId === id;
+const activeListId = computed({
+  get(): number | undefined {
+    return props.activeListId;
+  },
+  set(value?: number) {
+    emits("update:activeListId", value);
+  },
+});
 </script>
 
 <template src="./template.html"></template>

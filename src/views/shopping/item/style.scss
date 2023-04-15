@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  height: 20px;
 
   &:deep(.checkbox) {
     width: 100%;
@@ -12,24 +13,31 @@
     align-items: center;
     gap: $spacing-xl;
     width: 100%;
-
-    *:last-child:not(.shopping-item__buttons) {
-      margin-left: auto;
-    }
   }
 
-  &__buttons {
+  &__amount-wrapper {
     display: flex;
-    gap: $spacing-2xs;
+    align-items: center;
+    gap: $spacing-xl;
+    margin-left: auto;
   }
 
-  &:hover {
-    .shopping-item__buttons {
-      opacity: 1;
+  &__amount {
+    display: flex;
+    align-items: flex-end;
+    gap: $spacing-sm;
+
+    > span:last-child {
+      font-size: $font-sm;
     }
   }
 
-  &--grayed-out {
+  &--disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  &--crossed-out {
     opacity: 0.5;
 
     > * {

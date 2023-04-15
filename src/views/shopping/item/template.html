@@ -1,33 +1,28 @@
 <div
   class="shopping-item"
   :key="getItemKey(item)"
-  :class="{ 'shopping-item--grayed-out': grayedOut }"
+  :class="{ 
+    'shopping-item--crossed-out': isCrossedOut,
+    'shopping-item--disabled': isDisabled 
+  }"
 >
   <CCheckbox v-model="item.isChecked" @update:modelValue="handleChecking">
     <template #label>
       <div class="shopping-item__label">
         <p>{{ getItemName(item) }}</p>
-        <div class="shopping-item__buttons">
-          <CButton
-            v-if="!disableActions && !isSummedUpMode"
-            color="secondary"
-            variant="text"
-            icon="edit"
-            :size="isMobile ? 'medium' : 'small'"
-            @click.stop=""
-          />
-          <CButton
+        <div class="shopping-item__amount-wrapper">
+          <div v-if="item.amount" class="shopping-item__amount">
+            <span>{{ item.amount }}</span>
+            <span>{{ item.unitShortcut }}</span>
+          </div>
+          <CButtonWithDropdown
             v-if="!disableActions"
-            color="secondary"
+            :options="options"
+            icon="ellipsis-vertical"
             variant="text"
-            icon="trash-can"
-            :size="isMobile ? 'medium' : 'small'"
-            @click.stop="handleDeleting"
+            color="secondary"
             :isLoading="isDeletingItem"
           />
-        </div>
-        <div v-if="item.amount">
-          <p>{{ item.amount }} {{ item.unitShortcut}}</p>
         </div>
       </div>
     </template>

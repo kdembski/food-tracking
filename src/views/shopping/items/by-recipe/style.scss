@@ -1,7 +1,7 @@
 .shopping-items-by-recipe {
   display: flex;
   flex-direction: column;
-  gap: $spacing-3xl;
+  gap: $spacing-2xl;
 
   .item {
     &__header-wrapper {
@@ -33,7 +33,7 @@
 
 @media screen and (max-width: $screen-md) {
   .shopping-items-by-recipe {
-    gap: $spacing-2xl;
+    gap: $spacing-xl;
 
     .item {
       &__header-wrapper {

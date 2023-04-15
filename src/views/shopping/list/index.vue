@@ -8,6 +8,7 @@ import ShoppingItemsByRecipe from "../items/by-recipe/index.vue";
 import ShoppingItemsByCategory from "../items/by-category/index.vue";
 import CShoppingItem from "../item/index.vue";
 import AddItem from "../add-item/index.vue";
+import MoveShoppingItemModal from "../move-item-modal/index.vue";
 
 export default {
   name: "ShoppingList",
@@ -21,6 +22,7 @@ export default {
     ShoppingItemsByCategory,
     CShoppingItem,
     AddItem,
+    MoveShoppingItemModal,
   },
 };
 </script>

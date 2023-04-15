@@ -1,0 +1,24 @@
+<CModal
+  v-model:isOpen="isOpen"
+  title="Przenieś przedmiot do innej listy"
+  submitButtonLabel="Przenieś"
+  :isSubmitting="isSubmitting"
+  @submit="onSubmit"
+>
+  <div class="move-shopping-item-modal">
+    <p class="move-shopping-item-modal__heading">
+      Wybierz gdzie chcesz przenieść
+      <span>
+        {{ itemToMove?.ingredientName || itemToMove?.customItemName }} {{
+        itemToMove?.amount }} {{ itemToMove?.amount ? itemToMove?.unitShortcut :
+        '' }}
+      </span>
+    </p>
+    <SelectShoppingList
+      v-model:activeListId="selectedListId"
+      :excludedListIds="[currentList.id]"
+      :columns="2"
+      disableActions
+    />
+  </div>
+</CModal>

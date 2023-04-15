@@ -1,7 +1,7 @@
 .shopping-items-by-category {
   display: flex;
   flex-direction: column;
-  gap: $spacing-3xl;
+  gap: $spacing-2xl;
 
   p {
     font-size: $font-sm;
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: $screen-md) {
   .shopping-items-by-category {
-    gap: $spacing-2xl;
+    gap: $spacing-xl;
 
     p {
       margin-bottom: $spacing-xl;

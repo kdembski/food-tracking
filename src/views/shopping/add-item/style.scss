@@ -19,12 +19,13 @@
     left: 0;
     right: 0;
     z-index: $layer-4 + 2;
-    background-color: var(--surface-secondary);
+    background-color: var(--surface-primary);
     height: 64px;
     padding: 0 $spacing-lg;
-    transform: translateY(100%);
+    transform: translateY(105%);
     transition: 0.1s ease-in-out;
     border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 4px 0 var(--shadow-color);
 
     &--mobile-active {
       transform: translateY(0);

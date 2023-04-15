@@ -1,0 +1,12 @@
+.move-shopping-item-modal {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+
+  &__heading {
+    span {
+      color: var(--primary);
+      font-weight: $font-bold;
+    }
+  }
+}

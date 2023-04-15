@@ -2,16 +2,14 @@
   <header class="shopping__header">
     <h1>Zakupy</h1>
   </header>
-  <div v-if="!isLoadingShoppingLists" class="shopping__body">
-    <CShoppingList :list="activeList" @editList="editList" />
+  <div class="shopping__body">
+    <CShoppingList v-if="activeList" :list="activeList" @editList="editList" />
     <SideNav
-      :items="shoppingLists"
       v-model:activeListId="activeListId"
       @editList="editList"
       @addList="editList"
     />
   </div>
-  <div v-else>loading</div>
 </div>
 <EditListModal
   v-model:isOpen="isEditListModalOpen"

@@ -53,9 +53,10 @@
       <CShoppingItem
         v-for="item in ownedItems"
         :item="item"
-        grayedOut
+        isCrossedOut
         disableActions
       />
     </div>
   </CCard>
 </div>
+<MoveShoppingItemModal />

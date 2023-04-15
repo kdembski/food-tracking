@@ -11,7 +11,7 @@ const state: () => ShoppingItemState = () => ({
   isSubmitting: false,
   isDeleting: false,
   webSocket: null,
-  isDragging: false,
+  itemToMove: null,
 });
 
 const getters: GetterTree<ShoppingItemState, any> = {};
@@ -190,8 +190,8 @@ const mutations: MutationTree<ShoppingItemState> = {
     state.webSocket = webSocket;
   },
 
-  setIsDragging(state, isDragging: boolean) {
-    state.isDragging = isDragging;
+  setItemToMove(state, itemToMove: ShoppingItem | null) {
+    state.itemToMove = itemToMove;
   },
 };
 
