@@ -90,10 +90,11 @@ $optionPadding: $spacing-xl;
 @media screen and (min-width: $screen-md) {
   .dropdown {
     &--medium {
+      padding: $spacing-sm 0;
+
       .dropdown__option {
         padding: $spacing-lg;
         gap: $spacing-lg;
-        font-size: $font-sm;
 
         .option__icon {
           min-width: 18px;

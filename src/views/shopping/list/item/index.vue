@@ -12,14 +12,15 @@ export default {
 <script setup lang="ts">
 import { useStore } from "vuex";
 import { computed, inject, ref, Ref } from "vue";
-import { useShoppingHelpers } from "../../composables/helpers";
 import { ShoppingItem, SummedUpShoppingItem } from "@/types/shopping/item";
 import { useWindowSize } from "@/composables/window-size";
 import { DropdownOption } from "@/types/components/utils/dropdown";
-import { useToastNotification } from "@/composables/toast-notification";
+import { useShoppingHelpers } from "../../composables/helpers";
+import { useShoppingItemDelete } from "./composables/delete";
 
+const { isSummedUpItem } = useShoppingHelpers();
+const { isMobile } = useWindowSize();
 const store = useStore();
-const toastNotification = useToastNotification();
 
 const props = withDefaults(
   defineProps<{
@@ -31,10 +32,7 @@ const props = withDefaults(
   { disableActions: false, isCrossedOut: false, isDisabled: false }
 );
 
-const { isSummedUpItem } = useShoppingHelpers();
-const { isMobile } = useWindowSize();
 const isSummedUpMode = inject<Ref<boolean>>("isSummedUpMode");
-const isDeletingItem = ref(false);
 const isDisabled = computed(() => props.isDisabled || isDeletingItem.value);
 
 const getItemName = (item: ShoppingItem | SummedUpShoppingItem) => {
@@ -61,42 +59,13 @@ const handleChecking = async (value: boolean) => {
   });
 };
 
-const handleDeleting = async () => {
-  isDeletingItem.value = true;
-
-  if (!isSummedUpItem(props.item)) {
-    await deleteItem(props.item);
-    afterDelete();
-    return;
-  }
-
-  await deleteSummedUpItem(props.item);
-  afterDelete();
-};
-
-const deleteItem = (item: ShoppingItem) => {
-  if (item.isChecked) {
-    return store.dispatch("shopping/item/updateIsRemoved", item);
-  }
-
-  return store.dispatch("shopping/item/delete", item.id);
-};
-
-const deleteSummedUpItem = async (item: SummedUpShoppingItem) => {
-  const promises = item.items.map((item) => {
-    return deleteItem(item);
-  });
-  await Promise.all(promises);
-};
-
-const afterDelete = () => {
-  isDeletingItem.value = false;
-  toastNotification.success("Usunięto przedmiot z listy zakupów.");
-};
-
 const openMoveItemModal = () => {
   store.commit("shopping/item/setItemToMove", props.item);
 };
+
+const { isDeletingItem, handleDeleting } = useShoppingItemDelete(
+  computed(() => props.item)
+);
 
 const options: Ref<DropdownOption[]> = ref([
   {

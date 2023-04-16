@@ -38,17 +38,15 @@
       justify-content: center;
       padding: $spacing-lg;
       width: 100%;
-      cursor: pointer;
-      border-radius: $radius-sm;
+      @include clickableTile;
 
       &:hover {
-        background-color: var(--surface-secondary);
+        @include clickableTileHover;
       }
     }
 
     > input:checked + label {
-      background-color: rgba(var(--primary-rgb), 0.12);
-      box-shadow: $shadow-sm var(--shadow-color);
+      @include clickableTileActive;
     }
   }
 }

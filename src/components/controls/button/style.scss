@@ -47,12 +47,12 @@
       background-color: var(--primary);
 
       &:hover {
-        background-color: color-mix(in srgb, var(--primary) 90%, $white);
+        background-color: color-mix(in srgb, var(--primary) 80%, $white);
       }
 
       &:active,
       &.button-active {
-        background-color: color-mix(in srgb, var(--primary) 70%, $white);
+        background-color: color-mix(in srgb, var(--primary) 60%, $white);
       }
     }
 
@@ -62,13 +62,13 @@
       border-color: rgba(var(--primary-rgb), 0.3);
 
       &:hover {
-        background-color: rgba(var(--primary-rgb), 0.15);
+        background-color: rgba(var(--primary-rgb), 0.2);
         border-color: rgba(var(--primary-rgb), 0.4);
       }
 
       &:active,
       &.button--active {
-        background-color: rgba(var(--primary-rgb), 0.25);
+        background-color: rgba(var(--primary-rgb), 0.3);
         border-color: rgba(var(--primary-rgb), 0.5);
       }
     }
@@ -84,12 +84,12 @@
       background-color: $error;
 
       &:hover {
-        background-color: lighten($error, 7);
+        background-color: lighten($error, 8);
       }
 
       &:active,
       &.button--active {
-        background-color: lighten($error, 20);
+        background-color: lighten($error, 18);
       }
     }
 
@@ -99,14 +99,14 @@
       border-color: transparentize($error, 0.75);
 
       &:hover {
-        background-color: transparentize($error, 0.85);
-        border-color: transparentize($error, 0.65);
+        background-color: transparentize($error, 0.8);
+        border-color: transparentize($error, 0.6);
       }
 
       &:active,
       &.button--active {
-        background-color: transparentize($error, 0.75);
-        border-color: transparentize($error, 0.55);
+        background-color: transparentize($error, 0.7);
+        border-color: transparentize($error, 0.5);
       }
     }
   }

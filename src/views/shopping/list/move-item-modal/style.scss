@@ -1,7 +1,8 @@
 .move-shopping-item-modal {
   display: flex;
   flex-direction: column;
-  gap: $spacing-2xl;
+  gap: $spacing-xl;
+  padding: 0 $spacing-2xs;
 
   &__heading {
     span {

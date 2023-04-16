@@ -9,10 +9,7 @@
     justify-content: center;
     gap: $spacing-lg;
     padding: $spacing-xl $spacing-lg $spacing-xl $spacing-2xl;
-    border: 1px solid var(--border-color);
-    border-radius: $radius-sm;
-    transition: 0.1s ease-in-out;
-    cursor: pointer;
+    @include outlinedClickableTile;
 
     &__header {
       display: flex;
@@ -37,13 +34,11 @@
     }
 
     &:hover:not(.item--active) {
-      border-color: var(--border-active);
-      background-color: var(--surface-secondary);
+      @include outlinedClickableTileHover;
     }
 
     &--active {
-      border-color: rgba(var(--primary-rgb), 0.15);
-      background-color: rgba(var(--primary-rgb), 0.12);
+      @include outlinedClickableTileActive;
     }
   }
 }

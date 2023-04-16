@@ -25,3 +25,34 @@
   letter-spacing: 1px;
   font-weight: $font-bold;
 }
+
+@mixin clickableTile {
+  border-radius: $radius-sm;
+  transition: 0.1s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+}
+
+@mixin clickableTileHover {
+  background-color: var(--surface-secondary);
+}
+
+@mixin clickableTileActive {
+  background-color: rgba(var(--primary-rgb), 0.15);
+  box-shadow: $shadow-sm var(--shadow-color);
+}
+
+@mixin outlinedClickableTile {
+  @include clickableTile;
+  border: 1px solid var(--border-color);
+}
+
+@mixin outlinedClickableTileHover {
+  @include clickableTileHover;
+  border-color: var(--border-active);
+}
+
+@mixin outlinedClickableTileActive {
+  @include clickableTileActive;
+  border-color: rgba(var(--primary-rgb), 0.3);
+}

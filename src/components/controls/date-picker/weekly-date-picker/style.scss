@@ -15,10 +15,8 @@
       justify-content: center;
       padding: $spacing-2xl $spacing-lg;
       width: 100%;
-      cursor: pointer;
-      border-radius: $radius-md;
       gap: $spacing-lg;
-      border: 1px solid var(--border-color);
+      @include outlinedClickableTile;
 
       & > p:first-child {
         font-size: $font-xl;
@@ -29,15 +27,12 @@
       }
 
       &:hover {
-        background-color: var(--surface-secondary);
-        border-color: var(--border-active);
+        @include outlinedClickableTileHover;
       }
     }
 
     > input:checked + label {
-      background-color: rgba(var(--primary-rgb), 0.12);
-      box-shadow: $shadow-sm var(--shadow-color);
-      border-color: rgba(var(--primary-rgb), 0.15);
+      @include outlinedClickableTileActive;
     }
 
     &--today {
