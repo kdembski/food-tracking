@@ -65,11 +65,22 @@ const handleSizeOnMobile = (size: string): string => {
 };
 
 const getLoaderSize = (): number => {
+  const size = handleSizeOnMobile(props.size);
+
   if (!props.label) {
-    return 20;
+    switch (size) {
+      case "small":
+        return 18;
+      case "medium":
+        return 20;
+      case "large":
+        return 22;
+      default:
+        return 20;
+    }
   }
 
-  switch (handleSizeOnMobile(props.size)) {
+  switch (size) {
     case "small":
       return 20;
     case "medium":

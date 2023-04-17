@@ -33,7 +33,7 @@ const selectedList = computed<ShoppingList>(() =>
   store.getters["shopping/list/getById"](selectedListId.value)
 );
 const currentList = computed<ShoppingList>(() => {
-  const currentListId = store.state.shopping.item.shoppingListId;
+  const currentListId = store.state.shopping.item.currentListId;
   return store.getters["shopping/list/getById"](currentListId);
 });
 

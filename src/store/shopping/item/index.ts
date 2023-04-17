@@ -3,10 +3,11 @@ import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosError, AxiosResponse } from "axios";
 import { ShoppingItem, ShoppingItemState } from "@/types/shopping/item";
+import { ShoppingList } from "@/types/shopping/list";
 
 const state: () => ShoppingItemState = () => ({
   collection: null,
-  shoppingListId: null,
+  currentListId: null,
   isLoadingCollection: false,
   isSubmitting: false,
   isDeleting: false,
@@ -29,7 +30,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
       )
         .then((response: AxiosResponse<ShoppingItem[]>) => {
           commit("setCollection", response.data);
-          commit("setShoppingListId", shoppingListId);
+          commit("setCurrentListId", shoppingListId);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -41,13 +42,21 @@ const actions: ActionTree<ShoppingItemState, any> = {
     });
   },
 
-  create({ commit, dispatch, rootState }, item: ShoppingItem) {
+  create(
+    { commit, dispatch, state, rootState, rootGetters },
+    item: ShoppingItem
+  ) {
     return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/shopping/items", item)
         .then(() => {
           rootState.toastNotification.success("Dodano do listy zakupów.");
+          const list: ShoppingList = rootGetters["shopping/list/getById"](
+            state.currentListId
+          );
+          list.count++;
+
           dispatch("sendWebSocketMessage");
           resolve();
         })
@@ -119,7 +128,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
     });
   },
 
-  delete({ commit, dispatch, rootState }, itemId: number) {
+  delete({ commit, dispatch, state, rootGetters }, itemId: number) {
     return new Promise<void>((resolve) => {
       commit("setIsDeleting", true);
 
@@ -127,6 +136,11 @@ const actions: ActionTree<ShoppingItemState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/shopping/items/" + itemId
       )
         .then(() => {
+          const list: ShoppingList = rootGetters["shopping/list/getById"](
+            state.currentListId
+          );
+          list.count--;
+
           dispatch("sendWebSocketMessage");
           resolve();
         })
@@ -150,7 +164,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
       const { listId, items }: { listId: string; items: ShoppingItem[] } =
         JSON.parse(event.data.toString());
 
-      if (parseInt(listId) !== state.shoppingListId) {
+      if (parseInt(listId) !== state.currentListId) {
         return;
       }
       commit("setCollection", items);
@@ -158,10 +172,10 @@ const actions: ActionTree<ShoppingItemState, any> = {
   },
 
   sendWebSocketMessage({ state }) {
-    if (!state.shoppingListId) {
+    if (!state.currentListId) {
       return;
     }
-    state.webSocket?.send(state.shoppingListId.toString());
+    state.webSocket?.send(state.currentListId.toString());
   },
 };
 
@@ -170,8 +184,8 @@ const mutations: MutationTree<ShoppingItemState> = {
     state.collection = collection;
   },
 
-  setShoppingListId(state, id: number) {
-    state.shoppingListId = id;
+  setCurrentListId(state, id: number) {
+    state.currentListId = id;
   },
 
   setIsLoadingCollection(state, value) {

@@ -11,7 +11,7 @@ export default {
 
 <script setup lang="ts">
 import { ShoppingList } from "@/types/shopping/list";
-import { computed, ComputedRef, ref } from "vue";
+import { computed, ComputedRef, onBeforeUnmount, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -39,6 +39,10 @@ const editList = (id?: number) => {
   editedListId.value = id;
   isEditListModalOpen.value = true;
 };
+
+onBeforeUnmount(() => {
+  store.commit("shopping/list/setAll", null);
+});
 </script>
 
 <template src="./template.html"></template>

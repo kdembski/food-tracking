@@ -28,7 +28,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ShoppingList, ShoppingListNavItems } from "@/types/shopping/list";
 import {
   computed,
   ComputedRef,
@@ -39,12 +38,14 @@ import {
   WritableComputedRef,
 } from "vue";
 import { useStore } from "vuex";
+import { ShoppingList } from "@/types/shopping/list";
 import { ShoppingItem } from "@/types/shopping/item";
 import { useShoppingHelpers } from "../composables/helpers";
 import { useWindowSize } from "@/composables/window-size";
+import { useShoppingListNavigationTabs } from "./composables/tabs";
 
-const { isMobile } = useWindowSize();
 const store = useStore();
+const { isMobile } = useWindowSize();
 
 const props = defineProps<{
   list: ShoppingList;
@@ -54,25 +55,17 @@ const emits = defineEmits<{
   (e: "editList", id: number): void;
 }>();
 
-const isClearingList = computed(
-  () => store.state.shopping.list.isDeletingItems
-);
-const tabs = [
-  { code: ShoppingListNavItems.DEFAULT, label: "Bez podziału" },
-  { code: ShoppingListNavItems.BY_RECIPE, label: "Według przepisów" },
-  { code: ShoppingListNavItems.BY_CATEGORY, label: "Według kategorii" },
-];
-const selectedTab = ref(ShoppingListNavItems.DEFAULT);
-const isSummedUpMode = ref(true);
-provide("isSummedUpMode", isSummedUpMode);
 const { sumUpItemsWithSameIngredient } = useShoppingHelpers();
+const {
+  selectedTab,
+  tabs,
+  isDefaultSelected,
+  isByCategorySelected,
+  isByRecipeSelected,
+} = useShoppingListNavigationTabs();
 
-const isDefaultSelected = () =>
-  selectedTab.value === ShoppingListNavItems.DEFAULT;
-const isByRecipeSelected = () =>
-  selectedTab.value === ShoppingListNavItems.BY_RECIPE;
-const isByCategorySelected = () =>
-  selectedTab.value === ShoppingListNavItems.BY_CATEGORY;
+const isSummedUpMode = ref(true);
+const isClearingList = ref(false);
 
 const items: WritableComputedRef<ShoppingItem[]> = computed({
   get(): ShoppingItem[] {
@@ -98,41 +91,11 @@ const addItemToList = (item: ShoppingItem) => {
   items.value = items.value.concat(item);
 };
 
-const clearList = () => {
-  store.dispatch("shopping/list/removeItems", props.list.id).then(() => {
-    store.commit("shopping/item/setCollection", []);
-  });
+const clearList = async () => {
+  isClearingList.value = true;
+  await store.dispatch("shopping/list/removeItems", props.list.id);
+  isClearingList.value = false;
 };
-
-const loadShoppingItems = () => {
-  store.dispatch("shopping/item/loadCollection", props.list.id);
-};
-
-const loadRecipeOptions = () => {
-  store.dispatch("recipe/loadOptions");
-};
-
-const loadIngredientCategoryOptions = () => {
-  store.dispatch("ingredient/category/loadOptions");
-};
-
-const initShoppingItemsWebSocket = () => {
-  store.dispatch("shopping/item/initWebSocket");
-};
-
-onBeforeMount(() => {
-  loadShoppingItems();
-  loadRecipeOptions();
-  loadIngredientCategoryOptions();
-  initShoppingItemsWebSocket();
-});
-
-watch(
-  () => props.list.id,
-  () => {
-    loadShoppingItems();
-  }
-);
 
 const getSummedUpModeButtonLabel = () => {
   if (isMobile.value) {
@@ -143,6 +106,26 @@ const getSummedUpModeButtonLabel = () => {
   }
   return "Połącz";
 };
+
+const loadShoppingItems = () => {
+  store.dispatch("shopping/item/loadCollection", props.list.id);
+};
+
+watch(
+  () => props.list.id,
+  () => {
+    loadShoppingItems();
+  }
+);
+
+onBeforeMount(() => {
+  loadShoppingItems();
+  store.dispatch("recipe/loadOptions");
+  store.dispatch("ingredient/category/loadOptions");
+  store.dispatch("shopping/item/initWebSocket");
+});
+
+provide("isSummedUpMode", isSummedUpMode);
 </script>
 
 <template src="./template.html"></template>

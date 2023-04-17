@@ -9,7 +9,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ComputedRef, computed, onBeforeMount } from "vue";
+import { ComputedRef, computed, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
 import { ShoppingList } from "@/types/shopping/list";
 import { useWindowSize } from "@/composables/window-size";
@@ -32,6 +32,8 @@ const emits = defineEmits<{
   (e: "editList", id: number): void;
 }>();
 
+const isClearingList = ref<Record<number, boolean>>({});
+
 const activeListId = computed({
   get(): number | undefined {
     return props.activeListId;
@@ -48,6 +50,11 @@ const lists: ComputedRef<ShoppingList[] | undefined> = computed(() => {
   return all?.filter((list) => !props.excludedListIds?.includes(list.id));
 });
 
+const clearList = async (id: number) => {
+  isClearingList.value[id] = true;
+  await store.dispatch("shopping/list/removeItems", id);
+  isClearingList.value[id] = false;
+};
 const loadShoppingLists = () => {
   return store.dispatch("shopping/list/loadAll");
 };

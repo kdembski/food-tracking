@@ -9,7 +9,7 @@
   justify-content: center;
   flex: none;
   border: 1px solid transparent;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.05s ease-in-out;
   outline: 2px solid transparent;
   outline-offset: 2px;
 
@@ -47,12 +47,12 @@
       background-color: var(--primary);
 
       &:hover {
-        background-color: color-mix(in srgb, var(--primary) 80%, $white);
+        background-color: color-mix(in srgb, var(--primary) 85%, $white);
       }
 
       &:active,
       &.button-active {
-        background-color: color-mix(in srgb, var(--primary) 60%, $white);
+        background-color: color-mix(in srgb, var(--primary) 70%, $white);
       }
     }
 
@@ -62,14 +62,14 @@
       border-color: rgba(var(--primary-rgb), 0.3);
 
       &:hover {
-        background-color: rgba(var(--primary-rgb), 0.2);
-        border-color: rgba(var(--primary-rgb), 0.4);
+        background-color: rgba(var(--primary-rgb), 0.18);
+        border-color: rgba(var(--primary-rgb), 0.38);
       }
 
       &:active,
       &.button--active {
-        background-color: rgba(var(--primary-rgb), 0.3);
-        border-color: rgba(var(--primary-rgb), 0.5);
+        background-color: rgba(var(--primary-rgb), 0.28);
+        border-color: rgba(var(--primary-rgb), 0.48);
       }
     }
   }
@@ -99,14 +99,14 @@
       border-color: transparentize($error, 0.75);
 
       &:hover {
-        background-color: transparentize($error, 0.8);
-        border-color: transparentize($error, 0.6);
+        background-color: transparentize($error, 0.83);
+        border-color: transparentize($error, 0.63);
       }
 
       &:active,
       &.button--active {
-        background-color: transparentize($error, 0.7);
-        border-color: transparentize($error, 0.5);
+        background-color: transparentize($error, 0.73);
+        border-color: transparentize($error, 0.53);
       }
     }
   }

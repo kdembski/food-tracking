@@ -24,6 +24,8 @@
           variant="text"
           :size="isMobile ? 'medium' : 'small'"
           icon="ban"
+          @click.stop="clearList(list.id)"
+          :isLoading="isClearingList[list.id]"
         />
       </div>
     </div>

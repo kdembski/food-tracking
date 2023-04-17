@@ -51,7 +51,7 @@ $mobileSectionHeight: 60px;
   }
 
   &__footer {
-    height: $sectionHeight;
+    height: $sectionHeight + 5px;
     padding: $sectionPadding;
     border-top: 1px solid var(--border-color);
     display: flex;
@@ -95,7 +95,7 @@ $mobileSectionHeight: 60px;
 
     &__footer {
       padding: $mobileSectionPadding;
-      height: $sectionHeight;
+      height: $mobileSectionHeight;
     }
   }
 }
