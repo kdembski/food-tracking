@@ -35,7 +35,8 @@
   </div>
   <CCard variant="contained">
     <CHorizontalTabs v-model="selectedTab" :items="tabs" />
-    <template v-if="items?.length > 0">
+    <ShoppingListLoader v-if="isLoadingItems" />
+    <template v-else-if="items?.length > 0">
       <ShoppingItems v-if="isDefaultSelected()" :items="items" />
       <ShoppingItemsByRecipe v-if="isByRecipeSelected()" :items="items" />
       <ShoppingItemsByCategory v-if="isByCategorySelected()" :items="items" />

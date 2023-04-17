@@ -2,10 +2,11 @@
 import CShoppingList from "./list/index.vue";
 import SideNav from "./side-nav/index.vue";
 import EditListModal from "./list/edit-modal/index.vue";
+import ShoppingLoader from "./loader/index.vue";
 
 export default {
   name: "ShoppingView",
-  components: { CShoppingList, SideNav, EditListModal },
+  components: { CShoppingList, SideNav, EditListModal, ShoppingLoader },
 };
 </script>
 

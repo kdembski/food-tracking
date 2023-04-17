@@ -3,7 +3,12 @@
     <h1>Zakupy</h1>
   </header>
   <div class="shopping__body">
-    <CShoppingList v-if="activeList" :list="activeList" @editList="editList" />
+    <CShoppingList
+      v-if="activeList && !isLoadingShoppingLists"
+      :list="activeList"
+      @editList="editList"
+    />
+    <ShoppingLoader v-else />
     <SideNav
       v-model:activeListId="activeListId"
       @editList="editList"

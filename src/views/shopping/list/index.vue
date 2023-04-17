@@ -9,6 +9,7 @@ import ShoppingItemsByCategory from "./items/by-category/index.vue";
 import CShoppingItem from "./item/index.vue";
 import AddItem from "../add-item/index.vue";
 import MoveShoppingItemModal from "./move-item-modal/index.vue";
+import ShoppingListLoader from "./loader/index.vue";
 
 export default {
   name: "ShoppingList",
@@ -23,6 +24,7 @@ export default {
     CShoppingItem,
     AddItem,
     MoveShoppingItemModal,
+    ShoppingListLoader,
   },
 };
 </script>
@@ -66,6 +68,9 @@ const {
 
 const isSummedUpMode = ref(true);
 const isClearingList = ref(false);
+const isLoadingItems = computed(
+  () => store.state.shopping.item.isLoadingCollection
+);
 
 const items: WritableComputedRef<ShoppingItem[]> = computed({
   get(): ShoppingItem[] {

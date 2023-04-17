@@ -153,7 +153,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
     });
   },
 
-  initWebSocket({ commit, state }) {
+  initWebSocket({ commit, rootGetters, state }) {
     const url =
       process.env.VUE_APP_SERVICE_URL?.replace("http", "ws") +
       "/shopping/items";
@@ -168,6 +168,11 @@ const actions: ActionTree<ShoppingItemState, any> = {
         return;
       }
       commit("setCollection", items);
+
+      const list: ShoppingList = rootGetters["shopping/list/getById"](
+        state.currentListId
+      );
+      list.count = items.length;
     });
   },
 

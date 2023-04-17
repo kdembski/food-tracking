@@ -1,6 +1,7 @@
 .select-shopping-list-loader {
   display: grid;
   gap: $spacing-lg;
+  height: unset;
 
   > div {
     height: 88px;

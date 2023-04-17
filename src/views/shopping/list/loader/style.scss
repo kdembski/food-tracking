@@ -1,0 +1,36 @@
+.shopping-list-loader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+
+    .skeleton-loader__item {
+      &:nth-child(1) {
+        height: 25px;
+        width: 25px;
+      }
+
+      &:nth-child(2) {
+        height: 18px;
+        width: 40%;
+      }
+
+      &:nth-child(3) {
+        height: 18px;
+        width: 15%;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+  .shopping-list-loader {
+    display: flex;
+    gap: $spacing-xl;
+  }
+}
