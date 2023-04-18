@@ -119,7 +119,7 @@ const actions: ActionTree<ShoppingListState, any> = {
     });
   },
 
-  removeItems({ commit, dispatch, rootState, getters }, itemId: number) {
+  removeItems({ commit, dispatch, rootState }, itemId: number) {
     return new Promise<void>((resolve) => {
       commit("setIsDeletingItems", true);
 
@@ -127,11 +127,10 @@ const actions: ActionTree<ShoppingListState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/shopping/lists/" + itemId + "/items"
       )
         .then(() => {
-          dispatch("shopping/item/sendWebSocketMessage", null, {
+          dispatch("shopping/item/sendWebSocketMessage", true, {
             root: true,
           });
-          const list: ShoppingList = getters.getById(itemId);
-          list.count = 0;
+          dispatch("updateCount", { listId: itemId, amount: 0 });
 
           rootState.toastNotification.success("Wyczyszczono listę zakupów.");
           resolve();
@@ -143,6 +142,11 @@ const actions: ActionTree<ShoppingListState, any> = {
           commit("setIsDeletingItems", false);
         });
     });
+  },
+
+  updateCount({ getters }, { listId, amount }) {
+    const list: ShoppingList = getters.getById(listId);
+    list.count = amount;
   },
 };
 

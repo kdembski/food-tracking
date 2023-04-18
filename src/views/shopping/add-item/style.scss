@@ -24,7 +24,7 @@
     padding: 0 $spacing-lg;
     transform: translateY(105%);
     transition: 0.1s ease-in-out;
-    box-shadow: 0 -2px 4px 0 var(--shadow-color);
+    box-shadow: 0 0 6px 0 var(--shadow-color);
 
     &--mobile-active {
       transform: translateY(0);

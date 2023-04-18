@@ -23,8 +23,8 @@ export interface ShoppingItemState {
   isLoadingCollection: boolean;
   isSubmitting: boolean;
   isDeleting: boolean;
-  webSocket: WebSocket | null;
   itemToMove: ShoppingItem | null;
+  webSocket: WebSocket | null;
 }
 
 export interface RecipeShoppingItems {
@@ -57,10 +57,4 @@ export enum AddedItemOptionType {
 export interface SelectedShoppingItem {
   id: number;
   type: AddedItemOptionType;
-}
-
-export interface DraggableEventConfig {
-  target: HTMLElement;
-  x: number;
-  y: number;
 }

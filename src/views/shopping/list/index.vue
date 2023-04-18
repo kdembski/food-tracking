@@ -38,6 +38,7 @@ import {
   provide,
   watch,
   WritableComputedRef,
+  onBeforeUnmount,
 } from "vue";
 import { useStore } from "vuex";
 import { ShoppingList } from "@/types/shopping/list";
@@ -92,10 +93,6 @@ const ownedItems: ComputedRef<ShoppingItem[]> = computed(() => {
   return ownedItems;
 });
 
-const addItemToList = (item: ShoppingItem) => {
-  items.value = items.value.concat(item);
-};
-
 const clearList = async () => {
   isClearingList.value = true;
   await store.dispatch("shopping/list/removeItems", props.list.id);
@@ -128,6 +125,10 @@ onBeforeMount(() => {
   store.dispatch("recipe/loadOptions");
   store.dispatch("ingredient/category/loadOptions");
   store.dispatch("shopping/item/initWebSocket");
+});
+
+onBeforeUnmount(() => {
+  store.commit("shopping/item/closeWebSocket");
 });
 
 provide("isSummedUpMode", isSummedUpMode);

@@ -21,17 +21,12 @@ import { useStore } from "vuex";
 import { IngredientUnitDetails } from "@/types/ingredients/ingredient";
 import { useAddShoppingItem } from "./composables/item";
 import { useAddShoppingItemOptions } from "./composables/options";
-import { ShoppingItem } from "@/types/shopping/item";
 import { useMobileAddShoppingItemPanel } from "./composables/mobile-panel";
 
 const store = useStore();
 
 const props = defineProps<{
   listId: number;
-}>();
-
-const emits = defineEmits<{
-  (e: "itemAdded", item: Partial<ShoppingItem>): void;
 }>();
 
 const amount = ref<number>();
@@ -55,12 +50,8 @@ const getAmountPlaceholder = () => {
 const onSubmit = () => {
   isSubmitting.value = true;
   addItem()
-    .then(async (item) => {
+    .then(async () => {
       clearInputValues();
-
-      if (item) {
-        emits("itemAdded", item);
-      }
 
       await nextTick();
       ingredientAutocomplete.value?.input.focus();

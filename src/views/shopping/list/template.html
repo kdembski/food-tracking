@@ -43,7 +43,7 @@
     </template>
     <p v-else class="shopping-list__empty">Brak produktów</p>
   </CCard>
-  <AddItem :listId="list.id" @itemAdded="addItemToList" :key="list.id" />
+  <AddItem :listId="list.id" :key="list.id" />
   <CCard
     v-if="ownedItems?.length > 0"
     variant="contained"
