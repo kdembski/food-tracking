@@ -1,0 +1,34 @@
+.add-recipe-to-shopping-list-modal {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+  padding: 0 $spacing-2xs;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-lg;
+  }
+
+  &__select-list,
+  &__recipe-name,
+  &__portions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    p:first-child {
+      @include uppercasedSecondaryText;
+      white-space: nowrap;
+    }
+
+    p:last-child {
+      color: var(--primary);
+      font-weight: $font-bold;
+    }
+  }
+
+  &__select-list {
+    gap: $spacing-md;
+  }
+}

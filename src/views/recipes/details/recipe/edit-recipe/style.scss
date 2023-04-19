@@ -4,7 +4,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: $spacing-xl;
+    gap: $spacing-2xl;
   }
 
   &__buttons {
@@ -16,5 +16,15 @@
 @media screen and (max-width: $screen-md) {
   .edit-recipe {
     gap: $spacing-2xl;
+
+    .edit-recipe__header {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &__buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

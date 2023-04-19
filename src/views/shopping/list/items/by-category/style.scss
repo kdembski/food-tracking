@@ -1,14 +1,14 @@
 .shopping-items-by-category {
   display: flex;
   flex-direction: column;
-  gap: $spacing-2xl;
+  gap: $spacing-3xl;
+  padding-left: $spacing-xs;
 
   p {
-    font-size: $font-sm;
     font-weight: $font-medium;
-    color: var(--text-secondary);
+    color: color-mix(in srgb, var(--primary) 50%, var(--text-primary));
     letter-spacing: 1px;
-    margin-bottom: $spacing-2xl;
+    margin-bottom: $spacing-3xl;
   }
 }
 

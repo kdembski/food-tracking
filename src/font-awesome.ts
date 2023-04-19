@@ -22,14 +22,8 @@ import {
   faCalendarWeek,
   faList,
   faBars,
-  faMoon,
-  faSun,
-  faLeaf,
-  faFireFlameSimple,
   faClock,
   faMagnifyingGlass,
-  faBellConcierge,
-  faMugSaucer,
   faFilter,
   faExclamation,
   faQuestion,
@@ -61,11 +55,13 @@ import {
   faCircleDown,
   faCircleXmark,
   faShuffle,
+  faCartArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
   faClock as faRegularClock,
   faCalendar as faRegularCalendar,
+  faCalendarPlus as faRegularCalendarPlus,
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -91,14 +87,8 @@ library.add(
   faCalendarWeek,
   faList,
   faBars,
-  faMoon,
-  faSun,
-  faLeaf,
-  faFireFlameSimple,
   faClock,
   faMagnifyingGlass,
-  faBellConcierge,
-  faMugSaucer,
   faFilter,
   faExclamation,
   faQuestion,
@@ -130,7 +120,9 @@ library.add(
   faBan,
   faCircleDown,
   faCircleXmark,
-  faShuffle
+  faShuffle,
+  faCartArrowDown,
+  faRegularCalendarPlus
 );
 
 export default FontAwesomeIcon;

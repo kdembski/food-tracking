@@ -1,8 +1,8 @@
 <div class="set-portions">
   <CButton
     color="secondary"
-    variant="text"
-    size="large"
+    :variant="variant"
+    :size="size"
     icon="minus"
     @click="portions--"
   />
@@ -15,8 +15,8 @@
   <p v-else class="set-portions__label">{{ portions }}</p>
   <CButton
     color="secondary"
-    variant="text"
-    size="large"
+    :variant="variant"
+    :size="size"
     icon="plus"
     @click="portions++"
   />

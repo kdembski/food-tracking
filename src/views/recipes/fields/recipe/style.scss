@@ -9,5 +9,6 @@
 @media screen and (max-width: $screen-md) {
   .recipe-fields {
     gap: $spacing-lg;
+    grid-template-columns: 1fr;
   }
 }

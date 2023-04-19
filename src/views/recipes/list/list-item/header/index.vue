@@ -14,12 +14,14 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useStore } from "vuex";
+import { computed } from "vue";
+import { RouterLink } from "vue-router";
 import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipes/recipe";
-import { RouterLink } from "vue-router";
-import { computed } from "vue";
 
 const { isMobile } = useWindowSize();
+const store = useStore();
 
 const props = defineProps({
   item: {
@@ -32,6 +34,11 @@ const emits = defineEmits<{ (e: "addToCalendar", recipe: Recipe): void }>();
 
 const addToCalendar = () => {
   emits("addToCalendar", props.item);
+};
+
+const openAddToShoppingListModal = () => {
+  store.commit("shopping/setAddedRecipeId", props.item.id);
+  store.commit("shopping/setIsAddRecipeModalOpen", true);
 };
 
 const openCookidoLink = () => {
@@ -50,13 +57,13 @@ const mobileDropdownOptions = computed(() => [
     value: "",
     label: "Dodaj do kalendarza",
     action: addToCalendar,
-    icon: ["far", "calendar"],
+    icon: ["far", "calendar-plus"],
   },
   {
     value: "",
     label: "Dodaj do listy zakupów",
-    action: () => false,
-    icon: "shopping-cart",
+    action: openAddToShoppingListModal,
+    icon: "cart-arrow-down",
   },
   ...(props.item.cookidooLink ? [openInCookidooOption] : []),
 ]);

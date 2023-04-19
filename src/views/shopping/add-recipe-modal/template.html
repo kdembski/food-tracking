@@ -1,0 +1,26 @@
+<CModal
+  v-model:isOpen="isOpen"
+  title="Dodaj przepis do listy zakupów"
+  submitButtonLabel="Dodaj"
+  :isSubmitting="isSubmitting"
+  @submit="onSubmit"
+>
+  <div class="add-recipe-to-shopping-list-modal">
+    <div class="add-recipe-to-shopping-list-modal__recipe-name">
+      <p>Przepis</p>
+      <p v-if="!isLoadingRecipe">{{ addedRecipe?.recipeName }}</p>
+    </div>
+    <div class="add-recipe-to-shopping-list-modal__portions">
+      <p>Liczba porcji</p>
+      <CSetPortions v-model="portions" variant="outlined" />
+    </div>
+    <div class="add-recipe-to-shopping-list-modal__select-list">
+      <p>Wybierz listę</p>
+      <SelectShoppingList
+        v-model:activeListId="selectedListId"
+        :columns="2"
+        disableActions
+      />
+    </div>
+  </div>
+</CModal>

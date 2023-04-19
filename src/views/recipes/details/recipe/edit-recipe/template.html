@@ -10,7 +10,7 @@
         size="small"
         icon="check"
         label="Zapisz"
-        variant="text"
+        variant="contained"
         :isLoading="isUpdatingRecipe"
         :fullWidth="isMobile"
       />
@@ -20,7 +20,7 @@
         icon="times"
         label="Anuluj"
         type="button"
-        variant="text"
+        variant="outlined"
         :isLoading="isUpdatingRecipe"
         @click="emits('cancel')"
         :fullWidth="isMobile"

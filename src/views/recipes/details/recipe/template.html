@@ -28,7 +28,7 @@
             :size="!isMobile ? 'small' : 'medium'"
             :label="!isMobile ? 'Edytuj' : ''"
             icon="pen-to-square"
-            variant="text"
+            variant="outlined"
             @click="startEditing"
           />
           <CButton
@@ -36,7 +36,7 @@
             :size="!isMobile ? 'small' : 'medium'"
             :label="!isMobile ? 'Usuń' : ''"
             icon="trash-can"
-            variant="text"
+            variant="outlined"
           />
         </div>
       </div>
@@ -44,7 +44,7 @@
         <CButton
           color="primary"
           size="small"
-          :icon="['far', 'calendar']"
+          :icon="['far', 'calendar-plus']"
           label="Dodaj do kalendarza"
           :fullWidth="isMobile"
           @click="isAddToCalendarModalOpen = true"
@@ -52,7 +52,7 @@
         <CButton
           color="secondary"
           size="small"
-          icon="cart-shopping"
+          icon="cart-arrow-down"
           label="Dodaj do zakupów"
           :fullWidth="isMobile"
         />

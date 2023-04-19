@@ -36,6 +36,8 @@ const state: () => RecipeState = () => ({
   isLoadingOptions: false,
 
   errors: null,
+
+  isAddingToShoppingList: false,
 });
 
 const getters: GetterTree<RecipeState, any> = {
@@ -157,7 +159,11 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  load({ commit, dispatch }, itemId) {
+  load({ commit, dispatch, state }, itemId) {
+    if (state.single?.id === parseInt(itemId)) {
+      return;
+    }
+
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoading", true);
 
@@ -240,6 +246,28 @@ const actions: ActionTree<RecipeState, any> = {
         });
     });
   },
+
+  addToShoppingList({ commit, dispatch, rootState }, data) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsAddingToShoppingList", true);
+
+      ApiService.post(
+        process.env.VUE_APP_SERVICE_URL + "/shopping/items/recipes",
+        data
+      )
+        .then(() => {
+          rootState.toastNotification.success(
+            "Dodano przepis do listy zakupów."
+          );
+          commit("setIsAddingToShoppingList", false);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsAddingToShoppingList", false);
+          dispatch("handleDefaultError", error, { root: true });
+        });
+    });
+  },
 };
 
 const mutations: MutationTree<RecipeState> = {
@@ -289,6 +317,10 @@ const mutations: MutationTree<RecipeState> = {
 
   setErrors(state, value: RecipeErrors) {
     state.errors = value;
+  },
+
+  setIsAddingToShoppingList(state, value: boolean) {
+    state.isAddingToShoppingList = value;
   },
 };
 

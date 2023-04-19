@@ -14,13 +14,14 @@
     <CButton
       color="secondary"
       variant="text"
-      icon="cart-shopping"
+      icon="cart-arrow-down"
+      @click="openAddToShoppingListModal"
       v-tooltip="{ text: 'Dodaj do listy zakupów' }"
     />
     <CButton
       color="secondary"
       variant="text"
-      :icon="['far', 'calendar']"
+      :icon="['far', 'calendar-plus']"
       @click="addToCalendar"
       v-tooltip="{ text: 'Dodaj do kalendarza' }"
     />

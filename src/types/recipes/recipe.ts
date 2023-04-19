@@ -15,6 +15,7 @@ export interface RecipeState {
   options: RecipeOption[] | null;
   isLoadingOptions: boolean;
   errors: RecipeErrors | null;
+  isAddingToShoppingList: boolean;
 }
 
 export interface Recipe {

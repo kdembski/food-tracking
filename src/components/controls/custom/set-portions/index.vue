@@ -20,6 +20,20 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  size: {
+    type: String,
+    default: "medium",
+    validator: (value: string) => {
+      return ["small", "medium", "large"].indexOf(value) !== -1;
+    },
+  },
+  variant: {
+    type: String,
+    default: "text",
+    validator: (value: string) => {
+      return ["contained", "outlined", "text"].indexOf(value) !== -1;
+    },
+  },
 });
 
 const emit = defineEmits<{
