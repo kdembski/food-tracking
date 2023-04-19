@@ -1,4 +1,7 @@
 .shopping-side-nav {
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
   display: flex;
   flex-direction: column;
   gap: $spacing-2xl;
@@ -18,6 +21,7 @@
 
 @media screen and (max-width: $screen-md) {
   .shopping-side-nav {
+    position: static;
     gap: $spacing-sm;
     width: 100%;
 

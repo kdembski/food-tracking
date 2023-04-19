@@ -65,7 +65,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
 
       &--sticky {
         .pagination {
-          box-shadow: $shadow-sm var(--shadow-color);
+          box-shadow: $shadow-xs var(--shadow-color);
         }
       }
     }

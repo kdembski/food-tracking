@@ -12,6 +12,7 @@ export interface ShoppingItem {
   isRemoved: boolean;
   ingredientName?: string;
   unitShortcut?: string;
+  primaryUnitShortcut?: string;
   customItemName?: string;
   isPrimary: boolean;
   converterToPrimary?: number;

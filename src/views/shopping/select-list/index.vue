@@ -56,7 +56,7 @@ const clearList = async (id: number) => {
   isClearingList.value[id] = false;
 };
 const loadShoppingLists = () => {
-  return store.dispatch("shopping/list/loadAll");
+  return store.dispatch("shopping/list/loadAll", true);
 };
 
 onBeforeMount(async () => {

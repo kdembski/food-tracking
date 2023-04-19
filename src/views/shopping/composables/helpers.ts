@@ -27,7 +27,7 @@ export function useShoppingHelpers() {
 
       if (summedUpItem) {
         if (summedUpItem.amount) {
-          summedUpItem.amount += getItemAmountToAdd(item) || 0;
+          summedUpItem.amount += getItemConvertedAmount(item) || 0;
         }
         summedUpItem.itemIds.push(item.id);
         summedUpItem.items.push(item);
@@ -37,8 +37,8 @@ export function useShoppingHelpers() {
       accum.push({
         ingredientId: item.ingredientId,
         ingredientName: item.ingredientName,
-        unitShortcut: item.unitShortcut,
-        amount: item.amount,
+        unitShortcut: item.primaryUnitShortcut,
+        amount: getItemConvertedAmount(item),
         isChecked: item.isChecked,
         itemIds: [item.id],
         items: [item],
@@ -47,11 +47,11 @@ export function useShoppingHelpers() {
     }, []);
   };
 
-  const getItemAmountToAdd = (item?: ShoppingItem) => {
+  const getItemConvertedAmount = (item?: ShoppingItem) => {
     if (item?.isPrimary) {
       return item.amount;
     }
-    return (item?.amount || 0) * (item?.converterToPrimary || 1);
+    return (item?.amount || 1) * (item?.converterToPrimary || 1);
   };
 
   const isSummedUpItems = (

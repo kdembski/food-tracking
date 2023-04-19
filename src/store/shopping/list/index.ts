@@ -20,8 +20,8 @@ const getters: GetterTree<ShoppingListState, any> = {
 };
 
 const actions: ActionTree<ShoppingListState, any> = {
-  loadAll({ commit, dispatch, state }) {
-    if (state.all) {
+  loadAll({ commit, dispatch, state }, forceReload: boolean) {
+    if (state.all && !forceReload) {
       return;
     }
 
