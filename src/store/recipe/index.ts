@@ -260,6 +260,13 @@ const actions: ActionTree<RecipeState, any> = {
             "Dodano przepis do listy zakupów."
           );
           commit("setIsAddingToShoppingList", false);
+          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
+          dispatch(
+            "shopping/item/sendWebSocketMessage",
+            { returnToSameClient: true },
+            { root: true }
+          );
+
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

@@ -2,7 +2,7 @@ import { MutationTree, ActionTree } from "vuex";
 import { ShoppingItem, ShoppingItemState } from "@/types/shopping/item";
 
 const actions: ActionTree<ShoppingItemState, any> = {
-  initWebSocket({ dispatch, commit, state }) {
+  initWebSocket({ commit, state }) {
     const url =
       process.env.VUE_APP_SERVICE_URL?.replace("http", "ws") +
       "/shopping/items";
@@ -23,23 +23,19 @@ const actions: ActionTree<ShoppingItemState, any> = {
       }
 
       commit("setCollection", items);
-      dispatch(
-        "shopping/list/updateCount",
-        {
-          listId: state.currentListId,
-          amount: items.length,
-        },
-        { root: true }
-      );
     });
   },
 
-  sendWebSocketMessage({ state }, returnToSameClient = true) {
-    if (!state.currentListId) {
+  sendWebSocketMessage(
+    { state },
+    { returnToSameClient, listId } = { returnToSameClient: true }
+  ) {
+    const targetedListId = listId || state.currentListId;
+    if (!targetedListId) {
       return;
     }
 
-    const message = { listId: state.currentListId, returnToSameClient };
+    const message = { listId: targetedListId, returnToSameClient };
     state.webSocket?.send(JSON.stringify(message));
   },
 };

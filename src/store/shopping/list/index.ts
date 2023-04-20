@@ -3,6 +3,7 @@ import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosError, AxiosResponse } from "axios";
 import { ShoppingList, ShoppingListState } from "@/types/shopping/list";
+import webSocket from "./websocket";
 
 const state: () => ShoppingListState = () => ({
   single: null,
@@ -11,6 +12,7 @@ const state: () => ShoppingListState = () => ({
   isLoadingAll: false,
   isSubmitting: false,
   isDeletingItems: false,
+  webSocket: null,
 });
 
 const getters: GetterTree<ShoppingListState, any> = {
@@ -67,6 +69,7 @@ const actions: ActionTree<ShoppingListState, any> = {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/shopping/lists", item)
         .then(() => {
           rootState.toastNotification.success("Dodano listę zakupów.");
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -88,6 +91,7 @@ const actions: ActionTree<ShoppingListState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Zedytowano listę zakupów.");
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -108,6 +112,7 @@ const actions: ActionTree<ShoppingListState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Usunięto listę zakupów.");
+          dispatch("sendWebSocketMessage");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -119,18 +124,20 @@ const actions: ActionTree<ShoppingListState, any> = {
     });
   },
 
-  removeItems({ commit, dispatch, rootState }, itemId: number) {
+  removeItems({ commit, dispatch, rootState }, listId: number) {
     return new Promise<void>((resolve) => {
       commit("setIsDeletingItems", true);
 
       ApiService.delete(
-        process.env.VUE_APP_SERVICE_URL + "/shopping/lists/" + itemId + "/items"
+        process.env.VUE_APP_SERVICE_URL + "/shopping/lists/" + listId + "/items"
       )
         .then(() => {
-          dispatch("shopping/item/sendWebSocketMessage", true, {
-            root: true,
-          });
-          dispatch("updateCount", { listId: itemId, amount: 0 });
+          dispatch("sendWebSocketMessage");
+          dispatch(
+            "shopping/item/sendWebSocketMessage",
+            { returnToSameClient: true, listId },
+            { root: true }
+          );
 
           rootState.toastNotification.success("Wyczyszczono listę zakupów.");
           resolve();
@@ -144,10 +151,7 @@ const actions: ActionTree<ShoppingListState, any> = {
     });
   },
 
-  updateCount({ getters }, { listId, amount }) {
-    const list: ShoppingList = getters.getById(listId);
-    list.count = amount;
-  },
+  ...webSocket.actions,
 };
 
 const mutations: MutationTree<ShoppingListState> = {
@@ -174,6 +178,8 @@ const mutations: MutationTree<ShoppingListState> = {
   setIsDeletingItems(state, value) {
     state.isDeletingItems = value;
   },
+
+  ...webSocket.mutations,
 };
 
 export default {

@@ -16,8 +16,4 @@
     />
   </div>
 </div>
-<EditListModal
-  v-model:isOpen="isEditListModalOpen"
-  :listId="editedListId"
-  @success="loadShoppingLists"
-/>
+<EditListModal v-model:isOpen="isEditListModalOpen" :listId="editedListId" />

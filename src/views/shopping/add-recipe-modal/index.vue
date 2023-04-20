@@ -20,9 +20,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
-import { useToastNotification } from "@/composables/toast-notification";
 
-const toastNotification = useToastNotification();
 const store = useStore();
 
 const isSubmitting = computed(() => store.state.recipe.isAddingToShoppingList);
@@ -45,6 +43,7 @@ watch(isOpen, (value) => {
   if (!value) {
     return;
   }
+
   store.dispatch("recipe/load", addedRecipeId.value);
 });
 

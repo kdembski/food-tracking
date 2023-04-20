@@ -82,7 +82,6 @@ const updateItem = (item: ShoppingItem) => {
   store
     .dispatch("shopping/item/update", item)
     .then(() => {
-      updateListsCount([item]);
       onSuccess();
     })
     .finally(() => {
@@ -98,7 +97,6 @@ const updateSummedUpItem = (summedUpItem: SummedUpShoppingItem) => {
 
   Promise.all(promises)
     .then(() => {
-      updateListsCount(summedUpItem.items);
       onSuccess();
     })
     .finally(() => {
@@ -106,14 +104,9 @@ const updateSummedUpItem = (summedUpItem: SummedUpShoppingItem) => {
     });
 };
 
-const updateListsCount = (itemsToRemove: ShoppingItem[]) => {
-  const countDifference = itemsToRemove.length;
-  selectedList.value.count += countDifference;
-  currentList.value.count -= countDifference;
-};
-
 const onSuccess = () => {
   store.dispatch("shopping/item/sendWebSocketMessage");
+  store.dispatch("shopping/list/sendWebSocketMessage");
   showSuccessMessage();
   closeModal();
 };

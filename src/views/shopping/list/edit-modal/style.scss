@@ -5,7 +5,7 @@
 
   &__delete-wrapper {
     padding: $spacing-2xl $spacing-lg;
-    border: 1px solid $error;
+    border: 1px solid transparentize($error, 0.5);
     border-radius: $radius-md;
 
     display: flex;

@@ -11,8 +11,9 @@
   >
     <div class="item__header">
       <p>{{ list.name }}</p>
-      <div v-if="!disableActions">
+      <div>
         <CButton
+          v-if="!disableEdit"
           color="secondary"
           variant="text"
           :size="isMobile ? 'medium' : 'small'"
@@ -20,6 +21,7 @@
           @click.stop="emits('editList', list.id)"
         />
         <CButton
+          v-if="!disableDelete"
           color="error"
           variant="text"
           :size="isMobile ? 'medium' : 'small'"

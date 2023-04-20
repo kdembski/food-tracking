@@ -20,11 +20,12 @@ const store = useStore();
 const props = withDefaults(
   defineProps<{
     activeListId?: number;
-    disableActions?: boolean;
+    disableEdit?: boolean;
+    disableDelete?: boolean;
     columns?: number;
     excludedListIds?: number[];
   }>(),
-  { columns: 1 }
+  { columns: 1, activeListId: 1 }
 );
 
 const emits = defineEmits<{
@@ -55,18 +56,11 @@ const clearList = async (id: number) => {
   await store.dispatch("shopping/list/removeItems", id);
   isClearingList.value[id] = false;
 };
-const loadShoppingLists = () => {
-  return store.dispatch("shopping/list/loadAll", true);
-};
 
 onBeforeMount(async () => {
-  await loadShoppingLists();
-
-  const firstListId = lists.value?.[0].id;
-  if (!firstListId) {
-    return;
-  }
-  activeListId.value = firstListId;
+  await store.dispatch("shopping/list/loadAll");
+  await store.dispatch("shopping/list/initWebSocket");
+  activeListId.value = lists.value?.[0].id;
 });
 </script>
 

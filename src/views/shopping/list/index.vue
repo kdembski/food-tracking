@@ -103,6 +103,7 @@ const getSummedUpModeButtonLabel = () => {
   if (isMobile.value) {
     return "";
   }
+
   if (isSummedUpMode.value) {
     return "Rozłącz";
   }

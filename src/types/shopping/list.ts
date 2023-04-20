@@ -1,5 +1,3 @@
-import { ShoppingItem } from "./item";
-
 export interface ShoppingList {
   id: number;
   name: string;
@@ -13,6 +11,7 @@ export interface ShoppingListState {
   isLoadingAll: boolean;
   isSubmitting: boolean;
   isDeletingItems: boolean;
+  webSocket: WebSocket | null;
 }
 
 export enum ShoppingListNavItems {

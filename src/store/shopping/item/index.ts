@@ -50,6 +50,8 @@ const actions: ActionTree<ShoppingItemState, any> = {
         .then(() => {
           rootState.toastNotification.success("Dodano do listy zakupów.");
           dispatch("sendWebSocketMessage");
+          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
+
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -92,7 +94,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
         { isChecked: item.isChecked }
       )
         .then(() => {
-          dispatch("sendWebSocketMessage", false);
+          dispatch("sendWebSocketMessage", { returnToSameClient: false });
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -112,6 +114,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
       )
         .then(() => {
           dispatch("sendWebSocketMessage");
+          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -129,6 +132,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
       )
         .then(() => {
           dispatch("sendWebSocketMessage");
+          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

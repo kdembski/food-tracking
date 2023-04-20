@@ -24,10 +24,6 @@ const isLoadingShoppingLists = computed(
   () => store.state.shopping.list.isLoadingAll
 );
 
-const loadShoppingLists = () => {
-  return store.dispatch("shopping/list/loadAll", true);
-};
-
 const activeListId = ref<number>();
 const editedListId = ref<number>();
 const isEditListModalOpen = ref(false);
