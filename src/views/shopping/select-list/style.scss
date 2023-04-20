@@ -8,7 +8,7 @@
     flex-direction: column;
     justify-content: center;
     gap: $spacing-lg;
-    padding: $spacing-xl $spacing-lg $spacing-xl $spacing-2xl;
+    padding: $spacing-lg $spacing-md $spacing-lg $spacing-xl;
     @include outlinedClickableTile;
 
     &__header {

@@ -15,7 +15,7 @@
   &__portions {
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
+    gap: $spacing-sm;
 
     p:first-child {
       @include uppercasedSecondaryText;
@@ -28,6 +28,7 @@
     }
   }
 
+  &__portions,
   &__select-list {
     gap: $spacing-md;
   }

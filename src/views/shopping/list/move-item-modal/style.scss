@@ -1,13 +1,27 @@
 .move-shopping-item-modal {
   display: flex;
   flex-direction: column;
-  gap: $spacing-2xl;
+  gap: $spacing-3xl;
   padding: 0 $spacing-2xs;
 
-  &__heading {
-    span {
+  &__select-list,
+  &__item-name {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    p:first-child {
+      @include uppercasedSecondaryText;
+      white-space: nowrap;
+    }
+
+    p:last-child {
       color: var(--primary);
       font-weight: $font-bold;
     }
+  }
+
+  &__select-list {
+    gap: $spacing-md;
   }
 }

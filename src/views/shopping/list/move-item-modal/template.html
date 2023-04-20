@@ -6,19 +6,23 @@
   @submit="onSubmit"
 >
   <div class="move-shopping-item-modal">
-    <p class="move-shopping-item-modal__heading">
-      Wybierz gdzie chcesz przenieść
-      <span>
+    <div class="move-shopping-item-modal__item-name">
+      <p>Przedmiot</p>
+      <p>
         {{ itemToMove?.ingredientName || itemToMove?.customItemName }} {{
         itemToMove?.amount }} {{ itemToMove?.amount ? itemToMove?.unitShortcut :
         '' }}
-      </span>
-    </p>
-    <SelectShoppingList
-      v-model:activeListId="selectedListId"
-      :excludedListIds="[currentList.id]"
-      :columns="2"
-      disableActions
-    />
+      </p>
+    </div>
+    <div class="move-shopping-item-modal__select-list">
+      <p>Wybierz listę</p>
+      <SelectShoppingList
+        v-model:activeListId="selectedListId"
+        :excludedListIds="[currentList.id]"
+        :columns="2"
+        disableEdit
+        disableDelete
+      />
+    </div>
   </div>
 </CModal>

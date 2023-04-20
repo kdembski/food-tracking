@@ -1,5 +1,7 @@
 import { MutationTree, ActionTree } from "vuex";
 import { ShoppingList, ShoppingListState } from "@/types/shopping/list";
+import { WebSocketStates } from "@/types/api";
+import { useWebSocketHelper } from "@/utils/websocket-helper";
 
 const actions: ActionTree<ShoppingListState, any> = {
   initWebSocket({ commit, state }) {
@@ -23,7 +25,12 @@ const actions: ActionTree<ShoppingListState, any> = {
     });
   },
 
-  sendWebSocketMessage({ state }) {
+  sendWebSocketMessage({ dispatch, state }) {
+    const { isWebSocketClosed } = useWebSocketHelper();
+    if (isWebSocketClosed(state.webSocket)) {
+      dispatch("initWebSocket");
+    }
+
     state.webSocket?.send("");
   },
 };

@@ -7,7 +7,7 @@
   .item {
     &__header-wrapper {
       font-weight: $font-medium;
-      color: color-mix(in srgb, var(--primary) 50%, var(--text-primary));
+      color: color-mix(in srgb, var(--primary) 40%, var(--text-secondary));
       letter-spacing: 1px;
       margin-bottom: $spacing-3xl;
       padding-right: 40px;
