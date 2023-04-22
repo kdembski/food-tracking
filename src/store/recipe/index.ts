@@ -130,7 +130,11 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  loadOptions({ commit, dispatch }) {
+  loadOptions({ commit, dispatch, state }) {
+    if (state.options) {
+      return;
+    }
+
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingOptions", true);
 

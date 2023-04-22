@@ -30,8 +30,9 @@ const props = withDefaults(
     disableDelete?: boolean;
     columns?: number;
     excludedListIds?: number[];
+    size?: "small" | "medium";
   }>(),
-  { columns: 1, activeListId: 1 }
+  { columns: 1, activeListId: 1, size: "medium" }
 );
 
 const emits = defineEmits<{
@@ -63,6 +64,10 @@ const clearList = async (id: number) => {
   isClearingList.value[id] = false;
 };
 
+const getRecipeName = (recipeId: number) => {
+  return store.getters["recipe/getNameById"](recipeId);
+};
+
 const sendWebSocketMessageIfDocumentIsVisible = () => {
   if (document.hidden) {
     return;
@@ -73,6 +78,7 @@ const sendWebSocketMessageIfDocumentIsVisible = () => {
 onBeforeMount(async () => {
   await store.dispatch("shopping/list/loadAll");
   await store.dispatch("shopping/list/sendWebSocketMessage");
+  await store.dispatch("recipe/loadOptions");
   activeListId.value = lists.value?.[0].id;
 
   document.addEventListener(

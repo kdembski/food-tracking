@@ -1,6 +1,7 @@
 <div class="shopping-items-by-recipe">
   <div
     v-for="recipeItem in itemsGroupedByRecipeId"
+    :key="recipeItem.recipeId"
     class="shopping-items-by-recipe__item item"
   >
     <div class="item__header-wrapper">

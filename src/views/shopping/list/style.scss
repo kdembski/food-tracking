@@ -88,6 +88,7 @@
     &__owned-items,
     &:deep(.shopping-list__items) {
       padding: $spacing-md 0;
+      gap: $spacing-3xl;
     }
 
     &__owned-card {

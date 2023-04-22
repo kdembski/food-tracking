@@ -2,13 +2,32 @@
   display: grid;
   gap: $spacing-lg;
 
+  &--small {
+    .item {
+      gap: $spacing-md;
+      padding: $spacing-lg - 2 $spacing-sm $spacing-lg - 2 $spacing-lg;
+
+      &__name {
+        font-size: $font-base;
+      }
+    }
+  }
+
+  &--medium {
+    .item {
+      gap: $spacing-lg;
+      padding: $spacing-lg $spacing-md $spacing-lg $spacing-xl;
+
+      &__name {
+        font-size: $font-lg;
+      }
+    }
+  }
+
   .item {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: $spacing-lg;
-    padding: $spacing-lg $spacing-md $spacing-lg $spacing-xl;
     @include outlinedClickableTile;
 
     &__header {
@@ -17,20 +36,39 @@
       align-items: center;
       height: 25px;
 
-      > p {
-        font-size: $font-lg;
-        font-weight: $font-medium;
-      }
-
       > div {
         display: flex;
         gap: $spacing-2xs;
       }
     }
 
+    &__name {
+      font-weight: $font-medium;
+    }
+
+    &__details {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      > p {
+        color: var(--text-secondary);
+      }
+    }
+
     &__amount {
       font-size: $font-sm;
-      color: var(--text-secondary);
+      margin-bottom: $spacing-2xs;
+    }
+
+    &__recipe-name {
+      display: flex;
+      gap: $spacing-md;
+      font-size: $font-xs;
+
+      > svg {
+        color: var(--text-tetriary);
+      }
     }
 
     &:hover:not(.item--active) {

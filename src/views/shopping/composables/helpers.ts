@@ -66,7 +66,7 @@ export function useShoppingHelpers() {
     return (item as SummedUpShoppingItem).itemIds !== undefined;
   };
 
-  const sortNullIdsToTheEnd = (
+  const sortByIds = (
     items?: CategoryShoppingItems[] | RecipeShoppingItems[]
   ) => {
     if (!items) {
@@ -74,15 +74,18 @@ export function useShoppingHelpers() {
     }
 
     return [...items].sort((a, b) => {
-      if (a["categoryId"] === null || a["recipeId"] === null) {
+      const aId = a["categoryId"] || a["recipeId"];
+      const bId = b["categoryId"] || b["recipeId"];
+
+      if (aId === null) {
         return 1;
       }
 
-      if (b["categoryId"] === null || b["recipeId"] === null) {
+      if (bId === null) {
         return -1;
       }
 
-      return 0;
+      return bId - aId;
     });
   };
 
@@ -90,6 +93,6 @@ export function useShoppingHelpers() {
     sumUpItemsWithSameIngredient,
     isSummedUpItems,
     isSummedUpItem,
-    sortNullIdsToTheEnd,
+    sortByIds,
   };
 }

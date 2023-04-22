@@ -1,6 +1,7 @@
 <div
   v-if="!isLoadingLists"
   class="select-shopping-list"
+  :class="'select-shopping-list--' + size"
   :style="`grid-template-columns: repeat(${columns}, 1fr)`"
 >
   <div
@@ -10,7 +11,7 @@
     @click="activeListId = list.id"
   >
     <div class="item__header">
-      <p>{{ list.name }}</p>
+      <p class="item__name">{{ list.name }}</p>
       <div>
         <CButton
           v-if="!disableEdit"
@@ -31,8 +32,18 @@
         />
       </div>
     </div>
-    <p v-if="list.count === 0" class="item__amount">pusto!</p>
-    <p v-else class="item__amount">ilość produktów: {{ list.count }}</p>
+    <div class="item__details">
+      <p v-if="list.count === 0" class="item__amount">pusto!</p>
+      <p v-else class="item__amount">ilość produktów: {{ list.count }}</p>
+      <p
+        v-if="columns === 1"
+        v-for="recipeId in list.recipeIds"
+        class="item__recipe-name"
+      >
+        <FontAwesomeIcon icon="chevron-right" />
+        {{ getRecipeName(recipeId) }}
+      </p>
+    </div>
   </div>
 </div>
 <SelectShoppingListLoader v-else :columns="columns" />

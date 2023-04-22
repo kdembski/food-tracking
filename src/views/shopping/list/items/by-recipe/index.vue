@@ -19,12 +19,12 @@ const props = defineProps<{
   items?: ShoppingItem[];
 }>();
 
-const { sortNullIdsToTheEnd } = useShoppingHelpers();
+const { sortByIds } = useShoppingHelpers();
 
 const isDeletingRecipe = ref<Record<number, boolean>>({});
 
 const itemsGroupedByRecipeId = computed(() => {
-  return sortNullIdsToTheEnd(groupItemsByRecipeId(props.items));
+  return sortByIds(groupItemsByRecipeId(props.items));
 });
 
 const getRecipeName = (recipeId: number) => {
