@@ -50,12 +50,19 @@ const isCustomItem = () => {
 const handleChecking = async (value: boolean) => {
   if (!isSummedUpItem(props.item)) {
     store.dispatch("shopping/item/updateIsChecked", props.item);
+    store.dispatch("shopping/item/sendWebSocketMessage", {
+      returnToSender: false,
+    });
     return;
   }
 
-  props.item.items.forEach((item) => {
+  const promises = props.item.items.map((item) => {
     item.isChecked = value;
-    store.dispatch("shopping/item/updateIsChecked", item);
+    return store.dispatch("shopping/item/updateIsChecked", item);
+  });
+  await Promise.all(promises);
+  store.dispatch("shopping/item/sendWebSocketMessage", {
+    returnToSender: false,
   });
 };
 

@@ -135,7 +135,7 @@ const actions: ActionTree<ShoppingListState, any> = {
           dispatch("sendWebSocketMessage");
           dispatch(
             "shopping/item/sendWebSocketMessage",
-            { returnToSameClient: true, listId },
+            { returnToSender: true, listId },
             { root: true }
           );
 

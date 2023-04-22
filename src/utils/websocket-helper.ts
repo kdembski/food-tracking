@@ -1,14 +1,43 @@
-import { WebSocketStates } from "@/types/api";
-
 export function useWebSocketHelper() {
-  const isWebSocketClosed = (ws?: WebSocket | null) => {
+  const isClosed = (ws: WebSocket) => {
     return (
-      ws?.readyState === WebSocketStates.CLOSED ||
-      ws?.readyState === WebSocketStates.CLOSING
+      ws.readyState === WebSocket.CLOSED || ws.readyState === WebSocket.CLOSING
     );
   };
 
-  return {
-    isWebSocketClosed,
+  const isConnecting = (ws: WebSocket) => {
+    return ws.readyState === WebSocket.CONNECTING;
   };
+
+  const sendMessage = async (
+    ws: WebSocket | null,
+    message: unknown,
+    initWebSocket?: any
+  ) => {
+    if (!ws) {
+      return;
+    }
+    ws = await ws;
+
+    if (isClosed(ws)) {
+      setTimeout(() => {
+        const ws = initWebSocket?.();
+        sendMessage(ws, message);
+      }, 5);
+
+      return;
+    }
+
+    if (isConnecting(ws)) {
+      setTimeout(() => {
+        sendMessage(ws, message);
+      }, 5);
+
+      return;
+    }
+
+    ws.send(JSON.stringify(message));
+  };
+
+  return { sendMessage };
 }

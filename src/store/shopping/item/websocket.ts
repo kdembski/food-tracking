@@ -4,6 +4,10 @@ import { useWebSocketHelper } from "@/utils/websocket-helper";
 
 const actions: ActionTree<ShoppingItemState, any> = {
   initWebSocket({ commit, state }) {
+    if (state.webSocket?.readyState === WebSocket.OPEN) {
+      return;
+    }
+
     const url =
       process.env.VUE_APP_SERVICE_URL?.replace("http", "ws") +
       "/shopping/items";
@@ -11,7 +15,7 @@ const actions: ActionTree<ShoppingItemState, any> = {
     const ws = new WebSocket(url);
     commit("setWebSocket", ws);
 
-    ws.addEventListener("message", (event: MessageEvent<string>) => {
+    ws.onmessage = (event: MessageEvent<string>) => {
       if (!event.data) {
         return;
       }
@@ -24,25 +28,23 @@ const actions: ActionTree<ShoppingItemState, any> = {
       }
 
       commit("setCollection", items);
-    });
+    };
+
+    return ws;
   },
 
-  sendWebSocketMessage(
+  async sendWebSocketMessage(
     { dispatch, state },
-    { returnToSameClient, listId } = { returnToSameClient: true }
+    { returnToSender, listId } = { returnToSender: true }
   ) {
     const targetedListId = listId || state.currentListId;
     if (!targetedListId) {
       return;
     }
 
-    const { isWebSocketClosed } = useWebSocketHelper();
-    if (isWebSocketClosed(state.webSocket)) {
-      dispatch("initWebSocket");
-    }
-
-    const message = { listId: targetedListId, returnToSameClient };
-    state.webSocket?.send(JSON.stringify(message));
+    const message = { listId: targetedListId, returnToSender };
+    const { sendMessage } = useWebSocketHelper();
+    sendMessage(state.webSocket, message, () => dispatch("initWebSocket"));
   },
 };
 

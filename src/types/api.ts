@@ -20,10 +20,3 @@ export interface DbResults {
   warningCount: number;
   message: string;
 }
-
-export enum WebSocketStates {
-  CONNECTING,
-  OPEN,
-  CLOSING,
-  CLOSED,
-}

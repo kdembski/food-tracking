@@ -94,7 +94,6 @@ const actions: ActionTree<ShoppingItemState, any> = {
         { isChecked: item.isChecked }
       )
         .then(() => {
-          dispatch("sendWebSocketMessage", { returnToSameClient: false });
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -113,8 +112,6 @@ const actions: ActionTree<ShoppingItemState, any> = {
         { isRemoved: item.isRemoved }
       )
         .then(() => {
-          dispatch("sendWebSocketMessage");
-          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
@@ -131,8 +128,6 @@ const actions: ActionTree<ShoppingItemState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/shopping/items/" + itemId
       )
         .then(() => {
-          dispatch("sendWebSocketMessage");
-          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

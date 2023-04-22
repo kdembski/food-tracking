@@ -43,6 +43,8 @@ export function useShoppingItemDelete(
 
   const afterDelete = () => {
     isDeletingItem.value = false;
+    store.dispatch("shopping/item/sendWebSocketMessage");
+    store.dispatch("shopping/list/sendWebSocketMessage");
     toastNotification.success("Usunięto przedmiot z listy zakupów.");
   };
 
