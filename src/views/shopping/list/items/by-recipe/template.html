@@ -8,7 +8,13 @@
         <RouterLink :to="'/recipes/' + recipeItem.recipeId">
           <p>{{ getRecipeName(recipeItem.recipeId) }}</p>
         </RouterLink>
-        <CButton color="secondary" variant="text" icon="trash-can" @click="" />
+        <CButton
+          color="secondary"
+          variant="text"
+          icon="trash-can"
+          @click="deleteRecipe(recipeItem.recipeId)"
+          :isLoading="isDeletingRecipe[recipeItem.recipeId]"
+        />
       </div>
       <p v-else>Pozostałe</p>
     </div>

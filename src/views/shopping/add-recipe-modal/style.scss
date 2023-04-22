@@ -32,4 +32,8 @@
   &__select-list {
     gap: $spacing-md;
   }
+
+  &__recipe-name {
+    min-height: 39px;
+  }
 }

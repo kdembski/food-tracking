@@ -159,11 +159,7 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  load({ commit, dispatch, state }, itemId) {
-    if (state.single?.id === parseInt(itemId)) {
-      return;
-    }
-
+  load({ commit, dispatch }, itemId) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoading", true);
 

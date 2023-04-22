@@ -139,6 +139,22 @@ const actions: ActionTree<ShoppingItemState, any> = {
     });
   },
 
+  deleteByRecipeId({ dispatch }, recipeId: number) {
+    return new Promise<void>((resolve) => {
+      ApiService.delete(
+        process.env.VUE_APP_SERVICE_URL + "/shopping/items/recipes/" + recipeId
+      )
+        .then(() => {
+          dispatch("sendWebSocketMessage");
+          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          dispatch("handleDefaultError", error, { root: true });
+        });
+    });
+  },
+
   ...webSocket.actions,
 };
 

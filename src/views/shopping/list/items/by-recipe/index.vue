@@ -9,7 +9,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { RecipeShoppingItems, ShoppingItem } from "@/types/shopping/item";
 import { useShoppingHelpers } from "../../../composables/helpers";
@@ -20,6 +20,8 @@ const props = defineProps<{
 }>();
 
 const { sortNullIdsToTheEnd } = useShoppingHelpers();
+
+const isDeletingRecipe = ref<Record<number, boolean>>({});
 
 const itemsGroupedByRecipeId = computed(() => {
   return sortNullIdsToTheEnd(groupItemsByRecipeId(props.items));
@@ -44,6 +46,12 @@ const groupItemsByRecipeId = (items?: ShoppingItem[]) => {
     accum.push({ recipeId: item.recipeId, items: [item] });
     return accum;
   }, []);
+};
+
+const deleteRecipe = async (id: number) => {
+  isDeletingRecipe.value[id] = true;
+  await store.dispatch("shopping/item/deleteByRecipeId", id);
+  isDeletingRecipe.value[id] = false;
 };
 </script>
 
