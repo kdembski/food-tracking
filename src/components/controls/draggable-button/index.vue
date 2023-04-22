@@ -15,7 +15,7 @@ const props = defineProps<{
 
 const { windowHeight, isMobile } = useWindowSize();
 const attrs = useAttrs();
-const maxPositionY = windowHeight.value - 124;
+const maxPositionY = windowHeight.value - 70;
 const positionY = ref(maxPositionY);
 const currentPageY = ref(0);
 const button = ref<HTMLButtonElement>();

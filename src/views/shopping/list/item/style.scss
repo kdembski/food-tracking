@@ -11,8 +11,20 @@
   &__label {
     display: flex;
     align-items: center;
-    gap: $spacing-xl;
+    gap: $spacing-md;
     width: 100%;
+  }
+
+  &__summed-up-indicator {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: var(--text-secondary);
+
+    > svg {
+      transform: rotateX(180deg);
+      font-size: $font-xs;
+    }
   }
 
   &__amount-wrapper {

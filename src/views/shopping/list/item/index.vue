@@ -47,6 +47,16 @@ const isCustomItem = () => {
   return !!props.item.customItemName;
 };
 
+const isSummedUpIndicatorVisible = (
+  item: ShoppingItem | SummedUpShoppingItem
+) => {
+  if (!isSummedUpItem(item)) {
+    return;
+  }
+
+  return item.items.length > 1;
+};
+
 const handleChecking = async (value: boolean) => {
   if (!isSummedUpItem(props.item)) {
     store.dispatch("shopping/item/updateIsChecked", props.item);

@@ -263,7 +263,7 @@ const actions: ActionTree<RecipeState, any> = {
           dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
           dispatch(
             "shopping/item/sendWebSocketMessage",
-            { returnToSender: true },
+            { returnToSender: true, listId: data.shoppingListId },
             { root: true }
           );
 

@@ -14,12 +14,9 @@ export function useWebSocketHelper() {
     message: unknown,
     initWebSocket?: any
   ) => {
-    if (!ws) {
-      return;
-    }
     ws = await ws;
 
-    if (isClosed(ws)) {
+    if (!ws || isClosed(ws)) {
       setTimeout(() => {
         const ws = initWebSocket?.();
         sendMessage(ws, message);

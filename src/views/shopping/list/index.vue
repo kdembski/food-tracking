@@ -10,6 +10,7 @@ import CShoppingItem from "./item/index.vue";
 import AddItem from "../add-item/index.vue";
 import MoveShoppingItemModal from "./move-item-modal/index.vue";
 import ShoppingListLoader from "./loader/index.vue";
+import { useToastNotification } from "@/composables/toast-notification";
 
 export default {
   name: "ShoppingList",
@@ -121,15 +122,32 @@ watch(
   }
 );
 
+const sendWebSocketMessageIfDocumentIsVisible = () => {
+  if (document.hidden) {
+    return;
+  }
+  store.dispatch("shopping/item/sendWebSocketMessage");
+};
+
 onBeforeMount(() => {
   loadShoppingItems();
   store.dispatch("recipe/loadOptions");
   store.dispatch("ingredient/category/loadOptions");
   store.dispatch("shopping/item/initWebSocket");
+
+  document.addEventListener(
+    "visibilitychange",
+    sendWebSocketMessageIfDocumentIsVisible
+  );
 });
 
 onBeforeUnmount(() => {
   store.commit("shopping/item/closeWebSocket");
+
+  document.removeEventListener(
+    "visibilitychange",
+    sendWebSocketMessageIfDocumentIsVisible
+  );
 });
 
 provide("isSummedUpMode", isSummedUpMode);

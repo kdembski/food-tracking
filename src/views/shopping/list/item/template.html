@@ -9,6 +9,13 @@
   <CCheckbox v-model="item.isChecked" @update:modelValue="handleChecking">
     <template #label>
       <div class="shopping-item__label">
+        <div
+          v-if="isSummedUpIndicatorVisible(item)"
+          class="shopping-item__summed-up-indicator"
+        >
+          <p>{{ item.items.length }}</p>
+          <FontAwesomeIcon icon="sitemap" />
+        </div>
         <p>{{ getItemName(item) }}</p>
         <div class="shopping-item__amount-wrapper">
           <div v-if="item.amount" class="shopping-item__amount">

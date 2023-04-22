@@ -9,7 +9,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ComputedRef, computed, onBeforeMount, ref } from "vue";
+import {
+  ComputedRef,
+  computed,
+  onBeforeMount,
+  onBeforeUnmount,
+  ref,
+} from "vue";
 import { useStore } from "vuex";
 import { ShoppingList } from "@/types/shopping/list";
 import { useWindowSize } from "@/composables/window-size";
@@ -57,10 +63,29 @@ const clearList = async (id: number) => {
   isClearingList.value[id] = false;
 };
 
+const sendWebSocketMessageIfDocumentIsVisible = () => {
+  if (document.hidden) {
+    return;
+  }
+  store.dispatch("shopping/item/sendWebSocketMessage");
+};
+
 onBeforeMount(async () => {
   await store.dispatch("shopping/list/loadAll");
-  await store.dispatch("shopping/list/initWebSocket");
+  await store.dispatch("shopping/list/sendWebSocketMessage");
   activeListId.value = lists.value?.[0].id;
+
+  document.addEventListener(
+    "visibilitychange",
+    sendWebSocketMessageIfDocumentIsVisible
+  );
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener(
+    "visibilitychange",
+    sendWebSocketMessageIfDocumentIsVisible
+  );
 });
 </script>
 
