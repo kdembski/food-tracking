@@ -10,7 +10,6 @@ import CShoppingItem from "./item/index.vue";
 import AddItem from "../add-item/index.vue";
 import MoveShoppingItemModal from "./move-item-modal/index.vue";
 import ShoppingListLoader from "./loader/index.vue";
-import { useToastNotification } from "@/composables/toast-notification";
 
 export default {
   name: "ShoppingList",

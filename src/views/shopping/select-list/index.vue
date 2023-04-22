@@ -67,7 +67,7 @@ const sendWebSocketMessageIfDocumentIsVisible = () => {
   if (document.hidden) {
     return;
   }
-  store.dispatch("shopping/item/sendWebSocketMessage");
+  store.dispatch("shopping/list/sendWebSocketMessage");
 };
 
 onBeforeMount(async () => {

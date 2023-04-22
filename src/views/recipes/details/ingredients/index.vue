@@ -4,6 +4,7 @@ import CLoader from "@/components/feedback/loader/index.vue";
 import CSetPortions from "@/components/controls/custom/set-portions/index.vue";
 import RecipeIngredientsFields from "../../fields/ingredients/index.vue";
 import RecipeIngredientsLoader from "./loader/index.vue";
+import { RecipeIngredient } from "@/types/recipes/recipeIngredient";
 
 export default {
   name: "RecipeDetailsIngredients",
@@ -21,7 +22,6 @@ export default {
 import { computed, onBeforeMount, ref, Ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { IngredientUnitDetails } from "@/types/ingredients/ingredient";
 import { cloneDeep } from "lodash";
 
 const store = useStore();
@@ -38,14 +38,14 @@ const isUpdatingIngredients = computed(
   () => store.state.recipe.ingredient.isSubmittingCollection
 );
 const recipeId = computed(() => route.params.id);
-const tempIngredients: Ref<IngredientUnitDetails[] | undefined> = ref();
+const tempIngredients: Ref<RecipeIngredient[] | undefined> = ref();
 const portions = ref(1);
 const isEditing = ref(false);
 const ingredients = computed({
-  get(): IngredientUnitDetails[] {
+  get(): RecipeIngredient[] {
     return store.state.recipe.ingredient.collection;
   },
-  set(value: IngredientUnitDetails[]) {
+  set(value: RecipeIngredient[]) {
     store.commit("recipe/ingredient/setCollection", value);
   },
 });
@@ -60,12 +60,22 @@ const loadIngredients = () => {
 
 const updateIngredients = async () => {
   await store.dispatch("recipe/ingredient/updateCollection", {
-    collection: ingredients.value,
+    collection: getIngredientsWithoutEmpties(),
     recipeId: recipeId.value,
   });
   isEditing.value = false;
   emits("success");
   await loadIngredients();
+};
+
+const getIngredientsWithoutEmpties = () => {
+  return ingredients.value.filter((ingredient) => {
+    return !(
+      !ingredient.ingredientId &&
+      !ingredient.unitId &&
+      !ingredient.amount
+    );
+  });
 };
 
 const startEditing = () => {
