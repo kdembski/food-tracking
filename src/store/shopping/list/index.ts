@@ -125,6 +125,8 @@ const actions: ActionTree<ShoppingListState, any> = {
   },
 
   removeItems({ commit, dispatch, rootState }, listId: number) {
+    commit("shopping/item/setCollectionToRestore", true, { root: true });
+
     return new Promise<void>((resolve) => {
       commit("setIsDeletingItems", true);
 
@@ -139,7 +141,12 @@ const actions: ActionTree<ShoppingListState, any> = {
             { root: true }
           );
 
-          rootState.toastNotification.success("Wyczyszczono listę zakupów.");
+          rootState.toastNotification.success(
+            "Wyczyszczono listę zakupów.",
+            () =>
+              dispatch("shopping/item/restoreCollection", true, { root: true }),
+            "Cofnij"
+          );
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {

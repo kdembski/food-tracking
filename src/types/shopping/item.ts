@@ -26,6 +26,7 @@ export interface ShoppingItemState {
   isDeleting: boolean;
   itemToMove: ShoppingItem | null;
   webSocket: WebSocket | null;
+  collectionToRestore: ShoppingItem[] | null;
 }
 
 export interface RecipeShoppingItems {

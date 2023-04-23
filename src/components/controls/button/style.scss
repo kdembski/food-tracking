@@ -9,7 +9,7 @@
   justify-content: center;
   flex: none;
   border: 1px solid transparent;
-  transition: all 0.05s ease-in-out;
+  transition: background-color 0.05s ease-in-out, border-color 0.1s ease-in-out;
   outline: 2px solid transparent;
   outline-offset: 2px;
 

@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash";
 import ApiService from "@/services/api.service";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
@@ -7,12 +8,15 @@ import webSocket from "./websocket";
 
 const state: () => ShoppingItemState = () => ({
   collection: null,
-  currentListId: null,
   isLoadingCollection: false,
+  currentListId: null,
+
   isSubmitting: false,
   isDeleting: false,
+
   webSocket: null,
   itemToMove: null,
+  collectionToRestore: null,
 });
 
 const getters: GetterTree<ShoppingItemState, any> = {};
@@ -47,6 +51,33 @@ const actions: ActionTree<ShoppingItemState, any> = {
       commit("setIsSubmitting", true);
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/shopping/items", item)
+        .then(() => {
+          rootState.toastNotification.success("Dodano do listy zakupów.");
+          dispatch("sendWebSocketMessage");
+          dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
+
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
+        });
+    });
+  },
+
+  createCollection(
+    { commit, dispatch, rootState },
+    collection: ShoppingItem[]
+  ) {
+    return new Promise<void>((resolve) => {
+      commit("setIsSubmitting", true);
+
+      ApiService.post(
+        process.env.VUE_APP_SERVICE_URL + "/shopping/items/collection",
+        collection
+      )
         .then(() => {
           rootState.toastNotification.success("Dodano do listy zakupów.");
           dispatch("sendWebSocketMessage");
@@ -155,6 +186,10 @@ const actions: ActionTree<ShoppingItemState, any> = {
     });
   },
 
+  restoreCollection({ dispatch, state }) {
+    return dispatch("createCollection", state.collectionToRestore);
+  },
+
   ...webSocket.actions,
 };
 
@@ -181,6 +216,10 @@ const mutations: MutationTree<ShoppingItemState> = {
 
   setItemToMove(state, itemToMove: ShoppingItem | null) {
     state.itemToMove = itemToMove;
+  },
+
+  setCollectionToRestore(state) {
+    state.collectionToRestore = cloneDeep(state.collection);
   },
 
   ...webSocket.mutations,
