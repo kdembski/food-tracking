@@ -27,7 +27,7 @@ export function useToastNotification() {
 
     setTimeout(() => {
       store.commit("popToastNotification");
-    }, 2000);
+    }, 3000);
   };
 
   const success = (

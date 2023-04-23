@@ -32,18 +32,19 @@
         />
       </div>
     </div>
-    <div class="item__details">
-      <p v-if="list.count === 0" class="item__amount">pusto!</p>
-      <p v-else class="item__amount">ilość produktów: {{ list.count }}</p>
-      <p
-        v-if="columns === 1"
-        v-for="recipeId in list.recipeIds"
-        class="item__recipe-name"
-      >
+    <p v-if="list.count === 0" class="item__amount">pusto!</p>
+    <p v-else class="item__amount">
+      Produkty na liście: <strong>{{ list.count }}</strong>
+    </p>
+    <ul
+      v-if="columns === 1 && list.recipeIds.length > 0"
+      class="item__recipe-names"
+    >
+      <li v-for="recipeId in list.recipeIds">
         <FontAwesomeIcon icon="chevron-right" />
         {{ getRecipeName(recipeId) }}
-      </p>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>
 <SelectShoppingListLoader v-else :columns="columns" />
