@@ -1,9 +1,8 @@
-<CSkeletonLoader
-  class="select-shopping-list-loader"
-  :style="`grid-template-columns: repeat(${columns}, 1fr)`"
->
+<CSkeletonLoader class="select-shopping-list-loader">
   <div v-for="index in 3">
-    <div class="skeleton-loader__item header"></div>
-    <div class="skeleton-loader__item amount"></div>
+    <div class="skeleton-loader__item name"></div>
+    <div class="skeleton-loader__item count"></div>
+    <div class="skeleton-loader__item button"></div>
+    <div class="skeleton-loader__item button"></div>
   </div>
 </CSkeletonLoader>

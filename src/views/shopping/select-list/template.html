@@ -1,9 +1,4 @@
-<div
-  v-if="!isLoadingLists"
-  class="select-shopping-list"
-  :class="'select-shopping-list--' + size"
-  :style="`grid-template-columns: repeat(${columns}, 1fr)`"
->
+<div v-if="!isLoadingLists" class="select-shopping-list">
   <div
     v-for="list in lists"
     class="select-shopping-list__item item"
@@ -11,8 +6,16 @@
     @click="activeListId = list.id"
   >
     <div class="item__header">
-      <p class="item__name">{{ list.name }}</p>
-      <div>
+      <div class="item__name">
+        <p>{{ list.name }}</p>
+        <span
+          class="item__amount"
+          :class="{'item__amount--empty': isListEmpty(list)}"
+        >
+          {{ list.count }}
+        </span>
+      </div>
+      <div class="item__buttons">
         <CButton
           v-if="!disableEdit"
           color="secondary"
@@ -29,17 +32,11 @@
           icon="ban"
           @click.stop="clearList(list.id)"
           :isLoading="isClearingList[list.id]"
+          :isDisabled="isListEmpty(list)"
         />
       </div>
     </div>
-    <p v-if="list.count === 0" class="item__amount">pusto!</p>
-    <p v-else class="item__amount">
-      Produkty na liście: <strong>{{ list.count }}</strong>
-    </p>
-    <ul
-      v-if="columns === 1 && list.recipeIds.length > 0"
-      class="item__recipe-names"
-    >
+    <ul v-if="hasRecipes(list)" class="item__recipe-names">
       <li v-for="recipeId in list.recipeIds">
         <FontAwesomeIcon icon="chevron-right" />
         {{ getRecipeName(recipeId) }}
@@ -47,4 +44,4 @@
     </ul>
   </div>
 </div>
-<SelectShoppingListLoader v-else :columns="columns" />
+<SelectShoppingListLoader v-else />

@@ -1,33 +1,14 @@
 .select-shopping-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: $spacing-lg;
-
-  &--small {
-    .item {
-      gap: $spacing-lg;
-      padding: $spacing-md $spacing-sm $spacing-md + 2 $spacing-lg;
-
-      &__name {
-        font-size: $font-base;
-      }
-    }
-  }
-
-  &--medium {
-    .item {
-      gap: $spacing-lg;
-      padding: $spacing-lg $spacing-md $spacing-lg + 2 $spacing-xl;
-
-      &__name {
-        font-size: $font-lg;
-      }
-    }
-  }
 
   .item {
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: $spacing-md;
+    padding: $spacing-lg $spacing-md $spacing-lg $spacing-xl;
     @include outlinedClickableTile;
 
     &__header {
@@ -35,30 +16,42 @@
       justify-content: space-between;
       align-items: center;
       height: 25px;
+    }
 
-      > div {
-        display: flex;
-        gap: $spacing-2xs;
-      }
+    &__buttons {
+      display: flex;
+      gap: $spacing-2xs;
     }
 
     &__name {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-size: $font-lg;
       font-weight: $font-medium;
     }
 
     &__amount {
-      font-size: $font-sm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-2xs $spacing-md - 1;
       color: var(--text-secondary);
+      background-color: rgba(var(--text-primary-rgb), 0.1);
+      font-size: $font-sm;
+      border-radius: $radius-xl;
 
-      > strong {
-        color: color-mix(in srgb, var(--primary) 40%, var(--text-secondary));
+      &--empty {
+        opacity: 0.5;
+        color: var(--text-tetriary);
       }
     }
 
     &__recipe-names {
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: $spacing-sm;
+      padding-left: 1px;
 
       > li {
         display: flex;

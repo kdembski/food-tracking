@@ -57,7 +57,7 @@ const mobileDropdownOptions = computed(() => [
     value: "",
     label: "Dodaj do kalendarza",
     action: addToCalendar,
-    icon: ["far", "calendar-plus"],
+    icon: ["far", "calendar-check"],
   },
   {
     value: "",

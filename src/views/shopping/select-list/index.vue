@@ -28,11 +28,9 @@ const props = withDefaults(
     activeListId?: number;
     disableEdit?: boolean;
     disableDelete?: boolean;
-    columns?: number;
     excludedListIds?: number[];
-    size?: "small" | "medium";
   }>(),
-  { columns: 1, activeListId: 1, size: "medium" }
+  { activeListId: 1 }
 );
 
 const emits = defineEmits<{
@@ -52,6 +50,9 @@ const activeListId = computed({
 });
 
 const isListActive = (id: number) => props.activeListId === id;
+const isListEmpty = (list: ShoppingList) => list.count === 0;
+const hasRecipes = (list: ShoppingList) => list.recipeIds.length > 0;
+
 const isLoadingLists = computed(() => store.state.shopping.list.isLoadingAll);
 const lists: ComputedRef<ShoppingList[] | undefined> = computed(() => {
   const all: ShoppingList[] | null = store.state.shopping.list.all;

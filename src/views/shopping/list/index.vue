@@ -67,6 +67,7 @@ const {
   isByRecipeSelected,
 } = useShoppingListNavigationTabs();
 
+const isListEmpty = () => props.list.count === 0;
 const isSummedUpMode = ref(true);
 const isClearingList = ref(false);
 const isLoadingItems = computed(

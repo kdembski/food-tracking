@@ -16,12 +16,7 @@
     </div>
     <div class="add-recipe-to-shopping-list-modal__select-list">
       <p>Wybierz listę</p>
-      <SelectShoppingList
-        v-model:activeListId="selectedListId"
-        :columns="2"
-        disableEdit
-        size="small"
-      />
+      <SelectShoppingList v-model:activeListId="selectedListId" disableEdit />
     </div>
   </div>
 </CModal>

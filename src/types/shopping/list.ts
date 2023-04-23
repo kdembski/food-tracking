@@ -2,6 +2,7 @@ export interface ShoppingList {
   id: number;
   name: string;
   count: number;
+  recipeIds: number[];
 }
 
 export interface ShoppingListState {

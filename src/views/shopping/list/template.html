@@ -30,6 +30,7 @@
         :size="isMobile ? 'large' : 'small'"
         @click="clearList"
         :isLoading="isClearingList"
+        :isDisabled="isListEmpty()"
       />
     </div>
   </div>

@@ -7,11 +7,5 @@ export default {
 };
 </script>
 
-<script setup lang="ts">
-const props = defineProps<{
-  columns?: number;
-}>();
-</script>
-
 <template src="./template.html"></template>
 <style src="./style.scss" lang="scss" scoped></style>

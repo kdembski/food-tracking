@@ -41,7 +41,6 @@ import {
   faArrowDownShortWide,
   faArrowUpShortWide,
   faBell,
-  faCalendarPlus,
   faCartShopping,
   faCartPlus,
   faMinus,
@@ -61,7 +60,7 @@ import {
 import {
   faClock as faRegularClock,
   faCalendar as faRegularCalendar,
-  faCalendarPlus as faRegularCalendarPlus,
+  faCalendarCheck as faRegularCalendarCheck,
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -107,7 +106,6 @@ library.add(
   faArrowDownShortWide,
   faArrowUpShortWide,
   faBell,
-  faCalendarPlus,
   faCartShopping,
   faCartPlus,
   faMinus,
@@ -122,7 +120,7 @@ library.add(
   faCircleXmark,
   faShuffle,
   faCartArrowDown,
-  faRegularCalendarPlus
+  faRegularCalendarCheck
 );
 
 export default FontAwesomeIcon;
