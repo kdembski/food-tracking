@@ -43,6 +43,10 @@ $mobileItemGap: $spacing-xs;
   &__cooked-date {
     &--planned {
       color: var(--success-primary);
+
+      > svg {
+        color: var(--success-primary);
+      }
     }
   }
 

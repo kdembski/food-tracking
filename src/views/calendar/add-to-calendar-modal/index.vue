@@ -10,54 +10,52 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch, Ref } from "vue";
+import { useStore } from "vuex";
+import { computed, ref, watch, ComputedRef } from "vue";
 import { Recipe } from "@/types/recipes/recipe";
 import { OrderedFood } from "@/types/ordered-food/ordered-food";
 import { useDateHelpers } from "@/composables/date-helpers";
 import { useAddToCalendar } from "./composables/add-to-calendar";
 
-const props = defineProps({
-  isOpen: {
-    type: Boolean,
-    default: false,
-  },
-  addedRecipe: {
-    type: Object as () => Recipe,
-  },
-  addedOrderedFood: {
-    type: Object as () => OrderedFood,
-  },
-  defaultMembers: {
-    type: Array,
-    default: () => [1, 2],
-  },
-});
+const store = useStore();
 
 const emits = defineEmits<{
   (event: "update:isOpen", value: boolean): void;
 }>();
 
 const { getFormattedDate } = useDateHelpers();
-const selectedDates: Ref<Date[]> = ref([]);
-const members: Ref<number[][]> = ref([]);
+const selectedDates = ref<Date[]>([]);
+const members = ref<number[][]>([]);
+const defaultMembers = ref([1, 2]);
+
+const addedRecipe: ComputedRef<Recipe> = computed(
+  () => store.state.calendar.addedRecipe
+);
+const addedOrderedFood: ComputedRef<OrderedFood> = computed(
+  () => store.state.calendar.addedOrderedFood
+);
 
 const _isOpen = computed({
   get(): boolean {
-    return props.isOpen;
+    return store.state.calendar.isAddToCalendarModalOpen;
   },
   set(value: boolean) {
-    emits("update:isOpen", value);
+    store.commit("calendar/setIsAddToCalendarModalOpen", value);
   },
 });
 
-watch(_isOpen, () => {
+watch(_isOpen, (value) => {
+  if (!value) {
+    store.commit("calendar/setAddedRecipe", null);
+    store.commit("calendar/setAddedOrderedFood", null);
+  }
   selectedDates.value = [];
 });
 
 watch(selectedDates, (dates) => {
   dates.sort((a, b) => a.getTime() - b.getTime());
   members.value = dates.map(
-    (_, index) => members.value[index] || props.defaultMembers
+    (_, index) => members.value[index] || defaultMembers.value
   );
 });
 
@@ -69,8 +67,8 @@ const { addSelectedDatesToCalendar, isAddingToCalendar } = useAddToCalendar(
   selectedDates,
   members,
   _isOpen,
-  computed(() => props.addedRecipe),
-  computed(() => props.addedOrderedFood)
+  addedRecipe,
+  addedOrderedFood
 );
 </script>
 

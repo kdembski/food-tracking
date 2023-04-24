@@ -30,15 +30,14 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits<{ (e: "addToCalendar", recipe: Recipe): void }>();
-
-const addToCalendar = () => {
-  emits("addToCalendar", props.item);
-};
-
 const openAddToShoppingListModal = () => {
   store.commit("shopping/setAddedRecipeId", props.item.id);
   store.commit("shopping/setIsAddRecipeModalOpen", true);
+};
+
+const openAddToCalendarModal = (recipe: Recipe) => {
+  store.commit("calendar/setAddedRecipe", recipe);
+  store.commit("calendar/setIsAddToCalendarModalOpen", true);
 };
 
 const openCookidoLink = () => {
@@ -56,7 +55,7 @@ const mobileDropdownOptions = computed(() => [
   {
     value: "",
     label: "Dodaj do kalendarza",
-    action: addToCalendar,
+    action: openAddToCalendarModal,
     icon: ["far", "calendar-check"],
   },
   {

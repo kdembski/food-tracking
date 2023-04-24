@@ -3,7 +3,7 @@ import { CalendarDay, CalendarState } from "@/types/calendar/calendar";
 import { ApiError } from "@/types/api";
 import { ActionTree, MutationTree, GetterTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { formatISO, isEqual } from "date-fns";
+import { isEqual } from "date-fns";
 import {
   getErrorMessage,
   showDefualtErrorNotification,
@@ -13,6 +13,10 @@ import { isNil } from "lodash";
 const state: CalendarState = {
   days: null,
   isLoadingDays: false,
+
+  isAddToCalendarModalOpen: false,
+  addedRecipe: null,
+  addedOrderedFood: null,
 };
 
 const getters: GetterTree<CalendarState, any> = {
@@ -103,6 +107,18 @@ const mutations: MutationTree<CalendarState> = {
 
   setIsLoadingDays(state, value) {
     state.isLoadingDays = value;
+  },
+
+  setIsAddToCalendarModalOpen(state, value) {
+    state.isAddToCalendarModalOpen = value;
+  },
+
+  setAddedRecipe(state, value) {
+    state.addedRecipe = value;
+  },
+
+  setAddedOrderedFood(state, value) {
+    state.addedOrderedFood = value;
   },
 };
 

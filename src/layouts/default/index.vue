@@ -3,10 +3,17 @@ import CSideBar from "@/components/navigation/side-bar/index.vue";
 import CTopBar from "@/components/navigation/top-bar/index.vue";
 import CBottomBar from "@/components/navigation/bottom-bar/index.vue";
 import AddRecipeToShoppingListModal from "@/views/shopping/add-recipe-modal/index.vue";
+import AddToCalendarModal from "@/views/calendar/add-to-calendar-modal/index.vue";
 
 export default {
   name: "DefaultLayout",
-  components: { CTopBar, CSideBar, CBottomBar, AddRecipeToShoppingListModal },
+  components: {
+    CTopBar,
+    CSideBar,
+    CBottomBar,
+    AddRecipeToShoppingListModal,
+    AddToCalendarModal,
+  },
 };
 </script>
 

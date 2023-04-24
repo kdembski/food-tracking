@@ -16,10 +16,12 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useStore } from "vuex";
 import { OrderedFood } from "@/types/ordered-food/ordered-food";
 import { useWindowSize } from "@/composables/window-size";
 
 const { isMobile } = useWindowSize();
+const store = useStore();
 
 const props = defineProps({
   item: {
@@ -29,23 +31,23 @@ const props = defineProps({
 });
 
 const emits = defineEmits<{
-  (e: "addToCalendar", orderedFood: OrderedFood): void;
   (e: "edit", id: number): void;
 }>();
 
-const addToCalendar = () => {
-  emits("addToCalendar", props.item);
-};
-
 const edit = () => {
   emits("edit", props.item.id);
+};
+
+const openAddToCalendarModal = (orderedFood: OrderedFood) => {
+  store.commit("calendar/setAddedOrderedFood", orderedFood);
+  store.commit("calendar/setIsAddToCalendarModalOpen", true);
 };
 
 const mobileDropdownOptions = [
   {
     value: "",
     label: "Dodaj do kalendarza",
-    action: addToCalendar,
+    action: openAddToCalendarModal,
     icon: ["far", "calendar"],
   },
   {

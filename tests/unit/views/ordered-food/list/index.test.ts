@@ -1,4 +1,3 @@
-import flushPromises from "flush-promises";
 import { shallowMount } from "@vue/test-utils";
 import OrderedFoodListView from "@/views/ordered-food/list/index.vue";
 
@@ -9,12 +8,6 @@ describe("Ordered Food List View", () => {
     wrapper = shallowMount(OrderedFoodListView, {
       global: global.settings,
     });
-  });
-
-  it("Should open add to calendar modal on openAddToCalendarModal call", async () => {
-    wrapper.vm.openAddToCalendarModal({ test: "test" });
-    expect(wrapper.vm.orderedFoodAddedToCalendar).toEqual({ test: "test" });
-    expect(wrapper.vm.isAddToCalendarModalOpen).toBe(true);
   });
 
   it("Should open edit modal on add button click", async () => {

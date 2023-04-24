@@ -4,7 +4,6 @@ import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import RecipeLoader from "./loader/index.vue";
 import InlineSvg from "vue-inline-svg";
 import CCard from "@/components/surfaces/card/index.vue";
-import AddToCalendarModal from "@/views/calendar/add-to-calendar-modal/index.vue";
 import EditRecipe from "./edit-recipe/index.vue";
 
 export default {
@@ -15,7 +14,6 @@ export default {
     RecipeLoader,
     InlineSvg,
     CCard,
-    AddToCalendarModal,
     EditRecipe,
   },
 };
@@ -45,7 +43,6 @@ const isLoadingRecipe = computed(() => store.state.recipe.isLoading);
 const recipeId = computed(() => route.params.id);
 const tempRecipe: Ref<Recipe | undefined> = ref();
 const isEditing = ref(false);
-const isAddToCalendarModalOpen = ref(false);
 
 const recipe = computed({
   get(): Recipe {
@@ -62,6 +59,11 @@ onBeforeMount(() => {
 
 const loadRecipe = () => {
   return store.dispatch("recipe/load", recipeId.value);
+};
+
+const openAddToCalendarModal = (recipe: Recipe) => {
+  store.commit("calendar/setAddedRecipe", recipe);
+  store.commit("calendar/setIsAddToCalendarModalOpen", true);
 };
 
 const startEditing = () => {

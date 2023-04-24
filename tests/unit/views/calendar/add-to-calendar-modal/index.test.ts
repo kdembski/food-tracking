@@ -25,6 +25,8 @@ describe("Add To Calendar Modal Component", () => {
   let addedRecipe: any;
   let addedOrderedFood: any;
   let calendarActions: any;
+  let calendarState: any;
+  let calendarMutations: any;
 
   beforeEach(async () => {
     calendarActions = {
@@ -43,6 +45,24 @@ describe("Add To Calendar Modal Component", () => {
       orderDatesInCurrentMonth: [],
     };
 
+    calendarState = {
+      isAddToCalendarModalOpen: true,
+    };
+
+    calendarMutations = {
+      setIsAddToCalendarModalOpen: jest
+        .fn()
+        .mockImplementation(
+          (state, value) => (state.isAddToCalendarModalOpen = value)
+        ),
+      setAddedRecipe: jest
+        .fn()
+        .mockImplementation((state, value) => (state.addedRecipe = value)),
+      setAddedOrderedFood: jest
+        .fn()
+        .mockImplementation((state, value) => (state.addedOrderedFood = value)),
+    };
+
     store = createStore({
       mutations: {
         unshiftToastNotification: jest.fn(),
@@ -50,7 +70,9 @@ describe("Add To Calendar Modal Component", () => {
       },
       modules: {
         calendar: {
+          state: calendarState,
           actions: calendarActions,
+          mutations: calendarMutations,
           namespaced: true,
         },
         member: {
@@ -78,7 +100,6 @@ describe("Add To Calendar Modal Component", () => {
     toastError = jest.fn();
 
     wrapper = mount(AddToCalendarModal, {
-      props: { isOpen: true },
       global: global.settings,
     });
   });
@@ -91,9 +112,7 @@ describe("Add To Calendar Modal Component", () => {
 
   it("Should clear selectedDates after isOpen change", async () => {
     wrapper.vm.selectedDates = [new Date()];
-    await wrapper.setProps({
-      isOpen: false,
-    });
+    await store.commit("calendar/setIsAddToCalendarModalOpen", false);
     expect(wrapper.vm.selectedDates).toEqual([]);
   });
 
@@ -107,9 +126,7 @@ describe("Add To Calendar Modal Component", () => {
   });
 
   it("Should trigger createItem with provided recipe and NOT change cooked date", async () => {
-    await wrapper.setProps({
-      addedRecipe,
-    });
+    await store.commit("calendar/setAddedRecipe", addedRecipe);
     wrapper.vm.selectedDates = [new Date(2000, 0, 1)];
     wrapper.vm.members = [[1, 2]];
     wrapper.vm.addSelectedDatesToCalendar();
@@ -117,7 +134,7 @@ describe("Add To Calendar Modal Component", () => {
 
     await flushPromises();
     expect(wrapper.vm.isAddingToCalendar).toBe(false);
-    expect(wrapper.emitted()["update:isOpen"][0][0]).toBe(false);
+    expect(store.state.calendar.isAddToCalendarModalOpen).toBe(false);
     expect(calendarActions.createItem).toHaveBeenLastCalledWith(
       expect.any(Object),
       {
@@ -131,9 +148,7 @@ describe("Add To Calendar Modal Component", () => {
   });
 
   it("Should trigger createItem with provided recipe and change cooked date", async () => {
-    await wrapper.setProps({
-      addedRecipe,
-    });
+    await store.commit("calendar/setAddedRecipe", addedRecipe);
     wrapper.vm.selectedDates = [new Date(2000, 1, 3), new Date(2000, 1, 2)];
     wrapper.vm.members = [[1, 2], [1]];
     wrapper.vm.addSelectedDatesToCalendar();
@@ -152,9 +167,7 @@ describe("Add To Calendar Modal Component", () => {
   });
 
   it("Should trigger createItem with provided ordered food and change order date", async () => {
-    await wrapper.setProps({
-      addedOrderedFood,
-    });
+    await store.commit("calendar/setAddedOrderedFood", addedOrderedFood);
     wrapper.vm.selectedDates = [new Date(2000, 1, 2)];
     wrapper.vm.members = [[1, 2]];
     wrapper.vm.addSelectedDatesToCalendar();

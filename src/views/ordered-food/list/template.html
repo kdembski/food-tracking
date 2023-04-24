@@ -17,11 +17,7 @@
       :sortOptions="orderedFoodListSortOptions"
     >
       <template #header="{ item }">
-        <OrderedFoodListItemHeader
-          :item="item"
-          @addToCalendar="openAddToCalendarModal"
-          @edit="editOrderedFood"
-        />
+        <OrderedFoodListItemHeader :item="item" @edit="editOrderedFood" />
       </template>
       <template #body="{ item, addTagToSelected }">
         <OrderedFoodListItemBody
@@ -32,11 +28,6 @@
     </CListWithFilters>
   </main>
 </div>
-<AddToCalendarModal
-  v-model:isOpen="isAddToCalendarModalOpen"
-  :addedOrderedFood="orderedFoodAddedToCalendar"
-  :defaultMembers="[]"
-/>
 <EditModal
   v-model:isOpen="isEditModalOpen"
   :orderedFoodId="editedOrderedFoodId"
