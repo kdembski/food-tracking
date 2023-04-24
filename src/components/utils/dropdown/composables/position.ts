@@ -31,7 +31,12 @@ export function useDropdownPosition(
     setDropdownPosition();
   });
 
-  watch(windowHeight, () => {
+  watch(windowHeight, async () => {
+    if (isMobile.value) {
+      return;
+    }
+
+    await nextTick();
     setDropdownPosition();
   });
 

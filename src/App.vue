@@ -64,7 +64,8 @@ onBeforeMount(() => {
   box-sizing: border-box;
 }
 
-body {
+html {
+  background-color: var(--surface-primary);
   color: var(--text-primary);
 }
 

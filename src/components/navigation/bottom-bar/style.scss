@@ -10,6 +10,7 @@
     z-index: $layer-4;
     display: flex;
     transition: transform 0.2s ease-in-out;
+    border-top: 1px solid var(--border-color);
   }
 
   &--active-2 {
