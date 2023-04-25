@@ -8,7 +8,11 @@
       ref="dropdown"
       v-click-away="onClickAway"
     >
-      <ul v-if="isLoading" class="dropdown__loader">
+      <ul
+        v-if="isLoading"
+        class="dropdown__loader"
+        :style="getDropdownMaxHeight()"
+      >
         <li v-for="index in 5">
           <CSkeletonLoader />
         </li>

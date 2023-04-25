@@ -119,6 +119,10 @@ $optionPadding: $spacing-xl;
     border-top: 1px solid var(--border-color);
     box-shadow: 0 0 6px 0 var(--shadow-color);
 
+    &__loader {
+      overflow: hidden;
+    }
+
     &__transition {
       &--delayed {
         &-enter-active {

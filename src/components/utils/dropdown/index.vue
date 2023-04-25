@@ -78,8 +78,8 @@ const getDropdownDirectionClass = () => {
 };
 
 const getDropdownMaxHeight = () => {
-  if (isMobile.value && isMobileKeyboardOpen.value) {
-    return "max-height: " + Math.floor(windowHeight.value / 2.5) + "px";
+  if (isMobile.value && props.withMobileKeyboard) {
+    return "max-height: 175px";
   }
 
   if (isMobile.value) {

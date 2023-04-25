@@ -8,6 +8,7 @@ interface DropdownProps {
   searchPhrase: string;
   isLoading: boolean;
   size: string;
+  withMobileKeyboard: boolean;
 }
 
 export function useDropdownProps() {
@@ -47,6 +48,10 @@ export function useDropdownProps() {
         return ["small", "medium", "large"].indexOf(value) !== -1;
       },
     },
+    withMobileKeyboard: {
+      type: Boolean,
+      default: false,
+    },
   };
 
   const getDropdownProps = (props: DropdownProps): DropdownProps => {
@@ -58,6 +63,7 @@ export function useDropdownProps() {
       searchPhrase: props.searchPhrase,
       isLoading: props.isLoading,
       size: props.size,
+      withMobileKeyboard: props.withMobileKeyboard,
     };
   };
 
