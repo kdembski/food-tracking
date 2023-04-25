@@ -37,12 +37,13 @@
         @click="emits('edit', item)"
       />
       <CButton
+        v-if="item.recipeId"
         color="secondary"
         variant="text"
-        icon="shopping-cart"
+        icon="cart-arrow-down"
         size="small"
         v-tooltip="{ text: 'Dodaj do zakupów' }"
-        @click=""
+        @click="openAddToShoppingListModal"
       />
       <RouterLink v-if="item.recipeId" :to="'/recipes/' + item.recipeId">
         <CButton

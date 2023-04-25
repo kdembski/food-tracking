@@ -8,7 +8,7 @@
   <div class="add-recipe-to-shopping-list-modal">
     <div class="add-recipe-to-shopping-list-modal__recipe-name">
       <p>Przepis</p>
-      <p v-if="!isLoadingRecipe">{{ addedRecipe?.recipeName }}</p>
+      <p>{{ getRecipeName() }}</p>
     </div>
     <div class="add-recipe-to-shopping-list-modal__portions">
       <p>Liczba porcji</p>

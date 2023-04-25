@@ -66,6 +66,11 @@ const openAddToCalendarModal = () => {
   store.commit("calendar/setIsAddToCalendarModalOpen", true);
 };
 
+const openAddToShoppingListModal = () => {
+  store.commit("shopping/setAddedRecipeId", recipe.value.id);
+  store.commit("shopping/setIsAddRecipeModalOpen", true);
+};
+
 const startEditing = () => {
   isEditing.value = true;
   tempRecipe.value = clone(recipe.value);

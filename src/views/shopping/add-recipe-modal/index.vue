@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -27,8 +27,6 @@ const isSubmitting = computed(() => store.state.recipe.isAddingToShoppingList);
 const selectedListId = ref<number>();
 const portions = ref(4);
 const addedRecipeId = computed(() => store.state.shopping.addedRecipeId);
-const addedRecipe = computed(() => store.state.recipe.single);
-const isLoadingRecipe = computed(() => store.state.recipe.isLoading);
 
 const isOpen = computed({
   get(): boolean {
@@ -39,29 +37,29 @@ const isOpen = computed({
   },
 });
 
-watch(isOpen, (value) => {
-  if (!value) {
-    return;
-  }
-
-  store.dispatch("recipe/load", addedRecipeId.value);
-});
-
 const closeModal = () => {
   isOpen.value = false;
+};
+
+const getRecipeName = () => {
+  return store.getters["recipe/getNameById"](addedRecipeId.value);
 };
 
 const onSubmit = () => {
   store
     .dispatch("recipe/addToShoppingList", {
       shoppingListId: selectedListId.value,
-      recipeId: addedRecipe.value.id,
+      recipeId: addedRecipeId.value,
       portions: portions.value,
     })
     .then(() => {
       closeModal();
     });
 };
+
+onBeforeMount(() => {
+  store.dispatch("recipe/loadOptions");
+});
 </script>
 
 <template src="./template.html"></template>

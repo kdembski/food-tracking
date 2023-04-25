@@ -37,6 +37,11 @@ const membersLength = computed(() => {
 const getTagsTooltipId = (id: number) => {
   return "calendar-tags-" + id;
 };
+
+const openAddToShoppingListModal = () => {
+  store.commit("shopping/setAddedRecipeId", props.item.recipeId);
+  store.commit("shopping/setIsAddRecipeModalOpen", true);
+};
 </script>
 
 <template src="./template.html"></template>
