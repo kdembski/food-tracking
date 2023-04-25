@@ -61,8 +61,8 @@ const loadRecipe = () => {
   return store.dispatch("recipe/load", recipeId.value);
 };
 
-const openAddToCalendarModal = (recipe: Recipe) => {
-  store.commit("calendar/setAddedRecipe", recipe);
+const openAddToCalendarModal = () => {
+  store.commit("calendar/setAddedRecipe", recipe.value);
   store.commit("calendar/setIsAddToCalendarModalOpen", true);
 };
 

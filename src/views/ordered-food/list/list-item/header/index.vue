@@ -38,8 +38,8 @@ const edit = () => {
   emits("edit", props.item.id);
 };
 
-const openAddToCalendarModal = (orderedFood: OrderedFood) => {
-  store.commit("calendar/setAddedOrderedFood", orderedFood);
+const openAddToCalendarModal = () => {
+  store.commit("calendar/setAddedOrderedFood", props.item);
   store.commit("calendar/setIsAddToCalendarModalOpen", true);
 };
 

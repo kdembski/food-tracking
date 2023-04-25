@@ -92,7 +92,7 @@ describe("Dropdown Component", () => {
 
     window.innerHeight = 500;
     window.dispatchEvent(new Event("resize"));
-    expect(wrapper.vm.getDropdownMaxHeight()).toEqual("max-height: 285px");
+    expect(wrapper.vm.getDropdownMaxHeight()).toEqual("max-height: 250px");
   });
 
   it("Should highlight label part that match the searchPhrase", async () => {

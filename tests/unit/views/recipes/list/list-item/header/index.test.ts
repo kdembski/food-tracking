@@ -40,10 +40,10 @@ describe("Recipes List Item Header", () => {
   });
 
   it("Should open modal and set added recipe on openAddToCalendarModal call", async () => {
-    await wrapper.vm.openAddToCalendarModal({ test: "test" });
+    await wrapper.vm.openAddToCalendarModal();
     expect(calendarMutations.setAddedRecipe).toHaveBeenCalledWith(
       expect.any(Object),
-      { test: "test" }
+      { cookidooLink: "test" }
     );
     expect(calendarMutations.setIsAddToCalendarModalOpen).toHaveBeenCalledWith(
       expect.any(Object),

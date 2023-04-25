@@ -35,8 +35,8 @@ const openAddToShoppingListModal = () => {
   store.commit("shopping/setIsAddRecipeModalOpen", true);
 };
 
-const openAddToCalendarModal = (recipe: Recipe) => {
-  store.commit("calendar/setAddedRecipe", recipe);
+const openAddToCalendarModal = () => {
+  store.commit("calendar/setAddedRecipe", props.item);
   store.commit("calendar/setIsAddToCalendarModalOpen", true);
 };
 

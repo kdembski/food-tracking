@@ -37,10 +37,10 @@ describe("Ordered Food List Item Header", () => {
   });
 
   it("Should open add to calendar modal on openAddToCalendarModal call", async () => {
-    wrapper.vm.openAddToCalendarModal({ test: "test" });
+    wrapper.vm.openAddToCalendarModal();
     expect(calendarMutations.setAddedOrderedFood).toHaveBeenCalledWith(
       expect.any(Object),
-      { test: "test" }
+      { id: 1 }
     );
     expect(calendarMutations.setIsAddToCalendarModalOpen).toHaveBeenCalledWith(
       expect.any(Object),
