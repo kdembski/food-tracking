@@ -29,6 +29,9 @@
   --success-primary: #{$success};
   --success-secondary: #{$success-light};
 
+  --warning-primary: #{$warning};
+  --warning-secondary: #{$warning-light};
+
   --text-button-hover-background: #{$text-button-hover-background-light};
   --text-button-active-background: #{$text-button-active-background-light};
 }
@@ -56,6 +59,9 @@
 
   --success-primary: #{$success-light};
   --success-secondary: #{$success};
+
+  --warning-primary: #{$warning-light};
+  --warning-secondary: #{$warning};
 
   --text-button-hover-background: #{$text-button-hover-background-dark};
   --text-button-active-background: #{$text-button-active-background-dark};

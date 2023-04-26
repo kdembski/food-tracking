@@ -1,4 +1,11 @@
 .item-header {
+  &__name-wrapper {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    align-items: start;
+  }
+
   &__recipe-name {
     font-size: $font-xl;
     font-weight: $font-medium;
@@ -8,6 +15,20 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  &__empty-badge {
+    font-size: $font-xs;
+    padding: $spacing-2xs $spacing-md;
+    background-color: color-mix(
+      in srgb,
+      var(--warning-secondary) 75%,
+      var(--surface-primary)
+    );
+    color: var(--warning-primary);
+    font-weight: $font-medium;
+    border-radius: $radius-2xl;
+    margin-top: $spacing-2xs;
   }
 
   &__cookidoo-link {
@@ -37,6 +58,10 @@
   .item-header {
     &__recipe-name {
       font-size: $font-lg;
+    }
+
+    &__empty-badge {
+      margin-top: 0;
     }
 
     &__buttons {

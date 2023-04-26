@@ -28,10 +28,6 @@ $mobileItemGap: $spacing-xs;
     gap: 5px;
     color: var(--text-secondary);
     white-space: nowrap;
-
-    > svg {
-      color: color-mix(in srgb, var(--primary) 30%, var(--text-secondary));
-    }
   }
 
   &__preparation-time {

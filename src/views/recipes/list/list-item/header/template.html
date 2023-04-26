@@ -1,6 +1,9 @@
-<RouterLink :to="'/recipes/' + item.id">
-  <p class="item-header__recipe-name">{{ item.recipeName }}</p>
-</RouterLink>
+<div class="item-header__name-wrapper">
+  <RouterLink :to="'/recipes/' + item.id">
+    <p class="item-header__recipe-name">{{ item.recipeName }}</p>
+  </RouterLink>
+  <span v-if="!isFilled()" class="item-header__empty-badge">Pusty</span>
+</div>
 <div class="item-header__buttons">
   <template v-if="isMobile">
     <CButtonWithDropdown

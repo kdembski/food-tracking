@@ -26,6 +26,7 @@ export interface Recipe {
   cookidooLink: string;
   cookedDate?: Date;
   datesFromLastYear: Date[][];
+  kcal?: number;
 }
 
 export type RecipesList = ListWithFilters<Recipe>;

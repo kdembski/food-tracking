@@ -44,6 +44,10 @@ const openCookidoLink = () => {
   window.open(props.item.cookidooLink, "_blank");
 };
 
+const isFilled = () => {
+  return props.item.kcal;
+};
+
 const openInCookidooOption = {
   value: "",
   label: "Otwórz w Cookidoo",
