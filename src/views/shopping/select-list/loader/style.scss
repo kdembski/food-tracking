@@ -10,7 +10,7 @@
     height: 51px;
     padding: 0 $spacing-xl;
     gap: $spacing-sm;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-secondary);
     border-radius: $radius-sm;
 
     .skeleton-loader__item {

@@ -2,23 +2,31 @@ import ApiService from "@/services/api.service";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosError, AxiosResponse } from "axios";
-import { ShoppingList, ShoppingListState } from "@/types/shopping/list";
+import {
+  ShoppingList,
+  ShoppingListErrors,
+  ShoppingListState,
+} from "@/types/shopping/list";
 import webSocket from "./websocket";
 
 const state: () => ShoppingListState = () => ({
   single: null,
-  all: null,
   isLoading: false,
-  isLoadingAll: false,
   isSubmitting: false,
+
+  all: null,
+  isLoadingAll: false,
   isDeletingItems: false,
+
   webSocket: null,
+  errors: null,
 });
 
 const getters: GetterTree<ShoppingListState, any> = {
   getById: (state) => (id: number) => {
     return state.all?.find((list) => list.id === id);
   },
+  errors: (state) => state.errors,
 };
 
 const actions: ActionTree<ShoppingListState, any> = {
@@ -73,7 +81,11 @@ const actions: ActionTree<ShoppingListState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          dispatch("handleDefaultError", error, { root: true });
+          dispatch(
+            "handleComplexError",
+            { error, module: "shopping/list" },
+            { root: true }
+          );
         })
         .finally(() => {
           commit("setIsSubmitting", false);
@@ -95,7 +107,11 @@ const actions: ActionTree<ShoppingListState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          dispatch("handleDefaultError", error, { root: true });
+          dispatch(
+            "handleComplexError",
+            { error, module: "shopping/list" },
+            { root: true }
+          );
         })
         .finally(() => {
           commit("setIsSubmitting", false);
@@ -184,6 +200,10 @@ const mutations: MutationTree<ShoppingListState> = {
 
   setIsDeletingItems(state, value) {
     state.isDeletingItems = value;
+  },
+
+  setErrors(state, value: ShoppingListErrors) {
+    state.errors = value;
   },
 
   ...webSocket.mutations,

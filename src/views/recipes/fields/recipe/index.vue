@@ -31,7 +31,7 @@ const isLoadingRecipesTags = computed(
   () => store.getters["recipe/isLoadingTags"]
 );
 
-const { errors, getErrorMessage, clearError, clearAllErrors } =
+const { getErrorMessage, clearError, clearAllErrors } =
   useStoredErrors("recipe");
 
 onBeforeMount(async () => {

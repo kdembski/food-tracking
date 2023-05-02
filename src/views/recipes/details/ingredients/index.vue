@@ -39,7 +39,7 @@ const isUpdatingIngredients = computed(
 );
 const recipeId = computed(() => route.params.id);
 const tempIngredients: Ref<RecipeIngredient[] | undefined> = ref();
-const portions = ref(1);
+const portions = ref(4);
 const isEditing = ref(false);
 const ingredients = computed({
   get(): RecipeIngredient[] {

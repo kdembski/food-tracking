@@ -41,7 +41,7 @@ describe("Recipes List Item Body", () => {
     expect(wrapper.vm.getFormattedCookedDate(new Date(2000, 0, 0))).toEqual(
       "około miesiąc temu"
     );
-    expect(wrapper.vm.getFormattedCookedDate(undefined)).toEqual("Brak");
+    expect(wrapper.vm.getFormattedCookedDate(undefined)).toEqual("---");
   });
 
   it("Should return cooked date tooltip content based on isPlanned value", async () => {

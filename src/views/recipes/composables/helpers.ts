@@ -31,7 +31,7 @@ export function useRecipeHelpers() {
 
   const getFormattedCookedDate = (cookedDate: Date) => {
     if (!cookedDate) {
-      return "Brak";
+      return "---";
     }
 
     const today = new Date();
@@ -64,7 +64,7 @@ export function useRecipeHelpers() {
 
   const getKcal = (kcal: number) => {
     if (!kcal) {
-      return "Brak";
+      return "---";
     }
 
     return kcal + " kcal";

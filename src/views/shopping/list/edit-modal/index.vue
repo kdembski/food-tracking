@@ -18,8 +18,11 @@ import { computed, ref, watch } from "vue";
 import { cloneDeep } from "lodash";
 import { useStore } from "vuex";
 import { ShoppingList } from "@/types/shopping/list";
+import { useStoredErrors } from "@/composables/stored-errors";
 
 const store = useStore();
+const { getErrorMessage, clearError, clearAllErrors } =
+  useStoredErrors("shopping/list");
 
 const props = defineProps({
   isOpen: {
@@ -49,6 +52,7 @@ const _isOpen = computed({
 watch(_isOpen, (value) => {
   list.value = cloneDeep(emptyList);
   if (!value) {
+    clearAllErrors();
     return;
   }
 

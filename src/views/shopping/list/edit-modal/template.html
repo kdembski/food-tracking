@@ -12,6 +12,8 @@
       label="Nazwa"
       :isLoading="isLoading"
       isRequired
+      :errorMessage="getErrorMessage(['name'])"
+      @update:modelValue="clearError(['name'])"
     />
     <div
       v-if="!isAddingNewList && !isMainList()"

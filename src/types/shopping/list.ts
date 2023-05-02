@@ -1,3 +1,5 @@
+import { ApiError } from "../api";
+
 export interface ShoppingList {
   id: number;
   name: string;
@@ -13,10 +15,15 @@ export interface ShoppingListState {
   isSubmitting: boolean;
   isDeletingItems: boolean;
   webSocket: WebSocket | null;
+  errors: ShoppingListErrors | null;
 }
 
 export enum ShoppingListNavItems {
   DEFAULT = "DEFAULT",
   BY_RECIPE = "BY_RECIPE",
   BY_CATEGORY = "BY_CATEGORY",
+}
+
+export interface ShoppingListErrors {
+  name: ApiError;
 }

@@ -33,6 +33,10 @@ export function useAddShoppingItem(
   };
 
   const addItem = async () => {
+    if (!selectedItem.value) {
+      return;
+    }
+
     const item = buildNewItem();
     await store.dispatch("shopping/item/create", {
       shoppingListId: item?.shoppingListId,
