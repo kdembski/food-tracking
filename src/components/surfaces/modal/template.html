@@ -4,6 +4,7 @@
       <component
         :is="containerElement"
         class="modal__container"
+        :class="containerClass"
         @submit.prevent="onSubmit"
         :novalidate="isContainerForm() ? true : null"
       >

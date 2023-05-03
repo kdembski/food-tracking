@@ -37,6 +37,7 @@
             :label="!isMobile ? 'Usuń' : ''"
             icon="trash-can"
             variant="outlined"
+            @click="isDeleteModalOpen = true"
           />
         </div>
       </div>
@@ -96,3 +97,14 @@
   @cancel="cancelEditing"
   @success="isEditing = false"
 />
+<CModal
+  v-model:isOpen="isDeleteModalOpen"
+  title="Na pewno?"
+  submitButtonLabel="Usuń"
+  submitButtonColor="error"
+  :isSubmitting="isDeletingRecipe"
+  @submit="deleteRecipe"
+  containerClass="delete-modal"
+>
+  <p>Na pewno chcesz usunać <strong>{{ recipe?.recipeName }}</strong>?</p>
+</CModal>

@@ -12,6 +12,7 @@ export interface RecipeState {
   searchSuggestions: string[] | null;
   isLoadingSearchSuggestions: boolean;
   isSubmitting: boolean;
+  isDeleting: boolean;
   options: RecipeOption[] | null;
   isLoadingOptions: boolean;
   errors: RecipeErrors | null;

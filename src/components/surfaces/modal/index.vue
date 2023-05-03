@@ -43,6 +43,10 @@ const props = defineProps({
     type: String,
     default: "div",
   },
+  containerClass: {
+    type: String,
+    default: "",
+  },
 });
 
 const emits = defineEmits<{

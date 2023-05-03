@@ -22,6 +22,7 @@ const state: () => RecipeState = () => ({
   single: null,
   isLoading: false,
   isSubmitting: false,
+  isDeleting: false,
 
   list: null,
   isLoadingList: false,
@@ -232,16 +233,16 @@ const actions: ActionTree<RecipeState, any> = {
 
   delete({ commit, dispatch, rootState }, itemId: number) {
     return new Promise<void>((resolve, reject) => {
-      commit("setIsSubmitting", true);
+      commit("setIsDeleting", true);
 
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
         .then(() => {
           rootState.toastNotification.success("Usunięto przepis.");
-          commit("setIsSubmitting", false);
+          commit("setIsDeleting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
+          commit("setIsDeleting", false);
           dispatch("handleDefaultError", error, { root: true });
         });
     });
@@ -312,6 +313,10 @@ const mutations: MutationTree<RecipeState> = {
 
   setIsSubmitting(state, value) {
     state.isSubmitting = value;
+  },
+
+  setIsDeleting(state, value) {
+    state.isDeleting = value;
   },
 
   setSingle(state, recipe: Recipe) {

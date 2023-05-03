@@ -77,6 +77,12 @@ a {
   all: unset;
 }
 
+.delete-modal {
+  strong {
+    color: color-mix(in srgb, var(--primary) 60%, $white);
+  }
+}
+
 @media screen and (min-width: $screen-md) {
   * {
     &::-webkit-scrollbar {

@@ -1,19 +1,21 @@
 <script lang="ts">
+import InlineSvg from "vue-inline-svg";
 import CButton from "@/components/controls/button/index.vue";
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
-import RecipeLoader from "./loader/index.vue";
-import InlineSvg from "vue-inline-svg";
 import CCard from "@/components/surfaces/card/index.vue";
+import CModal from "@/components/surfaces/modal/index.vue";
+import RecipeLoader from "./loader/index.vue";
 import EditRecipe from "./edit-recipe/index.vue";
 
 export default {
   name: "RecipeDetails",
   components: {
+    InlineSvg,
     CButton,
     CDisplayTags,
-    RecipeLoader,
-    InlineSvg,
     CCard,
+    CModal,
+    RecipeLoader,
     EditRecipe,
   },
 };
@@ -22,7 +24,7 @@ export default {
 <script setup lang="ts">
 import { computed, onBeforeMount, ref, Ref } from "vue";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useRecipeHelpers } from "@/views/recipes/composables/helpers";
 import { useWindowSize } from "@/composables/window-size";
 import { Recipe } from "@/types/recipes/recipe";
@@ -38,11 +40,14 @@ const {
 const { isMobile } = useWindowSize();
 const store = useStore();
 const route = useRoute();
+const router = useRouter();
 
 const isLoadingRecipe = computed(() => store.state.recipe.isLoading);
+const isDeletingRecipe = computed(() => store.state.recipe.isDeleting);
 const recipeId = computed(() => route.params.id);
 const tempRecipe: Ref<Recipe | undefined> = ref();
 const isEditing = ref(false);
+const isDeleteModalOpen = ref(false);
 
 const recipe = computed({
   get(): Recipe {
@@ -83,6 +88,12 @@ const cancelEditing = () => {
     return;
   }
   recipe.value = clone(tempRecipe.value);
+};
+
+const deleteRecipe = async () => {
+  store.dispatch("recipe/delete", recipe.value.id).then(() => {
+    router.push("/recipes");
+  });
 };
 
 defineExpose({
