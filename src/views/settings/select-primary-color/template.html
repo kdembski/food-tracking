@@ -1,0 +1,10 @@
+<div class="select-primary-color">
+  <template v-for="color in colors">
+    <ThemeRadioButton
+      v-model="selectedPrimaryColor"
+      :code="color.code"
+      :caption="color.label"
+      name="primary-color"
+    />
+  </template>
+</div>

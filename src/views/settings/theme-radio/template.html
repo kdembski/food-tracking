@@ -1,0 +1,12 @@
+<input
+  v-model="selected"
+  :value="code"
+  :id="'theme-' + code"
+  :name="name"
+  type="radio"
+  class="theme-radio__input"
+/>
+<label :for="'theme-' + code" class="theme-radio__label">
+  <ThemeSvg :code="code" />
+  <div class="theme-radio__caption">{{ caption }}</div>
+</label>

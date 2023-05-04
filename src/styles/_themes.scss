@@ -3,9 +3,6 @@
 }
 
 :root {
-  --primary: #{$primary};
-  --primary-rgb: #{toRGB($primary)};
-
   --surface-primary: #{$surface-lightest};
   --surface-primary-rgb: #{toRGB($surface-lightest)};
   --surface-secondary: #{$surface-lighter};
@@ -65,4 +62,29 @@
 
   --text-button-hover-background: #{$text-button-hover-background-dark};
   --text-button-active-background: #{$text-button-active-background-dark};
+}
+
+[data-primary-color="orange"]:root {
+  --primary: #{$orange};
+  --primary-rgb: #{toRGB($orange)};
+}
+
+[data-primary-color="cyan"]:root {
+  --primary: #{$cyan};
+  --primary-rgb: #{toRGB($cyan)};
+}
+
+[data-primary-color="red"]:root {
+  --primary: #{$red};
+  --primary-rgb: #{toRGB($red)};
+}
+
+[data-primary-color="purple"]:root {
+  --primary: #{$purple};
+  --primary-rgb: #{toRGB($purple)};
+}
+
+[data-primary-color="blue"]:root {
+  --primary: #{$blue};
+  --primary-rgb: #{toRGB($blue)};
 }

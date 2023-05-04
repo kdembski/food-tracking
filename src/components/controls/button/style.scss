@@ -44,10 +44,10 @@
 
     &.button--contained {
       color: $white;
-      background-color: var(--primary);
+      background-color: color-mix(in srgb, var(--primary) 90%, $black);
 
       &:hover {
-        background-color: color-mix(in srgb, var(--primary) 85%, $white);
+        background-color: color-mix(in srgb, var(--primary) 90%, $white);
       }
 
       &:active,

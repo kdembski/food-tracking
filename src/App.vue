@@ -43,6 +43,15 @@ watch(
   { immediate: true }
 );
 
+const primaryColor = computed(() => store.state.primaryColor);
+watch(
+  primaryColor,
+  (value) => {
+    document.documentElement.setAttribute("data-primary-color", value);
+  },
+  { immediate: true }
+);
+
 const layoutComponentName = computed(() => {
   const layoutType = useRoute().meta.layout;
   return (layoutType || "default") + "-layout";

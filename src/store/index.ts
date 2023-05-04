@@ -36,8 +36,8 @@ export default createStore<State>({
     },
 
     setPrimaryColor(state, value) {
-      StorageService.setItem("theme", value);
-      state.theme = value;
+      StorageService.setItem("primaryColor", value);
+      state.primaryColor = value;
     },
 
     setMainContainerScrollValue(state, value) {

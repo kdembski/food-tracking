@@ -29,6 +29,14 @@
     fill: var(--primary);
   }
 
+  &__sidebar-item {
+    fill: var(--surface-tetriary);
+
+    &--active {
+      fill: var(--primary);
+    }
+  }
+
   &__nav-item {
     fill: var(--text-tetriary);
 
@@ -63,6 +71,14 @@
     fill: $text-lighter;
   }
 
+  &__sidebar-item {
+    fill: $surface-dark;
+
+    &--active {
+      fill: var(--primary);
+    }
+  }
+
   &__nav-item {
     fill: $text-light;
 
@@ -93,6 +109,14 @@
     fill: $text-darker;
   }
 
+  &__sidebar-item {
+    fill: $surface-light;
+
+    &--active {
+      fill: var(--primary);
+    }
+  }
+
   &__nav-item {
     fill: $text-dark;
 
@@ -107,5 +131,105 @@
 
   &__item-border {
     stroke: $border-light;
+  }
+}
+
+.theme-svg.theme-svg--orange .theme-svg {
+  &__logo {
+    fill: $orange;
+  }
+
+  &__button {
+    fill: $orange;
+  }
+
+  &__sidebar-item {
+    &--active {
+      fill: $orange;
+    }
+  }
+
+  &__active-indicator {
+    fill: $orange;
+  }
+}
+
+.theme-svg.theme-svg--red .theme-svg {
+  &__logo {
+    fill: $red;
+  }
+
+  &__button {
+    fill: $red;
+  }
+
+  &__sidebar-item {
+    &--active {
+      fill: $red;
+    }
+  }
+
+  &__active-indicator {
+    fill: $red;
+  }
+}
+
+.theme-svg.theme-svg--purple .theme-svg {
+  &__logo {
+    fill: $purple;
+  }
+
+  &__button {
+    fill: $purple;
+  }
+
+  &__sidebar-item {
+    &--active {
+      fill: $purple;
+    }
+  }
+
+  &__active-indicator {
+    fill: $purple;
+  }
+}
+
+.theme-svg.theme-svg--blue .theme-svg {
+  &__logo {
+    fill: $blue;
+  }
+
+  &__button {
+    fill: $blue;
+  }
+
+  &__sidebar-item {
+    &--active {
+      fill: $blue;
+    }
+  }
+
+  &__active-indicator {
+    fill: $blue;
+  }
+}
+
+.theme-svg.theme-svg--cyan .theme-svg {
+  &__logo {
+    fill: $cyan;
+  }
+
+  &__button {
+    fill: $cyan;
+  }
+
+  &__sidebar-item {
+    &--active {
+      fill: $cyan;
+    }
+  }
+
+  &__active-indicator {
+    fill: $cyan;
   }
 }

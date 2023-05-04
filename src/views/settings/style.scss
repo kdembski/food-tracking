@@ -4,22 +4,34 @@
   flex-direction: column;
   width: 100%;
 
-  &__content {
+  .content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    gap: $spacing-4xl;
 
-    & > p {
-      @include uppercasedSecondaryTextWithBorder;
-      width: 100%;
+    &__row {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xl;
+
+      & > p {
+        @include uppercasedSecondaryTextWithBorder;
+        width: 100%;
+      }
     }
   }
 }
 
 @media screen and (max-width: $screen-md) {
   .settings {
-    &__content {
+    .content {
       padding: 0 $spacing-lg;
+      gap: $spacing-2xl;
+
+      &__row {
+        gap: $spacing-lg;
+      }
     }
   }
 }

@@ -4,32 +4,17 @@ export default { name: "ThemeSvg" };
 
 <script setup lang="ts">
 const props = defineProps({
-  theme: {
+  code: {
     type: String,
-    default: "light",
-    validator: (value: string) => {
-      return ["dark", "light"].indexOf(value) !== -1;
-    },
-  },
-  primaryColor: {
-    type: String,
-    default: "orange",
-    validator: (value: string) => {
-      return ["orange"].indexOf(value) !== -1;
-    },
+    default: "",
   },
 });
 
-const getSvgClasses = () => {
-  return [getThemeClass(), getPrimaryColorClass()];
-};
-
-const getThemeClass = () => {
-  return "theme-svg--" + props.theme;
-};
-
-const getPrimaryColorClass = () => {
-  return "theme-svg--" + props.primaryColor;
+const getCodeClass = () => {
+  if (!props.code) {
+    return;
+  }
+  return "theme-svg--" + props.code;
 };
 </script>
 

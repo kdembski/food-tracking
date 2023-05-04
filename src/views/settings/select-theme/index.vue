@@ -1,8 +1,8 @@
 <script lang="ts">
-import ThemeSvg from "../theme-svg/index.vue";
+import ThemeRadioButton from "../theme-radio/index.vue";
 export default {
   name: "SelectTheme",
-  components: { ThemeSvg },
+  components: { ThemeRadioButton },
 };
 </script>
 
