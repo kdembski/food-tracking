@@ -22,13 +22,13 @@ describe("Modal Component", () => {
 
   it("Should close modal on close button click", async () => {
     const closeButton = wrapper.findAllComponents(CButton)[0];
-    closeButton.trigger("click");
+    await closeButton.trigger("click");
     expect(wrapper.emitted()["update:isOpen"][0][0]).toBe(false);
   });
 
   it("Should emit submit event and close modal on submit button click", async () => {
-    const submitButton = wrapper.findAllComponents(CButton)[1];
-    submitButton.trigger("click");
+    const submitButton = wrapper.findAllComponents(CButton)[2];
+    await submitButton.trigger("click");
     expect(wrapper.emitted()["submit"]).toBeTruthy();
   });
 

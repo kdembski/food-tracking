@@ -240,12 +240,12 @@ describe("Recipe Store Module", () => {
   it("Should show success notification on successful delete action dispatch", async () => {
     mockAxiosDelete.mockImplementation(() => Promise.resolve());
     store.dispatch("module/delete", 1);
-    expect(store.state.module.isSubmitting).toBe(true);
+    expect(store.state.module.isDeleting).toBe(true);
     await flushPromises();
 
     expect(mockAxiosDelete).toHaveBeenCalledWith("service/recipes/1");
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
-    expect(store.state.module.isSubmitting).toBe(false);
+    expect(store.state.module.isDeleting).toBe(false);
   });
 
   it("Should show error notification on failed delete action dispatch", async () => {

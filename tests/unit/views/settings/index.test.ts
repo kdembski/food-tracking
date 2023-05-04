@@ -10,6 +10,7 @@ describe("Settings View", () => {
     store = createStore({
       state: {
         theme: "light",
+        primaryColor: "orange",
       },
       mutations: {
         setTheme: (state, value) => (state.theme = value),

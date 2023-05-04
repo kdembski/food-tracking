@@ -52,7 +52,7 @@ describe("Default Layout Component", () => {
   });
 
   it("Should get container max height based on route meta", async () => {
-    expect(wrapper.vm.getContainerMaxWidth()).toEqual("1300px");
+    expect(wrapper.vm.getContainerMaxWidth()).toEqual("1350px");
     routeMeta.maxWidth = "unset";
     expect(wrapper.vm.getContainerMaxWidth()).toEqual("");
     routeMeta.maxWidth = 1000;

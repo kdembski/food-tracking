@@ -8,6 +8,7 @@ jest.mock("vue-router", () => ({
       id: 1,
     },
   }),
+  useRouter: jest.fn(),
 }));
 
 describe("Recipe Details", () => {
