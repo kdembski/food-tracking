@@ -31,7 +31,11 @@ export const getListQuery = (filters: ListFilters) => {
   );
 };
 
-export const getListBaseQuery = (filters: ListBaseFilters) => {
+export const getListBaseQuery = (filters?: ListBaseFilters) => {
+  if (!filters) {
+    return "";
+  }
+
   const { searchPhrase, tags, ingredientIds } = filters;
   return "?" + buildQueryFromObject({ searchPhrase, tags, ingredientIds });
 };

@@ -84,7 +84,7 @@ describe("Ordered Food Store Module", () => {
     await flushPromises();
 
     expect(mockAxiosGet).toHaveBeenCalledWith(
-      "service/ordered?page=1&size=10&searchPhrase=test&sortAttribute=attr&sortDirection=dir&tags=tag"
+      "service/ordered?page=1&size=10&sortAttribute=attr&sortDirection=dir&searchPhrase=test&tags=tag"
     );
     expect(store.getters["module/list"]).toEqual(list);
     expect(store.getters["module/isLoadingList"]).toBe(false);
