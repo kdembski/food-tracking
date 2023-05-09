@@ -4,12 +4,10 @@ $filtersHeightOffset: 92px; //topbar height + paddings
   display: flex;
   height: 100%;
   width: 100%;
+  gap: $spacing-4xl;
 
   &__filters {
-    display: flex;
-    margin-right: 45px;
-    margin-left: 1px;
-    width: 32%;
+    width: 30%;
     height: 100%;
   }
 
@@ -17,7 +15,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
     &__wrapper {
       display: flex;
       flex-direction: column;
-      gap: $spacing-2xl;
+      gap: $spacing-3xl;
       position: sticky;
       top: 0;
       align-self: flex-start;
@@ -26,7 +24,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
       max-height: calc(100vh - $filtersHeightOffset);
       overflow-y: auto;
       padding: 0 $spacing-sm;
-      margin: 0 (-$spacing-sm);
+      margin-left: (-$spacing-sm);
     }
 
     &__btns-container {
@@ -40,7 +38,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 68%;
+    width: 70%;
   }
 
   &__pagination {
@@ -84,6 +82,7 @@ $filtersHeightOffset: 92px; //topbar height + paddings
     display: flex;
     align-items: flex-start;
     max-width: 100vw;
+    gap: 0;
 
     &--child-transition {
       overflow: hidden;

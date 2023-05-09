@@ -1,13 +1,13 @@
-<CInput
-  class="select-tags__input"
-  v-model="searchPhrase"
-  :icon="inputIcon"
-  :placeholder="'Wyszukaj tag' + (enableAddingTags ? ' albo dodaj nowy' : '')"
-  :isLoading="isLoading"
-  label="Tagi"
-  ref="inputRef"
-/>
 <div v-if="tags || isLoading" class="select-tags" ref="container">
+  <CInput
+    class="select-tags__input"
+    v-model="searchPhrase"
+    :icon="inputIcon"
+    :placeholder="'Wyszukaj tag' + (enableAddingTags ? ' albo dodaj nowy' : '')"
+    :isLoading="isLoading"
+    label="Tagi"
+    ref="inputRef"
+  />
   <Loader v-if="isLoading" :containerWidth="container?.clientWidth" />
   <CTags v-else-if="tags.length > 0" :tags="tags">
     <template #default="{ tagsArray }">

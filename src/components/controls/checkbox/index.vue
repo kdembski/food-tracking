@@ -8,20 +8,20 @@ export default {
 import { computed } from "vue";
 
 const props = defineProps<{
-  modelValue: boolean | string | number;
+  modelValue: unknown;
   label?: string;
   isDisabled?: boolean;
 }>();
 
 const emits = defineEmits<{
-  (event: "update:modelValue", value: string | number | boolean): void;
+  (event: "update:modelValue", value: unknown): void;
 }>();
 
 const value = computed({
-  get(): string | number | boolean {
+  get(): unknown {
     return props.modelValue;
   },
-  set(value: string | number | boolean) {
+  set(value: unknown) {
     emits("update:modelValue", value);
   },
 });

@@ -1,45 +1,63 @@
 import {
-  ListFilters,
   ListBaseFilters,
+  ListFilters,
 } from "@/types/components/data-display/list";
 
 export const getListQuery = (filters: ListFilters) => {
-  const page = filters.currentPage || 1;
-  const size = filters.pageSize || 10;
-  let query = "?page=" + page + "&size=" + size;
+  const {
+    currentPage,
+    pageSize,
+    sortAttribute,
+    sortDirection,
+    searchPhrase,
+    tags,
+    ingredientIds,
+  } = filters;
 
-  if (filters.searchPhrase) {
-    query += "&searchPhrase=" + filters.searchPhrase;
-  }
-  if (filters.sortAttribute) {
-    query += "&sortAttribute=" + filters.sortAttribute;
-  }
-  if (filters.sortDirection) {
-    query += "&sortDirection=" + filters.sortDirection;
-  }
-  if (filters.tags) {
-    query += "&tags=" + filters.tags;
-  }
+  const page = currentPage || 1;
+  const size = pageSize || 10;
+  const query = "?page=" + page + "&size=" + size;
 
-  return query;
+  return (
+    query +
+    "&" +
+    buildQueryFromObject({
+      sortAttribute,
+      sortDirection,
+      searchPhrase,
+      tags,
+      ingredientIds,
+    })
+  );
 };
 
 export const getListBaseQuery = (filters: ListBaseFilters) => {
-  if (!filters) {
+  const { searchPhrase, tags, ingredientIds } = filters;
+  return "?" + buildQueryFromObject({ searchPhrase, tags, ingredientIds });
+};
+
+export const buildQueryFromObject = (object: any) => {
+  if (!object) {
     return "";
   }
 
-  if (filters.searchPhrase && filters.tags) {
-    return "?searchPhrase=" + filters.searchPhrase + "&tags=" + filters.tags;
+  let query = "";
+
+  for (const [key, value] of Object.entries(object)) {
+    let tempValue = value;
+    if (!tempValue) {
+      continue;
+    }
+
+    if (Array.isArray(tempValue)) {
+      if (tempValue.length === 0) {
+        continue;
+      }
+      tempValue = tempValue.join(",");
+    }
+
+    query += `${!query ? "" : "&"}${key}=${tempValue}`;
   }
 
-  if (filters.searchPhrase) {
-    return "?searchPhrase=" + filters.searchPhrase;
-  }
-
-  if (filters.tags) {
-    return "?tags=" + filters.tags;
-  }
-
-  return "";
+  return query;
 };

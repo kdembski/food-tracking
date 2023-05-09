@@ -1,18 +1,25 @@
 import {
   RecipeIngredient,
+  RecipeIngredientFilterOption,
   RecipeIngredientsErrors,
-} from "./../../../types/recipes/recipeIngredient";
+} from "@/types/recipes/recipeIngredient";
 import ApiService from "@/services/api.service";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { RecipeIngredientState } from "@/types/recipes/recipeIngredient";
+import { ListFilters } from "@/types/components/data-display/list";
+import { getListBaseQuery } from "../../helpers/list-query";
 
 const state: RecipeIngredientState = {
   collection: null,
   isLoadingCollection: false,
   isSubmittingCollection: false,
+
   errors: null,
+
+  filterOptions: null,
+  isLoadingFilterOptions: false,
 };
 
 const getters: GetterTree<RecipeIngredientState, any> = {
@@ -37,6 +44,27 @@ const actions: ActionTree<RecipeIngredientState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingCollection", false);
+          dispatch("handleDefaultError", error, { root: true });
+        });
+    });
+  },
+
+  loadFilterOptions({ commit, dispatch }, filters: ListFilters) {
+    return new Promise<void>((resolve, reject) => {
+      commit("setIsLoadingFilterOptions", true);
+
+      ApiService.get(
+        process.env.VUE_APP_SERVICE_URL +
+          "/recipes/ingredients/options" +
+          getListBaseQuery(filters)
+      )
+        .then((response: AxiosResponse<RecipeIngredientFilterOption[]>) => {
+          commit("setIsLoadingFilterOptions", false);
+          commit("setFilterOptions", response.data);
+          resolve();
+        })
+        .catch((error: AxiosError<ApiError>) => {
+          commit("setIsLoadingFilterOptions", false);
           dispatch("handleDefaultError", error, { root: true });
         });
     });
@@ -123,6 +151,14 @@ const mutations: MutationTree<RecipeIngredientState> = {
 
   setErrors(state, value: { _items: RecipeIngredientsErrors[] } | null) {
     state.errors = value?._items || null;
+  },
+
+  setIsLoadingFilterOptions(state, value) {
+    state.isLoadingFilterOptions = value;
+  },
+
+  setFilterOptions(state, value: RecipeIngredientFilterOption[]) {
+    state.filterOptions = value;
   },
 };
 

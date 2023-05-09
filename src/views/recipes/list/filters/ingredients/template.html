@@ -1,0 +1,38 @@
+<div class="ingredients-filter">
+  <CInput
+    v-model="searchPhrase"
+    label="Składniki"
+    placeholder="Wyszukaj składnik"
+    icon="cheese"
+    :isLoading="isLoading || isLoadingList"
+  />
+  <IngredientsFilterLoader v-if="isLoading || isLoadingList" />
+  <template v-else>
+    <div class="ingredients-filter__options">
+      <CCheckbox
+        v-for="option in options"
+        v-model="filters.ingredientIds"
+        :value="option.id"
+        @change="onChange"
+      >
+        <template #label>
+          <div class="ingredients-filter__label label">
+            <p class="label__name">{{ getIngredientName(option.id) }}</p>
+            <p v-if="!isOptionSelected(option.id)" class="label__count">
+              {{ option.count }}
+            </p>
+          </div>
+        </template>
+      </CCheckbox>
+    </div>
+    <div v-if="isExpandable" class="ingredients-filter__expand-btn">
+      <CButton
+        size="small"
+        :label="getExpandButtonConfig().label"
+        :icon="getExpandButtonConfig().icon"
+        variant="text"
+        @click="isExpanded = !isExpanded"
+      />
+    </div>
+  </template>
+</div>

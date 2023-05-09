@@ -68,7 +68,6 @@ const closeModal = () => {
 };
 
 const onSubmit = () => {
-  console.log("test");
   emits("submit");
 };
 

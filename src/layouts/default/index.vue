@@ -71,7 +71,7 @@ const getContainerMaxWidth = () => {
     case "unset":
       return "";
     case undefined:
-      return "1350px";
+      return "1300px";
     default:
       return maxWidth + "px";
   }

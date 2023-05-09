@@ -11,12 +11,18 @@ export interface RecipeIngredient {
   isPrimary: boolean;
   converterToPrimary: number;
 }
+export interface RecipeIngredientFilterOption {
+  id: number;
+  count: number;
+}
 
 export interface RecipeIngredientState {
   collection: RecipeIngredient[] | null;
   isLoadingCollection: boolean;
   isSubmittingCollection: boolean;
   errors: RecipeIngredientsErrors[] | null;
+  filterOptions: RecipeIngredientFilterOption[] | null;
+  isLoadingFilterOptions: boolean;
 }
 
 export interface RecipeIngredientsErrors {

@@ -5,9 +5,8 @@
 >
   <div class="checkbox__input-wrapper">
     <input
+      v-bind="$attrs"
       :id="$attrs.id && $attrs.id + '-field'"
-      :name="$attrs.name"
-      :value="$attrs.value"
       v-model="value"
       type="checkbox"
       :disabled="isDisabled"

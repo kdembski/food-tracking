@@ -4,6 +4,7 @@ import CButton from "@/components/controls/button/index.vue";
 import CHorizontalTabs from "@/components/navigation/horizontal-tabs/index.vue";
 import RecipesListItemHeader from "./list-item/header/index.vue";
 import RecipesListItemBody from "./list-item/body/index.vue";
+import RecipesListIngredientsFilter from "./filters/ingredients/index.vue";
 
 export default {
   name: "RecipesListView",
@@ -13,6 +14,7 @@ export default {
     CHorizontalTabs,
     RecipesListItemHeader,
     RecipesListItemBody,
+    RecipesListIngredientsFilter,
   },
 };
 </script>
@@ -21,6 +23,7 @@ export default {
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { ListFilters } from "@/types/components/data-display/list";
 
 const store = useStore();
 const router = useRouter();
@@ -32,6 +35,7 @@ const recipesListDefaultFilters = {
   sortAttribute: "cookedDate",
   sortDirection: "desc",
   tags: "",
+  ingredientIds: [],
 };
 
 const recipeListSortOptions = ref([
@@ -98,6 +102,10 @@ const setRecipesCount = async () => {
 
 const goToNewRecipeView = () => {
   router.push("/recipes/new");
+};
+
+const loadRecipeIngredientsFilterOptions = (filters: ListFilters) => {
+  return store.dispatch("recipe/ingredient/loadFilterOptions", filters);
 };
 
 onMounted(() => {

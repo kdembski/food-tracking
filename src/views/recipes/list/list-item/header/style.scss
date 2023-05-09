@@ -1,7 +1,8 @@
 .item-header {
   &__name-wrapper {
     display: flex;
-    gap: $spacing-md;
+    column-gap: $spacing-md;
+    row-gap: $spacing-xs;
     flex-wrap: wrap;
     align-items: start;
   }

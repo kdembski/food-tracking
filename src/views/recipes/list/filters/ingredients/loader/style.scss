@@ -1,0 +1,33 @@
+.ingredients-filter-loader {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+  padding: 1px $spacing-md 1px $spacing-sm;
+  margin: -1px 0 0 -1px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    height: 20px;
+
+    .skeleton-loader__item {
+      &:nth-child(1) {
+        height: 22px;
+        width: 22px;
+      }
+
+      &:nth-child(2) {
+        width: 50%;
+        height: 17px;
+      }
+
+      &:nth-child(3) {
+        margin-left: auto;
+        height: 17px;
+        width: 17px;
+        border-radius: 100%;
+      }
+    }
+  }
+}

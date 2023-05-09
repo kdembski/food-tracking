@@ -50,6 +50,7 @@ const props = withDefaults(
     enableTags?: boolean;
     enableRandomButton?: boolean;
     sortOptions: DropdownOption<ListSortFilters>[];
+    loadAdditionalFilters?: (filters: ListFilters) => void;
   }>(),
   {
     isLoading: false,
@@ -65,12 +66,7 @@ const isLoadingList = computed(
 );
 
 const _isLoading = computed(() => {
-  if (props.enableTags) {
-    return (
-      isLoadingList.value || isLoadingAvailableTags.value || props.isLoading
-    );
-  }
-  return isLoadingList.value || props.isLoading;
+  return isLoadingList.value || props.isLoading || isLoadingAvailableTags.value;
 });
 
 const loadList = (filters: ListFilters) => {
@@ -82,6 +78,7 @@ const handleListLoadingProccess = () => {
   if (props.enableTags) {
     loadAvailableTags(filters.value);
   }
+  props.loadAdditionalFilters?.(filters.value);
   loadList(filters.value);
 };
 

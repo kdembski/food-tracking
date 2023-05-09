@@ -5,23 +5,29 @@
   .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-sm;
+    row-gap: $spacing-sm;
+    column-gap: $spacing-xs;
   }
 
   &:deep(.tag) {
     display: inline-flex;
     align-items: center;
-    padding: 0 $spacing-lg;
+    padding: 0 $spacing-lg - 1;
     color: var(--text-primary);
-    background-color: var(--surface-tetriary);
+    background-color: var(--surface-secondary);
     font-weight: $font-medium;
     font-size: $font-sm;
     border-radius: $tag-radius;
     height: $tag-height;
+    letter-spacing: -0.5px;
     cursor: pointer;
 
     &:hover {
-      filter: brightness(94%);
+      background-color: color-mix(
+        in srgb,
+        var(--surface-secondary) 92%,
+        var(--text-primary)
+      );
     }
   }
 
@@ -37,10 +43,8 @@
   }
 }
 
-[data-theme="dark"] {
-  .select-tags:deep(.tag) {
-    &:hover {
-      filter: brightness(135%);
-    }
+@media screen and (max-width: $screen-md) {
+  .select-tags {
+    gap: $spacing-lg;
   }
 }

@@ -57,6 +57,12 @@
           enableSortingSelectedToFront
           ref="selectedTagsRef"
         />
+        <slot
+          name="additionalFilters"
+          :filters="filters"
+          :handleListLoadingProccess="handleListLoadingProccess"
+          :isLoading="_isLoading"
+        ></slot>
       </div>
     </div>
   </transition>
@@ -91,7 +97,7 @@
         </template>
       </CList>
       <CPagination
-        v-if="list?.data?.length > 5 && !_isLoading"
+        v-if="list?.data?.length > 6 && !_isLoading"
         class="list-with-filters__pagination-bottom"
         :currentPage="filters.currentPage"
         @update:currentPage="changeCurrentPage"

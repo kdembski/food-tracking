@@ -20,6 +20,7 @@
       listName="recipesList"
       storeModuleName="recipe"
       :sortOptions="recipeListSortOptions"
+      :loadAdditionalFilters="loadRecipeIngredientsFilterOptions"
     >
       <template #header="{ item }">
         <RecipesListItemHeader :item="item" />
@@ -28,6 +29,15 @@
         <RecipesListItemBody
           :item="item"
           :addTagToSelected="addTagToSelected"
+        />
+      </template>
+      <template
+        #additionalFilters="{ filters, handleListLoadingProccess, isLoading }"
+      >
+        <RecipesListIngredientsFilter
+          :filters="filters"
+          :handleListLoadingProccess="handleListLoadingProccess"
+          :isLoadingList="isLoading"
         />
       </template>
     </CListWithFilters>

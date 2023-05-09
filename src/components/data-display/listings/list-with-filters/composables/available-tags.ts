@@ -6,17 +6,13 @@ export function useAvailableTags(storeModuleName: string) {
   const store = useStore();
 
   const loadAvailableTags = (filters: ListFilters) => {
-    const filtersForAvailableTags = {
-      searchPhrase: filters.searchPhrase,
-      tags: filters.tags,
-    };
-
-    store.dispatch(storeModuleName + "/loadTags", filtersForAvailableTags);
+    store.dispatch(storeModuleName + "/loadTags", filters);
   };
 
   const availableTags = computed(
     () => store.getters[storeModuleName + "/tags"]
   );
+
   const isLoadingAvailableTags = computed(
     () => store.getters[storeModuleName + "/isLoadingTags"]
   );

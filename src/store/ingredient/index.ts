@@ -41,6 +41,9 @@ const getters: GetterTree<IngredientState, any> = {
   errors: (state) => state.errors,
 
   primaryUnit: (state) => state.single?.units.find((unit) => unit.isPrimary),
+
+  getNameById: (state) => (id: number) =>
+    state.options?.find((options) => options.id === id)?.name,
 };
 
 const actions: ActionTree<IngredientState, any> = {

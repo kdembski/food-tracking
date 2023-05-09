@@ -11,6 +11,7 @@ export interface ListPaginationFilters {
 export interface ListBaseFilters {
   searchPhrase: string;
   tags?: string;
+  ingredientIds?: number[];
 }
 
 export interface ListFilters
