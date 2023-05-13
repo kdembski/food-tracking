@@ -2,44 +2,15 @@
   display: grid;
   gap: $spacing-xl;
 
-  .tags {
+  &__items {
     display: flex;
     flex-wrap: wrap;
     row-gap: $spacing-sm;
     column-gap: $spacing-xs;
   }
 
-  &:deep(.tag) {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 $spacing-lg - 1;
-    color: var(--text-primary);
-    background-color: var(--surface-secondary);
-    font-weight: $font-medium;
-    font-size: $font-sm;
-    border-radius: $tag-radius;
-    height: $tag-height;
-    letter-spacing: -0.5px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--surface-secondary) 92%,
-        var(--text-primary)
-      );
-    }
-  }
-
   &__empty {
     color: var(--text-primary);
-  }
-
-  .select-tags__new-tag {
-    color: var(--success-primary);
-    background-color: var(--success-secondary);
-    display: flex;
-    gap: 5px;
   }
 }
 

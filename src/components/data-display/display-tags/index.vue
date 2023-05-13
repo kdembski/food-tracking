@@ -1,18 +1,16 @@
 <script lang="ts">
-import CTags from "@/components/utils/tags/index.vue";
 export default {
   name: "CDisplayTags",
-  components: { CTags },
 };
 </script>
 
 <script setup lang="ts">
-import { nextTick, ref, Ref, watch } from "vue";
+import { computed, nextTick, ref, Ref, watch } from "vue";
 import { useWindowSize } from "@/composables/window-size";
 
 const props = defineProps({
   tags: {
-    type: [String, Array],
+    type: String,
     default: "",
   },
   size: {
@@ -38,6 +36,12 @@ const props = defineProps({
 const { windowWidth } = useWindowSize();
 const tagRefs: Ref<HTMLElement[] | undefined> = ref();
 
+const tags = computed(() =>
+  props.tags.split(",").map((tag) => ({
+    name: tag,
+  }))
+);
+
 const emit = defineEmits<{
   (e: "click", name: string): void;
 }>();
@@ -51,7 +55,7 @@ const getContainerClasses = () => {
 };
 
 const getSizeClass = () => {
-  return "tags--" + props.size;
+  return "display-tags--" + props.size;
 };
 
 const getItemClasses = () => {

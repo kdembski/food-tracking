@@ -30,7 +30,11 @@
     }
 
     &:hover {
-      filter: brightness(94%);
+      background-color: color-mix(
+        in srgb,
+        var(--surface-tetriary) 92%,
+        var(--text-primary)
+      );
     }
   }
 }

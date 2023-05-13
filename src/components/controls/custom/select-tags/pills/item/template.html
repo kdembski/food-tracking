@@ -6,7 +6,7 @@
     class="tag__checkbox"
     type="checkbox"
   />
-  <label class="tag tag--with-hover" :for="getItemId()">
+  <label class="tag__label" :for="getItemId()">
     <p class="tag__name">{{ tag.name }}</p>
     <span v-if="withCounts && tag.count > 1" class="tag__count">
       {{ tag.count }}

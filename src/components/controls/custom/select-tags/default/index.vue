@@ -11,7 +11,7 @@ export default {
 <script setup lang="ts">
 import { nextTick, ref, watch } from "vue";
 import { Tag } from "@/types/components/utils/tags";
-import { useCommonMethods } from "../composables/common-methods";
+import { useSelectTagsCommonMethods } from "../composables/common-methods";
 
 const props = withDefaults(
   defineProps<{
@@ -29,8 +29,10 @@ const emits = defineEmits<{
   (e: "update:tags", tags: Tag[]): void;
 }>();
 
-const { _selectedTags, _tags, addTagToSelected, addTagToOptions } =
-  useCommonMethods(props, emits);
+const { _selectedTags, _tags, addTagToSelected } = useSelectTagsCommonMethods(
+  props,
+  emits
+);
 
 const selectedValue = ref(null);
 const inputValue = ref("");
@@ -76,8 +78,9 @@ const getTagOptions = () => {
   );
 };
 
-const updateInputPadding = async () => {
-  const input = container.value?.getElementsByTagName("input")[0];
+const updateInputPadding = async (
+  input = container.value?.getElementsByTagName("input")[0]
+) => {
   if (!input) {
     return;
   }
@@ -87,7 +90,7 @@ const updateInputPadding = async () => {
   input.style.paddingLeft = selectedWidth + "px";
 };
 
-watch([_selectedTags, () => props.isLoading], updateInputPadding, {
+watch([_selectedTags, () => props.isLoading], () => updateInputPadding(), {
   deep: true,
 });
 </script>

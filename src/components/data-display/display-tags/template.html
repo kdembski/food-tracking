@@ -1,14 +1,11 @@
-<CTags v-if="tags" :tags="tags" :class="getContainerClasses()">
-  <template #default="{ tagsArray }">
-    <template v-for="(tag, index) in tagsArray">
-      <div
-        class="tag"
-        :class="getItemClasses()"
-        @click="onClick(tag.name)"
-        ref="tagRefs"
-      >
-        {{ tag.name }}
-      </div>
-    </template>
-  </template>
-</CTags>
+<div v-if="tags" class="display-tags" :class="getContainerClasses()">
+  <p
+    v-for="tag in tags"
+    class="tag"
+    :class="getItemClasses()"
+    @click="onClick(tag.name)"
+    ref="tagRefs"
+  >
+    {{ tag.name }}
+  </p>
+</div>

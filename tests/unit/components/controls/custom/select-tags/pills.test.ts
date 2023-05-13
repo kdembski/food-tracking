@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import CSelectTags from "@/components/controls/custom/select-tags/pills/index.vue";
 
-describe("Select Tags Component", () => {
+describe("Select Tags Pills Component", () => {
   let wrapper: any;
   let input: any;
   let newTag: any;
@@ -29,7 +29,6 @@ describe("Select Tags Component", () => {
     });
 
     input = wrapper.find(".select-tags__input > input");
-    newTag = wrapper.find(".select-tags__new-tag");
   });
 
   it("Should set _selectedTags based on selectedTags props", async () => {
@@ -118,13 +117,6 @@ describe("Select Tags Component", () => {
     ]);
   });
 
-  it("Should show new tag if enableAddingTags prop is true", async () => {
-    expect(newTag.exists()).toBe(true);
-
-    const newTagText = newTag.find("p");
-    expect(newTagText.exists()).toBe(false);
-  });
-
   it("Should filter tags based on search phrase value", async () => {
     await input.setValue("tag3");
     expect(
@@ -139,41 +131,6 @@ describe("Select Tags Component", () => {
     ).toEqual([
       {
         name: "tag3",
-      },
-    ]);
-  });
-
-  it("Should clear search phrase after tag selection", async () => {
-    await input.setValue("tag3");
-    expect(wrapper.vm.searchPhrase).toEqual("tag3");
-
-    await newTag.trigger("click");
-    expect(wrapper.vm.searchPhrase).toEqual("");
-  });
-
-  it("Should add tag to selected and options on new tag click", async () => {
-    await newTag.trigger("click");
-    await input.setValue("tag4");
-
-    const newTagText = newTag.find("p");
-    expect(newTagText.text()).toEqual("tag4...");
-
-    await newTag.trigger("click");
-    expect(wrapper.emitted()["update:selectedTags"][0][0]).toEqual("tag1,tag4");
-    expect(wrapper.emitted()["update:tags"][0][0]).toEqual([
-      {
-        name: "tag1",
-        count: 12,
-      },
-      {
-        name: "tag2",
-        count: 23,
-      },
-      {
-        name: "tag3",
-      },
-      {
-        name: "tag4",
       },
     ]);
   });

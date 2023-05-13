@@ -1,12 +1,11 @@
 <script lang="ts">
-import CTags from "@/components/utils/tags/index.vue";
 import CInput from "@/components/controls/inputs/input/index.vue";
 import Item from "./item/index.vue";
 import Loader from "./loader/index.vue";
 
 export default {
   name: "CSelectTags - Pills",
-  components: { CTags, Item, Loader, CInput },
+  components: { Item, Loader, CInput },
   inheritAttrs: false,
 };
 </script>
@@ -15,7 +14,7 @@ export default {
 import { ref, Ref } from "vue";
 import { Tag } from "@/types/components/utils/tags";
 import { cloneDeep } from "lodash";
-import { useCommonMethods } from "../composables/common-methods";
+import { useSelectTagsCommonMethods } from "../composables/common-methods";
 
 const props = withDefaults(
   defineProps<{
@@ -23,13 +22,11 @@ const props = withDefaults(
     selectedTags: string;
     isLoading?: boolean;
     withCounts?: boolean;
-    enableAddingTags?: boolean;
     enableSortingSelectedToFront?: boolean;
     inputIcon?: string;
   }>(),
   {
     isLoading: false,
-    enableAddingTags: false,
     withCounts: false,
     enableSortingSelectedToFront: false,
     inputIcon: "tags",
@@ -45,20 +42,15 @@ const {
   _selectedTags,
   _tags,
   addTagToSelected,
-  addTagToOptions,
   isTagSelected,
-} = useCommonMethods(props, emits);
+  addTagToOptions,
+} = useSelectTagsCommonMethods(props, emits);
 
 const container: Ref<HTMLElement | undefined> = ref();
-const inputRef: Ref<{ input: HTMLInputElement } | undefined> = ref();
 const searchPhrase = ref("");
 
 const getPreparedTags = (tags: Tag[]) => {
   return sortSelectedToFront(filterBySearchPhrase(tags));
-};
-
-const clearSearchPhrase = () => {
-  searchPhrase.value = "";
 };
 
 const filterBySearchPhrase = (tags: Tag[]) => {
@@ -80,17 +72,6 @@ const sortSelectedToFront = (tags: Tag[]) => {
 
     return 1;
   });
-};
-
-const onNewTagClick = () => {
-  if (!searchPhrase.value) {
-    inputRef.value?.input.focus();
-    return;
-  }
-
-  addTagToOptions(searchPhrase.value);
-  addTagToSelected(searchPhrase.value);
-  clearSearchPhrase();
 };
 
 defineExpose({ addTagToSelected });

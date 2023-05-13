@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { Tag } from "@/types/components/utils/tags";
 
-export function useCommonMethods(props: any, emits: any) {
+export function useSelectTagsCommonMethods(props: any, emits: any) {
   const _selectedTags = computed({
     get(): string[] {
       if (!props.selectedTags) {

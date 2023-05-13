@@ -3,30 +3,19 @@
     class="select-tags__input"
     v-model="searchPhrase"
     :icon="inputIcon"
-    :placeholder="'Wyszukaj tag' + (enableAddingTags ? ' albo dodaj nowy' : '')"
+    placeholder="Wyszukaj tag"
     :isLoading="isLoading"
     label="Tagi"
-    ref="inputRef"
   />
   <Loader v-if="isLoading" :containerWidth="container?.clientWidth" />
-  <CTags v-else-if="tags.length > 0" :tags="tags">
-    <template #default="{ tagsArray }">
-      <Item
-        v-for="tag in getPreparedTags(tagsArray)"
-        v-model:selectedTags="_selectedTags"
-        :tag="tag"
-        :withCounts="withCounts"
-        :id="$attrs.id"
-      />
-      <div
-        v-if="enableAddingTags"
-        class="select-tags__new-tag tag"
-        @click.stop="onNewTagClick"
-      >
-        <FontAwesomeIcon icon="plus" />
-        <p v-if="searchPhrase">{{ searchPhrase }}...</p>
-      </div>
-    </template>
-  </CTags>
+  <div v-else-if="tags.length > 0" class="select-tags__items">
+    <Item
+      v-for="tag in getPreparedTags(_tags)"
+      v-model:selectedTags="_selectedTags"
+      :tag="tag"
+      :withCounts="withCounts"
+      :id="$attrs.id"
+    />
+  </div>
   <div v-else class="select-tags__empty">Brak tagów</div>
 </div>

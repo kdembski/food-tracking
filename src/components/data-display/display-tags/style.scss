@@ -1,4 +1,4 @@
-.tags {
+.display-tags {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -6,12 +6,15 @@
   .tag {
     font-weight: $font-medium;
     color: var(--text-secondary);
-    cursor: pointer;
     display: flex;
     position: relative;
 
-    &--with-hover:hover {
-      color: var(--text-primary);
+    &--with-hover {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--text-primary);
+      }
     }
 
     &:not(:last-child):after {

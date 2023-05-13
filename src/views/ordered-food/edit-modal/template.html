@@ -10,11 +10,9 @@
     <CInput v-model="orderedFood.placeName" label="Nazwa miejsca" />
     <CInput v-model="orderedFood.placeLink" label="Link do miejsca" />
     <CSelectTags
-      id="edit-modal-select-tags"
       v-model:selectedTags="orderedFood.tags"
       v-model:tags="orderedFoodTags"
       :isLoading="isLoadingTags"
-      inputIcon=""
       enableAddingTags
     />
   </div>
