@@ -1,6 +1,6 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
-import CButtonWithDropdown from "@/components/controls/button-with-dropdown/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
+import CButtonWithDropdown from "@/components/controls/buttons/button-with-dropdown/index.vue";
 import InlineSvg from "vue-inline-svg";
 
 export default {

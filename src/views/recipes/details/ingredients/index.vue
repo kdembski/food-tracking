@@ -1,5 +1,5 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 import CSetPortions from "@/components/controls/custom/set-portions/index.vue";
 import RecipeIngredientsFields from "../../fields/ingredients/index.vue";

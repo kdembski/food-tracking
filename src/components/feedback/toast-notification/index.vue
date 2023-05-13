@@ -1,6 +1,6 @@
 <script lang="ts">
 import CIcon from "@/components/utils/icon/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 
 export default {
   name: "CToastNotification",

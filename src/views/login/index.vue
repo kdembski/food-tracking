@@ -1,6 +1,6 @@
 <script lang="ts">
-import CInput from "@/components/controls/input/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
 
 export default {

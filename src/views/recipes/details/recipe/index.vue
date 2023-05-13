@@ -1,6 +1,6 @@
 <script lang="ts">
 import InlineSvg from "vue-inline-svg";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";

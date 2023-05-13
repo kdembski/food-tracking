@@ -1,5 +1,5 @@
 import { mount, VueWrapper, DOMWrapper } from "@vue/test-utils";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
 import { config } from "@vue/test-utils";
 import { createStore } from "vuex";
 

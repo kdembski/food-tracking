@@ -1,8 +1,8 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
-import CInput from "@/components/controls/input/index.vue";
-import CDraggableButton from "@/components/controls/draggable-button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
+import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
+import CDraggableButton from "@/components/controls/buttons/draggable-button/index.vue";
 
 export default {
   name: "ShoppingListAddItem",

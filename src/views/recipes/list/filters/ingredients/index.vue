@@ -1,7 +1,7 @@
 <script lang="ts">
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 import CCheckbox from "@/components/controls/checkbox/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import IngredientsFilterLoader from "./loader/index.vue";
 
 export default {

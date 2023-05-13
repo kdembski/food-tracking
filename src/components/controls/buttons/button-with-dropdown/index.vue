@@ -1,5 +1,5 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CDropdown from "@/components/utils/dropdown/index.vue";
 
 export default {
@@ -10,7 +10,7 @@ export default {
 <script setup lang="ts">
 import { ref, Ref } from "vue";
 import { useDropdownProps } from "@/components/utils/dropdown/composables/props";
-import { useButtonProps } from "@/components/controls/button/composables/props";
+import { useButtonProps } from "@/components/controls/buttons/button/composables/props";
 
 const { getDropdownProps } = useDropdownProps();
 const { getButtonProps } = useButtonProps();

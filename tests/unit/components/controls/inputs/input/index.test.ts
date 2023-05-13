@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 
 describe("Input Component", () => {
   let wrapper: any;

@@ -1,5 +1,5 @@
 <script lang="ts">
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
 import { IngredientUnit } from "@/types/ingredients/unit";
 

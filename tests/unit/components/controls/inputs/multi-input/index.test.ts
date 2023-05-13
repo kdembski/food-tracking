@@ -1,5 +1,5 @@
 import { DOMWrapper, mount, VueWrapper } from "@vue/test-utils";
-import CMultiInput from "@/components/controls/multi-input/index.vue";
+import CMultiInput from "@/components/controls/inputs/multi-input/index.vue";
 import { MultiInputValuesTypes } from "@/types/components/multi-input";
 
 describe("Multi Input Component", () => {

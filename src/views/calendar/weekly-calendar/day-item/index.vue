@@ -1,6 +1,6 @@
 <script lang="ts">
 import CDisplayTags from "@/components/data-display/display-tags/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CDisplayMembers from "@/components/data-display/display-members/index.vue";
 
 export default {

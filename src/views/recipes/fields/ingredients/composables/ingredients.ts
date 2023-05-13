@@ -46,6 +46,7 @@ export function useIngredients(
   ) => {
     if (units.length === 1) {
       recipeIngredients.value[index].unitId = units[0].unitId;
+      incrementUnitAutocompleteKey(index);
       getComponentInput("amount-input", index)?.focus();
       return;
     }

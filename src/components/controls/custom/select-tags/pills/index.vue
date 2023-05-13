@@ -1,6 +1,6 @@
 <script lang="ts">
 import CTags from "@/components/utils/tags/index.vue";
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 import Item from "./item/index.vue";
 import Loader from "./loader/index.vue";
 

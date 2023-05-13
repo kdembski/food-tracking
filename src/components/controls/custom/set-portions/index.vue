@@ -1,6 +1,6 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
-import CInput from "@/components/controls/input/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 
 export default {
   name: "CSetPortions",

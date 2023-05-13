@@ -2,7 +2,7 @@
 import CSortingTrigger from "./sorting-trigger/index.vue";
 import CTable from "@/components/data-display/listings/table/index.vue";
 import CPagination from "@/components/utils/pagination/index.vue";
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 
 export default {
   name: "CTableWithFilters",

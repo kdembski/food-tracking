@@ -1,7 +1,7 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
-import CInput from "@/components/controls/input/index.vue";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
+import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
 import CSelectTags from "@/components/controls/custom/select-tags/default/index.vue";
 
 export default {

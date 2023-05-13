@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 
 describe("Button Component", () => {
   let wrapper: any;

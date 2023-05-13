@@ -1,8 +1,8 @@
 <script lang="ts">
 import CHorizontalTabs from "@/components/navigation/horizontal-tabs/index.vue";
 import CCard from "@/components/surfaces/card/index.vue";
-import CButton from "@/components/controls/button/index.vue";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
+import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
 import ShoppingItems from "./items/default/index.vue";
 import ShoppingItemsByRecipe from "./items/by-recipe/index.vue";
 import ShoppingItemsByCategory from "./items/by-category/index.vue";

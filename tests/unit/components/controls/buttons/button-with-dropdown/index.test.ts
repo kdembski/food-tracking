@@ -1,5 +1,5 @@
 import { mount, DOMWrapper } from "@vue/test-utils";
-import CButtonWithDropdown from "@/components/controls/button-with-dropdown/index.vue";
+import CButtonWithDropdown from "@/components/controls/buttons/button-with-dropdown/index.vue";
 import { createStore } from "vuex";
 
 describe("Button Component", () => {

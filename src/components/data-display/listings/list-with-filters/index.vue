@@ -1,10 +1,10 @@
 <script lang="ts">
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 import CSelectTags from "@/components/controls/custom/select-tags/pills/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CList from "@/components/data-display/listings/list/index.vue";
 import CPagination from "@/components/utils/pagination/index.vue";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
 import CSelect from "@/components/controls/select/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 

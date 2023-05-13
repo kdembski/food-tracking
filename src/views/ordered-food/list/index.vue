@@ -2,7 +2,7 @@
 import CListWithFilters from "@/components/data-display/listings/list-with-filters/index.vue";
 import OrderedFoodListItemHeader from "./list-item/header/index.vue";
 import OrderedFoodListItemBody from "./list-item/body/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import EditModal from "../edit-modal/index.vue";
 
 export default {

@@ -1,7 +1,7 @@
 import CAutocomplete from "./index.vue";
 
 export default {
-  title: "Controls/Autocomplete",
+  title: "controls/inputs/autocomplete",
   component: CAutocomplete,
 };
 

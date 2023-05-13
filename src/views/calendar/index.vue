@@ -2,9 +2,9 @@
 import CCalendarMode from "@/components/controls/custom/calendar-mode/index.vue";
 import MonthlyCalendar from "./monthly-calendar/index.vue";
 import WeeklyCalendar from "./weekly-calendar/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CSelectMembers from "@/components/controls/custom/select-members/index.vue";
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 
 export default {
   name: "CalendarView",

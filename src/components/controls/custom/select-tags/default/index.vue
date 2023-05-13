@@ -1,5 +1,5 @@
 <script lang="ts">
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
+import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
 
 export default {
   name: "CSelectTags",

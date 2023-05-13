@@ -1,7 +1,7 @@
 <script lang="ts">
 import CCheckbox from "@/components/controls/checkbox/index.vue";
-import CButton from "@/components/controls/button/index.vue";
-import CButtonWithDropdown from "@/components/controls/button-with-dropdown/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
+import CButtonWithDropdown from "@/components/controls/buttons/button-with-dropdown/index.vue";
 
 export default {
   name: "ShoppingItem",

@@ -1,7 +1,7 @@
 <script lang="ts">
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
-import MultiInputLoader from "@/components/controls/multi-input/loader/index.vue";
-import InputLoader from "@/components/controls/input/loader/index.vue";
+import MultiInputLoader from "@/components/controls/inputs/multi-input/loader/index.vue";
+import InputLoader from "@/components/controls/inputs/input/loader/index.vue";
 
 export default {
   name: "EditIngredientModalLoader",

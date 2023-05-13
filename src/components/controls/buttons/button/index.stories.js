@@ -1,7 +1,7 @@
 import CButton from "./index.vue";
 
 export default {
-  title: "Controls/Button",
+  title: "controls/buttons/button",
   component: CButton,
   argTypes: {
     variant: {

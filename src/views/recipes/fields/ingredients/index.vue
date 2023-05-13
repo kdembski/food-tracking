@@ -1,8 +1,8 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
-import CInput from "@/components/controls/input/index.vue";
-import CAutocomplete from "@/components/controls/autocomplete/index.vue";
-import CMultiInput from "@/components/controls/multi-input/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
+import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
+import CMultiInput from "@/components/controls/inputs/multi-input/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
 

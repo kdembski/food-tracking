@@ -1,7 +1,7 @@
 <script lang="ts">
-import CInput from "@/components/controls/input/index.vue";
+import CInput from "@/components/controls/inputs/input/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CSetPortions from "@/components/controls/custom/set-portions/index.vue";
 import SelectShoppingList from "../select-list/index.vue";
 

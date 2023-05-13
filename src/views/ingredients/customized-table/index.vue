@@ -1,6 +1,6 @@
 <script lang="ts">
 import CTableWithFilters from "@/components/data-display/listings/table-with-filters/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CModal from "@/components/surfaces/modal/index.vue";
 
 export default {

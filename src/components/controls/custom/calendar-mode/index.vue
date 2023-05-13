@@ -1,5 +1,5 @@
 <script lang="ts">
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 
 export default {
   name: "CCalendarMode",

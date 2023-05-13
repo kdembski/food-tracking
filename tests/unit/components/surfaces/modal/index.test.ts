@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import CModal from "@/components/surfaces/modal/index.vue";
-import CButton from "@/components/controls/button/index.vue";
+import CButton from "@/components/controls/buttons/button/index.vue";
 import CLoader from "@/components/feedback/loader/index.vue";
 
 describe("Modal Component", () => {
