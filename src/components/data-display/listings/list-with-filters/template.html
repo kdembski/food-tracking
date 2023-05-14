@@ -106,16 +106,10 @@
       />
     </div>
   </transition>
-  <button
-    v-if="isMobile"
-    class="list-with-filters__toggle-mobile-filters"
-    :style="mobileBtnStyle"
-    @touchmove.prevent="onMobileBtnTouchMove"
-    @touchstart="onMobileBtnTouchStart"
+  <CDraggableButton
+    id="list-with-filters-toggle-mobile-filters"
+    :icon="areMobileFiltersOpen ? 'list' : 'magnifying-glass'"
+    class="shopping-list-add-item__mobile-btn"
     @click="toggleFiltersOnMobile"
-  >
-    <FontAwesomeIcon
-      :icon="areMobileFiltersOpen ? 'list' : 'magnifying-glass'"
-    />
-  </button>
+  />
 </div>

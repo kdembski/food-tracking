@@ -163,22 +163,4 @@ describe("List With Filters Component", () => {
     expect(wrapper.vm.areMobileFiltersOpen).toBe(false);
     jest.runAllTimers();
   });
-
-  it("Should set mobile button translateY based on touch move event", async () => {
-    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(644px)");
-
-    const touchEvent = {
-      changedTouches: [
-        {
-          pageY: 10,
-        },
-      ],
-    };
-    await wrapper.vm.onMobileBtnTouchMove(touchEvent);
-    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(644px)");
-
-    touchEvent.changedTouches[0].pageY = -10;
-    await wrapper.vm.onMobileBtnTouchMove(touchEvent);
-    expect(wrapper.vm.mobileBtnStyle).toEqual("transform: translateY(624px)");
-  });
 });

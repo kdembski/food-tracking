@@ -10,12 +10,12 @@ import { computed, onBeforeMount, ref, useAttrs, watch } from "vue";
 import StorageService from "@/services/storage.service";
 
 const props = defineProps<{
-  icon: string;
+  icon?: string;
 }>();
 
 const { windowHeight, isMobile } = useWindowSize();
 const attrs = useAttrs();
-const maxPositionY = windowHeight.value - 70;
+const maxPositionY = windowHeight.value - 60;
 const positionY = ref(maxPositionY);
 const currentPageY = ref(0);
 const button = ref<HTMLButtonElement>();

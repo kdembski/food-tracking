@@ -7,6 +7,7 @@ import CPagination from "@/components/utils/pagination/index.vue";
 import CAutocomplete from "@/components/controls/inputs/autocomplete/index.vue";
 import CSelect from "@/components/controls/select/index.vue";
 import CSkeletonLoader from "@/components/feedback/skeleton-loader/index.vue";
+import CDraggableButton from "@/components/controls/buttons/draggable-button/index.vue";
 
 export default {
   name: "CListWithFilters",
@@ -19,6 +20,7 @@ export default {
     CAutocomplete,
     CSelect,
     CSkeletonLoader,
+    CDraggableButton,
   },
 };
 </script>
@@ -122,13 +124,8 @@ const { loadAvailableTags, availableTags, isLoadingAvailableTags } =
 
 const { isMobile, windowHeight } = useWindowSize();
 
-const {
-  areMobileFiltersOpen,
-  toggleFiltersOnMobile,
-  onMobileBtnTouchMove,
-  onMobileBtnTouchStart,
-  mobileBtnStyle,
-} = useMobileFilters(isMobile, windowHeight);
+const { areMobileFiltersOpen, toggleFiltersOnMobile } =
+  useMobileFilters(isMobile);
 
 const paginationRef: Ref<HTMLElement | undefined> = ref();
 const { paginationStickyClass } = useStickyPagination(paginationRef);

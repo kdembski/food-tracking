@@ -1,9 +1,6 @@
-import { ref, Ref, computed } from "vue";
+import { ref, Ref } from "vue";
 
-export function useMobileFilters(
-  isMobile: Ref<boolean>,
-  windowHeight: Ref<number>
-) {
+export function useMobileFilters(isMobile: Ref<boolean>) {
   const areMobileFiltersOpen = ref(false);
   const mainScrollContainer = document.querySelector("#main-scroll-container");
 
@@ -27,36 +24,8 @@ export function useMobileFilters(
     }, 400);
   };
 
-  const maxPositionY = windowHeight.value - 124;
-  const mobileBtnPositionY = ref(maxPositionY);
-  const currentPageY = ref(0);
-
-  const onMobileBtnTouchMove = (e: TouchEvent) => {
-    const pageY = e.changedTouches[0].pageY;
-    const touchMoveDifference = currentPageY.value - pageY;
-    currentPageY.value = pageY;
-
-    const newPositionY = mobileBtnPositionY.value - touchMoveDifference;
-    if (newPositionY > maxPositionY || newPositionY < 5) {
-      return;
-    }
-
-    mobileBtnPositionY.value = newPositionY;
-  };
-
-  const onMobileBtnTouchStart = (e: TouchEvent) => {
-    currentPageY.value = e.changedTouches[0].pageY;
-  };
-
-  const mobileBtnStyle = computed(() => {
-    return "transform: translateY(" + mobileBtnPositionY.value + "px)";
-  });
-
   return {
     areMobileFiltersOpen,
     toggleFiltersOnMobile,
-    onMobileBtnTouchMove,
-    onMobileBtnTouchStart,
-    mobileBtnStyle,
   };
 }
