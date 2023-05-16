@@ -1,5 +1,5 @@
 import { ApiError } from "@/types/api";
-import { ListWithFilters } from "@/types/components/data-display/list";
+import { List } from "@/types/components/data-display/list";
 
 export interface IngredientState {
   single: Ingredient | null;
@@ -46,7 +46,11 @@ export interface IngredientOption {
   name: string;
 }
 
-export type IngredientsList = ListWithFilters<IngredientListItem>;
+export type IngredientsList = List<IngredientListItem>;
+
+export interface IngredientsFilters {
+  searchPhrase: string;
+}
 
 export enum IngredientsNavItems {
   LIST = "LIST",

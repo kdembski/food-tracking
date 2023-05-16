@@ -6,7 +6,7 @@ import { Ref } from "vue";
 let temporarySearchPhrase = "";
 
 export function useSearchPhraseFilter(
-  filters: Ref<ListFilters>,
+  filters: Ref<ListFilters<any>>,
   handleListLoadingProccess: () => void,
   storeModuleName: string
 ) {
@@ -19,28 +19,21 @@ export function useSearchPhraseFilter(
   };
 
   const setTemporarySearchPhrase = () => {
-    temporarySearchPhrase = filters.value.searchPhrase;
+    temporarySearchPhrase = filters.value.custom.searchPhrase;
   };
 
   const filterBySearchPhraseWithDelay = () => {
     setTimeout(() => {
-      if (temporarySearchPhrase === filters.value.searchPhrase) {
+      if (temporarySearchPhrase === filters.value.custom.searchPhrase) {
         return;
       }
+
       filterBySearchPhrase();
     }, 100);
   };
 
   const loadSearchSuggestions = () => {
-    const filtersForSearchSuggestions = {
-      searchPhrase: "",
-      tags: filters.value.tags,
-    };
-
-    store.dispatch(
-      storeModuleName + "/loadSearchSuggestions",
-      filtersForSearchSuggestions
-    );
+    store.dispatch(storeModuleName + "/loadSearchSuggestions", filters);
   };
 
   const searchSuggestions = computed(() => {

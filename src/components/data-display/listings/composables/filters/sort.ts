@@ -8,7 +8,7 @@ import {
 import { Ref } from "vue";
 
 export function useSortFilter(
-  filters: Ref<ListFilters>,
+  filters: Ref<ListFilters<unknown>>,
   handleListLoadingProccess: () => void
 ) {
   const selectedSort = computed(() => {

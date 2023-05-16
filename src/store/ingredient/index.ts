@@ -1,5 +1,5 @@
 import ApiService from "@/services/api.service";
-import { ApiError, ErrorCodes } from "@/types/api";
+import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getListQuery } from "../helpers/list-query";
@@ -8,6 +8,7 @@ import {
   Ingredient,
   IngredientErrors,
   IngredientOption,
+  IngredientsFilters,
   IngredientsList,
   IngredientState,
 } from "@/types/ingredients/ingredient";
@@ -47,7 +48,7 @@ const getters: GetterTree<IngredientState, any> = {
 };
 
 const actions: ActionTree<IngredientState, any> = {
-  loadList({ commit, dispatch }, filters: ListFilters) {
+  loadList({ commit, dispatch }, filters: ListFilters<IngredientsFilters>) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 

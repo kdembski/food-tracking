@@ -3,15 +3,13 @@ import {
   OrderedFoodState,
   OrderedFoodList,
   OrderedFood,
+  OrderedFoodFilters,
 } from "@/types/ordered-food/ordered-food";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { getListQuery, getListBaseQuery } from "../helpers/list-query";
-import {
-  ListFilters,
-  ListBaseFilters,
-} from "@/types/components/data-display/list";
+import { getCustomFiltersQuery, getListQuery } from "../helpers/list-query";
+import { ListFilters } from "@/types/components/data-display/list";
 import {
   getErrorMessage,
   showDefualtErrorNotification,
@@ -39,7 +37,7 @@ const getters: GetterTree<OrderedFoodState, any> = {
 };
 
 const actions: ActionTree<OrderedFoodState, any> = {
-  loadList({ commit, rootState }, filters: ListFilters) {
+  loadList({ commit, rootState }, filters: ListFilters<OrderedFoodFilters>) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 
@@ -59,14 +57,14 @@ const actions: ActionTree<OrderedFoodState, any> = {
     });
   },
 
-  loadTags({ commit, rootState }, filters: ListBaseFilters) {
+  loadTags({ commit, rootState }, filters: ListFilters<OrderedFoodFilters>) {
     return new Promise<string[]>((resolve, reject) => {
       commit("setIsLoadingTags", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/ordered/tags" +
-          getListBaseQuery(filters)
+          getCustomFiltersQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
           const tags = response.data;

@@ -26,7 +26,7 @@
           />
         </div>
         <CAutocomplete
-          v-model:inputValue="filters.searchPhrase"
+          v-model:inputValue="filters.custom.searchPhrase"
           @enter="filterBySearchPhrase"
           @blur="filterBySearchPhraseWithDelay"
           @focus="setTemporarySearchPhrase"
@@ -49,7 +49,7 @@
         />
         <CSelectTags
           v-if="enableTags"
-          :selectedTags="filters.tags"
+          :selectedTags="filters.custom.tags"
           @update:selectedTags="filterByTags"
           :tags="availableTags"
           :isLoading="_isLoading"

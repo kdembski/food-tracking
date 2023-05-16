@@ -5,15 +5,13 @@ import {
   Recipe,
   RecipeErrors,
   RecipeOption,
+  RecipesFilters,
 } from "@/types/recipes/recipe";
 import { ApiError, DbResults } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { getListQuery, getListBaseQuery } from "../helpers/list-query";
-import {
-  ListFilters,
-  ListBaseFilters,
-} from "@/types/components/data-display/list";
+import { getCustomFiltersQuery, getListQuery } from "../helpers/list-query";
+import { ListFilters } from "@/types/components/data-display/list";
 import { DropdownOption } from "@/types/components/utils/dropdown";
 import { Tag } from "@/types/components/utils/tags";
 import ingredient from "./ingredient";
@@ -69,7 +67,7 @@ const getters: GetterTree<RecipeState, any> = {
 };
 
 const actions: ActionTree<RecipeState, any> = {
-  loadList({ commit, dispatch }, filters: ListFilters) {
+  loadList({ commit, dispatch }, filters: ListFilters<RecipesFilters>) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 
@@ -89,14 +87,14 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  loadTags({ commit, dispatch }, filters: ListBaseFilters) {
+  loadTags({ commit, dispatch }, filters: ListFilters<RecipesFilters>) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingTags", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/recipes/tags" +
-          getListBaseQuery(filters)
+          getCustomFiltersQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
           commit("setIsLoadingTags", false);
@@ -110,14 +108,17 @@ const actions: ActionTree<RecipeState, any> = {
     });
   },
 
-  loadSearchSuggestions({ commit, dispatch }, filters: ListBaseFilters) {
+  loadSearchSuggestions(
+    { commit, dispatch },
+    filters: ListFilters<RecipesFilters>
+  ) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingSearchSuggestions", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/recipes/suggestions" +
-          getListBaseQuery(filters)
+          getCustomFiltersQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
           commit("setIsLoadingSearchSuggestions", false);

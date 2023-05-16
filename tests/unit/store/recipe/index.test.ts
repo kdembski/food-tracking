@@ -25,10 +25,12 @@ describe("Recipe Store Module", () => {
   const listFilters = {
     currentPage: 1,
     pageSize: 10,
-    searchPhrase: "test",
-    tags: "tag",
     sortAttribute: "attr",
     sortDirection: "dir",
+    custom: {
+      searchPhrase: "test",
+      tags: "tag",
+    },
   };
 
   beforeEach(async () => {
@@ -104,14 +106,10 @@ describe("Recipe Store Module", () => {
   });
 
   it("Should set tags to state on successful loadTags action dispatch", async () => {
-    const filters = {
-      searchPhrase: "test",
-      tags: "tag",
-    };
     const tags = "tag1,tag2";
 
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: tags }));
-    store.dispatch("module/loadTags", filters);
+    store.dispatch("module/loadTags", listFilters);
     expect(store.getters["module/isLoadingTags"]).toBe(true);
     await flushPromises();
 
@@ -130,14 +128,10 @@ describe("Recipe Store Module", () => {
   });
 
   it("Should set suggestions to state on successful loadSearchSuggestions action dispatch", async () => {
-    const filters = {
-      searchPhrase: "test",
-      tags: "tag",
-    };
     const suggestions = ["test"];
 
     mockAxiosGet.mockImplementation(() => Promise.resolve({ data: ["test"] }));
-    store.dispatch("module/loadSearchSuggestions", filters);
+    store.dispatch("module/loadSearchSuggestions", listFilters);
     expect(store.getters["module/isLoadingSearchSuggestions"]).toBe(true);
     await flushPromises();
 

@@ -19,14 +19,18 @@ export default {
 
 <script setup lang="ts">
 import { ref, Ref } from "vue";
+import { OrderedFoodFilters } from "@/types/ordered-food/ordered-food";
+import { ListFilters } from "@/types/components/data-display/list";
 
-const orderedFoodListDefaultFilters = {
+const orderedFoodListDefaultFilters: ListFilters<OrderedFoodFilters> = {
   currentPage: 1,
   pageSize: 10,
-  searchPhrase: "",
   sortAttribute: "foodName",
   sortDirection: "asc",
-  tags: "",
+  custom: {
+    searchPhrase: "",
+    tags: "",
+  },
 };
 
 const orderedFoodListSortOptions = ref([

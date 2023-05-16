@@ -24,18 +24,21 @@ import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ListFilters } from "@/types/components/data-display/list";
+import { RecipesFilters } from "@/types/recipes/recipe";
 
 const store = useStore();
 const router = useRouter();
 
-const recipesListDefaultFilters = {
+const recipesListDefaultFilters: ListFilters<RecipesFilters> = {
   currentPage: 1,
   pageSize: 20,
-  searchPhrase: "",
   sortAttribute: "cookedDate",
   sortDirection: "desc",
-  tags: "",
-  ingredientIds: [],
+  custom: {
+    searchPhrase: "",
+    tags: "",
+    ingredientIds: [],
+  },
 };
 
 const recipeListSortOptions = ref([
@@ -94,6 +97,7 @@ const tabs = ref([
   { code: "NOT_COMPLETED", label: "Nieuzupełnione" },
   { code: "NEW", label: "Nowe" },
 ]);
+
 const selectedTab = ref("ALL");
 
 const setRecipesCount = async () => {
@@ -104,7 +108,9 @@ const goToNewRecipeView = () => {
   router.push("/recipes/new");
 };
 
-const loadRecipeIngredientsFilterOptions = (filters: ListFilters) => {
+const loadRecipeIngredientsFilterOptions = (
+  filters: ListFilters<RecipesFilters>
+) => {
   return store.dispatch("recipe/ingredient/loadFilterOptions", filters);
 };
 

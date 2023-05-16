@@ -1,5 +1,5 @@
 import { ApiError } from "./../api";
-import { ListWithFilters } from "@/types/components/data-display/list";
+import { List } from "@/types/components/data-display/list";
 import { Tag } from "../components/utils/tags";
 
 export interface RecipeState {
@@ -30,7 +30,13 @@ export interface Recipe {
   kcal?: number;
 }
 
-export type RecipesList = ListWithFilters<Recipe>;
+export type RecipesList = List<Recipe>;
+
+export interface RecipesFilters {
+  searchPhrase: string;
+  tags: string;
+  ingredientIds: number[];
+}
 
 export interface RecipeErrors {
   recipeName: ApiError;

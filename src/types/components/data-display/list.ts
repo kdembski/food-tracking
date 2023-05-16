@@ -8,16 +8,11 @@ export interface ListPaginationFilters {
   pageSize: number;
 }
 
-export interface ListBaseFilters {
-  searchPhrase: string;
-  tags?: string;
-  ingredientIds?: number[];
+export interface ListFilters<CustomFilters>
+  extends ListSortFilters,
+    ListPaginationFilters {
+  custom: CustomFilters;
 }
-
-export interface ListFilters
-  extends ListBaseFilters,
-    ListSortFilters,
-    ListPaginationFilters {}
 
 export interface ListPagination {
   currentPage: number;
@@ -27,7 +22,7 @@ export interface ListPagination {
   totalRecords: number;
 }
 
-export type ListWithFilters<T> = {
+export type List<T> = {
   data: Array<T>;
   pagination: ListPagination;
 };

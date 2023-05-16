@@ -7,6 +7,7 @@ import {
   IngredientUnit,
   IngredientUnitErrors,
   IngredientUnitOption,
+  IngredientUnitsFilters,
   IngredientUnitsList,
   IngredientUnitState,
 } from "@/types/ingredients/unit";
@@ -40,7 +41,7 @@ const getters: GetterTree<IngredientUnitState, any> = {
 };
 
 const actions: ActionTree<IngredientUnitState, any> = {
-  loadList({ commit, dispatch }, filters: ListFilters) {
+  loadList({ commit, dispatch }, filters: ListFilters<IngredientUnitsFilters>) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 

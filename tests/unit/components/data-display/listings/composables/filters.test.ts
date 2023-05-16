@@ -15,10 +15,12 @@ describe("List With Filters - Filters", () => {
   const defaultFilters = {
     currentPage: 1,
     pageSize: 20,
-    searchPhrase: "",
     sortAttribute: "attribute1",
     sortDirection: "asc",
-    tags: "",
+    custom: {
+      searchPhrase: "",
+      tags: "",
+    },
   };
   let composable: any;
   const handleListLoadingProccess = jest.fn();
@@ -58,7 +60,7 @@ describe("List With Filters - Filters", () => {
 
   it("filterByTags should set filter tags and reload list", async () => {
     composable.filterByTags("test1,test2");
-    expect(composable.filters.value.tags).toEqual("test1,test2");
+    expect(composable.filters.value.custom.tags).toEqual("test1,test2");
     expect(composable.filters.value.currentPage).toEqual(1);
     expect(handleListLoadingProccess).toHaveBeenCalledTimes(1);
   });
@@ -73,21 +75,18 @@ describe("List With Filters - Filters", () => {
     jest.runAllTimers();
     expect(handleListLoadingProccess).toHaveBeenCalledTimes(0);
 
-    composable.filters.value.searchPhrase = "test";
+    composable.filters.value.custom.searchPhrase = "test";
     composable.filterBySearchPhraseWithDelay();
     jest.runAllTimers();
     expect(handleListLoadingProccess).toHaveBeenCalledTimes(1);
   });
 
   it("loadSearchSuggestions should load suggestions with prepared filters", async () => {
-    composable.filters.value.tags = "test1";
+    composable.filters.value.custom.tags = "test1";
     composable.loadSearchSuggestions();
     expect(store.dispatch).toHaveBeenCalledWith(
       "module/loadSearchSuggestions",
-      {
-        searchPhrase: "",
-        tags: "test1",
-      }
+      composable.filters
     );
   });
 

@@ -47,12 +47,12 @@ const props = withDefaults(
   defineProps<{
     storeModuleName: string;
     listName: string;
-    defaultFilters: ListFilters;
+    defaultFilters: ListFilters<unknown>;
     isLoading?: boolean;
     enableTags?: boolean;
     enableRandomButton?: boolean;
     sortOptions: DropdownOption<ListSortFilters>[];
-    loadAdditionalFilters?: (filters: ListFilters) => void;
+    loadAdditionalFilters?: (filters: ListFilters<unknown>) => void;
   }>(),
   {
     isLoading: false,
@@ -71,7 +71,7 @@ const _isLoading = computed(() => {
   return isLoadingList.value || props.isLoading || isLoadingAvailableTags.value;
 });
 
-const loadList = (filters: ListFilters) => {
+const loadList = (filters: ListFilters<unknown>) => {
   store.dispatch(props.storeModuleName + "/loadList", filters);
 };
 

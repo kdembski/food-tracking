@@ -9,7 +9,8 @@ import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { RecipeIngredientState } from "@/types/recipes/recipeIngredient";
 import { ListFilters } from "@/types/components/data-display/list";
-import { getListBaseQuery } from "../../helpers/list-query";
+import { getCustomFiltersQuery } from "../../helpers/list-query";
+import { RecipesFilters } from "@/types/recipes/recipe";
 
 const state: RecipeIngredientState = {
   collection: null,
@@ -49,14 +50,17 @@ const actions: ActionTree<RecipeIngredientState, any> = {
     });
   },
 
-  loadFilterOptions({ commit, dispatch }, filters: ListFilters) {
+  loadFilterOptions(
+    { commit, dispatch },
+    filters: ListFilters<RecipesFilters>
+  ) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingFilterOptions", true);
 
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/recipes/ingredients/options" +
-          getListBaseQuery(filters)
+          getCustomFiltersQuery(filters)
       )
         .then((response: AxiosResponse<RecipeIngredientFilterOption[]>) => {
           commit("setIsLoadingFilterOptions", false);

@@ -1,4 +1,4 @@
-import { ListWithFilters } from "@/types/components/data-display/list";
+import { List } from "@/types/components/data-display/list";
 import { ApiError } from "../api";
 
 export interface IngredientCategoryState {
@@ -25,7 +25,11 @@ export interface IngredientCategoryOption {
   name: string;
 }
 
-export type IngredientCategoriesList = ListWithFilters<IngredientCategory>;
+export type IngredientCategoriesList = List<IngredientCategory>;
+
+export interface IngredientCategoriesFilters {
+  searchPhrase: string;
+}
 
 export interface IngredientCategoryErrors {
   name: ApiError;

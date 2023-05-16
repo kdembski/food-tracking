@@ -27,7 +27,7 @@ const props = withDefaults(
     listName: string;
     storeModuleName: string;
     isLoading?: boolean;
-    defaultFilters: ListFilters;
+    defaultFilters: ListFilters<unknown>;
     columns: TableColumn[];
   }>(),
   { isLoading: false }
@@ -40,7 +40,7 @@ const isLoadingList = computed(
 
 const _isLoading = computed(() => isLoadingList.value || props.isLoading);
 
-const loadList = (filters: ListFilters) => {
+const loadList = (filters: ListFilters<unknown>) => {
   store.dispatch(props.storeModuleName + "/loadList", filters);
 };
 

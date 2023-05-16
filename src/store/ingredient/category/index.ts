@@ -9,6 +9,7 @@ import {
   IngredientCategoriesList,
   IngredientCategoryState,
   IngredientCategoryErrors,
+  IngredientCategoriesFilters,
 } from "@/types/ingredients/category";
 import { getListQuery } from "@/store/helpers/list-query";
 
@@ -43,7 +44,10 @@ const getters: GetterTree<IngredientCategoryState, any> = {
 };
 
 const actions: ActionTree<IngredientCategoryState, any> = {
-  loadList({ commit, dispatch }, filters: ListFilters) {
+  loadList(
+    { commit, dispatch },
+    filters: ListFilters<IngredientCategoriesFilters>
+  ) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsLoadingList", true);
 

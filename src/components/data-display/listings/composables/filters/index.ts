@@ -1,16 +1,16 @@
 import { ListFilters } from "@/types/components/data-display/list";
 import { ref, Ref } from "vue";
-import { isEqual, clone } from "lodash";
+import { isEqual, cloneDeep } from "lodash";
 import { useSearchPhraseFilter } from "./search-phrase";
 import { useSortFilter } from "./sort";
 import { useTagsFilter } from "./tags";
 
 export function useFilters(
-  defaultFilters: ListFilters,
+  defaultFilters: ListFilters<unknown>,
   handleListLoadingProccess: () => void,
   storeModuleName: string
 ) {
-  const filters: Ref<ListFilters> = ref(clone(defaultFilters));
+  const filters: Ref<ListFilters<unknown>> = ref(cloneDeep(defaultFilters));
 
   const changeCurrentPage = (page: number) => {
     filters.value.currentPage = page;
@@ -26,7 +26,7 @@ export function useFilters(
       return;
     }
 
-    filters.value = clone(defaultFilters);
+    filters.value = cloneDeep(defaultFilters);
     handleListLoadingProccess();
   };
 

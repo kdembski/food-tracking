@@ -1,18 +1,8 @@
-import {
-  ListBaseFilters,
-  ListFilters,
-} from "@/types/components/data-display/list";
+import { ListFilters } from "@/types/components/data-display/list";
 
-export const getListQuery = (filters: ListFilters) => {
-  const {
-    currentPage,
-    pageSize,
-    sortAttribute,
-    sortDirection,
-    searchPhrase,
-    tags,
-    ingredientIds,
-  } = filters;
+export const getListQuery = (filters: ListFilters<Record<string, any>>) => {
+  const { currentPage, pageSize, sortAttribute, sortDirection, custom } =
+    filters;
 
   const page = currentPage || 1;
   const size = pageSize || 10;
@@ -24,23 +14,22 @@ export const getListQuery = (filters: ListFilters) => {
     buildQueryFromObject({
       sortAttribute,
       sortDirection,
-      searchPhrase,
-      tags,
-      ingredientIds,
+      ...custom,
     })
   );
 };
 
-export const getListBaseQuery = (filters?: ListBaseFilters) => {
-  if (!filters) {
+export const getCustomFiltersQuery = (
+  filters?: ListFilters<Record<string, any>>
+) => {
+  if (!filters || !filters.custom) {
     return "";
   }
 
-  const { searchPhrase, tags, ingredientIds } = filters;
-  return "?" + buildQueryFromObject({ searchPhrase, tags, ingredientIds });
+  return "?" + buildQueryFromObject(filters.custom);
 };
 
-export const buildQueryFromObject = (object: any) => {
+export const buildQueryFromObject = (object: Record<string, any>) => {
   if (!object) {
     return "";
   }

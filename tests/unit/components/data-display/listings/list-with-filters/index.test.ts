@@ -10,10 +10,12 @@ describe("List With Filters Component", () => {
   const defaultFilters = {
     currentPage: 1,
     pageSize: 20,
-    searchPhrase: "",
     sortAttribute: "attribute1",
     sortDirection: "asc",
-    tags: "",
+    custom: {
+      searchPhrase: "",
+      tags: "",
+    },
   };
   const list = ["item1", "item2", "item3"];
   const tags = [
@@ -136,10 +138,12 @@ describe("List With Filters Component", () => {
     const filters = {
       currentPage: 2,
       pageSize: 20,
-      searchPhrase: "",
       sortAttribute: "attribute2",
       sortDirection: "desc",
-      tags: "",
+      custom: {
+        searchPhrase: "",
+        tags: "",
+      },
     };
     localStorage.setItem("testListFilters", JSON.stringify(filters));
 

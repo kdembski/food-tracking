@@ -15,11 +15,12 @@ import { useRecipeListIngredientFilterOptions } from "./composables/options";
 import { ListFilters } from "@/types/components/data-display/list";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { RecipesFilters } from "@/types/recipes/recipe";
 
 const store = useStore();
 
 const props = defineProps<{
-  filters: ListFilters;
+  filters: ListFilters<RecipesFilters>;
   handleListLoadingProccess: () => void;
   isLoadingList: boolean;
 }>();

@@ -11,16 +11,20 @@ export default {
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { IngredientCategoriesFilters } from "@/types/ingredients/category";
+import { ListFilters } from "@/types/components/data-display/list";
 
 const store = useStore();
 const isEditModalOpen = ref(false);
 
-const categoriesListDefaultFilters = {
+const categoriesListDefaultFilters: ListFilters<IngredientCategoriesFilters> = {
   currentPage: 1,
   pageSize: 50,
-  searchPhrase: "",
   sortAttribute: "id",
   sortDirection: "asc",
+  custom: {
+    searchPhrase: "",
+  },
 };
 
 const categoriesListColumns = [

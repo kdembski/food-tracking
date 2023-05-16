@@ -1,7 +1,7 @@
 <div class="table-with-filters">
   <CInput
     class="table-with-filters__search"
-    v-model="filters.searchPhrase"
+    v-model="filters.custom.searchPhrase"
     @enter="filterBySearchPhrase"
     @blur="filterBySearchPhraseWithDelay"
     @focus="setTemporarySearchPhrase"

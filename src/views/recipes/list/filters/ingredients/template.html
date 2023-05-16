@@ -11,7 +11,7 @@
     <div class="ingredients-filter__options">
       <CCheckbox
         v-for="option in options"
-        v-model="filters.ingredientIds"
+        v-model="filters.custom.ingredientIds"
         :value="option.id"
         @change="onChange"
       >

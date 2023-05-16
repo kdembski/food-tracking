@@ -29,10 +29,12 @@ describe("Ingredient Category Store Module", () => {
   const listFilters = {
     currentPage: 1,
     pageSize: 10,
-    searchPhrase: "test",
-    tags: "tag",
     sortAttribute: "attr",
     sortDirection: "dir",
+    custom: {
+      searchPhrase: "test",
+      tags: "tag",
+    },
   };
 
   beforeEach(async () => {

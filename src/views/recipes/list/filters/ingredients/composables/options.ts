@@ -1,4 +1,5 @@
 import { ListFilters } from "@/types/components/data-display/list";
+import { RecipesFilters } from "@/types/recipes/recipe";
 import { RecipeIngredientFilterOption } from "@/types/recipes/recipeIngredient";
 import { ComputedRef, Ref, computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
@@ -6,7 +7,7 @@ import { useStore } from "vuex";
 export function useRecipeListIngredientFilterOptions(
   searchPhrase: Ref<string>,
   isExpanded: Ref<boolean>,
-  filters: ComputedRef<ListFilters>
+  filters: ComputedRef<ListFilters<RecipesFilters>>
 ) {
   const store = useStore();
   const isExpandable = ref(false);
@@ -57,7 +58,7 @@ export function useRecipeListIngredientFilterOptions(
   };
 
   const isOptionSelected = (id: number) => {
-    return filters.value.ingredientIds?.includes(id);
+    return filters.value.custom.ingredientIds?.includes(id);
   };
 
   const getIngredientName = (id: number) =>

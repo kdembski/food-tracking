@@ -1,4 +1,4 @@
-import { ListWithFilters } from "@/types/components/data-display/list";
+import { List } from "@/types/components/data-display/list";
 import { ApiError } from "../api";
 
 export interface IngredientUnitState {
@@ -32,7 +32,11 @@ export interface IngredientUnitOption {
   name: string;
 }
 
-export type IngredientUnitsList = ListWithFilters<IngredientUnit>;
+export type IngredientUnitsList = List<IngredientUnit>;
+
+export interface IngredientUnitsFilters {
+  searchPhrase: string;
+}
 
 export interface IngredientUnitErrors {
   name: ApiError;

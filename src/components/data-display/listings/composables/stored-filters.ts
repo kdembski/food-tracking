@@ -6,15 +6,15 @@ import { Ref } from "vue";
 export function useStoredFilters(listName: string) {
   const storageFiltersName = listName + "Filters";
 
-  const saveFiltersToStorage = (listFilters: ListFilters) => {
+  const saveFiltersToStorage = (listFilters: ListFilters<unknown>) => {
     StorageService.setObject(storageFiltersName, listFilters);
   };
 
-  const getFiltersFromStorage = (): ListFilters => {
+  const getFiltersFromStorage = (): ListFilters<unknown> => {
     return StorageService.getObject(storageFiltersName);
   };
 
-  const setFiltersFromStorage = (filters: Ref<ListFilters>) => {
+  const setFiltersFromStorage = (filters: Ref<ListFilters<unknown>>) => {
     const storedFilters = getFiltersFromStorage();
 
     if (isEmpty(storedFilters)) {
