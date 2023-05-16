@@ -4,7 +4,6 @@ import { UserState, LoginResponse } from "@/types/users/user";
 import { ApiError } from "@/types/api";
 import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
-import { getErrorMessage } from "../helpers/error-message";
 
 const state: UserState = {
   accessToken: StorageService.getItem("accessToken"),
@@ -17,7 +16,7 @@ const getters: GetterTree<UserState, any> = {
 };
 
 const actions: ActionTree<UserState, any> = {
-  login({ commit }, password: string) {
+  login({ commit, dispatch }, password: string) {
     return new Promise<void>((resolve, reject) => {
       commit("setIsloggingIn", true);
 
@@ -31,7 +30,7 @@ const actions: ActionTree<UserState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsloggingIn", false);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },

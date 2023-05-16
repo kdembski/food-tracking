@@ -19,6 +19,7 @@ jest.mock("@/services/api.service", () => ({
 
 describe("Calendar Store Module", () => {
   let store: any;
+  let actions: any;
   let daysMock: CalendarDay[];
   let allDatesInRange: Date[];
   let toastNotification: any;
@@ -75,10 +76,16 @@ describe("Calendar Store Module", () => {
       error: jest.fn(),
     };
 
+    actions = {
+      handleDefaultError: jest.fn(),
+      handleComplexError: jest.fn(),
+    };
+
     store = createStore({
       state: {
         toastNotification,
       },
+      actions,
       modules: {
         calendar,
       },
@@ -105,15 +112,14 @@ describe("Calendar Store Module", () => {
   });
 
   it("Should show error notification on failed loadDays action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(
-      store.dispatch("calendar/loadDays", {
-        allDatesInRange,
-        selectedMembers: [],
-      })
-    ).rejects.toEqual("error");
+    mockAxiosGet.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("calendar/loadDays", {
+      allDatesInRange,
+      selectedMembers: [],
+    });
+
     await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 
   it("Should send post request on createItem dispatch", async () => {
@@ -144,16 +150,15 @@ describe("Calendar Store Module", () => {
 
   it("Should send delete request on deleteItem dispatch", async () => {
     mockAxiosDelete.mockImplementation(() => Promise.resolve());
-    await store.dispatch("calendar/deleteItem", 1);
+    store.dispatch("calendar/deleteItem", 1);
     await flushPromises();
     expect(mockAxiosDelete).toHaveBeenCalledWith("service/calendar/1");
     expect(toastNotification.success).toHaveBeenCalledTimes(1);
 
-    mockAxiosDelete.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("calendar/deleteItem", 1)).rejects.toEqual(
-      "error"
-    );
-    expect(toastNotification.success).toHaveBeenCalledTimes(1);
+    mockAxiosDelete.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("calendar/deleteItem", 1);
+    await flushPromises();
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 
   it("Should send request on updateItemMembers dispatch", async () => {

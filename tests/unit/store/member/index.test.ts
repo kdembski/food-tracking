@@ -24,6 +24,9 @@ describe("Member Store Module", () => {
     members = [1, 2];
 
     store = createStore({
+      actions: {
+        handleDefaultError: jest.fn(),
+      },
       modules: {
         member,
       },
@@ -39,6 +42,6 @@ describe("Member Store Module", () => {
     expect(store.state.member.all).toEqual(members);
 
     mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("member/loadAll")).rejects.toEqual("error");
+    store.dispatch("member/loadAll");
   });
 });

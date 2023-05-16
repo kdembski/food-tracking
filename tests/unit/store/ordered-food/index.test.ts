@@ -1,9 +1,6 @@
 import flushPromises from "flush-promises";
 import { createStore } from "vuex";
-import {
-  OrderedFoodList,
-  OrderedFood,
-} from "@/types/ordered-food/ordered-food";
+import { OrderedFoodList } from "@/types/ordered-food/ordered-food";
 
 let mockAxiosGet = jest.fn();
 let mockAxiosPost = jest.fn();
@@ -22,6 +19,7 @@ jest.mock("@/services/api.service", () => ({
 
 describe("Ordered Food Store Module", () => {
   let store: any;
+  let actions: any;
   let toastNotification: any;
   let list: OrderedFoodList;
   const listFilters = {
@@ -39,6 +37,11 @@ describe("Ordered Food Store Module", () => {
     toastNotification = {
       success: jest.fn(),
       error: jest.fn(),
+    };
+
+    actions = {
+      handleDefaultError: jest.fn(),
+      handleComplexError: jest.fn(),
     };
 
     list = {
@@ -73,6 +76,7 @@ describe("Ordered Food Store Module", () => {
       state: {
         toastNotification,
       },
+      actions,
       modules: {
         module,
       },
@@ -93,12 +97,10 @@ describe("Ordered Food Store Module", () => {
   });
 
   it("Should show error notification on failed loadList action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(
-      store.dispatch("module/loadList", listFilters)
-    ).rejects.toEqual("error");
+    mockAxiosGet.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("module/loadList", listFilters);
     await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 
   it("Should set tags to state on successful loadTags action dispatch", async () => {
@@ -117,10 +119,10 @@ describe("Ordered Food Store Module", () => {
   });
 
   it("Should show error notification on failed loadTags action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("module/loadTags")).rejects.toEqual("error");
+    mockAxiosGet.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("module/loadTags");
     await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 
   it("Should set single to state on successful load action dispatch", async () => {
@@ -135,10 +137,10 @@ describe("Ordered Food Store Module", () => {
   });
 
   it("Should show error notification on failed load action dispatch", async () => {
-    mockAxiosGet.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("module/load", 1)).rejects.toEqual("error");
+    mockAxiosGet.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("module/load", 1);
     await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 
   it("Should show success notification on successful create action dispatch", async () => {
@@ -155,12 +157,10 @@ describe("Ordered Food Store Module", () => {
 
   it("Should show error notification on failed create action dispatch", async () => {
     const item = { id: 1 };
-    mockAxiosPost.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("module/create", item)).rejects.toEqual(
-      "error"
-    );
+    mockAxiosPost.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("module/create", item);
     await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 
   it("Should show success notification on successful update action dispatch", async () => {
@@ -177,12 +177,10 @@ describe("Ordered Food Store Module", () => {
 
   it("Should show error notification on failed update action dispatch", async () => {
     const item = { id: 1 };
-    mockAxiosPut.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("module/update", item)).rejects.toEqual(
-      "error"
-    );
+    mockAxiosPut.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("module/update", item);
     await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 
   it("Should show success notification on successful delete action dispatch", async () => {
@@ -197,9 +195,9 @@ describe("Ordered Food Store Module", () => {
   });
 
   it("Should show error notification on failed delete action dispatch", async () => {
-    mockAxiosDelete.mockImplementation(() => Promise.reject({ code: "error" }));
-    await expect(store.dispatch("module/delete", 1)).rejects.toEqual("error");
+    mockAxiosDelete.mockImplementation(() => Promise.reject("error"));
+    store.dispatch("module/delete", 1);
     await flushPromises();
-    expect(toastNotification.error).toHaveBeenCalledTimes(1);
+    expect(actions.handleDefaultError).toHaveBeenCalledTimes(1);
   });
 });

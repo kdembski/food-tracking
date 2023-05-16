@@ -42,7 +42,7 @@ const getters: GetterTree<IngredientUnitState, any> = {
 
 const actions: ActionTree<IngredientUnitState, any> = {
   loadList({ commit, dispatch }, filters: ListFilters<IngredientUnitsFilters>) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingList", true);
 
       ApiService.get(
@@ -63,7 +63,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
   },
 
   loadOptions({ commit, dispatch }) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingOptions", true);
 
       ApiService.get(
@@ -82,7 +82,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
   },
 
   load({ commit, dispatch }, itemId) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoading", true);
 
       ApiService.get(
@@ -101,7 +101,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
   },
 
   create({ commit, dispatch, rootState }, item: IngredientUnit) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.post(
@@ -125,7 +125,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
   },
 
   update({ commit, dispatch, rootState }, item: IngredientUnit) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.put(
@@ -149,7 +149,7 @@ const actions: ActionTree<IngredientUnitState, any> = {
   },
 
   delete({ commit, dispatch, rootState }, itemId: number) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.delete(

@@ -29,7 +29,7 @@ const getters: GetterTree<RecipeIngredientState, any> = {
 
 const actions: ActionTree<RecipeIngredientState, any> = {
   loadCollection({ commit, dispatch }, recipeId) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingCollection", true);
 
       ApiService.get(
@@ -54,7 +54,7 @@ const actions: ActionTree<RecipeIngredientState, any> = {
     { commit, dispatch },
     filters: ListFilters<RecipesFilters>
   ) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingFilterOptions", true);
 
       ApiService.get(
@@ -81,7 +81,7 @@ const actions: ActionTree<RecipeIngredientState, any> = {
       recipeId,
     }: { collection: RecipeIngredient[]; recipeId: number }
   ) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmittingCollection", true);
 
       ApiService.post(
@@ -113,7 +113,7 @@ const actions: ActionTree<RecipeIngredientState, any> = {
       recipeId,
     }: { collection: RecipeIngredient[]; recipeId: number }
   ) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmittingCollection", true);
 
       ApiService.put(

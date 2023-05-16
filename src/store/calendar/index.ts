@@ -4,10 +4,6 @@ import { ApiError } from "@/types/api";
 import { ActionTree, MutationTree, GetterTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { isEqual } from "date-fns";
-import {
-  getErrorMessage,
-  showDefualtErrorNotification,
-} from "../helpers/error-message";
 import { isNil } from "lodash";
 
 const state: CalendarState = {
@@ -26,14 +22,14 @@ const getters: GetterTree<CalendarState, any> = {
 };
 
 const actions: ActionTree<CalendarState, any> = {
-  loadDays({ rootState, commit }, { allDatesInRange, selectedMembers }) {
+  loadDays({ commit, dispatch }, { allDatesInRange, selectedMembers }) {
     commit("setIsLoadingDays", true);
 
     const fromDate = allDatesInRange[0];
     const toDate = allDatesInRange[allDatesInRange.length - 1];
     selectedMembers = selectedMembers?.join(",");
 
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       ApiService.get(
         process.env.VUE_APP_SERVICE_URL +
           "/calendar?" +
@@ -48,8 +44,7 @@ const actions: ActionTree<CalendarState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         })
         .finally(() => commit("setIsLoadingDays", false));
     });
@@ -74,16 +69,15 @@ const actions: ActionTree<CalendarState, any> = {
     });
   },
 
-  deleteItem({ rootState }, id) {
-    return new Promise<void>((resolve, reject) => {
+  deleteItem({ dispatch, rootState }, id) {
+    return new Promise<void>((resolve) => {
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/calendar/" + id)
         .then(() => {
           rootState.toastNotification.success("Usunięto z kalendarza.");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },

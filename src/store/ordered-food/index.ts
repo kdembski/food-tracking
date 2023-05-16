@@ -10,10 +10,6 @@ import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { AxiosResponse, AxiosError } from "axios";
 import { getCustomFiltersQuery, getListQuery } from "../helpers/list-query";
 import { ListFilters } from "@/types/components/data-display/list";
-import {
-  getErrorMessage,
-  showDefualtErrorNotification,
-} from "../helpers/error-message";
 import { Tag } from "@/types/components/utils/tags";
 
 const state: OrderedFoodState = {
@@ -37,8 +33,8 @@ const getters: GetterTree<OrderedFoodState, any> = {
 };
 
 const actions: ActionTree<OrderedFoodState, any> = {
-  loadList({ commit, rootState }, filters: ListFilters<OrderedFoodFilters>) {
-    return new Promise<void>((resolve, reject) => {
+  loadList({ commit, dispatch }, filters: ListFilters<OrderedFoodFilters>) {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingList", true);
 
       ApiService.get(
@@ -51,14 +47,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingList", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },
 
-  loadTags({ commit, rootState }, filters: ListFilters<OrderedFoodFilters>) {
-    return new Promise<string[]>((resolve, reject) => {
+  loadTags({ commit, dispatch }, filters: ListFilters<OrderedFoodFilters>) {
+    return new Promise<string[]>((resolve) => {
       commit("setIsLoadingTags", true);
 
       ApiService.get(
@@ -74,14 +69,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoadingTags", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },
 
-  load({ commit, rootState }, itemId) {
-    return new Promise<void>((resolve, reject) => {
+  load({ commit, dispatch }, itemId) {
+    return new Promise<void>((resolve) => {
       commit("setIsLoading", true);
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ordered/" + itemId)
@@ -92,14 +86,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsLoading", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },
 
-  create({ commit, rootState }, item: OrderedFood) {
-    return new Promise<void>((resolve, reject) => {
+  create({ commit, dispatch, rootState }, item: OrderedFood) {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/ordered", item)
@@ -110,14 +103,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },
 
-  update({ commit, rootState }, item: OrderedFood) {
-    return new Promise<void>((resolve, reject) => {
+  update({ commit, dispatch, rootState }, item: OrderedFood) {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.put(
@@ -131,14 +123,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },
 
-  delete({ commit, rootState }, itemId: number) {
-    return new Promise<void>((resolve, reject) => {
+  delete({ commit, dispatch, rootState }, itemId: number) {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/ordered/" + itemId)
@@ -149,8 +140,7 @@ const actions: ActionTree<OrderedFoodState, any> = {
         })
         .catch((error: AxiosError<ApiError>) => {
           commit("setIsSubmitting", false);
-          showDefualtErrorNotification(error, rootState);
-          reject(getErrorMessage(error));
+          dispatch("handleDefaultError", error, { root: true });
         });
     });
   },

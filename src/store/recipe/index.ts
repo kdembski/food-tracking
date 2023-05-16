@@ -68,7 +68,7 @@ const getters: GetterTree<RecipeState, any> = {
 
 const actions: ActionTree<RecipeState, any> = {
   loadList({ commit, dispatch }, filters: ListFilters<RecipesFilters>) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingList", true);
 
       ApiService.get(
@@ -88,7 +88,7 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   loadTags({ commit, dispatch }, filters: ListFilters<RecipesFilters>) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingTags", true);
 
       ApiService.get(
@@ -112,7 +112,7 @@ const actions: ActionTree<RecipeState, any> = {
     { commit, dispatch },
     filters: ListFilters<RecipesFilters>
   ) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingSearchSuggestions", true);
 
       ApiService.get(
@@ -137,7 +137,7 @@ const actions: ActionTree<RecipeState, any> = {
       return;
     }
 
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoadingOptions", true);
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/options")
@@ -154,7 +154,7 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   getCount({ dispatch }) {
-    return new Promise<number>((resolve, reject) => {
+    return new Promise<number>((resolve) => {
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/count")
         .then((response: AxiosResponse<number>) => {
           resolve(response.data);
@@ -166,7 +166,7 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   load({ commit, dispatch }, itemId) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsLoading", true);
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
@@ -188,7 +188,7 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   create({ commit, dispatch, rootState }, item: Recipe) {
-    return new Promise<number>((resolve, reject) => {
+    return new Promise<number>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", item)
@@ -209,7 +209,7 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   update({ commit, dispatch, rootState }, item: Recipe) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
       ApiService.put(
@@ -233,7 +233,7 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   delete({ commit, dispatch, rootState }, itemId: number) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsDeleting", true);
 
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
@@ -250,7 +250,7 @@ const actions: ActionTree<RecipeState, any> = {
   },
 
   addToShoppingList({ commit, dispatch, rootState }, data) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsAddingToShoppingList", true);
 
       ApiService.post(
