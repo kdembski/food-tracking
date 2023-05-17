@@ -38,7 +38,7 @@ const actions: ActionTree<ShoppingCustomItemState, any> = {
     });
   },
 
-  create({ commit, dispatch, rootState }, item: ShoppingCustomItem) {
+  create({ commit, dispatch }, item: ShoppingCustomItem) {
     return new Promise<number>((resolve) => {
       commit("setIsSubmitting", true);
 
@@ -58,7 +58,7 @@ const actions: ActionTree<ShoppingCustomItemState, any> = {
     });
   },
 
-  update({ commit, dispatch, rootState }, item: ShoppingCustomItem) {
+  update({ commit, dispatch }, item: ShoppingCustomItem) {
     return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 
@@ -78,7 +78,7 @@ const actions: ActionTree<ShoppingCustomItemState, any> = {
     });
   },
 
-  delete({ commit, dispatch, rootState }, itemId: number) {
+  delete({ commit, dispatch }, itemId: number) {
     return new Promise<void>((resolve) => {
       commit("setIsSubmitting", true);
 

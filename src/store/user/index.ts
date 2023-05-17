@@ -17,20 +17,21 @@ const getters: GetterTree<UserState, any> = {
 
 const actions: ActionTree<UserState, any> = {
   login({ commit, dispatch }, password: string) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       commit("setIsloggingIn", true);
 
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/users/login", {
         password,
       })
         .then((response: AxiosResponse<LoginResponse>) => {
-          commit("setIsloggingIn", false);
           commit("setAccessToken", response.data.accessToken);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsloggingIn", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsloggingIn", false);
         });
     });
   },

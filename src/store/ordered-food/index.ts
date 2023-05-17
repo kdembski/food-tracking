@@ -25,10 +25,10 @@ const state: OrderedFoodState = {
 };
 
 const getters: GetterTree<OrderedFoodState, any> = {
-  list: (state): OrderedFoodList | null => state.list,
+  list: (state) => state.list,
   isLoadingList: (state) => state.isLoadingList,
 
-  tags: (state): Tag[] | null => state.tags,
+  tags: (state) => state.tags,
   isLoadingTags: (state) => state.isLoadingTags,
 };
 
@@ -41,13 +41,14 @@ const actions: ActionTree<OrderedFoodState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/ordered" + getListQuery(filters)
       )
         .then((response: AxiosResponse<OrderedFoodList>) => {
-          commit("setIsLoadingList", false);
           commit("setList", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingList", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingList", false);
         });
     });
   },
@@ -63,13 +64,14 @@ const actions: ActionTree<OrderedFoodState, any> = {
       )
         .then((response: AxiosResponse<string[]>) => {
           const tags = response.data;
-          commit("setIsLoadingTags", false);
           commit("setTags", tags);
           resolve(tags);
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingTags", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingTags", false);
         });
     });
   },
@@ -80,13 +82,14 @@ const actions: ActionTree<OrderedFoodState, any> = {
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ordered/" + itemId)
         .then((response: AxiosResponse<OrderedFood>) => {
-          commit("setIsLoading", false);
           commit("setSingle", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoading", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoading", false);
         });
     });
   },
@@ -98,12 +101,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/ordered", item)
         .then(() => {
           rootState.toastNotification.success("Dodano jedzenie.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -118,12 +122,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Zapisano jedzenie.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -135,12 +140,13 @@ const actions: ActionTree<OrderedFoodState, any> = {
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/ordered/" + itemId)
         .then(() => {
           rootState.toastNotification.success("Usunięto jedzenie.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },

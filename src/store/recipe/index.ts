@@ -40,10 +40,10 @@ const state: () => RecipeState = () => ({
 });
 
 const getters: GetterTree<RecipeState, any> = {
-  list: (state): RecipesList | null => state.list,
+  list: (state) => state.list,
   isLoadingList: (state) => state.isLoadingList,
 
-  tags: (state): Tag[] | null => state.tags,
+  tags: (state) => state.tags,
   isLoadingTags: (state) => state.isLoadingTags,
 
   searchSuggestions: (state): DropdownOption<null>[] => {
@@ -76,13 +76,14 @@ const actions: ActionTree<RecipeState, any> = {
       )
         .then((response: AxiosResponse<RecipesList>) => {
           const list = helpers.fixListDates(response.data);
-          commit("setIsLoadingList", false);
           commit("setList", list);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingList", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingList", false);
         });
     });
   },
@@ -97,13 +98,14 @@ const actions: ActionTree<RecipeState, any> = {
           getCustomFiltersQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
-          commit("setIsLoadingTags", false);
           commit("setTags", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingTags", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingTags", false);
         });
     });
   },
@@ -121,13 +123,14 @@ const actions: ActionTree<RecipeState, any> = {
           getCustomFiltersQuery(filters)
       )
         .then((response: AxiosResponse<string[]>) => {
-          commit("setIsLoadingSearchSuggestions", false);
           commit("setSearchSuggestions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingSearchSuggestions", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingSearchSuggestions", false);
         });
     });
   },
@@ -142,13 +145,14 @@ const actions: ActionTree<RecipeState, any> = {
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/options")
         .then((response: AxiosResponse<RecipeOption[]>) => {
-          commit("setIsLoadingOptions", false);
           commit("setOptions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingOptions", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingOptions", false);
         });
     });
   },
@@ -171,9 +175,8 @@ const actions: ActionTree<RecipeState, any> = {
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
         .then((response: AxiosResponse<Recipe>) => {
-          commit("setIsLoading", false);
           const recipe = response.data;
-          if (recipe.cookedDate) {
+          if (recipe?.cookedDate) {
             recipe.cookedDate = new Date(recipe.cookedDate);
           }
 
@@ -181,8 +184,10 @@ const actions: ActionTree<RecipeState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoading", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoading", false);
         });
     });
   },
@@ -194,16 +199,17 @@ const actions: ActionTree<RecipeState, any> = {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/recipes", item)
         .then((response: AxiosResponse<DbResults>) => {
           rootState.toastNotification.success("Dodano przepis.");
-          commit("setIsSubmitting", false);
           resolve(response.data.insertId);
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch(
             "handleComplexError",
             { error, module: "recipe" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -218,16 +224,17 @@ const actions: ActionTree<RecipeState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Zapisano przepis.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch(
             "handleComplexError",
             { error, module: "recipe" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -239,12 +246,13 @@ const actions: ActionTree<RecipeState, any> = {
       ApiService.delete(process.env.VUE_APP_SERVICE_URL + "/recipes/" + itemId)
         .then(() => {
           rootState.toastNotification.success("Usunięto przepis.");
-          commit("setIsDeleting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsDeleting", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsDeleting", false);
         });
     });
   },
@@ -261,7 +269,6 @@ const actions: ActionTree<RecipeState, any> = {
           rootState.toastNotification.success(
             "Dodano przepis do listy zakupów."
           );
-          commit("setIsAddingToShoppingList", false);
           dispatch("shopping/list/sendWebSocketMessage", true, { root: true });
           dispatch(
             "shopping/item/sendWebSocketMessage",
@@ -272,8 +279,10 @@ const actions: ActionTree<RecipeState, any> = {
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsAddingToShoppingList", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsAddingToShoppingList", false);
         });
     });
   },

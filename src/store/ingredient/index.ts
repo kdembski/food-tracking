@@ -30,7 +30,7 @@ const state: () => IngredientState = () => ({
 });
 
 const getters: GetterTree<IngredientState, any> = {
-  list: (state): IngredientsList | null => state.list,
+  list: (state) => state.list,
   isLoadingList: (state) => state.isLoadingList,
 
   options: (state) =>
@@ -56,13 +56,14 @@ const actions: ActionTree<IngredientState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/ingredients" + getListQuery(filters)
       )
         .then((response: AxiosResponse<IngredientsList>) => {
-          commit("setIsLoadingList", false);
           commit("setList", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingList", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingList", false);
         });
     });
   },
@@ -73,13 +74,14 @@ const actions: ActionTree<IngredientState, any> = {
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ingredients/options")
         .then((response: AxiosResponse<IngredientOption[]>) => {
-          commit("setIsLoadingOptions", false);
           commit("setOptions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingOptions", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingOptions", false);
         });
     });
   },
@@ -90,13 +92,14 @@ const actions: ActionTree<IngredientState, any> = {
 
       ApiService.get(process.env.VUE_APP_SERVICE_URL + "/ingredients/" + itemId)
         .then((response: AxiosResponse<Ingredient>) => {
-          commit("setIsLoading", false);
           commit("setSingle", response.data);
           resolve(response.data);
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoading", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoading", false);
         });
     });
   },
@@ -108,16 +111,17 @@ const actions: ActionTree<IngredientState, any> = {
       ApiService.post(process.env.VUE_APP_SERVICE_URL + "/ingredients", item)
         .then(() => {
           rootState.toastNotification.success("Dodano składnik.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch(
             "handleComplexError",
             { error, module: "ingredient" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -132,16 +136,17 @@ const actions: ActionTree<IngredientState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Zapisano składnik.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError<IngredientErrors | string>>) => {
-          commit("setIsSubmitting", false);
           dispatch(
             "handleComplexError",
             { error, module: "ingredient" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -155,12 +160,13 @@ const actions: ActionTree<IngredientState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Usunięto składnik.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -189,7 +195,6 @@ const mutations: MutationTree<IngredientState> = {
 
   setSingle(state, ingredient: Ingredient | null) {
     if (!ingredient) {
-      state.single = ingredient;
       return;
     }
 

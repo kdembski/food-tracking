@@ -1,5 +1,7 @@
-import { ApiError, ErrorCodes } from "@/types/api";
 import { ActionContext, createStore } from "vuex";
+import { AxiosError } from "axios";
+import { ApiError, ErrorCodes } from "@/types/api";
+import { State } from "@/types/store";
 import StorageService from "@/services/storage.service";
 import user from "./user/index";
 import recipe from "./recipe/index";
@@ -8,8 +10,6 @@ import calendar from "./calendar/index";
 import member from "./member";
 import ingredient from "./ingredient";
 import shopping from "./shopping";
-import { State } from "@/types/store";
-import { AxiosError } from "axios";
 
 export default createStore<State>({
   state: {

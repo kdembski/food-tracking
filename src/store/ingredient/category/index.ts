@@ -28,7 +28,7 @@ const state: IngredientCategoryState = {
 };
 
 const getters: GetterTree<IngredientCategoryState, any> = {
-  list: (state): IngredientCategoriesList | null => state.list,
+  list: (state) => state.list,
   isLoadingList: (state) => state.isLoadingList,
 
   options: (state) =>
@@ -57,13 +57,14 @@ const actions: ActionTree<IngredientCategoryState, any> = {
           getListQuery(filters)
       )
         .then((response: AxiosResponse<IngredientCategoriesList>) => {
-          commit("setIsLoadingList", false);
           commit("setList", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingList", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingList", false);
         });
     });
   },
@@ -76,13 +77,14 @@ const actions: ActionTree<IngredientCategoryState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/ingredients/categories/options"
       )
         .then((response: AxiosResponse<IngredientCategoryOption[]>) => {
-          commit("setIsLoadingOptions", false);
           commit("setOptions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingOptions", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingOptions", false);
         });
     });
   },
@@ -95,13 +97,14 @@ const actions: ActionTree<IngredientCategoryState, any> = {
         process.env.VUE_APP_SERVICE_URL + "/ingredients/categories/" + itemId
       )
         .then((response: AxiosResponse<IngredientCategory>) => {
-          commit("setIsLoading", false);
           commit("setSingle", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoading", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoading", false);
         });
     });
   },
@@ -116,16 +119,17 @@ const actions: ActionTree<IngredientCategoryState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Dodano składnik.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch(
             "handleComplexError",
             { error, module: "ingredient/category" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -140,16 +144,17 @@ const actions: ActionTree<IngredientCategoryState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Zapisano składnik.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch(
             "handleComplexError",
             { error, module: "ingredient/category" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },
@@ -163,12 +168,13 @@ const actions: ActionTree<IngredientCategoryState, any> = {
       )
         .then(() => {
           rootState.toastNotification.success("Usunięto składnik.");
-          commit("setIsSubmitting", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmitting", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsSubmitting", false);
         });
     });
   },

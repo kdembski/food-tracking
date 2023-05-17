@@ -39,13 +39,14 @@ const actions: ActionTree<RecipeIngredientState, any> = {
           "/ingredients"
       )
         .then((response: AxiosResponse<RecipeIngredient[]>) => {
-          commit("setIsLoadingCollection", false);
           commit("setCollection", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingCollection", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingCollection", false);
         });
     });
   },
@@ -63,13 +64,14 @@ const actions: ActionTree<RecipeIngredientState, any> = {
           getCustomFiltersQuery(filters)
       )
         .then((response: AxiosResponse<RecipeIngredientFilterOption[]>) => {
-          commit("setIsLoadingFilterOptions", false);
           commit("setFilterOptions", response.data);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsLoadingFilterOptions", false);
           dispatch("handleDefaultError", error, { root: true });
+        })
+        .finally(() => {
+          commit("setIsLoadingFilterOptions", false);
         });
     });
   },
@@ -92,16 +94,17 @@ const actions: ActionTree<RecipeIngredientState, any> = {
         collection
       )
         .then(() => {
-          commit("setIsSubmittingCollection", false);
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingCollection", false);
           dispatch(
             "handleComplexError",
             { error, module: "recipe/ingredient" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmittingCollection", false);
         });
     });
   },
@@ -124,17 +127,18 @@ const actions: ActionTree<RecipeIngredientState, any> = {
         collection
       )
         .then(() => {
-          commit("setIsSubmittingCollection", false);
           rootState.toastNotification.success("Zapisano składniki.");
           resolve();
         })
         .catch((error: AxiosError<ApiError>) => {
-          commit("setIsSubmittingCollection", false);
           dispatch(
             "handleComplexError",
             { error, module: "recipe/ingredient" },
             { root: true }
           );
+        })
+        .finally(() => {
+          commit("setIsSubmittingCollection", false);
         });
     });
   },
