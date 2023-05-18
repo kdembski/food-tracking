@@ -1,5 +1,5 @@
 export interface ApiError<T = string> {
-  code: string;
+  code: ErrorCodes;
   message: T;
 }
 

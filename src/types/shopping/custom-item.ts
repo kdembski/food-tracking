@@ -1,5 +1,3 @@
-import { ShoppingItem } from "./item";
-
 export interface ShoppingCustomItem {
   id: number;
   name: string;

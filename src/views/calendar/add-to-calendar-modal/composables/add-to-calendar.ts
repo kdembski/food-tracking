@@ -3,8 +3,8 @@ import { useStore } from "vuex";
 import { ref, Ref, ComputedRef } from "vue";
 import { Recipe } from "@/types/recipes/recipe";
 import { OrderedFood } from "@/types/ordered-food/ordered-food";
-import { isAfter } from "date-fns";
 import { useRouter } from "vue-router";
+import { useAddedItemDate } from "./added-item-date";
 
 export function useAddToCalendar(
   selectedDates: Ref<Date[]>,
@@ -48,7 +48,7 @@ export function useAddToCalendar(
       .then(() => {
         isAddingToCalendar.value = false;
         isOpen.value = false;
-        updateAddedItemDates();
+        updateAddedItemDate();
 
         const pushRouterToCalendar = () => router.push("/calendar");
         toastNotification.success(
@@ -62,43 +62,11 @@ export function useAddToCalendar(
       });
   };
 
-  const updateAddedItemDates = () => {
-    updateAddedRecipeDates();
-    updateAddedOrderedFoodDates();
-  };
-
-  const updateAddedRecipeDates = () => {
-    if (!addedRecipe.value) {
-      return;
-    }
-
-    const lastSelectedDate = getLastSelectedDate();
-
-    if (
-      !addedRecipe.value.cookedDate ||
-      isAfter(lastSelectedDate, addedRecipe.value.cookedDate)
-    ) {
-      addedRecipe.value.cookedDate = lastSelectedDate;
-    }
-  };
-
-  const updateAddedOrderedFoodDates = () => {
-    if (!addedOrderedFood.value) {
-      return;
-    }
-
-    const lastSelectedDate = getLastSelectedDate();
-    if (
-      !addedOrderedFood.value.orderDate ||
-      isAfter(lastSelectedDate, addedOrderedFood.value.orderDate)
-    ) {
-      addedOrderedFood.value.orderDate = lastSelectedDate;
-    }
-  };
-
-  const getLastSelectedDate = () => {
-    return selectedDates.value[selectedDates.value.length - 1];
-  };
+  const { updateAddedItemDate } = useAddedItemDate(
+    selectedDates,
+    addedRecipe,
+    addedOrderedFood
+  );
 
   return {
     addSelectedDatesToCalendar,
