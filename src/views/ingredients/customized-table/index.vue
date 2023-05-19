@@ -20,7 +20,7 @@ const { isMobile } = useWindowSize();
 const props = defineProps<{
   listName: string;
   storeModuleName: string;
-  defaultFilters: ListFilters;
+  defaultFilters: ListFilters<unknown>;
   columns: TableColumn[];
   deleteItem: (id?: number) => Promise<void>;
   isSubmittingItem: boolean;

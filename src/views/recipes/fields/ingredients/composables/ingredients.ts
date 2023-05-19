@@ -1,12 +1,10 @@
 import { RecipeIngredient } from "@/types/recipes/recipeIngredient";
-import {
-  Ingredient,
-  IngredientUnitDetails,
-} from "@/types/ingredients/ingredient";
+import { Ingredient } from "@/types/ingredients/ingredient";
 import { nextTick, ref, WritableComputedRef } from "vue";
 import { useStore } from "vuex";
+import { useIngredientUnitFields } from "./units";
 
-export function useIngredients(
+export function useIngredientFields(
   recipeIngredients: WritableComputedRef<Partial<RecipeIngredient>[]>,
   getComponentInput: (component: string, index: number) => HTMLInputElement
 ) {
@@ -15,7 +13,6 @@ export function useIngredients(
   const ingredients = ref<Record<number, Ingredient | undefined>>({});
   const isLoadingIngredients = ref(false);
   const isLoadingUnits = ref<Record<number, boolean>>({});
-  const unitAutocompleteKeys = ref<Record<number, number>>({});
 
   const setIngredientsOptions = async () => {
     await store.dispatch("ingredient/loadOptions");
@@ -38,29 +35,6 @@ export function useIngredients(
 
     handleUnitsAfterIngredientChange(ingredient.units, index);
     isLoadingUnits.value[index] = false;
-  };
-
-  const handleUnitsAfterIngredientChange = async (
-    units: IngredientUnitDetails[],
-    index: number
-  ) => {
-    if (units.length === 1) {
-      recipeIngredients.value[index].unitId = units[0].unitId;
-      incrementUnitAutocompleteKey(index);
-      getComponentInput("amount-input", index)?.focus();
-      return;
-    }
-
-    recipeIngredients.value[index].unitId = undefined;
-    incrementUnitAutocompleteKey(index);
-    await nextTick();
-    getComponentInput("units-autocomplete", index)?.focus();
-  };
-
-  const incrementUnitAutocompleteKey = (index: number) => {
-    unitAutocompleteKeys.value[index]
-      ? unitAutocompleteKeys.value[index]++
-      : (unitAutocompleteKeys.value[index] = 1);
   };
 
   const onIngredientRemove = async () => {
@@ -87,27 +61,17 @@ export function useIngredients(
     isLoadingIngredients.value = false;
   };
 
-  const getIngredientUnitOptions = (index: number) => {
-    const ingredient = ingredients.value[index];
-    if (!ingredient) {
-      return [];
-    }
-
-    const units = ingredient.units;
-    return units.map((unit) => {
-      return {
-        value: unit.unitId,
-        label: unit.unitName,
-      };
-    });
-  };
-
-  const onUnitUpdate = (index: number, value?: unknown) => {
-    if (!value) {
-      return;
-    }
-    getComponentInput("amount-input", index)?.focus();
-  };
+  const {
+    incrementUnitAutocompleteKey,
+    handleUnitsAfterIngredientChange,
+    getIngredientUnitOptions,
+    onUnitUpdate,
+    unitAutocompleteKeys,
+  } = useIngredientUnitFields(
+    recipeIngredients,
+    ingredients,
+    getComponentInput
+  );
 
   return {
     ingredients,

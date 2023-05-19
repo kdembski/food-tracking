@@ -23,7 +23,7 @@ export default {
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, ref } from "vue";
 import { MultiInputValuesTypes } from "@/types/components/multi-input";
 import { RecipeIngredient } from "@/types/recipes/recipeIngredient";
-import { useIngredients } from "./composables/ingredients";
+import { useIngredientFields } from "./composables/ingredients";
 import { useStoredErrors } from "@/composables/stored-errors";
 
 const props = defineProps<{
@@ -65,7 +65,7 @@ const {
   fillIngredients,
   getIngredientUnitOptions,
   onUnitUpdate,
-} = useIngredients(recipeIngredients, getComponentInput);
+} = useIngredientFields(recipeIngredients, getComponentInput);
 
 onBeforeMount(async () => {
   isLoading.value = true;

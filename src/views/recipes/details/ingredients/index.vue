@@ -4,7 +4,6 @@ import CLoader from "@/components/feedback/loader/index.vue";
 import CSetPortions from "@/components/controls/custom/set-portions/index.vue";
 import RecipeIngredientsFields from "../../fields/ingredients/index.vue";
 import RecipeIngredientsLoader from "./loader/index.vue";
-import { RecipeIngredient } from "@/types/recipes/recipeIngredient";
 
 export default {
   name: "RecipeDetailsIngredients",
@@ -23,6 +22,7 @@ import { computed, onBeforeMount, ref, Ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { cloneDeep } from "lodash";
+import { RecipeIngredient } from "@/types/recipes/recipeIngredient";
 
 const store = useStore();
 const route = useRoute();
