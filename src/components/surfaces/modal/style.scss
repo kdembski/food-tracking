@@ -75,6 +75,10 @@ $mobileSectionHeight: 60px;
       }
     }
   }
+
+  &:deep(strong) {
+    color: color-mix(in srgb, var(--primary) 40%, var(--text-primary));
+  }
 }
 
 @media screen and (max-width: $screen-md) {

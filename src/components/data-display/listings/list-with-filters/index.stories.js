@@ -29,10 +29,12 @@ Default.args = {
   defaultFilters: {
     currentPage: 1,
     pageSize: 10,
-    searchPhrase: "",
     sortAttribute: "1",
     sortDirection: "asc",
-    tags: "",
+    custom: {
+      searchPhrase: "",
+      tags: "",
+    },
   },
   listName: "list",
   storeModuleName: "list",

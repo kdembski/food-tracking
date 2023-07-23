@@ -1,10 +1,13 @@
-<div class="button-with-dropdown">
+<div
+  class="button-with-dropdown"
+  :class="'button-with-dropdown--' + props.dropdownPosition"
+>
   <CButton
     v-bind="getButtonProps(props)"
     @click="toggleOpen"
     @blur="setOpen(false)"
     ref="buttonRef"
-    :class="{'button--active':isDropdownOpen }"
+    :class="{'button--active': isDropdownOpen }"
   />
   <CDropdown
     v-bind="getDropdownProps(props)"

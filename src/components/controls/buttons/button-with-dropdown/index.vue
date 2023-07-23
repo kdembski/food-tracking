@@ -18,6 +18,13 @@ const { getButtonProps } = useButtonProps();
 const props = defineProps({
   ...useDropdownProps().dropdownProps,
   ...useButtonProps().buttonProps,
+  dropdownPosition: {
+    type: String,
+    default: "right",
+    validator: (value: string) => {
+      return ["left", "right"].indexOf(value) !== -1;
+    },
+  },
 });
 
 const isDropdownOpen = ref(false);

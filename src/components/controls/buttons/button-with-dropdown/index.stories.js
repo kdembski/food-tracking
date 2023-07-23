@@ -1,7 +1,7 @@
 import CButtonWithDropdown from "./index.vue";
 
 export default {
-  title: "controls/buttons/button With Dropdown",
+  title: "Controls/Buttons/Button With Dropdown",
   component: CButtonWithDropdown,
 };
 
@@ -10,7 +10,7 @@ const Template = (args) => ({
     return { args };
   },
   components: { CButtonWithDropdown },
-  template: `<CButtonWithDropdown v-bind="args" />`,
+  template: `<CButtonWithDropdown v-bind="args"/>`,
 });
 
 export const Default = Template.bind({});
@@ -24,4 +24,5 @@ Default.args = {
     { value: 6, label: "Label-6" },
   ],
   label: "Click to open",
+  dropdownPosition: "left",
 };

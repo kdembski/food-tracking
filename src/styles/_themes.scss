@@ -64,6 +64,7 @@
   --text-button-active-background: #{$text-button-active-background-dark};
 }
 
+:root,
 [data-primary-color="orange"]:root {
   --primary: #{$orange};
   --primary-rgb: #{toRGB($orange)};

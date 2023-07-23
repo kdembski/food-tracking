@@ -1,7 +1,7 @@
 import CInput from "./index.vue";
 
 export default {
-  title: "controls/inputs/input",
+  title: "Controls/Inputs/Input",
   component: CInput,
 };
 
