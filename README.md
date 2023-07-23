@@ -1,29 +1,23 @@
-# food-tracking
+# Food tracking
 
-## Project setup
-```
-npm install
-```
+An app built to make everyday cooking a bit easier.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Demo
 
-### Compiles and minifies for production
-```
-npm run build
-```
+.
 
-### Run your unit tests
-```
-npm run test:unit
-```
+## Storybook
 
-### Lints and fixes files
-```
-npm run lint
-```
+http://foodtracker-storybook.free.nf/
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Tech Stack
+
+TypeScript, Vue 3, Vuex, HTML, Sass, Jest, Storybook
+
+## Running Tests
+
+To run unit tests, run the following command
+
+```
+  npm run test
+```
