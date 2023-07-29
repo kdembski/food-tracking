@@ -1,23 +1,25 @@
-# Food tracking
+## Food tracking
 
-An app built to make everyday cooking a bit easier.
+An app to make everyday cooking a bit easier.
 
-## Demo
+### Storybook
 
-.
+[Here](http://foodtracker-storybook.free.nf/) you can find preview of components used to built this app
 
-## Storybook
+### Tech Stack
 
-http://foodtracker-storybook.free.nf/
+TypeScript · Vue 3 · Vuex · HTML · Sass · Jest · Storybook
 
-## Tech Stack
-
-TypeScript, Vue 3, Vuex, HTML, Sass, Jest, Storybook
-
-## Running Tests
+### Running Tests
 
 To run unit tests, run the following command
 
 ```
   npm run test
+```
+
+or with coverage
+
+```
+  npm run test:coverage
 ```
