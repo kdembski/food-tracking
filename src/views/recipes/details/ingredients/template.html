@@ -33,7 +33,11 @@
   <template v-if="!isLoadingIngredients">
     <template v-if="!isEditing">
       <div class="recipe-ingredients__content">
-        <div class="recipe-ingredients__item" v-for="ingredient in ingredients">
+        <div
+          class="recipe-ingredients__item"
+          v-for="ingredient in ingredients"
+          v-tooltip="{text: ingredient.amount * ingredient.kcalPerUnit + ' kcal'}"
+        >
           <p>{{ ingredient.ingredientName }}</p>
           <p>
             {{ Math.round((ingredient.amount * portions) * 100) / 100 }}
